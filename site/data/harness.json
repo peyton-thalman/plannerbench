@@ -1,0 +1,11 @@
+[
+ {
+  "direct": "claude-haiku-5-5",
+  "openrouter": "or:anthropic/claude-haiku-5.5@anthropic",
+  "questions": 140,
+  "direct_accuracy": 0.7714,
+  "openrouter_accuracy": 0.7714,
+  "p_value": 1.0,
+  "pass": true
+ }
+]

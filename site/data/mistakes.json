@@ -18,5 +18,100 @@
   "model": "claude-sonnet-5-5",
   "mistake": "unexplained",
   "count": 4
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "mistake": "combined senior phase-out",
+  "count": 32
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "mistake": "flagged a non-issue",
+  "count": 3
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "mistake": "right IRMAA tier, wrong cents",
+  "count": 1
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "mistake": "unexplained",
+  "count": 21
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "mistake": "combined senior phase-out",
+  "count": 21
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "mistake": "flagged a non-issue",
+  "count": 2
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "mistake": "right IRMAA tier, wrong cents",
+  "count": 4
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "mistake": "unexplained",
+  "count": 20
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "mistake": "flagged a non-issue",
+  "count": 4
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "mistake": "one-step shortcut",
+  "count": 1
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "mistake": "pre-2022 RMD table",
+  "count": 8
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "mistake": "unexplained",
+  "count": 85
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "mistake": "flagged a non-issue",
+  "count": 4
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "mistake": "pre-2022 RMD table",
+  "count": 3
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "mistake": "unexplained",
+  "count": 5
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "mistake": "combined senior phase-out",
+  "count": 7
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "mistake": "flagged a non-issue",
+  "count": 3
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "mistake": "right IRMAA tier, wrong cents",
+  "count": 7
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "mistake": "unexplained",
+  "count": 56
  }
 ]

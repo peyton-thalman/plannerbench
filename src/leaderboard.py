@@ -24,7 +24,26 @@ TIERS = ["single-step", "multi-step", "stacked", "compliance"]
 
 
 def load(run):
-    return [g for g in (json.loads(l) for l in (ROOT / "runs" / run / "graded.jsonl").read_text().splitlines() if l.strip()) if g["bucket"] != "error"]
+    """Graded replies from one run, or several joined with "+" (each model's replies come from the runs that asked it)."""
+    return [g for r in run.split("+") for g in (json.loads(l) for l in (ROOT / "runs" / r / "graded.jsonl").read_text().splitlines() if l.strip())
+            if g["bucket"] != "error"]
+
+
+# How the leaderboard names and describes each model. Unlisted models fall back to their id.
+LABELS = {
+    "claude-sonnet-5-5": ("Claude Sonnet 5.5", "Anthropic", "Anthropic API", False),
+    "claude-haiku-5-5": ("Claude Haiku 5.5", "Anthropic", "Anthropic API", False),
+    "or:anthropic/claude-haiku-5.5@anthropic": ("Claude Haiku 5.5", "Anthropic", "OpenRouter → Anthropic", False),
+    "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8": ("DeepSeek V4.1 Flash", "DeepSeek", "OpenRouter → DeepInfra (fp8)", True),
+    "or:qwen/qwen3.8-flash@alibaba": ("Qwen3.8 Flash", "Alibaba", "OpenRouter → Alibaba", False),
+    "or:z-ai/glm-5.3-flash@z-ai/fp8": ("GLM 5.3 Flash", "Z.ai", "OpenRouter → Z.ai (fp8)", True),
+    "or:openai/gpt-oss-120b@deepinfra/bf16": ("gpt-oss-120b", "OpenAI", "OpenRouter → DeepInfra (bf16)", True),
+}
+
+
+def label(m):
+    name, lab, access, open_weights = LABELS.get(m, (m.removeprefix("or:").split("@")[0], None, None, None))
+    return {"name": name, "lab": lab, "access": access, "open_weights": open_weights}
 
 
 def main(run, rule_run=None):
@@ -42,7 +61,7 @@ def main(run, rule_run=None):
         cost = sum(cost_of(g) for g in mine)
         # An unpriced model would look free; leave its cost blank instead.
         priced = m in PRICES or any(g.get("billed_usd") is not None for g in mine)
-        models.append({"model": m, "questions": len({g["id"] for g in mine}), "replies": len(mine), "correct": correct, **scored("", mine),
+        models.append({"model": m, **label(m), "questions": len({g["id"] for g in mine}), "replies": len(mine), "correct": correct, **scored("", mine),
                        **{k: v for t in TIERS for k, v in scored(f"{t.replace('-', '_')}_", [g for g in mine if TIER[g["task"]] == t]).items()},
                        # Ran out of tokens before answering: scored as not right, shown so it isn't mistaken for bad math.
                        "truncated_rate": round(sum(g["bucket"] == "truncated" for g in mine) / len(mine), 4),

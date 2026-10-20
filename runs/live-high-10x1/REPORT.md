@@ -24,10 +24,10 @@ Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run c
 
 ## Where replies landed
 
-| Model | correct | wrong | no_answer | refusal | error |
-|---|---|---|---|---|---|
-| claude-haiku-5-5 | 108 | 32 | 0 | 0 | 0 |
-| claude-sonnet-5-5 | 117 | 23 | 0 | 0 | 0 |
+| Model | correct | wrong | truncated | no_answer | refusal | error |
+|---|---|---|---|---|---|---|
+| claude-haiku-5-5 | 108 | 32 | 0 | 0 | 0 | 0 |
+| claude-sonnet-5-5 | 117 | 23 | 0 | 0 | 0 | 0 |
 
 ## Review queue (different models agree with each other, not the key)
 
@@ -50,10 +50,10 @@ Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run c
 
 ## Mistakes by type
 
-| Model | combined senior phase-out | left out Medicare | one-step shortcut | counted adult child | counted other fund family | missed a violation | flagged a compliant sentence | missed an issue | flagged a non-issue | unexplained |
-|---|---|---|---|---|---|---|---|---|---|---|
-| claude-haiku-5-5 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 |
-| claude-sonnet-5-5 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
+| Model | combined senior phase-out | pre-2022 RMD table | right IRMAA tier, wrong cents | left out Medicare | one-step shortcut | counted adult child | counted other fund family | missed a violation | flagged a compliant sentence | missed an issue | flagged a non-issue | unexplained |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| claude-haiku-5-5 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 |
+| claude-sonnet-5-5 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
 
 ## Wrong answers
 

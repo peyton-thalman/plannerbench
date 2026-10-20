@@ -16,6 +16,31 @@
     "got": 42268.0,
     "bucket": "correct",
     "mistake": null
+   },
+   "or:anthropic/claude-haiku-5.5@anthropic": {
+    "got": 42268.0,
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8": {
+    "got": null,
+    "bucket": "truncated",
+    "mistake": null
+   },
+   "or:openai/gpt-oss-120b@deepinfra/bf16": {
+    "got": 42766.0,
+    "bucket": "wrong",
+    "mistake": null
+   },
+   "or:qwen/qwen3.8-flash@alibaba": {
+    "got": null,
+    "bucket": "truncated",
+    "mistake": null
+   },
+   "or:z-ai/glm-5.3-flash@z-ai/fp8": {
+    "got": 42268.0,
+    "bucket": "correct",
+    "mistake": null
    }
   }
  },
@@ -33,6 +58,31 @@
     "mistake": null
    },
    "claude-sonnet-5-5": {
+    "got": 8915.0,
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:anthropic/claude-haiku-5.5@anthropic": {
+    "got": 8915.0,
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8": {
+    "got": 8915.0,
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:openai/gpt-oss-120b@deepinfra/bf16": {
+    "got": null,
+    "bucket": "truncated",
+    "mistake": null
+   },
+   "or:qwen/qwen3.8-flash@alibaba": {
+    "got": null,
+    "bucket": "truncated",
+    "mistake": null
+   },
+   "or:z-ai/glm-5.3-flash@z-ai/fp8": {
     "got": 8915.0,
     "bucket": "correct",
     "mistake": null
@@ -56,6 +106,31 @@
     "got": 15928.0,
     "bucket": "wrong",
     "mistake": "combined senior phase-out"
+   },
+   "or:anthropic/claude-haiku-5.5@anthropic": {
+    "got": 15928.0,
+    "bucket": "wrong",
+    "mistake": "combined senior phase-out"
+   },
+   "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8": {
+    "got": 15928.0,
+    "bucket": "wrong",
+    "mistake": "combined senior phase-out"
+   },
+   "or:openai/gpt-oss-120b@deepinfra/bf16": {
+    "got": 13511.0,
+    "bucket": "wrong",
+    "mistake": null
+   },
+   "or:qwen/qwen3.8-flash@alibaba": {
+    "got": null,
+    "bucket": "error",
+    "mistake": null
+   },
+   "or:z-ai/glm-5.3-flash@z-ai/fp8": {
+    "got": 15928.0,
+    "bucket": "wrong",
+    "mistake": "combined senior phase-out"
    }
   }
  },
@@ -73,6 +148,31 @@
     "mistake": null
    },
    "claude-sonnet-5-5": {
+    "got": "1,5",
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:anthropic/claude-haiku-5.5@anthropic": {
+    "got": "1,5",
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8": {
+    "got": "1,5",
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:openai/gpt-oss-120b@deepinfra/bf16": {
+    "got": "1,5",
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:qwen/qwen3.8-flash@alibaba": {
+    "got": "1,5",
+    "bucket": "correct",
+    "mistake": null
+   },
+   "or:z-ai/glm-5.3-flash@z-ai/fp8": {
     "got": "1,5",
     "bucket": "correct",
     "mistake": null

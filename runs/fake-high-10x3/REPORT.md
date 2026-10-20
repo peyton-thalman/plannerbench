@@ -16,9 +16,9 @@ Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run c
 
 ## Where replies landed
 
-| Model | correct | wrong | no_answer | refusal | error |
-|---|---|---|---|---|---|
-| fake | 141 | 32 | 7 | 0 | 0 |
+| Model | correct | wrong | truncated | no_answer | refusal | error |
+|---|---|---|---|---|---|---|
+| fake | 141 | 32 | 0 | 7 | 0 | 0 |
 
 ## Consistency (same question, repeated)
 
@@ -30,9 +30,9 @@ Needs two or more models to run.
 
 ## Mistakes by type
 
-| Model | combined senior phase-out | left out Medicare | one-step shortcut | counted adult child | counted other fund family | missed a violation | flagged a compliant sentence | missed an issue | flagged a non-issue | unexplained |
-|---|---|---|---|---|---|---|---|---|---|---|
-| fake | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 32 |
+| Model | combined senior phase-out | pre-2022 RMD table | right IRMAA tier, wrong cents | left out Medicare | one-step shortcut | counted adult child | counted other fund family | missed a violation | flagged a compliant sentence | missed an issue | flagged a non-issue | unexplained |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| fake | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 32 |
 
 ## Wrong answers
 

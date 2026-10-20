@@ -184,3 +184,7 @@ p { margin: 0; }
   .nav nav { gap: 1rem; }
   .lines li { grid-template-columns: 2.25rem minmax(0, 1fr) auto; gap: 0.5rem; }
 }
+
+.scores .model .via { display: block; font: 400 0.75rem/1.4 var(--mono); color: var(--muted); margin-top: 0.25rem; }
+.value-card { margin-top: 2.5rem; }
+.legend .dot.open { background: var(--paper); border: 2px solid var(--accent); }

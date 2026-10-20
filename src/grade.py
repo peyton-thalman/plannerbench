@@ -46,7 +46,7 @@ import independent_check as ic  # noqa: E402
 from stats import wilson  # noqa: E402
 
 # Named mistakes, checked in order: a wrong answer matching what a known misreading produces gets that label.
-MISTAKES = ["combined senior phase-out", "left out Medicare", "one-step shortcut", "counted adult child", "counted other fund family",
+MISTAKES = ["combined senior phase-out", "pre-2022 RMD table", "right IRMAA tier, wrong cents", "left out Medicare", "one-step shortcut", "counted adult child", "counted other fund family",
             "missed a violation", "flagged a compliant sentence", "missed an issue", "flagged a non-issue"]
 
 
@@ -60,6 +60,10 @@ def mistake(got, case):
     near = lambda x: abs(got - x) <= case["tol"]
     if near(ic.answer_if_misread("combined_senior_phaseout", case)) and not near(case["answer"]):
         return "combined senior phase-out"
+    if case["task"] == "rmd" and near(ic.answer_if_misread("pre2022_rmd_table", case)):
+        return "pre-2022 RMD table"
+    if case["task"] == "irmaa" and abs(got - case["answer"]) < 0.5:  # tier right, premium rebuilt a few cents off SSA's table
+        return "right IRMAA tier, wrong cents"
     for name, value in case.get("misreadings", {}).items():
         if near(value):
             return name

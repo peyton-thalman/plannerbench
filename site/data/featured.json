@@ -19,6 +19,31 @@
    "got": 15928.0,
    "bucket": "wrong",
    "mistake": "combined senior phase-out"
+  },
+  "or:anthropic/claude-haiku-5.5@anthropic": {
+   "got": 15928.0,
+   "bucket": "wrong",
+   "mistake": "combined senior phase-out"
+  },
+  "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8": {
+   "got": 15928.0,
+   "bucket": "wrong",
+   "mistake": "combined senior phase-out"
+  },
+  "or:openai/gpt-oss-120b@deepinfra/bf16": {
+   "got": 13511.0,
+   "bucket": "wrong",
+   "mistake": null
+  },
+  "or:qwen/qwen3.8-flash@alibaba": {
+   "got": null,
+   "bucket": "error",
+   "mistake": null
+  },
+  "or:z-ai/glm-5.3-flash@z-ai/fp8": {
+   "got": 15928.0,
+   "bucket": "wrong",
+   "mistake": "combined senior phase-out"
   }
  },
  "with_rule": {

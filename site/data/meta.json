@@ -1,7 +1,7 @@
 {
  "questions": 2800,
  "tasks": 14,
- "run": "live-high-10x1",
+ "run": "live-high-10x1+or-5models-15x1",
  "rule_run": "with-rule-10x1",
  "tiers": {
   "single-step": [

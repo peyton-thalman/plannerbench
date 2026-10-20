@@ -20,6 +20,56 @@
   "hi": 1.0
  },
  {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 14,
+  "answered": 15,
+  "accuracy": 0.9333,
+  "lo": 0.7018,
+  "hi": 0.9881
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 6,
+  "answered": 15,
+  "accuracy": 0.4,
+  "lo": 0.1982,
+  "hi": 0.6425
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 7,
+  "answered": 15,
+  "accuracy": 0.4667,
+  "lo": 0.2481,
+  "hi": 0.6988
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 13,
+  "answered": 15,
+  "accuracy": 0.8667,
+  "lo": 0.6212,
+  "hi": 0.9626
+ },
+ {
   "model": "claude-haiku-5-5",
   "task": "federal_tax",
   "tier": "single-step",
@@ -38,6 +88,56 @@
   "accuracy": 1.0,
   "lo": 0.7225,
   "hi": 1.0
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 15,
+  "accuracy": 0.6667,
+  "lo": 0.4171,
+  "hi": 0.8482
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 9,
+  "answered": 15,
+  "accuracy": 0.6,
+  "lo": 0.3575,
+  "hi": 0.8018
  },
  {
   "model": "claude-haiku-5-5",
@@ -60,6 +160,56 @@
   "hi": 1.0
  },
  {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 13,
+  "answered": 15,
+  "accuracy": 0.8667,
+  "lo": 0.6212,
+  "hi": 0.9626
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 3,
+  "answered": 15,
+  "accuracy": 0.2,
+  "lo": 0.0705,
+  "hi": 0.4519
+ },
+ {
   "model": "claude-haiku-5-5",
   "task": "rmd",
   "tier": "single-step",
@@ -78,6 +228,56 @@
   "accuracy": 1.0,
   "lo": 0.7225,
   "hi": 1.0
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 5,
+  "answered": 15,
+  "accuracy": 0.3333,
+  "lo": 0.1518,
+  "hi": 0.5829
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 6,
+  "answered": 15,
+  "accuracy": 0.4,
+  "lo": 0.1982,
+  "hi": 0.6425
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
  },
  {
   "model": "claude-haiku-5-5",
@@ -100,6 +300,56 @@
   "hi": 0.9433
  },
  {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 12,
+  "answered": 15,
+  "accuracy": 0.8,
+  "lo": 0.5481,
+  "hi": 0.9295
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 14,
+  "answered": 15,
+  "accuracy": 0.9333,
+  "lo": 0.7018,
+  "hi": 0.9881
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 14,
+  "answered": 15,
+  "accuracy": 0.9333,
+  "lo": 0.7018,
+  "hi": 0.9881
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 14,
+  "answered": 15,
+  "accuracy": 0.9333,
+  "lo": 0.7018,
+  "hi": 0.9881
+ },
+ {
   "model": "claude-haiku-5-5",
   "task": "taxable_ss",
   "tier": "single-step",
@@ -118,6 +368,56 @@
   "accuracy": 1.0,
   "lo": 0.7225,
   "hi": 1.0
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 14,
+  "answered": 15,
+  "accuracy": 0.9333,
+  "lo": 0.7018,
+  "hi": 0.9881
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 7,
+  "answered": 15,
+  "accuracy": 0.4667,
+  "lo": 0.2481,
+  "hi": 0.6988
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 12,
+  "answered": 15,
+  "accuracy": 0.8,
+  "lo": 0.5481,
+  "hi": 0.9295
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
  },
  {
   "model": "claude-haiku-5-5",
@@ -138,6 +438,56 @@
   "accuracy": 1.0,
   "lo": 0.7225,
   "hi": 1.0
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 12,
+  "answered": 15,
+  "accuracy": 0.8,
+  "lo": 0.5481,
+  "hi": 0.9295
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 14,
+  "answered": 15,
+  "accuracy": 0.9333,
+  "lo": 0.7018,
+  "hi": 0.9881
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 3,
+  "answered": 15,
+  "accuracy": 0.2,
+  "lo": 0.0705,
+  "hi": 0.4519
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 1,
+  "answered": 15,
+  "accuracy": 0.0667,
+  "lo": 0.0119,
+  "hi": 0.2982
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
  },
  {
   "model": "claude-haiku-5-5",
@@ -160,6 +510,56 @@
   "hi": 0.9433
  },
  {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 7,
+  "answered": 15,
+  "accuracy": 0.4667,
+  "lo": 0.2481,
+  "hi": 0.6988
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 7,
+  "answered": 15,
+  "accuracy": 0.4667,
+  "lo": 0.2481,
+  "hi": 0.6988
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 4,
+  "answered": 15,
+  "accuracy": 0.2667,
+  "lo": 0.109,
+  "hi": 0.5195
+ },
+ {
   "model": "claude-haiku-5-5",
   "task": "conversion_all_in",
   "tier": "stacked",
@@ -178,6 +578,56 @@
   "accuracy": 0.8,
   "lo": 0.4902,
   "hi": 0.9433
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 6,
+  "answered": 15,
+  "accuracy": 0.4,
+  "lo": 0.1982,
+  "hi": 0.6425
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 8,
+  "answered": 15,
+  "accuracy": 0.5333,
+  "lo": 0.3012,
+  "hi": 0.7519
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 1,
+  "answered": 15,
+  "accuracy": 0.0667,
+  "lo": 0.0119,
+  "hi": 0.2982
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 0,
+  "answered": 5,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.4345
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 5,
+  "answered": 15,
+  "accuracy": 0.3333,
+  "lo": 0.1518,
+  "hi": 0.5829
  },
  {
   "model": "claude-haiku-5-5",
@@ -200,6 +650,56 @@
   "hi": 0.4042
  },
  {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 0,
+  "answered": 15,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2039
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 3,
+  "answered": 15,
+  "accuracy": 0.2,
+  "lo": 0.0705,
+  "hi": 0.4519
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 1,
+  "answered": 15,
+  "accuracy": 0.0667,
+  "lo": 0.0119,
+  "hi": 0.2982
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 0,
+  "answered": 1,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.7935
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 4,
+  "answered": 15,
+  "accuracy": 0.2667,
+  "lo": 0.109,
+  "hi": 0.5195
+ },
+ {
   "model": "claude-haiku-5-5",
   "task": "widow_all_in",
   "tier": "stacked",
@@ -218,6 +718,56 @@
   "accuracy": 0.2,
   "lo": 0.0567,
   "hi": 0.5098
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 3,
+  "answered": 15,
+  "accuracy": 0.2,
+  "lo": 0.0705,
+  "hi": 0.4519
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 5,
+  "answered": 15,
+  "accuracy": 0.3333,
+  "lo": 0.1518,
+  "hi": 0.5829
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 0,
+  "answered": 7,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.3543
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 0,
+  "answered": 11,
+  "accuracy": 0.0,
+  "lo": 0.0,
+  "hi": 0.2588
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 3,
+  "answered": 15,
+  "accuracy": 0.2,
+  "lo": 0.0705,
+  "hi": 0.4519
  },
  {
   "model": "claude-haiku-5-5",
@@ -237,6 +787,56 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
+  "hi": 1.0
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
   "hi": 1.0
  },
  {
@@ -260,6 +860,56 @@
   "hi": 1.0
  },
  {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 15,
+  "answered": 15,
+  "accuracy": 1.0,
+  "lo": 0.7961,
+  "hi": 1.0
+ },
+ {
   "model": "claude-haiku-5-5",
   "task": "rollover_flags",
   "tier": "compliance",
@@ -278,5 +928,55 @@
   "accuracy": 1.0,
   "lo": 0.7225,
   "hi": 1.0
+ },
+ {
+  "model": "or:anthropic/claude-haiku-5.5@anthropic",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 12,
+  "answered": 15,
+  "accuracy": 0.8,
+  "lo": 0.5481,
+  "hi": 0.9295
+ },
+ {
+  "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 13,
+  "answered": 15,
+  "accuracy": 0.8667,
+  "lo": 0.6212,
+  "hi": 0.9626
+ },
+ {
+  "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
+ },
+ {
+  "model": "or:qwen/qwen3.8-flash@alibaba",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 11,
+  "answered": 15,
+  "accuracy": 0.7333,
+  "lo": 0.4805,
+  "hi": 0.891
+ },
+ {
+  "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 12,
+  "answered": 15,
+  "accuracy": 0.8,
+  "lo": 0.5481,
+  "hi": 0.9295
  }
 ]

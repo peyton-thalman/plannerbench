@@ -42,7 +42,7 @@
         <span class="cap">on the same questions, once it’s given the IRS rule it was missing</span>
       </div>
     </div>
-    <p class="thesis-note">Claude Sonnet 5.5, pilot run. The model can do the math. It doesn’t reliably know the current rule.</p>
+    <p class="thesis-note">Claude Sonnet 5.5, pilot run (10 questions per task). The model can do the math. It doesn’t reliably know the current rule, and neither do the other labs’ models tested.</p>
   </section>
 
   <section class="band" id="worked">
@@ -76,16 +76,25 @@
     <div class="section-head">
       <p class="eyebrow">Results</p>
       <h2>Accuracy by kind of question</h2>
-      <p class="sub">Share of questions answered within the answer key’s tolerance. The small numbers and the shaded band are the 95% interval: where the true score likely sits. When two bands overlap heavily, the gap between the models may be noise.</p>
+      <p class="sub">Share of questions answered within the answer key’s tolerance. The small numbers and the shaded band are the 95% interval: where the true score likely sits. When two bands overlap heavily, the gap between the models may be noise. Claude models were asked 10 questions per task through Anthropic’s API; the others 15 per task through OpenRouter, each pinned to one named host. “Ran out of tokens” means the model used its whole 32,000-token budget thinking and never answered; that counts as not right.</p>
     </div>
     <div class="table-wrap">
       <table class="scores" id="scores">
         <thead>
-          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Cost per 1,000 right answers</th></tr>
+          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Ran out of tokens</th><th scope="col" class="r">Cost per 1,000 right answers</th></tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
+
+    <figure class="chart-card value-card">
+      <figcaption>
+        <h3>Right answers per dollar</h3>
+        <p id="value-sub">Accuracy against what each right answer actually cost, as billed. Up and to the left is better; vertical lines are 95% intervals. A low price per token doesn’t mean a low price per answer: Qwen3.8 Flash is among the cheapest per token and the most expensive per right answer, because it ran out of tokens on about half of its questions (49%).</p>
+      </figcaption>
+      <div class="chart" id="value-chart" role="img" aria-label="Accuracy against cost per right answer"></div>
+      <div class="legend"><span><i class="dot"></i>Closed weights</span><span><i class="dot open"></i>Open weights</span></div>
+    </figure>
 
     <div class="pair">
       <figure class="chart-card">
@@ -99,7 +108,7 @@
       <figure class="chart-card">
         <figcaption>
           <h3>What the wrong answers were</h3>
-          <p>Each wrong answer is checked against known misreadings. One misreading explains most of them.</p>
+          <p>Each wrong answer is checked against known misreadings of the rules. The senior-deduction misreading explains most of Claude’s and DeepSeek’s; most of gpt-oss’s and GLM’s fit no single rule.</p>
         </figcaption>
         <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
       </figure>
@@ -122,7 +131,7 @@
       <div>
         <p class="eyebrow">Method</p>
         <h2>Why you can trust the answer key</h2>
-        <p class="sub">A benchmark is only as good as its answers. If the key is wrong, you’re grading the model on your own bug. No question ships unless all seven checks pass, and <code>./reproduce.sh</code> reruns every one of them.</p>
+        <p class="sub">A benchmark is only as good as its answers. If the key is wrong, you’re grading the model on your own bug. No question ships unless all of these checks pass, and <code>./reproduce.sh</code> reruns every one of them.</p>
       </div>
       <ol class="checks">
         <li><span><b>Published examples.</b> Sixteen cases whose answers come straight from IRS, SSA and CMS tables must match exactly.</span></li>
@@ -131,10 +140,11 @@
         <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
         <li><span><b>Human audit.</b> Random cases come with worked solutions a CPA can check with a calculator.</span></li>
         <li><span><b>An outside tax model.</b> PolicyEngine-US, an open-source tax model this project didn’t write, recomputes every tax answer. It agrees on all of them within $2, the new senior deduction included.</span></li>
+        <li><span><b>Same model, two routes.</b> Claude Haiku 5.5 was asked the same 140 questions directly and through OpenRouter. It scored 77% both ways, so routing doesn’t change scores.</span></li>
         <li><span><b>A held-out set.</b> Private questions from a secret seed pass the same checks and are never published, so a model that trained on the public set still meets new ones.</span></li>
       </ol>
     </div>
-    <p class="aside">When models disagree with the key, the source decides, not the models. In the pilot, both models agreed with each other and against the key on the senior deduction. The IRS form, and separately PolicyEngine, showed the key was right.</p>
+    <p class="aside">When models disagree with the key, the source decides, not the models. Models from several labs agreed with each other and against the key on the senior deduction; the IRS form, and separately PolicyEngine, showed the key was right. Several also answered Medicare premiums ten cents above the key; SSA’s 2026 table matches the key to the cent.</p>
   </section>
 
   <section class="band">
@@ -162,7 +172,9 @@
         <li><b>The math isn’t the problem.</b> Models handle long-standing rules well. They slip on the newest ones, like the 2025 senior deduction, and on several rules interacting at once.</li>
         <li><b>The fix is the rules, not a bigger model.</b> Handing a model the current rule fixed most of its misses. AI built for advisors needs the rules supplied to it.</li>
         <li><b>The compliance questions are a start.</b> They define each issue in the question, and both models scored 100%. The next version names issues without defining them, which tests knowledge instead of reading.</li>
-        <li><b>It’s a pilot.</b> Ten questions per task per model, two models so far. Larger runs and models from other labs are next.</li>
+        <li><b>It isn’t one lab’s blind spot.</b> DeepSeek and GLM made the same senior-deduction misreading as Claude. gpt-oss-120b used the IRS life-expectancy table that was replaced in 2022 on every RMD it got wrong. Models know the rules as they were, not as they are.</li>
+        <li><b>Cheap can be good, but price per token misleads.</b> DeepSeek V4.1 Flash tied Claude Haiku 5.5 overall and did better on the hardest questions. Haiku was still the cheapest per right answer. Models that think until they run out of room cost the most.</li>
+        <li><b>It’s still small.</b> 10–15 questions per task per model, seven model setups so far. A gap of a few points is within the noise; the intervals show how much.</li>
         <li><b>It measures math and rules, not advice.</b> Judgment about what a client should do is out of scope for now.</li>
       </ul>
     </div>

@@ -9,6 +9,12 @@ compliance tasks, a set of codes). A reply is right when its final `ANSWER:` lin
 $1–2 on dollar answers, one cent on Medicare premiums, an exact match on codes. Replies with no parsable answer,
 refusals and API errors are counted separately, and errors are excluded and retried instead of being scored.
 
+A reply that hits the token limit before answering is graded **truncated**. It counts as not right, and its rate is
+published for each model. Some low-cost reasoning models spend their whole budget thinking. A firm pays for those
+tokens and gets no answer, so that rate is part of the result, not noise. The limit is recorded per run in
+`meta.json`. It was 16,000 tokens for the Claude pilot runs and 32,000 for the OpenRouter runs, after a smoke test
+showed 16,000 cut off two models on most questions.
+
 It measures rule knowledge and arithmetic. It doesn't measure advice quality, judgment or client communication.
 
 ## How models are asked
@@ -57,6 +63,15 @@ trained on the public set still meets new questions there. A large gap between a
 is evidence of contamination, and the leaderboard will report both once private runs exist. The runner refuses to send
 the private set to free endpoints, which commonly keep prompts for training. Paid endpoints get it only through
 providers whose terms exclude API traffic from training.
+
+## Checks on the harness and the site
+
+- **Harness check** (`checks/harness_check.py`). Claude Haiku 5.5 is asked the same questions directly and through
+  OpenRouter. If routing changed scores, no OpenRouter number would be publishable. Pass means no significant
+  difference (exact McNemar p > 0.05). The comparison isn't perfectly clean: the direct pilot ran with a
+  16,000-token limit and the prompt wording from before the single-filer fix.
+- **Site check** (`checks/site_check.py`). Fetches the data files the deployed site serves and requires them to equal
+  `leaderboard/` field for field, so the page can't drift from the graded runs.
 
 ## Statistics
 

@@ -21,7 +21,9 @@ done
 
 echo "== 3. Leaderboard"
 cp -r leaderboard /tmp/plannerbench-committed-leaderboard.$$
-.venv/bin/python src/leaderboard.py $(cat leaderboard/RUNS)
+# leaderboard/RUNS line 1: the runs behind the leaderboard; line 2 (optional): the runs the harness check compares.
+.venv/bin/python src/leaderboard.py $(sed -n 1p leaderboard/RUNS)
+[ -n "$(sed -n 2p leaderboard/RUNS)" ] && .venv/bin/python -I checks/harness_check.py $(sed -n 2p leaderboard/RUNS) | tail -3
 if diff -rq leaderboard /tmp/plannerbench-committed-leaderboard.$$ > /dev/null; then
   echo "REPRODUCED: leaderboard/ matches the committed numbers exactly."
 else

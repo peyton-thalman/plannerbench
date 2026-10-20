@@ -6,7 +6,10 @@
 
   const pct = (x) => (x == null ? '—' : `${Math.round(x * 100)}%`);
   const usd = (x, cents = false) => '$' + Number(x).toLocaleString('en-US', { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
-  const name = (m) => m.replace(/^claude-/, 'Claude ').replace(/-(\d+)-(\d+)$/, ' $1.$2').replace(/ (\w)/, (s, c) => ' ' + c.toUpperCase());
+  // Names come from models.json; when one model was run two ways (direct and via OpenRouter), say which.
+  const byId = Object.fromEntries((models ?? []).map((m) => [m.model, m]));
+  const dupes = new Set((models ?? []).map((m) => m.name).filter((n, i, all) => all.indexOf(n) !== i));
+  const name = (id) => { const m = byId[id]; if (!m) return id; return dupes.has(m.name) && id.startsWith('or:') ? `${m.name} via OpenRouter` : m.name; };
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const NS = 'http://www.w3.org/2000/svg';
   const svgEl = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
@@ -64,7 +67,9 @@
     const range = (lo, hi) => (lo == null ? '' : `${Math.round(lo * 100)}–${Math.round(hi * 100)}`);
     for (const m of [...models].sort((a, b) => b.accuracy - a.accuracy)) {
       const tr = el('tr');
-      tr.append(el('td', 'model', name(m.model)));
+      const who = el('td', 'model', name(m.model));
+      if (m.access) who.append(el('span', 'via', m.access + (m.open_weights ? ' · open weights' : '')));
+      tr.append(who);
       for (const c of cols) {
         const v = m[`${c}_accuracy`], lo = m[`${c}_lo`], hi = m[`${c}_hi`];
         const td = el('td'); const cell = el('div', `cell${v != null && v < 0.5 ? ' low' : ''}`);
@@ -76,7 +81,8 @@
         cell.append(val, track); td.append(cell); tr.append(td);
       }
       const overall = el('td', 'overall', pct(m.accuracy)); overall.append(el('span', 'ci', range(m.lo, m.hi)));
-      tr.append(overall, el('td', 'cost', m.cost_per_correct == null ? '—' : usd(m.cost_per_correct * 1000, true)));
+      tr.append(overall, el('td', 'cost', m.truncated_rate ? pct(m.truncated_rate) : '—'),
+        el('td', 'cost', m.cost_per_correct == null ? '—' : usd(m.cost_per_correct * 1000, true)));
       tbody.append(tr);
     }
   }
@@ -114,34 +120,48 @@
     if (!mistakes?.length) { box.textContent = 'No wrong answers yet.'; return; }
     box.textContent = '';
     const ms = [...new Set(mistakes.map((r) => r.model))];
-    const kinds = [...new Set(mistakes.map((r) => r.mistake))].sort((a, b) => (a === 'unexplained') - (b === 'unexplained'));
+    // Four groups keep the bars readable: the two stale-rule misreadings the story is about, other named
+    // mistakes (wrong cents, one-step shortcuts, flagging a non-issue, ...), and wrong answers no rule explains.
+    const GROUPS = [
+      ['Senior deduction misread', (k) => k === 'combined senior phase-out', 'var(--bad)'],
+      ['Pre-2022 RMD table', (k) => k === 'pre-2022 RMD table', 'var(--accent)'],
+      ['Other named mistake', (k) => k !== 'unexplained', 'color-mix(in srgb, var(--accent) 45%, var(--muted))'],
+      ['Unexplained', () => true, 'color-mix(in srgb, var(--muted) 40%, transparent)'],
+    ];
+    const group = (k) => GROUPS.findIndex(([, test]) => test(k));
+    const count = (m, gi) => mistakes.filter((r) => r.model === m && group(r.mistake) === gi).reduce((s, r) => s + r.count, 0);
+    const used = GROUPS.map((_, gi) => ms.some((m) => count(m, gi) > 0));
     const W = Math.max(280, box.clientWidth), rowH = 40, top = 8;
     const svg = svgEl('svg', {});
     box.append(svg);
     const left = Math.max(...ms.map((m) => measure(svg, name(m).replace('Claude ', '')))) + 16, right = 16;
-    const totals = ms.map((m) => mistakes.filter((r) => r.model === m).reduce((s, r) => s + r.count, 0));
+    const totals = ms.map((m) => GROUPS.reduce((s, _, gi) => s + count(m, gi), 0));
     const x = (v) => left + (v / Math.max(...totals)) * (W - left - right);
-    const fill = (k) => (k === 'unexplained' ? 'color-mix(in srgb, var(--muted) 40%, transparent)' : 'var(--bad)');
     ms.forEach((m, i) => {
       const y = top + i * rowH;
       const lab = svgEl('text', { x: left - 12, y: y + 14, dy: '0.32em', 'text-anchor': 'end', class: 'lbl' }); lab.textContent = name(m).replace('Claude ', ''); svg.append(lab);
       let x0 = 0;
-      for (const k of kinds) {
-        const r = mistakes.find((q) => q.model === m && q.mistake === k);
-        if (!r) continue;
-        const w = Math.max(0, x(x0 + r.count) - x(x0) - 2);
-        svg.append(svgEl('rect', { x: x(x0), y, width: w, height: 28, rx: 3, style: `fill:${fill(k)}` }));
-        if (w > 22) { const t = svgEl('text', { x: x(x0) + 8, y: y + 14, dy: '0.32em', style: `fill:${k === 'unexplained' ? 'var(--ink)' : 'var(--paper)'};font-family:var(--mono)` }); t.textContent = r.count; svg.append(t); }
-        x0 += r.count;
-      }
+      GROUPS.forEach(([title, , color], gi) => {
+        const n = count(m, gi);
+        if (!n) return;
+        const w = Math.max(0, x(x0 + n) - x(x0) - 2);
+        const rect = svgEl('rect', { x: x(x0), y, width: w, height: 28, rx: 3, style: `fill:${color}` });
+        const tip = svgEl('title', {}); tip.textContent = `${name(m)}: ${n} × ${title.toLowerCase()}`; rect.append(tip); svg.append(rect);
+        if (w > 22) { const t = svgEl('text', { x: x(x0) + 8, y: y + 14, dy: '0.32em', style: `fill:${gi === 0 ? 'var(--paper)' : 'var(--ink)'};font-family:var(--mono)` }); t.textContent = n; svg.append(t); }
+        x0 += n;
+      });
     });
-    // Legend under the bars
-    let lx = left; const ly = top + ms.length * rowH + 10;
-    for (const k of kinds) {
-      svg.append(svgEl('rect', { x: lx, y: ly, width: 10, height: 10, rx: 2, style: `fill:${fill(k)}` }));
-      const t = svgEl('text', { x: lx + 16, y: ly + 5, dy: '0.32em' }); t.textContent = k === 'combined senior phase-out' ? 'Senior deduction misread' : k[0].toUpperCase() + k.slice(1); svg.append(t);
-      lx += 16 + t.getComputedTextLength() + 20;
-    }
+    // Legend under the bars, wrapping onto new lines at narrow widths
+    let lx = left, ly = top + ms.length * rowH + 10;
+    GROUPS.forEach(([title, , color], gi) => {
+      if (!used[gi]) return;
+      const t = svgEl('text', { x: 0, y: 0, dy: '0.32em' }); t.textContent = title; svg.append(t);
+      const w = 16 + t.getComputedTextLength() + 20;
+      if (lx + w > W - right && lx > left) { lx = left; ly += 20; }
+      t.setAttribute('x', lx + 16); t.setAttribute('y', ly + 5);
+      svg.append(svgEl('rect', { x: lx, y: ly, width: 10, height: 10, rx: 2, style: `fill:${color}` }));
+      lx += w;
+    });
     svg.setAttribute('viewBox', `0 0 ${W} ${ly + 22}`);
   }
 
@@ -180,7 +200,70 @@
     if (lead) document.getElementById('questions-sub').append(` The score on each card is ${name(lead.model)}’s.`);
   }
 
-  const draw = () => { ruleChart(); mistakeChart(); };
+  // Accuracy against what a right answer costs, on a log scale: up and to the left is better.
+  function valueChart() {
+    const box = document.getElementById('value-chart');
+    if (!box) return;
+    const pts = (models ?? []).filter((m) => m.cost_per_correct);
+    if (!pts.length) { box.textContent = 'No priced runs yet.'; return; }
+    box.textContent = '';
+    const W = Math.max(300, box.clientWidth), H = W < 520 ? 440 : 340, L = 48, R = 16, T = 12, B = 44;
+    const costs = pts.map((m) => m.cost_per_correct * 1000);
+    const lo = Math.log10(Math.min(...costs) / 1.6), hi = Math.log10(Math.max(...costs) * 1.6);
+    const x = (c) => L + ((Math.log10(c) - lo) / (hi - lo)) * (W - L - R);
+    const y = (a) => T + (1 - a) * (H - T - B);
+    const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}` });
+    box.append(svg);
+    for (const a of [0, 0.25, 0.5, 0.75, 1]) {
+      svg.append(svgEl('line', { x1: L, x2: W - R, y1: y(a), y2: y(a), style: 'stroke:var(--rule)' }));
+      const t = svgEl('text', { x: L - 8, y: y(a), dy: '0.32em', 'text-anchor': 'end' }); t.textContent = pct(a); svg.append(t);
+    }
+    for (let e = Math.ceil(lo); e <= Math.floor(hi); e++) {
+      for (const k of [1, 3]) {
+        const c = k * 10 ** e; if (Math.log10(c) < lo || Math.log10(c) > hi) continue;
+        svg.append(svgEl('line', { x1: x(c), x2: x(c), y1: T, y2: H - B, style: 'stroke:var(--rule);stroke-dasharray:2 3' }));
+        const t = svgEl('text', { x: x(c), y: H - B + 18, 'text-anchor': 'middle' }); t.textContent = usd(c, c < 1); svg.append(t);
+      }
+    }
+    const cap = svgEl('text', { x: (L + W - R) / 2, y: H - 6, 'text-anchor': 'middle', class: 'lbl' }); cap.textContent = 'Cost per 1,000 right answers (log scale)'; svg.append(cap);
+    // Dots and interval lines first, then labels, nudged apart vertically where models sit close together.
+    const placed = [];
+    for (const m of pts.sort((a, b) => b.accuracy - a.accuracy)) {
+      const cx = x(m.cost_per_correct * 1000), cy = y(m.accuracy);
+      svg.append(svgEl('line', { x1: cx, x2: cx, y1: y(m.hi), y2: y(m.lo), style: 'stroke:var(--accent);stroke-width:2;opacity:0.35' }));
+      const dot = svgEl('circle', { cx, cy, r: 6, style: `fill:${m.open_weights ? 'var(--paper)' : 'var(--accent)'};stroke:var(--accent);stroke-width:2` });
+      const title = svgEl('title', {}); title.textContent = `${name(m.model)}: ${pct(m.accuracy)} (${pct(m.lo)}–${pct(m.hi)}), ${usd(m.cost_per_correct * 1000, true)} per 1,000 right answers`;
+      dot.append(title); svg.append(dot);
+      placed.push({ m, cx, cy, ly: cy });
+    }
+    // Each label tries the right side, then the left, at growing vertical offsets, and takes the first spot that
+    // overlaps no other label or dot and stays inside the plot. A leader line joins a moved label to its dot.
+    const boxes = placed.map((p) => ({ x0: p.cx - 7, x1: p.cx + 7, y0: p.cy - 7, y1: p.cy + 7 }));
+    const hit = (b) => boxes.some((o) => b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0);
+    placed.sort((a, b) => a.cy - b.cy);
+    for (const p of placed) {
+      const t = svgEl('text', { dy: '0.32em', class: 'lbl' }); t.textContent = name(p.m.model); svg.append(t);
+      const w = t.getComputedTextLength(), h = 14;
+      let spot = null;
+      for (const dy of [0, 15, -15, 30, -30, 45, -45, 60, -60]) {
+        for (const right of [true, false]) {
+          const x0 = right ? p.cx + 11 : p.cx - 11 - w, ly = p.cy + dy;
+          const b = { x0, x1: x0 + w, y0: ly - h / 2, y1: ly + h / 2 };
+          if (b.x0 < L || b.x1 > W - R || b.y0 < T || b.y1 > H - B || hit(b)) continue;
+          spot = { b, right, ly }; break;
+        }
+        if (spot) break;
+      }
+      spot ??= { b: { x0: p.cx + 11, x1: p.cx + 11 + w, y0: p.cy - 7, y1: p.cy + 7 }, right: true, ly: p.cy };
+      boxes.push(spot.b);
+      t.setAttribute('x', spot.right ? spot.b.x0 : spot.b.x1); t.setAttribute('y', spot.ly);
+      if (!spot.right) t.setAttribute('text-anchor', 'end');
+      if (Math.abs(spot.ly - p.cy) > 2)
+        svg.append(svgEl('line', { x1: p.cx + (spot.right ? 6 : -6), y1: p.cy, x2: spot.right ? spot.b.x0 - 2 : spot.b.x1 + 2, y2: spot.ly, style: 'stroke:var(--muted);stroke-width:1' }));
+    }
+  }
+
+  const draw = () => { ruleChart(); mistakeChart(); valueChart(); };
   draw();
   // The browser jumped to a #section before the data filled in and moved it; jump again now that layout is final.
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();

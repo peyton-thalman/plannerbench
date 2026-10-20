@@ -24,6 +24,10 @@ SS_BASE = {"mfj": (32000, 44000), "single": (25000, 34000)}
 # Pub 590-B Table III (Uniform Lifetime), ages 72..100.
 ULT = {72: 27.4, 73: 26.5, 74: 25.5, 75: 24.6, 76: 23.7, 77: 22.9, 78: 22.0, 79: 21.1, 80: 20.2, 81: 19.4, 82: 18.5,
        83: 17.7, 84: 16.8, 85: 16.0, 86: 15.2, 87: 14.4, 88: 13.7, 89: 12.9, 90: 12.2}
+# The Uniform Lifetime Table in force before 2022 (Treas. Reg. 1.401(a)(9)-9 before the 2020 final regulations),
+# kept only to recognize answers that use it.
+ULT_PRE2022 = {72: 25.6, 73: 24.7, 74: 23.8, 75: 22.9, 76: 22.0, 77: 21.2, 78: 20.3, 79: 19.5, 80: 18.7, 81: 17.9, 82: 17.1,
+               83: 16.3, 84: 15.5, 85: 14.8, 86: 14.1, 87: 13.4, 88: 12.7, 89: 12.0, 90: 11.4}
 IRMAA_EDGES = {"mfj": [218000, 274000, 342000, 410000, 750000], "single": [109000, 137000, 171000, 205000, 500000]}
 PART_B = [202.90, 284.10, 405.80, 527.50, 649.20, 689.90]
 
@@ -31,7 +35,8 @@ PART_B = [202.90, 284.10, 405.80, 527.50, 649.20, 689.90]
 # Known misreadings of the rules. The grader switches one on to recompute what a model that holds it would answer,
 # so a wrong answer can be named ("took the senior phase-out once off $12,000") instead of just counted.
 MISREAD = set()
-MISREADINGS = {"combined_senior_phaseout": "senior deduction phase-out taken once off the couple's $12,000, not off each $6,000"}
+MISREADINGS = {"combined_senior_phaseout": "senior deduction phase-out taken once off the couple's $12,000, not off each $6,000",
+               "pre2022_rmd_table": "RMD divided by the Uniform Lifetime Table replaced in 2022"}
 
 
 def answer_if_misread(name, c):
@@ -91,7 +96,8 @@ def rmd(c):
     i = c["inputs"]
     by = i["birthYear"]
     start = 75 if by >= 1960 else 73 if by >= 1951 else 72
-    return 0 if i["age"] < start else round(i["balance"] / ULT[i["age"]])
+    table = ULT_PRE2022 if "pre2022_rmd_table" in MISREAD else ULT
+    return 0 if i["age"] < start else round(i["balance"] / table[i["age"]])
 
 
 def ss_claim(c):

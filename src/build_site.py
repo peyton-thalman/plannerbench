@@ -47,14 +47,19 @@ def steps(c):
 
 
 def replies(run):
-    path = ROOT / "runs" / run / "graded.jsonl"
-    return {(g["model"], g["id"]): g for g in (json.loads(l) for l in path.read_text().splitlines() if l.strip())} if path.exists() else {}
+    """First-run replies by (model, case), from one run or several joined with "+"."""
+    out = {}
+    for r in run.split("+"):
+        path = ROOT / "runs" / r / "graded.jsonl"
+        if path.exists():
+            out.update({(g["model"], g["id"]): g for g in (json.loads(l) for l in path.read_text().splitlines() if l.strip()) if g["rep"] == 0})
+    return out
 
 
 def main(run, rule_run=None):
     out = ROOT / "site" / "data"
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("models", "tasks", "mistakes", "rule_effect"):
+    for name in ("models", "tasks", "mistakes", "rule_effect", "harness"):
         src = ROOT / "leaderboard" / f"{name}.json"
         if src.exists():
             shutil.copy(src, out / f"{name}.json")

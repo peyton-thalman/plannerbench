@@ -38,13 +38,13 @@ Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run c
 
 ## Mistakes by type
 
-| Model | combined senior phase-out | left out Medicare | one-step shortcut | counted adult child | counted other fund family | missed a violation | flagged a compliant sentence | missed an issue | flagged a non-issue | unexplained |
-|---|---|---|---|---|---|---|---|---|---|---|
-| or:anthropic/claude-haiku-5.5@anthropic | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
-| or:deepseek/deepseek-v4.1-flash@deepinfra/fp8 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| or:openai/gpt-oss-120b@deepinfra/bf16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 |
-| or:qwen/qwen3.8-flash@alibaba | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| or:z-ai/glm-5.3-flash@z-ai/fp8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
+| Model | combined senior phase-out | pre-2022 RMD table | right IRMAA tier, wrong cents | left out Medicare | one-step shortcut | counted adult child | counted other fund family | missed a violation | flagged a compliant sentence | missed an issue | flagged a non-issue | unexplained |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| or:anthropic/claude-haiku-5.5@anthropic | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
+| or:deepseek/deepseek-v4.1-flash@deepinfra/fp8 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+| or:openai/gpt-oss-120b@deepinfra/bf16 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+| or:qwen/qwen3.8-flash@alibaba | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| or:z-ai/glm-5.3-flash@z-ai/fp8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 |
 
 ## Wrong answers
 
@@ -55,7 +55,7 @@ Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run c
 | `federal_tax-000` | or:deepseek/deepseek-v4.1-flash@deepinfra/fp8 | 42,268.00 | 42,274.00 | +6.00 |  |
 | `irmaa-000` | or:openai/gpt-oss-120b@deepinfra/bf16 | 284.10 | 188.40 | -95.70 |  |
 | `rmd-000` | or:z-ai/glm-5.3-flash@z-ai/fp8 | 59,455.00 | 49,358.00 | -10,097.00 |  |
-| `rmd-000` | or:openai/gpt-oss-120b@deepinfra/bf16 | 59,455.00 | 64,433.00 | +4,978.00 |  |
+| `rmd-000` | or:openai/gpt-oss-120b@deepinfra/bf16 | 59,455.00 | 64,433.00 | +4,978.00 | pre-2022 RMD table |
 | `rollover_flags-000` | or:anthropic/claude-haiku-5.5@anthropic | COST,NUA | AGE55,COST,NUA |  | flagged a non-issue |
 | `senior_phaseout-000` | or:z-ai/glm-5.3-flash@z-ai/fp8 | 16,152.00 | 16,450.00 | +298.00 |  |
 | `senior_phaseout-000` | or:anthropic/claude-haiku-5.5@anthropic | 16,152.00 | 15,928.00 | -224.00 | combined senior phase-out |
