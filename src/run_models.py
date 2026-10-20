@@ -4,6 +4,7 @@ Usage:
   .venv/bin/python src/run_models.py --models claude-sonnet-5-5 --per-task 10            # 60-case pilot
   .venv/bin/python src/run_models.py --models claude-opus-5-5,claude-sonnet-5-5 --per-task 200 --reps 3
   .venv/bin/python src/run_models.py --fake --per-task 10                                # offline test, no API calls
+  .venv/bin/python src/run_models.py --models @lineups/cheap.txt --per-task 1 --run smoke  # check every pinned host answers
 
 Replies are appended to runs/<run>/raw.jsonl as they arrive, so an interrupted run resumes where it stopped.
 """
@@ -33,6 +34,7 @@ load_env()
 # $ per million tokens (input, output), Anthropic first-party rates as of 2026-10.
 PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "fake": (0, 0)}
 # Other providers' models: add "oai:<id>": [input, output] to prices.json from the provider's pricing page.
+# OpenRouter ("or:") replies carry their billed cost, so they need no entry.
 _extra = ROOT / "prices.json"
 if _extra.exists():
     PRICES.update({k: tuple(v) for k, v in json.loads(_extra.read_text()).items() if not k.startswith("_")})
@@ -88,45 +90,98 @@ def ask_claude(client, model, effort, prompt):
     return rec
 
 
-def ask_openai_compatible(model, effort, prompt):
-    """Any OpenAI-style /chat/completions endpoint (OpenAI, OpenCode Zen, OpenRouter, DeepSeek, ...).
-
-    Name the model "oai:<model id>"; OPENAI_BASE_URL (default https://api.openai.com/v1) and OPENAI_API_KEY pick the provider.
-    """
-    import os
+def post_json(url, body, key, label):
+    """POST with retries on rate limits and server errors; returns (json, None) or (None, error string)."""
     import time
     import urllib.error
     import urllib.request
 
-    base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-    body = {"model": model.removeprefix("oai:"), "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000}
-    req = urllib.request.Request(f"{base}/chat/completions", data=json.dumps(body).encode(), method="POST",
-                                 headers={"Content-Type": "application/json", "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY', '')}"})
+    req = urllib.request.Request(url, data=json.dumps(body).encode() if body is not None else None, method="POST" if body is not None else "GET",
+                                 headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
     for attempt in range(5):
         try:
             with urllib.request.urlopen(req, timeout=600) as resp:
-                r = json.loads(resp.read())
-            break
+                return json.loads(resp.read()), None
         except urllib.error.HTTPError as e:
             if e.code == 401:
-                raise SystemExit(f"Authentication failed at {base}. Set OPENAI_API_KEY.")
-            if e.code in (429, 500, 502, 503, 529) and attempt < 4:
+                raise SystemExit(f"Authentication failed at {url}. Check {label}.")
+            if e.code in (404, 429, 500, 502, 503, 529) and attempt < 4 and (e.code != 404 or body is None):
                 time.sleep(2 ** attempt * 3)
                 continue
-            return {"error": f"{e.code}: {e.read()[:300].decode(errors='replace')}"}
+            return None, f"{e.code}: {e.read()[:300].decode(errors='replace')}"
         except (urllib.error.URLError, TimeoutError) as e:
             if attempt < 4:
                 time.sleep(2 ** attempt * 3)
                 continue
-            return {"error": f"connection: {e}"}
+            return None, f"connection: {e}"
+
+
+def from_chat_completion(r):
+    """A reply record from an OpenAI-style response."""
     choice = r["choices"][0]
     usage = r.get("usage") or {}
     # Providers report a content-filter stop for declines; score it as a refusal like Claude's stop_reason.
     stop = "refusal" if choice.get("finish_reason") == "content_filter" else choice.get("finish_reason")
     rec = {"text": choice["message"].get("content") or "", "stop_reason": stop,
            "input_tokens": usage.get("prompt_tokens", 0), "output_tokens": usage.get("completion_tokens", 0)}
-    if isinstance(usage.get("cost"), (int, float)):  # OpenRouter-style billed cost
+    if isinstance(usage.get("cost"), (int, float)):  # billed cost, when the provider reports it
         rec["billed_usd"] = usage["cost"]
+    reasoning = (usage.get("completion_tokens_details") or {}).get("reasoning_tokens")
+    if reasoning:
+        rec["reasoning_tokens"] = reasoning
+    return rec
+
+
+def ask_openai_compatible(model, effort, prompt):
+    """Any OpenAI-style /chat/completions endpoint (OpenAI, OpenCode Zen, DeepSeek, ...).
+
+    Name the model "oai:<model id>"; OPENAI_BASE_URL (default https://api.openai.com/v1) and OPENAI_API_KEY pick the provider.
+    """
+    import os
+
+    base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+    body = {"model": model.removeprefix("oai:"), "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000}
+    r, err = post_json(f"{base}/chat/completions", body, os.environ.get("OPENAI_API_KEY", ""), "OPENAI_API_KEY")
+    return {"error": err} if err else from_chat_completion(r)
+
+
+OPENROUTER = "https://openrouter.ai/api/v1"
+
+
+def ask_openrouter(model, effort, prompt, private=False):
+    """OpenRouter, with the routing pinned down so a score names what actually answered.
+
+    Name the model "or:<vendor>/<model>" or "or:<vendor>/<model>@<host>" (e.g. or:deepseek/deepseek-v4.1-flash@deepinfra).
+    With @host, only that host may answer and there is no fallback, so every reply comes from the same deployment.
+    Hosts that keep prompts for training are always excluded; the private set also requires zero data retention.
+    The host that served each reply is saved, since the same open model can score differently on different hosts.
+    """
+    import os
+
+    name, _, host = model.removeprefix("or:").partition("@")
+    provider = {"data_collection": "deny"}
+    if host:
+        provider.update({"only": [host], "allow_fallbacks": False})
+    if private:
+        provider["zdr"] = True
+    body = {"model": name, "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000,
+            # Reasoning text isn't graded, so leave it out of the reply; it is still used and billed.
+            "reasoning": {"effort": effort, "exclude": True}, "provider": provider}
+    key = os.environ.get("OPENROUTER_API_KEY", "")
+    r, err = post_json(f"{OPENROUTER}/chat/completions", body, key, "OPENROUTER_API_KEY")
+    if err:
+        return {"error": err}
+    rec = {**from_chat_completion(r), "served_model": r.get("model"), "generation_id": r.get("id")}
+    if r.get("provider"):
+        rec["host"] = r["provider"]
+    elif r.get("id"):
+        # The host isn't always in the reply; the generation record has it (and the exact billed cost).
+        g, _ = post_json(f"{OPENROUTER}/generation?id={r['id']}", None, key, "OPENROUTER_API_KEY")
+        g = (g or {}).get("data") or {}
+        if g.get("provider_name"):
+            rec["host"] = g["provider_name"]
+        if rec.get("billed_usd") is None and isinstance(g.get("total_cost"), (int, float)):
+            rec["billed_usd"] = g["total_cost"]
     return rec
 
 
@@ -157,12 +212,15 @@ def main():
     ap.add_argument("--fake", action="store_true")
     ap.add_argument("--tasks", default=None, help="comma-separated tasks to ask (default: all)")
     ap.add_argument("--context", default=None, help="file whose text is put before every question, e.g. a rule the model needs")
+    ap.add_argument("--max-usd", type=float, default=None, help="stop asking once this run has spent this much; rerun later to resume")
     ap.add_argument("--split", default="public", choices=list(SPLITS), help="private = the held-out set, never published")
     a = ap.parse_args()
 
+    if a.models.startswith("@"):  # a lineup file: one model per line, # comments allowed
+        a.models = ",".join(l.split("#")[0].strip() for l in Path(a.models[1:]).read_text().splitlines() if l.split("#")[0].strip())
     models = ["fake"] if a.fake else a.models.split(",")
     # Free endpoints commonly keep prompts for training; a held-out question sent there is no longer held out.
-    free = [m for m in models if m.endswith("-free") or m == "oai:big-pickle"]
+    free = [m for m in models if m.endswith("-free") or m.split("@")[0].endswith(":free") or m == "oai:big-pickle"]
     if a.split == "private" and free:
         raise SystemExit(f"Not sending the private set to free endpoints that may train on it: {', '.join(free)}")
     cases = load_cases(a.per_task, a.split)
@@ -182,7 +240,9 @@ def main():
         raise SystemExit(f"Run '{run}' was asked on the {meta.get('split', 'public')} split; pick another --run name.")
     meta.update({"split": a.split, "effort": a.effort, "per_task": a.per_task, "reps": a.reps, "context": a.context, "tasks": a.tasks,
                  "models": sorted(set(meta.get("models", [])) | set(models)), "max_tokens": 16000,
-                 "openai_base_url": __import__("os").environ.get("OPENAI_BASE_URL") if any(m.startswith("oai:") for m in models) else meta.get("openai_base_url")})
+                 "openai_base_url": __import__("os").environ.get("OPENAI_BASE_URL") if any(m.startswith("oai:") for m in models) else meta.get("openai_base_url"),
+                 "openrouter_routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; private split adds zdr=true; reasoning effort = --effort"
+                 if any(m.startswith("or:") for m in models) else meta.get("openrouter_routing")})
     meta_path.write_text(json.dumps(meta, indent=1) + "\n")
     raw = out_dir / "raw.jsonl"
     done = set()
@@ -192,7 +252,8 @@ def main():
             if "error" not in r:
                 done.add((r["model"], r["id"], r["rep"]))
 
-    jobs = [(m, c, rep) for m in models for c in cases for rep in range(a.reps) if (m, c["id"], rep) not in done]
+    # Case by case across models, so a budget stop leaves every model with the same questions answered.
+    jobs = [(m, c, rep) for rep in range(a.reps) for c in cases for m in models if (m, c["id"], rep) not in done]
     print(f"Run '{run}': {len(cases)} cases x {len(models)} model(s) x {a.reps} rep(s); {len(jobs)} to ask, {len(done)} already done")
     if not jobs:
         return
@@ -209,11 +270,15 @@ def main():
 
     lock = threading.Lock()
     cost = 0.0
-    errors = 0
+    errors = skipped = 0
     with raw.open("a") as f, ThreadPoolExecutor(max_workers=1 if a.fake else a.workers) as pool:
         def ask(m, c, rep):
+            if a.max_usd is not None and cost >= a.max_usd:
+                return None  # over budget: not asked, not recorded, so a rerun picks it up
             if a.fake:
                 return ask_fake(c, rep)
+            if m.startswith("or:"):
+                return ask_openrouter(m, a.effort, c["prompt"], private=a.split == "private")
             if m.startswith("oai:"):
                 return ask_openai_compatible(m, a.effort, c["prompt"])
             return ask_claude(client, m, a.effort, c["prompt"])
@@ -221,7 +286,10 @@ def main():
         futs = {pool.submit(ask, m, c, rep): (m, c, rep) for m, c, rep in jobs}
         for n, fut in enumerate(as_completed(futs), 1):
             m, c, rep = futs[fut]
-            rec = {"model": m, "effort": a.effort, "id": c["id"], "task": c["task"], "rep": rep, **fut.result()}
+            if (res := fut.result()) is None:
+                skipped += 1
+                continue
+            rec = {"model": m, "effort": a.effort, "id": c["id"], "task": c["task"], "rep": rep, **res}
             errors += "error" in rec
             cost += cost_of(rec)
             with lock:
@@ -229,6 +297,8 @@ def main():
                 f.flush()
             if n % 10 == 0 or n == len(jobs):
                 print(f"  {n}/{len(jobs)} answered, ${cost:.2f} so far")
+    if skipped:
+        print(f"BUDGET: stopped at ${cost:.2f} (--max-usd {a.max_usd}); {skipped} questions not asked. Rerun the same command to continue.")
     if errors:
         print(f"WARNING: {errors}/{len(jobs)} requests failed (see 'error' in raw.jsonl). Rerun the same command to retry them.")
     print(f"Saved to {raw.relative_to(ROOT)}. Next: .venv/bin/python src/grade.py {run}")

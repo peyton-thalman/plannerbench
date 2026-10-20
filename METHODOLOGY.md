@@ -15,8 +15,12 @@ It measures rule knowledge and arithmetic. It doesn't measure advice quality, ju
 
 - One user message per question: no system prompt, no tools, no examples. The prompt text is in `data/cases.jsonl`.
 - Claude models: `effort` as recorded in each run's `meta.json` (default `high`), `max_tokens` 16,000.
-- Other providers: the same prompt through an OpenAI-compatible `/chat/completions` endpoint, `max_tokens` 16,000,
-  provider defaults otherwise. The base URL is recorded in `meta.json`.
+- Other labs' models: the same prompt through OpenRouter, `max_tokens` 16,000, reasoning effort set to the run's
+  effort. Each model is pinned to one host (`only: [host]`, no fallbacks), chosen as the model maker's own endpoint or
+  else a full-precision one, never 4-bit; the lineup and the reason for each host are in `lineups/`. Every reply
+  records the host that actually served it. Hosts that train on prompts are excluded (`data_collection: deny`).
+- Other OpenAI-compatible endpoints (`oai:`) are supported for exploration. Their serving host and precision aren't
+  visible, so their scores aren't published.
 - No refusal fallbacks: a decline is scored as a refusal, never re-answered by a different model.
 - Every raw reply is saved in `runs/<run>/raw.jsonl`, so anyone can regrade without asking a model again.
 

@@ -46,7 +46,16 @@ export ANTHROPIC_API_KEY=...                       # from console.anthropic.com 
 .venv/bin/python src/leaderboard.py live-high-10x1                              # leaderboard/*.json for the leaderboard page
 ```
 
-Keys not tied to a workspace also need `ANTHROPIC_WORKSPACE_ID`. Any OpenAI-compatible provider (OpenAI, OpenCode Zen, OpenRouter, DeepSeek) runs with an `oai:` prefix:
+Keys not tied to a workspace also need `ANTHROPIC_WORKSPACE_ID`. Keys can live in `.env` (git-ignored; see `.env.example`) instead of the shell.
+
+**Other labs' models go through OpenRouter**, pinned to one host so a score names the deployment that produced it (the same open model is served by dozens of hosts, many at 4-bit precision):
+
+```bash
+.venv/bin/python src/run_models.py --models @lineups/cheap.txt --per-task 1 --run smoke          # every host answers? ~1 cent
+.venv/bin/python src/run_models.py --models @lineups/cheap.txt --per-task 50 --max-usd 10        # stops at $10; rerun to resume
+```
+
+`or:<vendor>/<model>@<host>` allows only that host with no fallback. Hosts that keep prompts for training are always excluded, and `--split private` also requires zero data retention. Each reply records the host that served it and OpenRouter's billed cost. `--max-usd` stops a run at a spend limit (it may go over by the questions already in flight); questions are asked case by case across models, so a stopped run leaves every model with the same questions. Any other OpenAI-compatible provider (OpenAI, OpenCode Zen, OpenRouter, DeepSeek) runs with an `oai:` prefix:
 
 ```bash
 export OPENAI_BASE_URL=https://opencode.ai/zen/v1 OPENAI_API_KEY=...

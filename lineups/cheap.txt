@@ -1,0 +1,13 @@
+# Low-cost models on OpenRouter, each pinned to one host so every reply comes from the same deployment.
+# Host choice: the model maker's own endpoint where OpenRouter has one, else a full-precision (fp8/bf16) host,
+# never a 4-bit one. Checked against openrouter.ai/api/v1/models/<id>/endpoints on 2026-10-20.
+# $ per million tokens (input/output) at that host on that date, for reference; runs record the billed cost.
+or:deepseek/deepseek-v4.1-flash@deepinfra/fp8         # 0.14 / 0.42  (no first-party host listed)
+or:qwen/qwen3.8-flash@alibaba                          # 0.15 / 0.47  maker
+or:z-ai/glm-5.3-flash@z-ai/fp8                         # 0.15 / 0.50  maker
+or:minimax/minimax-m3@minimax/fp8                      # 0.30 / 1.20  maker
+or:openai/gpt-oss-120b@deepinfra/bf16                  # 0.037 / 0.17 open weights
+or:nvidia/nemotron-3-super-120b-a12b@deepinfra/bf16    # 0.085 / 0.40 open weights
+or:openai/gpt-6-luna@openai                            # 0.10 / 0.50  maker
+or:google/gemini-3.5-flash-lite@google-ai-studio       # 0.30 / 2.50  maker
+or:anthropic/claude-haiku-5.5@anthropic                # 0.10 / 0.50  maker; same model as the direct-API Haiku runs

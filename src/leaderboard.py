@@ -47,7 +47,9 @@ def main(run, rule_run=None):
                        "cost_usd": round(cost, 4) if priced else None,
                        # What a wealthtech team actually pays for: dollars per right answer, not per token.
                        "cost_per_correct": round(cost / correct, 5) if priced and correct else None,
-                       "cost_per_1k_questions": round(1000 * cost / len(mine), 3) if priced and mine else None})
+                       "cost_per_1k_questions": round(1000 * cost / len(mine), 3) if priced and mine else None,
+                       # Which deployment answered (OpenRouter): an unpinned open model can be served by several hosts.
+                       **({"hosts": dict(Counter(g["host"] for g in mine if g.get("host")))} if any(g.get("host") for g in mine) else {})})
 
     cell = defaultdict(list)
     for g in rows:
