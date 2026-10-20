@@ -60,16 +60,23 @@
   // Score table
   if (models) {
     const tbody = document.querySelector('#scores tbody');
-    const cols = ['single_step_accuracy', 'multi_step_accuracy', 'stacked_accuracy', 'compliance_accuracy'];
+    const cols = ['single_step', 'multi_step', 'stacked', 'compliance'];
+    const range = (lo, hi) => (lo == null ? '' : `${Math.round(lo * 100)}–${Math.round(hi * 100)}`);
     for (const m of [...models].sort((a, b) => b.accuracy - a.accuracy)) {
       const tr = el('tr');
       tr.append(el('td', 'model', name(m.model)));
       for (const c of cols) {
-        const td = el('td'); const cell = el('div', `cell${m[c] != null && m[c] < 0.5 ? ' low' : ''}`);
-        const track = el('div', 'track'); const fill = el('div', 'fill'); fill.style.width = `${(m[c] ?? 0) * 100}%`; track.append(fill);
-        cell.append(el('span', 'v', pct(m[c])), track); td.append(cell); tr.append(td);
+        const v = m[`${c}_accuracy`], lo = m[`${c}_lo`], hi = m[`${c}_hi`];
+        const td = el('td'); const cell = el('div', `cell${v != null && v < 0.5 ? ' low' : ''}`);
+        // The track shows the 95% interval as a band, with the measured score as the solid bar.
+        const track = el('div', 'track'); const band = el('div', 'band-ci'); const fill = el('div', 'fill');
+        band.style.left = `${(lo ?? 0) * 100}%`; band.style.width = `${((hi ?? 0) - (lo ?? 0)) * 100}%`; fill.style.width = `${(v ?? 0) * 100}%`;
+        track.append(band, fill);
+        const val = el('span', 'v', pct(v)); val.append(el('span', 'ci', range(lo, hi)));
+        cell.append(val, track); td.append(cell); tr.append(td);
       }
-      tr.append(el('td', 'overall', pct(m.accuracy)), el('td', 'cost', usd(m.cost_usd, true)));
+      const overall = el('td', 'overall', pct(m.accuracy)); overall.append(el('span', 'ci', range(m.lo, m.hi)));
+      tr.append(overall, el('td', 'cost', m.cost_per_correct == null ? '—' : usd(m.cost_per_correct * 1000, true)));
       tbody.append(tr);
     }
   }

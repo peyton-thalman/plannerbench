@@ -3,28 +3,48 @@
   "model": "claude-haiku-5-5",
   "task": "senior_phaseout",
   "without_rule": 0.0,
+  "without_lo": 0.0,
+  "without_hi": 0.2775,
   "with_rule": 0.9,
-  "questions": 10
+  "with_lo": 0.5958,
+  "with_hi": 0.9821,
+  "questions": 10,
+  "p_value": 0.00391
  },
  {
   "model": "claude-haiku-5-5",
   "task": "widow_all_in",
   "without_rule": 0.2,
+  "without_lo": 0.0567,
+  "without_hi": 0.5098,
   "with_rule": 0.6,
-  "questions": 10
+  "with_lo": 0.3127,
+  "with_hi": 0.8318,
+  "questions": 10,
+  "p_value": 0.28906
  },
  {
   "model": "claude-sonnet-5-5",
   "task": "senior_phaseout",
   "without_rule": 0.1,
+  "without_lo": 0.0179,
+  "without_hi": 0.4042,
   "with_rule": 1.0,
-  "questions": 10
+  "with_lo": 0.7225,
+  "with_hi": 1.0,
+  "questions": 10,
+  "p_value": 0.00391
  },
  {
   "model": "claude-sonnet-5-5",
   "task": "widow_all_in",
   "without_rule": 0.2,
+  "without_lo": 0.0567,
+  "without_hi": 0.5098,
   "with_rule": 1.0,
-  "questions": 10
+  "with_lo": 0.7225,
+  "with_hi": 1.0,
+  "questions": 10,
+  "p_value": 0.00781
  }
 ]

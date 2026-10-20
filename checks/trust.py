@@ -6,7 +6,10 @@ Runs five layers and writes TRUST.md plus a human audit pack:
   3. Invariants      — rules that must hold for any input (more income never lowers tax, ...).
   4. Dataset health  — no duplicates, no task dominated by one answer, every prompt asks for ANSWER:.
   5. Human audit     — a small random sample with worked solutions, for a person to tick off with a calculator.
+  6. Outside model   — PolicyEngine-US, an open-source tax model this project didn't write, recomputes every tax answer.
+  7. Held-out set    — the private cases (secret seed, not in the repo) pass the two-way and outside checks too.
 """
+import subprocess
 import json
 import random
 import sys
@@ -168,7 +171,38 @@ lines = ["# Human audit pack", "", "Check each with a calculator and the cited t
 for c in sample:
     lines += [f"## [ ] {c['id']}", "", f"> {c['prompt'].split(' End your reply')[0]}", "", *[f"- {s}" for s in worked(c)], ""]
 (ROOT / "checks" / "AUDIT.md").write_text("\n".join(lines))
-layer("Human audit pack", True, "12 random cases with worked solutions written to checks/AUDIT.md")
+layer("Human audit pack", True, "12 random cases with worked solutions written to checks/AUDIT.md (not yet ticked by an outside reviewer)")
+
+# 6. Outside implementation
+PE = ROOT / ".venv-pe" / "bin" / "python"
+
+
+def outside(cases_path, out_name):
+    if not PE.exists():
+        return None, "skipped: install with  python3 -m venv .venv-pe && .venv-pe/bin/pip install policyengine-us"
+    subprocess.run([str(PE), "-I", str(ROOT / "checks" / "policyengine_check.py"), str(cases_path), out_name], capture_output=True, text=True)
+    r = json.loads((ROOT / "checks" / f"{out_name.lower()}.json").read_text())
+    return r["pass"], f"{r['agree']:,}/{r['total']:,} tax answers agree with PolicyEngine-US within $2"
+
+
+pe_ok, pe_detail = outside(ROOT / "data" / "cases.jsonl", "POLICYENGINE")
+layer("Outside model (PolicyEngine-US)", bool(pe_ok), pe_detail + ("; see checks/POLICYENGINE.md" if pe_ok is not None else ""))
+
+# 7. Held-out set: the same checks, reporting counts only so nothing about the private cases is published.
+private = ROOT / "private" / "cases.jsonl"
+if private.exists():
+    pcases = [json.loads(l) for l in private.read_text().splitlines() if l.strip()]
+    p_two = sum(not ic.agrees(ic.CHECK[c["task"]](c), c) for c in pcases)
+    p_overlap = len({c["prompt"] for c in pcases} & {c["prompt"] for c in cases})
+    p_pe_ok, p_pe = outside(private, "private_policyengine")
+    moved = ROOT / "checks" / "PRIVATE_POLICYENGINE.md"
+    if moved.exists():  # the per-case report names private cases; keep it with them
+        moved.replace(ROOT / "private" / "POLICYENGINE.md")
+        (ROOT / "checks" / "private_policyengine.json").replace(ROOT / "private" / "policyengine.json")
+    p_ok = not p_two and not p_overlap and p_pe_ok is not False
+    layer("Held-out set (private)", p_ok, f"{len(pcases):,} private cases: {len(pcases) - p_two:,} pass the two-way check, {p_overlap} repeat a public question; {p_pe}")
+else:
+    layer("Held-out set (private)", True, "not on this machine (it never leaves the maintainer's); public checks above still apply")
 
 # Report
 ok = all(r[1] for r in results)

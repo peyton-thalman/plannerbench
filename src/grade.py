@@ -42,6 +42,7 @@ def parse_set(text):
 
 sys.path.insert(0, str(ROOT / "checks"))
 import independent_check as ic  # noqa: E402
+from stats import wilson  # noqa: E402
 
 # Named mistakes, checked in order: a wrong answer matching what a known misreading produces gets that label.
 MISTAKES = ["combined senior phase-out", "left out Medicare", "one-step shortcut", "counted adult child", "counted other fund family",
@@ -83,7 +84,9 @@ def bucket(rec, case):
 
 def main(run):
     run_dir = ROOT / "runs" / run
-    cases = {c["id"]: c for c in (json.loads(l) for l in (ROOT / "data" / "cases.jsonl").read_text().splitlines() if l.strip())}
+    meta = json.loads((run_dir / "meta.json").read_text()) if (run_dir / "meta.json").exists() else {}
+    split = ROOT / ("private" if meta.get("split") == "private" else "data") / "cases.jsonl"
+    cases = {c["id"]: c for c in (json.loads(l) for l in split.read_text().splitlines() if l.strip())}
     recs = [json.loads(l) for l in (run_dir / "raw.jsonl").read_text().splitlines() if l.strip()]
     # Keep the last attempt per (model, case, rep): a resumed run may have retried an error.
     latest = {(r["model"], r["id"], r["rep"]): r for r in recs}
@@ -97,10 +100,15 @@ def main(run):
     models = sorted({g["model"] for g in graded})
     tasks = sorted({g["task"] for g in graded})
     acc = lambda rows: (sum(r["bucket"] == "correct" for r in rows), sum(r["bucket"] != "error" for r in rows))
-    pct = lambda k, n: f"{100 * k / n:.0f}% ({k}/{n})" if n else "n/a"
+
+    def pct(k, n):
+        if not n:
+            return "n/a"
+        lo, hi = wilson(k, n)
+        return f"{100 * k / n:.0f}% ({k}/{n}, {100 * lo:.0f}–{100 * hi:.0f})"
 
     md = [f"# PlannerBench results: {run}", ""]
-    md += ["## Accuracy by task", "", "| Task | " + " | ".join(models) + " |", "|---|" + "---|" * len(models)]
+    md += ["## Accuracy by task", "", "Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run counts in the cell.", "", "| Task | " + " | ".join(models) + " |", "|---|" + "---|" * len(models)]
     for t in tasks:
         md.append(f"| {t} | " + " | ".join(pct(*acc([g for g in graded if g["model"] == m and g["task"] == t])) for m in models) + " |")
     md.append("| **Overall** | " + " | ".join(f"**{pct(*acc([g for g in graded if g['model'] == m]))}**" for m in models) + " |")

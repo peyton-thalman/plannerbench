@@ -1,6 +1,6 @@
 // Generates PlannerBench cases: client-style questions with exact answers computed by the MoneyGuide engine,
 // whose own tests check it against IRS Rev. Proc. 2025-32, Pub 915, the Uniform Lifetime Table and SSA factors.
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { computeTax, taxableSocialSecurity, rmdDivisor, rmdStartAge, irmaaTier, IRMAA, type Filing } from '../../../moneyguide/src/engine/tax';
 import { claimFactor } from '../../../moneyguide/src/engine/sim';
 
@@ -21,14 +21,19 @@ export interface Case {
   misreadings?: Record<string, number | string>;
 }
 
-// Seeded PRNG so the benchmark is reproducible.
-let seed = 20261020;
+// Seeded PRNG so the benchmark is reproducible. The public set uses the seed below; the private held-out set uses
+// PB_SEED, which lives only in private/seed, so a model trained on the public cases still meets new ones.
+let seed = Number(process.env.PB_SEED ?? 20261020);
 const rand = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
 const pick = <T,>(xs: T[]) => xs[Math.floor(rand() * xs.length)];
 const round = (x: number, to: number) => Math.round(x / to) * to;
 const between = (lo: number, hi: number, to: number) => round(lo + rand() * (hi - lo), to);
 const usd = (x: number) => '$' + x.toLocaleString('en-US');
 const who = (f: Filing) => (f === 'mfj' ? 'a married couple filing jointly' : 'a single filer');
+/** Who is 65 or older, in words that fit the filing status (a single filer has no spouse). */
+const ages = (f: Filing, over65: number) =>
+  f === 'single' ? (over65 ? 'age 65 or older' : 'under age 65')
+    : ['both spouses under age 65', 'one spouse age 65 or older, the other under 65', 'both spouses age 65 or older'][over65];
 
 const fed = (filing: Filing, over65: number, ordinary: number, ltcg: number, ss: number) =>
   computeTax({ filing, year: 2026, index: 1, wages: 0, ordinary, ltcg, ssBenefits: ss, over65, stateRate: 0, stateTaxesSS: false });
@@ -50,7 +55,7 @@ const gens: Record<Case['task'], () => Omit<Case, 'id' | 'task'>> = {
     const ss = over65 ? between(18000, 62000, 100) : 0;
     const t = computeTax({ filing, year: 2026, index: 1, wages, ordinary, ltcg, ssBenefits: ss, over65, stateRate: 0, stateTaxesSS: false });
     return {
-      prompt: `${RULES}In 2026, ${who(filing)} (${over65} spouse${over65 === 1 ? '' : 's'} age 65 or older) has ${usd(wages)} of wages, ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?${FORMAT}`,
+      prompt: `${RULES}In 2026, ${who(filing)} (${ages(filing, over65)}) has ${usd(wages)} of wages, ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?${FORMAT}`,
       inputs: { filing, over65, wages, ordinary, ltcg, ss },
       answer: Math.round(t.federal),
       tol: 2,
@@ -132,7 +137,7 @@ const gens: Record<Case['task'], () => Omit<Case, 'id' | 'task'>> = {
     const before = fed(filing, over65, ordinary, ltcg, ss);
     const after = fed(filing, over65, ordinary + conversion, ltcg, ss);
     return {
-      prompt: `${RULES}In 2026, ${who(filing)} (${over65 === 2 ? 'both spouses' : 'the filer'} age 65 or older) has ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits, with no wages. They take the standard deduction and have no credits. If they also convert ${usd(conversion)} from a traditional IRA to a Roth IRA in 2026, by how many dollars does their total federal income tax (including any Net Investment Income Tax) go up? Round to the nearest dollar.${FORMAT}`,
+      prompt: `${RULES}In 2026, ${who(filing)} (${ages(filing, over65)}) has ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits, with no wages. They take the standard deduction and have no credits. If they also convert ${usd(conversion)} from a traditional IRA to a Roth IRA in 2026, by how many dollars does their total federal income tax (including any Net Investment Income Tax) go up? Round to the nearest dollar.${FORMAT}`,
       inputs: { filing, over65, ordinary, ltcg, ss, conversion },
       answer: Math.round(after.federal - before.federal),
       tol: 2,
@@ -173,7 +178,7 @@ const gens: Record<Case['task'], () => Omit<Case, 'id' | 'task'>> = {
     }
     const t = fed(filing, over65, ordinary, ltcg, ss);
     return {
-      prompt: `${RULES}In 2026, ${who(filing)} (${over65 === 2 ? 'both spouses' : 'the filer'} age 65 or older) has ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits, with no wages. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?${FORMAT}`,
+      prompt: `${RULES}In 2026, ${who(filing)} (${ages(filing, over65)}) has ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits, with no wages. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?${FORMAT}`,
       inputs: { filing, over65, ordinary, ltcg, ss },
       answer: Math.round(t.federal),
       tol: 2,
@@ -199,7 +204,7 @@ const gens: Record<Case['task'], () => Omit<Case, 'id' | 'task'>> = {
     const taxUp = after.federal - before.federal;
     const medicareUp = 12 * over65 * (partB(after.agi, filing) - partB(before.agi, filing));
     return {
-      prompt: `${RULES}${MEDICARE}In 2026, ${who(filing)} (${over65 === 2 ? 'both spouses' : 'the filer'} age 65 or older and enrolled in Medicare Part B) has ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits, with no wages, standard deduction and no credits. They are considering converting ${usd(conversion)} from a traditional IRA to a Roth IRA in 2026. Medicare sets Part B premiums from the tax return two years earlier, so 2026 income sets 2028 premiums; assume the 2026 premiums and tiers still apply in 2028 and that nothing else changes. What is the total added cost of the conversion: the increase in 2026 federal income tax (including any Net Investment Income Tax) plus the increase in their combined 2028 Part B premiums for the full year? Round to the nearest dollar.${FORMAT}`,
+      prompt: `${RULES}${MEDICARE}In 2026, ${who(filing)} (${ages(filing, over65)}, ${over65 === 2 ? 'both ' : ''}enrolled in Medicare Part B) has ${usd(ordinary)} of traditional IRA distributions, ${usd(ltcg)} of long-term capital gains and qualified dividends, and ${usd(ss)} of Social Security benefits, with no wages, standard deduction and no credits. They are considering converting ${usd(conversion)} from a traditional IRA to a Roth IRA in 2026. Medicare sets Part B premiums from the tax return two years earlier, so 2026 income sets 2028 premiums; assume the 2026 premiums and tiers still apply in 2028 and that nothing else changes. What is the total added cost of the conversion: the increase in 2026 federal income tax (including any Net Investment Income Tax) plus the increase in their combined 2028 Part B premiums for the full year? Round to the nearest dollar.${FORMAT}`,
       inputs: { filing, over65, ordinary, ltcg, ss, conversion },
       answer: Math.round(taxUp + medicareUp),
       tol: 2,
@@ -309,6 +314,9 @@ const gens: Record<Case['task'], () => Omit<Case, 'id' | 'task'>> = {
 const PER_TASK = Number(process.argv[2] ?? 50);
 const cases: Case[] = [];
 const seen = new Set<string>();
+// The private set must not repeat a public question, or it isn't held out: PB_EXCLUDE names the public file.
+if (process.env.PB_EXCLUDE)
+  for (const l of readFileSync(process.env.PB_EXCLUDE, 'utf8').split('\n')) if (l.trim()) seen.add(JSON.parse(l).prompt);
 for (const task of Object.keys(gens) as Case['task'][])
   for (let i = 0; i < PER_TASK; i++) {
     // A repeated question would count twice in a model's score, so redraw until it's new.
@@ -318,5 +326,6 @@ for (const task of Object.keys(gens) as Case['task'][])
     cases.push({ id: `${task}-${String(i).padStart(3, '0')}`, task, ...c });
   }
 
-writeFileSync(new URL('../data/cases.jsonl', import.meta.url), cases.map((c) => JSON.stringify(c)).join('\n') + '\n');
-console.log(`Wrote ${cases.length} cases (${PER_TASK} per task) to data/cases.jsonl`);
+const OUT = process.argv[3] ?? new URL('../data/cases.jsonl', import.meta.url).pathname;
+writeFileSync(OUT, cases.map((c) => JSON.stringify(c)).join('\n') + '\n');
+console.log(`Wrote ${cases.length} cases (${PER_TASK} per task, seed ${process.env.PB_SEED ? 'private' : 'public'}) to ${OUT}`);

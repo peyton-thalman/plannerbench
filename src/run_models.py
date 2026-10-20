@@ -17,10 +17,25 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 # $ per million tokens (input, output), Anthropic first-party rates as of 2026-10.
 PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "fake": (0, 0)}
+# Other providers' models: add "oai:<id>": [input, output] to prices.json from the provider's pricing page.
+_extra = ROOT / "prices.json"
+if _extra.exists():
+    PRICES.update({k: tuple(v) for k, v in json.loads(_extra.read_text()).items()})
 
 
-def load_cases(per_task):
-    cases = [json.loads(l) for l in (ROOT / "data" / "cases.jsonl").read_text().splitlines() if l.strip()]
+def cost_of(rec):
+    """Dollars for one reply: the provider's own billed cost when it reports one, else tokens x list price."""
+    if rec.get("billed_usd") is not None:
+        return rec["billed_usd"]
+    pin, pout = PRICES.get(rec["model"], (0, 0))
+    return (rec.get("input_tokens", 0) * pin + rec.get("output_tokens", 0) * pout) / 1e6
+
+
+SPLITS = {"public": ROOT / "data" / "cases.jsonl", "private": ROOT / "private" / "cases.jsonl"}
+
+
+def load_cases(per_task, split="public"):
+    cases = [json.loads(l) for l in SPLITS[split].read_text().splitlines() if l.strip()]
     taken, out = {}, []
     for c in cases:  # first N per task, so a pilot is always the same questions
         if taken.get(c["task"], 0) < per_task:
@@ -93,8 +108,11 @@ def ask_openai_compatible(model, effort, prompt):
     usage = r.get("usage") or {}
     # Providers report a content-filter stop for declines; score it as a refusal like Claude's stop_reason.
     stop = "refusal" if choice.get("finish_reason") == "content_filter" else choice.get("finish_reason")
-    return {"text": choice["message"].get("content") or "", "stop_reason": stop,
-            "input_tokens": usage.get("prompt_tokens", 0), "output_tokens": usage.get("completion_tokens", 0)}
+    rec = {"text": choice["message"].get("content") or "", "stop_reason": stop,
+           "input_tokens": usage.get("prompt_tokens", 0), "output_tokens": usage.get("completion_tokens", 0)}
+    if isinstance(usage.get("cost"), (int, float)):  # OpenRouter-style billed cost
+        rec["billed_usd"] = usage["cost"]
+    return rec
 
 
 def ask_fake(case, rep):
@@ -104,7 +122,10 @@ def ask_fake(case, rep):
     if roll < 0.80:
         ans = case["answer"]
     elif roll < 0.95:
-        ans = round(case["answer"] * rng.choice([0.9, 1.1, 1.25]) + rng.choice([0, 1000]), 2)
+        if isinstance(case["answer"], str):  # code sets: a wrong set is the opposite of the key
+            ans = "NONE" if case["answer"] != "NONE" else "1"
+        else:
+            ans = round(case["answer"] * rng.choice([0.9, 1.1, 1.25]) + rng.choice([0, 1000]), 2)
     else:
         return {"text": f"I estimate roughly {case['answer']}.", "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0}
     return {"text": f"Working...\nANSWER: {ans}", "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0}
@@ -121,19 +142,29 @@ def main():
     ap.add_argument("--fake", action="store_true")
     ap.add_argument("--tasks", default=None, help="comma-separated tasks to ask (default: all)")
     ap.add_argument("--context", default=None, help="file whose text is put before every question, e.g. a rule the model needs")
+    ap.add_argument("--split", default="public", choices=list(SPLITS), help="private = the held-out set, never published")
     a = ap.parse_args()
 
     models = ["fake"] if a.fake else a.models.split(",")
-    cases = load_cases(a.per_task)
+    cases = load_cases(a.per_task, a.split)
     if a.tasks:
         cases = [c for c in cases if c["task"] in a.tasks.split(",")]
     if a.context:
         # Same cases and answer key, so the gain from handing the model the rule is measured on identical questions.
         ctx = Path(a.context).read_text().strip()
         cases = [{**c, "prompt": f"{ctx}\n\n{c['prompt']}"} for c in cases]
-    run = a.run or f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}"
+    run = a.run or f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-private" if a.split == "private" else "")
     out_dir = ROOT / "runs" / run
     out_dir.mkdir(parents=True, exist_ok=True)
+    # What was asked and how, so anyone can rerun it exactly; grade.py reads the split from here.
+    meta_path = out_dir / "meta.json"
+    meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
+    if meta and meta.get("split", "public") != a.split:  # runs from before meta.json existed were all public
+        raise SystemExit(f"Run '{run}' was asked on the {meta.get('split', 'public')} split; pick another --run name.")
+    meta.update({"split": a.split, "effort": a.effort, "per_task": a.per_task, "reps": a.reps, "context": a.context, "tasks": a.tasks,
+                 "models": sorted(set(meta.get("models", [])) | set(models)), "max_tokens": 16000,
+                 "openai_base_url": __import__("os").environ.get("OPENAI_BASE_URL") if any(m.startswith("oai:") for m in models) else meta.get("openai_base_url")})
+    meta_path.write_text(json.dumps(meta, indent=1) + "\n")
     raw = out_dir / "raw.jsonl"
     done = set()
     if raw.exists():
@@ -172,9 +203,8 @@ def main():
         for n, fut in enumerate(as_completed(futs), 1):
             m, c, rep = futs[fut]
             rec = {"model": m, "effort": a.effort, "id": c["id"], "task": c["task"], "rep": rep, **fut.result()}
-            pin, pout = PRICES.get(m, (0, 0))
             errors += "error" in rec
-            cost += (rec.get("input_tokens", 0) * pin + rec.get("output_tokens", 0) * pout) / 1e6
+            cost += cost_of(rec)
             with lock:
                 f.write(json.dumps(rec) + "\n")
                 f.flush()

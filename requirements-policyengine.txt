@@ -1,0 +1,2 @@
+policyengine-us==2.50.2
+policyengine-core==3.33.12

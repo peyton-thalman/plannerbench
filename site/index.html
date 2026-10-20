@@ -76,12 +76,12 @@
     <div class="section-head">
       <p class="eyebrow">Results</p>
       <h2>Accuracy by kind of question</h2>
-      <p class="sub">Share of questions answered within the answer key’s tolerance. Ten questions per task per model in this pilot, so a gap of one or two questions is noise.</p>
+      <p class="sub">Share of questions answered within the answer key’s tolerance. The small numbers and the shaded band are the 95% interval: where the true score likely sits. When two bands overlap heavily, the gap between the models may be noise.</p>
     </div>
     <div class="table-wrap">
       <table class="scores" id="scores">
         <thead>
-          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Run cost</th></tr>
+          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Cost per 1,000 right answers</th></tr>
         </thead>
         <tbody></tbody>
       </table>
@@ -122,7 +122,7 @@
       <div>
         <p class="eyebrow">Method</p>
         <h2>Why you can trust the answer key</h2>
-        <p class="sub">A benchmark is only as good as its answers. If the key is wrong, you’re grading the model on your own bug. No question ships unless all five checks pass.</p>
+        <p class="sub">A benchmark is only as good as its answers. If the key is wrong, you’re grading the model on your own bug. No question ships unless all seven checks pass, and <code>./reproduce.sh</code> reruns every one of them.</p>
       </div>
       <ol class="checks">
         <li><span><b>Published examples.</b> Sixteen cases whose answers come straight from IRS, SSA and CMS tables must match exactly.</span></li>
@@ -130,9 +130,11 @@
         <li><span><b>Rules that must always hold.</b> Thousands of random households test things like “more income never lowers tax” and “waiting a month never lowers a Social Security check.”</span></li>
         <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
         <li><span><b>Human audit.</b> Random cases come with worked solutions a CPA can check with a calculator.</span></li>
+        <li><span><b>An outside tax model.</b> PolicyEngine-US, an open-source tax model this project didn’t write, recomputes every tax answer. It agrees on all of them within $2, the new senior deduction included.</span></li>
+        <li><span><b>A held-out set.</b> Private questions from a secret seed pass the same checks and are never published, so a model that trained on the public set still meets new ones.</span></li>
       </ol>
     </div>
-    <p class="aside">When models disagree with the key, the source decides, not the models. In the pilot, both models agreed with each other and against the key on the senior deduction. The IRS form showed the key was right.</p>
+    <p class="aside">When models disagree with the key, the source decides, not the models. In the pilot, both models agreed with each other and against the key on the senior deduction. The IRS form, and separately PolicyEngine, showed the key was right.</p>
   </section>
 
   <section class="band">

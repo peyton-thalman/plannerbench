@@ -2,7 +2,11 @@
 
 Can AI do a financial planner's math? PlannerBench asks frontier models the questions advisors answer every week, using 2026 tax law, and grades them against an exact answer key.
 
-The answer key comes from the [MoneyGuide engine](../../moneyguide/src/engine). Its tests check it against IRS and SSA publications. A separately written Python checker then recomputes every answer from the published rules. If the two disagree on even one case, the benchmark doesn't ship.
+The answer key comes from the MoneyGuide engine, whose tests check it against IRS and SSA publications. A separately written Python checker recomputes every answer from the published rules. Then [PolicyEngine-US](https://github.com/PolicyEngine/policyengine-us), an open-source tax model this project didn't write, recomputes every tax answer a third time. If any of them disagree on even one case, the benchmark doesn't ship. How every number is made, and how to check it yourself: [METHODOLOGY.md](METHODOLOGY.md).
+
+```bash
+./reproduce.sh      # re-verify the key, regrade every saved reply, rebuild the leaderboard; fails on any difference
+```
 
 ## Tasks (200 each, 2,800 total)
 
@@ -27,7 +31,8 @@ The answer key comes from the [MoneyGuide engine](../../moneyguide/src/engine). 
 
 ```bash
 ~/moneyguide/node_modules/.bin/vite-node src/generate.ts 200
-python3 -I checks/trust.py      # all five trust layers → TRUST.md + checks/AUDIT.md
+PB_EXCLUDE=data/cases.jsonl PB_SEED=$(cat private/seed) ~/moneyguide/node_modules/.bin/vite-node src/generate.ts 50 "$PWD/private/cases.jsonl"   # held-out set
+.venv/bin/python -I checks/trust.py      # all seven trust layers → TRUST.md, checks/AUDIT.md, checks/POLICYENGINE.md
 ```
 
 The full plan is in [SPEC.md](SPEC.md).
@@ -48,6 +53,8 @@ export OPENAI_BASE_URL=https://opencode.ai/zen/v1 OPENAI_API_KEY=...
 .venv/bin/python src/run_models.py --models oai:<model-id> --per-task 10
 ```
 
+Add `--split private` to ask the held-out set; its run folder ends in `-private`. For providers whose API doesn't report cost, put `"oai:<model-id>": [input $/M, output $/M]` in `prices.json` so cost per right answer is filled in.
+
 Each run saves replies as they arrive, so if it stops you can run the same command again and it picks up where it left off. `--fake` runs the whole pipeline offline with a stand-in model. Refusals are scored as refusals, never quietly re-answered by a fallback model.
 
 ## Site
@@ -61,6 +68,8 @@ cd site && vercel deploy --prod      # Vercel project "plannerbench" → planner
 ```
 
 ## Log
+
+- 2026-10-20: Credibility pass. PolicyEngine-US now recomputes every tax answer as a third, outside implementation: 1,600/1,600 public and 400/400 private agree within $2, the senior phase-out included. (Its first run showed 82%. Both gaps were harness mistakes on my side: PolicyEngine keeps NIIT outside "tax before credits," and its taxable-SS variable is per person.) Added a 700-case private held-out set from a secret seed, 95% intervals and paired McNemar tests on every number, cost per right answer, a run `meta.json` recording settings, `./reproduce.sh`, and METHODOLOGY.md. Fixed a fairness bug: 54 federal_tax questions called a single filer "1 spouse age 65 or older"; 561 prompts reworded, no inputs or answers changed. With intervals, Haiku's widow_all_in gain from the rule (20% → 60%) is not significant (p = 0.29). The other three rule effects are (p < 0.01). Haiku costs $1.29 per 1,000 right answers to Sonnet's $13.27.
 
 - 2026-10-20: Compliance track + the rule experiment. Both models scored 100% on all three compliance tasks, where each issue is defined in the question: when the rule is stated, they apply it. So the same senior_phaseout and widow_all_in questions were asked again with the two-line Schedule 1-A Part V instructions in front (`--context contexts/schedule_1a_part_v.md`, run with-rule-10x1). Sonnet went 10% → 100% and 20% → 100%; Haiku 0% → 90% and 20% → 60%. The models don't lack the math. They lack the current rule. Next: make the compliance questions name issues without defining them, so they test knowledge, not reading.
 - 2026-10-20: v3 stacked tasks + Haiku 5.5. On 110 questions: Sonnet 79% (single-step 97%, multi-step 90%, stacked 37%); Haiku 71% (97 / 75 / 17). 19 of Sonnet's 23 misses and 20 of Haiku's 32 are one misreading: the senior-deduction phase-out taken once off $12,000 instead of off each $6,000. Both models agree on the wrong number, so model agreement is not evidence the key is wrong; the IRS form decides. The grader now labels this mistake automatically.

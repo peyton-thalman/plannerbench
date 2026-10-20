@@ -1,0 +1,40 @@
+{
+ "pass": true,
+ "agree": 1600,
+ "total": 1600,
+ "by_task": {
+  "federal_tax": [
+   200,
+   200
+  ],
+  "taxable_ss": [
+   200,
+   200
+  ],
+  "bracket_room": [
+   200,
+   200
+  ],
+  "tax_torpedo": [
+   200,
+   200
+  ],
+  "widow_penalty": [
+   200,
+   200
+  ],
+  "senior_phaseout": [
+   200,
+   200
+  ],
+  "conversion_all_in": [
+   200,
+   200
+  ],
+  "widow_all_in": [
+   200,
+   200
+  ]
+ },
+ "misses": []
+}

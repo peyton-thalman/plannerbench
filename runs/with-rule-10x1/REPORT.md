@@ -2,11 +2,13 @@
 
 ## Accuracy by task
 
+Each cell: accuracy (right/asked, 95% interval). With repeated runs, every run counts in the cell.
+
 | Task | claude-haiku-5-5 | claude-sonnet-5-5 |
 |---|---|---|
-| senior_phaseout | 90% (9/10) | 100% (10/10) |
-| widow_all_in | 60% (6/10) | 100% (10/10) |
-| **Overall** | **75% (15/20)** | **100% (20/20)** |
+| senior_phaseout | 90% (9/10, 60–98) | 100% (10/10, 72–100) |
+| widow_all_in | 60% (6/10, 31–83) | 100% (10/10, 72–100) |
+| **Overall** | **75% (15/20, 53–89)** | **100% (20/20, 84–100)** |
 
 ## Where replies landed
 

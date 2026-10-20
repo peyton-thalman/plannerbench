@@ -4,7 +4,7 @@
   "task": "federal_tax",
   "tier": "single-step",
   "title": "A full 2026 federal return, in one step",
-  "prompt": "In 2026, a married couple filing jointly (0 spouses age 65 or older) has $180,000 of wages, $90,000 of traditional IRA distributions, $0 of long-term capital gains and qualified dividends, and $0 of Social Security benefits. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?",
+  "prompt": "In 2026, a married couple filing jointly (both spouses under age 65) has $180,000 of wages, $90,000 of traditional IRA distributions, $0 of long-term capital gains and qualified dividends, and $0 of Social Security benefits. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?",
   "answer": 42268,
   "replies": {
    "claude-haiku-5-5": {
@@ -24,7 +24,7 @@
   "task": "tax_torpedo",
   "tier": "multi-step",
   "title": "A Roth conversion that also makes Social Security taxable",
-  "prompt": "In 2026, a single filer (the filer age 65 or older) has $37,000 of traditional IRA distributions, $21,000 of long-term capital gains and qualified dividends, and $28,100 of Social Security benefits, with no wages. They take the standard deduction and have no credits. If they also convert $36,000 from a traditional IRA to a Roth IRA in 2026, by how many dollars does their total federal income tax (including any Net Investment Income Tax) go up? Round to the nearest dollar.",
+  "prompt": "In 2026, a single filer (age 65 or older) has $37,000 of traditional IRA distributions, $21,000 of long-term capital gains and qualified dividends, and $28,100 of Social Security benefits, with no wages. They take the standard deduction and have no credits. If they also convert $36,000 from a traditional IRA to a Roth IRA in 2026, by how many dollars does their total federal income tax (including any Net Investment Income Tax) go up? Round to the nearest dollar.",
   "answer": 8915,
   "replies": {
    "claude-haiku-5-5": {
