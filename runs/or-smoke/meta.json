@@ -1,0 +1,18 @@
+{
+ "split": "public",
+ "effort": "high",
+ "per_task": 1,
+ "reps": 1,
+ "context": null,
+ "tasks": null,
+ "models": [
+  "or:anthropic/claude-haiku-5.5@anthropic",
+  "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+  "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "or:qwen/qwen3.8-flash@alibaba",
+  "or:z-ai/glm-5.3-flash@z-ai/fp8"
+ ],
+ "max_tokens": 16000,
+ "openai_base_url": null,
+ "openrouter_routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; private split adds zdr=true; reasoning effort = --effort"
+}

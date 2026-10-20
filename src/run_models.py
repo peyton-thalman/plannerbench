@@ -16,6 +16,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
+MAX_TOKENS = 16000  # per reply, thinking included; set per run with --max-tokens and recorded in meta.json
 
 
 def load_env():
@@ -31,6 +32,13 @@ def load_env():
 
 
 load_env()
+
+try:  # python.org builds ship without root certificates; use the operating system's store instead
+    import truststore
+
+    truststore.inject_into_ssl()
+except ImportError:
+    pass
 # $ per million tokens (input, output), Anthropic first-party rates as of 2026-10.
 PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "fake": (0, 0)}
 # Other providers' models: add "oai:<id>": [input, output] to prices.json from the provider's pricing page.
@@ -69,7 +77,7 @@ def ask_claude(client, model, effort, prompt):
         # recorded as a refusal instead of being silently re-answered by a different model.
         r = client.messages.create(
             model=model,
-            max_tokens=16000,
+            max_tokens=MAX_TOKENS,
             output_config={"effort": effort},
             messages=[{"role": "user", "content": prompt}],
         )
@@ -100,7 +108,7 @@ def post_json(url, body, key, label):
                                  headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
     for attempt in range(5):
         try:
-            with urllib.request.urlopen(req, timeout=600) as resp:
+            with urllib.request.urlopen(req, timeout=1200) as resp:
                 return json.loads(resp.read()), None
         except urllib.error.HTTPError as e:
             if e.code == 401:
@@ -140,7 +148,7 @@ def ask_openai_compatible(model, effort, prompt):
     import os
 
     base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-    body = {"model": model.removeprefix("oai:"), "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000}
+    body = {"model": model.removeprefix("oai:"), "messages": [{"role": "user", "content": prompt}], "max_tokens": MAX_TOKENS}
     r, err = post_json(f"{base}/chat/completions", body, os.environ.get("OPENAI_API_KEY", ""), "OPENAI_API_KEY")
     return {"error": err} if err else from_chat_completion(r)
 
@@ -164,7 +172,7 @@ def ask_openrouter(model, effort, prompt, private=False):
         provider.update({"only": [host], "allow_fallbacks": False})
     if private:
         provider["zdr"] = True
-    body = {"model": name, "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000,
+    body = {"model": name, "messages": [{"role": "user", "content": prompt}], "max_tokens": MAX_TOKENS,
             # Reasoning text isn't graded, so leave it out of the reply; it is still used and billed.
             "reasoning": {"effort": effort, "exclude": True}, "provider": provider}
     key = os.environ.get("OPENROUTER_API_KEY", "")
@@ -202,6 +210,7 @@ def ask_fake(case, rep):
 
 
 def main():
+    global MAX_TOKENS
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", default="claude-sonnet-5-5")
     ap.add_argument("--effort", default="high", choices=["low", "medium", "high", "xhigh", "max"])
@@ -212,9 +221,11 @@ def main():
     ap.add_argument("--fake", action="store_true")
     ap.add_argument("--tasks", default=None, help="comma-separated tasks to ask (default: all)")
     ap.add_argument("--context", default=None, help="file whose text is put before every question, e.g. a rule the model needs")
+    ap.add_argument("--max-tokens", type=int, default=MAX_TOKENS, help="per reply, thinking included; replies that hit it are graded 'truncated'")
     ap.add_argument("--max-usd", type=float, default=None, help="stop asking once this run has spent this much; rerun later to resume")
     ap.add_argument("--split", default="public", choices=list(SPLITS), help="private = the held-out set, never published")
     a = ap.parse_args()
+    MAX_TOKENS = a.max_tokens
 
     if a.models.startswith("@"):  # a lineup file: one model per line, # comments allowed
         a.models = ",".join(l.split("#")[0].strip() for l in Path(a.models[1:]).read_text().splitlines() if l.split("#")[0].strip())
@@ -239,7 +250,7 @@ def main():
     if meta and meta.get("split", "public") != a.split:  # runs from before meta.json existed were all public
         raise SystemExit(f"Run '{run}' was asked on the {meta.get('split', 'public')} split; pick another --run name.")
     meta.update({"split": a.split, "effort": a.effort, "per_task": a.per_task, "reps": a.reps, "context": a.context, "tasks": a.tasks,
-                 "models": sorted(set(meta.get("models", [])) | set(models)), "max_tokens": 16000,
+                 "models": sorted(set(meta.get("models", [])) | set(models)), "max_tokens": MAX_TOKENS,
                  "openai_base_url": __import__("os").environ.get("OPENAI_BASE_URL") if any(m.startswith("oai:") for m in models) else meta.get("openai_base_url"),
                  "openrouter_routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; private split adds zdr=true; reasoning effort = --effort"
                  if any(m.startswith("or:") for m in models) else meta.get("openrouter_routing")})

@@ -1,0 +1,7 @@
+# Five-model test within a $5 OpenRouter budget: four low-cost open-weight models, plus Haiku 5.5 through
+# OpenRouter as a harness check against its direct-API runs. Hosts as in cheap.txt.
+or:deepseek/deepseek-v4.1-flash@deepinfra/fp8
+or:qwen/qwen3.8-flash@alibaba
+or:z-ai/glm-5.3-flash@z-ai/fp8
+or:openai/gpt-oss-120b@deepinfra/bf16
+or:anthropic/claude-haiku-5.5@anthropic

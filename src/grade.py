@@ -4,6 +4,7 @@ Every reply lands in exactly one bucket:
   correct    within the case's tolerance
   wrong      a number, but not the right one
   no_answer  no parsable "ANSWER:" line (kept apart so format slips don't look like math errors)
+  truncated  hit the token limit before giving an answer (usually spent it all thinking); counts as not right
   refusal    the model declined
   error      the API call failed (excluded from accuracy; rerun to fill in)
 
@@ -78,7 +79,7 @@ def bucket(rec, case):
         return "refusal", None
     got = parse_set(rec.get("text")) if isinstance(case["answer"], str) else parse(rec.get("text"))
     if got is None:
-        return "no_answer", None
+        return ("truncated" if rec.get("stop_reason") in ("length", "max_tokens") else "no_answer"), None
     return ("correct" if ic.agrees(got, case) else "wrong"), got
 
 
@@ -113,10 +114,10 @@ def main(run):
         md.append(f"| {t} | " + " | ".join(pct(*acc([g for g in graded if g["model"] == m and g["task"] == t])) for m in models) + " |")
     md.append("| **Overall** | " + " | ".join(f"**{pct(*acc([g for g in graded if g['model'] == m]))}**" for m in models) + " |")
 
-    md += ["", "## Where replies landed", "", "| Model | correct | wrong | no_answer | refusal | error |", "|---|---|---|---|---|---|"]
+    md += ["", "## Where replies landed", "", "| Model | correct | wrong | truncated | no_answer | refusal | error |", "|---|---|---|---|---|---|---|"]
     for m in models:
         c = Counter(g["bucket"] for g in graded if g["model"] == m)
-        md.append(f"| {m} | {c['correct']} | {c['wrong']} | {c['no_answer']} | {c['refusal']} | {c['error']} |")
+        md.append(f"| {m} | {c['correct']} | {c['wrong']} | {c['truncated']} | {c['no_answer']} | {c['refusal']} | {c['error']} |")
 
     # Consistency: with reps > 1, how often does a model give the same answer to the same question?
     by_case = defaultdict(list)

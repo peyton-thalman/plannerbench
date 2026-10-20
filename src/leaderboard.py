@@ -44,6 +44,8 @@ def main(run, rule_run=None):
         priced = m in PRICES or any(g.get("billed_usd") is not None for g in mine)
         models.append({"model": m, "questions": len({g["id"] for g in mine}), "replies": len(mine), "correct": correct, **scored("", mine),
                        **{k: v for t in TIERS for k, v in scored(f"{t.replace('-', '_')}_", [g for g in mine if TIER[g["task"]] == t]).items()},
+                       # Ran out of tokens before answering: scored as not right, shown so it isn't mistaken for bad math.
+                       "truncated_rate": round(sum(g["bucket"] == "truncated" for g in mine) / len(mine), 4),
                        "cost_usd": round(cost, 4) if priced else None,
                        # What a wealthtech team actually pays for: dollars per right answer, not per token.
                        "cost_per_correct": round(cost / correct, 5) if priced and correct else None,
