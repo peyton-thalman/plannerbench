@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.env*
+site/.vercel/
+# The private held-out set and the seed that makes it never leave this machine.
+private/

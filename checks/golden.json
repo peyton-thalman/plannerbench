@@ -1,0 +1,18 @@
+[
+  {"task": "ss_claim", "inputs": {"birthYear": 1960, "pia": 1000, "claimAgeMonths": 744}, "expected": 700, "source": "SSA, Benefit reduction for early retirement: born 1960+, claim at 62 = 70% of PIA"},
+  {"task": "ss_claim", "inputs": {"birthYear": 1960, "pia": 1000, "claimAgeMonths": 780}, "expected": 867, "source": "SSA early retirement chart: born 1960+, claim at 65 = 86.7%"},
+  {"task": "ss_claim", "inputs": {"birthYear": 1960, "pia": 1000, "claimAgeMonths": 804}, "expected": 1000, "source": "SSA: full retirement age 67 for 1960+ births"},
+  {"task": "ss_claim", "inputs": {"birthYear": 1960, "pia": 1000, "claimAgeMonths": 840}, "expected": 1240, "source": "SSA delayed retirement credits: 8%/yr, 124% at 70 for FRA 67"},
+  {"task": "ss_claim", "inputs": {"birthYear": 1957, "pia": 1000, "claimAgeMonths": 744}, "expected": 725, "source": "SSA early retirement chart: born 1957 (FRA 66 + 6 mo), 72.5% at 62"},
+  {"task": "taxable_ss", "inputs": {"filing": "mfj", "ss": 30000, "other": 40000}, "expected": 15350, "source": "IRS Pub 915 worksheet, MFJ bases $32,000 / $44,000"},
+  {"task": "taxable_ss", "inputs": {"filing": "single", "ss": 20000, "other": 10000}, "expected": 0, "source": "IRS Pub 915: provisional income under the $25,000 base"},
+  {"task": "taxable_ss", "inputs": {"filing": "mfj", "ss": 40000, "other": 500000}, "expected": 34000, "source": "IRS Pub 915: cap at 85% of benefits"},
+  {"task": "rmd", "inputs": {"birthYear": 1953, "age": 73, "balance": 265000}, "expected": 10000, "source": "IRS Pub 590-B Table III: divisor 26.5 at 73; SECURE 2.0 start age 73 for 1951-1959 births"},
+  {"task": "rmd", "inputs": {"birthYear": 1961, "age": 65, "balance": 500000}, "expected": 0, "source": "SECURE 2.0: RMD age 75 for 1960+ births"},
+  {"task": "federal_tax", "inputs": {"filing": "mfj", "over65": 0, "wages": 0, "ordinary": 100000, "ltcg": 0, "ss": 0}, "expected": 7640, "source": "Rev. Proc. 2025-32: $32,200 MFJ standard deduction, 10%/12% brackets to $24,800/$100,800"},
+  {"task": "federal_tax", "inputs": {"filing": "single", "over65": 0, "wages": 0, "ordinary": 60000, "ltcg": 0, "ss": 0}, "expected": 5020, "source": "Rev. Proc. 2025-32: $16,100 single standard deduction, 10%/12% brackets to $12,400/$50,400"},
+  {"task": "irmaa", "inputs": {"filing": "single", "magi": 109000}, "expected": 202.9, "source": "CMS 2026 Part B fact sheet: tier 1 is 'greater than $109,000'"},
+  {"task": "irmaa", "inputs": {"filing": "single", "magi": 109001}, "expected": 284.1, "source": "CMS 2026 Part B fact sheet"},
+  {"task": "irmaa", "inputs": {"filing": "single", "magi": 500000}, "expected": 689.9, "source": "CMS 2026 Part B fact sheet: top tier 'greater than or equal to $500,000'"},
+  {"task": "irmaa", "inputs": {"filing": "mfj", "magi": 750000}, "expected": 689.9, "source": "CMS 2026 Part B fact sheet: top tier 'greater than or equal to $750,000'"}
+]

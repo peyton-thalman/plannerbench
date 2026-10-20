@@ -1,0 +1,30 @@
+{
+ "questions": 2800,
+ "tasks": 14,
+ "run": "live-high-10x1",
+ "rule_run": "with-rule-10x1",
+ "tiers": {
+  "single-step": [
+   "bracket_room",
+   "federal_tax",
+   "irmaa",
+   "rmd",
+   "ss_claim",
+   "taxable_ss"
+  ],
+  "multi-step": [
+   "tax_torpedo",
+   "widow_penalty"
+  ],
+  "stacked": [
+   "conversion_all_in",
+   "senior_phaseout",
+   "widow_all_in"
+  ],
+  "compliance": [
+   "breakpoint",
+   "comms_review",
+   "rollover_flags"
+  ]
+ }
+}

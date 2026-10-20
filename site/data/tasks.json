@@ -1,0 +1,226 @@
+[
+ {
+  "model": "claude-haiku-5-5",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 9,
+  "answered": 10,
+  "accuracy": 0.9
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "irmaa",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "rmd",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 9,
+  "answered": 10,
+  "accuracy": 0.9
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "correct": 8,
+  "answered": 10,
+  "accuracy": 0.8
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 9,
+  "answered": 10,
+  "accuracy": 0.9
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 6,
+  "answered": 10,
+  "accuracy": 0.6
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "correct": 8,
+  "answered": 10,
+  "accuracy": 0.8
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 3,
+  "answered": 10,
+  "accuracy": 0.3
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "correct": 8,
+  "answered": 10,
+  "accuracy": 0.8
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 0,
+  "answered": 10,
+  "accuracy": 0.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "correct": 1,
+  "answered": 10,
+  "accuracy": 0.1
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 2,
+  "answered": 10,
+  "accuracy": 0.2
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "correct": 2,
+  "answered": 10,
+  "accuracy": 0.2
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "comms_review",
+  "tier": "compliance",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "correct": 10,
+  "answered": 10,
+  "accuracy": 1.0
+ }
+]

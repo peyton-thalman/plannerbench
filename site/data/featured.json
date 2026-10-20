@@ -1,0 +1,45 @@
+{
+ "id": "senior_phaseout-000",
+ "prompt": "In 2026, a married couple filing jointly (both spouses age 65 or older) has $105,500 of traditional IRA distributions, $0 of long-term capital gains and qualified dividends, and $72,300 of Social Security benefits, with no wages. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?",
+ "inputs": {
+  "filing": "mfj",
+  "over65": 2,
+  "ordinary": 105500,
+  "ltcg": 0,
+  "ss": 72300
+ },
+ "answer": 16152,
+ "replies": {
+  "claude-haiku-5-5": {
+   "got": 15928.0,
+   "bucket": "wrong",
+   "mistake": "combined senior phase-out"
+  },
+  "claude-sonnet-5-5": {
+   "got": 15928.0,
+   "bucket": "wrong",
+   "mistake": "combined senior phase-out"
+  }
+ },
+ "with_rule": {
+  "claude-haiku-5-5": {
+   "got": 16152.0,
+   "bucket": "correct",
+   "mistake": null
+  },
+  "claude-sonnet-5-5": {
+   "got": 16152.0,
+   "bucket": "correct",
+   "mistake": null
+  }
+ },
+ "steps": {
+  "agi": 166955.0,
+  "threshold": 150000,
+  "cut": 1017.3,
+  "per_spouse": 9965.4,
+  "combined": 10982.7,
+  "tax_key": 16152,
+  "tax_combined": 15928
+ }
+}

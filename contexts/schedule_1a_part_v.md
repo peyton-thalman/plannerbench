@@ -1,0 +1,2 @@
+Reference: IRS Schedule 1-A (Form 1040), Part V, Enhanced Deduction for Seniors.
+Line 31: modified adjusted gross income. Line 32: $75,000 ($150,000 if married filing jointly). Line 33: line 31 minus line 32 (if zero or less, enter $6,000 on line 35). Line 34: line 33 × 6%. Line 35: $6,000 minus line 34 (not less than zero). Line 36a: if you were born before January 2, 1961, enter line 35. Line 36b: if married filing jointly and your spouse was born before January 2, 1961, enter line 35. Line 37: add lines 36a and 36b; this is the enhanced deduction for seniors.

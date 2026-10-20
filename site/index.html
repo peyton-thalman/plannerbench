@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PlannerBench</title>
+<meta name="description" content="A benchmark for AI in financial planning: 2,800 retirement-planning questions with an exact answer key from IRS, SSA and CMS rules.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="#top">PlannerBench</a>
+    <nav aria-label="Sections">
+      <a href="#results">Results</a>
+      <a href="#questions">Questions</a>
+      <a href="#method">Method</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <p class="eyebrow">A benchmark for AI in financial planning</p>
+    <h1>Can AI do a financial planner’s math?</h1>
+    <p class="lede">PlannerBench asks AI models the questions advisors answer every week: taxes, Social Security, required distributions, Medicare premiums and compliance review. Each one has an exact answer under 2026 rules, so a script grades every reply.</p>
+
+    <div class="thesis" aria-label="Headline results for Claude Sonnet 5.5">
+      <div class="figure">
+        <span class="num" data-k="single">—</span>
+        <span class="cap">on single-step questions</span>
+      </div>
+      <div class="figure">
+        <span class="num" data-k="stacked">—</span>
+        <span class="cap">when several rules meet in one household</span>
+      </div>
+      <div class="figure accent">
+        <span class="num" data-k="rule">—</span>
+        <span class="cap">on the same questions, once it’s given the IRS rule it was missing</span>
+      </div>
+    </div>
+    <p class="thesis-note">Claude Sonnet 5.5, pilot run. The model can do the math. It doesn’t reliably know the current rule.</p>
+  </section>
+
+  <section class="band" id="worked">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">One question, worked</p>
+        <h2>Where the models go wrong</h2>
+        <p class="sub">A real question from the set. Both models tested gave the same wrong answer, and the IRS form shows why.</p>
+      </div>
+
+      <div class="worked">
+        <div class="question">
+          <p class="label">The question</p>
+          <p class="prompt" id="featured-prompt">—</p>
+          <dl class="answers" id="featured-answers"></dl>
+        </div>
+
+        <div class="form" aria-label="Schedule 1-A Part V, worked">
+          <p class="label">IRS Schedule 1-A, Part V · Enhanced deduction for seniors</p>
+          <ol class="lines" id="featured-lines"></ol>
+          <div class="misread">
+            <p class="label">What the models did</p>
+            <p id="featured-misread">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="results">
+    <div class="section-head">
+      <p class="eyebrow">Results</p>
+      <h2>Accuracy by kind of question</h2>
+      <p class="sub">Share of questions answered within the answer key’s tolerance. Ten questions per task per model in this pilot, so a gap of one or two questions is noise.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="scores" id="scores">
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Run cost</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="pair">
+      <figure class="chart-card">
+        <figcaption>
+          <h3>Give it the rule</h3>
+          <p>The same questions, asked again with the two-line Schedule 1-A instructions placed in front.</p>
+        </figcaption>
+        <div class="chart" id="rule-chart" role="img" aria-label="Accuracy without and with the rule"></div>
+        <div class="legend"><span><i class="dot hollow"></i>Without the rule</span><span><i class="dot"></i>With the rule</span></div>
+      </figure>
+      <figure class="chart-card">
+        <figcaption>
+          <h3>What the wrong answers were</h3>
+          <p>Each wrong answer is checked against known misreadings. One misreading explains most of them.</p>
+        </figcaption>
+        <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" id="questions">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The questions</p>
+        <h2>Four kinds of question, from one rule to many</h2>
+        <p class="sub" id="questions-sub">Every question is generated from a household’s numbers, so there are as many as needed and none can be memorized from the web.</p>
+      </div>
+      <div class="tiers" id="tiers"></div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="method">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Method</p>
+        <h2>Why you can trust the answer key</h2>
+        <p class="sub">A benchmark is only as good as its answers. If the key is wrong, you’re grading the model on your own bug. No question ships unless all five checks pass.</p>
+      </div>
+      <ol class="checks">
+        <li><span><b>Published examples.</b> Sixteen cases whose answers come straight from IRS, SSA and CMS tables must match exactly.</span></li>
+        <li><span><b>Two independent programs.</b> A planning engine and a separately written checker compute every answer. They agree on all <span data-k="questions">—</span> questions.</span></li>
+        <li><span><b>Rules that must always hold.</b> Thousands of random households test things like “more income never lowers tax” and “waiting a month never lowers a Social Security check.”</span></li>
+        <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
+        <li><span><b>Human audit.</b> Random cases come with worked solutions a CPA can check with a calculator.</span></li>
+      </ol>
+    </div>
+    <p class="aside">When models disagree with the key, the source decides, not the models. In the pilot, both models agreed with each other and against the key on the senior deduction. The IRS form showed the key was right.</p>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Who it’s for</p>
+        <h2>For anyone deciding what to trust AI with</h2>
+      </div>
+      <dl class="audience">
+        <div><dt>Wealth-tech product teams</dt><dd>Know which planning questions a model can answer alone and which need your engine behind it.</dd></div>
+        <div><dt>Compliance and risk</dt><dd>A score with named mistakes and the rule each one breaks, not a demo.</dd></div>
+        <div><dt>AI labs</dt><dd>Exact, current, hard-to-memorize questions in a field where small errors cost clients real money.</dd></div>
+        <div><dt>Advisors</dt><dd>A plain answer to “can I check this with AI?” for the math you do every week.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Reading the results</p>
+        <h2>What they mean, and what they don’t</h2>
+      </div>
+      <ul class="notes">
+        <li><b>The math isn’t the problem.</b> Models handle long-standing rules well. They slip on the newest ones, like the 2025 senior deduction, and on several rules interacting at once.</li>
+        <li><b>The fix is the rules, not a bigger model.</b> Handing a model the current rule fixed most of its misses. AI built for advisors needs the rules supplied to it.</li>
+        <li><b>The compliance questions are a start.</b> They define each issue in the question, and both models scored 100%. The next version names issues without defining them, which tests knowledge instead of reading.</li>
+        <li><b>It’s a pilot.</b> Ten questions per task per model, two models so far. Larger runs and models from other labs are next.</li>
+        <li><b>It measures math and rules, not advice.</b> Judgment about what a client should do is out of scope for now.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What’s next</p>
+        <h2>Toward a model that gets planning right</h2>
+      </div>
+      <ol class="roadmap">
+        <li><span>Models from more labs, including low-cost ones, on the full set</span></li>
+        <li><span>A CPA and a compliance professional sign off on the answer key</span></li>
+        <li><span>Compliance questions that test what a model knows, not what it’s told</span></li>
+        <li><span>The planning engine exposed as tools a model can call, scored against the model alone</span></li>
+        <li><span>Reruns as new models ship, and new rules every January</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules</span>
+    <span>Answers follow IRS, SSA and CMS publications. Nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

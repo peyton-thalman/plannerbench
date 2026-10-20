@@ -1,0 +1,22 @@
+[
+ {
+  "model": "claude-haiku-5-5",
+  "mistake": "combined senior phase-out",
+  "count": 20
+ },
+ {
+  "model": "claude-haiku-5-5",
+  "mistake": "unexplained",
+  "count": 12
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "mistake": "combined senior phase-out",
+  "count": 19
+ },
+ {
+  "model": "claude-sonnet-5-5",
+  "mistake": "unexplained",
+  "count": 4
+ }
+]
