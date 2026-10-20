@@ -5,3 +5,4 @@ __pycache__/
 site/.vercel/
 # The private held-out set and the seed that makes it never leave this machine.
 private/
+!.env.example

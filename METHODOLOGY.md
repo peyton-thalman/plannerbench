@@ -50,7 +50,9 @@ model. Those rest on layers 1–4.
 The public set comes from a fixed seed in `src/generate.ts`. A private set of 700 cases (50 per task) comes from a
 secret seed kept in `private/`, which is git-ignored and never published. It excludes every public prompt. A model
 trained on the public set still meets new questions there. A large gap between a model's public and private scores
-is evidence of contamination, and the leaderboard will report both once private runs exist.
+is evidence of contamination, and the leaderboard will report both once private runs exist. The runner refuses to send
+the private set to free endpoints, which commonly keep prompts for training. Paid endpoints get it only through
+providers whose terms exclude API traffic from training.
 
 ## Statistics
 

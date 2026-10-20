@@ -15,12 +15,27 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
+
+
+def load_env():
+    """Read KEY=value lines from .env (git-ignored) so API keys never have to be typed into a shell or committed."""
+    import os
+
+    env = ROOT / ".env"
+    if env.exists():
+        for line in env.read_text().splitlines():
+            k, sep, v = line.strip().partition("=")
+            if sep and not k.startswith("#"):
+                os.environ.setdefault(k.strip().removeprefix("export "), v.strip().strip("'\""))
+
+
+load_env()
 # $ per million tokens (input, output), Anthropic first-party rates as of 2026-10.
 PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "fake": (0, 0)}
 # Other providers' models: add "oai:<id>": [input, output] to prices.json from the provider's pricing page.
 _extra = ROOT / "prices.json"
 if _extra.exists():
-    PRICES.update({k: tuple(v) for k, v in json.loads(_extra.read_text()).items()})
+    PRICES.update({k: tuple(v) for k, v in json.loads(_extra.read_text()).items() if not k.startswith("_")})
 
 
 def cost_of(rec):
@@ -146,6 +161,10 @@ def main():
     a = ap.parse_args()
 
     models = ["fake"] if a.fake else a.models.split(",")
+    # Free endpoints commonly keep prompts for training; a held-out question sent there is no longer held out.
+    free = [m for m in models if m.endswith("-free") or m == "oai:big-pickle"]
+    if a.split == "private" and free:
+        raise SystemExit(f"Not sending the private set to free endpoints that may train on it: {', '.join(free)}")
     cases = load_cases(a.per_task, a.split)
     if a.tasks:
         cases = [c for c in cases if c["task"] in a.tasks.split(",")]
