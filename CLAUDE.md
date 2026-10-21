@@ -22,9 +22,11 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
   the tools answer all 2,750 numeric cases. Smoke done (`tools-smoke`, Haiku, $0.02, 12/14 vs 10/14 without tools;
   both misses were Haiku overruling a correct tool result with the senior-deduction misreading). $5 step done
   (`tools-high-10x1`, $0.22): 77% → 84% (p = 0.02), stacked 17% → 47% (p = 0.004), senior_phaseout 0/10 → 0/10
-  with 18/22 misses Haiku explicitly overruling the tool. `src/tool_effect.py` writes the comparison. Not on the
-  leaderboard or site yet. Ideas, each needs the owner's OK to spend: tool replies that show and cite the rule
-  (Schedule 1-A Part V), Sonnet with tools, the private-split tools run. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
+  with 18/22 misses Haiku explicitly overruling the tool. `src/tool_effect.py` writes the comparison. Then MCP 1.1.0
+  (tool reply shows the senior deduction per spouse and cites Schedule 1-A Part V): `tools-v2-high-10x1`, 50
+  multi-step + stacked questions, $0.10, **50/50** (vs 31/50 with tools 1.0, 20/50 without). Report files are
+  `runs/<run>/TOOL_EFFECT_vs_<base>.md`. Not on the leaderboard or site yet. Next ideas, each needs the owner's OK
+  to spend: the private-split tools run (to confirm), Sonnet with tools, single-step tasks on 1.1.0. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
 
 ## Open items (owner decides what's next; don't start these unasked)
 

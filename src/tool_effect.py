@@ -11,7 +11,7 @@ dollars off a year, and sorts every miss in the tools run by its tool calls:
 "overruled" is decided by recomputing the oracle from the case and checking that every call it needs appears in
 the model's own calls with the same inputs and result, so it never credits a model with calls it didn't make.
 
-Usage: .venv/bin/python src/tool_effect.py live-high-10x1 tools-high-10x1 claude-haiku-5-5   → runs/<tools run>/TOOL_EFFECT.md
+Usage: .venv/bin/python src/tool_effect.py live-high-10x1 tools-high-10x1 claude-haiku-5-5   → runs/<tools run>/TOOL_EFFECT_vs_<base run>.md
 """
 import json
 import sys
@@ -65,9 +65,9 @@ def main(base_run, tools_run, model):
     ids = sorted(set(a) & set(b))
     A, B = [a[i] for i in ids], [b[i] for i in ids]
 
-    md = [f"# Tool effect: {model}", "", f"Without tools: `{base_run}`. With the MoneyGuide planning tools (MCP): `{tools_run}`. "
+    md = [f"# Tool effect: {model}", "", f"Before: `{base_run}`. After, with the MoneyGuide planning tools (MCP): `{tools_run}`. "
           f"{len(ids)} questions asked both ways; p is a paired McNemar test on the questions that flipped.", "",
-          "| Questions | Without tools | With tools | Fixed | Broken | p |", "|---|---|---|---|---|---|"]
+          f"| Questions | `{base_run}` | `{tools_run}` | Fixed | Broken | p |", "|---|---|---|---|---|---|"]
 
     def row(label, keep):
         q = [i for i in ids if keep(i)]
@@ -83,15 +83,16 @@ def main(base_run, tools_run, model):
     row("All", lambda i: True)
     for tier in TIERS:
         row(tier, lambda i, t=tier: TIER[cases[i]["task"]] == t)
-    md += ["", "| Task | Without | With |", "|---|---|---|"]
+    md += ["", "| Task | Before | After |", "|---|---|---|"]
     for task in sorted({cases[i]["task"] for i in ids}):
         q = [i for i in ids if cases[i]["task"] == task]
         md.append(f"| {task} | {sum(a[i]['bucket'] == 'correct' for i in q)}/{len(q)} | {sum(b[i]['bucket'] == 'correct' for i in q)}/{len(q)} |")
 
-    sa, sb = summary(A), summary(B)
-    md += ["", "## Dollars off a year, per numeric question", "",
-           f"- Without tools: ${sa['dollars_off_per_question']:,.0f} [{sa['dollars_lo']:,.0f}–{sa['dollars_hi']:,.0f}], {sa['misses']} misses, median miss ${sa['median_miss']:,.0f}, worst ${sa['worst_miss']:,.0f}",
-           f"- With tools: ${sb['dollars_off_per_question']:,.0f} [{sb['dollars_lo']:,.0f}–{sb['dollars_hi']:,.0f}], {sb['misses']} misses, median miss ${sb['median_miss']:,.0f}, worst ${sb['worst_miss']:,.0f}"]
+    def dollars(label, s):
+        line = f"- {label}: ${s['dollars_off_per_question']:,.0f} [{s['dollars_lo']:,.0f}–{s['dollars_hi']:,.0f}], {s['misses']} misses"
+        return line + (f", median miss ${s['median_miss']:,.0f}, worst ${s['worst_miss']:,.0f}" if s["misses"] else "")
+
+    md += ["", "## Dollars off a year, per numeric question", "", dollars(f"`{base_run}`", summary(A)), dollars(f"`{tools_run}`", summary(B))]
 
     tools = PlanningTools()
     misses = [i for i in ids if b[i]["bucket"] != "correct"]
@@ -109,7 +110,7 @@ def main(base_run, tools_run, model):
     for i in misses:
         md.append(f"| {i} | {kinds[i]} | {b[i].get('key')} | {b[i].get('got')} | {b[i].get('mistake') or ''} |")
 
-    out = ROOT / "runs" / tools_run / "TOOL_EFFECT.md"
+    out = ROOT / "runs" / tools_run / f"TOOL_EFFECT_vs_{base_run}.md"
     out.write_text("\n".join(md) + "\n")
     print("\n".join(md[:12]))
     print(f"\nFull report: {out.relative_to(ROOT)}")

@@ -1,8 +1,8 @@
 # Tool effect: claude-haiku-5-5
 
-Without tools: `live-high-10x1`. With the MoneyGuide planning tools (MCP): `tools-smoke`. 14 questions asked both ways; p is a paired McNemar test on the questions that flipped.
+Before: `live-high-10x1`. After, with the MoneyGuide planning tools (MCP): `tools-smoke`. 14 questions asked both ways; p is a paired McNemar test on the questions that flipped.
 
-| Questions | Without tools | With tools | Fixed | Broken | p |
+| Questions | `live-high-10x1` | `tools-smoke` | Fixed | Broken | p |
 |---|---|---|---|---|---|
 | All (14) | 71% [45%–88%] | 86% [60%–96%] | 2 | 0 | 0.5 |
 | single-step (6) | 100% [61%–100%] | 100% [61%–100%] | 0 | 0 | 1 |
@@ -10,7 +10,7 @@ Without tools: `live-high-10x1`. With the MoneyGuide planning tools (MCP): `tool
 | stacked (3) | 0% [0%–56%] | 33% [6%–79%] | 1 | 0 | 1 |
 | compliance (3) | 100% [44%–100%] | 100% [44%–100%] | 0 | 0 | 1 |
 
-| Task | Without | With |
+| Task | Before | After |
 |---|---|---|
 | bracket_room | 1/1 | 1/1 |
 | breakpoint | 1/1 | 1/1 |
@@ -29,8 +29,8 @@ Without tools: `live-high-10x1`. With the MoneyGuide planning tools (MCP): `tool
 
 ## Dollars off a year, per numeric question
 
-- Without tools: $133 [1–298], 4 misses, median miss $316, worst $821
-- With tools: $95 [0–244], 2 misses, median miss $522, worst $821
+- `live-high-10x1`: $133 [1–298], 4 misses, median miss $316, worst $821
+- `tools-smoke`: $95 [0–244], 2 misses, median miss $522, worst $821
 
 ## Why the remaining misses happened
 
