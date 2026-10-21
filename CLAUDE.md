@@ -27,8 +27,9 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
   multi-step + stacked questions, $0.10, **50/50** (vs 31/50 with tools 1.0, 20/50 without). Report files are
   `runs/<run>/TOOL_EFFECT_vs_<base>.md`. Not on the leaderboard or site yet. Private confirm done
   (`tools-v2-high-10x1-private`, $0.11): 48/50; both misses overruled conversion_all_in. Private runs are
-  git-ignored (`runs/*-private/`); publish aggregates only. Next ideas, each needs the owner's OK to spend:
-  a private no-tools baseline (for a paired comparison), Sonnet with tools, single-step tasks on 1.1.0. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
+  git-ignored (`runs/*-private/`); publish aggregates only. Private no-tools baseline done
+  (`live-high-10x1-private`, $0.09): 44% → 96% paired, 26 fixed / 0 broken. Next ideas, each needs the owner's OK
+  to spend: Sonnet with tools, single-step tasks on 1.1.0, the leaderboard/site panel (after 3290 clearance). The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
 
 ## Open items (owner decides what's next; don't start these unasked)
 

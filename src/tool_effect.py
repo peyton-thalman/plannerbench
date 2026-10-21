@@ -58,8 +58,18 @@ def miss_kind(tools, case, raw):
     return "overruled" if all(same_call(c, made) for c in rec.calls) else "misused tools"
 
 
+def split_of(run):
+    meta = ROOT / "runs" / run / "meta.json"
+    return json.loads(meta.read_text()).get("split", "public") if meta.exists() else "public"
+
+
 def main(base_run, tools_run, model):
-    cases = {c["id"]: c for c in (json.loads(l) for l in (ROOT / "data" / "cases.jsonl").read_text().splitlines() if l.strip())}
+    # Private runs pair by id within the private set; the report lands in the (git-ignored) private run folder.
+    split = split_of(tools_run)
+    if split_of(base_run) != split:
+        raise SystemExit(f"{base_run} and {tools_run} were asked on different splits; ids don't pair across them.")
+    path = ROOT / ("private" if split == "private" else "data") / "cases.jsonl"
+    cases = {c["id"]: c for c in (json.loads(l) for l in path.read_text().splitlines() if l.strip())}
     raw = {r["id"]: r for r in (json.loads(l) for l in (ROOT / "runs" / tools_run / "raw.jsonl").read_text().splitlines() if l.strip()) if r["model"] == model}
     a, b = graded(base_run, model), graded(tools_run, model)
     ids = sorted(set(a) & set(b))
