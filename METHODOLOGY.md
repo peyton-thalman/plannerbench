@@ -81,7 +81,8 @@ secret seed kept in `private/`, which is git-ignored and never published. It exc
 trained on the public set still meets new questions there. A large gap between a model's public and private scores
 is evidence of contamination, and the leaderboard will report both once private runs exist. The runner refuses to send
 the private set to free endpoints, which commonly keep prompts for training. Paid endpoints get it only through
-providers whose terms exclude API traffic from training.
+providers whose terms exclude API traffic from training. Replies to private questions restate their numbers, so
+private runs (`runs/*-private/`) stay on the maintainer's machine; only aggregate scores are published.
 
 ## Checks on the harness and the site
 

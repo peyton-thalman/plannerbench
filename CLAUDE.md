@@ -25,8 +25,10 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
   with 18/22 misses Haiku explicitly overruling the tool. `src/tool_effect.py` writes the comparison. Then MCP 1.1.0
   (tool reply shows the senior deduction per spouse and cites Schedule 1-A Part V): `tools-v2-high-10x1`, 50
   multi-step + stacked questions, $0.10, **50/50** (vs 31/50 with tools 1.0, 20/50 without). Report files are
-  `runs/<run>/TOOL_EFFECT_vs_<base>.md`. Not on the leaderboard or site yet. Next ideas, each needs the owner's OK
-  to spend: the private-split tools run (to confirm), Sonnet with tools, single-step tasks on 1.1.0. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
+  `runs/<run>/TOOL_EFFECT_vs_<base>.md`. Not on the leaderboard or site yet. Private confirm done
+  (`tools-v2-high-10x1-private`, $0.11): 48/50; both misses overruled conversion_all_in. Private runs are
+  git-ignored (`runs/*-private/`); publish aggregates only. Next ideas, each needs the owner's OK to spend:
+  a private no-tools baseline (for a paired comparison), Sonnet with tools, single-step tasks on 1.1.0. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
 
 ## Open items (owner decides what's next; don't start these unasked)
 

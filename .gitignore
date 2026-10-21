@@ -5,4 +5,6 @@ __pycache__/
 site/.vercel/
 # The private held-out set and the seed that makes it never leave this machine.
 private/
+# Private-split runs: replies restate the held-out questions' numbers, so only aggregate scores leave this machine.
+runs/*-private/
 !.env.example
