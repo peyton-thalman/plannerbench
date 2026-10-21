@@ -1,7 +1,8 @@
 # PlannerBench: notes for the next session
 
 A benchmark of AI models on retirement-planning math (2026 federal tax, Social Security, RMDs, Medicare IRMAA) plus
-a compliance track, with an exact answer key. Public site: https://plannerbench.vercel.app (deployed from `site/`).
+a compliance track, with an exact answer key. Public site: https://plannerbench.vercel.app (deployed from `site/`). Code: https://github.com/peyton-thalman/plannerbench
+(private until the owner decides to publish; push to `origin master`).
 Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every number is made) first.
 
 ## Where it stands (paused 2026-10-20)
