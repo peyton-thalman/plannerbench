@@ -45,7 +45,7 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
 - API keys live in `.env` (git-ignored; template `.env.example`). The OpenRouter key in there is temporary;
   the owner said they'd swap it.
 - This Python is a python.org build without root certificates; the runner uses `truststore` for HTTPS.
-- Regenerating cases needs the MoneyGuide engine at `~/moneyguide` (not in this repo); checks don't need it.
+- Regenerating cases needs the MoneyGuide engine at `~/moneyguide` (not in this repo; private backup at github.com/peyton-thalman/moneyguide, IRMAA fix in commit e26ba54); checks don't need it.
 - Low-cost reasoning models are slow (Qwen3.8 Flash writes ~11k tokens/question). Use `--workers 40`,
   `--max-tokens 32000`, and run in the background.
 - `site/.env.local` holds a Vercel token; `site/.vercelignore` keeps env files out of deploys.
