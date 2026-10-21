@@ -19,8 +19,10 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
 
 - Planning tools (2026-10-21): `--tools` offers the MoneyGuide engine as MCP tools (`~/moneyguide/mcp`,
   `npm run mcp:build` there; client and answer-composer in `src/planning_tools.py`). `checks/tools_check.py` proves
-  the tools answer all 2,750 numeric cases. No live tools run yet. Owner approved $1 smoke then $5 (same 140
-  questions as `live-high-10x1`), asked step by step; the private-split tools run is a separate ask.
+  the tools answer all 2,750 numeric cases. Smoke done (`tools-smoke`, Haiku, $0.02, 12/14 vs 10/14 without tools;
+  both misses were Haiku overruling a correct tool result with the senior-deduction misreading). Next: the $5 step
+  (`--per-task 10`, same 140 questions as `live-high-10x1`), asked first; the private-split tools run is a separate
+  ask. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
 
 ## Open items (owner decides what's next; don't start these unasked)
 
