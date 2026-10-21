@@ -20,9 +20,11 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
 - Planning tools (2026-10-21): `--tools` offers the MoneyGuide engine as MCP tools (`~/moneyguide/mcp`,
   `npm run mcp:build` there; client and answer-composer in `src/planning_tools.py`). `checks/tools_check.py` proves
   the tools answer all 2,750 numeric cases. Smoke done (`tools-smoke`, Haiku, $0.02, 12/14 vs 10/14 without tools;
-  both misses were Haiku overruling a correct tool result with the senior-deduction misreading). Next: the $5 step
-  (`--per-task 10`, same 140 questions as `live-high-10x1`), asked first; the private-split tools run is a separate
-  ask. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
+  both misses were Haiku overruling a correct tool result with the senior-deduction misreading). $5 step done
+  (`tools-high-10x1`, $0.22): 77% → 84% (p = 0.02), stacked 17% → 47% (p = 0.004), senior_phaseout 0/10 → 0/10
+  with 18/22 misses Haiku explicitly overruling the tool. `src/tool_effect.py` writes the comparison. Not on the
+  leaderboard or site yet. Ideas, each needs the owner's OK to spend: tool replies that show and cite the rule
+  (Schedule 1-A Part V), Sonnet with tools, the private-split tools run. The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
 
 ## Open items (owner decides what's next; don't start these unasked)
 
