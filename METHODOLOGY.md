@@ -19,7 +19,7 @@ It measures rule knowledge and arithmetic. It doesn't measure advice quality, ju
 
 ## How models are asked
 
-- One user message per question: no system prompt, no tools, no examples. The prompt text is in `data/cases.jsonl`.
+- One user message per question: no system prompt, no tools (except tools runs, below), no examples. The prompt text is in `data/cases.jsonl`.
 - Claude models: `effort` as recorded in each run's `meta.json` (default `high`), `max_tokens` 16,000.
 - Other labs' models: the same prompt through OpenRouter, `max_tokens` 16,000, reasoning effort set to the run's
   effort. Each model is pinned to one host (`only: [host]`, no fallbacks), chosen as the model maker's own endpoint or
@@ -29,6 +29,25 @@ It measures rule knowledge and arithmetic. It doesn't measure advice quality, ju
   visible, so their scores aren't published.
 - No refusal fallbacks: a decline is scored as a refusal, never re-answered by a different model.
 - Every raw reply is saved in `runs/<run>/raw.jsonl`, so anyone can regrade without asking a model again.
+
+### With planning tools (`--tools`)
+
+The same questions, word for word, with one difference: the model may call the MoneyGuide planning tools over MCP
+(`~/moneyguide/mcp/server.ts`). There are six general calculators: federal income tax, taxable Social Security,
+RMD, Social Security claiming benefit, Medicare Part B premium, and the 2026 tax tables. There is no tool per question
+type. A stacked question still needs the model to pick the inputs (the survivor files single and keeps the larger
+check; 2026 income sets 2028 premiums), call several tools and combine the results.
+
+- **The tools are enough, and right.** `checks/tools_check.py` answers every numeric question from tool calls alone
+  and must match the key on all of them (2,200/2,200 public, 550/550 private). So a miss in a tools run is the
+  model's: wrong inputs, a missed step, or not calling a tool at all.
+- **This is not circular, though the tools and the key share an engine.** The key's correctness is established
+  separately (golden set, independent checker, PolicyEngine-US). A tools run measures whether a model can use a
+  verified calculator correctly, the way an advisor would use planning software.
+- Each reply saves every tool call with its inputs and result. Tokens are summed over all turns; a question gets up
+  to 12 turns, after which it is scored `no_answer`. `meta.json` records the tool names, the MCP server version and
+  the MoneyGuide commit, and the runner refuses a live run while that repo has uncommitted engine or tool changes.
+- Claude models only for now.
 
 ## How the answer key is checked
 

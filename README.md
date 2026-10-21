@@ -62,6 +62,14 @@ export OPENAI_BASE_URL=https://opencode.ai/zen/v1 OPENAI_API_KEY=...
 .venv/bin/python src/run_models.py --models oai:<model-id> --per-task 10
 ```
 
+**With planning tools.** `--tools` asks the same questions with the MoneyGuide engine available as MCP tools (build them once: `cd ~/moneyguide && npm run mcp:build`). How it's kept fair: [METHODOLOGY.md](METHODOLOGY.md#with-planning-tools---tools).
+
+```bash
+.venv/bin/python -I checks/tools_check.py                                       # the tools answer every numeric question (free)
+.venv/bin/python src/run_models.py --fake --tools --per-task 10                 # whole pipeline through the MCP server, offline
+.venv/bin/python src/run_models.py --models claude-haiku-5-5 --tools --per-task 1 --max-usd 1 --run tools-smoke
+```
+
 Add `--split private` to ask the held-out set; its run folder ends in `-private`. For providers whose API doesn't report cost, put `"oai:<model-id>": [input $/M, output $/M]` in `prices.json` so cost per right answer is filled in.
 
 Each run saves replies as they arrive, so if it stops you can run the same command again and it picks up where it left off. `--fake` runs the whole pipeline offline with a stand-in model. Refusals are scored as refusals, never quietly re-answered by a fallback model.
@@ -77,6 +85,8 @@ cd site && vercel deploy --prod      # Vercel project "plannerbench" → planner
 ```
 
 ## Log
+
+- 2026-10-21: **Planning tools over MCP, no API calls yet.** The MoneyGuide engine is now an MCP server (`~/moneyguide/mcp/server.ts`, six general calculators), and `--tools` lets Claude call it on the same questions. Before any model sees it, `checks/tools_check.py` answers every numeric question from tool calls alone: 2,200/2,200 public and 550/550 private match the key, so a miss in a tools run is the model's. The tool loop was tested against a pretend API client (two calls in one turn, a bad argument returned as a readable error, thinking passed back, tokens summed over turns), and `--fake --tools` runs the whole pipeline through the real server. The site went behind Vercel login until the outside-activity clearance.
 
 - 2026-10-20: Dollars off, not just right or wrong. Every numeric reply is now scored by how many dollars a year it is off from the key (monthly answers times 12; right = $0), with a "material" line at $1,000 a year (`src/dollars.py`, checked by `checks/dollars_check.py`, which recomputes it from the raw replies and must match). No new API calls. The ranking changes: Sonnet 5.5 is 84% accurate and DeepSeek V4.1 Flash 75%, but both are off by the same $161 a year per question, because DeepSeek's misses are smaller (median $300 vs $677). gpt-oss-120b is off by $1,929 per question, and 40% of its answers miss by $1,000 or more. Sizes vary a lot by mistake: the pre-2022 RMD table is rare but typically $5,675 too high, which would push a client to withdraw and pay tax on money they didn't need to. The senior-deduction misreading is common and typically $669. "Right tier, wrong cents" on IRMAA is $1.20. Qwen3.8 Flash gave a number on only 48 questions (it often ran out of tokens), so its dollar score covers less.
 - 2026-10-20: First models from other labs, through OpenRouter with each model pinned to one host (run `or-5models-15x1`, 15 questions per task, 32k-token limit, $3.66 billed). Harness check passed: Claude Haiku 5.5 scored 77% on the same 140 questions both directly and through OpenRouter (p = 1.0). Overall: DeepSeek V4.1 Flash 75%, Haiku 5.5 73%, GLM 5.3 Flash 62%, Qwen3.8 Flash 45%, gpt-oss-120b 39%. DeepSeek tied Haiku overall (p = 0.61) and beat it on stacked questions (36% vs 20%, p = 0.04, suggestive at n = 45), matching Sonnet there (p = 0.73). Haiku was cheapest per right answer ($1.34 per 1,000); Qwen was the most expensive ($20.23) despite a low token price, because 49% of its replies ran out of tokens while thinking. The senior-deduction misreading isn't Claude-only: DeepSeek made it 21 times and GLM 7. gpt-oss used the Uniform Lifetime Table replaced in 2022 on all 8 RMDs it missed (now a named mistake). Several models put Medicare premiums $0.10 above the key; SSA POMS HI 01101.020 matches the key to the cent. The 12 slowest questions were left unasked when the run was stopped; 24 Qwen requests were rate-limited (not scored). Both can be filled by rerunning the same command.

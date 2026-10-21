@@ -13,6 +13,12 @@ cd "$(dirname "$0")"
 echo "== 1. Answer key"
 .venv/bin/python -I checks/trust.py
 
+# The planning tools live with the engine (~/moneyguide/mcp); skip if this machine doesn't have them.
+if [ -f "${MONEYGUIDE_MCP:-$HOME/moneyguide/mcp/dist/server.mjs}" ]; then
+  echo "== 1b. Planning tools (MCP) answer every numeric question"
+  .venv/bin/python -I checks/tools_check.py | tail -1
+fi
+
 echo "== 2. Regrade saved replies"
 for run in runs/*/; do
   run=$(basename "$run")

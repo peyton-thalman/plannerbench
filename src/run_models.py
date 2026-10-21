@@ -98,6 +98,59 @@ def ask_claude(client, model, effort, prompt):
     return rec
 
 
+MAX_TOOL_TURNS = 12  # a question needs at most ~4 tool calls; past this the reply is scored no_answer
+
+
+def ask_claude_with_tools(client, model, effort, prompt, tools):
+    """The same question with the MoneyGuide planning tools (MCP) available; Claude decides whether and how to use them.
+
+    The prompt is unchanged and there is no system prompt, so the tools are the only difference from a plain run.
+    Tokens are summed over every turn, and every call is saved so a miss can be traced to the inputs Claude chose.
+    """
+    import anthropic
+
+    messages = [{"role": "user", "content": prompt}]
+    rec = {"input_tokens": 0, "output_tokens": 0, "tool_calls": []}
+    for _ in range(MAX_TOOL_TURNS):
+        try:
+            r = client.messages.create(
+                model=model,
+                max_tokens=MAX_TOKENS,
+                output_config={"effort": effort},
+                tools=tools.list(),
+                messages=messages,
+            )
+        except anthropic.NotFoundError as e:
+            return {**rec, "error": f"404 not found: {e.message}"}
+        except anthropic.AuthenticationError as e:
+            raise SystemExit(f"Authentication failed: {e.message}. Set ANTHROPIC_API_KEY.")
+        except anthropic.RateLimitError as e:
+            return {**rec, "error": f"rate limited after retries: {e.message}"}
+        except anthropic.APIStatusError as e:
+            return {**rec, "error": f"{e.status_code} {e.type}: {e.message}"}
+        except anthropic.APIConnectionError as e:
+            return {**rec, "error": f"connection: {e}"}
+        rec["input_tokens"] += r.usage.input_tokens
+        rec["output_tokens"] += r.usage.output_tokens
+        rec["text"] = "".join(b.text for b in r.content if b.type == "text")
+        rec["stop_reason"] = r.stop_reason
+        if r.stop_reason == "refusal" and r.stop_details:
+            rec["refusal_category"] = r.stop_details.category
+        if r.stop_reason != "tool_use":
+            return rec
+        # Thinking and tool_use blocks go back unchanged; all results return in one user message.
+        messages.append({"role": "assistant", "content": r.content})
+        results = []
+        for b in r.content:
+            if b.type == "tool_use":
+                out, is_error = tools.call(b.name, b.input)
+                rec["tool_calls"].append({"name": b.name, "input": b.input, "result": out, "is_error": is_error})
+                results.append({"type": "tool_result", "tool_use_id": b.id, "content": out, "is_error": is_error})
+        messages.append({"role": "user", "content": results})
+    rec["stop_reason"] = "tool_turn_limit"
+    return rec
+
+
 def post_json(url, body, key, label):
     """POST with retries on rate limits and server errors; returns (json, None) or (None, error string)."""
     import time
@@ -193,6 +246,12 @@ def ask_openrouter(model, effort, prompt, private=False):
     return rec
 
 
+def subprocess_out(cmd):
+    import subprocess
+
+    return subprocess.run(cmd, capture_output=True, text=True).stdout.strip()
+
+
 def ask_fake(case, rep):
     """Stand-in model for testing the pipeline: mostly right, sometimes wrong, sometimes forgets the format."""
     rng = random.Random(f"{case['id']}-{rep}")
@@ -207,6 +266,16 @@ def ask_fake(case, rep):
     else:
         return {"text": f"I estimate roughly {case['answer']}.", "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0}
     return {"text": f"Working...\nANSWER: {ans}", "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0}
+
+
+def ask_fake_with_tools(tools, case, rep):
+    """Stand-in for a tools run: answers numeric questions from real MCP tool calls, compliance like ask_fake."""
+    from planning_tools import oracle
+
+    ans = oracle(tools, case)
+    if ans is None:
+        return ask_fake(case, rep)
+    return {"text": f"From the planning tools.\nANSWER: {ans}", "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0, "tool_calls": []}
 
 
 def main():
@@ -224,6 +293,7 @@ def main():
     ap.add_argument("--max-tokens", type=int, default=MAX_TOKENS, help="per reply, thinking included; replies that hit it are graded 'truncated'")
     ap.add_argument("--max-usd", type=float, default=None, help="stop asking once this run has spent this much; rerun later to resume")
     ap.add_argument("--split", default="public", choices=list(SPLITS), help="private = the held-out set, never published")
+    ap.add_argument("--tools", action="store_true", help="offer the MoneyGuide planning tools over MCP (Claude models only)")
     a = ap.parse_args()
     MAX_TOKENS = a.max_tokens
 
@@ -234,6 +304,13 @@ def main():
     free = [m for m in models if m.endswith("-free") or m.split("@")[0].endswith(":free") or m == "oai:big-pickle"]
     if a.split == "private" and free:
         raise SystemExit(f"Not sending the private set to free endpoints that may train on it: {', '.join(free)}")
+    if a.tools and not a.fake and not all(m.startswith("claude") for m in models):
+        raise SystemExit("--tools runs Claude models only for now (the tool loop uses the Claude API's tool use).")
+    tools = None
+    if a.tools:
+        from planning_tools import SERVER, PlanningTools
+
+        tools = PlanningTools()
     cases = load_cases(a.per_task, a.split)
     if a.tasks:
         cases = [c for c in cases if c["task"] in a.tasks.split(",")]
@@ -241,7 +318,7 @@ def main():
         # Same cases and answer key, so the gain from handing the model the rule is measured on identical questions.
         ctx = Path(a.context).read_text().strip()
         cases = [{**c, "prompt": f"{ctx}\n\n{c['prompt']}"} for c in cases]
-    run = a.run or f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-private" if a.split == "private" else "")
+    run = a.run or f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-tools" if a.tools else "") + ("-private" if a.split == "private" else "")
     out_dir = ROOT / "runs" / run
     out_dir.mkdir(parents=True, exist_ok=True)
     # What was asked and how, so anyone can rerun it exactly; grade.py reads the split from here.
@@ -249,6 +326,16 @@ def main():
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
     if meta and meta.get("split", "public") != a.split:  # runs from before meta.json existed were all public
         raise SystemExit(f"Run '{run}' was asked on the {meta.get('split', 'public')} split; pick another --run name.")
+    if meta and bool(meta.get("tools")) != a.tools:
+        raise SystemExit(f"Run '{run}' was asked {'with' if meta.get('tools') else 'without'} --tools; pick another --run name.")
+    if tools:
+        # Which tools, from which engine commit, so a tools score names exactly what the model could call.
+        engine = subprocess_out(["git", "-C", str(SERVER.parents[2]), "rev-parse", "--short", "HEAD"])
+        dirty = subprocess_out(["git", "-C", str(SERVER.parents[2]), "status", "--porcelain", "src/engine", "mcp"])
+        if dirty and not a.fake:
+            raise SystemExit("~/moneyguide has uncommitted engine or MCP changes; commit them so the score names a real commit.")
+        meta["tools"] = {"server": tools.server_info, "names": [t["name"] for t in tools.tools], "moneyguide_commit": engine,
+                         "moneyguide_dirty": bool(dirty), "max_tool_turns": MAX_TOOL_TURNS}
     meta.update({"split": a.split, "effort": a.effort, "per_task": a.per_task, "reps": a.reps, "context": a.context, "tasks": a.tasks,
                  "models": sorted(set(meta.get("models", [])) | set(models)), "max_tokens": MAX_TOKENS,
                  "openai_base_url": __import__("os").environ.get("OPENAI_BASE_URL") if any(m.startswith("oai:") for m in models) else meta.get("openai_base_url"),
@@ -287,7 +374,9 @@ def main():
             if a.max_usd is not None and cost >= a.max_usd:
                 return None  # over budget: not asked, not recorded, so a rerun picks it up
             if a.fake:
-                return ask_fake(c, rep)
+                return ask_fake_with_tools(tools, c, rep) if tools else ask_fake(c, rep)
+            if tools:
+                return ask_claude_with_tools(client, m, a.effort, c["prompt"], tools)
             if m.startswith("or:"):
                 return ask_openrouter(m, a.effort, c["prompt"], private=a.split == "private")
             if m.startswith("oai:"):
