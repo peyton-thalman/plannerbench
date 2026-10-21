@@ -1,8 +1,8 @@
 // Fills the page from data/*.json, which src/build_site.py writes from the graded runs.
 (async () => {
   const get = (name) => fetch(`data/${name}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const [models, mistakes, ruleEffect, examples, featured, meta] = await Promise.all(
-    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta'].map(get));
+  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake] = await Promise.all(
+    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake'].map(get));
 
   const pct = (x) => (x == null ? '—' : `${Math.round(x * 100)}%`);
   const usd = (x, cents = false) => '$' + Number(x).toLocaleString('en-US', { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
@@ -84,6 +84,28 @@
       tr.append(overall, el('td', 'cost', m.truncated_rate ? pct(m.truncated_rate) : '—'),
         el('td', 'cost', m.cost_per_correct == null ? '—' : usd(m.cost_per_correct * 1000, true)));
       tbody.append(tr);
+    }
+  }
+
+  // Dollars off: what each model's mistakes would cost a client who acted on them
+  if (models) {
+    const tbody = document.querySelector('#dollars tbody');
+    const scored = models.filter((m) => m.dollars).sort((a, b) => a.dollars.dollars_off_per_question - b.dollars.dollars_off_per_question);
+    for (const m of scored) {
+      const d = m.dollars, tr = el('tr');
+      const who = el('td', 'model', name(m.model));
+      if (m.access) who.append(el('span', 'via', m.access + (m.open_weights ? ' · open weights' : '')));
+      const off = el('td', 'overall', usd(d.dollars_off_per_question)); off.append(el('span', 'ci', `${usd(d.dollars_lo)}–${usd(d.dollars_hi)}`));
+      const mat = el('td', 'overall', pct(d.material_rate)); mat.append(el('span', 'ci', `${Math.round(d.material_lo * 100)}–${Math.round(d.material_hi * 100)}`));
+      tr.append(who, off, mat, el('td', 'cost', d.median_miss == null ? '—' : usd(d.median_miss)),
+        el('td', 'cost', d.worst_miss == null ? '—' : usd(d.worst_miss)), el('td', 'cost', String(d.questions)));
+      tbody.append(tr);
+    }
+    const big = byMistake?.filter((r) => r.mistake !== 'unexplained').sort((a, b) => b.median_off - a.median_off);
+    if (big?.length) {
+      const top = big[0], tiny = big[big.length - 1];
+      document.getElementById('dollars-note').textContent = `Not every mistake is equal. The ${top.mistake} mistake is rare (${top.count} times) but large: a typical miss of ${usd(top.median_off)} a year. `
+        + `“${tiny.mistake}” happened ${tiny.count} times and is worth about ${usd(tiny.median_off, true)}. Typical miss is the median size of a wrong answer; ranges are 95% intervals.`;
     }
   }
 

@@ -26,7 +26,19 @@
   "truncated_rate": 0.0,
   "cost_usd": 0.139,
   "cost_per_correct": 0.00129,
-  "cost_per_1k_questions": 0.993
+  "cost_per_1k_questions": 0.993,
+  "dollars": {
+   "questions": 110,
+   "dollars_off_per_question": 171.47,
+   "dollars_lo": 109.06,
+   "dollars_hi": 237.99,
+   "material_rate": 0.0364,
+   "material_lo": 0.0142,
+   "material_hi": 0.0898,
+   "misses": 32,
+   "median_miss": 567.5,
+   "worst_miss": 1512.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -55,7 +67,19 @@
   "truncated_rate": 0.0,
   "cost_usd": 1.5523,
   "cost_per_correct": 0.01327,
-  "cost_per_1k_questions": 11.088
+  "cost_per_1k_questions": 11.088,
+  "dollars": {
+   "questions": 110,
+   "dollars_off_per_question": 161.1,
+   "dollars_lo": 91.03,
+   "dollars_hi": 252.84,
+   "material_rate": 0.0364,
+   "material_lo": 0.0142,
+   "material_hi": 0.0898,
+   "misses": 23,
+   "median_miss": 677.0,
+   "worst_miss": 3472.0
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -87,6 +111,18 @@
   "cost_per_1k_questions": 0.975,
   "hosts": {
    "Anthropic": 210
+  },
+  "dollars": {
+   "questions": 165,
+   "dollars_off_per_question": 243.67,
+   "dollars_lo": 141.46,
+   "dollars_hi": 376.18,
+   "material_rate": 0.0424,
+   "material_lo": 0.0207,
+   "material_hi": 0.085,
+   "misses": 54,
+   "median_miss": 495.0,
+   "worst_miss": 8700.0
   }
  },
  {
@@ -119,6 +155,18 @@
   "cost_per_1k_questions": 4.119,
   "hosts": {
    "DeepInfra": 210
+  },
+  "dollars": {
+   "questions": 159,
+   "dollars_off_per_question": 161.32,
+   "dollars_lo": 78.63,
+   "dollars_hi": 294.0,
+   "material_rate": 0.0252,
+   "material_lo": 0.0098,
+   "material_hi": 0.0629,
+   "misses": 45,
+   "median_miss": 300.0,
+   "worst_miss": 8700.0
   }
  },
  {
@@ -151,6 +199,18 @@
   "cost_per_1k_questions": 2.339,
   "hosts": {
    "DeepInfra": 202
+  },
+  "dollars": {
+   "questions": 131,
+   "dollars_off_per_question": 1929.33,
+   "dollars_lo": 1345.57,
+   "dollars_hi": 2610.93,
+   "material_rate": 0.3969,
+   "material_lo": 0.3172,
+   "material_hi": 0.4825,
+   "misses": 94,
+   "median_miss": 1250.0,
+   "worst_miss": 27450.0
   }
  },
  {
@@ -183,6 +243,18 @@
   "cost_per_1k_questions": 9.003,
   "hosts": {
    "Alibaba": 182
+  },
+  "dollars": {
+   "questions": 48,
+   "dollars_off_per_question": 745.84,
+   "dollars_lo": 206.77,
+   "dollars_hi": 1440.4,
+   "material_rate": 0.1042,
+   "material_lo": 0.0453,
+   "material_hi": 0.2217,
+   "misses": 8,
+   "median_miss": 4332.6,
+   "worst_miss": 9379.0
   }
  },
  {
@@ -215,6 +287,18 @@
   "cost_per_1k_questions": 2.312,
   "hosts": {
    "Z.AI": 210
+  },
+  "dollars": {
+   "questions": 158,
+   "dollars_off_per_question": 587.86,
+   "dollars_lo": 314.68,
+   "dollars_hi": 903.96,
+   "material_rate": 0.1076,
+   "material_lo": 0.0683,
+   "material_hi": 0.1656,
+   "misses": 70,
+   "median_miss": 471.5,
+   "worst_miss": 13000.0
   }
  }
 ]

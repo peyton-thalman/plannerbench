@@ -7,7 +7,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -17,7 +29,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -27,7 +51,19 @@
   "answered": 15,
   "accuracy": 0.9333,
   "lo": 0.7018,
-  "hi": 0.9881
+  "hi": 0.9881,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 580.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 1740.0,
+   "material_rate": 0.0667,
+   "material_lo": 0.0119,
+   "material_hi": 0.2982,
+   "misses": 1,
+   "median_miss": 8700.0,
+   "worst_miss": 8700.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -37,7 +73,19 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 640.0,
+   "dollars_lo": 20.0,
+   "dollars_hi": 1820.0,
+   "material_rate": 0.0667,
+   "material_lo": 0.0119,
+   "material_hi": 0.2982,
+   "misses": 4,
+   "median_miss": 300.0,
+   "worst_miss": 8700.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -47,7 +95,19 @@
   "answered": 15,
   "accuracy": 0.4,
   "lo": 0.1982,
-  "hi": 0.6425
+  "hi": 0.6425,
+  "dollars": {
+   "questions": 12,
+   "dollars_off_per_question": 5843.67,
+   "dollars_lo": 1570.83,
+   "dollars_hi": 11372.0,
+   "material_rate": 0.3333,
+   "material_lo": 0.1381,
+   "material_hi": 0.6094,
+   "misses": 6,
+   "median_miss": 11844.0,
+   "worst_miss": 27450.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -57,7 +117,19 @@
   "answered": 15,
   "accuracy": 0.4667,
   "lo": 0.2481,
-  "hi": 0.6988
+  "hi": 0.6988,
+  "dollars": {
+   "questions": 8,
+   "dollars_off_per_question": 50.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 150.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.3244,
+   "misses": 1,
+   "median_miss": 400.0,
+   "worst_miss": 400.0
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -67,7 +139,19 @@
   "answered": 15,
   "accuracy": 0.8667,
   "lo": 0.6212,
-  "hi": 0.9626
+  "hi": 0.9626,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 643.33,
+   "dollars_lo": 0.0,
+   "dollars_hi": 1866.67,
+   "material_rate": 0.0667,
+   "material_lo": 0.0119,
+   "material_hi": 0.2982,
+   "misses": 2,
+   "median_miss": 4825.0,
+   "worst_miss": 8700.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -77,7 +161,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -87,7 +183,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -97,7 +205,19 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -107,7 +227,19 @@
   "answered": 15,
   "accuracy": 0.6667,
   "lo": 0.4171,
-  "hi": 0.8482
+  "hi": 0.8482,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 7.57,
+   "dollars_lo": 0.57,
+   "dollars_hi": 20.14,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2153,
+   "misses": 4,
+   "median_miss": 8.0,
+   "worst_miss": 84.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -117,7 +249,19 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 624.4,
+   "dollars_lo": 309.4,
+   "dollars_hi": 966.5,
+   "material_rate": 0.3,
+   "material_lo": 0.1078,
+   "material_hi": 0.6032,
+   "misses": 10,
+   "median_miss": 370.0,
+   "worst_miss": 1545.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -127,7 +271,19 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": {
+   "questions": 1,
+   "dollars_off_per_question": 182.0,
+   "dollars_lo": 182.0,
+   "dollars_hi": 182.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.7935,
+   "misses": 1,
+   "median_miss": 182.0,
+   "worst_miss": 182.0
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -137,7 +293,19 @@
   "answered": 15,
   "accuracy": 0.6,
   "lo": 0.3575,
-  "hi": 0.8018
+  "hi": 0.8018,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 493.27,
+   "dollars_lo": 116.13,
+   "dollars_hi": 989.73,
+   "material_rate": 0.2,
+   "material_lo": 0.0705,
+   "material_hi": 0.4519,
+   "misses": 6,
+   "median_miss": 1047.0,
+   "worst_miss": 2930.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -147,7 +315,19 @@
   "answered": 10,
   "accuracy": 0.9,
   "lo": 0.5958,
-  "hi": 0.9821
+  "hi": 0.9821,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 146.04,
+   "dollars_lo": 0.0,
+   "dollars_hi": 438.12,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 1,
+   "median_miss": 1460.4,
+   "worst_miss": 1460.4
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -157,7 +337,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -167,7 +359,19 @@
   "answered": 15,
   "accuracy": 0.8667,
   "lo": 0.6212,
-  "hi": 0.9626
+  "hi": 0.9626,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 32.48,
+   "dollars_lo": 0.0,
+   "dollars_hi": 97.28,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 2,
+   "median_miss": 243.6,
+   "worst_miss": 486.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -177,7 +381,19 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 0.32,
+   "dollars_lo": 0.08,
+   "dollars_hi": 0.64,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 4,
+   "median_miss": 1.2,
+   "worst_miss": 1.2
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -187,7 +403,19 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 2107.63,
+   "dollars_lo": 1363.97,
+   "dollars_hi": 2928.17,
+   "material_rate": 0.7143,
+   "material_lo": 0.4535,
+   "material_hi": 0.8828,
+   "misses": 14,
+   "median_miss": 2066.4,
+   "worst_miss": 4935.6
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -197,7 +425,19 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": {
+   "questions": 1,
+   "dollars_off_per_question": 3409.2,
+   "dollars_lo": 3409.2,
+   "dollars_hi": 3409.2,
+   "material_rate": 1.0,
+   "material_lo": 0.2065,
+   "material_hi": 1.0,
+   "misses": 1,
+   "median_miss": 3409.2,
+   "worst_miss": 3409.2
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -207,7 +447,19 @@
   "answered": 15,
   "accuracy": 0.2,
   "lo": 0.0705,
-  "hi": 0.4519
+  "hi": 0.4519,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 197.06,
+   "dollars_lo": 14.91,
+   "dollars_hi": 466.11,
+   "material_rate": 0.0714,
+   "material_lo": 0.0127,
+   "material_hi": 0.3147,
+   "misses": 11,
+   "median_miss": 3.6,
+   "worst_miss": 1458.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -217,7 +469,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -227,7 +491,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -237,7 +513,19 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -247,7 +535,19 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -257,7 +557,19 @@
   "answered": 15,
   "accuracy": 0.3333,
   "lo": 0.1518,
-  "hi": 0.5829
+  "hi": 0.5829,
+  "dollars": {
+   "questions": 13,
+   "dollars_off_per_question": 3624.31,
+   "dollars_lo": 1893.15,
+   "dollars_hi": 5427.54,
+   "material_rate": 0.6154,
+   "material_lo": 0.3552,
+   "material_hi": 0.8229,
+   "misses": 8,
+   "median_miss": 5196.0,
+   "worst_miss": 9379.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -267,7 +579,19 @@
   "answered": 15,
   "accuracy": 0.4,
   "lo": 0.1982,
-  "hi": 0.6425
+  "hi": 0.6425,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 3085.9,
+   "dollars_lo": 726.2,
+   "dollars_hi": 5646.2,
+   "material_rate": 0.4,
+   "material_lo": 0.1682,
+   "material_hi": 0.6873,
+   "misses": 4,
+   "median_miss": 8112.0,
+   "worst_miss": 9379.0
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -277,7 +601,19 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 1087.27,
+   "dollars_lo": 25.73,
+   "dollars_hi": 2689.0,
+   "material_rate": 0.1333,
+   "material_lo": 0.0374,
+   "material_hi": 0.3788,
+   "misses": 4,
+   "median_miss": 3274.5,
+   "worst_miss": 9567.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -287,7 +623,19 @@
   "answered": 10,
   "accuracy": 0.9,
   "lo": 0.5958,
-  "hi": 0.9821
+  "hi": 0.9821,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 151.2,
+   "dollars_lo": 0.0,
+   "dollars_hi": 453.6,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 1,
+   "median_miss": 1512.0,
+   "worst_miss": 1512.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -297,7 +645,19 @@
   "answered": 10,
   "accuracy": 0.8,
   "lo": 0.4902,
-  "hi": 0.9433
+  "hi": 0.9433,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 168.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 408.0,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 2,
+   "median_miss": 840.0,
+   "worst_miss": 1200.0
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -307,7 +667,19 @@
   "answered": 15,
   "accuracy": 0.8,
   "lo": 0.5481,
-  "hi": 0.9295
+  "hi": 0.9295,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 192.8,
+   "dollars_lo": 0.0,
+   "dollars_hi": 448.0,
+   "material_rate": 0.0667,
+   "material_lo": 0.0119,
+   "material_hi": 0.2982,
+   "misses": 3,
+   "median_miss": 576.0,
+   "worst_miss": 1812.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -317,7 +689,19 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -327,7 +711,19 @@
   "answered": 15,
   "accuracy": 0.9333,
   "lo": 0.7018,
-  "hi": 0.9881
+  "hi": 0.9881,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2153,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -337,7 +733,19 @@
   "answered": 15,
   "accuracy": 0.9333,
   "lo": 0.7018,
-  "hi": 0.9881
+  "hi": 0.9881,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2153,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -347,7 +755,19 @@
   "answered": 15,
   "accuracy": 0.9333,
   "lo": 0.7018,
-  "hi": 0.9881
+  "hi": 0.9881,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 33.6,
+   "dollars_lo": 0.0,
+   "dollars_hi": 100.8,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 1,
+   "median_miss": 504.0,
+   "worst_miss": 504.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -357,7 +777,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -367,7 +799,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -377,7 +821,19 @@
   "answered": 15,
   "accuracy": 0.9333,
   "lo": 0.7018,
-  "hi": 0.9881
+  "hi": 0.9881,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 300.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 900.0,
+   "material_rate": 0.0667,
+   "material_lo": 0.0119,
+   "material_hi": 0.2982,
+   "misses": 1,
+   "median_miss": 4500.0,
+   "worst_miss": 4500.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -387,7 +843,19 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -397,7 +865,19 @@
   "answered": 15,
   "accuracy": 0.4667,
   "lo": 0.2481,
-  "hi": 0.6988
+  "hi": 0.6988,
+  "dollars": {
+   "questions": 13,
+   "dollars_off_per_question": 3617.85,
+   "dollars_lo": 1169.23,
+   "dollars_hi": 6324.54,
+   "material_rate": 0.4615,
+   "material_lo": 0.2321,
+   "material_hi": 0.7086,
+   "misses": 6,
+   "median_miss": 7786.0,
+   "worst_miss": 14440.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -407,7 +887,19 @@
   "answered": 15,
   "accuracy": 0.8,
   "lo": 0.5481,
-  "hi": 0.9295
+  "hi": 0.9295,
+  "dollars": {
+   "questions": 13,
+   "dollars_off_per_question": 73.08,
+   "dollars_lo": 0.0,
+   "dollars_hi": 219.23,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2281,
+   "misses": 1,
+   "median_miss": 950.0,
+   "worst_miss": 950.0
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -417,7 +909,19 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 1408.5,
+   "dollars_lo": 0.0,
+   "dollars_hi": 3399.71,
+   "material_rate": 0.2143,
+   "material_lo": 0.0757,
+   "material_hi": 0.4759,
+   "misses": 3,
+   "median_miss": 4079.0,
+   "worst_miss": 13000.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -427,7 +931,19 @@
   "answered": 10,
   "accuracy": 0.9,
   "lo": 0.5958,
-  "hi": 0.9821
+  "hi": 0.9821,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 37.3,
+   "dollars_lo": 0.0,
+   "dollars_hi": 111.9,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 1,
+   "median_miss": 373.0,
+   "worst_miss": 373.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -437,7 +953,19 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -447,7 +975,19 @@
   "answered": 15,
   "accuracy": 0.8,
   "lo": 0.5481,
-  "hi": 0.9295
+  "hi": 0.9295,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 22.4,
+   "dollars_lo": 0.0,
+   "dollars_hi": 59.2,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 3,
+   "median_miss": 30.0,
+   "worst_miss": 276.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -457,7 +997,19 @@
   "answered": 15,
   "accuracy": 0.9333,
   "lo": 0.7018,
-  "hi": 0.9881
+  "hi": 0.9881,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 18.4,
+   "dollars_lo": 0.0,
+   "dollars_hi": 55.2,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 1,
+   "median_miss": 276.0,
+   "worst_miss": 276.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -467,7 +1019,19 @@
   "answered": 15,
   "accuracy": 0.2,
   "lo": 0.0705,
-  "hi": 0.4519
+  "hi": 0.4519,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 284.2,
+   "dollars_lo": 74.4,
+   "dollars_hi": 533.9,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 7,
+   "median_miss": 203.0,
+   "worst_miss": 1122.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -477,7 +1041,19 @@
   "answered": 15,
   "accuracy": 0.0667,
   "lo": 0.0119,
-  "hi": 0.2982
+  "hi": 0.2982,
+  "dollars": {
+   "questions": 1,
+   "dollars_off_per_question": 0.0,
+   "dollars_lo": 0.0,
+   "dollars_hi": 0.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.7935,
+   "misses": 0,
+   "median_miss": null,
+   "worst_miss": null
+  }
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -487,7 +1063,19 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 128.4,
+   "dollars_lo": 1.33,
+   "dollars_hi": 324.27,
+   "material_rate": 0.0667,
+   "material_lo": 0.0119,
+   "material_hi": 0.2982,
+   "misses": 4,
+   "median_miss": 241.0,
+   "worst_miss": 1434.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -497,7 +1085,19 @@
   "answered": 10,
   "accuracy": 0.6,
   "lo": 0.3127,
-  "hi": 0.8318
+  "hi": 0.8318,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 174.4,
+   "dollars_lo": 2.4,
+   "dollars_hi": 375.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 4,
+   "median_miss": 432.5,
+   "worst_miss": 871.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -507,7 +1107,19 @@
   "answered": 10,
   "accuracy": 0.8,
   "lo": 0.4902,
-  "hi": 0.9433
+  "hi": 0.9433,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 86.5,
+   "dollars_lo": 0.0,
+   "dollars_hi": 211.1,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 2,
+   "median_miss": 432.5,
+   "worst_miss": 484.0
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -517,7 +1129,19 @@
   "answered": 15,
   "accuracy": 0.4667,
   "lo": 0.2481,
-  "hi": 0.6988
+  "hi": 0.6988,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 202.47,
+   "dollars_lo": 81.4,
+   "dollars_hi": 344.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 8,
+   "median_miss": 295.5,
+   "worst_miss": 871.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -527,7 +1151,19 @@
   "answered": 15,
   "accuracy": 0.4667,
   "lo": 0.2481,
-  "hi": 0.6988
+  "hi": 0.6988,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 181.27,
+   "dollars_lo": 59.2,
+   "dollars_hi": 326.73,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 8,
+   "median_miss": 236.5,
+   "worst_miss": 871.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -537,7 +1173,19 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": {
+   "questions": 13,
+   "dollars_off_per_question": 605.46,
+   "dollars_lo": 340.92,
+   "dollars_hi": 893.0,
+   "material_rate": 0.3077,
+   "material_lo": 0.1268,
+   "material_hi": 0.5763,
+   "misses": 13,
+   "median_miss": 334.0,
+   "worst_miss": 1405.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -547,7 +1195,8 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -557,7 +1206,19 @@
   "answered": 15,
   "accuracy": 0.2667,
   "lo": 0.109,
-  "hi": 0.5195
+  "hi": 0.5195,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 1159.87,
+   "dollars_lo": 182.53,
+   "dollars_hi": 2884.53,
+   "material_rate": 0.1333,
+   "material_lo": 0.0374,
+   "material_hi": 0.3788,
+   "misses": 11,
+   "median_miss": 548.0,
+   "worst_miss": 12730.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -567,7 +1228,19 @@
   "answered": 10,
   "accuracy": 0.3,
   "lo": 0.1078,
-  "hi": 0.6032
+  "hi": 0.6032,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 322.1,
+   "dollars_lo": 78.9,
+   "dollars_hi": 621.1,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 7,
+   "median_miss": 241.0,
+   "worst_miss": 1358.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -577,7 +1250,19 @@
   "answered": 10,
   "accuracy": 0.8,
   "lo": 0.4902,
-  "hi": 0.9433
+  "hi": 0.9433,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 371.3,
+   "dollars_lo": 0.0,
+   "dollars_hi": 1065.7,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 2,
+   "median_miss": 1856.5,
+   "worst_miss": 3472.0
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -587,7 +1272,19 @@
   "answered": 15,
   "accuracy": 0.4,
   "lo": 0.1982,
-  "hi": 0.6425
+  "hi": 0.6425,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 200.73,
+   "dollars_lo": 69.8,
+   "dollars_hi": 359.8,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 9,
+   "median_miss": 227.0,
+   "worst_miss": 821.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -597,7 +1294,19 @@
   "answered": 15,
   "accuracy": 0.5333,
   "lo": 0.3012,
-  "hi": 0.7519
+  "hi": 0.7519,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 127.13,
+   "dollars_lo": 2.13,
+   "dollars_hi": 271.0,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2039,
+   "misses": 7,
+   "median_miss": 6.0,
+   "worst_miss": 821.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -607,7 +1316,19 @@
   "answered": 15,
   "accuracy": 0.0667,
   "lo": 0.0119,
-  "hi": 0.2982
+  "hi": 0.2982,
+  "dollars": {
+   "questions": 13,
+   "dollars_off_per_question": 1559.85,
+   "dollars_lo": 965.08,
+   "dollars_hi": 2195.23,
+   "material_rate": 0.6154,
+   "material_lo": 0.3552,
+   "material_hi": 0.8229,
+   "misses": 12,
+   "median_miss": 1500.5,
+   "worst_miss": 3313.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -617,7 +1338,8 @@
   "answered": 5,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.4345
+  "hi": 0.4345,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -627,7 +1349,19 @@
   "answered": 15,
   "accuracy": 0.3333,
   "lo": 0.1518,
-  "hi": 0.5829
+  "hi": 0.5829,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 383.4,
+   "dollars_lo": 157.87,
+   "dollars_hi": 625.67,
+   "material_rate": 0.1333,
+   "material_lo": 0.0374,
+   "material_hi": 0.3788,
+   "misses": 10,
+   "median_miss": 646.5,
+   "worst_miss": 1443.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -637,7 +1371,19 @@
   "answered": 10,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2775
+  "hi": 0.2775,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 584.7,
+   "dollars_lo": 368.0,
+   "dollars_hi": 813.5,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 10,
+   "median_miss": 597.5,
+   "worst_miss": 1251.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -647,7 +1393,19 @@
   "answered": 10,
   "accuracy": 0.1,
   "lo": 0.0179,
-  "hi": 0.4042
+  "hi": 0.4042,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 562.8,
+   "dollars_lo": 326.3,
+   "dollars_hi": 798.4,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 9,
+   "median_miss": 677.0,
+   "worst_miss": 1252.0
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -657,7 +1415,19 @@
   "answered": 15,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2039
+  "hi": 0.2039,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 645.4,
+   "dollars_lo": 476.53,
+   "dollars_hi": 810.4,
+   "material_rate": 0.1333,
+   "material_lo": 0.0374,
+   "material_hi": 0.3788,
+   "misses": 15,
+   "median_miss": 677.0,
+   "worst_miss": 1251.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -667,7 +1437,19 @@
   "answered": 15,
   "accuracy": 0.2,
   "lo": 0.0705,
-  "hi": 0.4519
+  "hi": 0.4519,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 536.21,
+   "dollars_lo": 343.0,
+   "dollars_hi": 727.71,
+   "material_rate": 0.1429,
+   "material_lo": 0.0401,
+   "material_hi": 0.3994,
+   "misses": 11,
+   "median_miss": 677.0,
+   "worst_miss": 1078.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -677,7 +1459,19 @@
   "answered": 15,
   "accuracy": 0.0667,
   "lo": 0.0119,
-  "hi": 0.2982
+  "hi": 0.2982,
+  "dollars": {
+   "questions": 13,
+   "dollars_off_per_question": 681.31,
+   "dollars_lo": 373.62,
+   "dollars_hi": 1081.92,
+   "material_rate": 0.1538,
+   "material_lo": 0.0433,
+   "material_hi": 0.4224,
+   "misses": 12,
+   "median_miss": 555.0,
+   "worst_miss": 2641.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -687,7 +1481,8 @@
   "answered": 1,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.7935
+  "hi": 0.7935,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -697,7 +1492,19 @@
   "answered": 15,
   "accuracy": 0.2667,
   "lo": 0.109,
-  "hi": 0.5195
+  "hi": 0.5195,
+  "dollars": {
+   "questions": 14,
+   "dollars_off_per_question": 337.93,
+   "dollars_lo": 154.5,
+   "dollars_hi": 542.21,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2153,
+   "misses": 10,
+   "median_miss": 409.5,
+   "worst_miss": 978.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -707,7 +1514,19 @@
   "answered": 10,
   "accuracy": 0.2,
   "lo": 0.0567,
-  "hi": 0.5098
+  "hi": 0.5098,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 470.4,
+   "dollars_lo": 257.1,
+   "dollars_hi": 671.7,
+   "material_rate": 0.0,
+   "material_lo": 0.0,
+   "material_hi": 0.2775,
+   "misses": 8,
+   "median_miss": 677.0,
+   "worst_miss": 913.0
+  }
  },
  {
   "model": "claude-sonnet-5-5",
@@ -717,7 +1536,19 @@
   "answered": 10,
   "accuracy": 0.2,
   "lo": 0.0567,
-  "hi": 0.5098
+  "hi": 0.5098,
+  "dollars": {
+   "questions": 10,
+   "dollars_off_per_question": 583.5,
+   "dollars_lo": 354.2,
+   "dollars_hi": 819.9,
+   "material_rate": 0.1,
+   "material_lo": 0.0179,
+   "material_hi": 0.4042,
+   "misses": 8,
+   "median_miss": 746.0,
+   "worst_miss": 1277.0
+  }
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -727,7 +1558,19 @@
   "answered": 15,
   "accuracy": 0.2,
   "lo": 0.0705,
-  "hi": 0.4519
+  "hi": 0.4519,
+  "dollars": {
+   "questions": 15,
+   "dollars_off_per_question": 504.13,
+   "dollars_lo": 310.8,
+   "dollars_hi": 707.67,
+   "material_rate": 0.1333,
+   "material_lo": 0.0374,
+   "material_hi": 0.3788,
+   "misses": 12,
+   "median_miss": 637.0,
+   "worst_miss": 1277.0
+  }
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -737,7 +1580,19 @@
   "answered": 15,
   "accuracy": 0.3333,
   "lo": 0.1518,
-  "hi": 0.5829
+  "hi": 0.5829,
+  "dollars": {
+   "questions": 11,
+   "dollars_off_per_question": 320.91,
+   "dollars_lo": 79.82,
+   "dollars_hi": 590.64,
+   "material_rate": 0.0909,
+   "material_lo": 0.0162,
+   "material_hi": 0.3774,
+   "misses": 6,
+   "median_miss": 710.0,
+   "worst_miss": 1136.0
+  }
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -747,7 +1602,19 @@
   "answered": 7,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.3543
+  "hi": 0.3543,
+  "dollars": {
+   "questions": 6,
+   "dollars_off_per_question": 2145.33,
+   "dollars_lo": 1723.0,
+   "dollars_hi": 2646.17,
+   "material_rate": 1.0,
+   "material_lo": 0.6097,
+   "material_hi": 1.0,
+   "misses": 6,
+   "median_miss": 2079.0,
+   "worst_miss": 3301.0
+  }
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -757,7 +1624,8 @@
   "answered": 11,
   "accuracy": 0.0,
   "lo": 0.0,
-  "hi": 0.2588
+  "hi": 0.2588,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -767,7 +1635,19 @@
   "answered": 15,
   "accuracy": 0.2,
   "lo": 0.0705,
-  "hi": 0.4519
+  "hi": 0.4519,
+  "dollars": {
+   "questions": 11,
+   "dollars_off_per_question": 612.36,
+   "dollars_lo": 96.0,
+   "dollars_hi": 1242.73,
+   "material_rate": 0.1818,
+   "material_lo": 0.0514,
+   "material_hi": 0.477,
+   "misses": 8,
+   "median_miss": 260.0,
+   "worst_miss": 3155.0
+  }
  },
  {
   "model": "claude-haiku-5-5",
@@ -777,7 +1657,8 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "claude-sonnet-5-5",
@@ -787,7 +1668,8 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -797,7 +1679,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -807,7 +1690,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -817,7 +1701,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -827,7 +1712,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -837,7 +1723,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "claude-haiku-5-5",
@@ -847,7 +1734,8 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "claude-sonnet-5-5",
@@ -857,7 +1745,8 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -867,7 +1756,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -877,7 +1767,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -887,7 +1778,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -897,7 +1789,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -907,7 +1800,8 @@
   "answered": 15,
   "accuracy": 1.0,
   "lo": 0.7961,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "claude-haiku-5-5",
@@ -917,7 +1811,8 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "claude-sonnet-5-5",
@@ -927,7 +1822,8 @@
   "answered": 10,
   "accuracy": 1.0,
   "lo": 0.7225,
-  "hi": 1.0
+  "hi": 1.0,
+  "dollars": null
  },
  {
   "model": "or:anthropic/claude-haiku-5.5@anthropic",
@@ -937,7 +1833,8 @@
   "answered": 15,
   "accuracy": 0.8,
   "lo": 0.5481,
-  "hi": 0.9295
+  "hi": 0.9295,
+  "dollars": null
  },
  {
   "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
@@ -947,7 +1844,8 @@
   "answered": 15,
   "accuracy": 0.8667,
   "lo": 0.6212,
-  "hi": 0.9626
+  "hi": 0.9626,
+  "dollars": null
  },
  {
   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
@@ -957,7 +1855,8 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": null
  },
  {
   "model": "or:qwen/qwen3.8-flash@alibaba",
@@ -967,7 +1866,8 @@
   "answered": 15,
   "accuracy": 0.7333,
   "lo": 0.4805,
-  "hi": 0.891
+  "hi": 0.891,
+  "dollars": null
  },
  {
   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
@@ -977,6 +1877,7 @@
   "answered": 15,
   "accuracy": 0.8,
   "lo": 0.5481,
-  "hi": 0.9295
+  "hi": 0.9295,
+  "dollars": null
  }
 ]

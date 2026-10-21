@@ -14,6 +14,7 @@ ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 from run_models import PRICES, cost_of  # noqa: E402
 from stats import accuracy, mcnemar  # noqa: E402
+import dollars  # noqa: E402
 
 # How many rules interact in one question: the leaderboard's main cut.
 TIER = {**{t: "single-step" for t in ("federal_tax", "taxable_ss", "rmd", "ss_claim", "bracket_room", "irmaa")},
@@ -81,7 +82,12 @@ def main(run, rule_run=None):
     mistakes = Counter((g["model"], g.get("mistake") or "unexplained") for g in rows if g["bucket"] == "wrong")
     mistake_rows = [{"model": m, "mistake": k, "count": n} for (m, k), n in sorted(mistakes.items())]
 
-    files = [("models", models), ("tasks", tasks), ("mistakes", mistake_rows)]
+    # Dollars off, per model and per task: what a wrong answer would cost a client who acted on it.
+    for r in models:
+        r["dollars"] = dollars.summary([g for g in rows if g["model"] == r["model"]])
+    for r in tasks:
+        r["dollars"] = dollars.summary(cell[(r["model"], r["task"])])
+    files = [("models", models), ("tasks", tasks), ("mistakes", mistake_rows), ("dollars_by_mistake", dollars.by_mistake(rows))]
     if rule_run:
         with_rule = defaultdict(list)
         for g in load(rule_run):
@@ -110,7 +116,8 @@ def main(run, rule_run=None):
         tiers = " | ".join(f"{t} {r[t.replace('-', '_') + '_accuracy']:.0%} [{r[t.replace('-', '_') + '_lo']:.0%}-{r[t.replace('-', '_') + '_hi']:.0%}]"
                            for t in TIERS if r[t.replace('-', '_') + '_accuracy'] is not None)
         print(f"  {r['model']}: {r['accuracy']:.0%} [{r['lo']:.0%}-{r['hi']:.0%}] overall | {tiers} | " + (f"${r['cost_usd']:.2f}" if r["cost_usd"] is not None else "unpriced")
-              + (f", ${r['cost_per_correct'] * 1000:.2f} per 1,000 right answers" if r["cost_per_correct"] else ""))
+              + (f", ${r['cost_per_correct'] * 1000:.2f} per 1,000 right answers" if r["cost_per_correct"] else "")
+              + (f" | ${r['dollars']['dollars_off_per_question']:,.0f}/yr off per question, {r['dollars']['material_rate']:.0%} material" if r["dollars"] else ""))
 
 
 if __name__ == "__main__":

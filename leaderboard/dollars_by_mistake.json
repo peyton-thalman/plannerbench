@@ -1,0 +1,37 @@
+[
+ {
+  "mistake": "unexplained",
+  "count": 203,
+  "median_off": 584.0,
+  "total_off": 348562.0,
+  "material": 72
+ },
+ {
+  "mistake": "pre-2022 RMD table",
+  "count": 11,
+  "median_off": 5675.0,
+  "total_off": 72719.0,
+  "material": 11
+ },
+ {
+  "mistake": "combined senior phase-out",
+  "count": 99,
+  "median_off": 669.0,
+  "total_off": 61441.0,
+  "material": 9
+ },
+ {
+  "mistake": "one-step shortcut",
+  "count": 1,
+  "median_off": 1122.0,
+  "total_off": 1122.0,
+  "material": 1
+ },
+ {
+  "mistake": "right IRMAA tier, wrong cents",
+  "count": 12,
+  "median_off": 1.2,
+  "total_off": 19.2,
+  "material": 0
+ }
+]

@@ -59,7 +59,7 @@ def replies(run):
 def main(run, rule_run=None):
     out = ROOT / "site" / "data"
     out.mkdir(parents=True, exist_ok=True)
-    for name in ("models", "tasks", "mistakes", "rule_effect", "harness"):
+    for name in ("models", "tasks", "mistakes", "dollars_by_mistake", "rule_effect", "harness"):
         src = ROOT / "leaderboard" / f"{name}.json"
         if src.exists():
             shutil.copy(src, out / f"{name}.json")
