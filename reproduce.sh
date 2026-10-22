@@ -29,6 +29,7 @@ echo "== 3. Leaderboard"
 cp -r leaderboard /tmp/plannerbench-committed-leaderboard.$$
 # leaderboard/RUNS line 1: the runs behind the leaderboard; line 2 (optional): the runs the harness check compares.
 .venv/bin/python src/leaderboard.py $(sed -n 1p leaderboard/RUNS)
+.venv/bin/python src/tools_board.py > /dev/null   # with/without planning tools; held-out part only where private runs exist
 .venv/bin/python -I checks/dollars_check.py $(sed -n 1p leaderboard/RUNS | cut -d' ' -f1) | tail -1
 [ -n "$(sed -n 2p leaderboard/RUNS)" ] && .venv/bin/python -I checks/harness_check.py $(sed -n 2p leaderboard/RUNS) | tail -3
 if diff -rq leaderboard /tmp/plannerbench-committed-leaderboard.$$ > /dev/null; then

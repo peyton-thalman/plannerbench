@@ -1,0 +1,181 @@
+{
+ "model": "claude-haiku-5-5",
+ "runs": {
+  "none": "live-high-10x1",
+  "v1": "tools-high-10x1",
+  "v2": "tools-v2-high-10x1"
+ },
+ "server": {
+  "v1": {
+   "version": "1.0.0",
+   "moneyguide_commit": "5bc3a2b"
+  },
+  "v2": {
+   "version": "1.1.0",
+   "moneyguide_commit": "b3c29bd"
+  }
+ },
+ "tools": [
+  "federal_income_tax",
+  "taxable_social_security",
+  "required_minimum_distribution",
+  "social_security_benefit",
+  "medicare_part_b_premium",
+  "tax_tables"
+ ],
+ "hard": {
+  "questions": 50,
+  "tasks": [
+   "conversion_all_in",
+   "senior_phaseout",
+   "tax_torpedo",
+   "widow_all_in",
+   "widow_penalty"
+  ],
+  "stages": [
+   {
+    "key": "none",
+    "label": "No tools",
+    "accuracy": 0.4,
+    "lo": 0.2761,
+    "hi": 0.5382,
+    "questions": 50,
+    "right": 20,
+    "dollars_off": 317.78
+   },
+   {
+    "key": "v1",
+    "label": "Tools 1.0: the right number",
+    "accuracy": 0.62,
+    "lo": 0.4815,
+    "hi": 0.7414,
+    "questions": 50,
+    "right": 31,
+    "dollars_off": 228.58
+   },
+   {
+    "key": "v2",
+    "label": "Tools 1.1: the number, the rule and its source",
+    "accuracy": 1.0,
+    "lo": 0.9286,
+    "hi": 1.0,
+    "questions": 50,
+    "right": 50,
+    "dollars_off": 0.0
+   }
+  ],
+  "pairs": {
+   "none_to_v1": {
+    "fixed": 11,
+    "broken": 0,
+    "p": 0.0009765625
+   },
+   "v1_to_v2": {
+    "fixed": 19,
+    "broken": 0,
+    "p": 3.814697265625e-06
+   },
+   "none_to_v2": {
+    "fixed": 30,
+    "broken": 0,
+    "p": 1.862645149230957e-09
+   }
+  },
+  "by_task": [
+   {
+    "task": "conversion_all_in",
+    "none": 3,
+    "v1": 8,
+    "v2": 10,
+    "of": 10
+   },
+   {
+    "task": "senior_phaseout",
+    "none": 0,
+    "v1": 0,
+    "v2": 10,
+    "of": 10
+   },
+   {
+    "task": "tax_torpedo",
+    "none": 9,
+    "v1": 10,
+    "v2": 10,
+    "of": 10
+   },
+   {
+    "task": "widow_all_in",
+    "none": 2,
+    "v1": 6,
+    "v2": 10,
+    "of": 10
+   },
+   {
+    "task": "widow_penalty",
+    "none": 6,
+    "v1": 7,
+    "v2": 10,
+    "of": 10
+   }
+  ]
+ },
+ "whole": {
+  "questions": 140,
+  "without": {
+   "accuracy": 0.7714,
+   "lo": 0.6952,
+   "hi": 0.8332,
+   "questions": 140,
+   "right": 108,
+   "dollars_off": 171.47
+  },
+  "with": {
+   "accuracy": 0.8429,
+   "lo": 0.7735,
+   "hi": 0.8939,
+   "questions": 140,
+   "right": 118,
+   "dollars_off": 1254.6
+  },
+  "fixed": 13,
+  "broken": 3,
+  "p": 0.021270751953125,
+  "by_tier": {
+   "single-step": {
+    "without": 0.9667,
+    "with": 0.95
+   },
+   "multi-step": {
+    "without": 0.75,
+    "with": 0.85
+   },
+   "stacked": {
+    "without": 0.1667,
+    "with": 0.4667
+   },
+   "compliance": {
+    "without": 1.0,
+    "with": 1.0
+   }
+  },
+  "misses": 22,
+  "overruled": 18
+ },
+ "quote": {
+  "id": "senior_phaseout-007",
+  "run": "tools-high-10x1",
+  "text": "The calculation tool's figure of $21,639 applies the senior-deduction phase-out to each spouse separately, which I don't think the statute supports.",
+  "key": 21639,
+  "answered": 21121.0,
+  "answered_v2": 21639.0,
+  "v2_right": true,
+  "v2_senior_deduction": {
+   "rule": "OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduction is figured for each qualifying person separately: on a joint return each spouse's $6,000 is reduced by the full 6% of the excess, not one reduction off a combined $12,000.",
+   "magi_over_threshold": 39225,
+   "reduction_per_person": 2353.5,
+   "per_person": 3646.5,
+   "people": 2,
+   "total": 7293
+  }
+ }
+}

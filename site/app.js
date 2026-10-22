@@ -1,8 +1,8 @@
 // Fills the page from data/*.json, which src/build_site.py writes from the graded runs.
 (async () => {
   const get = (name) => fetch(`data/${name}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake] = await Promise.all(
-    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake'].map(get));
+  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake, tools, toolsPrivate] = await Promise.all(
+    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake', 'tools', 'tools_private'].map(get));
 
   const pct = (x) => (x == null ? '—' : `${Math.round(x * 100)}%`);
   const usd = (x, cents = false) => '$' + Number(x).toLocaleString('en-US', { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
@@ -107,6 +107,63 @@
       document.getElementById('dollars-note').textContent = `Not every mistake is equal. The ${top.mistake} mistake is rare (${top.count} times) but large: a typical miss of ${usd(top.median_off)} a year. `
         + `“${tiny.mistake}” happened ${tiny.count} times and is worth about ${usd(tiny.median_off, true)}. Typical miss is the median size of a wrong answer; ranges are 95% intervals.`;
     }
+  }
+
+  // With planning tools: the same hard questions without tools, with the right number, and with the rule shown
+  if (tools) {
+    const range = (lo, hi) => `${Math.round(lo * 100)}–${Math.round(hi * 100)}`;
+    const scoreCell = (s) => {
+      const td = el('td');
+      if (!s) { td.append(el('span', 'ci', 'not asked')); return td; }
+      const cell = el('div', `cell${s.accuracy < 0.5 ? ' low' : ''}`);
+      const track = el('div', 'track'), band = el('div', 'band-ci'), fill = el('div', 'fill');
+      band.style.left = `${s.lo * 100}%`; band.style.width = `${(s.hi - s.lo) * 100}%`; fill.style.width = `${s.accuracy * 100}%`;
+      track.append(band, fill);
+      const v = el('span', 'v', `${pct(s.accuracy)} · ${s.right}/${s.questions}`); v.append(el('span', 'ci', range(s.lo, s.hi)));
+      cell.append(v, track); td.append(cell); return td;
+    };
+    const tbody = document.querySelector('#ladder tbody');
+    const priv = Object.fromEntries((toolsPrivate?.stages ?? []).map((s) => [s.key, s]));
+    for (const s of tools.hard.stages) {
+      const tr = el('tr', s.key === 'v2' ? 'best' : null);
+      tr.append(el('td', 'model', s.label), scoreCell(s), scoreCell(priv[s.key]));
+      const off = el('td', 'overall', usd(s.dollars_off));
+      if (priv[s.key]) off.append(el('span', 'ci', `held-out ${usd(priv[s.key].dollars_off)}`));
+      tr.append(off); tbody.append(tr);
+    }
+    const p = tools.hard.pairs, fmtP = (x) => (x < 0.001 ? 'p < 0.001' : `p = ${x.toFixed(3)}`);
+    document.getElementById('ladder-note').textContent = `The same ${tools.hard.questions} questions in every row (${tools.hard.tasks.length} tasks, 10 each). `
+      + `The right number alone fixed ${p.none_to_v1.fixed} and broke ${p.none_to_v1.broken}; adding the rule and its source fixed ${p.v1_to_v2.fixed} more and broke ${p.v1_to_v2.broken} (${fmtP(p.v1_to_v2.p)}, paired). `
+      + (toolsPrivate ? `On ${toolsPrivate.questions} held-out questions, never seen while the tools were built: ${toolsPrivate.pairs.none_to_v2.fixed} fixed, ${toolsPrivate.pairs.none_to_v2.broken} broken. ` : '')
+      + 'Shaded bands are 95% intervals.';
+
+    const q = tools.quote;
+    document.getElementById('tools-quote').textContent = `“${q.text}”`;
+    const dl = document.getElementById('tools-answers');
+    const row = (label, value, ok) => {
+      const d = el('div'); d.append(el('dt', null, label)); const dd = el('dd', null, value);
+      if (ok != null) dd.append(el('span', `mark ${ok ? 'ok' : 'bad'}`, ok ? 'Right' : 'Wrong'));
+      d.append(dd); dl.append(d);
+    };
+    row('Tool’s answer, and the key', usd(q.key));
+    row('Haiku with tools 1.0', usd(q.answered), q.answered === q.key);
+    row('Haiku with tools 1.1', usd(q.answered_v2), q.v2_right);
+
+    const sd = q.v2_senior_deduction, ol = document.getElementById('tools-lines');
+    for (const [what, amt, total] of [['MAGI over the $150,000 threshold', usd(sd.magi_over_threshold, true)],
+      ['Reduction per person (6%)', usd(sd.reduction_per_person, true)], ['Senior deduction per person', usd(sd.per_person, true)],
+      ['People 65 or older', String(sd.people)], ['Senior deduction', usd(sd.total, true), true]]) {
+      const li = el('li', total ? 'total' : null); li.append(el('span', 'what', what), el('span', 'amt', amt)); ol.append(li);
+    }
+    document.getElementById('tools-rule').textContent = sd.rule;
+
+    const w = tools.whole;
+    document.getElementById('tools-whole').textContent = `Across all ${w.questions} questions, tools 1.0 lifted Haiku from ${pct(w.without.accuracy)} to ${pct(w.with.accuracy)} `
+      + `(${w.fixed} fixed, ${w.broken} broken, ${fmtP(w.p)}); single-step questions were already at ${pct(w.by_tier['single-step'].without)}. `
+      + `But ${w.overruled} of the ${w.misses} misses left were Haiku getting the right number from the tool and replacing it, every time saying so.`;
+    document.getElementById('tools-private').textContent = toolsPrivate
+      ? `On ${toolsPrivate.questions} private questions from a secret seed: ${pct(toolsPrivate.stages[0].accuracy)} without tools, ${pct(toolsPrivate.stages.at(-1).accuracy)} with tools 1.1. Both misses were Haiku overruling the tool again, with the rule in front of it.`
+      : 'Held-out results aren’t published yet.';
   }
 
   // Charts are drawn at the container's width, so redraw on resize.

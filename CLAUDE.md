@@ -3,7 +3,7 @@
 A benchmark of AI models on retirement-planning math (2026 federal tax, Social Security, RMDs, Medicare IRMAA) plus
 a compliance track, with an exact answer key. Site: https://plannerbench.vercel.app (deployed from `site/`), behind
 Vercel login since 2026-10-21 (`ssoProtection: all`; "all_except_custom_domains" left the production .vercel.app
-address open) until the owner's FINRA 3290 clearance; `checks/site_check.py` can't reach it while locked. Code: https://github.com/peyton-thalman/plannerbench
+address open) until the owner's FINRA 3290 clearance; `checks/site_check.py` can't reach it while locked: run it against a local copy (`python3 -m http.server 4173 --directory site`, then `site_check.py http://localhost:4173`), and spot-check the live deploy with `vercel curl /data/tools.json --deployment <url>`. The tools section reads `leaderboard/tools.json` (`src/tools_board.py`). Code: https://github.com/peyton-thalman/plannerbench
 (private until the owner decides to publish; push to `origin master`).
 Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every number is made) first.
 

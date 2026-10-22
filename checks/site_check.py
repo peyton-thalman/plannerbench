@@ -20,7 +20,7 @@ except ImportError:
     pass
 
 ROOT = Path(__file__).parent.parent
-FILES = ["models", "tasks", "mistakes", "rule_effect", "harness"]
+FILES = ["models", "tasks", "mistakes", "rule_effect", "harness", "tools", "tools_private"]
 
 
 def main(base):

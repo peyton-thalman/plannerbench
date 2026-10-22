@@ -16,6 +16,7 @@
     <a class="wordmark" href="#top">PlannerBench</a>
     <nav aria-label="Sections">
       <a href="#results">Results</a>
+      <a href="#tools">Tools</a>
       <a href="#questions">Questions</a>
       <a href="#method">Method</a>
     </nav>
@@ -129,8 +130,48 @@
     </div>
   </section>
 
-  <section class="band" id="questions">
+  <section class="band" id="tools">
     <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">With planning tools</p>
+        <h2>Hand it the right answer, and it argues</h2>
+        <p class="sub">The engine behind the answer key is also six tools a model can call over MCP (Model Context Protocol): federal income tax, taxable Social Security, RMDs, claiming age, Medicare premiums and the 2026 tax tables. They’re general calculators, not one per question, so the model still has to choose the inputs and combine the results. Claude Haiku 5.5 was asked the same multi-step and stacked questions three ways.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="scores ladder" id="ladder">
+          <thead>
+            <tr><th scope="col">Claude Haiku 5.5</th><th scope="col">Public questions</th><th scope="col">Held-out questions</th><th scope="col" class="r">Dollars off per question, per year</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="sub ladder-note" id="ladder-note"></p>
+
+      <div class="worked tools-worked">
+        <div class="question">
+          <p class="label">With tools 1.0, on a senior-deduction question</p>
+          <blockquote class="quote" id="tools-quote">—</blockquote>
+          <dl class="answers" id="tools-answers"></dl>
+        </div>
+        <div class="form" aria-label="What tools 1.1 sent back">
+          <p class="label">What tools 1.1 sends back with the tax</p>
+          <ol class="lines" id="tools-lines"></ol>
+          <p class="rule-text" id="tools-rule">—</p>
+        </div>
+      </div>
+
+      <ul class="notes tools-notes">
+        <li><b>A right number wasn’t enough.</b> <span id="tools-whole">—</span></li>
+        <li><b>Showing the rule and its source was.</b> The engine’s answers didn’t change between 1.0 and 1.1. Only the reply did: it now works the deduction per person and names the form lines.</li>
+        <li><b>It holds on questions nobody tuned against.</b> <span id="tools-private">—</span></li>
+        <li><b>Still small.</b> One model, 50 questions per set. The new reply targets a misreading this benchmark had already found, so it says nothing about ones nobody has named yet. Single-step questions weren’t rerun on 1.1. Held-out replies stay private; only their scores are shown.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="questions">
+    <div>
       <div class="section-head">
         <p class="eyebrow">The questions</p>
         <h2>Four kinds of question, from one rule to many</h2>
@@ -185,6 +226,7 @@
       <ul class="notes">
         <li><b>The math isn’t the problem.</b> Models handle long-standing rules well. They slip on the newest ones, like the 2025 senior deduction, and on several rules interacting at once.</li>
         <li><b>The fix is the rules, not a bigger model.</b> Handing a model the current rule fixed most of its misses. AI built for advisors needs the rules supplied to it.</li>
+        <li><b>Tools help only if they explain themselves.</b> Given a verified calculator, Haiku still overruled it when it believed a wrong rule. A tool reply that showed the rule and cited the IRS form ended nearly all of that.</li>
         <li><b>The compliance questions are a start.</b> They define each issue in the question, and both models scored 100%. The next version names issues without defining them, which tests knowledge instead of reading.</li>
         <li><b>It isn’t one lab’s blind spot.</b> DeepSeek and GLM made the same senior-deduction misreading as Claude. gpt-oss-120b used the IRS life-expectancy table that was replaced in 2022 on every RMD it got wrong. Models know the rules as they were, not as they are.</li>
         <li><b>Cheap can be good, but price per token misleads.</b> DeepSeek V4.1 Flash tied Claude Haiku 5.5 overall and did better on the hardest questions. Haiku was still the cheapest per right answer. Models that think until they run out of room cost the most.</li>
@@ -204,7 +246,7 @@
         <li><span>Models from more labs, including low-cost ones, on the full set</span></li>
         <li><span>A CPA and a compliance professional sign off on the answer key</span></li>
         <li><span>Compliance questions that test what a model knows, not what it’s told</span></li>
-        <li><span>The planning engine exposed as tools a model can call, scored against the model alone</span></li>
+        <li><span>More models with the planning tools, and tool replies that show and cite every rule they use</span></li>
         <li><span>Reruns as new models ship, and new rules every January</span></li>
       </ol>
     </div>

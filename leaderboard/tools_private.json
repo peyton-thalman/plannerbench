@@ -1,0 +1,41 @@
+{
+ "model": "claude-haiku-5-5",
+ "split": "private",
+ "questions": 50,
+ "tasks": [
+  "conversion_all_in",
+  "senior_phaseout",
+  "tax_torpedo",
+  "widow_all_in",
+  "widow_penalty"
+ ],
+ "stages": [
+  {
+   "key": "none",
+   "label": "No tools",
+   "accuracy": 0.44,
+   "lo": 0.3116,
+   "hi": 0.5769,
+   "questions": 50,
+   "right": 22,
+   "dollars_off": 215.8
+  },
+  {
+   "key": "v2",
+   "label": "Tools 1.1: the number, the rule and its source",
+   "accuracy": 0.96,
+   "lo": 0.8654,
+   "hi": 0.989,
+   "questions": 50,
+   "right": 48,
+   "dollars_off": 4.36
+  }
+ ],
+ "pairs": {
+  "none_to_v2": {
+   "fixed": 26,
+   "broken": 0,
+   "p": 2.9802322387695312e-08
+  }
+ }
+}
