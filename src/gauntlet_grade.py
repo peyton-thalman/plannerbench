@@ -15,7 +15,10 @@ a wrong number that matches a known shortcut ("ignored the torpedo", "used one f
 With tools, each wrong item is also classed by what the engine had shown the model:
   override        a tool reply contained the right answer and the final answer went against it
   mistranslated   the model called the tools but no reply contained the right answer (wrong inputs)
+  broken_calls    it called them, but no call got through (arguments not valid JSON, or every call rejected)
   no_tools        it never called them
+A "tool plumbing" table counts calls, malformed calls and rejected calls per model, so a model that can't drive the
+tools isn't mistaken for one that ignored them.
 Overrides are the finding that matters most, so every one is listed with the tool reply and the model's words.
 
 Usage: .venv/bin/python src/gauntlet_grade.py <run> [<run with tools> ...]
@@ -195,6 +198,8 @@ def classify(rec, c, item, n=None):
     """For a wrong item in a tools run: override, mistranslated or no_tools."""
     if not rec.get("tool_calls"):
         return "no_tools"
+    if not any(not t.get("malformed") and not t.get("is_error") for t in rec["tool_calls"]):
+        return "broken_calls"
     nums, decisions, plans = tool_views(rec)
     if item == "decision":
         if c["how_much"]:
@@ -280,7 +285,7 @@ def grade_rec(rec, c):
     else:
         g["great"] = right and all(x["right"] for x in g["numbers"].values())
     g.setdefault("bucket", "great" if g["great"] else "wrong")
-    if g["tools"]:
+    if g["tools"] and g["bucket"] == "wrong":  # no answer at all isn't the engine's doing: it stays in its own bucket
         g["why_wrong"] = {}
         if not right and c["family"] != "trap":
             g["why_wrong"]["decision"] = classify(rec, c, "decision")
@@ -288,6 +293,8 @@ def grade_rec(rec, c):
             if not x["right"]:
                 g["why_wrong"][k] = classify(rec, c, k, c["numbers"][k])
     g["invented"] = invented(rec.get("text"), c["prompt"])
+    if "asks" in rec:  # ask first (src/gauntlet_ask.py): questions asked, and whether one got the withheld fact
+        g["asks"], g["revealed"] = len(rec["asks"]), bool(rec.get("revealed"))
     return g
 
 
@@ -321,6 +328,22 @@ def report(run, graded, recs):
                      f"{money(losses[len(losses) // 2]) if losses else '–'} |")
     lines += ["", "Great = right decision and every number within tolerance (traps: declined). Intervals are 95% Wilson.", ""]
 
+    if any("asks" in g for g in graded):
+        lines += ["## Ask first: did it ask before advising?", "",
+                  "One decisive fact was left out of each question (every reasonable guess grades wrong; src/gauntlet_ask.py). "
+                  "A scripted client answers questions on that fact's topic and never volunteers.", "",
+                  "| Model | Engine | Asked | Asked any question | Got the missing fact | Great when it got the fact | Great when it guessed | Questions per reply |",
+                  "|---|---|---|---|---|---|---|---|"]
+        for (m, tools), gs in sorted(by_model.items()):
+            gs = [g for g in gs if "asks" in g]
+            if not gs:
+                continue
+            got, guessed = [g for g in gs if g["revealed"]], [g for g in gs if not g["revealed"]]
+            lines.append(f"| {m} | {'with' if tools else 'alone'} | {len(gs)} | {pct(sum(g['asks'] > 0 for g in gs), len(gs))} | "
+                         f"{pct(len(got), len(gs))} | {pct(sum(g['great'] for g in got), len(got))} | {pct(sum(g['great'] for g in guessed), len(guessed))} | "
+                         f"{sum(g['asks'] for g in gs) / len(gs):.1f} |")
+        lines += [""]
+
     shortcuts = Counter(x["shortcut"] for g in graded for x in g.get("numbers", {}).values() if x.get("shortcut"))
     if shortcuts:
         lines += ["## Wrong numbers that match a known shortcut", "", "| Shortcut | Times |", "|---|---|"]
@@ -332,7 +355,16 @@ def report(run, graded, recs):
         lines += ["## With the engine: why wrong answers were wrong", "",
                   f"Override (the engine showed the right answer and the model went against it): **{kinds['override']}**; "
                   f"possible override (matched on unnamed plans, may be a coincidence): {kinds['possible override']}; "
-                  f"mistranslated (wrong inputs to the tools): {kinds['mistranslated']}; never called the tools: {kinds['no_tools']}.", ""]
+                  f"mistranslated (wrong inputs to the tools): {kinds['mistranslated']}; no call got through: {kinds['broken_calls']}; "
+                  f"never called the tools: {kinds['no_tools']}.", ""]
+        lines += ["### Tool plumbing", "", "| Model | Replies | Tool calls | Malformed (not valid JSON) | Rejected by the engine | Replies with no tool call |",
+                  "|---|---|---|---|---|---|"]
+        for m in sorted({r["model"] for r in recs if r.get("tool_calls") is not None and "error" not in r}):
+            rs = [r for r in recs if r["model"] == m and r.get("tool_calls") is not None and "error" not in r]
+            calls = [t for r in rs for t in r["tool_calls"]]
+            lines.append(f"| {m} | {len(rs)} | {len(calls)} | {sum(bool(t.get('malformed')) for t in calls)} | "
+                         f"{sum(bool(t.get('is_error')) and not t.get('malformed') for t in calls)} | {sum(not r['tool_calls'] for r in rs)} |")
+        lines.append("")
         overrides = [(g, k) for g in tooled for k, v in g["why_wrong"].items() if v in ("override", "possible override")]
         if overrides:
             lines += ["### Every override", ""]

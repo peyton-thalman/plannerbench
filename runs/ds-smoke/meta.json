@@ -1,0 +1,15 @@
+{
+ "set": "gauntlet",
+ "split": "public",
+ "effort": "high",
+ "per_task": 1,
+ "reps": 1,
+ "context": null,
+ "tasks": null,
+ "models": [
+  "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8"
+ ],
+ "max_tokens": 32000,
+ "openai_base_url": null,
+ "openrouter_routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; private split adds zdr=true; reasoning effort = --effort"
+}

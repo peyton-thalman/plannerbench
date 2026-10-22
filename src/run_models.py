@@ -59,10 +59,13 @@ def cost_of(rec):
 SPLITS = {"public": ROOT / "data" / "cases.jsonl", "private": ROOT / "private" / "cases.jsonl"}
 # The Gauntlet (src/gauntlet/build.ts): stacked multi-year decisions; graded by src/gauntlet_grade.py.
 GAUNTLET = {"public": ROOT / "data" / "gauntlet.jsonl", "private": ROOT / "private" / "gauntlet.jsonl"}
+# Ask first (src/gauntlet_ask.py): the same questions with one decisive fact left out and a scripted client to ask.
+GAUNTLET_ASK = {"public": ROOT / "data" / "gauntlet-ask.jsonl", "private": ROOT / "private" / "gauntlet-ask.jsonl"}
 
 
 def load_cases(per_task, split="public", gauntlet=False):
-    cases = [json.loads(l) for l in (GAUNTLET if gauntlet else SPLITS)[split].read_text().splitlines() if l.strip()]
+    sets = {False: SPLITS, True: GAUNTLET, "ask": GAUNTLET_ASK}[gauntlet]
+    cases = [json.loads(l) for l in sets[split].read_text().splitlines() if l.strip()]
     taken, out = {}, []
     for c in cases:  # first N per task (Gauntlet: per family), so a pilot is always the same questions
         task = c.get("task") or c["family"]
@@ -221,40 +224,111 @@ def ask_openai_compatible(model, effort, prompt):
 OPENROUTER = "https://openrouter.ai/api/v1"
 
 
-def ask_openrouter(model, effort, prompt, private=False):
-    """OpenRouter, with the routing pinned down so a score names what actually answered.
+def openrouter_body(model, effort, messages, private=False):
+    """Request body for one OpenRouter call, with the routing pinned down so a score names what actually answered.
 
     Name the model "or:<vendor>/<model>" or "or:<vendor>/<model>@<host>" (e.g. or:deepseek/deepseek-v4.1-flash@deepinfra).
     With @host, only that host may answer and there is no fallback, so every reply comes from the same deployment.
     Hosts that keep prompts for training are always excluded; the private set also requires zero data retention.
-    The host that served each reply is saved, since the same open model can score differently on different hosts.
     """
-    import os
-
     name, _, host = model.removeprefix("or:").partition("@")
     provider = {"data_collection": "deny"}
     if host:
         provider.update({"only": [host], "allow_fallbacks": False})
     if private:
         provider["zdr"] = True
-    body = {"model": name, "messages": [{"role": "user", "content": prompt}], "max_tokens": MAX_TOKENS,
-            # Reasoning text isn't graded, so leave it out of the reply; it is still used and billed.
-            "reasoning": {"effort": effort, "exclude": True}, "provider": provider}
-    key = os.environ.get("OPENROUTER_API_KEY", "")
-    r, err = post_json(f"{OPENROUTER}/chat/completions", body, key, "OPENROUTER_API_KEY")
-    if err:
-        return {"error": err}
+    return {"model": name, "messages": messages, "max_tokens": MAX_TOKENS, "reasoning": {"effort": effort}, "provider": provider}
+
+
+def openrouter_post(body):
+    import os
+
+    return post_json(f"{OPENROUTER}/chat/completions", body, os.environ.get("OPENROUTER_API_KEY", ""), "OPENROUTER_API_KEY")
+
+
+def openrouter_rec(r):
+    """A reply record from an OpenRouter response, with the host that served it (the same open model can score
+    differently on different hosts) and the exact billed cost."""
+    import os
+
     rec = {**from_chat_completion(r), "served_model": r.get("model"), "generation_id": r.get("id")}
     if r.get("provider"):
         rec["host"] = r["provider"]
     elif r.get("id"):
         # The host isn't always in the reply; the generation record has it (and the exact billed cost).
-        g, _ = post_json(f"{OPENROUTER}/generation?id={r['id']}", None, key, "OPENROUTER_API_KEY")
+        g, _ = post_json(f"{OPENROUTER}/generation?id={r['id']}", None, os.environ.get("OPENROUTER_API_KEY", ""), "OPENROUTER_API_KEY")
         g = (g or {}).get("data") or {}
         if g.get("provider_name"):
             rec["host"] = g["provider_name"]
         if rec.get("billed_usd") is None and isinstance(g.get("total_cost"), (int, float)):
             rec["billed_usd"] = g["total_cost"]
+    return rec
+
+
+def ask_openrouter(model, effort, prompt, private=False):
+    body = openrouter_body(model, effort, [{"role": "user", "content": prompt}], private)
+    body["reasoning"]["exclude"] = True  # reasoning text isn't graded, so leave it out of the reply; it is still used and billed
+    r, err = openrouter_post(body)
+    return {"error": err} if err else openrouter_rec(r)
+
+
+def chat_tools(tools):
+    """The MCP tool list in the OpenAI "function calling" shape that open models (and OpenRouter) speak.
+    Same names, descriptions and JSON schemas as the Claude run; only the wrapping differs."""
+    return [{"type": "function", "function": {"name": t["name"], "description": t["description"],
+                                              "parameters": {k: v for k, v in t["inputSchema"].items() if k != "$schema"}}} for t in tools.tools]
+
+
+def ask_chat_with_tools(post, body, tools):
+    """The tool loop for OpenAI-style models: the model asks for tool calls, this runs each one on the MCP server and
+    sends the results back, until the model answers. `post` sends one request; `body` is the first request.
+
+    Like the Claude loop: the prompt is unchanged and there is no system prompt, so the tools are the only difference
+    from a plain run. Calls whose arguments aren't valid JSON are kept (malformed: true) and the model is told so, so a
+    plumbing failure is never blamed on the engine.
+    """
+    messages = body["messages"]
+    rec = {"input_tokens": 0, "output_tokens": 0, "tool_calls": []}
+    for _ in range(MAX_TOOL_TURNS):
+        r, err = post({**body, "messages": messages, "tools": chat_tools(tools)})
+        if err:
+            return {**rec, "error": err}
+        turn = openrouter_rec(r) if body["model"] != "fake" else from_chat_completion(r)
+        for k in ("input_tokens", "output_tokens", "reasoning_tokens"):
+            if turn.get(k):
+                rec[k] = rec.get(k, 0) + turn[k]
+        if turn.get("billed_usd") is not None:
+            rec["billed_usd"] = rec.get("billed_usd", 0) + turn["billed_usd"]
+        for k in ("text", "stop_reason", "host", "served_model"):
+            if k in turn:
+                rec[k] = turn[k]
+        msg = r["choices"][0]["message"]
+        calls = msg.get("tool_calls") or []
+        if not calls:
+            rec["_messages"] = messages + [{"role": "assistant", "content": rec.get("text") or ""}]  # for ask-first: the conversation so far
+            return rec
+        # Reasoning goes back unchanged (some models need their own thinking to continue after a tool call).
+        messages = messages + [{"role": "assistant", "content": msg.get("content") or "", "tool_calls": calls,
+                                **({"reasoning_details": msg["reasoning_details"]} if msg.get("reasoning_details") else {})}]
+        for c in calls:
+            fn = c.get("function") or {}
+            call = {"name": fn.get("name"), "input": fn.get("arguments")}
+            try:
+                args = json.loads(fn.get("arguments") or "{}")
+                if not isinstance(args, dict):
+                    raise ValueError("arguments must be a JSON object")
+            except ValueError as e:
+                out, is_error = f"Your arguments for {fn.get('name')} were not valid JSON ({e}). Send the call again with a JSON object.", True
+                call["malformed"] = True
+            else:
+                call["input"] = args
+                try:
+                    out, is_error = tools.call(fn.get("name"), args)
+                except RuntimeError as e:
+                    out, is_error = str(e), True
+            rec["tool_calls"].append({**call, "result": out, "is_error": is_error})
+            messages = messages + [{"role": "tool", "tool_call_id": c.get("id"), "content": out}]
+    rec["stop_reason"] = "tool_turn_limit"
     return rec
 
 
@@ -294,6 +368,55 @@ def ask_fake_with_tools(tools, case, rep):
     return {"text": f"From the planning tools.\nANSWER: {ans}", "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0, "tool_calls": []}
 
 
+class _Replay:
+    """Plays back tool results in order, so the stand-in's final answer is built only from what came through the loop."""
+
+    def __init__(self, outs):
+        self.outs = list(outs)
+
+    def call(self, name, args):
+        return self.outs.pop(0), False
+
+
+def scripted_chat(tools, case):
+    """A stand-in OpenAI-style model for the Gauntlet: asks for the perfect tool user's calls one per turn, with one
+    malformed call first on every fifth question, then answers from the tool results it was sent. Proves the open-model
+    tool loop end to end for free: it should grade exactly like the Claude-loop stand-in."""
+    from planning_tools import gauntlet_oracle
+
+    _, plan = gauntlet_oracle(tools, case)
+    bad_first = sum(map(ord, case["id"])) % 5 == 0
+
+    def reply(msg, finish):
+        return {"choices": [{"message": msg, "finish_reason": finish}], "usage": {"prompt_tokens": 0, "completion_tokens": 0}}
+
+    def post(body):
+        sent = [m for m in body["messages"] if m["role"] == "tool"]
+        good = [m["content"] for m in sent if not m["content"].startswith("Your arguments for")]
+        if bad_first and not sent:
+            return reply({"content": "", "tool_calls": [{"id": "bad", "type": "function", "function": {"name": "run_scenario", "arguments": "{household: oops"}}]}, "tool_calls"), None
+        if len(good) < len(plan):
+            c = plan[len(good)]
+            return reply({"content": "", "tool_calls": [{"id": f"c{len(good)}", "type": "function", "function": {"name": c["name"], "arguments": json.dumps(c["input"])}}]}, "tool_calls"), None
+        text, _ = gauntlet_oracle(_Replay(good), case)
+        return reply({"content": text}, "stop"), None
+
+    return post
+
+
+def openrouter_prices(model):
+    """($ per million in, out) for an OpenRouter model, read from its public endpoint list: the pinned host's price, or
+    the most expensive host when unpinned. Lets --max-usd set aside each request's worst case before it's sent."""
+    import os
+
+    name, _, host = model.removeprefix("or:").partition("@")
+    r, err = post_json(f"{OPENROUTER}/models/{name}/endpoints", None, os.environ.get("OPENROUTER_API_KEY", ""), "OPENROUTER_API_KEY")
+    if err:
+        raise SystemExit(f"Couldn't read OpenRouter prices for {name}: {err}")
+    eps = [e for e in r["data"]["endpoints"] if not host or e.get("tag") == host] or r["data"]["endpoints"]
+    return (max(float(e["pricing"]["prompt"]) for e in eps) * 1e6, max(float(e["pricing"]["completion"]) for e in eps) * 1e6)
+
+
 def main():
     global MAX_TOKENS
     ap = argparse.ArgumentParser()
@@ -310,10 +433,13 @@ def main():
     ap.add_argument("--max-usd", type=float, default=None, help="stop asking once this run has spent this much; rerun later to resume")
     ap.add_argument("--split", default="public", choices=list(SPLITS), help="private = the held-out set, never published")
     ap.add_argument("--tools", action="store_true", help="offer the MoneyGuide planning tools over MCP (Claude models only)")
-    ap.add_argument("--set", default="cases", choices=["cases", "gauntlet"], help="gauntlet = the stacked multi-year decisions (--per-task = per family)")
+    ap.add_argument("--chat", action="store_true", help="with --fake --tools: the stand-in goes through the OpenAI-style tool loop open models use")
+    ap.add_argument("--set", default="cases", choices=["cases", "gauntlet", "gauntlet-ask"],
+                    help="gauntlet = the stacked multi-year decisions (--per-task = per family); gauntlet-ask = the same with one fact to ask for")
+    ap.add_argument("--fake-style", default="asker", choices=["asker", "guesser", "spammer"], help="with --fake --set gauntlet-ask: which stand-in")
     a = ap.parse_args()
     global MAX_TOOL_TURNS
-    if a.set == "gauntlet":
+    if a.set.startswith("gauntlet"):
         # Long multi-year questions: more room to think, and a few scenario runs per option.
         if a.max_tokens == MAX_TOKENS:
             a.max_tokens = 32000
@@ -327,21 +453,26 @@ def main():
     free = [m for m in models if m.endswith("-free") or m.split("@")[0].endswith(":free") or m == "oai:big-pickle"]
     if a.split == "private" and free:
         raise SystemExit(f"Not sending the private set to free endpoints that may train on it: {', '.join(free)}")
-    if a.tools and not a.fake and not all(m.startswith("claude") for m in models):
-        raise SystemExit("--tools runs Claude models only for now (the tool loop uses the Claude API's tool use).")
+    if a.tools and not a.fake and not all(m.startswith(("claude", "or:")) for m in models):
+        raise SystemExit("--tools runs Claude models (Claude API tool use) and OpenRouter models (function calling) only.")
+    for m in models:
+        if m.startswith("or:") and m not in PRICES and a.max_usd is not None:
+            PRICES[m] = openrouter_prices(m)
     tools = None
     if a.tools:
         from planning_tools import SERVER, PlanningTools
 
         tools = PlanningTools()
-    cases = load_cases(a.per_task, a.split, gauntlet=a.set == "gauntlet")
+    if a.set == "gauntlet-ask" and not a.fake and not all(m.startswith("or:") for m in models):
+        raise SystemExit("--set gauntlet-ask runs OpenRouter models only for now.")
+    cases = load_cases(a.per_task, a.split, gauntlet={"cases": False, "gauntlet": True, "gauntlet-ask": "ask"}[a.set])
     if a.tasks:
         cases = [c for c in cases if (c.get("task") or c["family"]) in a.tasks.split(",")]
     if a.context:
         # Same cases and answer key, so the gain from handing the model the rule is measured on identical questions.
         ctx = Path(a.context).read_text().strip()
         cases = [{**c, "prompt": f"{ctx}\n\n{c['prompt']}"} for c in cases]
-    run = a.run or ("gauntlet-" if a.set == "gauntlet" else "") + f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-tools" if a.tools else "") + ("-private" if a.split == "private" else "")
+    run = a.run or (a.set + "-" if a.set.startswith("gauntlet") else "") + f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-tools" if a.tools else "") + ("-private" if a.split == "private" else "")
     out_dir = ROOT / "runs" / run
     out_dir.mkdir(parents=True, exist_ok=True)
     # What was asked and how, so anyone can rerun it exactly; grade.py reads the split from here.
@@ -391,37 +522,60 @@ def main():
         ws = os.environ.get("ANTHROPIC_WORKSPACE_ID")
         client = anthropic.Anthropic(max_retries=4, default_headers={"anthropic-workspace-id": ws} if ws else None)
 
+    oracle_tools = None
+    if a.fake and a.set == "gauntlet-ask" and not tools:  # the stand-ins answer from real engine runs
+        from planning_tools import PlanningTools
+
+        oracle_tools = PlanningTools()
     lock = threading.Lock()
-    cost = 0.0
+    room = threading.Condition(lock)  # signalled when a question in flight finishes and frees its set-aside budget
+    spent = [0.0]
     # The cap holds even with several questions in flight: each one sets aside its worst case (the whole token budget,
     # plus for tools the most input a Gauntlet tools reply has used, 150k tokens) before it's sent, and only starts if
     # spent + set aside + its worst case stays under --max-usd. (2026-10-22: without this, 6 Sonnet questions in
-    # flight carried a $5 cap to $5.39.) Models without a list price (OpenRouter) set nothing aside.
+    # flight carried a $5 cap to $5.39.) OpenRouter models are priced from their pinned host's public price list.
     reserved = [0.0]
 
     def worst_case(m, c):
         pin, pout = PRICES.get(m, (0, 0))
         tokens_in = 150_000 if a.tools else len(c["prompt"]) / 3
-        return (tokens_in * pin + MAX_TOKENS * pout) / 1e6
+        turns = 4 if a.set == "gauntlet-ask" else 1  # ask first: up to 3 questions, then the answer
+        return turns * (tokens_in * pin + MAX_TOKENS * pout) / 1e6
     errors = skipped = 0
     with raw.open("a") as f, ThreadPoolExecutor(max_workers=1 if a.fake else a.workers) as pool:
         def ask(m, c, rep):
             w = worst_case(m, c)
-            with lock:
-                if a.max_usd is not None and cost + reserved[0] + w > a.max_usd:
-                    return None  # over budget: not asked, not recorded, so a rerun picks it up
+            with room:
+                # Doesn't fit beside the questions in flight: wait for one to finish. Only when nothing is in flight and it
+                # still doesn't fit is the budget really spent (not asked, not recorded, so a rerun picks it up).
+                while a.max_usd is not None and spent[0] + reserved[0] + w > a.max_usd:
+                    if reserved[0] == 0:
+                        return None
+                    room.wait()
                 reserved[0] += w
+            res = None
             try:
-                return answer(m, c, rep)
+                res = answer(m, c, rep)
+                return res
             finally:
-                with lock:
+                with room:  # count the spend before freeing its set-aside, so neither side ever misses it
+                    if res is not None:
+                        spent[0] += cost_of({"model": m, **res})
                     reserved[0] -= w
+                    room.notify_all()
 
         def answer(m, c, rep):
+            if a.set == "gauntlet-ask":
+                return ask_first_answer(m, c)
             if a.fake:
+                if tools and a.chat:
+                    return ask_chat_with_tools(scripted_chat(tools, c), {"model": "fake", "messages": [{"role": "user", "content": c["prompt"]}]}, tools)
                 if tools:
                     return ask_fake_with_tools(tools, c, rep)
                 return ask_fake_gauntlet(c) if a.set == "gauntlet" else ask_fake(c, rep)
+            if tools and m.startswith("or:"):
+                body = openrouter_body(m, a.effort, [{"role": "user", "content": c["prompt"]}], private=a.split == "private")
+                return ask_chat_with_tools(openrouter_post, body, tools)
             if tools:
                 return ask_claude_with_tools(client, m, a.effort, c["prompt"], tools)
             if m.startswith("or:"):
@@ -430,25 +584,43 @@ def main():
                 return ask_openai_compatible(m, a.effort, c["prompt"])
             return ask_claude(client, m, a.effort, c["prompt"])
 
+        def ask_first_answer(m, c):
+            from gauntlet_ask import ask_first, fake_turn
+
+            if a.fake:
+                turn = fake_turn(a.fake_style, tools or oracle_tools, c)
+            elif tools:
+                turn = lambda msgs: ask_chat_with_tools(openrouter_post, openrouter_body(m, a.effort, msgs, private=a.split == "private"), tools)
+            else:
+                def turn(msgs):
+                    body = openrouter_body(m, a.effort, msgs, private=a.split == "private")
+                    body["reasoning"]["exclude"] = True
+                    r, err = openrouter_post(body)
+                    if err:
+                        return {"error": err}
+                    rec = openrouter_rec(r)
+                    return {**rec, "_messages": msgs + [{"role": "assistant", "content": rec["text"]}]}
+            return ask_first(turn, c)
+
         futs = {pool.submit(ask, m, c, rep): (m, c, rep) for m, c, rep in jobs}
         for n, fut in enumerate(as_completed(futs), 1):
             m, c, rep = futs[fut]
             if (res := fut.result()) is None:
                 skipped += 1
                 continue
+            res.pop("_messages", None)
             rec = {"model": m, "effort": a.effort, "id": c["id"], "task": c.get("task") or c["family"], "rep": rep, **res}
             errors += "error" in rec
-            cost += cost_of(rec)
             with lock:
                 f.write(json.dumps(rec) + "\n")
                 f.flush()
             if n % 10 == 0 or n == len(jobs):
-                print(f"  {n}/{len(jobs)} answered, ${cost:.2f} so far")
+                print(f"  {n}/{len(jobs)} answered, ${spent[0]:.2f} so far")
     if skipped:
-        print(f"BUDGET: stopped at ${cost:.2f} (--max-usd {a.max_usd}); {skipped} questions not asked. Rerun the same command to continue.")
+        print(f"BUDGET: stopped at ${spent[0]:.2f} (--max-usd {a.max_usd}); {skipped} questions not asked. Rerun the same command to continue.")
     if errors:
         print(f"WARNING: {errors}/{len(jobs)} requests failed (see 'error' in raw.jsonl). Rerun the same command to retry them.")
-    print(f"Saved to {raw.relative_to(ROOT)}. Next: .venv/bin/python src/{'gauntlet_grade' if a.set == 'gauntlet' else 'grade'}.py {run}")
+    print(f"Saved to {raw.relative_to(ROOT)}. Next: .venv/bin/python src/{'gauntlet_grade' if a.set.startswith('gauntlet') else 'grade'}.py {run}")
 
 
 if __name__ == "__main__":

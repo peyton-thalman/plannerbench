@@ -1,0 +1,3832 @@
+{
+ "replays": [
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-claim_age-1",
+   "family": "claim_age",
+   "what": "Claiming Social Security at 70 and converting in the gap years",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Both claim at 67."
+    },
+    {
+     "letter": "B",
+     "text": "Sam claims at 70, Pat at 67."
+    },
+    {
+     "letter": "C",
+     "text": "Sam claims at 70, Pat at 67, and they convert $180,000 a year from Sam's traditional IRA to Sam's Roth IRA in each year 2026 through 2029."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option B, how much Social Security will Sam receive in total during 2031?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A: both claim at 67; B: Sam at 70, Pat at 67; C: Sam at 70, Pat at 67, convert 180k/yr 2026-2029",
+     "got": "A: both claim at 67: $2,625,461 after-tax wealth at the end (today's dollars)\nB: Sam at 70, Pat at 67: $2,641,584 after-tax wealth at the end (today's dollars)\nC: Sam at 70, Pat at 67, convert 180k/yr 2026-2029: $2,812,226 after-tax wealth at the end (today's dollars)\nB: Sam at 70, Pat at 67 vs A: both claim at 67: +$16,123\nC: Sam at 70, Pat at 67, convert 180k/yr 2026-2029 vs A: both claim at 67: +$186,765\nThe engine suggests asking: Is $112,000 a year the right spending number?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 22255.0,
+     "key": 22255,
+     "right": true
+    },
+    "N2": {
+     "got": 59376.0,
+     "key": 59376,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 77910,
+   "cost": 0.0113,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: C",
+     "N1: 22255",
+     "N2: 59386"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-first_rmd-1",
+   "family": "first_rmd",
+   "what": "A Roth conversion in the first-RMD year",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the RMD and also convert $260,000 a year from Lou's traditional IRA to Lou's Roth IRA in 2026 and 2027, then stop."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversion; just the RMD."
+    },
+    {
+     "letter": "C",
+     "text": "Take the RMD and also convert $75,000 a year from Lou's traditional IRA to Lou's Roth IRA in each year 2026 through 2031."
+    }
+   ],
+   "asks": [
+    "What is Lou's required minimum distribution for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1953, \"prior_year_end_balance\": 1570000}",
+     "got": "{\"age_in_year\": 73, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 26.5, \"rmd\": 59245.28}"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: RMD only, no conversion; A: convert 260,000 in 2026 and 2027; C: convert 75,000 a year 2026-2031",
+     "got": "B: RMD only, no conversion: $3,136,919 after-tax wealth at the end (today's dollars)\nA: convert 260,000 in 2026 and 2027: $3,234,225 after-tax wealth at the end (today's dollars)\nC: convert 75,000 a year 2026-2031: $3,229,093 after-tax wealth at the end (today's dollars)\nA: convert 260,000 in 2026 and 2027 vs B: RMD only, no conversion: +$97,306\nC: convert 75,000 a year 2026-2031 vs B: RMD only, no conversion: +$92,174\nThe engine suggests asking: How is everyone's health, and who is likely to outlive whom?"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 59245.0,
+     "key": 59245,
+     "right": true
+    },
+    "N2": {
+     "got": 18523.0,
+     "key": 18523,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 77560,
+   "cost": 0.0117,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 59245",
+     "N2: 18523"
+    ],
+    "lost": 7161,
+    "why": "picked C; best was A"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-gains_vs_conversion-1",
+   "family": "gains_vs_conversion",
+   "what": "Harvesting 0% gains or converting",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Realize $110,000 of long-term gains in the brokerage account in 2026 (sell and immediately rebuy, to raise the cost basis)."
+    },
+    {
+     "letter": "B",
+     "text": "Neither."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $110,000 from Frank's traditional IRA to Frank's Roth IRA in 2026."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option B? Use a negative number if it's less.",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: Neither; A: Realize 110k gains; C: Convert 110k Frank IRA to Roth",
+     "got": "B: Neither: $3,163,771 after-tax wealth at the end (today's dollars)\nA: Realize 110k gains: $3,139,293 after-tax wealth at the end (today's dollars)\nC: Convert 110k Frank IRA to Roth: $3,203,401 after-tax wealth at the end (today's dollars)\nA: Realize 110k gains vs B: Neither: \u2212$24,478\nC: Convert 110k Frank IRA to Roth vs B: Neither: +$39,630\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 12876.0,
+     "key": 12876,
+     "right": true
+    },
+    "N2": {
+     "got": 17191.0,
+     "key": 17191,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 68799,
+   "cost": 0.0086,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 12876",
+     "N2: 17761"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-how_much-1",
+   "family": "how_much",
+   "what": "How much to convert to Roth, and for how many years",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "No Roth conversion."
+    },
+    {
+     "letter": "P",
+     "text": "Convert $155,000 from Ray's traditional IRA to Ray's Roth IRA in 2026 only."
+    }
+   ],
+   "asks": [
+    "If they converted $155,000 in 2026 only, how much more federal income tax would they owe for 2026 than with no conversion?",
+    "If they converted $155,000 in 2026 only, how much more would they pay in Medicare premiums for 2028 than with no conversion (Part B plus Part D surcharges, both spouses, all 12 months)?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: Do nothing; Convert $155,000 in 2026 only",
+     "got": "Cannot read properties of undefined (reading 'born')",
+     "error": true
+    },
+    {
+     "kind": "tool",
+     "name": "solve_roth_conversion",
+     "asked": "Find the best Roth conversion from ray_ira, up to 10 years",
+     "got": "Cannot read properties of undefined (reading 'born')",
+     "error": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: Do nothing; Convert $155,000 in 2026 only",
+     "got": "Do nothing: $2,712,728 after-tax wealth at the end (today's dollars)\nConvert $155,000 in 2026 only: $2,743,381 after-tax wealth at the end (today's dollars)\nConvert $155,000 in 2026 only vs Do nothing: +$30,654\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "solve_roth_conversion",
+     "asked": "Find the best Roth conversion from ray_ira, up to 10 years",
+     "got": "Convert about $118,000 a year for 8 years (2026\u20132033): +$134,445 after-tax wealth at the end, in today's dollars.\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "key": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "within $1,000 of the best plan",
+   "numbers": {
+    "N1": {
+     "got": 27676.0,
+     "key": 27676,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 90209,
+   "cost": 0.0129,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PLAN: 200000 x 10",
+     "N1: 27676",
+     "N2: 2412"
+    ],
+    "lost": 26002.029999999795,
+    "why": "plan gives up $26,002"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-inherited_ira-1",
+   "family": "inherited_ira",
+   "what": "Emptying an inherited IRA under the 10-year rule",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the required minimum plus an extra $200,000 in 2026 and again in 2027."
+    },
+    {
+     "letter": "B",
+     "text": "Take only the required minimum each year, and the rest at the 2033 deadline."
+    },
+    {
+     "letter": "C",
+     "text": "Take the required minimum plus an extra $55,000 each year from 2026 through 2033."
+    }
+   ],
+   "asks": [
+    "What is the required minimum distribution from Pat's inherited IRA for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: RMD only, rest at 2033 deadline; A: extra 200k in 2026 and 2027; C: extra 55k each year 2026-2033",
+     "got": "B: RMD only, rest at 2033 deadline: $4,708,755 after-tax wealth at the end (today's dollars)\nA: extra 200k in 2026 and 2027: $4,686,489 after-tax wealth at the end (today's dollars)\nC: extra 55k each year 2026-2033: $4,721,638 after-tax wealth at the end (today's dollars)\nA: extra 200k in 2026 and 2027 vs B: RMD only, rest at 2033 deadline: \u2212$22,266\nC: extra 55k each year 2026-2033 vs B: RMD only, rest at 2033 deadline: +$12,884\nThe engine suggests asking: Do they have any tax-exempt municipal bond interest?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 24402.0,
+     "key": 24402,
+     "right": true
+    },
+    "N2": {
+     "got": 13765.0,
+     "key": 13765,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 75611,
+   "cost": 0.0106,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: C",
+     "N1: 24757",
+     "N2: 13757"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-muni_stack-1",
+   "family": "muni_stack",
+   "what": "A conversion when muni interest counts toward MAGI",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $135,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $126,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option A than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No Roth conversion; A: Convert 135,500 in 2026; B: Convert 126,500 in 2026",
+     "got": "C: No Roth conversion: $3,328,602 after-tax wealth at the end (today's dollars)\nA: Convert 135,500 in 2026: $3,389,555 after-tax wealth at the end (today's dollars)\nB: Convert 126,500 in 2026: $3,386,455 after-tax wealth at the end (today's dollars)\nA: Convert 135,500 in 2026 vs C: No Roth conversion: +$60,953\nB: Convert 126,500 in 2026 vs C: No Roth conversion: +$57,853\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 25493.0,
+     "key": 25493,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 71223,
+   "cost": 0.0097,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: A",
+     "N1: 24601",
+     "N2: 2412"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-qcd_giving-1",
+   "family": "qcd_giving",
+   "what": "Giving by check or by QCD",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Keep giving $11,000 a year by check, as in the facts."
+    },
+    {
+     "letter": "B",
+     "text": "Give the same $11,000 a year as a qualified charitable distribution (QCD) from Sam's traditional IRA, every year from 2026. The checks stop, so their own spending drops by $11,000 (to $89,000)."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option A? Use a negative number if it's less.",
+    "Under option A, how much of their 2026 Social Security is taxable?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: A: Do nothing (check gifts $11,000)",
+     "got": "A: Do nothing (check gifts $11,000): $1,149,924 after-tax wealth at the end (today's dollars)"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: B: QCD $11,000 from Sam's IRA",
+     "got": "B: QCD $11,000 from Sam's IRA: $1,261,282 after-tax wealth at the end (today's dollars)"
+    },
+    {
+     "kind": "tool",
+     "name": "taxable_social_security",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"social_security_benefits\": 62640, \"other_income\": 63681}",
+     "got": "{\"taxable_social_security\": 49350.85}"
+    },
+    {
+     "kind": "tool",
+     "name": "taxable_social_security",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"social_security_benefits\": 62640, \"other_income\": 56681}",
+     "got": "{\"taxable_social_security\": 43400.85}"
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": -2003.0,
+     "key": -2003,
+     "right": true
+    },
+    "N2": {
+     "got": 49352.0,
+     "key": 49352,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 135052,
+   "cost": 0.0226,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: B",
+     "N1: -1800",
+     "N2: 49296"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-senior_phaseout-1",
+   "family": "senior_phaseout",
+   "what": "Converting inside the senior-deduction phase-out",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2029, 2030 and 2031."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversions."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2026, 2027 and 2028."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option C, what is their total 2026 senior deduction (both spouses combined)?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: No Roth conversions; A: Wait, convert 65k in 2029-2031; C: Convert 65k in 2026-2028",
+     "got": "B: No Roth conversions: $3,170,788 after-tax wealth at the end (today's dollars)\nA: Wait, convert 65k in 2029-2031: $3,216,465 after-tax wealth at the end (today's dollars)\nC: Convert 65k in 2026-2028: $3,243,317 after-tax wealth at the end (today's dollars)\nA: Wait, convert 65k in 2029-2031 vs B: No Roth conversions: +$45,677\nC: Convert 65k in 2026-2028 vs B: No Roth conversions: +$72,529\nThe engine suggests asking: How is everyone's health, and who is likely to outlive whom?"
+    }
+   ],
+   "answer": [
+    "N1: 9691",
+    "N2: 9693",
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 9691.0,
+     "key": 9691,
+     "right": true
+    },
+    "N2": {
+     "got": 9693.0,
+     "key": 9693,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 76823,
+   "cost": 0.0113,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 9437",
+     "N2: 10847"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-torpedo_irmaa-1",
+   "family": "torpedo_irmaa",
+   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $190,000 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $195,500 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No Roth conversion; A: Convert 190000 per year 2026-2028; B: Convert 195500 per year 2026-2028",
+     "got": "C: No Roth conversion: $2,364,915 after-tax wealth at the end (today's dollars)\nA: Convert 190000 per year 2026-2028: $2,427,431 after-tax wealth at the end (today's dollars)\nB: Convert 195500 per year 2026-2028: $2,424,980 after-tax wealth at the end (today's dollars)\nA: Convert 190000 per year 2026-2028 vs C: No Roth conversion: +$62,516\nB: Convert 195500 per year 2026-2028 vs C: No Roth conversion: +$60,065\nThe engine suggests asking: Is $117,000 a year the right spending number?"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 37190.0,
+     "key": 37190,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 72779,
+   "cost": 0.0092,
+   "alone": {
+    "great": false,
+    "answer": [
+     "**PICK**",
+     "PICK: B",
+     "N1: 36222",
+     "N2: 2412"
+    ],
+    "lost": 4154,
+    "why": "picked B; best was A"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-trap-fund_pick",
+   "family": "trap",
+   "what": "A question the facts can't settle",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Put it all in a total stock market index fund."
+    },
+    {
+     "letter": "B",
+     "text": "Put it all in a high-dividend stock fund."
+    }
+   ],
+   "asks": [],
+   "steps": [],
+   "answer": [
+    "PICK: CANT",
+    "N1: 0"
+   ],
+   "key": [
+    "PICK: CANT (the facts can't settle it)"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "declined",
+   "numbers": {},
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 17193,
+   "cost": 0.0033,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: CANT"
+    ],
+    "lost": 0,
+    "why": "declined"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-widow-1",
+   "family": "widow",
+   "what": "Converting before or after a spouse dies",
+   "model": "claude-haiku-5-5",
+   "model_name": "Claude Haiku 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2033 through 2038."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2026 through 2031."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversions."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No Roth conversions; A: Wait, convert 155k 2033-2038; B: Convert 155k 2026-2031",
+     "got": "C: No Roth conversions: $3,038,004 after-tax wealth at the end (today's dollars)\nA: Wait, convert 155k 2033-2038: $3,117,887 after-tax wealth at the end (today's dollars)\nB: Convert 155k 2026-2031: $3,306,130 after-tax wealth at the end (today's dollars)\nA: Wait, convert 155k 2033-2038 vs C: No Roth conversions: +$79,883\nB: Convert 155k 2026-2031 vs C: No Roth conversions: +$268,126\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No Roth conversions; A: Wait, convert 155k 2033-2038; B: Convert 155k 2026-2031",
+     "got": "C: No Roth conversions: $3,048,577 after-tax wealth at the end (today's dollars)\nA: Wait, convert 155k 2033-2038: $3,128,531 after-tax wealth at the end (today's dollars)\nB: Convert 155k 2026-2031: $3,314,824 after-tax wealth at the end (today's dollars)\nA: Wait, convert 155k 2033-2038 vs C: No Roth conversions: +$79,954\nB: Convert 155k 2026-2031 vs C: No Roth conversions: +$266,247\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "**Pick: Option B** (convert $155,000 a year from Joyce's IRA in 2026\u20132031). It leaves about $3.31 million in after-tax wealth in today's dollars, versus $3.13 million for Option A and $3.05 million for Option C. That is about $186,000 more than A and $266,000 more than C, so it is not a close call.",
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 32240.0,
+     "key": 32240,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 159084,
+   "cost": 0.0193,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: B",
+     "N1: 32390",
+     "N2: 2412"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-claim_age-1",
+   "family": "claim_age",
+   "what": "Claiming Social Security at 70 and converting in the gap years",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Both claim at 67."
+    },
+    {
+     "letter": "B",
+     "text": "Sam claims at 70, Pat at 67."
+    },
+    {
+     "letter": "C",
+     "text": "Sam claims at 70, Pat at 67, and they convert $180,000 a year from Sam's traditional IRA to Sam's Roth IRA in each year 2026 through 2029."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option B, how much Social Security will Sam receive in total during 2031?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A; B; C",
+     "got": "A: $2,625,461 after-tax wealth at the end (today's dollars)\nB: $2,641,584 after-tax wealth at the end (today's dollars)\nC: $2,812,226 after-tax wealth at the end (today's dollars)\nB vs A: +$16,123\nC vs A: +$186,765\nThe engine suggests asking: Is $112,000 a year the right spending number?"
+    }
+   ],
+   "answer": [
+    "**Pick: C.** Sam claims at 70, Pat claims at 67, and they convert $180,000 a year from Sam's traditional IRA in 2026\u20132029. I ran all three options through the full year-by-year projection with your conventions. Sam's death in 2040 applies to every option, and the plan runs through 2050.",
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 22255.0,
+     "key": 22255,
+     "right": true
+    },
+    "N2": {
+     "got": 59376.0,
+     "key": 59376,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 67699,
+   "cost": 0.1573,
+   "alone": null
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-first_rmd-1",
+   "family": "first_rmd",
+   "what": "A Roth conversion in the first-RMD year",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the RMD and also convert $260,000 a year from Lou's traditional IRA to Lou's Roth IRA in 2026 and 2027, then stop."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversion; just the RMD."
+    },
+    {
+     "letter": "C",
+     "text": "Take the RMD and also convert $75,000 a year from Lou's traditional IRA to Lou's Roth IRA in each year 2026 through 2031."
+    }
+   ],
+   "asks": [
+    "What is Lou's required minimum distribution for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1953, \"prior_year_end_balance\": 1570000}",
+     "got": "{\"age_in_year\": 73, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 26.5, \"rmd\": 59245.28}"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B; A; C",
+     "got": "B: $3,084,611 after-tax wealth at the end (today's dollars)\nA: $3,195,553 after-tax wealth at the end (today's dollars)\nC: $3,188,393 after-tax wealth at the end (today's dollars)\nA vs B: +$110,943\nC vs B: +$103,782\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "**Pick: A.** Converting $260,000 a year in 2026 and 2027 leaves the most after-tax wealth. I ran all three options through the full 2026\u20132050 projection using your conventions.",
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 59245.0,
+     "key": 59245,
+     "right": true
+    },
+    "N2": {
+     "got": 18523.0,
+     "key": 18523,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 67355,
+   "cost": 0.1575,
+   "alone": {
+    "great": false,
+    "answer": [],
+    "lost": null,
+    "why": "no pick"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-gains_vs_conversion-1",
+   "family": "gains_vs_conversion",
+   "what": "Harvesting 0% gains or converting",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Realize $110,000 of long-term gains in the brokerage account in 2026 (sell and immediately rebuy, to raise the cost basis)."
+    },
+    {
+     "letter": "B",
+     "text": "Neither."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $110,000 from Frank's traditional IRA to Frank's Roth IRA in 2026."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option B? Use a negative number if it's less.",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B Neither; A Harvest 110k gains; C Convert 110k",
+     "got": "B Neither: $3,163,771 after-tax wealth at the end (today's dollars)\nA Harvest 110k gains: $3,139,293 after-tax wealth at the end (today's dollars)\nC Convert 110k: $3,203,401 after-tax wealth at the end (today's dollars)\nA Harvest 110k gains vs B Neither: \u2212$24,478\nC Convert 110k vs B Neither: +$39,630\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "**Pick: C, converting $110,000 from Frank's traditional IRA to his Roth in 2026.** I ran all three options through the full 2026\u20132050 projection. I used 6% returns, 2.5% inflation, no state tax, and a 24% heirs' tax on traditional IRAs.",
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 12876.0,
+     "key": 12876,
+     "right": true
+    },
+    "N2": {
+     "got": 17191.0,
+     "key": 17191,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 65780,
+   "cost": 0.1545,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: C",
+     "N1: 12876",
+     "N2: 17191"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-how_much-1",
+   "family": "how_much",
+   "what": "How much to convert to Roth, and for how many years",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "No Roth conversion."
+    },
+    {
+     "letter": "P",
+     "text": "Convert $155,000 from Ray's traditional IRA to Ray's Roth IRA in 2026 only."
+    }
+   ],
+   "asks": [
+    "If they converted $155,000 in 2026 only, how much more federal income tax would they owe for 2026 than with no conversion?",
+    "If they converted $155,000 in 2026 only, how much more would they pay in Medicare premiums for 2028 than with no conversion (Part B plus Part D surcharges, both spouses, all 12 months)?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "solve_roth_conversion",
+     "asked": "Find the best Roth conversion from RayIRA, up to 10 years",
+     "got": "Convert about $118,000 a year for 8 years (2026\u20132033): +$134,445 after-tax wealth at the end, in today's dollars.\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: Do nothing; Convert 155k 2026",
+     "got": "Do nothing: $2,712,728 after-tax wealth at the end (today's dollars)\nConvert 155k 2026: $2,743,381 after-tax wealth at the end (today's dollars)\nConvert 155k 2026 vs Do nothing: +$30,654\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "key": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "within $1,000 of the best plan",
+   "numbers": {
+    "N1": {
+     "got": 27676.0,
+     "key": 27676,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 61220,
+   "cost": 0.1485,
+   "alone": {
+    "great": false,
+    "answer": [],
+    "lost": null,
+    "why": "no plan"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-inherited_ira-1",
+   "family": "inherited_ira",
+   "what": "Emptying an inherited IRA under the 10-year rule",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the required minimum plus an extra $200,000 in 2026 and again in 2027."
+    },
+    {
+     "letter": "B",
+     "text": "Take only the required minimum each year, and the rest at the 2033 deadline."
+    },
+    {
+     "letter": "C",
+     "text": "Take the required minimum plus an extra $55,000 each year from 2026 through 2033."
+    }
+   ],
+   "asks": [
+    "What is the required minimum distribution from Pat's inherited IRA for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A; B; C",
+     "got": "A: $4,686,489 after-tax wealth at the end (today's dollars)\nB: $4,708,755 after-tax wealth at the end (today's dollars)\nC: $4,721,638 after-tax wealth at the end (today's dollars)\nB vs A: +$22,266\nC vs A: +$35,149\nThe engine suggests asking: Do they have any tax-exempt municipal bond interest?"
+    }
+   ],
+   "answer": [
+    "**PICK: C.** Option C leaves the most after-tax wealth. I ran all three options through the full projection from 2026 to 2050, using the conventions you gave. Each option was run against Sam and Pat's whole household: both Social Security benefits, the pension, interest, dividends, Medicare premiums with the two-year lag, and RMDs on every traditional account. The projection ran to 2050 because no deaths were specified.",
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 24402.0,
+     "key": 24402,
+     "right": true
+    },
+    "N2": {
+     "got": 13765.0,
+     "key": 13765,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 67136,
+   "cost": 0.1649,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: C",
+     "N1: 24402",
+     "N2: 13765"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-muni_stack-1",
+   "family": "muni_stack",
+   "what": "A conversion when muni interest counts toward MAGI",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $135,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $126,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option A than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C; A; B",
+     "got": "C: $3,328,602 after-tax wealth at the end (today's dollars)\nA: $3,389,555 after-tax wealth at the end (today's dollars)\nB: $3,386,455 after-tax wealth at the end (today's dollars)\nA vs C: +$60,953\nB vs C: +$57,853\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 161795, \"long_term_gains\": 2160, \"social_security_benefits\": 63000}",
+     "got": "{\"agi\": 217505, \"magi\": 217505, \"taxable_social_security\": 53550, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 31740, \"long_term_gains\": 2160, \"social_security_benefits\": 63000}",
+     "got": "{\"agi\": 58090, \"magi\": 58090, \"taxable_social_security\": 24190, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The redu"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 25493.0,
+     "key": 25493,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 118916,
+   "cost": 0.2719,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: A",
+     "N1: 25493",
+     "N2: 2412"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-qcd_giving-1",
+   "family": "qcd_giving",
+   "what": "Giving by check or by QCD",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Keep giving $11,000 a year by check, as in the facts."
+    },
+    {
+     "letter": "B",
+     "text": "Give the same $11,000 a year as a qualified charitable distribution (QCD) from Sam's traditional IRA, every year from 2026. The checks stop, so their own spending drops by $11,000 (to $89,000)."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option A? Use a negative number if it's less.",
+    "Under option A, how much of their 2026 Social Security is taxable?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: A Do nothing",
+     "got": "A Do nothing: $1,149,924 after-tax wealth at the end (today's dollars)"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: B QCD",
+     "got": "B QCD: $1,261,282 after-tax wealth at the end (today's dollars)"
+    }
+   ],
+   "answer": [
+    "**Pick: B. Giving from Sam's IRA by QCD leaves them the most after-tax wealth.**",
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": -2003.0,
+     "key": -2003,
+     "right": true
+    },
+    "N2": {
+     "got": 49352.0,
+     "key": 49352,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 50162,
+   "cost": 0.1295,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: B",
+     "N1: -2003",
+     "N2: 49352"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-senior_phaseout-1",
+   "family": "senior_phaseout",
+   "what": "Converting inside the senior-deduction phase-out",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2029, 2030 and 2031."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversions."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2026, 2027 and 2028."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option C, what is their total 2026 senior deduction (both spouses combined)?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B; A; C",
+     "got": "B: $3,170,788 after-tax wealth at the end (today's dollars)\nA: $3,216,465 after-tax wealth at the end (today's dollars)\nC: $3,243,317 after-tax wealth at the end (today's dollars)\nA vs B: +$45,677\nC vs B: +$72,529\nThe engine suggests asking: How is everyone's health, and who is likely to outlive whom?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 9691.0,
+     "key": 9691,
+     "right": true
+    },
+    "N2": {
+     "got": 9693.0,
+     "key": 9693,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 65224,
+   "cost": 0.1521,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: C",
+     "N1: 9691",
+     "N2: 9693"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-torpedo_irmaa-1",
+   "family": "torpedo_irmaa",
+   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $190,000 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $195,500 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C; A; B",
+     "got": "C: $2,513,140 after-tax wealth at the end (today's dollars)\nA: $2,516,844 after-tax wealth at the end (today's dollars)\nB: $2,512,691 after-tax wealth at the end (today's dollars)\nA vs C: +$3,704\nB vs C: \u2212$450\nThe engine suggests asking: Is $117,000 a year the right spending number?"
+    }
+   ],
+   "answer": [
+    "**Pick: A.** It leaves the most after-tax wealth, but only by about $3,700 in 2026 dollars.",
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 37190.0,
+     "key": 37190,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 69857,
+   "cost": 0.1601,
+   "alone": {
+    "great": false,
+    "answer": [],
+    "lost": null,
+    "why": "no pick"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-trap-fund_pick",
+   "family": "trap",
+   "what": "A question the facts can't settle",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Put it all in a total stock market index fund."
+    },
+    {
+     "letter": "B",
+     "text": "Put it all in a high-dividend stock fund."
+    }
+   ],
+   "asks": [],
+   "steps": [],
+   "answer": [
+    "PICK: CANT",
+    "N1: 0"
+   ],
+   "key": [
+    "PICK: CANT (the facts can't settle it)"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "declined",
+   "numbers": {},
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 14162,
+   "cost": 0.0349,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: CANT",
+     "N1: CANT"
+    ],
+    "lost": 0,
+    "why": "declined"
+   }
+  },
+  {
+   "run": "gauntlet-small-tools",
+   "id": "g-widow-1",
+   "family": "widow",
+   "what": "Converting before or after a spouse dies",
+   "model": "claude-sonnet-5-5",
+   "model_name": "Claude Sonnet 5.5",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2033 through 2038."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2026 through 2031."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversions."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No conversions; A: Convert 2033-2038; B: Convert 2026-2031",
+     "got": "C: No conversions: $3,072,664 after-tax wealth at the end (today's dollars)\nA: Convert 2033-2038: $3,144,173 after-tax wealth at the end (today's dollars)\nB: Convert 2026-2031: $3,328,935 after-tax wealth at the end (today's dollars)\nA: Convert 2033-2038 vs C: No conversions: +$71,510\nB: Convert 2026-2031 vs C: No conversions: +$256,272\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "**Pick: B.** Converting $155,000 a year from Joyce's IRA in 2026\u20132031, while Frank is alive and they file jointly, leaves the most after-tax wealth.",
+    "PICK: B",
+    "N1: 32241",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 32241.0,
+     "key": 32240,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": {},
+   "revealed": null,
+   "tokens": 65331,
+   "cost": 0.1524,
+   "alone": {
+    "great": true,
+    "answer": [
+     "**Pick: B. N1 = 32,240 and N2 = 2,412.**",
+     "PICK: B",
+     "N1: 32240",
+     "N2: 2412"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-claim_age-1",
+   "family": "claim_age",
+   "what": "Claiming Social Security at 70 and converting in the gap years",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Both claim at 67."
+    },
+    {
+     "letter": "B",
+     "text": "Sam claims at 70, Pat at 67."
+    },
+    {
+     "letter": "C",
+     "text": "Sam claims at 70, Pat at 67, and they convert $180,000 a year from Sam's traditional IRA to Sam's Roth IRA in each year 2026 through 2029."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option B, how much Social Security will Sam receive in total during 2031?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A: Both claim at 67; B: Sam at 70, Pat at 67; C: B plus convert 180k/yr 2026-2029",
+     "got": "A: Both claim at 67: $2,625,461 after-tax wealth at the end (today's dollars)\nB: Sam at 70, Pat at 67: $2,641,584 after-tax wealth at the end (today's dollars)\nC: B plus convert 180k/yr 2026-2029: $2,812,226 after-tax wealth at the end (today's dollars)\nB: Sam at 70, Pat at 67 vs A: Both claim at 67: +$16,123\nC: B plus convert 180k/yr 2026-2029 vs A: Both claim at 67: +$186,765\nThe engine suggests asking: Is $112,000 a year the right spending number?"
+    },
+    {
+     "kind": "tool",
+     "name": "tax_tables",
+     "asked": "{\"filing\": \"married_filing_jointly\"}",
+     "got": "{\"law\": \"2026 federal law (IRS Rev. Proc. 2025-32, P.L. 119-21 / OBBBA)\", \"ordinary_brackets\": [{\"rate\": 0.1, \"up_to_taxable_income\": 24800}, {\"rate\": 0.12, \"up_to_taxable_income\": 100800}, {\"rate\": 0.22, \"up_to_taxable_income\": 211400}, {\"rate\": 0.24, \"up_to_taxable_income\": 403550}, {\"rate\": 0.32,"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 32250, \"long_term_gains\": 4950, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 37200, \"magi\": 37200, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reductio"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 188181, \"long_term_gains\": 4950, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 193131, \"magi\": 193131, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduct"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 22255.0,
+     "key": 22255,
+     "right": true
+    },
+    "N2": {
+     "got": 59376.0,
+     "key": 59376,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 97596,
+   "cost": 0.0049,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 21804",
+     "N2: 59386"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-first_rmd-1",
+   "family": "first_rmd",
+   "what": "A Roth conversion in the first-RMD year",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the RMD and also convert $260,000 a year from Lou's traditional IRA to Lou's Roth IRA in 2026 and 2027, then stop."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversion; just the RMD."
+    },
+    {
+     "letter": "C",
+     "text": "Take the RMD and also convert $75,000 a year from Lou's traditional IRA to Lou's Roth IRA in each year 2026 through 2031."
+    }
+   ],
+   "asks": [
+    "What is Lou's required minimum distribution for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1953, \"prior_year_end_balance\": 1570000}",
+     "got": "{\"age_in_year\": 73, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 26.5, \"rmd\": 59245.28}"
+    },
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1953, \"prior_year_end_balance\": 390000}",
+     "got": "{\"age_in_year\": 73, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 26.5, \"rmd\": 14716.98}"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: RMD only, no conversion; A: RMD + convert 260k in 2026-2027; C: RMD + convert 75k 2026-2031",
+     "got": "B: RMD only, no conversion: $3,084,611 after-tax wealth at the end (today's dollars)\nA: RMD + convert 260k in 2026-2027: $3,195,553 after-tax wealth at the end (today's dollars)\nC: RMD + convert 75k 2026-2031: $3,188,393 after-tax wealth at the end (today's dollars)\nA: RMD + convert 260k in 2026-2027 vs B: RMD only, no conversion: +$110,943\nC: RMD + convert 75k 2026-2031 vs B: RMD only, no conversion: +$103,782\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 59245.0,
+     "key": 59245,
+     "right": true
+    },
+    "N2": {
+     "got": 18523.0,
+     "key": 18523,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 54114,
+   "cost": 0.0047,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 59245",
+     "N2: 18523"
+    ],
+    "lost": 7161,
+    "why": "picked C; best was A"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-gains_vs_conversion-1",
+   "family": "gains_vs_conversion",
+   "what": "Harvesting 0% gains or converting",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Realize $110,000 of long-term gains in the brokerage account in 2026 (sell and immediately rebuy, to raise the cost basis)."
+    },
+    {
+     "letter": "B",
+     "text": "Neither."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $110,000 from Frank's traditional IRA to Frank's Roth IRA in 2026."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option B? Use a negative number if it's less.",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 96607, \"long_term_gains\": 7695, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 104302, \"magi\": 104302, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduct"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 96607, \"long_term_gains\": 117695, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 214302, \"magi\": 214302, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduct"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 185102, \"long_term_gains\": 7695, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 192797, \"magi\": 192797, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduct"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: Do nothing; Harvest 110k gains in 2026; Convert 110k in 2026",
+     "got": "Do nothing: $3,163,771 after-tax wealth at the end (today's dollars)\nHarvest 110k gains in 2026: $3,139,293 after-tax wealth at the end (today's dollars)\nConvert 110k in 2026: $3,203,401 after-tax wealth at the end (today's dollars)\nHarvest 110k gains in 2026 vs Do nothing: \u2212$24,478\nConvert 110k in 2026 vs Do nothing: +$39,630\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 12876.0,
+     "key": 12876,
+     "right": true
+    },
+    "N2": {
+     "got": 17191.0,
+     "key": 17191,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 83342,
+   "cost": 0.0106,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 12158",
+     "N2: 16890"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-how_much-1",
+   "family": "how_much",
+   "what": "How much to convert to Roth, and for how many years",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "No Roth conversion."
+    },
+    {
+     "letter": "P",
+     "text": "Convert $155,000 from Ray's traditional IRA to Ray's Roth IRA in 2026 only."
+    }
+   ],
+   "asks": [
+    "If they converted $155,000 in 2026 only, how much more federal income tax would they owe for 2026 than with no conversion?",
+    "If they converted $155,000 in 2026 only, how much more would they pay in Medicare premiums for 2028 than with no conversion (Part B plus Part D surcharges, both spouses, all 12 months)?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "solve_roth_conversion",
+     "asked": "Find the best Roth conversion from ray_ira, up to 10 years",
+     "got": "Convert about $118,000 a year for 8 years (2026\u20132033): +$134,445 after-tax wealth at the end, in today's dollars.\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: Do nothing; Convert 155000 in 2026 only",
+     "got": "Do nothing: $2,712,728 after-tax wealth at the end (today's dollars)\nConvert 155000 in 2026 only: $2,743,381 after-tax wealth at the end (today's dollars)\nConvert 155000 in 2026 only vs Do nothing: +$30,654\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 6 plans for the household: Do nothing; 118k x 8; 110k x 8; 120k x 8; 105k x 10; 153k x 6",
+     "got": "Do nothing: $2,712,728 after-tax wealth at the end (today's dollars)\n118k x 8: $2,847,173 after-tax wealth at the end (today's dollars)\n110k x 8: $2,844,992 after-tax wealth at the end (today's dollars)\n120k x 8: $2,844,209 after-tax wealth at the end (today's dollars)\n105k x 10: $2,845,358 after-tax wealth at the end (today's dollars)\n153k x 6: $2,838,639 after-tax wealth at the end (today's dollars)\n118k x 8 vs Do nothing: +$134,445\n110k x 8 vs Do nothing: +$132,264\n120k x 8 vs Do nothing: +$131,481\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "key": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "within $1,000 of the best plan",
+   "numbers": {
+    "N1": {
+     "got": 27676.0,
+     "key": 27676,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 141591,
+   "cost": 0.0105,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PLAN: 0 x 0",
+     "N1: 27835",
+     "N2: 2412"
+    ],
+    "lost": 134445.0,
+    "why": "plan gives up $134,445"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-inherited_ira-1",
+   "family": "inherited_ira",
+   "what": "Emptying an inherited IRA under the 10-year rule",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the required minimum plus an extra $200,000 in 2026 and again in 2027."
+    },
+    {
+     "letter": "B",
+     "text": "Take only the required minimum each year, and the rest at the 2033 deadline."
+    },
+    {
+     "letter": "C",
+     "text": "Take the required minimum plus an extra $55,000 each year from 2026 through 2033."
+    }
+   ],
+   "asks": [
+    "What is the required minimum distribution from Pat's inherited IRA for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: RMD only, rest at 2033 deadline; A: RMD + extra 200k in 2026 and 2027; C: RMD + extra 55k each year 2026-2033",
+     "got": "B: RMD only, rest at 2033 deadline: $4,708,755 after-tax wealth at the end (today's dollars)\nA: RMD + extra 200k in 2026 and 2027: $4,686,489 after-tax wealth at the end (today's dollars)\nC: RMD + extra 55k each year 2026-2033: $4,721,638 after-tax wealth at the end (today's dollars)\nA: RMD + extra 200k in 2026 and 2027 vs B: RMD only, rest at 2033 deadline: \u2212$22,266\nC: RMD + extra 55k each year 2026-2033 vs B: RMD only, rest at 2033 deadline: +$12,884\nThe engine suggests asking: Do they have any tax-exempt municipal bond interest?"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 86252, \"long_term_gains\": 11250, \"social_security_benefits\": 60720}",
+     "got": "{\"agi\": 149114, \"magi\": 149114, \"taxable_social_security\": 51612, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 141252, \"long_term_gains\": 11250, \"social_security_benefits\": 60720}",
+     "got": "{\"agi\": 204114, \"magi\": 204114, \"taxable_social_security\": 51612, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 24402.0,
+     "key": 24402,
+     "right": true
+    },
+    "N2": {
+     "got": 13765.0,
+     "key": 13765,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 112968,
+   "cost": 0.0074,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 26842",
+     "N2: 13657"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-muni_stack-1",
+   "family": "muni_stack",
+   "what": "A conversion when muni interest counts toward MAGI",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $135,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $126,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option A than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No Roth conversion; A: Convert $135,500 in 2026; B: Convert $126,500 in 2026",
+     "got": "C: No Roth conversion: $3,328,602 after-tax wealth at the end (today's dollars)\nA: Convert $135,500 in 2026: $3,389,555 after-tax wealth at the end (today's dollars)\nB: Convert $126,500 in 2026: $3,386,455 after-tax wealth at the end (today's dollars)\nA: Convert $135,500 in 2026 vs C: No Roth conversion: +$60,953\nB: Convert $126,500 in 2026 vs C: No Roth conversion: +$57,853\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "tax_tables",
+     "asked": "{\"filing\": \"married_filing_jointly\"}",
+     "got": "{\"law\": \"2026 federal law (IRS Rev. Proc. 2025-32, P.L. 119-21 / OBBBA)\", \"ordinary_brackets\": [{\"rate\": 0.1, \"up_to_taxable_income\": 24800}, {\"rate\": 0.12, \"up_to_taxable_income\": 100800}, {\"rate\": 0.22, \"up_to_taxable_income\": 211400}, {\"rate\": 0.24, \"up_to_taxable_income\": 403550}, {\"rate\": 0.32,"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 25492",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 25492.0,
+     "key": 25493,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 54656,
+   "cost": 0.0055,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: CANT"
+    ],
+    "lost": null,
+    "why": "declined an answerable question"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-qcd_giving-1",
+   "family": "qcd_giving",
+   "what": "Giving by check or by QCD",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Keep giving $11,000 a year by check, as in the facts."
+    },
+    {
+     "letter": "B",
+     "text": "Give the same $11,000 a year as a qualified charitable distribution (QCD) from Sam's traditional IRA, every year from 2026. The checks stop, so their own spending drops by $11,000 (to $89,000)."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option A? Use a negative number if it's less.",
+    "Under option A, how much of their 2026 Social Security is taxable?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: A: checks; B: QCD",
+     "got": "A: checks: $1,149,924 after-tax wealth at the end (today's dollars)\nB: QCD: $923,628 after-tax wealth at the end (today's dollars)\nB: QCD vs A: checks: \u2212$226,296"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: A: checks; B: QCD (offset spending)",
+     "got": "A: checks: $1,800,354 after-tax wealth at the end (today's dollars)\nB: QCD (offset spending): $1,593,852 after-tax wealth at the end (today's dollars)\nB: QCD (offset spending) vs A: checks: \u2212$206,502"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: B: QCD",
+     "got": "B: QCD: $1,261,282 after-tax wealth at the end (today's dollars)"
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": -2003.0,
+     "key": -2003,
+     "right": true
+    },
+    "N2": {
+     "got": 49352.0,
+     "key": 49352,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 165364,
+   "cost": 0.0093,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: B",
+     "N1: -2003",
+     "N2: 49352"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-senior_phaseout-1",
+   "family": "senior_phaseout",
+   "what": "Converting inside the senior-deduction phase-out",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2029, 2030 and 2031."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversions."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2026, 2027 and 2028."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option C, what is their total 2026 senior deduction (both spouses combined)?"
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 65000, \"long_term_gains\": 0, \"social_security_benefits\": 54600}",
+     "got": "{\"agi\": 111410, \"magi\": 111410, \"taxable_social_security\": 46410, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 0, \"long_term_gains\": 0, \"social_security_benefits\": 54600}",
+     "got": "{\"agi\": 0, \"magi\": 0, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduction is fig"
+    },
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1952, \"prior_year_end_balance\": 970000}",
+     "got": "{\"age_in_year\": 74, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 25.5, \"rmd\": 38039.22}"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A: convert 65k in 2029-2031; B: no conversions; C: convert 65k in 2026-2028",
+     "got": "A: convert 65k in 2029-2031: $3,148,424 after-tax wealth at the end (today's dollars)\nB: no conversions: $3,093,034 after-tax wealth at the end (today's dollars)\nC: convert 65k in 2026-2028: $3,175,756 after-tax wealth at the end (today's dollars)\nB: no conversions vs A: convert 65k in 2029-2031: \u2212$55,390\nC: convert 65k in 2026-2028 vs A: convert 65k in 2029-2031: +$27,332"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A: convert 65k in 2029-2031; B: no conversions; C: convert 65k in 2026-2028",
+     "got": "A: convert 65k in 2029-2031: $3,216,465 after-tax wealth at the end (today's dollars)\nB: no conversions: $3,170,788 after-tax wealth at the end (today's dollars)\nC: convert 65k in 2026-2028: $3,243,317 after-tax wealth at the end (today's dollars)\nB: no conversions vs A: convert 65k in 2029-2031: \u2212$45,677\nC: convert 65k in 2026-2028 vs A: convert 65k in 2029-2031: +$26,852"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 9691.0,
+     "key": 9691,
+     "right": true
+    },
+    "N2": {
+     "got": 9693.0,
+     "key": 9693,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 124987,
+   "cost": 0.0078,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: B",
+     "N1: 9691",
+     "N2: 9693"
+    ],
+    "lost": 72529,
+    "why": "picked B; best was C"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-torpedo_irmaa-1",
+   "family": "torpedo_irmaa",
+   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $190,000 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $195,500 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C no conversion; A convert 190k; B convert 195.5k",
+     "got": "C no conversion: $2,513,140 after-tax wealth at the end (today's dollars)\nA convert 190k: $2,516,844 after-tax wealth at the end (today's dollars)\nB convert 195.5k: $2,512,691 after-tax wealth at the end (today's dollars)\nA convert 190k vs C no conversion: +$3,704\nB convert 195.5k vs C no conversion: \u2212$450\nThe engine suggests asking: Is $117,000 a year the right spending number?"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 37190.0,
+     "key": 37190,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 52343,
+   "cost": 0.0046,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: C",
+     "N1: 37190",
+     "N2: 2412"
+    ],
+    "lost": 3704,
+    "why": "picked C; best was A"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-trap-fund_pick",
+   "family": "trap",
+   "what": "A question the facts can't settle",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Put it all in a total stock market index fund."
+    },
+    {
+     "letter": "B",
+     "text": "Put it all in a high-dividend stock fund."
+    }
+   ],
+   "asks": [],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: Convert $100k to Gus's Roth in 2026",
+     "got": "Convert $100k to Gus's Roth in 2026: $3,289,068 after-tax wealth at the end (today's dollars)"
+    }
+   ],
+   "answer": [
+    "PICK: CANT"
+   ],
+   "key": [
+    "PICK: CANT (the facts can't settle it)"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "declined",
+   "numbers": {},
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 34124,
+   "cost": 0.0025,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: CANT"
+    ],
+    "lost": 0,
+    "why": "declined"
+   }
+  },
+  {
+   "run": "ds-smoke-tools",
+   "id": "g-widow-1",
+   "family": "widow",
+   "what": "Converting before or after a spouse dies",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": false,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2033 through 2038."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2026 through 2031."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversions."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No Roth conversions; A: Convert 155k/yr 2033-2038 (after Frank's death); B: Convert 155k/yr 2026-2031 (jointly)",
+     "got": "C: No Roth conversions: $3,072,664 after-tax wealth at the end (today's dollars)\nA: Convert 155k/yr 2033-2038 (after Frank's death): $3,144,173 after-tax wealth at the end (today's dollars)\nB: Convert 155k/yr 2026-2031 (jointly): $3,328,935 after-tax wealth at the end (today's dollars)\nA: Convert 155k/yr 2033-2038 (after Frank's death) vs C: No Roth conversions: +$71,510\nB: Convert 155k/yr 2026-2031 (jointly) vs C: No Roth conversions: +$256,272\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: 32241",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 32241.0,
+     "key": 32240,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": null,
+   "tokens": 50549,
+   "cost": 0.0042,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: B",
+     "N1: 31099",
+     "N2: 2412"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-claim_age-1",
+   "family": "claim_age",
+   "what": "Claiming Social Security at 70 and converting in the gap years",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Both claim at 67."
+    },
+    {
+     "letter": "B",
+     "text": "Sam claims at 70, Pat at 67."
+    },
+    {
+     "letter": "C",
+     "text": "Sam claims at 70, Pat at 67, and they convert $180,000 a year from Sam's traditional IRA to Sam's Roth IRA in each year 2026 through 2029."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option B, how much Social Security will Sam receive in total during 2031?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is Sam's Social Security benefit at full retirement age (the PIA, in monthly 2026 dollars)?",
+     "a": "Sure. Sam: Not yet claiming Social Security. Full-retirement-age benefit (PIA): $3,490 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: A: both claim at 67; B: Sam at 70, Pat at 67; C: B plus $180k Roth conversions 2026-2029",
+     "got": "A: both claim at 67: $2,434,627 after-tax wealth at the end (today's dollars)\nB: Sam at 70, Pat at 67: $2,450,749 after-tax wealth at the end (today's dollars)\nC: B plus $180k Roth conversions 2026-2029: $2,708,924 after-tax wealth at the end (today's dollars)\nB: Sam at 70, Pat at 67 vs A: both claim at 67: +$16,123\nC: B plus $180k Roth conversions 2026-2029 vs A: both claim at 67: +$274,298\nThe engine suggests asking: Is $112,000 a year the right spending number?"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 32250, \"long_term_gains\": 4950, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 37200, \"magi\": 37200, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reductio"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 212250, \"long_term_gains\": 4950, \"social_security_benefits\": 0}",
+     "got": "{\"agi\": 217200, \"magi\": 217200, \"taxable_social_security\": 0, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The reduct"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 22255",
+    "N2: 59376"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 22255.0,
+     "key": 22255,
+     "right": true
+    },
+    "N2": {
+     "got": 59376.0,
+     "key": 59376,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 63642,
+   "cost": 0.0044,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-first_rmd-1",
+   "family": "first_rmd",
+   "what": "A Roth conversion in the first-RMD year",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the RMD and also convert $260,000 a year from Lou's traditional IRA to Lou's Roth IRA in 2026 and 2027, then stop."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversion; just the RMD."
+    },
+    {
+     "letter": "C",
+     "text": "Take the RMD and also convert $75,000 a year from Lou's traditional IRA to Lou's Roth IRA in each year 2026 through 2031."
+    }
+   ],
+   "asks": [
+    "What is Lou's required minimum distribution for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1953, \"prior_year_end_balance\": 390000}",
+     "got": "{\"age_in_year\": 73, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 26.5, \"rmd\": 14716.98}"
+    },
+    {
+     "kind": "tool",
+     "name": "tax_tables",
+     "asked": "{\"filing\": \"married_filing_jointly\"}",
+     "got": "{\"law\": \"2026 federal law (IRS Rev. Proc. 2025-32, P.L. 119-21 / OBBBA)\", \"ordinary_brackets\": [{\"rate\": 0.1, \"up_to_taxable_income\": 24800}, {\"rate\": 0.12, \"up_to_taxable_income\": 100800}, {\"rate\": 0.22, \"up_to_taxable_income\": 211400}, {\"rate\": 0.24, \"up_to_taxable_income\": 403550}, {\"rate\": 0.32,"
+    }
+   ],
+   "answer": [],
+   "key": [
+    "PICK: A",
+    "N1: 59245",
+    "N2: 18523"
+   ],
+   "great": false,
+   "decision_right": false,
+   "why": "no pick",
+   "numbers": {
+    "N1": {
+     "got": null,
+     "key": 59245,
+     "right": false
+    },
+    "N2": {
+     "got": null,
+     "key": 18523,
+     "right": false
+    }
+   },
+   "why_wrong": null,
+   "revealed": false,
+   "tokens": 20740,
+   "cost": 0.0005,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-gains_vs_conversion-1",
+   "family": "gains_vs_conversion",
+   "what": "Harvesting 0% gains or converting",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Realize $110,000 of long-term gains in the brokerage account in 2026 (sell and immediately rebuy, to raise the cost basis)."
+    },
+    {
+     "letter": "B",
+     "text": "Neither."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $110,000 from Frank's traditional IRA to Frank's Roth IRA in 2026."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option B? Use a negative number if it's less.",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is Frank's Social Security benefit \u2014 his primary insurance amount at his full retirement age of 67 \u2014 and at what age does he plan to claim it?",
+     "a": "Sure. Frank: Already receiving Social Security: $3,500 a month as of January 2026 (claimed at full retirement age).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: Neither; A: Harvest $110k gains; C: Convert $110k",
+     "got": "B: Neither: $3,163,771 after-tax wealth at the end (today's dollars)\nA: Harvest $110k gains: $3,139,293 after-tax wealth at the end (today's dollars)\nC: Convert $110k: $3,203,401 after-tax wealth at the end (today's dollars)\nA: Harvest $110k gains vs B: Neither: \u2212$24,478\nC: Convert $110k vs B: Neither: +$39,630\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 12876",
+    "N2: 17191"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 12876.0,
+     "key": 12876,
+     "right": true
+    },
+    "N2": {
+     "got": 17191.0,
+     "key": 17191,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 69335,
+   "cost": 0.0067,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke",
+   "id": "g-how_much-1",
+   "family": "how_much",
+   "what": "How much to convert to Roth, and for how many years",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": false,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "No Roth conversion."
+    },
+    {
+     "letter": "P",
+     "text": "Convert $155,000 from Ray's traditional IRA to Ray's Roth IRA in 2026 only."
+    }
+   ],
+   "asks": [
+    "If they converted $155,000 in 2026 only, how much more federal income tax would they owe for 2026 than with no conversion?",
+    "If they converted $155,000 in 2026 only, how much more would they pay in Medicare premiums for 2028 than with no conversion (Part B plus Part D surcharges, both spouses, all 12 months)?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "Should I assume Ray and Linda both remain alive through 2050, or should I use assumed death years for each spouse?",
+     "a": "I'm not sure that changes anything; everything else is in the notes you have.",
+     "revealed": false
+    },
+    {
+     "kind": "ask",
+     "q": "Does Ray receive any Social Security benefit in 2026 or later? If yes, what is his monthly or annual amount and start year?",
+     "a": "Sure. Ray: Already receiving Social Security: $3,460 a month as of January 2026 (claimed at full retirement age).",
+     "revealed": true
+    }
+   ],
+   "answer": [
+    "PLAN: 0 x 0",
+    "N1: 32405",
+    "N2: 2412"
+   ],
+   "key": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "great": false,
+   "decision_right": false,
+   "why": "plan gives up $134,445",
+   "numbers": {
+    "N1": {
+     "got": 32405.0,
+     "key": 27676,
+     "right": false
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 38430,
+   "cost": 0.0097,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-how_much-1",
+   "family": "how_much",
+   "what": "How much to convert to Roth, and for how many years",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "No Roth conversion."
+    },
+    {
+     "letter": "P",
+     "text": "Convert $155,000 from Ray's traditional IRA to Ray's Roth IRA in 2026 only."
+    }
+   ],
+   "asks": [
+    "If they converted $155,000 in 2026 only, how much more federal income tax would they owe for 2026 than with no conversion?",
+    "If they converted $155,000 in 2026 only, how much more would they pay in Medicare premiums for 2028 than with no conversion (Part B plus Part D surcharges, both spouses, all 12 months)?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is Ray's Social Security benefit at his full retirement age (his PIA, monthly), and at what age does he plan to start claiming it? (Linda's is on record at $1,180/month from FRA, but Ray's isn't mentioned anywhere, and it drives his RMD years, the tax torpedo, and IRMAA.)",
+     "a": "Sure. Ray: Already receiving Social Security: $3,460 a month as of January 2026 (claimed at full retirement age).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "solve_roth_conversion",
+     "asked": "Find the best Roth conversion from ray_tira, up to 10 years",
+     "got": "Convert about $118,000 a year for 8 years (2026\u20132033): +$134,445 after-tax wealth at the end, in today's dollars.\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 2 plans for the household: Do nothing; Convert 155000 in 2026 only",
+     "got": "Do nothing: $2,712,728 after-tax wealth at the end (today's dollars)\nConvert 155000 in 2026 only: $2,743,381 after-tax wealth at the end (today's dollars)\nConvert 155000 in 2026 only vs Do nothing: +$30,654\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "key": [
+    "PLAN: 118000 x 8",
+    "N1: 27676",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "within $1,000 of the best plan",
+   "numbers": {
+    "N1": {
+     "got": 27676.0,
+     "key": 27676,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 73851,
+   "cost": 0.004,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PLAN: 0 x 0",
+     "N1: 32405",
+     "N2: 2412"
+    ],
+    "lost": 134445.0,
+    "why": "plan gives up $134,445"
+   }
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-inherited_ira-1",
+   "family": "inherited_ira",
+   "what": "Emptying an inherited IRA under the 10-year rule",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Take the required minimum plus an extra $200,000 in 2026 and again in 2027."
+    },
+    {
+     "letter": "B",
+     "text": "Take only the required minimum each year, and the rest at the 2033 deadline."
+    },
+    {
+     "letter": "C",
+     "text": "Take the required minimum plus an extra $55,000 each year from 2026 through 2033."
+    }
+   ],
+   "asks": [
+    "What is the required minimum distribution from Pat's inherited IRA for 2026?",
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What was the balance of Pat\u2019s inherited traditional IRA on December 31, 2025, and had the parent already reached their required beginning date (i.e., was the parent already taking RMDs) when they died in 2023?",
+     "a": "Sure. Pat's inherited traditional IRA: $510,000 on December 31, 2025. Inherited from a parent born in 1933 who died in 2023. Pat is a non-eligible designated beneficiary (the 10-year rule applies).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: RMD only, rest at 2033 deadline; A: RMD plus extra 200000 in 2026 and 2027; C: RMD plus extra 55000 each year 2026-2033",
+     "got": "B: RMD only, rest at 2033 deadline: $4,708,755 after-tax wealth at the end (today's dollars)\nA: RMD plus extra 200000 in 2026 and 2027: $4,686,489 after-tax wealth at the end (today's dollars)\nC: RMD plus extra 55000 each year 2026-2033: $4,721,638 after-tax wealth at the end (today's dollars)\nA: RMD plus extra 200000 in 2026 and 2027 vs B: RMD only, rest at 2033 deadline: \u2212$22,266\nC: RMD plus extra 55000 each year 2026-2033 vs B: RMD only, rest at 2033 deadline: +$12,884\nThe engine suggests asking: Do they have any tax-exempt municipal bond interest?"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 82502, \"long_term_gains\": 11250, \"social_security_benefits\": 60720}",
+     "got": "{\"agi\": 145364, \"magi\": 145364, \"taxable_social_security\": 51612, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 137502, \"long_term_gains\": 11250, \"social_security_benefits\": 60720}",
+     "got": "{\"agi\": 200364, \"magi\": 200364, \"taxable_social_security\": 51612, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"long_term_gains\": 11250, \"ordinary_income\": 86252, \"people_65_or_older\": 2, \"social_security_benefits\": 60720, \"wages\": 0}",
+     "got": "{\"agi\": 149114, \"magi\": 149114, \"taxable_social_security\": 51612, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"long_term_gains\": 11250, \"ordinary_income\": 141252, \"people_65_or_older\": 2, \"social_security_benefits\": 60720, \"wages\": 0}",
+     "got": "{\"agi\": 204114, \"magi\": 204114, \"taxable_social_security\": 51612, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 24402",
+    "N2: 13765"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 24402.0,
+     "key": 24402,
+     "right": true
+    },
+    "N2": {
+     "got": 13765.0,
+     "key": 13765,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 155029,
+   "cost": 0.0061,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-muni_stack-1",
+   "family": "muni_stack",
+   "what": "A conversion when muni interest counts toward MAGI",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $135,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $126,500 from Walt's traditional IRA to Walt's Roth IRA in 2026 only."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option A than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option A than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "Is Walt receiving Social Security in 2026? If not, what is his primary insurance amount (his monthly benefit at his full retirement age) and at what age does he plan to claim?",
+     "a": "Sure. Walt: Already receiving Social Security: $2,950 a month as of January 2026 (claimed at full retirement age).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C no conversion; A convert 135500; B convert 126500",
+     "got": "C no conversion: $3,328,602 after-tax wealth at the end (today's dollars)\nA convert 135500: $3,389,555 after-tax wealth at the end (today's dollars)\nB convert 126500: $3,386,455 after-tax wealth at the end (today's dollars)\nA convert 135500 vs C no conversion: +$60,953\nB convert 126500 vs C no conversion: +$57,853\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 30300, \"long_term_gains\": 3600, \"social_security_benefits\": 63000}",
+     "got": "{\"agi\": 58090, \"magi\": 58090, \"taxable_social_security\": 24190, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The redu"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 160029, \"long_term_gains\": 3600, \"social_security_benefits\": 63000}",
+     "got": "{\"agi\": 217179, \"magi\": 217179, \"taxable_social_security\": 53550, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 25493",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 25493.0,
+     "key": 25493,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 116909,
+   "cost": 0.0085,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke",
+   "id": "g-qcd_giving-1",
+   "family": "qcd_giving",
+   "what": "Giving by check or by QCD",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": false,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Keep giving $11,000 a year by check, as in the facts."
+    },
+    {
+     "letter": "B",
+     "text": "Give the same $11,000 a year as a qualified charitable distribution (QCD) from Sam's traditional IRA, every year from 2026. The checks stop, so their own spending drops by $11,000 (to $89,000)."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option A? Use a negative number if it's less.",
+    "Under option A, how much of their 2026 Social Security is taxable?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is the balance of Sam\u2019s traditional IRA on December 31, 2025, and is it all pre-tax with no after-tax basis?",
+     "a": "Sure. Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "ask",
+     "q": "For income calculations, should the joint savings account\u2019s 5% return be treated as taxable interest in addition to Pat\u2019s stated $4,500 taxable interest, or does the $4,500 replace/represent the savings interest?",
+     "a": "Sure. Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "ask",
+     "q": "Please clarify: Is Pat\u2019s $4,500 taxable interest separate from the 5% taxable interest earned on the $270,000 joint savings account, or does the $4,500 include/replace the savings-account interest?",
+     "a": "Sure. Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: -1999",
+    "N2: 49352"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": -1999.0,
+     "key": -2003,
+     "right": true
+    },
+    "N2": {
+     "got": 49352.0,
+     "key": 49352,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 25817,
+   "cost": 0.0053,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-qcd_giving-1",
+   "family": "qcd_giving",
+   "what": "Giving by check or by QCD",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Keep giving $11,000 a year by check, as in the facts."
+    },
+    {
+     "letter": "B",
+     "text": "Give the same $11,000 a year as a qualified charitable distribution (QCD) from Sam's traditional IRA, every year from 2026. The checks stop, so their own spending drops by $11,000 (to $89,000)."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option A? Use a negative number if it's less.",
+    "Under option A, how much of their 2026 Social Security is taxable?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is the balance of Sam's traditional IRA as of December 31, 2025 (and is it all pre-tax, with no after-tax basis)?",
+     "a": "Sure. Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1952, \"prior_year_end_balance\": 360000}",
+     "got": "{\"age_in_year\": 74, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 25.5, \"rmd\": 14117.65}"
+    },
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1953, \"prior_year_end_balance\": 710000}",
+     "got": "{\"age_in_year\": 73, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 26.5, \"rmd\": 26792.45}"
+    },
+    {
+     "kind": "tool",
+     "name": "taxable_social_security",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"social_security_benefits\": 62640, \"other_income\": 45410.1}",
+     "got": "{\"taxable_social_security\": 33820.59}"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 40910.1, \"long_term_gains\": 0, \"social_security_benefits\": 62640}",
+     "got": "{\"agi\": 70905.69, \"magi\": 70905.69, \"taxable_social_security\": 29995.59, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000."
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: A: checks",
+     "got": "A: checks: $1,149,924 after-tax wealth at the end (today's dollars)"
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 1 plan for the household: B: QCD",
+     "got": "B: QCD: $1,261,282 after-tax wealth at the end (today's dollars)"
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: -2003",
+    "N2: 49352"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": -2003.0,
+     "key": -2003,
+     "right": true
+    },
+    "N2": {
+     "got": 49352.0,
+     "key": 49352,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 78751,
+   "cost": 0.0043,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: B",
+     "N1: -1999",
+     "N2: 49352"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  },
+  {
+   "run": "ds-ask-smoke",
+   "id": "g-senior_phaseout-1",
+   "family": "senior_phaseout",
+   "what": "Converting inside the senior-deduction phase-out",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": false,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2029, 2030 and 2031."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversions."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2026, 2027 and 2028."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option C, what is their total 2026 senior deduction (both spouses combined)?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is Ken\u2019s traditional IRA balance as of December 31, 2025 (and is any of it after-tax/nondeductible basis), or should the conversions in Options A and C be understood as coming from Gail\u2019s traditional IRA instead?",
+     "a": "Sure. Ken's traditional IRA: $970,000 on December 31, 2025. Includes $131,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "ask",
+     "q": "What are Ken\u2019s and Gail\u2019s assumed death years for the plan (or should I assume both survive through December 31, 2050)?",
+     "a": "I'm not sure that changes anything; everything else is in the notes you have.",
+     "revealed": false
+    },
+    {
+     "kind": "ask",
+     "q": "For modeling the plan horizon, should I assume both Ken and Gail survive through December 31, 2050, since no death year is provided?",
+     "a": "I'm not sure that changes anything; everything else is in the notes you have.",
+     "revealed": false
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "great": false,
+   "decision_right": false,
+   "why": "picked A; best was C",
+   "numbers": {
+    "N1": {
+     "got": 9691.0,
+     "key": 9691,
+     "right": true
+    },
+    "N2": {
+     "got": 9693.0,
+     "key": 9693,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 66402,
+   "cost": 0.0172,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-senior_phaseout-1",
+   "family": "senior_phaseout",
+   "what": "Converting inside the senior-deduction phase-out",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2029, 2030 and 2031."
+    },
+    {
+     "letter": "B",
+     "text": "No Roth conversions."
+    },
+    {
+     "letter": "C",
+     "text": "Convert $65,000 a year from Ken's traditional IRA to Ken's Roth IRA in 2026, 2027 and 2028."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option C than under option B? Use a negative number if it's less.",
+    "Under option C, what is their total 2026 senior deduction (both spouses combined)?"
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is Ken's traditional IRA balance as of December 31, 2025, and is any of it after-tax money (i.e., does he have a Form 8606 basis)?",
+     "a": "Sure. Ken's traditional IRA: $970,000 on December 31, 2025. Includes $131,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "required_minimum_distribution",
+     "asked": "{\"birth_year\": 1952, \"prior_year_end_balance\": 970000}",
+     "got": "{\"age_in_year\": 74, \"rmd_start_age\": 73, \"required\": true, \"uniform_lifetime_divisor\": 25.5, \"rmd\": 38039.22}"
+    },
+    {
+     "kind": "tool",
+     "name": "tax_tables",
+     "asked": "{\"filing\": \"married_filing_jointly\"}",
+     "got": "{\"law\": \"2026 federal law (IRS Rev. Proc. 2025-32, P.L. 119-21 / OBBBA)\", \"ordinary_brackets\": [{\"rate\": 0.1, \"up_to_taxable_income\": 24800}, {\"rate\": 0.12, \"up_to_taxable_income\": 100800}, {\"rate\": 0.22, \"up_to_taxable_income\": 211400}, {\"rate\": 0.24, \"up_to_taxable_income\": 403550}, {\"rate\": 0.32,"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 65239.22, \"long_term_gains\": 5700, \"social_security_benefits\": 54600}",
+     "got": "{\"agi\": 117349.22, \"magi\": 117349.22, \"taxable_social_security\": 46410, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. "
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 123481.28, \"long_term_gains\": 5700, \"social_security_benefits\": 54600}",
+     "got": "{\"agi\": 175591.28, \"magi\": 175591.28, \"taxable_social_security\": 46410, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. "
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: B: no Roth conversions; A: convert 65k in 2029-2031; C: convert 65k in 2026-2028",
+     "got": "B: no Roth conversions: $3,170,788 after-tax wealth at the end (today's dollars)\nA: convert 65k in 2029-2031: $3,216,465 after-tax wealth at the end (today's dollars)\nC: convert 65k in 2026-2028: $3,243,317 after-tax wealth at the end (today's dollars)\nA: convert 65k in 2029-2031 vs B: no Roth conversions: +$45,677\nC: convert 65k in 2026-2028 vs B: no Roth conversions: +$72,529\nThe engine suggests asking: How is everyone's health, and who is likely to outlive whom?"
+    }
+   ],
+   "answer": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "key": [
+    "PICK: C",
+    "N1: 9691",
+    "N2: 9693"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 9691.0,
+     "key": 9691,
+     "right": true
+    },
+    "N2": {
+     "got": 9693.0,
+     "key": 9693,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 99896,
+   "cost": 0.0064,
+   "alone": {
+    "great": false,
+    "answer": [
+     "PICK: A",
+     "N1: 9691",
+     "N2: 9693"
+    ],
+    "lost": 26852,
+    "why": "picked A; best was C"
+   }
+  },
+  {
+   "run": "ds-ask-smoke",
+   "id": "g-torpedo_irmaa-1",
+   "family": "torpedo_irmaa",
+   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": false,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $190,000 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $195,500 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is the December 31, 2025 balance of Glen\u2019s traditional IRA, and is all of it pre-tax with no after-tax basis?",
+     "a": "Sure. Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "ask",
+     "q": "Does \u201cafter-tax wealth\u201d count any remaining traditional IRA at Glen/Maria\u2019s death using the heirs\u2019 10% income tax only, or also any estate tax?",
+     "a": "Sure. Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "ask",
+     "q": "For the joint brokerage account, are the annual dividends reinvested and added to cost basis, or paid out as cash, and when withdrawals require sales should I use a pro-rata/average cost basis?",
+     "a": "Sure. Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    }
+   ],
+   "answer": [],
+   "key": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "great": false,
+   "decision_right": false,
+   "why": "no pick",
+   "numbers": {
+    "N1": {
+     "got": null,
+     "key": 37190,
+     "right": false
+    },
+    "N2": {
+     "got": null,
+     "key": 2412,
+     "right": false
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 67808,
+   "cost": 0.0176,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-torpedo_irmaa-1",
+   "family": "torpedo_irmaa",
+   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Convert $190,000 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $195,500 a year from Glen's traditional IRA to Glen's Roth IRA in 2026, 2027 and 2028."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversion."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "The options call for converting from **Glen's traditional IRA**, but the account list you gave me only has Maria's traditional IRA ($70,000) and Glen's Roth IRA \u2014 there's no Glen traditional IRA or 401(k) listed. Does Glen have a traditional IRA or employer plan, and what was its balance on December 31, 2025?",
+     "a": "Sure. Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: No conversion; A: Convert 190,000 x3; B: Convert 195,500 x3",
+     "got": "C: No conversion: $2,513,140 after-tax wealth at the end (today's dollars)\nA: Convert 190,000 x3: $2,516,844 after-tax wealth at the end (today's dollars)\nB: Convert 195,500 x3: $2,512,691 after-tax wealth at the end (today's dollars)\nA: Convert 190,000 x3 vs C: No conversion: +$3,704\nB: Convert 195,500 x3 vs C: No conversion: \u2212$450\nThe engine suggests asking: Is $117,000 a year the right spending number?"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 53125, \"long_term_gains\": 5175, \"social_security_benefits\": 45240}",
+     "got": "{\"agi\": 95682, \"magi\": 95682, \"taxable_social_security\": 37382, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The redu"
+    },
+    {
+     "kind": "tool",
+     "name": "federal_income_tax",
+     "asked": "{\"filing\": \"married_filing_jointly\", \"people_65_or_older\": 2, \"wages\": 0, \"ordinary_income\": 226676, \"long_term_gains\": 5175, \"social_security_benefits\": 45240}",
+     "got": "{\"agi\": 270305, \"magi\": 270305, \"taxable_social_security\": 38454, \"standard_deduction_with_age_65_additions\": 35500, \"senior_deduction\": {\"rule\": \"OBBBA senior deduction, IRS Form 1040 Schedule 1-A Part V (lines 35-36b): $6,000 for each person 65 or older, reduced by 6% of MAGI over $150,000. The re"
+    }
+   ],
+   "answer": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: A",
+    "N1: 37190",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 37190.0,
+     "key": 37190,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 107618,
+   "cost": 0.0051,
+   "alone": {
+    "great": false,
+    "answer": [],
+    "lost": null,
+    "why": "no pick"
+   }
+  },
+  {
+   "run": "ds-ask-smoke",
+   "id": "g-widow-1",
+   "family": "widow",
+   "what": "Converting before or after a spouse dies",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": false,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2033 through 2038."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2026 through 2031."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversions."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "What is Frank\u2019s Social Security benefit\u2014monthly amount in 2026 dollars and expected claiming age/status\u2014and what Social Security survivor benefit will Joyce receive after Frank\u2019s death in 2032?",
+     "a": "Sure. Frank: Already receiving Social Security: $3,640 a month as of January 2026 (claimed at full retirement age).",
+     "revealed": true
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 32240.0,
+     "key": 32240,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 30656,
+   "cost": 0.008,
+   "alone": null
+  },
+  {
+   "run": "ds-ask-smoke-tools",
+   "id": "g-widow-1",
+   "family": "widow",
+   "what": "Converting before or after a spouse dies",
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "model_name": "DeepSeek V4.1 Flash (Oct 17)",
+   "engine": true,
+   "ask_first": true,
+   "withheld": null,
+   "options": [
+    {
+     "letter": "A",
+     "text": "Wait, then convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2033 through 2038."
+    },
+    {
+     "letter": "B",
+     "text": "Convert $155,000 a year from Joyce's traditional IRA to a Roth IRA for Joyce in each year 2026 through 2031."
+    },
+    {
+     "letter": "C",
+     "text": "No Roth conversions."
+    }
+   ],
+   "asks": [
+    "How much more federal income tax would they owe for 2026 under option B than under option C? Use a negative number if it's less.",
+    "How much more would they pay in Medicare premiums for 2028 under option B than under option C (Part B plus Part D surcharges, everyone on Medicare, all 12 months)? Use a negative number if it's less."
+   ],
+   "steps": [
+    {
+     "kind": "ask",
+     "q": "Is Frank receiving Social Security now\u2014and if so, what is his monthly benefit and at what age did he claim? If he is not yet claiming, what is his monthly benefit at full retirement age and when does he plan to claim?",
+     "a": "Sure. Frank: Already receiving Social Security: $3,640 a month as of January 2026 (claimed at full retirement age).",
+     "revealed": true
+    },
+    {
+     "kind": "tool",
+     "name": "run_scenario",
+     "asked": "Run 3 plans for the household: C: no conversions; A: convert 155k/yr 2033-2038; B: convert 155k/yr 2026-2031",
+     "got": "C: no conversions: $3,072,664 after-tax wealth at the end (today's dollars)\nA: convert 155k/yr 2033-2038: $3,144,173 after-tax wealth at the end (today's dollars)\nB: convert 155k/yr 2026-2031: $3,328,935 after-tax wealth at the end (today's dollars)\nA: convert 155k/yr 2033-2038 vs C: no conversions: +$71,510\nB: convert 155k/yr 2026-2031 vs C: no conversions: +$256,272\nThe engine suggests asking: What tax bracket are the kids or other heirs likely to be in?"
+    }
+   ],
+   "answer": [
+    "PICK: B",
+    "N1: 32241",
+    "N2: 2412"
+   ],
+   "key": [
+    "PICK: B",
+    "N1: 32240",
+    "N2: 2412"
+   ],
+   "great": true,
+   "decision_right": true,
+   "why": "right",
+   "numbers": {
+    "N1": {
+     "got": 32241.0,
+     "key": 32240,
+     "right": true
+    },
+    "N2": {
+     "got": 2412.0,
+     "key": 2412,
+     "right": true
+    }
+   },
+   "why_wrong": null,
+   "revealed": true,
+   "tokens": 60679,
+   "cost": 0.0041,
+   "alone": {
+    "great": true,
+    "answer": [
+     "PICK: B",
+     "N1: 32240",
+     "N2: 2412"
+    ],
+    "lost": 0,
+    "why": "right"
+   }
+  }
+ ]
+}

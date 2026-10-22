@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Replays · PlannerBench</title>
+<meta name="description" content="Watch a model answer a Gauntlet question with the planning engine: every tool call, what came back, and the answer against the key.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body data-page="replay">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="gauntlet.html">The Gauntlet</a>
+      <a href="replay.html" aria-current="page">Replays</a>
+      <a href="method.html">Method</a>
+      <a href="built.html">How I built it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Replays</p>
+    <h1>Watch it work: every call to the engine, and what came back.</h1>
+    <div class="tldr">
+      <p class="label">In short</p>
+      <p>Pick a question. You see what the model asked the engine for, what the engine answered, any question it put to the client, and its final answer next to the key. Where the same model also answered alone, both answers are side by side.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="rp-pick">
+      <label><span class="label">Question</span><select id="rp-question"></select></label>
+      <label><span class="label">Model</span><select id="rp-model"></select></label>
+    </div>
+    <div id="rp-view" class="rp-view" aria-live="polite"><p class="rp-empty">Loading replays…</p></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="replay.js?v=3"></script>
+</body>
+</html>
