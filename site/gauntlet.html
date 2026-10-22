@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body data-page="gauntlet">
 <header class="nav">
@@ -30,7 +30,7 @@
     <h1>Hand it the right answer, and it argues. Show it the rule, and it listens.</h1>
     <div class="tldr">
       <p class="label">In short</p>
-      <p>The planning engine is also a set of tools any model can call while it answers, over MCP (Model Context Protocol, the standard way to plug tools into AI models). A tool that only returned the right number got overruled. A tool that showed the rule and cited the IRS form line fixed every hard question. On whole-household decisions, both models tested got every decision and every number right with the engine.</p>
+      <p>The planning engine is also a set of tools any model can call while it answers, over MCP (Model Context Protocol, the standard way to plug tools into AI models). A tool that only returned the right number got overruled. A tool that showed the rule and cited the IRS form line fixed every hard question. On whole-household decisions, every model tested got every decision and every number right with the engine, including DeepSeek, an open model that costs under a cent a question and got 2 of 11 right on its own. Leave a key fact out, and with the engine it asks the client for it before answering.</p>
     </div>
   </section>
 
@@ -104,9 +104,41 @@
     <ul class="notes tools-notes">
       <li><b>The engine’s answers held.</b> <span id="gauntlet-overrides">—</span></li>
       <li><b>Hard on purpose.</b> Code checks that no single tax rate and no skipped rule gets within 2% of the answer, and every key is recomputed by a second engine and by PolicyEngine-US.</li>
-      <li><b>Still small.</b> One question from each of the 10 families plus a trap, two models, one try each. The intervals are wide on purpose: this shows the gap, not a ranking. Other labs’ models haven’t been run.</li>
+      <li><b>Still small.</b> One question from each of the 10 families plus a trap, three models (two Claude models and one open model, DeepSeek V4.1 Flash), one try each. The intervals are wide on purpose: this shows the gap, not a ranking.</li>
       <li><b>Decision support, not advice.</b> The engine prices each choice; it never picks investments or products, and every answer ends with what to take to a professional.</li>
     </ul>
+  </section>
+
+  <section class="band" id="ask-first">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Step three · ask first</p>
+        <h2>Leave a fact out. Does it ask, or guess?</h2>
+        <p class="sub" id="ask-sub">A real advisor doesn’t get every fact up front. Here each question has one fact left out, the one that decides it: a Social Security amount or an IRA balance. The notes say something may be missing, not what. The model can ask the client up to three questions before answering.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="scores ladder" id="ask-table">
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col">Fully right</th><th scope="col" class="r">Asked for the missing fact</th><th scope="col" class="r">Cost per question</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="ask-note"></p>
+
+      <div class="worked tools-worked">
+        <div class="question">
+          <p class="label">What it asked (word for word)</p>
+          <ol class="lines" id="ask-quotes"></ol>
+        </div>
+        <div class="form">
+          <p class="label">Why guessing can’t pass</p>
+          <ul class="notes" id="ask-proof"></ul>
+        </div>
+      </div>
+      <p class="more-link"><a href="replay.html">Watch every call and every question in the replays →</a></p>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -121,6 +153,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=10"></script>
 </body>
 </html>

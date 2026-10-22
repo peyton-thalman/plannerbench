@@ -1,6 +1,6 @@
 // Fills the page from data/*.json, which src/build_site.py writes from the graded runs.
 (async () => {
-  const get = (name) => fetch(`data/${name}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const get = (name) => fetch(`data/${name}.json`, { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   const [models, mistakes, ruleEffect, examples, featured, meta, byMistake, tools, toolsPrivate, gauntlet, harness, system] = await Promise.all(
     ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake', 'tools', 'tools_private', 'gauntlet', 'harness', 'system'].map(get));
   // Every page shares this script; each block below runs only if its page has the element it fills.
@@ -20,6 +20,7 @@
 
   // Headline figures, wherever a page shows one (data-k="...")
   const stages = tools?.hard.stages, gRows = gauntlet?.rows ?? [];
+  const openRow = (engine) => gRows.find((r) => r.open && r.engine === engine);
   const gSum = (engine) => { const rs = gRows.filter((r) => r.engine === engine); return `${rs.reduce((t, r) => t + r.great, 0)}/${rs.reduce((t, r) => t + r.questions, 0)}`; };
   // Models that gave the featured question's same wrong answer, counted once each, and the labs behind them
   const misread = featured ? Object.entries(featured.replies).filter(([, r]) => r.mistake === 'combined senior phase-out').map(([id]) => id) : [];
@@ -33,6 +34,9 @@
     private_tools: toolsPrivate && `${pct(toolsPrivate.stages[0].accuracy)} → ${pct(toolsPrivate.stages.at(-1).accuracy)}`,
     g_from: gRows.length ? gSum(false) : null, g_to: gRows.length ? gSum(true) : null,
     g_worst: gauntlet && usd(Math.max(...gauntlet.failures.map((f) => f.lost))),
+    g_models: gRows.length ? String(new Set(gRows.map((r) => r.model)).size) : null,
+    open_from: openRow(false) && `${openRow(false).great}/${openRow(false).questions}`, open_to: openRow(true) && `${openRow(true).great}/${openRow(true).questions}`,
+    open_name: openRow(true)?.name,
     agree_models: misread.length ? String(misreadNames.size) : null,
     agree_cap: misread.length ? `models from ${misreadLabs.size} labs gave the same wrong answer to the same question` : null,
     cleanroom: sys.cleanroom && `${sys.cleanroom.agree.toLocaleString('en-US')} / ${sys.cleanroom.of.toLocaleString('en-US')}`,
@@ -71,7 +75,7 @@
       gauntlet: ['Prove it matters', 'The Gauntlet',
         `${gauntlet?.families ?? 10} families of real decisions (Roth conversions, claiming age, giving, inherited IRAs) for whole households, each stacking three or more rules over 25 years. Code proves no shortcut lands within 2% of the answer.`,
         'Single questions can be passed with a good guess. Decisions with dollars attached show what a mistake costs a family, and whether a model with the engine still overrules it.',
-        fig.g_from && `${fig.g_from} → ${fig.g_to}`, `decisions fully right, alone vs. with the engine${sonnetG && sonnetAlone ? `; Sonnet thought ${Math.round(sonnetAlone.output_tokens / sonnetG.output_tokens)}× less with it` : ''}`, 'gauntlet.html'],
+        fig.g_from && `${fig.g_from} → ${fig.g_to}`, `decisions fully right, alone vs. with the engine, across ${fig.g_models ?? 'all'} models (one open)${sonnetG && sonnetAlone ? `; Sonnet thought ${Math.round(sonnetAlone.output_tokens / sonnetG.output_tokens)}× less with it` : ''}`, 'gauntlet.html'],
     };
     const show = (key) => {
       const [kind, title, what, why, proof, cap, href] = NODES[key];
@@ -211,7 +215,7 @@
     const tbody = document.querySelector('#gauntlet-table tbody');
     for (const r of gauntlet.rows) {
       const tr = el('tr', r.engine ? 'best' : null);
-      tr.append(el('td', 'model', `${r.name}${r.engine ? ' + engine' : ', alone'}`),
+      tr.append(el('td', 'model', `${r.name}${r.open ? ' (open model)' : ''}${r.engine ? ' + engine' : ', alone'}`),
         scoreCell({ accuracy: r.great / r.questions, right: r.great, questions: r.questions, lo: r.lo, hi: r.hi }),
         el('td', 'overall', `${r.out_of_room}`), el('td', 'overall', `${Math.round(r.output_tokens / 1000)}k tokens`),
         el('td', 'overall', usd(r.cost_per_question, true)));
@@ -228,7 +232,11 @@
       if (ok != null) dd.append(el('span', `mark ${ok ? 'ok' : 'bad'}`, ok ? 'Right' : 'Wrong'));
       d.append(dd); dl.append(d);
     };
-    const plan = (p) => { const m = p.match(/([\d,]+)\s*x\s*(\d+)/); return m ? `${usd(Number(m[1].replace(/,/g, '')))} a year × ${m[2]} years` : p; };
+    const plan = (p) => {
+      const m = p.match(/([\d,]+)\s*x\s*(\d+)/);
+      if (!m) return p;
+      return Number(m[1].replace(/,/g, '')) === 0 || m[2] === '0' ? 'Convert nothing' : `${usd(Number(m[1].replace(/,/g, '')))} a year × ${m[2]} years`;
+    };
     row('Engine’s best plan', sb.best);
     row(`${sb.model}, alone`, `${plan(sb.alone)} (gives up ${usd(sb.alone_lost)})`, false);
     row(`${sb.model} + engine`, plan(sb.engine), true);
@@ -240,8 +248,37 @@
       ol.append(li);
     });
     const ov = gauntlet.rows.filter((r) => r.engine).reduce((t, r) => t + r.overrides, 0);
-    document.getElementById('gauntlet-overrides').textContent = `With the engine, both models got every decision and every number right${ov ? `, but went against it ${ov} times` : ' and never went against it'}. `
+    const withEngine = gauntlet.rows.filter((r) => r.engine);
+    const allRight = withEngine.every((r) => r.great === r.questions);
+    document.getElementById('gauntlet-overrides').textContent = `With the engine, ${allRight ? `all ${withEngine.length} models got every decision and every number right` : 'the models mostly got every decision and number right'}${ov ? `, but went against it ${ov} times` : ' and never went against it'}. `
       + `They also thought far less: about ${Math.round(gauntlet.rows.find((r) => r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k tokens for Sonnet instead of ${Math.round(gauntlet.rows.find((r) => !r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k.`;
+  }
+
+  // Ask first: one decisive fact left out, a scripted client to ask (src/gauntlet_ask.py)
+  const ask = gauntlet?.ask_first;
+  if (ask && $('ask-table')) {
+    const tbody = document.querySelector('#ask-table tbody');
+    for (const r of ask.rows) {
+      const tr = el('tr', r.engine ? 'best' : null);
+      tr.append(el('td', 'model', `${r.name}${r.open ? ' (open model)' : ''}${r.engine ? ' + engine' : ', alone'}`),
+        scoreCell({ accuracy: r.great / r.questions, right: r.great, questions: r.questions, lo: r.lo, hi: r.hi }),
+        el('td', 'overall', `${r.got_fact} of ${r.questions}`), el('td', 'overall', usd(r.cost_per_question, true)));
+      tbody.append(tr);
+    }
+    const alone = ask.rows.find((r) => !r.engine);
+    $('ask-note').textContent = `One question per family (the trap has nothing to leave out).${alone && alone.questions < 10 ? ` The alone run was stopped after ${alone.questions} questions: answering without the engine took 10–15 minutes each.` : ''} `
+      + 'Fully right is graded against the full facts, by the same grader as above. Bars show 95% intervals.';
+    const quotes = $('ask-quotes');
+    const clip = (t) => (t.length > 220 ? t.slice(0, t.lastIndexOf(' ', 210)) + ' …' : t);
+    (ask.rows.find((r) => r.engine) ?? ask.rows[0]).quotes.forEach((q, i) => {
+      const li = el('li'); li.append(el('span', 'no', `${i + 1}`), el('span', 'what', `“${clip(q.q.replace(/\*\*/g, ''))}”`), el('span', 'amt', ''));
+      quotes.append(li);
+    });
+    const proof = $('ask-proof'), st = ask.stand_ins ?? {};
+    const item = (b, t) => { const li = el('li'); li.append(el('b', null, b), document.createTextNode(' ' + t)); proof.append(li); };
+    item('Every guess fails.', `Before a question is used, the engine answers it ${ask.guesses}–5 times with the missing fact guessed (none, half, 75%, 125%, 150%). All ${ask.all_guesses_wrong} of ${ask.built} questions grade wrong under every guess.`);
+    item('The client never volunteers.', 'It’s code, not a model: it answers only a question on the missing fact’s topic, and says nothing new to anything else.');
+    if (st.asker) item('Checked with stand-ins.', `A stand-in that asks the right question gets ${st.asker.great} of ${st.asker.of} fully right; one that guesses gets ${st.guesser?.great ?? '—'} of ${st.guesser?.of ?? '—'}; one that asks vague questions never gets the fact (${st.spammer?.got_fact ?? '—'} of ${st.spammer?.of ?? '—'}).`);
   }
 
   if (tools && $('ladder')) {

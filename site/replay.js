@@ -1,6 +1,6 @@
 // Fills replay.html from data/replays.json, which src/replay_site.py writes from graded Gauntlet runs.
 (async () => {
-  const data = await fetch('data/replays.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const data = await fetch('data/replays.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   const view = document.getElementById('rp-view');
   const qSel = document.getElementById('rp-question');
   const mSel = document.getElementById('rp-model');

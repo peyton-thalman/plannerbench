@@ -325,3 +325,6 @@ details.fine p { margin-top: 0.5rem; }
 .rp-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .rp-table td, .rp-table th { padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
 .rp-table .num { text-align: right; font-family: var(--mono); white-space: nowrap; }
+.more-link { margin: 1.5rem 0 0; }
+.more-link a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.more-link a:hover { text-decoration: underline; }

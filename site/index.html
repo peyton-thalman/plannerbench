@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body data-page="home">
 <header class="nav">
@@ -39,8 +39,8 @@
         <span class="cap">Claude Haiku 5.5 on the 50 hardest benchmark questions: alone, then with the engine as tools</span>
       </div>
       <div class="figure accent">
-        <span class="num"><span class="from"><span data-k="g_from">—</span> →</span> <span data-k="g_to">—</span></span>
-        <span class="cap">Whole-household retirement decisions right, alone vs. with the engine (Haiku and Sonnet)</span>
+        <span class="num"><span class="from"><span data-k="open_from">—</span> →</span> <span data-k="open_to">—</span></span>
+        <span class="cap">Whole-household retirement decisions fully right by <span data-k="open_name">an open model</span>, alone vs. with the engine, at under a cent a question</span>
       </div>
     </div>
     <p class="thesis-note">Early, small runs with honest 95% intervals; each page shows the details and the caveats.</p>
@@ -150,10 +150,10 @@
       <li>
         <div>
           <h3>Stress-test</h3>
-          <p>Then the hard part: whole households and real choices (how much to convert to Roth, when to claim, how to give) where three or more rules stack across 25 years. Code proves no shortcut gets within 2% of the answer.</p>
+          <p>Then the hard part: whole households and real choices (how much to convert to Roth, when to claim, how to give) where three or more rules stack across 25 years. Code proves no shortcut gets within 2% of the answer. With the engine, even a cheap open model gets them right, and when a key fact is left out, it asks the client instead of guessing.</p>
           <a class="go" href="gauntlet.html">See the Gauntlet →</a>
         </div>
-        <div class="stat"><b><span data-k="g_from">—</span> → <span data-k="g_to">—</span></b><span>decisions right, alone vs. with the engine. The worst plan made alone gave up <span data-k="g_worst">—</span>.</span></div>
+        <div class="stat"><b><span data-k="g_from">—</span> → <span data-k="g_to">—</span></b><span>decisions fully right across <span data-k="g_models">—</span> models, alone vs. with the engine. The worst plan made alone gave up <span data-k="g_worst">—</span>.</span></div>
       </li>
     </ol>
   </section>
@@ -200,6 +200,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=10"></script>
 </body>
 </html>

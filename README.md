@@ -44,7 +44,7 @@ questions + 33 held out, plus trap questions whose honest answer is "I can't ans
   match. With tools, every wrong answer is sorted into override / possible override / mistranslated / never called
   (`checks/GAUNTLET-GRADER.md`: 12/12 stand-in checks, 0/141 false overrides).
 
-First results (11 questions, one per family plus a trap; `runs/gauntlet-small*`):
+First results (11 questions, one per family plus a trap; `runs/gauntlet-small*`, `runs/ds-smoke*`):
 
 | | Fully right | Ran out of room | Thinking per question | Cost per question |
 |---|---|---|---|---|
@@ -52,9 +52,22 @@ First results (11 questions, one per family plus a trap; `runs/gauntlet-small*`)
 | Claude Sonnet 5.5, alone | 7/10 | 3 | 37k tokens | $0.38 |
 | Claude Haiku 5.5 + engine | **11/11** | 0 | 9k tokens | $0.01 |
 | Claude Sonnet 5.5 + engine | **11/11** | 0 | 3k tokens | $0.16 |
+| DeepSeek V4.1 Flash (Oct 17, open model), alone | 2/11 | 0 | 27k tokens | $0.008 |
+| DeepSeek V4.1 Flash + engine | **11/11** | 0 | 10k tokens | $0.007 |
 
-With the engine, no model went against it. Small sample, wide intervals: it shows the gap, not a ranking. Opus and
-other labs' models haven't been run (estimate for the full public set: about $127 for three Claude models).
+With the engine, no model went against it. DeepSeek is an open model, run through OpenRouter on one pinned host
+(DeepInfra, fp8, no data collection) and given the engine's MCP tools as OpenAI-style function calls (0 malformed
+or rejected calls out of 30). Alone, its costliest miss was "don't convert" on the how-much question: −$134,445. Small sample, wide
+intervals: it shows the gap, not a ranking. Opus hasn't been run (estimate for the full public set: about $127 for
+three Claude models).
+
+**Ask first** (`src/gauntlet_ask.py`, `data/gauntlet-ask.jsonl`): 69 of the questions with one decisive fact left out
+(a Social Security amount or an IRA balance). Each one is kept only if the engine shows every guess (none, half, 75%,
+125%, 150%) grades wrong. The prompt says something may be missing, not what; a scripted client answers on-topic
+questions and never volunteers (stand-ins: asker 69/69, guesser 0/69, vague asker never told). DeepSeek with the engine:
+9/10 fully right, asked for the missing fact 9 times (its one miss said it was asking but never wrote the `ASK:` line).
+Alone: 2/5 (run stopped early; each answer took 10–15 minutes). Every engine call and client question is on
+`site/replay.html`.
 
 ```bash
 ~/moneyguide/node_modules/.bin/vite-node src/gauntlet/build.ts                     # public set → data/gauntlet.jsonl
@@ -62,7 +75,12 @@ other labs' models haven't been run (estimate for the full public set: about $12
 .venv/bin/python -I checks/gauntlet_check.py                                       # grader stand-ins → checks/GAUNTLET-GRADER.md
 .venv/bin/python src/run_models.py --set gauntlet --models claude-haiku-5-5 --per-task 1 --max-tokens 64000 --max-usd 1 --run <name> [--tools]
 .venv/bin/python src/gauntlet_grade.py <name> [<tools run>]                        # → runs/<name>/GAUNTLET.md
-.venv/bin/python src/gauntlet_site.py <alone run> <tools run>                      # → site/data/gauntlet.json
+.venv/bin/python src/run_models.py --set gauntlet --tools --models or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8 --per-task 1 --max-usd 0.30 --run <name>
+.venv/bin/python src/run_models.py --set gauntlet --fake --tools --chat --per-task 100 --run <name>   # stand-in through the open-model tool loop
+.venv/bin/python src/gauntlet_ask.py build                                         # ask-first set → data/gauntlet-ask.jsonl (~13 min)
+.venv/bin/python src/run_models.py --set gauntlet-ask [--tools] --models or:... --per-task 1 --max-usd 0.30 --run <name>
+.venv/bin/python src/gauntlet_site.py <alone runs> <tools runs> [<ask-first runs>] # comma-separated → site/data/gauntlet.json
+.venv/bin/python src/replay_site.py <run> [<run> ...]                              # → site/data/replays.json (site/replay.html)
 ```
 
 ## Run

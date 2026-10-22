@@ -2,12 +2,99 @@
  "questions": 11,
  "runs": [
   "gauntlet-small",
-  "gauntlet-small-tools"
+  "ds-smoke",
+  "gauntlet-small-tools",
+  "ds-smoke-tools"
  ],
+ "ask_first": {
+  "runs": [
+   "ds-ask-smoke",
+   "ds-ask-smoke-tools"
+  ],
+  "rows": [
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+    "name": "DeepSeek V4.1 Flash",
+    "open": true,
+    "engine": false,
+    "questions": 5,
+    "great": 2,
+    "lo": 0.1176182311592533,
+    "hi": 0.769280067791163,
+    "asked": 5,
+    "got_fact": 5,
+    "great_with_fact": 2,
+    "quotes": [
+     {
+      "q": "What is Frank\u2019s Social Security benefit\u2014monthly amount in 2026 dollars and expected claiming age/status\u2014and what Social Security survivor benefit will Joyce receive after Frank\u2019s death in 2032?",
+      "id": "g-widow-1"
+     },
+     {
+      "q": "Does Ray receive any Social Security benefit in 2026 or later? If yes, what is his monthly or annual amount and start year?",
+      "id": "g-how_much-1"
+     },
+     {
+      "q": "What is the balance of Sam\u2019s traditional IRA on December 31, 2025, and is it all pre-tax with no after-tax basis?",
+      "id": "g-qcd_giving-1"
+     }
+    ],
+    "cost_per_question": 0.011554003216
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+    "name": "DeepSeek V4.1 Flash",
+    "open": true,
+    "engine": true,
+    "questions": 10,
+    "great": 9,
+    "lo": 0.5958436145024278,
+    "hi": 0.9821242504842788,
+    "asked": 9,
+    "got_fact": 9,
+    "great_with_fact": 9,
+    "quotes": [
+     {
+      "q": "Is Frank receiving Social Security now\u2014and if so, what is his monthly benefit and at what age did he claim? If he is not yet claiming, what is his monthly benefit at full retirement age and when does he plan to claim?",
+      "id": "g-widow-1"
+     },
+     {
+      "q": "The options call for converting from **Glen's traditional IRA**, but the account list you gave me only has Maria's traditional IRA ($70,000) and Glen's Roth IRA \u2014 there's no Glen traditional IRA or 401(k) listed. Does Glen have a traditional IRA or employer plan, and what was its balance on December 31, 2025?",
+      "id": "g-torpedo_irmaa-1"
+     },
+     {
+      "q": "What is Ken's traditional IRA balance as of December 31, 2025, and is any of it after-tax money (i.e., does he have a Form 8606 basis)?",
+      "id": "g-senior_phaseout-1"
+     }
+    ],
+    "cost_per_question": 0.005002196752
+   }
+  ],
+  "built": 69,
+  "guesses": 4,
+  "all_guesses_wrong": 69,
+  "stand_ins": {
+   "asker": {
+    "great": 69,
+    "got_fact": 69,
+    "of": 69
+   },
+   "guesser": {
+    "great": 0,
+    "got_fact": 0,
+    "of": 69
+   },
+   "spammer": {
+    "great": 0,
+    "got_fact": 0,
+    "of": 69
+   }
+  }
+ },
  "rows": [
   {
    "model": "claude-haiku-5-5",
    "name": "Claude Haiku 5.5",
+   "open": false,
    "engine": false,
    "questions": 11,
    "great": 4,
@@ -25,6 +112,7 @@
   {
    "model": "claude-sonnet-5-5",
    "name": "Claude Sonnet 5.5",
+   "open": false,
    "engine": false,
    "questions": 10,
    "great": 7,
@@ -40,8 +128,27 @@
    "overrides": 0
   },
   {
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "name": "DeepSeek V4.1 Flash",
+   "open": true,
+   "engine": false,
+   "questions": 11,
+   "great": 2,
+   "lo": 0.05136660067100063,
+   "hi": 0.4769861375782448,
+   "decisions": 5,
+   "decisions_of": 10,
+   "numbers": 14,
+   "numbers_of": 20,
+   "out_of_room": 0,
+   "cost_per_question": 0.008233852199999999,
+   "output_tokens": 27320,
+   "overrides": 0
+  },
+  {
    "model": "claude-haiku-5-5",
    "name": "Claude Haiku 5.5",
+   "open": false,
    "engine": true,
    "questions": 11,
    "great": 11,
@@ -59,6 +166,7 @@
   {
    "model": "claude-sonnet-5-5",
    "name": "Claude Sonnet 5.5",
+   "open": false,
    "engine": true,
    "questions": 11,
    "great": 11,
@@ -72,9 +180,45 @@
    "cost_per_question": 0.1648624,
    "output_tokens": 3141,
    "overrides": 0
+  },
+  {
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "name": "DeepSeek V4.1 Flash",
+   "open": true,
+   "engine": true,
+   "questions": 11,
+   "great": 11,
+   "lo": 0.7411599827511859,
+   "hi": 1.0,
+   "decisions": 10,
+   "decisions_of": 10,
+   "numbers": 20,
+   "numbers_of": 20,
+   "out_of_room": 0,
+   "cost_per_question": 0.006952844416,
+   "output_tokens": 10252,
+   "overrides": 0
   }
  ],
  "failures": [
+  {
+   "id": "g-how_much-1",
+   "model": "DeepSeek V4.1 Flash",
+   "what": "How much to convert to Roth, and for how many years",
+   "why": "plan gives up $134,445",
+   "lost": 134445,
+   "shortcut": null,
+   "engine_great": true
+  },
+  {
+   "id": "g-senior_phaseout-1",
+   "model": "DeepSeek V4.1 Flash",
+   "what": "Converting inside the senior-deduction phase-out",
+   "why": "picked B; best was C",
+   "lost": 72529,
+   "shortcut": null,
+   "engine_great": true
+  },
   {
    "id": "g-how_much-1",
    "model": "Claude Haiku 5.5",
@@ -83,38 +227,19 @@
    "lost": 26002,
    "shortcut": null,
    "engine_great": true
-  },
-  {
-   "id": "g-first_rmd-1",
-   "model": "Claude Haiku 5.5",
-   "what": "A Roth conversion in the first-RMD year",
-   "why": "picked C; best was A",
-   "lost": 7161,
-   "shortcut": null,
-   "engine_great": true
-  },
-  {
-   "id": "g-torpedo_irmaa-1",
-   "model": "Claude Haiku 5.5",
-   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
-   "why": "picked B; best was A",
-   "lost": 4154,
-   "shortcut": "left out how the extra income pushes dividends into the 15% capital-gains rate",
-   "engine_great": true
   }
  ],
  "side_by_side": {
   "id": "g-how_much-1",
-  "model": "Claude Haiku 5.5",
+  "model": "DeepSeek V4.1 Flash",
   "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
-  "alone": "200000 x 10",
-  "alone_lost": 26002,
+  "alone": "0 x 0",
+  "alone_lost": 134445,
   "engine": "118000 x 8",
   "engine_calls": [
-   "run_scenario",
    "solve_roth_conversion",
    "run_scenario",
-   "solve_roth_conversion"
+   "run_scenario"
   ],
   "best": "$118,000 a year for 8 years (2026\u20132033)",
   "best_gain": 134445

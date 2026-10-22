@@ -1,7 +1,8 @@
 """The Gauntlet's numbers for the site: site/data/gauntlet.json, from graded runs (src/gauntlet_grade.py first).
 
-Usage: .venv/bin/python src/gauntlet_site.py gauntlet-small gauntlet-small-tools
-The first run is the models alone, the second the same questions with the engine's MCP tools.
+Usage: .venv/bin/python src/gauntlet_site.py gauntlet-small,ds-smoke gauntlet-small-tools,ds-smoke-tools [ds-ask-smoke,ds-ask-smoke-tools]
+First the runs with models alone, then the same questions with the engine's MCP tools (comma-separated, any number of
+each), then optionally the ask-first runs (src/gauntlet_ask.py), alone and with the engine.
 """
 import json
 import re
@@ -13,7 +14,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from run_models import cost_of  # noqa: E402
 from stats import wilson  # noqa: E402
 
-NAMES = {"claude-haiku-5-5": "Claude Haiku 5.5", "claude-sonnet-5-5": "Claude Sonnet 5.5", "claude-opus-5-5": "Claude Opus 5.5"}
+NAMES = {"claude-haiku-5-5": "Claude Haiku 5.5", "claude-sonnet-5-5": "Claude Sonnet 5.5", "claude-opus-5-5": "Claude Opus 5.5",
+         "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8": "DeepSeek V4.1 Flash"}
+OPEN = {"or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8"}  # open-weight models, labeled as such on the site
 # What each family's question is, in a few words, for the failure list.
 WHAT = {"how_much": "How much to convert to Roth, and for how many years", "first_rmd": "A Roth conversion in the first-RMD year",
         "torpedo_irmaa": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
@@ -27,11 +30,13 @@ SHORTCUT = {"phaseout_once": "applied the senior-deduction phase-out once to the
             "ignore_senior_deduction": "left out the senior deduction it loses", "part_b_only": "counted Part B and forgot the Part D surcharge"}
 
 
-def load(run):
-    d = ROOT / "runs" / run
-    graded = [json.loads(l) for l in (d / "gauntlet_graded.jsonl").read_text().splitlines()]
-    raw = {(r["id"], r["model"]): r for r in map(json.loads, (d / "raw.jsonl").read_text().splitlines()) if "error" not in r}
-    return [g for g in graded if g["bucket"] != "error"], raw
+def load(runs):
+    graded, raw = [], {}
+    for run in runs.split(","):
+        d = ROOT / "runs" / run
+        graded += [g for g in map(json.loads, (d / "gauntlet_graded.jsonl").read_text().splitlines()) if g["bucket"] != "error"]
+        raw.update({(r["id"], r["model"]): r for r in map(json.loads, (d / "raw.jsonl").read_text().splitlines()) if "error" not in r})
+    return graded, raw
 
 
 def rows(graded, raw, engine):
@@ -43,7 +48,7 @@ def rows(graded, raw, engine):
         great = sum(g["great"] for g in gs)
         lo, hi = wilson(great, len(gs))
         cost = [cost_of(raw[(g["id"], m)]) for g in real]
-        out.append({"model": m, "name": NAMES.get(m, m), "engine": engine, "questions": len(gs), "great": great, "lo": lo, "hi": hi,
+        out.append({"model": m, "name": NAMES.get(m, m), "open": m in OPEN, "engine": engine, "questions": len(gs), "great": great, "lo": lo, "hi": hi,
                     "decisions": sum(g["decision"]["right"] for g in real), "decisions_of": len(real),
                     "numbers": sum(x["right"] for x in nums), "numbers_of": len(nums),
                     "out_of_room": sum(g["bucket"] == "truncated" for g in gs), "cost_per_question": sum(cost) / len(cost),
@@ -52,7 +57,39 @@ def rows(graded, raw, engine):
     return out
 
 
-def main(alone_run, tools_run):
+def ask_first(runs):
+    """The ask-first runs: per model and engine, how often it asked, got the missing fact, and was fully right; a few of
+    its real questions; and the proof each question is fair (every guess graded wrong; the stand-ins)."""
+    if not runs:
+        return None
+    rows_ = []
+    # Run by run: the same model answers the same ids alone and with the engine, so the runs can't share one lookup.
+    for run in runs.split(","):
+        graded, raw = load(run)
+        for m in sorted({g["model"] for g in graded}):
+            gs = [g for g in graded if g["model"] == m]
+            engine = gs[0]["tools"]
+            great = sum(g["great"] for g in gs)
+            lo, hi = wilson(great, len(gs))
+            quotes = [{"q": a["q"], "id": g["id"]} for g in gs for a in raw[(g["id"], m)].get("asks", []) if a["revealed"]][:3]
+            rows_.append({"model": m, "name": NAMES.get(m, m), "open": m in OPEN, "engine": engine, "questions": len(gs), "great": great, "lo": lo, "hi": hi,
+                          "asked": sum(g.get("asks", 0) > 0 for g in gs), "got_fact": sum(bool(g.get("revealed")) for g in gs),
+                          "great_with_fact": sum(g["great"] for g in gs if g.get("revealed")), "quotes": quotes,
+                          "cost_per_question": sum(cost_of(raw[(g["id"], m)]) for g in gs) / len(gs)})
+    rows_.sort(key=lambda r: (r["engine"], r["name"]))
+    built = [json.loads(l) for l in (ROOT / "data" / "gauntlet-ask.jsonl").read_text().splitlines()]
+    stand = {}
+    for style in ("asker", "guesser", "spammer"):
+        f = ROOT / "runs" / f"ask-fake-{style}" / "gauntlet_graded.jsonl"
+        if f.exists():
+            gs = [json.loads(l) for l in f.read_text().splitlines()]
+            stand[style] = {"great": sum(g["great"] for g in gs), "got_fact": sum(bool(g.get("revealed")) for g in gs), "of": len(gs)}
+    return {"runs": runs.split(","), "rows": rows_, "built": len(built),
+            "guesses": min(len(b["withheld"]["guesses"]) for b in built), "all_guesses_wrong": sum(all(not x["great"] for x in b["withheld"]["guesses"]) for b in built),
+            "stand_ins": stand}
+
+
+def main(alone_run, tools_run, ask_runs=None):
     alone, raw_alone = load(alone_run)
     tools, raw_tools = load(tools_run)
     with_engine = {(g["id"], g["model"]): g for g in tools}
@@ -78,7 +115,7 @@ def main(alone_run, tools_run):
             "engine": plan(raw_tools[(c["id"], model)]["text"]), "engine_calls": [t["name"] for t in raw_tools[(c["id"], model)].get("tool_calls", [])],
             "best": c["decision"]["best_any"]["label"], "best_gain": c["decision"]["best_flat"]["gain"]}
 
-    out = {"questions": len({g["id"] for g in alone}), "runs": [alone_run, tools_run],
+    out = {"questions": len({g["id"] for g in alone}), "runs": alone_run.split(",") + tools_run.split(","), "ask_first": ask_first(ask_runs),
            "rows": rows(alone, raw_alone, False) + rows(tools, raw_tools, True),
            "failures": failures[:3], "side_by_side": side, "families": len(WHAT)}
     (ROOT / "site" / "data" / "gauntlet.json").write_text(json.dumps(out, indent=1) + "\n")
@@ -86,4 +123,4 @@ def main(alone_run, tools_run):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:3])
+    main(*sys.argv[1:4])
