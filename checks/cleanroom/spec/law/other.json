@@ -1,0 +1,1949 @@
+{
+ "generated": "2026-10-21",
+ "parameters": [
+  {
+   "id": "partb_standard_premium_monthly",
+   "year": 2025,
+   "value": 185.0,
+   "source": {
+    "doc": "CMS Fact Sheet: 2025 Medicare Parts A & B Premiums and Deductibles (Nov 8, 2024)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2025-medicare-parts-b-premiums-and-deductibles",
+    "section": "Medicare Part B Premium and Deductible",
+    "quote": "The standard monthly premium for Medicare Part B enrollees will be $185.00 for 2025"
+   },
+   "notes": ""
+  },
+  {
+   "id": "partb_standard_premium_monthly",
+   "year": 2026,
+   "value": 202.9,
+   "source": {
+    "doc": "CMS Fact Sheet: 2026 Medicare Parts A & B Premiums and Deductibles (Nov 14, 2025)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles",
+    "section": "Medicare Part B Premium and Deductible",
+    "quote": "The standard monthly premium for Medicare Part B enrollees will be $202.90 for 2026"
+   },
+   "notes": "Also in FR notice 2025-20251 §II.A."
+  },
+  {
+   "id": "partb_deductible_annual",
+   "year": 2025,
+   "value": 257,
+   "source": {
+    "doc": "CMS Fact Sheet: 2025 Medicare Parts A & B Premiums and Deductibles (Nov 8, 2024)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2025-medicare-parts-b-premiums-and-deductibles",
+    "section": "Medicare Part B Premium and Deductible",
+    "quote": "The annual deductible for all Medicare Part B beneficiaries will be $257 in 2025"
+   },
+   "notes": ""
+  },
+  {
+   "id": "partb_deductible_annual",
+   "year": 2026,
+   "value": 283,
+   "source": {
+    "doc": "CMS Fact Sheet: 2026 Medicare Parts A & B Premiums and Deductibles (Nov 14, 2025)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles",
+    "section": "Medicare Part B Premium and Deductible",
+    "quote": "The annual deductible for all Medicare Part B beneficiaries will be $283 in 2026"
+   },
+   "notes": ""
+  },
+  {
+   "id": "irmaa_tiers",
+   "year": 2026,
+   "filing": "single_and_mfj",
+   "value": [
+    {
+     "tier": 0,
+     "single_magi_lower": null,
+     "single_magi_upper": 109000,
+     "joint_magi_lower": null,
+     "joint_magi_upper": 218000,
+     "boundary_wording": "Less than or equal to",
+     "partb_irmaa_monthly": 0,
+     "partb_total_monthly": 202.9,
+     "partd_irmaa_monthly": 0
+    },
+    {
+     "tier": 1,
+     "single_magi_lower": 109000,
+     "single_magi_upper": 137000,
+     "joint_magi_lower": 218000,
+     "joint_magi_upper": 274000,
+     "boundary_wording": "Greater than lo and less than or equal to hi",
+     "partb_irmaa_monthly": 81.2,
+     "partb_total_monthly": 284.1,
+     "partd_irmaa_monthly": 14.5
+    },
+    {
+     "tier": 2,
+     "single_magi_lower": 137000,
+     "single_magi_upper": 171000,
+     "joint_magi_lower": 274000,
+     "joint_magi_upper": 342000,
+     "boundary_wording": "Greater than lo and less than or equal to hi",
+     "partb_irmaa_monthly": 202.9,
+     "partb_total_monthly": 405.8,
+     "partd_irmaa_monthly": 37.5
+    },
+    {
+     "tier": 3,
+     "single_magi_lower": 171000,
+     "single_magi_upper": 205000,
+     "joint_magi_lower": 342000,
+     "joint_magi_upper": 410000,
+     "boundary_wording": "Greater than lo and less than or equal to hi",
+     "partb_irmaa_monthly": 324.6,
+     "partb_total_monthly": 527.5,
+     "partd_irmaa_monthly": 60.4
+    },
+    {
+     "tier": 4,
+     "single_magi_lower": 205000,
+     "single_magi_upper": 500000,
+     "joint_magi_lower": 410000,
+     "joint_magi_upper": 750000,
+     "boundary_wording": "Greater than lo and less than hi",
+     "partb_irmaa_monthly": 446.3,
+     "partb_total_monthly": 649.2,
+     "partd_irmaa_monthly": 83.3
+    },
+    {
+     "tier": 5,
+     "single_magi_lower": 500000,
+     "single_magi_upper": null,
+     "joint_magi_lower": 750000,
+     "joint_magi_upper": null,
+     "boundary_wording": "Greater than or equal to lo",
+     "partb_irmaa_monthly": 487.0,
+     "partb_total_monthly": 689.9,
+     "partd_irmaa_monthly": 91.0
+    }
+   ],
+   "source": {
+    "doc": "CMS Fact Sheet: 2026 Medicare Parts A & B Premiums and Deductibles (Nov 14, 2025)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles",
+    "section": "Tables: Part B full coverage; Part D income-related monthly adjustment amounts",
+    "quote": "Greater than $205,000 and less than $500,000 | Greater than $410,000 and less than $750,000"
+   },
+   "notes": "Boundaries exactly as worded: tier 0 'Less than or equal to' T1; tiers 1-3 'Greater than' lower 'and less than or equal to' upper; tier 4 'Greater than' lower 'and less than' $500,000/$750,000; tier 5 'Greater than or equal to' $500,000/$750,000. So exactly $109,000 (2026 single) pays no IRMAA; exactly $500,000 is in the TOP tier. Statute (§1839(i)(3)(C)(i)(III)) uses 'More than ... but not more than', 'less than $500,000', 'At least $500,000' - consistent. Part D amounts are added to the plan premium; Part B 'total' includes the standard premium. Applies to single, HOH, qualifying surviving spouse, and MFS who lived apart all year."
+  },
+  {
+   "id": "irmaa_tiers",
+   "year": 2025,
+   "filing": "single_and_mfj",
+   "value": [
+    {
+     "tier": 0,
+     "single_magi_lower": null,
+     "single_magi_upper": 106000,
+     "joint_magi_lower": null,
+     "joint_magi_upper": 212000,
+     "boundary_wording": "Less than or equal to",
+     "partb_irmaa_monthly": 0,
+     "partb_total_monthly": 185.0,
+     "partd_irmaa_monthly": 0
+    },
+    {
+     "tier": 1,
+     "single_magi_lower": 106000,
+     "single_magi_upper": 133000,
+     "joint_magi_lower": 212000,
+     "joint_magi_upper": 266000,
+     "boundary_wording": "Greater than lo and less than or equal to hi",
+     "partb_irmaa_monthly": 74.0,
+     "partb_total_monthly": 259.0,
+     "partd_irmaa_monthly": 13.7
+    },
+    {
+     "tier": 2,
+     "single_magi_lower": 133000,
+     "single_magi_upper": 167000,
+     "joint_magi_lower": 266000,
+     "joint_magi_upper": 334000,
+     "boundary_wording": "Greater than lo and less than or equal to hi",
+     "partb_irmaa_monthly": 185.0,
+     "partb_total_monthly": 370.0,
+     "partd_irmaa_monthly": 35.3
+    },
+    {
+     "tier": 3,
+     "single_magi_lower": 167000,
+     "single_magi_upper": 200000,
+     "joint_magi_lower": 334000,
+     "joint_magi_upper": 400000,
+     "boundary_wording": "Greater than lo and less than or equal to hi",
+     "partb_irmaa_monthly": 295.9,
+     "partb_total_monthly": 480.9,
+     "partd_irmaa_monthly": 57.0
+    },
+    {
+     "tier": 4,
+     "single_magi_lower": 200000,
+     "single_magi_upper": 500000,
+     "joint_magi_lower": 400000,
+     "joint_magi_upper": 750000,
+     "boundary_wording": "Greater than lo and less than hi",
+     "partb_irmaa_monthly": 406.9,
+     "partb_total_monthly": 591.9,
+     "partd_irmaa_monthly": 78.6
+    },
+    {
+     "tier": 5,
+     "single_magi_lower": 500000,
+     "single_magi_upper": null,
+     "joint_magi_lower": 750000,
+     "joint_magi_upper": null,
+     "boundary_wording": "Greater than or equal to lo",
+     "partb_irmaa_monthly": 443.9,
+     "partb_total_monthly": 628.9,
+     "partd_irmaa_monthly": 85.8
+    }
+   ],
+   "source": {
+    "doc": "CMS Fact Sheet: 2025 Medicare Parts A & B Premiums and Deductibles (Nov 8, 2024)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2025-medicare-parts-b-premiums-and-deductibles",
+    "section": "Tables: Part B full coverage; Part D income-related monthly adjustment amounts",
+    "quote": "Greater than $200,000 and less than $500,000 | Greater than $400,000 and less than $750,000"
+   },
+   "notes": "Boundaries exactly as worded: tier 0 'Less than or equal to' T1; tiers 1-3 'Greater than' lower 'and less than or equal to' upper; tier 4 'Greater than' lower 'and less than' $500,000/$750,000; tier 5 'Greater than or equal to' $500,000/$750,000. So exactly $109,000 (2026 single) pays no IRMAA; exactly $500,000 is in the TOP tier. Statute (§1839(i)(3)(C)(i)(III)) uses 'More than ... but not more than', 'less than $500,000', 'At least $500,000' - consistent. Part D amounts are added to the plan premium; Part B 'total' includes the standard premium. Applies to single, HOH, qualifying surviving spouse, and MFS who lived apart all year."
+  },
+  {
+   "id": "irmaa_tiers",
+   "year": 2026,
+   "filing": "mfs_lived_with_spouse",
+   "value": [
+    {
+     "tier": 0,
+     "magi_upper": 109000,
+     "boundary_wording": "Less than or equal to $109,000",
+     "partb_irmaa_monthly": 0,
+     "partb_total_monthly": 202.9,
+     "partd_irmaa_monthly": 0
+    },
+    {
+     "tier": 4,
+     "magi_lower": 109000,
+     "magi_upper": 391000,
+     "boundary_wording": "Greater than $109,000 and less than $391,000",
+     "partb_irmaa_monthly": 446.3,
+     "partb_total_monthly": 649.2,
+     "partd_irmaa_monthly": 83.3
+    },
+    {
+     "tier": 5,
+     "magi_lower": 391000,
+     "boundary_wording": "Greater than or equal to $391,000",
+     "partb_irmaa_monthly": 487.0,
+     "partb_total_monthly": 689.9,
+     "partd_irmaa_monthly": 91.0
+    }
+   ],
+   "source": {
+    "doc": "CMS Fact Sheet: 2026 Medicare Parts A & B Premiums and Deductibles (Nov 14, 2025)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles",
+    "section": "MFS tables (Part B and Part D)",
+    "quote": "Greater than $109,000 and less than $391,000 ... Greater than or equal to $391,000"
+   },
+   "notes": "Applies to married filing separately who lived with spouse at any time during the tax year. Only two IRMAA tiers (the 4th and top). MFS who lived apart all year use the single table (CMS: 'married individuals filing separately who lived apart from their spouses for the entire taxable year' file as individual)."
+  },
+  {
+   "id": "irmaa_tiers",
+   "year": 2025,
+   "filing": "mfs_lived_with_spouse",
+   "value": [
+    {
+     "tier": 0,
+     "magi_upper": 106000,
+     "boundary_wording": "Less than or equal to $106,000",
+     "partb_irmaa_monthly": 0,
+     "partb_total_monthly": 185.0,
+     "partd_irmaa_monthly": 0
+    },
+    {
+     "tier": 4,
+     "magi_lower": 106000,
+     "magi_upper": 394000,
+     "boundary_wording": "Greater than $106,000 and less than $394,000",
+     "partb_irmaa_monthly": 406.9,
+     "partb_total_monthly": 591.9,
+     "partd_irmaa_monthly": 78.6
+    },
+    {
+     "tier": 5,
+     "magi_lower": 394000,
+     "boundary_wording": "Greater than or equal to $394,000",
+     "partb_irmaa_monthly": 443.9,
+     "partb_total_monthly": 628.9,
+     "partd_irmaa_monthly": 85.8
+    }
+   ],
+   "source": {
+    "doc": "CMS Fact Sheet: 2025 Medicare Parts A & B Premiums and Deductibles (Nov 8, 2024)",
+    "url": "https://www.cms.gov/newsroom/fact-sheets/2025-medicare-parts-b-premiums-and-deductibles",
+    "section": "MFS tables (Part B and Part D)",
+    "quote": "Greater than $106,000 and less than $394,000 ... Greater than or equal to $394,000"
+   },
+   "notes": "Applies to married filing separately who lived with spouse at any time during the tax year. Only two IRMAA tiers (the 4th and top). MFS who lived apart all year use the single table (CMS: 'married individuals filing separately who lived apart from their spouses for the entire taxable year' file as individual). Note the MFS upper bound fell from $394,000 (2025) to $391,000 (2026) because it equals $500,000 minus the (indexed) single threshold."
+  },
+  {
+   "id": "irmaa_applicable_percentages",
+   "year": null,
+   "value": {
+    "tier1": 35,
+    "tier2": 50,
+    "tier3": 65,
+    "tier4": 80,
+    "tier5": 85,
+    "standard": 25,
+    "unit": "percent of estimated total cost of Part B for aged enrollee"
+   },
+   "source": {
+    "doc": "Social Security Act §1839(i) = 42 U.S.C. 1395r(i) (U.S. Code 2024 ed., govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42-chap7-subchapXVIII-partB-sec1395r.htm",
+    "section": "§1839(i)(3)(C)(i)(III) and FR 2025-20251 background",
+    "quote": "a beneficiary can now be responsible for 35, 50, 65, 80, or 85 percent of the estimated total cost"
+   },
+   "notes": "Quote is from FR 2025-20251 (Part B notice). Statute table: 'More than $160,000 but less than $500,000 80 percent; At least $500,000 85 percent' (2019 base dollars, before indexing)."
+  },
+  {
+   "id": "irmaa_lookback",
+   "year": null,
+   "value": {
+    "magi_tax_year": "premium_year_minus_2",
+    "fallback": "premium_year_minus_3 (temporary, corrected retroactively when the year-2 return is available)"
+   },
+   "source": {
+    "doc": "20 CFR 418.1135(a)-(b) (eCFR, current as of 2026-10-20); SSA Act §1839(i)(4)(B)",
+    "section": "20 CFR 418.1135(a)",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-418/subpart-B/section-418.1135",
+    "quote": "we will use your modified adjusted gross income provided by IRS for the tax year 2 years prior to the effective year"
+   },
+   "notes": "Statute: 'last taxable year beginning in the second calendar year preceding the year involved' (§1839(i)(4)(B)(i)). E.g., 2024 MAGI sets 2026 premiums; 2025 MAGI sets 2027. Part D: 20 CFR 418.2135 mirrors this."
+  },
+  {
+   "id": "irmaa_magi_definition",
+   "year": null,
+   "value": "AGI (IRC §62) + tax-exempt interest + excluded U.S. savings bond interest used for tuition (IRC §135) + excluded foreign earned income (§911) + excluded income from Guam/American Samoa/N. Mariana Is. (§931) + excluded Puerto Rico income (§933). Joint filers: the joint return's MAGI.",
+   "source": {
+    "doc": "20 CFR 418.1010(b)(6) (eCFR); SSA Act §1839(i)(4)(A)",
+    "section": "20 CFR 418.1010(b)(6)",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-418/subpart-B/section-418.1010",
+    "quote": "Modified adjusted gross income is your adjusted gross income as defined by the Internal Revenue Code, plus the following forms of tax-exempt income"
+   },
+   "notes": "Listed items (i)-(v): tax-exempt interest; savings bond tuition income; foreign earned income; Guam/American Samoa/N. Mariana income; Puerto Rico income. Untaxed Social Security is NOT added (unlike ACA MAGI). Part D: 20 CFR 418.2010."
+  },
+  {
+   "id": "irmaa_threshold_indexing",
+   "year": null,
+   "value": {
+    "index": "CPI-U (U.S. city average), 12-month average ending August of preceding year",
+    "base_period": "12 months ending August 2018 for 2020+ (no indexing 2018-2019)",
+    "rounding": "nearest multiple of $1,000",
+    "not_indexed": "$500,000 single / $750,000 joint top-tier thresholds frozen through 2027",
+    "top_tier_indexing_starts": 2028,
+    "top_tier_base_period": "12 months ending August 2026",
+    "joint_rule": "joint thresholds = 2x single, except top tier = 150% ($750,000)",
+    "mfs_rule": "MFS (lived with spouse) dollar amounts = single amounts minus the single threshold"
+   },
+   "source": {
+    "doc": "Social Security Act §1839(i) = 42 U.S.C. 1395r(i) (U.S. Code 2024 ed., govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42-chap7-subchapXVIII-partB-sec1395r.htm",
+    "section": "§1839(i)(5)(A)-(C); §1839(i)(3)(C)(ii)-(iii)",
+    "quote": "In the case of any calendar year beginning after 2027, each dollar amount in paragraph (3) of $500,000 shall be increased"
+   },
+   "notes": "Rounding text: 'shall be rounded to the nearest multiple of $1,000' (§1839(i)(5)(B)). Confirmed by FR 2025-20251: 'The BBA of 2018 specified that these new income threshold levels be inflation-adjusted beginning in 2028.' See flag about 20 CFR 418.1105(c) wording."
+  },
+  {
+   "id": "irmaa_life_changing_events",
+   "year": null,
+   "value": [
+    "death of spouse",
+    "marriage",
+    "divorce or annulment",
+    "you or spouse stop working or reduce hours of work",
+    "loss of income-producing property not at your direction and not ordinary investment risk (e.g., disaster, arson, fraud/theft by third party)",
+    "scheduled cessation, termination or reorganization of an employer's pension plan",
+    "settlement from an employer/former employer because of the employer's closure, bankruptcy or reorganization"
+   ],
+   "source": {
+    "doc": "20 CFR 418.1205 (eCFR); Part D mirror 20 CFR 418.2205; requested on Form SSA-44",
+    "section": "20 CFR 418.1205(a)-(g)",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-418/subpart-B/section-418.1205",
+    "quote": "(d) You or your spouse stop working or reduce the hours you work"
+   },
+   "notes": "Also requires a 'significant reduction' in MAGI that lowers or eliminates the IRMAA (418.1201(b), 418.1215). Not events: expense-only events; loss of dividend income from ordinary investment risk (418.1210). Form SSA-44 itself was not read (ssa.gov forms page not fetched); the regulation is the controlling list."
+  },
+  {
+   "id": "ss_cola_percent",
+   "year": 2025,
+   "value": 2.5,
+   "source": {
+    "doc": "SSA notice, Cost-of-Living Increase and Other Determinations for 2025, FR Doc 2024-24871 (Oct 25, 2024)",
+    "url": "https://www.federalregister.gov/documents/2024/10/25/2024-24871/cost-of-living-increase-and-other-determinations-for-2025",
+    "section": "SUMMARY",
+    "quote": "there will be a 2.5 percent cost-of-living increase in Social Security benefits effective December 2024"
+   },
+   "notes": "Payable starting January 2025."
+  },
+  {
+   "id": "ss_cola_percent",
+   "year": 2026,
+   "value": 2.8,
+   "source": {
+    "doc": "SSA notice, Cost-of-Living Increase and Other Determinations for 2026, FR Doc 2025-19763 (Nov 3, 2025)",
+    "url": "https://www.federalregister.gov/documents/2025/11/03/2025-19763/cost-of-living-increase-and-other-determinations-for-2026",
+    "section": "SUMMARY",
+    "quote": "there will be a 2.8 percent cost-of-living increase in Social Security benefits effective December 2025"
+   },
+   "notes": "Payable starting January 2026."
+  },
+  {
+   "id": "ss_cola_percent",
+   "year": 2027,
+   "value": 3.6,
+   "source": {
+    "doc": "SSA, Cost-of-Living Adjustment (COLA) Information for 2027 (ssa.gov/cola, read 2026-10-21)",
+    "url": "https://www.ssa.gov/cola/",
+    "section": "COLA Information for 2027",
+    "quote": "Social Security and Supplemental Security Income (SSI) benefits for 76 million Americans will increase 3.6 percent in 2027."
+   },
+   "notes": "Announced Oct 2026 (ssa.gov). Effective December 2026, payable January 2027. Federal Register notice for 2027 not yet published as of 2026-10-21 (FR API search)."
+  },
+  {
+   "id": "ss_earnings_test_exempt_annual",
+   "year": 2025,
+   "value": {
+    "under_fra": 23400,
+    "year_reaching_fra": 62160
+   },
+   "source": {
+    "doc": "SSA notice, Cost-of-Living Increase and Other Determinations for 2025, FR Doc 2024-24871 (Oct 25, 2024)",
+    "url": "https://www.federalregister.gov/documents/2024/10/25/2024-24871/cost-of-living-increase-and-other-determinations-for-2025",
+    "section": "Retirement Earnings Test Exempt Amounts",
+    "quote": "The lower annual exempt amount is $23,400 ... The higher annual exempt amount is $62,160"
+   },
+   "notes": "Under-FRA years: $1 withheld per $2 over the lower amount; year reaching FRA: $1 per $3 over the higher amount, counting only earnings before the month of FRA. FR text: 'reduce benefits by $1 for every $3 of earnings over the annual exempt amount'... and '$1 in benefits for every $2 of earnings over the annual exempt amount'."
+  },
+  {
+   "id": "ss_earnings_test_exempt_annual",
+   "year": 2026,
+   "value": {
+    "under_fra": 24480,
+    "year_reaching_fra": 65160
+   },
+   "source": {
+    "doc": "SSA notice, Cost-of-Living Increase and Other Determinations for 2026, FR Doc 2025-19763 (Nov 3, 2025)",
+    "url": "https://www.federalregister.gov/documents/2025/11/03/2025-19763/cost-of-living-increase-and-other-determinations-for-2026",
+    "section": "Retirement Earnings Test Exempt Amounts",
+    "quote": "The lower annual exempt amount is $24,480 ... The higher annual exempt amount is $65,160"
+   },
+   "notes": "Under-FRA years: $1 withheld per $2 over the lower amount; year reaching FRA: $1 per $3 over the higher amount, counting only earnings before the month of FRA. FR text: 'reduce benefits by $1 for every $3 of earnings over the annual exempt amount'... and '$1 in benefits for every $2 of earnings over the annual exempt amount'."
+  },
+  {
+   "id": "ss_earnings_test_exempt_annual",
+   "year": 2027,
+   "value": {
+    "under_fra": 25560,
+    "year_reaching_fra": 67920
+   },
+   "source": {
+    "doc": "SSA, Cost-of-Living Adjustment (COLA) Information for 2027 (ssa.gov/cola, read 2026-10-21)",
+    "url": "https://www.ssa.gov/cola/",
+    "section": "COLA Information for 2027",
+    "quote": "The earnings limit for workers who are younger than full retirement age ... will increase to $25,560."
+   },
+   "notes": "Higher amount: 'The earnings limit for people reaching their full retirement age in 2027 will increase to $67,920.' FR notice not yet published."
+  },
+  {
+   "id": "ss_full_retirement_age_retired_worker_spouse",
+   "year": null,
+   "value": [
+    {
+     "born_from": null,
+     "born_through": "1938-01-01",
+     "fra": "65y0m"
+    },
+    {
+     "born_from": "1938-01-02",
+     "born_through": "1939-01-01",
+     "fra": "65y2m"
+    },
+    {
+     "born_from": "1939-01-02",
+     "born_through": "1940-01-01",
+     "fra": "65y4m"
+    },
+    {
+     "born_from": "1940-01-02",
+     "born_through": "1941-01-01",
+     "fra": "65y6m"
+    },
+    {
+     "born_from": "1941-01-02",
+     "born_through": "1942-01-01",
+     "fra": "65y8m"
+    },
+    {
+     "born_from": "1942-01-02",
+     "born_through": "1943-01-01",
+     "fra": "65y10m"
+    },
+    {
+     "born_from": "1943-01-02",
+     "born_through": "1955-01-01",
+     "fra": "66y0m"
+    },
+    {
+     "born_from": "1955-01-02",
+     "born_through": "1956-01-01",
+     "fra": "66y2m"
+    },
+    {
+     "born_from": "1956-01-02",
+     "born_through": "1957-01-01",
+     "fra": "66y4m"
+    },
+    {
+     "born_from": "1957-01-02",
+     "born_through": "1958-01-01",
+     "fra": "66y6m"
+    },
+    {
+     "born_from": "1958-01-02",
+     "born_through": "1959-01-01",
+     "fra": "66y8m"
+    },
+    {
+     "born_from": "1959-01-02",
+     "born_through": "1960-01-01",
+     "fra": "66y10m"
+    },
+    {
+     "born_from": "1960-01-02",
+     "born_through": null,
+     "fra": "67y0m"
+    }
+   ],
+   "source": {
+    "doc": "20 CFR 404.409(a)",
+    "section": "404.409(a) table",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-404/subpart-D/section-404.409",
+    "quote": "1/2/1959—1/1/1960 | 66 years and 10 months. | 1/2/1960 and later | 67 years."
+   },
+   "notes": "Ranges run Jan 2 to Jan 1 because SSA treats you as attaining an age the day before your birthday (20 CFR 404.102): someone born Jan 1 uses the prior year's FRA. 'Before 1/2/1938' = 65."
+  },
+  {
+   "id": "ss_full_retirement_age_survivor",
+   "year": null,
+   "value": [
+    {
+     "born_from": null,
+     "born_through": "1940-01-01",
+     "fra": "65y0m (62 if born before 1/2/1912)"
+    },
+    {
+     "born_from": "1940-01-02",
+     "born_through": "1941-01-01",
+     "fra": "65y2m"
+    },
+    {
+     "born_from": "1941-01-02",
+     "born_through": "1942-01-01",
+     "fra": "65y4m"
+    },
+    {
+     "born_from": "1942-01-02",
+     "born_through": "1943-01-01",
+     "fra": "65y6m"
+    },
+    {
+     "born_from": "1943-01-02",
+     "born_through": "1944-01-01",
+     "fra": "65y8m"
+    },
+    {
+     "born_from": "1944-01-02",
+     "born_through": "1945-01-01",
+     "fra": "65y10m"
+    },
+    {
+     "born_from": "1945-01-02",
+     "born_through": "1957-01-01",
+     "fra": "66y0m"
+    },
+    {
+     "born_from": "1957-01-02",
+     "born_through": "1958-01-01",
+     "fra": "66y2m"
+    },
+    {
+     "born_from": "1958-01-02",
+     "born_through": "1959-01-01",
+     "fra": "66y4m"
+    },
+    {
+     "born_from": "1959-01-02",
+     "born_through": "1960-01-01",
+     "fra": "66y6m"
+    },
+    {
+     "born_from": "1960-01-02",
+     "born_through": "1961-01-01",
+     "fra": "66y8m"
+    },
+    {
+     "born_from": "1961-01-02",
+     "born_through": "1962-01-01",
+     "fra": "66y10m"
+    },
+    {
+     "born_from": "1962-01-02",
+     "born_through": null,
+     "fra": "67y0m"
+    }
+   ],
+   "source": {
+    "doc": "20 CFR 404.409(b)",
+    "section": "404.409(b) table",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-404/subpart-D/section-404.409",
+    "quote": "1/2/1945—1/1/1957 | 66 years. ... 1/2/1962 and later | 67 years."
+   },
+   "notes": "Survivor FRA lags the worker FRA schedule by two birth years. Do not use the worker table for widow(er) reductions."
+  },
+  {
+   "id": "ss_early_reduction_retired_worker",
+   "year": null,
+   "value": {
+    "first_36_months_per_month": "5/9 of 1%",
+    "additional_months_per_month": "5/12 of 1%",
+    "max_at_62_if_fra_67": "30%"
+   },
+   "source": {
+    "doc": "20 CFR 404.410(a)",
+    "section": "404.410(a)",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-404/subpart-D/section-404.410",
+    "quote": "5/9 of 1 percent for each of the first 36 months and 5/12 of 1 percent for each month in excess of 36"
+   },
+   "notes": "Reduction amount rounded to the next higher multiple of 10 cents (example in 404.410(a)). 30% max is arithmetic (36*5/9 + 24*5/12), not quoted."
+  },
+  {
+   "id": "ss_early_reduction_spouse",
+   "year": null,
+   "value": {
+    "first_36_months_per_month": "25/36 of 1%",
+    "additional_months_per_month": "5/12 of 1%"
+   },
+   "source": {
+    "doc": "20 CFR 404.410(b)",
+    "section": "404.410(b)",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-404/subpart-D/section-404.410",
+    "quote": "25/36 of 1 percent for each of the first 36 months and 5/12 of 1 percent for each month in excess of 36"
+   },
+   "notes": "Not requested but adjacent; included for completeness."
+  },
+  {
+   "id": "ss_delayed_retirement_credit",
+   "year": null,
+   "value": {
+    "born_after_1943_01_01_per_month": "2/3 of 1%",
+    "per_year": "8%",
+    "stops_at_age": 70
+   },
+   "source": {
+    "doc": "20 CFR 404.313(b)(2)",
+    "section": "404.313(b)(2) table",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-404/subpart-C/section-404.313",
+    "quote": "After 1/1/1943 | 2⁄3 of 1%"
+   },
+   "notes": "Credits earned from month of FRA through month of age 70. Increase rounded to next lower 10 cents. DRCs earned in a year generally take effect the following January (404.313(c)(1)); credits in the year of age 70 apply in the month of 70. Surviving spouse gets the deceased's DRCs (404.313(e)(1))."
+  },
+  {
+   "id": "ss_survivor_benefit_percent_of_pia",
+   "year": null,
+   "value": {
+    "at_or_after_survivor_fra": 100,
+    "at_age_60": 71.5,
+    "reduction_formula": "months_before_FRA * 0.285 / months_from_60_to_FRA",
+    "disabled_widow_50_59": "treated as age 60 (71.5%)",
+    "rib_lim_floor_if_deceased_claimed_early": "greater of deceased's reduced benefit or 82.5% of PIA",
+    "widow_with_child_in_care_mother_father": 75
+   },
+   "source": {
+    "doc": "20 CFR 404.338 and 404.410(c)",
+    "section": "404.338(a),(c); 404.410(c)(1)-(2)",
+    "url": "https://www.ecfr.gov/current/title-20/chapter-III/part-404/subpart-D/section-404.410",
+    "quote": "The number of months of entitlement prior to full retirement age is multiplied by .285 and then divided by the number of months"
+   },
+   "notes": "404.338(a): 'Your monthly benefit is equal to the insured person's primary insurance amount.' 404.338(c) RIB-LIM: reduced 'to the amount the insured person would be receiving if alive, or 82 1/2 percent of his or her primary insurance amount, whichever is larger.' 71.5% = 100% - 28.5%. Mother's/father's 75%: 404.342. Range normally quoted: 71.5%-100% (plus DRCs)."
+  },
+  {
+   "id": "rmd_applicable_age_by_birth",
+   "year": null,
+   "value": [
+    {
+     "born_before": "1949-07-01",
+     "applicable_age": 70.5
+    },
+    {
+     "born_from": "1949-07-01",
+     "born_before": "1951-01-01",
+     "applicable_age": 72
+    },
+    {
+     "born_from": "1951-01-01",
+     "born_before": "1959-01-01",
+     "applicable_age": 73
+    },
+    {
+     "born_in": 1959,
+     "applicable_age": 73,
+     "status": "PROPOSED reg only (REG-103529-23); final reg reserves §1.401(a)(9)-2(b)(2)(v)"
+    },
+    {
+     "born_from": "1960-01-01",
+     "applicable_age": 75
+    }
+   ],
+   "source": {
+    "doc": "T.D. 10001, Required Minimum Distributions (final regs), 89 FR 58886 (July 19, 2024), FR Doc 2024-14542",
+    "url": "https://www.federalregister.gov/documents/2024/07/19/2024-14542/required-minimum-distributions",
+    "section": "Treas. Reg. §1.401(a)(9)-2(b)(2)(ii)-(vi)",
+    "quote": "In the case of an employee born on or after January 1, 1960, the applicable age is age 75."
+   },
+   "notes": "Statute (IRC §401(a)(9)(C)(v) as amended by SECURE 2.0 §107): 73 for one who 'attains age 72 after December 31, 2022, and age 73 before January 1, 2033'; 75 for one who 'attains age 74 after December 31, 2032'. Someone born in 1959 satisfies both. T.D. 10001 fn. 7: 'section 401(a)(9)(C)(v) provides that the applicable age for those employees is both 73 and 75' and reserves the paragraph. Proposed §1.401(a)(9)-2(b)(2)(v): 'In the case of an employee born in 1959, the applicable age is age 73.' See flags."
+  },
+  {
+   "id": "rmd_required_beginning_date",
+   "year": null,
+   "value": "April 1 of the calendar year following the later of the year the employee attains the applicable age or (for non-5%-owner employer plans) the year the employee retires; IRA owners and 5% owners: April 1 after the year of attaining applicable age, regardless of retirement. The first-year RMD may be delayed to April 1; the second-year RMD is still due Dec 31 of that same year.",
+   "source": {
+    "doc": "T.D. 10001, Required Minimum Distributions (final regs), 89 FR 58886 (July 19, 2024), FR Doc 2024-14542",
+    "url": "https://www.federalregister.gov/documents/2024/07/19/2024-14542/required-minimum-distributions",
+    "section": "Treas. Reg. §1.401(a)(9)-2(b)(1)",
+    "quote": "the employee's required beginning date ... is April 1 of the calendar year following the later of"
+   },
+   "notes": "Preamble: 'For a 5-percent owner or an IRA owner, the required beginning date is April 1 of the calendar year following the calendar year in which the individual attains the applicable age, even if the individual has not retired.' Two-RMDs-in-one-year consequence is standard but was not separately quoted here."
+  },
+  {
+   "id": "rmd_final_regulations",
+   "year": 2024,
+   "value": {
+    "td_number": "T.D. 10001",
+    "published": "2024-07-19",
+    "effective": "2024-09-17",
+    "applies_to": "distribution calendar years beginning on or after 2025-01-01",
+    "companion_proposed": "REG-103529-23 (same day)"
+   },
+   "source": {
+    "doc": "T.D. 10001, Required Minimum Distributions (final regs), 89 FR 58886 (July 19, 2024), FR Doc 2024-14542",
+    "url": "https://www.federalregister.gov/documents/2024/07/19/2024-14542/required-minimum-distributions",
+    "section": "DATES",
+    "quote": "apply for purposes of determining required minimum distributions for calendar years beginning on or after January 1, 2025."
+   },
+   "notes": "FR API search (IRS, 'Required Minimum Distributions', 401(a)(9)) shows no final rule adopting REG-103529-23 as of 2026-10-20."
+  },
+  {
+   "id": "rmd_inherited_10yr_annual_waiver",
+   "year": null,
+   "value": {
+    "waived_years": [
+     2021,
+     2022,
+     2023,
+     2024
+    ],
+    "notices": {
+     "2021_2022": "Notice 2022-53",
+     "2023": "Notice 2023-54",
+     "2024": "Notice 2024-35"
+    },
+    "annual_rmds_required_starting": 2025,
+    "who": "designated (non-eligible) beneficiaries of owners who died 2020-2023 on/after their RBD, and beneficiaries of EDBs who died 2020-2023 while on life-expectancy payments"
+   },
+   "source": {
+    "doc": "IRS Notice 2024-35 (and T.D. 10001 preamble)",
+    "section": "Notice 2024-35 §I, §IV.C",
+    "url": "https://www.irs.gov/pub/irs-drop/n-24-35.pdf",
+    "quote": "final regulations ... will apply for purposes of determining RMDs for calendar years beginning on or after January 1, 2025."
+   },
+   "notes": "T.D. 10001 preamble: plan 'will not fail to be qualified for failing to make that distribution in 2021, 2022, 2023, or 2024' and no excise tax. Notice 2022-53: https://www.irs.gov/pub/irs-drop/n-22-53.pdf (2021-2022); Notice 2023-54: https://www.irs.gov/pub/irs-drop/n-23-54.pdf (2023, also SECURE 2.0 RBD transition). The 10-year deadline itself was NOT extended by the waivers. Annual RMDs in years 1-9 apply only if the owner died on/after RBD (at-least-as-rapidly rule)."
+  },
+  {
+   "id": "rmd_uniform_lifetime_table",
+   "year": null,
+   "value": [
+    {
+     "age": 72,
+     "value": 27.4
+    },
+    {
+     "age": 73,
+     "value": 26.5
+    },
+    {
+     "age": 74,
+     "value": 25.5
+    },
+    {
+     "age": 75,
+     "value": 24.6
+    },
+    {
+     "age": 76,
+     "value": 23.7
+    },
+    {
+     "age": 77,
+     "value": 22.9
+    },
+    {
+     "age": 78,
+     "value": 22.0
+    },
+    {
+     "age": 79,
+     "value": 21.1
+    },
+    {
+     "age": 80,
+     "value": 20.2
+    },
+    {
+     "age": 81,
+     "value": 19.4
+    },
+    {
+     "age": 82,
+     "value": 18.5
+    },
+    {
+     "age": 83,
+     "value": 17.7
+    },
+    {
+     "age": 84,
+     "value": 16.8
+    },
+    {
+     "age": 85,
+     "value": 16.0
+    },
+    {
+     "age": 86,
+     "value": 15.2
+    },
+    {
+     "age": 87,
+     "value": 14.4
+    },
+    {
+     "age": 88,
+     "value": 13.7
+    },
+    {
+     "age": 89,
+     "value": 12.9
+    },
+    {
+     "age": 90,
+     "value": 12.2
+    },
+    {
+     "age": 91,
+     "value": 11.5
+    },
+    {
+     "age": 92,
+     "value": 10.8
+    },
+    {
+     "age": 93,
+     "value": 10.1
+    },
+    {
+     "age": 94,
+     "value": 9.5
+    },
+    {
+     "age": 95,
+     "value": 8.9
+    },
+    {
+     "age": 96,
+     "value": 8.4
+    },
+    {
+     "age": 97,
+     "value": 7.8
+    },
+    {
+     "age": 98,
+     "value": 7.3
+    },
+    {
+     "age": 99,
+     "value": 6.8
+    },
+    {
+     "age": 100,
+     "value": 6.4
+    },
+    {
+     "age": 101,
+     "value": 6.0
+    },
+    {
+     "age": 102,
+     "value": 5.6
+    },
+    {
+     "age": 103,
+     "value": 5.2
+    },
+    {
+     "age": 104,
+     "value": 4.9
+    },
+    {
+     "age": 105,
+     "value": 4.6
+    },
+    {
+     "age": 106,
+     "value": 4.3
+    },
+    {
+     "age": 107,
+     "value": 4.1
+    },
+    {
+     "age": 108,
+     "value": 3.9
+    },
+    {
+     "age": 109,
+     "value": 3.7
+    },
+    {
+     "age": 110,
+     "value": 3.5
+    },
+    {
+     "age": 111,
+     "value": 3.4
+    },
+    {
+     "age": 112,
+     "value": 3.3
+    },
+    {
+     "age": 113,
+     "value": 3.1
+    },
+    {
+     "age": 114,
+     "value": 3.0
+    },
+    {
+     "age": 115,
+     "value": 2.9
+    },
+    {
+     "age": 116,
+     "value": 2.8
+    },
+    {
+     "age": 117,
+     "value": 2.7
+    },
+    {
+     "age": 118,
+     "value": 2.5
+    },
+    {
+     "age": 119,
+     "value": 2.3
+    },
+    {
+     "age": "120+",
+     "value": 2.0
+    }
+   ],
+   "source": {
+    "doc": "Treas. Reg. §1.401(a)(9)-9(c), Table 2 (eCFR current as of 2026-10-20; tables from T.D. 9930, applicable 2022+)",
+    "section": "§1.401(a)(9)-9(c)",
+    "url": "https://www.ecfr.gov/current/title-26/chapter-I/subchapter-A/part-1/subject-group-ECFR6f0f5bf9a6d4de0/section-1.401(a)(9)-9",
+    "quote": "applies for lifetime distributions to an employee in situations in which the employee's surviving spouse is not the sole designated beneficiary"
+   },
+   "notes": "Ages 72 to 120+ (the regulation's table starts at 72). Also used when spouse is sole beneficiary 'but is not more than 10 years younger than the employee'. (f)(1): tables 'apply for distribution calendar years beginning on or after January 1, 2022.' Values extracted programmatically from eCFR XML; 49 rows, contiguous ages verified."
+  },
+  {
+   "id": "rmd_single_life_table",
+   "year": null,
+   "value": [
+    {
+     "age": 0,
+     "value": 84.6
+    },
+    {
+     "age": 1,
+     "value": 83.7
+    },
+    {
+     "age": 2,
+     "value": 82.8
+    },
+    {
+     "age": 3,
+     "value": 81.8
+    },
+    {
+     "age": 4,
+     "value": 80.8
+    },
+    {
+     "age": 5,
+     "value": 79.8
+    },
+    {
+     "age": 6,
+     "value": 78.8
+    },
+    {
+     "age": 7,
+     "value": 77.9
+    },
+    {
+     "age": 8,
+     "value": 76.9
+    },
+    {
+     "age": 9,
+     "value": 75.9
+    },
+    {
+     "age": 10,
+     "value": 74.9
+    },
+    {
+     "age": 11,
+     "value": 73.9
+    },
+    {
+     "age": 12,
+     "value": 72.9
+    },
+    {
+     "age": 13,
+     "value": 71.9
+    },
+    {
+     "age": 14,
+     "value": 70.9
+    },
+    {
+     "age": 15,
+     "value": 69.9
+    },
+    {
+     "age": 16,
+     "value": 69.0
+    },
+    {
+     "age": 17,
+     "value": 68.0
+    },
+    {
+     "age": 18,
+     "value": 67.0
+    },
+    {
+     "age": 19,
+     "value": 66.0
+    },
+    {
+     "age": 20,
+     "value": 65.0
+    },
+    {
+     "age": 21,
+     "value": 64.1
+    },
+    {
+     "age": 22,
+     "value": 63.1
+    },
+    {
+     "age": 23,
+     "value": 62.1
+    },
+    {
+     "age": 24,
+     "value": 61.1
+    },
+    {
+     "age": 25,
+     "value": 60.2
+    },
+    {
+     "age": 26,
+     "value": 59.2
+    },
+    {
+     "age": 27,
+     "value": 58.2
+    },
+    {
+     "age": 28,
+     "value": 57.3
+    },
+    {
+     "age": 29,
+     "value": 56.3
+    },
+    {
+     "age": 30,
+     "value": 55.3
+    },
+    {
+     "age": 31,
+     "value": 54.4
+    },
+    {
+     "age": 32,
+     "value": 53.4
+    },
+    {
+     "age": 33,
+     "value": 52.5
+    },
+    {
+     "age": 34,
+     "value": 51.5
+    },
+    {
+     "age": 35,
+     "value": 50.5
+    },
+    {
+     "age": 36,
+     "value": 49.6
+    },
+    {
+     "age": 37,
+     "value": 48.6
+    },
+    {
+     "age": 38,
+     "value": 47.7
+    },
+    {
+     "age": 39,
+     "value": 46.7
+    },
+    {
+     "age": 40,
+     "value": 45.7
+    },
+    {
+     "age": 41,
+     "value": 44.8
+    },
+    {
+     "age": 42,
+     "value": 43.8
+    },
+    {
+     "age": 43,
+     "value": 42.9
+    },
+    {
+     "age": 44,
+     "value": 41.9
+    },
+    {
+     "age": 45,
+     "value": 41.0
+    },
+    {
+     "age": 46,
+     "value": 40.0
+    },
+    {
+     "age": 47,
+     "value": 39.0
+    },
+    {
+     "age": 48,
+     "value": 38.1
+    },
+    {
+     "age": 49,
+     "value": 37.1
+    },
+    {
+     "age": 50,
+     "value": 36.2
+    },
+    {
+     "age": 51,
+     "value": 35.3
+    },
+    {
+     "age": 52,
+     "value": 34.3
+    },
+    {
+     "age": 53,
+     "value": 33.4
+    },
+    {
+     "age": 54,
+     "value": 32.5
+    },
+    {
+     "age": 55,
+     "value": 31.6
+    },
+    {
+     "age": 56,
+     "value": 30.6
+    },
+    {
+     "age": 57,
+     "value": 29.8
+    },
+    {
+     "age": 58,
+     "value": 28.9
+    },
+    {
+     "age": 59,
+     "value": 28.0
+    },
+    {
+     "age": 60,
+     "value": 27.1
+    },
+    {
+     "age": 61,
+     "value": 26.2
+    },
+    {
+     "age": 62,
+     "value": 25.4
+    },
+    {
+     "age": 63,
+     "value": 24.5
+    },
+    {
+     "age": 64,
+     "value": 23.7
+    },
+    {
+     "age": 65,
+     "value": 22.9
+    },
+    {
+     "age": 66,
+     "value": 22.0
+    },
+    {
+     "age": 67,
+     "value": 21.2
+    },
+    {
+     "age": 68,
+     "value": 20.4
+    },
+    {
+     "age": 69,
+     "value": 19.6
+    },
+    {
+     "age": 70,
+     "value": 18.8
+    },
+    {
+     "age": 71,
+     "value": 18.0
+    },
+    {
+     "age": 72,
+     "value": 17.2
+    },
+    {
+     "age": 73,
+     "value": 16.4
+    },
+    {
+     "age": 74,
+     "value": 15.6
+    },
+    {
+     "age": 75,
+     "value": 14.8
+    },
+    {
+     "age": 76,
+     "value": 14.1
+    },
+    {
+     "age": 77,
+     "value": 13.3
+    },
+    {
+     "age": 78,
+     "value": 12.6
+    },
+    {
+     "age": 79,
+     "value": 11.9
+    },
+    {
+     "age": 80,
+     "value": 11.2
+    },
+    {
+     "age": 81,
+     "value": 10.5
+    },
+    {
+     "age": 82,
+     "value": 9.9
+    },
+    {
+     "age": 83,
+     "value": 9.3
+    },
+    {
+     "age": 84,
+     "value": 8.7
+    },
+    {
+     "age": 85,
+     "value": 8.1
+    },
+    {
+     "age": 86,
+     "value": 7.6
+    },
+    {
+     "age": 87,
+     "value": 7.1
+    },
+    {
+     "age": 88,
+     "value": 6.6
+    },
+    {
+     "age": 89,
+     "value": 6.1
+    },
+    {
+     "age": 90,
+     "value": 5.7
+    },
+    {
+     "age": 91,
+     "value": 5.3
+    },
+    {
+     "age": 92,
+     "value": 4.9
+    },
+    {
+     "age": 93,
+     "value": 4.6
+    },
+    {
+     "age": 94,
+     "value": 4.3
+    },
+    {
+     "age": 95,
+     "value": 4.0
+    },
+    {
+     "age": 96,
+     "value": 3.7
+    },
+    {
+     "age": 97,
+     "value": 3.4
+    },
+    {
+     "age": 98,
+     "value": 3.2
+    },
+    {
+     "age": 99,
+     "value": 3.0
+    },
+    {
+     "age": 100,
+     "value": 2.8
+    },
+    {
+     "age": 101,
+     "value": 2.6
+    },
+    {
+     "age": 102,
+     "value": 2.5
+    },
+    {
+     "age": 103,
+     "value": 2.3
+    },
+    {
+     "age": 104,
+     "value": 2.2
+    },
+    {
+     "age": 105,
+     "value": 2.1
+    },
+    {
+     "age": 106,
+     "value": 2.1
+    },
+    {
+     "age": 107,
+     "value": 2.1
+    },
+    {
+     "age": 108,
+     "value": 2.0
+    },
+    {
+     "age": 109,
+     "value": 2.0
+    },
+    {
+     "age": 110,
+     "value": 2.0
+    },
+    {
+     "age": 111,
+     "value": 2.0
+    },
+    {
+     "age": 112,
+     "value": 2.0
+    },
+    {
+     "age": 113,
+     "value": 1.9
+    },
+    {
+     "age": 114,
+     "value": 1.9
+    },
+    {
+     "age": 115,
+     "value": 1.8
+    },
+    {
+     "age": 116,
+     "value": 1.8
+    },
+    {
+     "age": 117,
+     "value": 1.6
+    },
+    {
+     "age": 118,
+     "value": 1.4
+    },
+    {
+     "age": 119,
+     "value": 1.1
+    },
+    {
+     "age": "120+",
+     "value": 1.0
+    }
+   ],
+   "source": {
+    "doc": "Treas. Reg. §1.401(a)(9)-9(b), Table 1 (eCFR current as of 2026-10-20)",
+    "section": "§1.401(a)(9)-9(b)",
+    "url": "https://www.ecfr.gov/current/title-26/chapter-I/subchapter-A/part-1/subject-group-ECFR6f0f5bf9a6d4de0/section-1.401(a)(9)-9",
+    "quote": "The following table, referred to as the Single Life Table, sets forth the life expectancy of an individual at each age."
+   },
+   "notes": "Ages 0 to 120+, 121 rows, contiguous verified. Used for beneficiaries (life-expectancy payments, and annual RMDs within 10-year period when owner died after RBD). For a beneficiary whose life expectancy was set before 2022 under the old table, §1.401(a)(9)-9(f)(2) resets it using this table."
+  },
+  {
+   "id": "rmd_joint_last_survivor_table_use",
+   "year": null,
+   "value": "Used for an IRA owner/employee whose spouse is the sole designated beneficiary for the entire year and is MORE than 10 years younger; otherwise the Uniform Lifetime Table applies. Full table is §1.401(a)(9)-9(d) (121 x 121 ages), not reproduced here.",
+   "source": {
+    "doc": "Treas. Reg. §1.401(a)(9)-9(c)-(d)",
+    "section": "§1.401(a)(9)-9(c),(d)",
+    "url": "https://www.ecfr.gov/current/title-26/chapter-I/subchapter-A/part-1/subject-group-ECFR6f0f5bf9a6d4de0/section-1.401(a)(9)-9",
+    "quote": "also used if the employee's surviving spouse is the sole designated beneficiary but is not more than 10 years younger"
+   },
+   "notes": "The 'sole beneficiary for the whole year' detail lives in §1.401(a)(9)-5 (not re-read here); flagging as less certain wording."
+  },
+  {
+   "id": "az_income_tax_rate",
+   "year": 2025,
+   "value": 0.025,
+   "source": {
+    "doc": "ADOR, Arizona Form 140 Instructions, Tax Year 2025 (PDF created 2025-12-11, modified 2026-08-21)",
+    "url": "https://azdor.gov/sites/default/files/document/FORMS_INDIVIDUAL_2025_140i.pdf",
+    "section": "Line 46 - Tax Amount",
+    "quote": "Multiply line 45 by 2.5% (.025) and enter the result."
+   },
+   "notes": "Statute: A.R.S. §43-1011(A)(9) (version at https://www.azleg.gov/ars/43/01011.01.htm): 'the tax is 2.5% of taxable income' for years after a revenue-trigger notice under §43-243. Flat for all filing statuses."
+  },
+  {
+   "id": "az_income_tax_rate",
+   "year": 2026,
+   "value": 0.025,
+   "source": {
+    "doc": "A.R.S. §43-1011(A)(9), Version 1 (azleg.gov, page dated 09/10/26)",
+    "section": "§43-1011(A)(9)",
+    "url": "https://www.azleg.gov/ars/43/01011.01.htm",
+    "quote": "the tax is 2.5% of taxable income."
+   },
+   "notes": "No 2026 ADOR forms yet (they come out ~Dec 2026). HB 4168 did not amend §43-1011. See flag on statute versions."
+  },
+  {
+   "id": "az_social_security_subtraction",
+   "year": null,
+   "value": "Full subtraction of Social Security (and RR retirement) benefits included in federal AGI under IRC §86",
+   "source": {
+    "doc": "A.R.S. §43-1022(10)",
+    "section": "§43-1022, paragraph 10",
+    "url": "https://www.azleg.gov/ars/43/01022.htm",
+    "quote": "The amount included in federal adjusted gross income pursuant to section 86 of the internal revenue code, relating to taxation of social security"
+   },
+   "notes": "Applies 2025 and 2026. Form 140 line 30."
+  },
+  {
+   "id": "az_age65_exemption",
+   "year": null,
+   "value": {
+    "per_person": 2100,
+    "applies": "taxpayer and (joint) spouse age 65+ by end of year, not a dependent"
+   },
+   "source": {
+    "doc": "A.R.S. §43-1023(E)",
+    "section": "§43-1023(E)",
+    "url": "https://www.azleg.gov/ars/43/01023.htm",
+    "quote": "A taxpayer is allowed an exemption of $2,100: 1. If the taxpayer has attained sixty-five years of age"
+   },
+   "notes": "Not indexed. Form 140 line 38: 'Multiply the number in box 8 ... by $2,100'. Separate from the $6,000 senior subtraction below; both can apply."
+  },
+  {
+   "id": "az_government_pension_subtraction",
+   "year": null,
+   "value": {
+    "max": 2500,
+    "per": "taxpayer (per person receiving); lesser of amount received or $2,500"
+   },
+   "source": {
+    "doc": "A.R.S. §43-1022(2)",
+    "section": "§43-1022, paragraph 2",
+    "url": "https://www.azleg.gov/ars/43/01022.htm",
+    "quote": "Benefits, annuities and pensions in an amount totaling not more than $2,500 received from one or more of the following"
+   },
+   "notes": "Covers U.S. civil service/federal plans and Arizona public plans (ASRS, PSPRS, CORP, EORP, ORPs, county/city plans). Uniformed-services retired pay is fully subtracted separately (paragraph 26). Form 140i: 'subtract the amount you received or $2,500, whichever is less.'"
+  },
+  {
+   "id": "az_standard_deduction",
+   "year": 2025,
+   "value": {
+    "single": 15750,
+    "mfs": 15750,
+    "hoh": 23625,
+    "mfj": 31500,
+    "charitable_increase_pct": 34
+   },
+   "source": {
+    "doc": "ADOR, Arizona Form 140 Instructions, Tax Year 2025 (PDF created 2025-12-11, modified 2026-08-21)",
+    "url": "https://azdor.gov/sites/default/files/document/FORMS_INDIVIDUAL_2025_140i.pdf",
+    "section": "Line 43 / filing requirements",
+    "quote": "Single $ 15,750; Married filing joint $ 31,500; Married filing separate $ 15,750; Head of Household $ 23,625"
+   },
+   "notes": "Equals the 2025 federal OBBBA basic standard deduction. Enacted by HB 4168 §16 (A.R.S. §43-1041(A)), retroactive to tax years beginning after 2024 (§35(A)). Arizona does NOT add the federal age-65/blind additional standard deduction. Charitable increase for 2025 is 34% of charitable deductions (Form 140 line 44; §43-1041(I)(1))."
+  },
+  {
+   "id": "az_standard_deduction",
+   "year": 2026,
+   "value": null,
+   "source": {
+    "doc": "A.R.S. §43-1041(A),(H) as amended by HB 4168",
+    "section": "§43-1041(H)",
+    "url": "https://www.azleg.gov/ars/43/01041.htm",
+    "quote": "adjust the dollar amounts ... for inflation in the same manner in which the federal basic standard deduction is adjusted"
+   },
+   "notes": "No published 2026 amount from ADOR. Statute text says $15,750/$23,625/$31,500 'subject to subsection H', and H indexes 'for each taxable year beginning from and after December 31, 2019'. The likely intent is to track the federal 2026 basic amounts ($16,100 single/MFS, $24,150 HOH, $32,200 MFJ per IRS Rev. Proc. 2025-32 §.14), but that is inference. New for 2026: the charitable add-on becomes 100% of charitable contributions capped at $1,000 single/MFS, $2,000 MFJ (§43-1041(I)(2))."
+  },
+  {
+   "id": "az_conformity_obbba_senior_deduction",
+   "year": 2025,
+   "value": {
+    "enacted": true,
+    "mechanism": "subtraction from Arizona gross income equal to the federal §151(d)(5)(C) deduction ($6,000 per qualified individual 65+, phased out 6% above $75k/$150k MAGI)",
+    "statute": "A.R.S. §43-1022(35)",
+    "bill": "HB 4168, Laws 2026 ch. 140",
+    "signed": "2026-06-13",
+    "retroactive_to": "tax years beginning after 2024-12-31"
+   },
+   "source": {
+    "doc": "Arizona HB 4168 (57th Leg., 2nd Reg. Sess.), Laws 2026, Chapter 140, signed by Gov. Hobbs 2026-06-13",
+    "url": "https://www.azleg.gov/legtext/57leg/2R/laws/0140.htm",
+    "section": "Sec. 15 (A.R.S. §43-1022(35)); Sec. 35(A) retroactivity",
+    "quote": "the amount deducted for a qualified individual under section 151(d)(5)(C) of the internal revenue code."
+   },
+   "notes": "Timeline: EO 2025-15 (2025-11-25) told ADOR to put the higher standard deduction on the 2025 forms and give 'prospective instructions' for the senior/tips/overtime/car-loan items via the 'other' line 'if and when the Arizona Legislature adopts' them - administrative, not law. SB 1106 vetoed 2026-01-16; HB 2785 vetoed 2026-02-12 (azleg bill API). HB 4168 signed 2026-06-13, chapter 140. ADOR (2026-01-30): no penalty/interest if a 2025 return is amended by 2027-10-15."
+  },
+  {
+   "id": "az_conformity_obbba_senior_deduction",
+   "year": 2026,
+   "value": {
+    "enacted": true,
+    "statute": "A.R.S. §43-1022(35)",
+    "applies": "open-ended in AZ text ('from and after December 31, 2024'); the federal deduction itself exists only for tax years beginning before 2029-01-01"
+   },
+   "source": {
+    "doc": "A.R.S. §43-1022(35) (azleg.gov, page dated 09/10/26)",
+    "section": "§43-1022, paragraph 35",
+    "url": "https://www.azleg.gov/ars/43/01022.htm",
+    "quote": "For taxable years beginning from and after December 31, 2024, to the extent not already excluded from Arizona gross income"
+   },
+   "notes": "Because the AZ subtraction equals 'the amount deducted' federally, it follows the federal phase-out and the 2028 sunset automatically. HB 4168 §12 conforms AZ to the IRC as of 2026-01-01 for 2026."
+  },
+  {
+   "id": "az_conformity_executive_order",
+   "year": 2025,
+   "value": {
+    "order": "Executive Order 2025-15",
+    "date": "2025-11-25",
+    "effect": "administrative: forms and instructions only; confers no legal rights"
+   },
+   "source": {
+    "doc": "Arizona Executive Order 2025-15",
+    "section": "Order paragraphs 1-2",
+    "url": "https://azgovernor.gov/office-arizona-governor/executive-order/2025-15",
+    "quote": "The Department shall update the State's tax forms to include the higher standard deduction"
+   },
+   "notes": "EO also says it 'shall not confer any legal rights or remedies'. ADOR release 2026-01-22 (superseded 2026-01-30): https://azdor.gov/news-center/ador-outlines-guidance-2025-tax-year-income-tax-forms"
+  },
+  {
+   "id": "aca_enhanced_ptc_expired",
+   "year": 2026,
+   "value": {
+    "expired_after": "2025-12-31",
+    "extension_enacted_as_of_2026_10_21": false,
+    "hr1834_status": "Passed House 2026-01-08 (230-196, Roll no. 11); received in Senate; placed on Senate Legislative Calendar No. 319 on 2026-02-10; no further action"
+   },
+   "source": {
+    "doc": "26 U.S.C. 36B (U.S. Code 2024 ed., govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartC-sec36B.htm",
+    "section": "§36B(b)(3)(A)(iii) and (c)(1)(E)",
+    "quote": "after December 31, 2020, and before January 1, 2026, subparagraph (A) shall be applied without regard to \"but does not exceed 400 percent\""
+   },
+   "notes": "H.R. 1834 actions read at https://www.congress.gov/bill/119th-congress/house-bill/1834/all-actions on 2026-10-21. I did not find (on congress.gov or via search) any other enacted law extending the credits; secondary sources say Senate bills (e.g., S. 3385) failed. Rev. Proc. 2025-25 table (below) confirms IRS is applying the original (non-enhanced) structure for 2026."
+  },
+  {
+   "id": "aca_applicable_percentage_table",
+   "year": 2026,
+   "value": [
+    {
+     "fpl_from": 0,
+     "fpl_to": 133,
+     "initial": 2.1,
+     "final": 2.1
+    },
+    {
+     "fpl_from": 133,
+     "fpl_to": 150,
+     "initial": 3.14,
+     "final": 4.19
+    },
+    {
+     "fpl_from": 150,
+     "fpl_to": 200,
+     "initial": 4.19,
+     "final": 6.6
+    },
+    {
+     "fpl_from": 200,
+     "fpl_to": 250,
+     "initial": 6.6,
+     "final": 8.44
+    },
+    {
+     "fpl_from": 250,
+     "fpl_to": 300,
+     "initial": 8.44,
+     "final": 9.96
+    },
+    {
+     "fpl_from": 300,
+     "fpl_to": 400,
+     "initial": 9.96,
+     "final": 9.96,
+     "upper_inclusive": true
+    }
+   ],
+   "source": {
+    "doc": "IRS Rev. Proc. 2025-25",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-25.pdf",
+    "section": "§3.01",
+    "quote": "At least 300% but not more than 400% 9.96% 9.96%"
+   },
+   "notes": "Lower bounds 'At least'; upper bounds 'less than', except the last tier 'not more than 400%'. Percent rises linearly from initial to final within a tier (§1.36B-3(g)). Required contribution percentage (employer affordability) 2026: 9.96%."
+  },
+  {
+   "id": "aca_applicable_percentage_table",
+   "year": 2025,
+   "value": [
+    {
+     "fpl_from": 0,
+     "fpl_to": 150,
+     "initial": 0,
+     "final": 0
+    },
+    {
+     "fpl_from": 150,
+     "fpl_to": 200,
+     "initial": 0,
+     "final": 2.0
+    },
+    {
+     "fpl_from": 200,
+     "fpl_to": 250,
+     "initial": 2.0,
+     "final": 4.0
+    },
+    {
+     "fpl_from": 250,
+     "fpl_to": 300,
+     "initial": 4.0,
+     "final": 6.0
+    },
+    {
+     "fpl_from": 300,
+     "fpl_to": 400,
+     "initial": 6.0,
+     "final": 8.5
+    },
+    {
+     "fpl_from": 400,
+     "fpl_to": null,
+     "initial": 8.5,
+     "final": 8.5
+    }
+   ],
+   "source": {
+    "doc": "IRS Rev. Proc. 2024-35",
+    "section": "§3.01",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-35.pdf",
+    "quote": "At least 400% and higher 8.50% 8.50%"
+   },
+   "notes": "Enhanced (ARPA/IRA) table, last year in effect."
+  },
+  {
+   "id": "aca_400_fpl_cutoff",
+   "year": 2026,
+   "value": {
+    "eligible_household_income_pct_fpl": "at least 100% and not more than 400%",
+    "cliff": true
+   },
+   "source": {
+    "doc": "26 U.S.C. 36B (U.S. Code 2024 ed., govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartC-sec36B.htm",
+    "section": "§36B(c)(1)(A)",
+    "quote": "household income for the taxable year equals or exceeds 100 percent but does not exceed 400 percent of"
+   },
+   "notes": "Exactly 400% FPL still qualifies; above 400% gets $0. Statutory 100% floor has exceptions (e.g., lawfully present immigrants under 100%; OBBBA §71301 narrows eligible immigrants from 2027) not covered here."
+  },
+  {
+   "id": "aca_fpl_year_for_coverage",
+   "year": 2026,
+   "value": {
+    "coverage_year": 2026,
+    "guidelines_year_used": 2025
+   },
+   "source": {
+    "doc": "26 U.S.C. 36B (U.S. Code 2024 ed., govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartC-sec36B.htm",
+    "section": "§36B(d)(3)(B)",
+    "quote": "the most recently published poverty line as of the 1st day of the regular enrollment period"
+   },
+   "notes": "Open enrollment for 2026 coverage began Nov 1, 2025, before the 2026 guidelines (Jan 15, 2026), so 2026 PTC uses the 2025 guidelines. Open-enrollment start date not separately sourced here."
+  },
+  {
+   "id": "aca_fpl_48_states",
+   "year": 2025,
+   "value": {
+    "1": 15650,
+    "2": 21150,
+    "applies_to_ptc_coverage_year": 2026
+   },
+   "source": {
+    "doc": "HHS, Annual Update of the HHS Poverty Guidelines, 90 FR (Jan 17, 2025), FR Doc 2025-01377",
+    "url": "https://www.federalregister.gov/documents/2025/01/17/2025-01377/annual-update-of-the-hhs-poverty-guidelines",
+    "section": "2025 Poverty Guidelines for the 48 Contiguous States and DC",
+    "quote": "1 ..... $15,650; 2 ..... 21,150"
+   },
+   "notes": "400% FPL for 2026 coverage: $62,600 (1 person), $84,600 (2 persons) - arithmetic."
+  },
+  {
+   "id": "aca_fpl_48_states",
+   "year": 2026,
+   "value": {
+    "1": 15960,
+    "2": 21640,
+    "applies_to_ptc_coverage_year": 2027
+   },
+   "source": {
+    "doc": "ASPE, HHS Poverty Guidelines for 2026 (published FR 2026-01-15, Doc 2026-00755)",
+    "section": "2026 Poverty Guidelines for the 48 Contiguous States and DC",
+    "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+    "quote": "1 | $15,960 ; 2 | $21,640"
+   },
+   "notes": "Will apply to 2027 coverage (open enrollment Nov 2026). ASPE notes the Oct 2025 CPI-U was missing due to the shutdown; 11 months used."
+  },
+  {
+   "id": "aca_magi_definition",
+   "year": null,
+   "value": "AGI + excluded foreign earned income (§911) + tax-exempt interest + nontaxable portion of Social Security benefits; household income = taxpayer MAGI + MAGI of family members required to file",
+   "source": {
+    "doc": "26 U.S.C. 36B (U.S. Code 2024 ed., govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartC-sec36B.htm",
+    "section": "§36B(d)(2)(B)",
+    "quote": "an amount equal to the portion of the taxpayer's social security benefits (as defined in section 86(d)) which is not included in gross income"
+   },
+   "notes": "Differs from IRMAA MAGI: ACA adds untaxed Social Security; IRMAA does not."
+  },
+  {
+   "id": "aca_excess_aptc_repayment_cap",
+   "year": 2026,
+   "value": {
+    "cap": null,
+    "repay_all_excess": true
+   },
+   "source": {
+    "doc": "Public Law 119-21 (One Big Beautiful Bill Act), July 4, 2025, govinfo",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm",
+    "section": "§71305(a),(c)",
+    "quote": "Section 36B(f)(2) is amended by striking subparagraph (B)."
+   },
+   "notes": "§71305(c): 'shall apply to taxable years beginning after December 31, 2025.' So for 2026 there is no repayment limitation: all excess APTC is added to tax. Rev. Proc. 2025-32 (2026 inflation adjustments) contains no §36B(f)(2)(B) table, consistent."
+  },
+  {
+   "id": "aca_excess_aptc_repayment_cap",
+   "year": 2025,
+   "value": [
+    {
+     "fpl_below": 200,
+     "single": 375,
+     "other": 750
+    },
+    {
+     "fpl_from": 200,
+     "fpl_below": 300,
+     "single": 975,
+     "other": 1950
+    },
+    {
+     "fpl_from": 300,
+     "fpl_below": 400,
+     "single": 1625,
+     "other": 3250
+    },
+    {
+     "fpl_from": 400,
+     "cap": null
+    }
+   ],
+   "source": {
+    "doc": "IRS Rev. Proc. 2024-40",
+    "section": "§3.07",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "the limitation on tax imposed under § 36B(f)(2)(B) for excess advance credit payments is determined using the following table"
+   },
+   "notes": "'single' = unmarried individuals other than surviving spouses and heads of household; 'other' = all other taxpayers. Last year caps apply."
+  },
+  {
+   "id": "federal_senior_deduction",
+   "year": null,
+   "value": {
+    "amount_per_qualified_individual": 6000,
+    "phaseout": "6% of MAGI over $75,000 ($150,000 joint)",
+    "years": "tax years beginning before 2029-01-01 (2025-2028)"
+   },
+   "source": {
+    "doc": "Public Law 119-21 (One Big Beautiful Bill Act), July 4, 2025, govinfo",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm",
+    "section": "§70103 (new IRC §151(d)(5)(C))",
+    "quote": "there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual"
+   },
+   "notes": "Included because Arizona's subtraction is defined by reference to it."
+  }
+ ],
+ "not_published": [
+  {
+   "id": "partb_standard_premium_monthly",
+   "year": 2027,
+   "why": "Not announced as of 2026-10-21. No 2027 Part B notice in the Federal Register (FR API search, newest is 2025-20251 for 2026) and ssa.gov/cola says 2027 Medicare information 'will be available' later. CMS historically announces in Oct-Nov."
+  },
+  {
+   "id": "irmaa_tiers",
+   "year": 2027,
+   "why": "2027 IRMAA thresholds and amounts not published (same reason). The $500,000/$750,000 top thresholds stay fixed for 2027 by statute; the lower thresholds will be CPI-indexed."
+  },
+  {
+   "id": "ss_cola_fr_notice",
+   "year": 2027,
+   "why": "The 3.6% COLA and 2027 earnings-test amounts are on ssa.gov, but the Federal Register 'Cost-of-Living Increase and Other Determinations for 2027' notice is not yet published."
+  },
+  {
+   "id": "az_standard_deduction",
+   "year": 2026,
+   "why": "ADOR has not published 2026 forms; statute's indexing language is ambiguous (see flags)."
+  },
+  {
+   "id": "rmd_applicable_age_born_1959_final",
+   "year": null,
+   "why": "No final regulation resolving the 1959 issue; only proposed §1.401(a)(9)-2(b)(2)(v) (age 73)."
+  },
+  {
+   "id": "ssa_44_form_text",
+   "year": null,
+   "why": "Form SSA-44 itself not read (www.ssa.gov blocks scripted fetches); the controlling list is 20 CFR 418.1205, recorded instead."
+  },
+  {
+   "id": "rmd_joint_last_survivor_table_values",
+   "year": null,
+   "why": "Not extracted (121x121); available in §1.401(a)(9)-9(d) on eCFR."
+  }
+ ],
+ "flags": [
+  "IRMAA boundaries are not uniform: tiers 1-3 upper bounds are inclusive ('less than or equal to'), tier 4 upper bound is exclusive ('less than $500,000'), top tier is 'greater than or equal to'. Code must use > and <= for tiers 1-3, and >= for $500k/$750k.",
+  "20 CFR 418.1105(c) says CMS will index 'all modified adjusted gross income threshold amounts', but the statute (§1839(i)(5)(C)) freezes the $500,000 (and so $750,000) amounts until 2028, indexed then from an August 2026 base. The regulation text is outdated; follow the statute (CMS's FR notice agrees).",
+  "MFS (lived with spouse) IRMAA upper band changed $394,000 (2025) -> $391,000 (2026): it is $500,000 minus the single threshold, so it falls as the single threshold rises. Do not hard-code.",
+  "IRMAA MAGI and ACA MAGI differ: ACA adds nontaxable Social Security (§36B(d)(2)(B)(iii)); IRMAA does not (20 CFR 418.1010(b)(6)).",
+  "RMD birth-year-1959: statute gives both 73 and 75. Final regs (T.D. 10001) reserve §1.401(a)(9)-2(b)(2)(v); proposed REG-103529-23 says 73. Not finalized as of 2026-10-20 (FR search). Proposed regs are not binding but signal IRS position; a technical correction in legislation has not been verified.",
+  "Uniform Lifetime Table in the regulation starts at age 72, not 70 or 73.",
+  "Inherited IRA annual RMDs (owner died on/after RBD) required starting 2025; 2021-2024 waived by Notices 2022-53, 2023-54, 2024-35. I found no 2025 or later notice extending relief (searched FR only; did not exhaustively search IRS bulletins).",
+  "Arizona: The 2025 senior subtraction was first offered administratively (EO 2025-15, 2025-11-25, and ADOR's 2025 forms/MCTCP worksheet) before any law; it became law only on 2026-06-13 (HB 4168, Laws 2026 ch. 140, retroactive to tax years after 2024). SB 1106 (vetoed 2026-01-16) and HB 2785 (vetoed 2026-02-12) did NOT become law.",
+  "Arizona: A.R.S. §43-1041 sets $15,750/$23,625/$31,500 'subject to subsection H', which indexes 'from and after December 31, 2019'. Literal reading could compound indexing on top of 2025 dollars; intended reading is probably to track the federal basic standard deduction (2026: $16,100/$24,150/$32,200). Confirm with ADOR's 2026 Form 140 (expected ~Dec 2026).",
+  "Arizona: azleg shows two versions of §43-1011 (01011.htm: L21 Ch. 411, with graduated brackets plus surcharge cap; 01011.01.htm 'Version 1': L21 Ch. 412 with flat 2.5% in paragraph 9 after §43-243 triggers). ADOR's 2025 Form 140 applies the flat 2.5%. I relied on ADOR plus Version 1 and did not trace the §43-243 trigger notice.",
+  "Arizona age-65 exemption $2,100 (A.R.S. §43-1023(E)) is separate from and in addition to the $6,000 senior subtraction (§43-1022(35)). Arizona does not use the federal additional standard deduction for age 65.",
+  "ACA: enhanced credits expired after 2025. H.R. 1834 (3-year extension) passed the House 2026-01-08 but sits on the Senate calendar (no action after 2026-02-10). No extension enacted as of 2026-10-21 per congress.gov; absence of another law was checked by search, not by reading every 2026 public law.",
+  "ACA 2026 repayment: OBBBA §71305 removed the excess-APTC repayment caps for tax years beginning after 2025. 2025 caps still apply to 2025 returns.",
+  "ACA 2026 uses 2025 poverty guidelines ($15,650 / $21,150), not the 2026 ones ($15,960 / $21,640), because of the 'most recently published as of first day of open enrollment' rule.",
+  "Social Security 2027 COLA (3.6%) and 2027 earnings-test amounts come from ssa.gov only; the Federal Register notice is not out yet. ssa.gov pages block scripted fetches (HTTP 403); I read them in a browser.",
+  "FRA: worker and survivor FRA tables differ (survivor schedule lags by 2 birth years). Birthdays on Jan 1 belong to the prior birth year (attain age the day before the birthday).",
+  "IRMAA amounts recorded are full Part B coverage only; the immunosuppressive-drug-only Part B tables (different amounts) were left out."
+ ]
+}

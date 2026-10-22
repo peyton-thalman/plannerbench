@@ -31,6 +31,11 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
   (`live-high-10x1-private`, $0.09): 44% → 96% paired, 26 fixed / 0 broken. Next ideas, each needs the owner's OK
   to spend: Sonnet with tools, single-step tasks on 1.1.0, the leaderboard/site panel (after 3290 clearance). The Anthropic key in `.env` is Wizard's temporary key (owner's choice, 2026-10-21), billed to the Wizard workspace.
 
+- Scenario-engine checks (2026-10-21): `checks/pe_years.py` runs PolicyEngine-US one tax year at a time for
+  MoneyGuide's year-by-year engine (`~/moneyguide/verify/outside.sh` drives it). `checks/cleanroom/` is a second,
+  independent Python engine written by a subagent from `spec/RULES.md` alone; it must never read `~/moneyguide`.
+  `~/moneyguide/verify/compare.ts` compares the two on random households. Tests: `python3 -I -m unittest discover -s checks/cleanroom`.
+
 ## Open items (owner decides what's next; don't start these unasked)
 
 1. Compliance v2: current compliance questions define each issue in the prompt, so every model scores 91–100%.

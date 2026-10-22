@@ -1,0 +1,38 @@
+{
+  "household": {
+    "filing": "mfj",
+    "state": "AZ",
+    "people": [
+      {"id": "p1", "born": 1954, "born_month": 3, "medicare": true,
+       "social_security": {"monthly_at_fra": 3200, "already_claimed_monthly": 4224, "claimed_at_months": 840}},
+      {"id": "p2", "born": 1958, "born_month": 8, "medicare": true,
+       "social_security": {"monthly_at_fra": 1800, "claim_age": 67}}
+    ],
+    "accounts": [
+      {"id": "ira1", "owner": "p1", "type": "traditional_ira", "balance": 900000, "after_tax_basis": 40000},
+      {"id": "ira2", "owner": "p2", "type": "traditional_ira", "balance": 300000, "after_tax_basis": 0},
+      {"id": "roth1", "owner": "p1", "type": "roth_ira", "balance": 150000, "first_roth_year": 2015},
+      {"id": "tax1", "owner": "joint", "type": "taxable", "balance": 400000, "cost_basis": 250000,
+       "dividend_yield": 0.02, "qualified_share": 0.9},
+      {"id": "cash1", "owner": "joint", "type": "cash", "balance": 50000},
+      {"id": "inh1", "owner": "p2", "type": "inherited_ira", "balance": 200000,
+       "inherited": {"from_born": 1932, "died": 2022, "beneficiary_class": "designated"}}
+    ],
+    "income": [
+      {"type": "pension", "owner": "p1", "annual": 24000, "start_year": 2026, "end_year": 2060, "cola": 0}
+    ],
+    "spending_need": 110000,
+    "itemized": {"salt_other": 4500, "mortgage_interest": 0, "medical": 6000, "charity_cash": 5000},
+    "prior_magi": {"2024": {"magi": 180000, "filing": "mfj"}, "2025": {"magi": 190000, "filing": "mfj"}}
+  },
+  "plans": [
+    {"name": "A", "actions": []},
+    {"name": "B", "actions": [
+      {"type": "roth_conversion", "from": "ira1", "amount": 60000, "years": [2026, 2027, 2028, 2029]},
+      {"type": "qcd", "from": "ira1", "amount": 10000, "years": [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035]}
+    ]}
+  ],
+  "events": [{"type": "death", "person": "p1", "year": 2034}],
+  "assumptions": {"return": 0.05, "inflation": 0.025, "first_year": 2026, "last_year": 2050,
+                  "heirs_tax_rate": 0.24, "switches": {}}
+}

@@ -1,0 +1,1987 @@
+{
+ "generated": "2026-10-21",
+ "parameters": [
+  {
+   "id": "ordinary_brackets",
+   "year": 2025,
+   "filing": "mfj",
+   "value": [
+    [
+     23850,
+     0.1
+    ],
+    [
+     96950,
+     0.12
+    ],
+    [
+     206700,
+     0.22
+    ],
+    [
+     394600,
+     0.24
+    ],
+    [
+     501050,
+     0.32
+    ],
+    [
+     751600,
+     0.35
+    ],
+    [
+     null,
+     0.37
+    ]
+   ],
+   "source": {
+    "doc": "Rev. Proc. 2024-40",
+    "section": "\u00a72.01 Table 1 (Section 1(j)(2)(A))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "Over $501,050 but not over $751,600 ... $114,462 plus 35% of the excess over $501,050"
+   },
+   "notes": "Each pair is [upper bound of taxable income for the bracket, marginal rate]; null upper bound = no limit. Lower bound of each bracket is the previous pair's upper bound. Not changed by OBBBA for 2025 (OBBBA \u00a770101 rate amendments apply to taxable years beginning after Dec 31, 2025)."
+  },
+  {
+   "id": "ordinary_brackets",
+   "year": 2025,
+   "filing": "single",
+   "value": [
+    [
+     11925,
+     0.1
+    ],
+    [
+     48475,
+     0.12
+    ],
+    [
+     103350,
+     0.22
+    ],
+    [
+     197300,
+     0.24
+    ],
+    [
+     250525,
+     0.32
+    ],
+    [
+     626350,
+     0.35
+    ],
+    [
+     null,
+     0.37
+    ]
+   ],
+   "source": {
+    "doc": "Rev. Proc. 2024-40",
+    "section": "\u00a72.01 Table 3 (Section 1(j)(2)(C))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "Over $250,525 but not over $626,350 ... $57,231 plus 35% of the excess over $250,525"
+   },
+   "notes": "Each pair is [upper bound of taxable income for the bracket, marginal rate]; null upper bound = no limit. Lower bound of each bracket is the previous pair's upper bound. Table 3 text was garbled in the -layout extraction; values read from plain-text extraction and match Table 4 (MFS) through the 35% bracket, as expected."
+  },
+  {
+   "id": "ordinary_brackets",
+   "year": 2026,
+   "filing": "mfj",
+   "value": [
+    [
+     24800,
+     0.1
+    ],
+    [
+     100800,
+     0.12
+    ],
+    [
+     211400,
+     0.22
+    ],
+    [
+     403550,
+     0.24
+    ],
+    [
+     512450,
+     0.32
+    ],
+    [
+     768700,
+     0.35
+    ],
+    [
+     null,
+     0.37
+    ]
+   ],
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.01 Table 1 (Section 1(j)(2)(A))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Over $512,450 but not over $768,700 ... $116,896 plus 35% of the excess over $512,450"
+   },
+   "notes": "Each pair is [upper bound of taxable income for the bracket, marginal rate]; null upper bound = no limit. Lower bound of each bracket is the previous pair's upper bound."
+  },
+  {
+   "id": "ordinary_brackets",
+   "year": 2026,
+   "filing": "single",
+   "value": [
+    [
+     12400,
+     0.1
+    ],
+    [
+     50400,
+     0.12
+    ],
+    [
+     105700,
+     0.22
+    ],
+    [
+     201775,
+     0.24
+    ],
+    [
+     256225,
+     0.32
+    ],
+    [
+     640600,
+     0.35
+    ],
+    [
+     null,
+     0.37
+    ]
+   ],
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.01 Table 3 (Section 1(j)(2)(C))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Over $256,225 but not over $640,600 ... $58,448 plus 35% of the excess over $256,225"
+   },
+   "notes": "Each pair is [upper bound of taxable income for the bracket, marginal rate]; null upper bound = no limit. Lower bound of each bracket is the previous pair's upper bound."
+  },
+  {
+   "id": "ltcg_breakpoints",
+   "year": 2025,
+   "filing": "mfj",
+   "value": {
+    "zero_rate_max": 96700,
+    "fifteen_rate_max": 600050
+   },
+   "source": {
+    "doc": "Rev. Proc. 2024-40",
+    "section": "\u00a72.03 (Maximum Capital Gains Rate, \u00a71(j)(5))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "Married Individuals Filing Joint Returns and Surviving Spouse $96,700 $600,050"
+   },
+   "notes": "Taxable-income breakpoints: 0% up to zero_rate_max, 15% up to fifteen_rate_max, 20% above. NIIT (3.8%) is separate."
+  },
+  {
+   "id": "ltcg_breakpoints",
+   "year": 2025,
+   "filing": "single",
+   "value": {
+    "zero_rate_max": 48350,
+    "fifteen_rate_max": 533400
+   },
+   "source": {
+    "doc": "Rev. Proc. 2024-40",
+    "section": "\u00a72.03",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "All Other Individuals $48,350 $533,400"
+   },
+   "notes": "'All Other Individuals' row = single."
+  },
+  {
+   "id": "ltcg_breakpoints",
+   "year": 2026,
+   "filing": "mfj",
+   "value": {
+    "zero_rate_max": 98900,
+    "fifteen_rate_max": 613700
+   },
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.03 (Maximum Capital Gains Rate, \u00a71(h), \u00a71(j)(5))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Married Individuals Filing Joint Returns and Surviving Spouse $98,900 $613,700"
+   },
+   "notes": ""
+  },
+  {
+   "id": "ltcg_breakpoints",
+   "year": 2026,
+   "filing": "single",
+   "value": {
+    "zero_rate_max": 49450,
+    "fifteen_rate_max": 545500
+   },
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.03",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "All Other Individuals $49,450 $545,500"
+   },
+   "notes": "'All Other Individuals' row = single. Note the 15% ceiling is NOT the 35% bracket edge; it is a separately indexed \u00a71(j)(5)(B) amount."
+  },
+  {
+   "id": "standard_deduction",
+   "year": 2025,
+   "filing": "mfj",
+   "value": 31500,
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770102(b); Rev. Proc. 2025-32",
+    "section": "OBBBA \u00a770102(b)-(c); Rev. Proc. 2025-32 \u00a73.01 (removing Rev. Proc. 2024-40 \u00a72.15(1))",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Married Individuals Filing Joint Returns and Surviving Spouses $31,500",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770102(b)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "by striking '$18,000' ... and inserting '$23,625'"
+     },
+     {
+      "doc": "Rev. Proc. 2024-40 \u00a72.15(1) (SUPERSEDED)",
+      "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+      "quote": "Married Individuals Filing Joint Returns and Surviving Spouses (\u00a7 1(j)(2)(A)) $30,000"
+     }
+    ]
+   },
+   "notes": "OBBBA raised 2025 from $30,000 (Rev. Proc. 2024-40) to $31,500; effective for taxable years beginning after Dec 31, 2024. Statute sets single base $15,750 and MFJ = 2x via \u00a763(c)(2)(A)."
+  },
+  {
+   "id": "standard_deduction",
+   "year": 2025,
+   "filing": "single",
+   "value": 15750,
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a73.01",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Unmarried Individuals (other than Surviving Spouses and Heads of Households) (\u00a7 1(j)(2)(C)) $15,750",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770102(b)(2)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "by striking '$12,000' both places it appears ... and inserting '$15,750'"
+     },
+     {
+      "doc": "Rev. Proc. 2024-40 \u00a72.15(1) (SUPERSEDED)",
+      "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+      "quote": "Unmarried Individuals ... $15,000"
+     }
+    ]
+   },
+   "notes": "Was $15,000 under Rev. Proc. 2024-40; superseded by OBBBA."
+  },
+  {
+   "id": "standard_deduction",
+   "year": 2026,
+   "filing": "mfj",
+   "value": 32200,
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.14(1)",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Married Individuals Filing Joint Returns and Surviving Spouses (\u00a7 1(j)(2)(A)) $32,200"
+   },
+   "notes": ""
+  },
+  {
+   "id": "standard_deduction",
+   "year": 2026,
+   "filing": "single",
+   "value": 16100,
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.14(1)",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "Unmarried Individuals (other than Surviving Spouses and Heads of Households) (\u00a7 1(j)(2)(C)) $16,100"
+   },
+   "notes": ""
+  },
+  {
+   "id": "additional_std_deduction_65",
+   "year": 2025,
+   "filing": "mfj",
+   "value": 1600,
+   "source": {
+    "doc": "Rev. Proc. 2024-40",
+    "section": "\u00a72.15(3) Aged or blind",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "the additional standard deduction amount under \u00a7 63(f) for the aged or the blind is $1,600",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040",
+      "section": "Standard Deduction Chart for People Who Were Born Before January 2, 1961",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly ... 1 $33,100 ... 2 34,700"
+     }
+    ]
+   },
+   "notes": "Per qualifying person (65+ or blind; a person both 65+ and blind gets two). Not changed by OBBBA; Rev. Proc. 2025-32 did not remove \u00a72.15(3). 2025 1040 chart confirms $31,500 + $1,600 = $33,100."
+  },
+  {
+   "id": "additional_std_deduction_65",
+   "year": 2025,
+   "filing": "single",
+   "value": 2000,
+   "source": {
+    "doc": "Rev. Proc. 2024-40",
+    "section": "\u00a72.15(3)",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-24-40.pdf",
+    "quote": "The additional standard deduction amount is increased to $2,000 if the individual is also unmarried and not a surviving spouse",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Single ... 1 $17,750"
+     }
+    ]
+   },
+   "notes": "Chart: $15,750 + $2,000 = $17,750."
+  },
+  {
+   "id": "additional_std_deduction_65",
+   "year": 2026,
+   "filing": "mfj",
+   "value": 1650,
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.14(3) Aged or blind",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "the additional standard deduction amount under \u00a7 63(f) for the aged or the blind is $1,650"
+   },
+   "notes": "Per qualifying spouse."
+  },
+  {
+   "id": "additional_std_deduction_65",
+   "year": 2026,
+   "filing": "single",
+   "value": 2050,
+   "source": {
+    "doc": "Rev. Proc. 2025-32",
+    "section": "\u00a74.14(3)",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "quote": "The additional standard deduction amount is increased to $2,050 if the individual is also unmarried and not a surviving spouse"
+   },
+   "notes": ""
+  },
+  {
+   "id": "senior_deduction",
+   "year": 2025,
+   "filing": "single",
+   "value": {
+    "amount_per_qualifying_person": 6000,
+    "age_requirement": "attained age 65 before the close of the taxable year (IRS: born before Jan 2, 1961 for 2025)",
+    "phaseout_threshold": {
+     "single": 75000,
+     "mfj": 150000
+    },
+    "phaseout_rate": 0.06,
+    "reduction_applies_per_person": true,
+    "magi_definition": "AGI increased by amounts excluded under IRC \u00a7911, \u00a7931, or \u00a7933 (Schedule 1-A Part I line 3 = Form 1040 line 11b + lines 2a-2d)",
+    "first_year": 2025,
+    "last_year": 2028,
+    "indexed": false,
+    "ssn_required": true,
+    "mfs_allowed": false,
+    "available_to_itemizers": true,
+    "irc_section": "\u00a7151(d)(5)(C) (NOT \u00a7151(f))"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770103(a), adding IRC \u00a7151(d)(5)(C)",
+    "section": "\u00a7151(d)(5)(C)(i)-(v)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "the $6,000 amount in clause (i) shall be reduced (but not below zero) by 6 percent of so much of the taxpayer's modified adjusted gross income as exceeds $75,000 ($150,000 in the case of a joint return)",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770103(a)",
+      "quote": "In the case of a taxable year beginning before January 1, 2029, there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf"
+     },
+     {
+      "doc": "2025 Schedule 1-A (Form 1040), Part V",
+      "section": "lines 31-37",
+      "url": "https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf",
+      "quote": "35 Subtract line 34 from $6,000 ... 36b If you are married filing jointly ... enter the amount from line 35"
+     },
+     {
+      "doc": "2025 Instructions for Form 1040, Schedule 1-A Part V",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "The maximum amount of the enhanced deduction for seniors is $6,000 per person ... the maximum amount ... is $12,000"
+     }
+    ]
+   },
+   "notes": "Effective for taxable years beginning after Dec 31, 2024 (OBBBA \u00a770103(c)); expires for years beginning on/after Jan 1, 2029, so 2025-2028. Reduction is applied to each person's $6,000: Schedule 1-A computes one reduced amount (line 35) and enters it once per qualifying spouse (36a, 36b), so a joint couple both 65+ loses 12% of MAGI over $150,000 combined; fully phased out at MAGI $250,000 (MFJ) / $175,000 (single). Married must file jointly. SSN must be valid for employment, issued before return due date. Dollar amounts not indexed. Below-the-line deduction (Form 1040 line 13b), allowed with standard or itemized deductions."
+  },
+  {
+   "id": "senior_deduction",
+   "year": 2025,
+   "filing": "mfj",
+   "value": {
+    "amount_per_qualifying_person": 6000,
+    "age_requirement": "attained age 65 before the close of the taxable year (IRS: born before Jan 2, 1961 for 2025)",
+    "phaseout_threshold": {
+     "single": 75000,
+     "mfj": 150000
+    },
+    "phaseout_rate": 0.06,
+    "reduction_applies_per_person": true,
+    "magi_definition": "AGI increased by amounts excluded under IRC \u00a7911, \u00a7931, or \u00a7933 (Schedule 1-A Part I line 3 = Form 1040 line 11b + lines 2a-2d)",
+    "first_year": 2025,
+    "last_year": 2028,
+    "indexed": false,
+    "ssn_required": true,
+    "mfs_allowed": false,
+    "available_to_itemizers": true,
+    "irc_section": "\u00a7151(d)(5)(C) (NOT \u00a7151(f))"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770103(a), adding IRC \u00a7151(d)(5)(C)",
+    "section": "\u00a7151(d)(5)(C)(i)-(v)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "the $6,000 amount in clause (i) shall be reduced (but not below zero) by 6 percent of so much of the taxpayer's modified adjusted gross income as exceeds $75,000 ($150,000 in the case of a joint return)",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770103(a)",
+      "quote": "In the case of a taxable year beginning before January 1, 2029, there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf"
+     },
+     {
+      "doc": "2025 Schedule 1-A (Form 1040), Part V",
+      "section": "lines 31-37",
+      "url": "https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf",
+      "quote": "35 Subtract line 34 from $6,000 ... 36b If you are married filing jointly ... enter the amount from line 35"
+     },
+     {
+      "doc": "2025 Instructions for Form 1040, Schedule 1-A Part V",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "The maximum amount of the enhanced deduction for seniors is $6,000 per person ... the maximum amount ... is $12,000"
+     }
+    ]
+   },
+   "notes": "Effective for taxable years beginning after Dec 31, 2024 (OBBBA \u00a770103(c)); expires for years beginning on/after Jan 1, 2029, so 2025-2028. Reduction is applied to each person's $6,000: Schedule 1-A computes one reduced amount (line 35) and enters it once per qualifying spouse (36a, 36b), so a joint couple both 65+ loses 12% of MAGI over $150,000 combined; fully phased out at MAGI $250,000 (MFJ) / $175,000 (single). Married must file jointly. SSN must be valid for employment, issued before return due date. Dollar amounts not indexed. Below-the-line deduction (Form 1040 line 13b), allowed with standard or itemized deductions."
+  },
+  {
+   "id": "senior_deduction",
+   "year": 2026,
+   "filing": "single",
+   "value": {
+    "amount_per_qualifying_person": 6000,
+    "age_requirement": "attained age 65 before the close of the taxable year (IRS: born before Jan 2, 1961 for 2025)",
+    "phaseout_threshold": {
+     "single": 75000,
+     "mfj": 150000
+    },
+    "phaseout_rate": 0.06,
+    "reduction_applies_per_person": true,
+    "magi_definition": "AGI increased by amounts excluded under IRC \u00a7911, \u00a7931, or \u00a7933 (Schedule 1-A Part I line 3 = Form 1040 line 11b + lines 2a-2d)",
+    "first_year": 2025,
+    "last_year": 2028,
+    "indexed": false,
+    "ssn_required": true,
+    "mfs_allowed": false,
+    "available_to_itemizers": true,
+    "irc_section": "\u00a7151(d)(5)(C) (NOT \u00a7151(f))"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770103(a), adding IRC \u00a7151(d)(5)(C)",
+    "section": "\u00a7151(d)(5)(C)(i)-(v)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "the $6,000 amount in clause (i) shall be reduced (but not below zero) by 6 percent of so much of the taxpayer's modified adjusted gross income as exceeds $75,000 ($150,000 in the case of a joint return)",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770103(a)",
+      "quote": "In the case of a taxable year beginning before January 1, 2029, there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf"
+     },
+     {
+      "doc": "2025 Schedule 1-A (Form 1040), Part V",
+      "section": "lines 31-37",
+      "url": "https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf",
+      "quote": "35 Subtract line 34 from $6,000 ... 36b If you are married filing jointly ... enter the amount from line 35"
+     },
+     {
+      "doc": "2025 Instructions for Form 1040, Schedule 1-A Part V",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "The maximum amount of the enhanced deduction for seniors is $6,000 per person ... the maximum amount ... is $12,000"
+     }
+    ]
+   },
+   "notes": "Effective for taxable years beginning after Dec 31, 2024 (OBBBA \u00a770103(c)); expires for years beginning on/after Jan 1, 2029, so 2025-2028. Reduction is applied to each person's $6,000: Schedule 1-A computes one reduced amount (line 35) and enters it once per qualifying spouse (36a, 36b), so a joint couple both 65+ loses 12% of MAGI over $150,000 combined; fully phased out at MAGI $250,000 (MFJ) / $175,000 (single). Married must file jointly. SSN must be valid for employment, issued before return due date. Dollar amounts not indexed. Below-the-line deduction (Form 1040 line 13b), allowed with standard or itemized deductions."
+  },
+  {
+   "id": "senior_deduction",
+   "year": 2026,
+   "filing": "mfj",
+   "value": {
+    "amount_per_qualifying_person": 6000,
+    "age_requirement": "attained age 65 before the close of the taxable year (IRS: born before Jan 2, 1961 for 2025)",
+    "phaseout_threshold": {
+     "single": 75000,
+     "mfj": 150000
+    },
+    "phaseout_rate": 0.06,
+    "reduction_applies_per_person": true,
+    "magi_definition": "AGI increased by amounts excluded under IRC \u00a7911, \u00a7931, or \u00a7933 (Schedule 1-A Part I line 3 = Form 1040 line 11b + lines 2a-2d)",
+    "first_year": 2025,
+    "last_year": 2028,
+    "indexed": false,
+    "ssn_required": true,
+    "mfs_allowed": false,
+    "available_to_itemizers": true,
+    "irc_section": "\u00a7151(d)(5)(C) (NOT \u00a7151(f))"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770103(a), adding IRC \u00a7151(d)(5)(C)",
+    "section": "\u00a7151(d)(5)(C)(i)-(v)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "the $6,000 amount in clause (i) shall be reduced (but not below zero) by 6 percent of so much of the taxpayer's modified adjusted gross income as exceeds $75,000 ($150,000 in the case of a joint return)",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770103(a)",
+      "quote": "In the case of a taxable year beginning before January 1, 2029, there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf"
+     },
+     {
+      "doc": "2025 Schedule 1-A (Form 1040), Part V",
+      "section": "lines 31-37",
+      "url": "https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf",
+      "quote": "35 Subtract line 34 from $6,000 ... 36b If you are married filing jointly ... enter the amount from line 35"
+     },
+     {
+      "doc": "2025 Instructions for Form 1040, Schedule 1-A Part V",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "The maximum amount of the enhanced deduction for seniors is $6,000 per person ... the maximum amount ... is $12,000"
+     }
+    ]
+   },
+   "notes": "Effective for taxable years beginning after Dec 31, 2024 (OBBBA \u00a770103(c)); expires for years beginning on/after Jan 1, 2029, so 2025-2028. Reduction is applied to each person's $6,000: Schedule 1-A computes one reduced amount (line 35) and enters it once per qualifying spouse (36a, 36b), so a joint couple both 65+ loses 12% of MAGI over $150,000 combined; fully phased out at MAGI $250,000 (MFJ) / $175,000 (single). Married must file jointly. SSN must be valid for employment, issued before return due date. Dollar amounts not indexed. Below-the-line deduction (Form 1040 line 13b), allowed with standard or itemized deductions."
+  },
+  {
+   "id": "ss_benefit_base_amounts",
+   "year": 2025,
+   "filing": "single",
+   "value": {
+    "base_amount": 25000,
+    "adjusted_base_amount": 34000,
+    "tier1_rate": 0.5,
+    "tier2_rate": 0.85,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a786(c)",
+    "section": "\u00a786(c)(1)-(2)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec86.htm",
+    "quote": "except as otherwise provided in this paragraph, $25,000",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040, Social Security Benefits Worksheet",
+      "section": "lines 8 and 10",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly, enter $32,000 ... Enter $12,000 if married filing jointly; $9,000 if single"
+     }
+    ]
+   },
+   "notes": "Statutory and fixed: \u00a786 contains no inflation-adjustment clause (not indexed) and was not amended by OBBBA (searched P.L. 119-21 text). MFS living together: base amounts are zero. Same values every year. 'Worksheet line 10' $9,000/$12,000 = adjusted base minus base. Statute text cited from govinfo USC 2023 edition; current OLRC site was down for maintenance."
+  },
+  {
+   "id": "ss_benefit_base_amounts",
+   "year": 2026,
+   "filing": "single",
+   "value": {
+    "base_amount": 25000,
+    "adjusted_base_amount": 34000,
+    "tier1_rate": 0.5,
+    "tier2_rate": 0.85,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a786(c)",
+    "section": "\u00a786(c)(1)-(2)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec86.htm",
+    "quote": "except as otherwise provided in this paragraph, $25,000",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040, Social Security Benefits Worksheet",
+      "section": "lines 8 and 10",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly, enter $32,000 ... Enter $12,000 if married filing jointly; $9,000 if single"
+     }
+    ]
+   },
+   "notes": "Statutory and fixed: \u00a786 contains no inflation-adjustment clause (not indexed) and was not amended by OBBBA (searched P.L. 119-21 text). MFS living together: base amounts are zero. Same values every year. 'Worksheet line 10' $9,000/$12,000 = adjusted base minus base. Statute text cited from govinfo USC 2023 edition; current OLRC site was down for maintenance."
+  },
+  {
+   "id": "ss_benefit_base_amounts",
+   "year": 2027,
+   "filing": "single",
+   "value": {
+    "base_amount": 25000,
+    "adjusted_base_amount": 34000,
+    "tier1_rate": 0.5,
+    "tier2_rate": 0.85,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a786(c)",
+    "section": "\u00a786(c)(1)-(2)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec86.htm",
+    "quote": "except as otherwise provided in this paragraph, $25,000",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040, Social Security Benefits Worksheet",
+      "section": "lines 8 and 10",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly, enter $32,000 ... Enter $12,000 if married filing jointly; $9,000 if single"
+     }
+    ]
+   },
+   "notes": "Statutory and fixed: \u00a786 contains no inflation-adjustment clause (not indexed) and was not amended by OBBBA (searched P.L. 119-21 text). MFS living together: base amounts are zero. Same values every year. 'Worksheet line 10' $9,000/$12,000 = adjusted base minus base. Statute text cited from govinfo USC 2023 edition; current OLRC site was down for maintenance."
+  },
+  {
+   "id": "ss_benefit_base_amounts",
+   "year": 2025,
+   "filing": "mfj",
+   "value": {
+    "base_amount": 32000,
+    "adjusted_base_amount": 44000,
+    "tier1_rate": 0.5,
+    "tier2_rate": 0.85,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a786(c)",
+    "section": "\u00a786(c)(1)-(2)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec86.htm",
+    "quote": "$32,000 in the case of a joint return",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040, Social Security Benefits Worksheet",
+      "section": "lines 8 and 10",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly, enter $32,000 ... Enter $12,000 if married filing jointly; $9,000 if single"
+     }
+    ]
+   },
+   "notes": "Statutory and fixed: \u00a786 contains no inflation-adjustment clause (not indexed) and was not amended by OBBBA (searched P.L. 119-21 text). MFS living together: base amounts are zero. Same values every year. 'Worksheet line 10' $9,000/$12,000 = adjusted base minus base. Statute text cited from govinfo USC 2023 edition; current OLRC site was down for maintenance."
+  },
+  {
+   "id": "ss_benefit_base_amounts",
+   "year": 2026,
+   "filing": "mfj",
+   "value": {
+    "base_amount": 32000,
+    "adjusted_base_amount": 44000,
+    "tier1_rate": 0.5,
+    "tier2_rate": 0.85,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a786(c)",
+    "section": "\u00a786(c)(1)-(2)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec86.htm",
+    "quote": "$32,000 in the case of a joint return",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040, Social Security Benefits Worksheet",
+      "section": "lines 8 and 10",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly, enter $32,000 ... Enter $12,000 if married filing jointly; $9,000 if single"
+     }
+    ]
+   },
+   "notes": "Statutory and fixed: \u00a786 contains no inflation-adjustment clause (not indexed) and was not amended by OBBBA (searched P.L. 119-21 text). MFS living together: base amounts are zero. Same values every year. 'Worksheet line 10' $9,000/$12,000 = adjusted base minus base. Statute text cited from govinfo USC 2023 edition; current OLRC site was down for maintenance."
+  },
+  {
+   "id": "ss_benefit_base_amounts",
+   "year": 2027,
+   "filing": "mfj",
+   "value": {
+    "base_amount": 32000,
+    "adjusted_base_amount": 44000,
+    "tier1_rate": 0.5,
+    "tier2_rate": 0.85,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a786(c)",
+    "section": "\u00a786(c)(1)-(2)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec86.htm",
+    "quote": "$32,000 in the case of a joint return",
+    "also": [
+     {
+      "doc": "2025 Instructions for Form 1040, Social Security Benefits Worksheet",
+      "section": "lines 8 and 10",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "Married filing jointly, enter $32,000 ... Enter $12,000 if married filing jointly; $9,000 if single"
+     }
+    ]
+   },
+   "notes": "Statutory and fixed: \u00a786 contains no inflation-adjustment clause (not indexed) and was not amended by OBBBA (searched P.L. 119-21 text). MFS living together: base amounts are zero. Same values every year. 'Worksheet line 10' $9,000/$12,000 = adjusted base minus base. Statute text cited from govinfo USC 2023 edition; current OLRC site was down for maintenance."
+  },
+  {
+   "id": "niit",
+   "year": 2025,
+   "filing": "single",
+   "value": {
+    "rate": 0.038,
+    "magi_threshold": 200000,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a71411(a)(1), (b)",
+    "section": "\u00a71411(b)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+    "quote": "in any other case, $200,000",
+    "also": [
+     {
+      "doc": "IRS Questions and Answers on the Net Investment Income Tax",
+      "url": "https://www.irs.gov/newsroom/questions-and-answers-on-the-net-investment-income-tax",
+      "quote": "Taxpayers should be aware that these threshold amounts are not indexed for inflation."
+     },
+     {
+      "doc": "IRC \u00a71411(a)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+      "quote": "a tax equal to 3.8 percent of the lesser of\u2014 (A) net investment income"
+     }
+    ]
+   },
+   "notes": "Tax = 3.8% x lesser of NII or (MAGI - threshold). MFS threshold $125,000. Not indexed."
+  },
+  {
+   "id": "niit",
+   "year": 2026,
+   "filing": "single",
+   "value": {
+    "rate": 0.038,
+    "magi_threshold": 200000,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a71411(a)(1), (b)",
+    "section": "\u00a71411(b)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+    "quote": "in any other case, $200,000",
+    "also": [
+     {
+      "doc": "IRS Questions and Answers on the Net Investment Income Tax",
+      "url": "https://www.irs.gov/newsroom/questions-and-answers-on-the-net-investment-income-tax",
+      "quote": "Taxpayers should be aware that these threshold amounts are not indexed for inflation."
+     },
+     {
+      "doc": "IRC \u00a71411(a)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+      "quote": "a tax equal to 3.8 percent of the lesser of\u2014 (A) net investment income"
+     }
+    ]
+   },
+   "notes": "Tax = 3.8% x lesser of NII or (MAGI - threshold). MFS threshold $125,000. Not indexed."
+  },
+  {
+   "id": "niit",
+   "year": 2027,
+   "filing": "single",
+   "value": {
+    "rate": 0.038,
+    "magi_threshold": 200000,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a71411(a)(1), (b)",
+    "section": "\u00a71411(b)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+    "quote": "in any other case, $200,000",
+    "also": [
+     {
+      "doc": "IRS Questions and Answers on the Net Investment Income Tax",
+      "url": "https://www.irs.gov/newsroom/questions-and-answers-on-the-net-investment-income-tax",
+      "quote": "Taxpayers should be aware that these threshold amounts are not indexed for inflation."
+     },
+     {
+      "doc": "IRC \u00a71411(a)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+      "quote": "a tax equal to 3.8 percent of the lesser of\u2014 (A) net investment income"
+     }
+    ]
+   },
+   "notes": "Tax = 3.8% x lesser of NII or (MAGI - threshold). MFS threshold $125,000. Not indexed."
+  },
+  {
+   "id": "niit",
+   "year": 2025,
+   "filing": "mfj",
+   "value": {
+    "rate": 0.038,
+    "magi_threshold": 250000,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a71411(a)(1), (b)",
+    "section": "\u00a71411(b)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+    "quote": "in the case of a taxpayer making a joint return ... $250,000",
+    "also": [
+     {
+      "doc": "IRS Questions and Answers on the Net Investment Income Tax",
+      "url": "https://www.irs.gov/newsroom/questions-and-answers-on-the-net-investment-income-tax",
+      "quote": "Taxpayers should be aware that these threshold amounts are not indexed for inflation."
+     },
+     {
+      "doc": "IRC \u00a71411(a)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+      "quote": "a tax equal to 3.8 percent of the lesser of\u2014 (A) net investment income"
+     }
+    ]
+   },
+   "notes": "Tax = 3.8% x lesser of NII or (MAGI - threshold). MFS threshold $125,000. Not indexed."
+  },
+  {
+   "id": "niit",
+   "year": 2026,
+   "filing": "mfj",
+   "value": {
+    "rate": 0.038,
+    "magi_threshold": 250000,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a71411(a)(1), (b)",
+    "section": "\u00a71411(b)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+    "quote": "in the case of a taxpayer making a joint return ... $250,000",
+    "also": [
+     {
+      "doc": "IRS Questions and Answers on the Net Investment Income Tax",
+      "url": "https://www.irs.gov/newsroom/questions-and-answers-on-the-net-investment-income-tax",
+      "quote": "Taxpayers should be aware that these threshold amounts are not indexed for inflation."
+     },
+     {
+      "doc": "IRC \u00a71411(a)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+      "quote": "a tax equal to 3.8 percent of the lesser of\u2014 (A) net investment income"
+     }
+    ]
+   },
+   "notes": "Tax = 3.8% x lesser of NII or (MAGI - threshold). MFS threshold $125,000. Not indexed."
+  },
+  {
+   "id": "niit",
+   "year": 2027,
+   "filing": "mfj",
+   "value": {
+    "rate": 0.038,
+    "magi_threshold": 250000,
+    "indexed": false
+   },
+   "source": {
+    "doc": "IRC \u00a71411(a)(1), (b)",
+    "section": "\u00a71411(b)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+    "quote": "in the case of a taxpayer making a joint return ... $250,000",
+    "also": [
+     {
+      "doc": "IRS Questions and Answers on the Net Investment Income Tax",
+      "url": "https://www.irs.gov/newsroom/questions-and-answers-on-the-net-investment-income-tax",
+      "quote": "Taxpayers should be aware that these threshold amounts are not indexed for inflation."
+     },
+     {
+      "doc": "IRC \u00a71411(a)(1)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap2A-sec1411.htm",
+      "quote": "a tax equal to 3.8 percent of the lesser of\u2014 (A) net investment income"
+     }
+    ]
+   },
+   "notes": "Tax = 3.8% x lesser of NII or (MAGI - threshold). MFS threshold $125,000. Not indexed."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2025,
+   "filing": "single",
+   "value": {
+    "cap": 40000,
+    "magi_threshold": 500000,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20000.0,
+     "magi_threshold": 250000.0,
+     "floor": 5000
+    },
+    "magi_definition": "AGI + amounts excluded under \u00a7911, \u00a7931, \u00a7933"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "Same cap for single and MFJ (no marriage doubling). MFS gets half of the cap, half the threshold, and (per IRS worksheet) half the $10,000 floor. Effective for taxable years beginning after Dec 31, 2024. 2025 IRS Schedule A instructions confirm 2025 numbers; 2026 numbers are straight from statute (not in Rev. Proc. 2025-32)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2025,
+   "filing": "mfj",
+   "value": {
+    "cap": 40000,
+    "magi_threshold": 500000,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20000.0,
+     "magi_threshold": 250000.0,
+     "floor": 5000
+    },
+    "magi_definition": "AGI + amounts excluded under \u00a7911, \u00a7931, \u00a7933"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "Same cap for single and MFJ (no marriage doubling). MFS gets half of the cap, half the threshold, and (per IRS worksheet) half the $10,000 floor. Effective for taxable years beginning after Dec 31, 2024. 2025 IRS Schedule A instructions confirm 2025 numbers; 2026 numbers are straight from statute (not in Rev. Proc. 2025-32)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2026,
+   "filing": "single",
+   "value": {
+    "cap": 40400,
+    "magi_threshold": 505000,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20200.0,
+     "magi_threshold": 252500.0,
+     "floor": 5000
+    },
+    "magi_definition": "AGI + amounts excluded under \u00a7911, \u00a7931, \u00a7933"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "Same cap for single and MFJ (no marriage doubling). MFS gets half of the cap, half the threshold, and (per IRS worksheet) half the $10,000 floor. Effective for taxable years beginning after Dec 31, 2024. 2025 IRS Schedule A instructions confirm 2025 numbers; 2026 numbers are straight from statute (not in Rev. Proc. 2025-32)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2026,
+   "filing": "mfj",
+   "value": {
+    "cap": 40400,
+    "magi_threshold": 505000,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20200.0,
+     "magi_threshold": 252500.0,
+     "floor": 5000
+    },
+    "magi_definition": "AGI + amounts excluded under \u00a7911, \u00a7931, \u00a7933"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "Same cap for single and MFJ (no marriage doubling). MFS gets half of the cap, half the threshold, and (per IRS worksheet) half the $10,000 floor. Effective for taxable years beginning after Dec 31, 2024. 2025 IRS Schedule A instructions confirm 2025 numbers; 2026 numbers are straight from statute (not in Rev. Proc. 2025-32)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2027,
+   "filing": "single",
+   "value": {
+    "cap": 40804,
+    "magi_threshold": 510050.0,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20402.0,
+     "magi_threshold": 255025.0,
+     "floor": 5000
+    },
+    "derived": true
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "DERIVED, not published: statute says 101% of prior year's amount, and gives no rounding rule. IRS may round when it publishes; treat cents as unconfirmed. CORRECTED 2026-10-21: threshold is 101% of the prior year (IRC \u00a7164(b)(7)(B)(ii)(III)); 2027 = 510,050, not 505,050 (arithmetic slip in the original research, caught by the clean-room comparison)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2027,
+   "filing": "mfj",
+   "value": {
+    "cap": 40804,
+    "magi_threshold": 510050.0,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20402.0,
+     "magi_threshold": 255025.0,
+     "floor": 5000
+    },
+    "derived": true
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "DERIVED, not published: statute says 101% of prior year's amount, and gives no rounding rule. IRS may round when it publishes; treat cents as unconfirmed. CORRECTED 2026-10-21: threshold is 101% of the prior year (IRC \u00a7164(b)(7)(B)(ii)(III)); 2027 = 510,050, not 505,050 (arithmetic slip in the original research, caught by the clean-room comparison)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2028,
+   "filing": "single",
+   "value": {
+    "cap": 41212.04,
+    "magi_threshold": 515150.5,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20606.02,
+     "magi_threshold": 257575.25,
+     "floor": 5000
+    },
+    "derived": true
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "DERIVED, not published: statute says 101% of prior year's amount, and gives no rounding rule. IRS may round when it publishes; treat cents as unconfirmed. CORRECTED 2026-10-21: threshold is 101% of the prior year (IRC \u00a7164(b)(7)(B)(ii)(III)); 2027 = 510,050, not 505,050 (arithmetic slip in the original research, caught by the clean-room comparison)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2028,
+   "filing": "mfj",
+   "value": {
+    "cap": 41212.04,
+    "magi_threshold": 515150.5,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20606.02,
+     "magi_threshold": 257575.25,
+     "floor": 5000
+    },
+    "derived": true
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "DERIVED, not published: statute says 101% of prior year's amount, and gives no rounding rule. IRS may round when it publishes; treat cents as unconfirmed. CORRECTED 2026-10-21: threshold is 101% of the prior year (IRC \u00a7164(b)(7)(B)(ii)(III)); 2027 = 510,050, not 505,050 (arithmetic slip in the original research, caught by the clean-room comparison)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2029,
+   "filing": "single",
+   "value": {
+    "cap": 41624.1604,
+    "magi_threshold": 520302.005,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20812.0802,
+     "magi_threshold": 260151.0025,
+     "floor": 5000
+    },
+    "derived": true
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "DERIVED, not published: statute says 101% of prior year's amount, and gives no rounding rule. IRS may round when it publishes; treat cents as unconfirmed. CORRECTED 2026-10-21: threshold is 101% of the prior year (IRC \u00a7164(b)(7)(B)(ii)(III)); 2027 = 510,050, not 505,050 (arithmetic slip in the original research, caught by the clean-room comparison)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2029,
+   "filing": "mfj",
+   "value": {
+    "cap": 41624.1604,
+    "magi_threshold": 520302.005,
+    "phasedown_rate": 0.3,
+    "floor": 10000,
+    "mfs": {
+     "cap": 20812.0802,
+     "magi_threshold": 260151.0025,
+     "floor": 5000
+    },
+    "derived": true
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "DERIVED, not published: statute says 101% of prior year's amount, and gives no rounding rule. IRS may round when it publishes; treat cents as unconfirmed. CORRECTED 2026-10-21: threshold is 101% of the prior year (IRC \u00a7164(b)(7)(B)(ii)(III)); 2027 = 510,050, not 505,050 (arithmetic slip in the original research, caught by the clean-room comparison)."
+  },
+  {
+   "id": "salt_cap",
+   "year": 2030,
+   "filing": "all",
+   "value": {
+    "cap": 10000,
+    "mfs_cap": 5000,
+    "phasedown": null
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770120, amending IRC \u00a7164(b)(6) and adding \u00a7164(b)(7)",
+    "section": "\u00a7164(b)(7)(A)-(B)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "in the case of any taxable year beginning in calendar year 2026, $40,400",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "the applicable limitation amount shall be reduced by 30 percent of the excess (if any) of the taxpayer's modified adjusted gross income over the threshold amount"
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "The reduction under clause (i) shall not result in the applicable limitation amount being less than $10,000."
+     },
+     {
+      "doc": "P.L. 119-21 \u00a770120(b)",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+      "quote": "in the case of any taxable year beginning after calendar year 2029, $10,000."
+     },
+     {
+      "doc": "2025 Instructions for Schedule A, What's New / SALT worksheet",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "increased to $40,000 ($20,000 if married filing separately) ... will not be reduced below $10,000 ($5,000 if married filing separately)"
+     }
+    ]
+   },
+   "notes": "From taxable years beginning after 2029 the cap reverts to $10,000 ($5,000 MFS) permanently (TCJA's 'before January 1, 2026' sunset was struck), and the MAGI phasedown applies only to years beginning before Jan 1, 2030."
+  },
+  {
+   "id": "charitable_floor_0_5pct",
+   "year": 2026,
+   "filing": "all",
+   "value": {
+    "floor_pct_of_contribution_base": 0.005,
+    "first_year": 2026
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770425(a), adding IRC \u00a7170(b)(1)(I)",
+    "section": "\u00a7170(b)(1)(I); effective \u00a770425(c)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "shall be allowed only to the extent that the aggregate of such contributions exceeds 0.5 percent of the taxpayer's contribution base"
+   },
+   "notes": "Applies to itemized charitable deductions of individuals for taxable years beginning after Dec 31, 2025. Base is 'contribution base' (AGI computed without any NOL carryback, \u00a7170(b)(1)(H)), which equals AGI for most retirees. Disallowed amounts carry forward only from years where a percentage limit is exceeded (\u00a7170(d)(1)(C)). Also permanent: 60% AGI limit on cash gifts (\u00a770425(b))."
+  },
+  {
+   "id": "itemized_2_37_limit",
+   "year": 2026,
+   "filing": "all",
+   "value": {
+    "fraction": "2/37",
+    "reduction": "2/37 x lesser of (itemized deductions) or (taxable income + itemized deductions - start of 37% bracket)",
+    "bracket_start_2026": {
+     "mfj": 768700,
+     "single": 640600
+    },
+    "first_year": 2026
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770111, rewriting IRC \u00a768",
+    "section": "\u00a768(a)-(b); effective \u00a770111(c)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "shall be reduced by 2\u204437 of the lesser of\u2014 (1) such amount of itemized deductions, or (2) so much of the taxable income"
+   },
+   "notes": "Replaces the old Pease limitation. Applied after all other itemized-deduction limitations (\u00a768(b)); does not affect the \u00a7199A deduction. 37% bracket start values from Rev. Proc. 2025-32 \u00a74.01."
+  },
+  {
+   "id": "nonitemizer_charitable_deduction",
+   "year": 2026,
+   "filing": "mfj",
+   "value": 2000,
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770424, amending IRC \u00a7170(p)",
+    "section": "\u00a7170(p); effective \u00a770424(b)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "by striking '$300 ($600' and inserting '$1,000 ($2,000'",
+    "also": [
+     {
+      "doc": "IRC \u00a7170(p) (pre-OBBBA text)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partVI-sec170.htm",
+      "quote": "contributions made in cash during such taxable year ... to an organization described in section 170(b)(1)(A) and not\u2014 (1) to an organization described in section 509(a)(3)"
+     }
+    ]
+   },
+   "notes": "$1,000 single / $2,000 joint, cash gifts only to public charities, not to supporting orgs or donor-advised funds. 'beginning in 2021' was struck, so permanent from taxable years beginning after Dec 31, 2025. Not indexed. OBBBA \u00a770425(a)(3) makes it computed without regard to the 0.5% floor."
+  },
+  {
+   "id": "nonitemizer_charitable_deduction",
+   "year": 2026,
+   "filing": "single",
+   "value": 1000,
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770424, amending IRC \u00a7170(p)",
+    "section": "\u00a7170(p); effective \u00a770424(b)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "by striking '$300 ($600' and inserting '$1,000 ($2,000'",
+    "also": [
+     {
+      "doc": "IRC \u00a7170(p) (pre-OBBBA text)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partVI-sec170.htm",
+      "quote": "contributions made in cash during such taxable year ... to an organization described in section 170(b)(1)(A) and not\u2014 (1) to an organization described in section 509(a)(3)"
+     }
+    ]
+   },
+   "notes": "$1,000 single / $2,000 joint, cash gifts only to public charities, not to supporting orgs or donor-advised funds. 'beginning in 2021' was struck, so permanent from taxable years beginning after Dec 31, 2025. Not indexed. OBBBA \u00a770425(a)(3) makes it computed without regard to the 0.5% floor."
+  },
+  {
+   "id": "medical_expense_floor",
+   "year": 2025,
+   "filing": "all",
+   "value": 0.075,
+   "source": {
+    "doc": "IRC \u00a7213(a)",
+    "section": "\u00a7213(a)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partVII-sec213.htm",
+    "quote": "to the extent that such expenses exceed 7.5 percent of adjusted gross income",
+    "also": [
+     {
+      "doc": "2025 Instructions for Schedule A",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "expenses that exceeds 7.5% of the amount of your adjusted gross income"
+     }
+    ]
+   },
+   "notes": "Permanent in statute; not amended by OBBBA."
+  },
+  {
+   "id": "medical_expense_floor",
+   "year": 2026,
+   "filing": "all",
+   "value": 0.075,
+   "source": {
+    "doc": "IRC \u00a7213(a)",
+    "section": "\u00a7213(a)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partVII-sec213.htm",
+    "quote": "to the extent that such expenses exceed 7.5 percent of adjusted gross income",
+    "also": [
+     {
+      "doc": "2025 Instructions for Schedule A",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "expenses that exceeds 7.5% of the amount of your adjusted gross income"
+     }
+    ]
+   },
+   "notes": "Permanent in statute; not amended by OBBBA."
+  },
+  {
+   "id": "medical_expense_floor",
+   "year": 2027,
+   "filing": "all",
+   "value": 0.075,
+   "source": {
+    "doc": "IRC \u00a7213(a)",
+    "section": "\u00a7213(a)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partVII-sec213.htm",
+    "quote": "to the extent that such expenses exceed 7.5 percent of adjusted gross income",
+    "also": [
+     {
+      "doc": "2025 Instructions for Schedule A",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040sca.pdf",
+      "quote": "expenses that exceeds 7.5% of the amount of your adjusted gross income"
+     }
+    ]
+   },
+   "notes": "Permanent in statute; not amended by OBBBA."
+  },
+  {
+   "id": "qcd_limit",
+   "year": 2025,
+   "filing": "per_ira_owner",
+   "value": {
+    "annual_limit": 108000,
+    "split_interest_one_time": 54000,
+    "min_age": 70.5
+   },
+   "source": {
+    "doc": "IRS Notice 2024-80",
+    "section": "limitations paragraph on \u00a7408(d)(8)",
+    "url": "https://www.irs.gov/pub/irs-drop/n-24-80.pdf",
+    "quote": "The aggregate amount of qualified charitable distributions ... under section 408(d)(8)(A) is increased from $105,000 to $108,000",
+    "also": [
+     {
+      "doc": "Notice 2024-80",
+      "url": "https://www.irs.gov/pub/irs-drop/n-24-80.pdf",
+      "quote": "made directly to a splitinterest entity ... pursuant to a one-time election is increased from $53,000 to $54,000"
+     },
+     {
+      "doc": "IRC \u00a7408(d)(8)(B)(ii)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapD-partI-subpartA-sec408.htm",
+      "quote": "made on or after the date that the individual for whose benefit the plan is maintained has attained age 70\u00bd"
+     }
+    ]
+   },
+   "notes": "Per IRA owner (each spouse has own limit). Age 70\u00bd is NOT tied to the RMD age (73/75). Indexed per \u00a7408(d)(8)(G): C-CPI-U, base year 2022, rounded to NEAREST $1,000. Reduced by post-70\u00bd deductible IRA contributions (\u00a7408(d)(8)(A)). Split-interest amount counts toward the annual limit (one-time election)."
+  },
+  {
+   "id": "qcd_limit",
+   "year": 2026,
+   "filing": "per_ira_owner",
+   "value": {
+    "annual_limit": 111000,
+    "split_interest_one_time": 55000,
+    "min_age": 70.5
+   },
+   "source": {
+    "doc": "IRS Notice 2025-67",
+    "section": "limitations paragraph on \u00a7408(d)(8)",
+    "url": "https://www.irs.gov/pub/irs-drop/n-25-67.pdf",
+    "quote": "The aggregate amount of qualified charitable distributions ... under section 408(d)(8)(A) is increased from $108,000 to $111,000",
+    "also": [
+     {
+      "doc": "Notice 2025-67",
+      "url": "https://www.irs.gov/pub/irs-drop/n-25-67.pdf",
+      "quote": "made directly to a split-interest entity ... pursuant to a one-time election is increased from $54,000 to $55,000"
+     }
+    ]
+   },
+   "notes": "See 2025 entry. Notice 2025-67 is the 2026 retirement-limits notice (QCD figure is not in Rev. Proc. 2025-32)."
+  },
+  {
+   "id": "early_distribution_penalty",
+   "year": 2025,
+   "filing": "all",
+   "value": {
+    "rate": 0.1,
+    "age": 59.5,
+    "exceptions": {
+     "separation_from_service_age_55": "employer qualified plans only; NOT IRAs (\u00a772(t)(3)(A)); age 50 for qualified public safety employees (\u00a772(t)(10))",
+     "sepp": "substantially equal periodic payments over life/life expectancy; applies to IRAs and (after separation) to qualified plans (\u00a772(t)(3)(B))",
+     "death": "\u00a772(t)(2)(A)(ii)",
+     "disability": "\u00a772(t)(2)(A)(iii)",
+     "medical_over_agi_floor": "\u00a772(t)(2)(B)"
+    }
+   },
+   "source": {
+    "doc": "IRC \u00a772(t)",
+    "section": "\u00a772(t)(1), (2)(A)(i), (iv), (v); (3)(A)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+    "quote": "made to an employee after separation from service after attainment of age 55",
+    "also": [
+     {
+      "doc": "IRC \u00a772(t)(2)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "(i) made on or after the date on which the employee attains age 59\u00bd"
+     },
+     {
+      "doc": "IRC \u00a772(t)(2)(A)(iv)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "part of a series of substantially equal periodic payments (not less frequently than annually) made for the life (or life expectancy)"
+     },
+     {
+      "doc": "IRC \u00a772(t)(3)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "Subparagraphs (A)(v) and (C) of paragraph (2) shall not apply to distributions from an individual retirement plan."
+     }
+    ]
+   },
+   "notes": "Tax = 10% of the taxable portion. Age 55 rule: separation in or after the calendar year the employee turns 55 (Treasury/IRS reading; statute just says 'after attainment of age 55' - not separately verified in a primary IRS doc here). Statute text from govinfo USC 2023 edition (includes SECURE 2.0); OBBBA did not amend \u00a772(t) (searched P.L. 119-21 text). Other SECURE 2.0 exceptions (emergency $1,000, terminal illness, etc.) omitted."
+  },
+  {
+   "id": "early_distribution_penalty",
+   "year": 2026,
+   "filing": "all",
+   "value": {
+    "rate": 0.1,
+    "age": 59.5,
+    "exceptions": {
+     "separation_from_service_age_55": "employer qualified plans only; NOT IRAs (\u00a772(t)(3)(A)); age 50 for qualified public safety employees (\u00a772(t)(10))",
+     "sepp": "substantially equal periodic payments over life/life expectancy; applies to IRAs and (after separation) to qualified plans (\u00a772(t)(3)(B))",
+     "death": "\u00a772(t)(2)(A)(ii)",
+     "disability": "\u00a772(t)(2)(A)(iii)",
+     "medical_over_agi_floor": "\u00a772(t)(2)(B)"
+    }
+   },
+   "source": {
+    "doc": "IRC \u00a772(t)",
+    "section": "\u00a772(t)(1), (2)(A)(i), (iv), (v); (3)(A)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+    "quote": "made to an employee after separation from service after attainment of age 55",
+    "also": [
+     {
+      "doc": "IRC \u00a772(t)(2)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "(i) made on or after the date on which the employee attains age 59\u00bd"
+     },
+     {
+      "doc": "IRC \u00a772(t)(2)(A)(iv)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "part of a series of substantially equal periodic payments (not less frequently than annually) made for the life (or life expectancy)"
+     },
+     {
+      "doc": "IRC \u00a772(t)(3)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "Subparagraphs (A)(v) and (C) of paragraph (2) shall not apply to distributions from an individual retirement plan."
+     }
+    ]
+   },
+   "notes": "Tax = 10% of the taxable portion. Age 55 rule: separation in or after the calendar year the employee turns 55 (Treasury/IRS reading; statute just says 'after attainment of age 55' - not separately verified in a primary IRS doc here). Statute text from govinfo USC 2023 edition (includes SECURE 2.0); OBBBA did not amend \u00a772(t) (searched P.L. 119-21 text). Other SECURE 2.0 exceptions (emergency $1,000, terminal illness, etc.) omitted."
+  },
+  {
+   "id": "early_distribution_penalty",
+   "year": 2027,
+   "filing": "all",
+   "value": {
+    "rate": 0.1,
+    "age": 59.5,
+    "exceptions": {
+     "separation_from_service_age_55": "employer qualified plans only; NOT IRAs (\u00a772(t)(3)(A)); age 50 for qualified public safety employees (\u00a772(t)(10))",
+     "sepp": "substantially equal periodic payments over life/life expectancy; applies to IRAs and (after separation) to qualified plans (\u00a772(t)(3)(B))",
+     "death": "\u00a772(t)(2)(A)(ii)",
+     "disability": "\u00a772(t)(2)(A)(iii)",
+     "medical_over_agi_floor": "\u00a772(t)(2)(B)"
+    }
+   },
+   "source": {
+    "doc": "IRC \u00a772(t)",
+    "section": "\u00a772(t)(1), (2)(A)(i), (iv), (v); (3)(A)",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+    "quote": "made to an employee after separation from service after attainment of age 55",
+    "also": [
+     {
+      "doc": "IRC \u00a772(t)(2)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "(i) made on or after the date on which the employee attains age 59\u00bd"
+     },
+     {
+      "doc": "IRC \u00a772(t)(2)(A)(iv)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "part of a series of substantially equal periodic payments (not less frequently than annually) made for the life (or life expectancy)"
+     },
+     {
+      "doc": "IRC \u00a772(t)(3)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partII-sec72.htm",
+      "quote": "Subparagraphs (A)(v) and (C) of paragraph (2) shall not apply to distributions from an individual retirement plan."
+     }
+    ]
+   },
+   "notes": "Tax = 10% of the taxable portion. Age 55 rule: separation in or after the calendar year the employee turns 55 (Treasury/IRS reading; statute just says 'after attainment of age 55' - not separately verified in a primary IRS doc here). Statute text from govinfo USC 2023 edition (includes SECURE 2.0); OBBBA did not amend \u00a772(t) (searched P.L. 119-21 text). Other SECURE 2.0 exceptions (emergency $1,000, terminal illness, etc.) omitted."
+  },
+  {
+   "id": "tcja_rates_permanent",
+   "year": 2026,
+   "filing": "all",
+   "value": true,
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770101(a), amending IRC \u00a71(j)(1)",
+    "section": "\u00a770101(a), (c)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "Section 1(j) is amended\u2014 (1) in paragraph (1), by striking ', and before January 1, 2026'",
+    "also": [
+     {
+      "doc": "Rev. Proc. 2025-32 \u00a72.01",
+      "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+      "quote": "Section 70101 of the OBBBA amends \u00a7 1(j) to make the tax rate tables ... permanent."
+     }
+    ]
+   },
+   "notes": "Seven rates 10/12/22/24/32/35/37 permanent for taxable years beginning after Dec 31, 2025. Standard deduction increase also permanent (\u00a770102), personal exemption repeal permanent (\u00a770103)."
+  },
+  {
+   "id": "bracket_indexing_method",
+   "year": 2027,
+   "filing": "all",
+   "value": {
+    "index": "C-CPI-U (chained CPI-U, BLS), average of 12 months ending Aug 31 of prior calendar year (\u00a71(f)(3)-(6))",
+    "brackets_10_12_tops": "base year 2016 (default \u00a71(f)(3)) applied to the original 2018 table amounts in \u00a71(j)(2)",
+    "brackets_22_and_up": "base year 2017 (\u00a71(j)(3)(B)(i), as amended by OBBBA \u00a770101(b))",
+    "rounding": "down to multiple of $50; $25 for single and MFS (\u00a71(f)(7), \u00a71(j)(3)(B)(ii))",
+    "ltcg_breakpoints": "base 2017 applied to \u00a71(j)(5)(B) amounts, round down to $50 (\u00a71(j)(5)(C))",
+    "standard_deduction": "base 2024 applied to $15,750/$31,500, round down to $50 (\u00a763(c)(7)(B)(ii) as amended by OBBBA \u00a770102(b)(3)-(4))",
+    "additional_std_deduction": "base 1987 applied to $600/$750 (\u00a763(c)(4), \u00a763(f))",
+    "qcd": "base 2022, round to nearest $1,000 (\u00a7408(d)(8)(G))",
+    "not_indexed": [
+     "SS base amounts \u00a786",
+     "NIIT thresholds \u00a71411",
+     "senior deduction $6,000/$75k/$150k",
+     "nonitemizer charitable $1,000/$2,000",
+     "SALT (fixed 1%/yr growth instead)"
+    ]
+   },
+   "source": {
+    "doc": "IRC \u00a71(f)(3), \u00a71(j)(3)(B) as amended by P.L. 119-21 \u00a770101(b)",
+    "section": "\u00a71(f)(3); \u00a71(j)(3)(B)(i)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "solely for purposes of determining the dollar amounts at which any rate bracket higher than 12 percent ends and at which any rate bracket higher than 22 percent begins",
+    "also": [
+     {
+      "doc": "IRC \u00a71(f)(3)(A)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapA-partI-sec1.htm",
+      "quote": "the C-CPI-U for the preceding calendar year, exceeds (ii) the CPI for calendar year 2016"
+     },
+     {
+      "doc": "IRC \u00a71(j)(3)(B)(i) (pre-OBBBA)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapA-partI-sec1.htm",
+      "quote": "subsection (f)(3) shall be applied by substituting 'calendar year 2017' for 'calendar year 2016'"
+     },
+     {
+      "doc": "IRC \u00a763(c)(7)(B)(ii) (pre-OBBBA; OBBBA changed 2018->2025 and 2017->2024)",
+      "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title26/html/USCODE-2023-title26-subtitleA-chap1-subchapB-partI-sec63.htm",
+      "quote": "If any increase under this clause is not a multiple of $50, such increase shall be rounded to the next lowest multiple of $50."
+     }
+    ]
+   },
+   "notes": "Projection recipe: new amount = statutory base amount x (C-CPI-U[year-1] / C-CPI-U[base year]) [for the 2016 base, the denominator is CPI-2016 x (C-CPI-U-2016/CPI-2016) = C-CPI-U-2016], rounded down. Practical shortcut that matches IRS within rounding: prior-year amount x ratio of consecutive C-CPI-U Sept-Aug averages, but always recompute from the statutory base to avoid compounding rounding errors. The OBBBA change gives the 10% and 12% bracket tops one extra year of inflation (2026 jump ~4.0% vs ~2.3% for higher brackets), which is visible in 2025->2026: 23,850->24,800 vs 394,600->403,550."
+  },
+  {
+   "id": "ordinary_brackets",
+   "year": 2027,
+   "filing": "single",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "ltcg_breakpoints",
+   "year": 2027,
+   "filing": "single",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "standard_deduction",
+   "year": 2027,
+   "filing": "single",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "additional_std_deduction_65",
+   "year": 2027,
+   "filing": "single",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "ordinary_brackets",
+   "year": 2027,
+   "filing": "mfj",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "ltcg_breakpoints",
+   "year": 2027,
+   "filing": "mfj",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "standard_deduction",
+   "year": 2027,
+   "filing": "mfj",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "additional_std_deduction_65",
+   "year": 2027,
+   "filing": "mfj",
+   "value": null,
+   "source": null,
+   "notes": "Rev. Proc. for 2027 not yet published as of 2026-10-21."
+  },
+  {
+   "id": "qcd_limit",
+   "year": 2027,
+   "filing": "per_ira_owner",
+   "value": null,
+   "source": null,
+   "notes": "2027 COLA notice not yet published."
+  },
+  {
+   "id": "senior_deduction",
+   "year": 2027,
+   "filing": "single",
+   "value": {
+    "amount_per_qualifying_person": 6000,
+    "age_requirement": "attained age 65 before the close of the taxable year (IRS: born before Jan 2, 1961 for 2025)",
+    "phaseout_threshold": {
+     "single": 75000,
+     "mfj": 150000
+    },
+    "phaseout_rate": 0.06,
+    "reduction_applies_per_person": true,
+    "magi_definition": "AGI increased by amounts excluded under IRC \u00a7911, \u00a7931, or \u00a7933 (Schedule 1-A Part I line 3 = Form 1040 line 11b + lines 2a-2d)",
+    "first_year": 2025,
+    "last_year": 2028,
+    "indexed": false,
+    "ssn_required": true,
+    "mfs_allowed": false,
+    "available_to_itemizers": true,
+    "irc_section": "\u00a7151(d)(5)(C) (NOT \u00a7151(f))"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770103(a), adding IRC \u00a7151(d)(5)(C)",
+    "section": "\u00a7151(d)(5)(C)(i)-(v)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "the $6,000 amount in clause (i) shall be reduced (but not below zero) by 6 percent of so much of the taxpayer's modified adjusted gross income as exceeds $75,000 ($150,000 in the case of a joint return)",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770103(a)",
+      "quote": "In the case of a taxable year beginning before January 1, 2029, there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf"
+     },
+     {
+      "doc": "2025 Schedule 1-A (Form 1040), Part V",
+      "section": "lines 31-37",
+      "url": "https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf",
+      "quote": "35 Subtract line 34 from $6,000 ... 36b If you are married filing jointly ... enter the amount from line 35"
+     },
+     {
+      "doc": "2025 Instructions for Form 1040, Schedule 1-A Part V",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "The maximum amount of the enhanced deduction for seniors is $6,000 per person ... the maximum amount ... is $12,000"
+     }
+    ]
+   },
+   "notes": "Statutory, unindexed; applies 2025-2028, so 2027 = same as 2025/2026."
+  },
+  {
+   "id": "senior_deduction",
+   "year": 2027,
+   "filing": "mfj",
+   "value": {
+    "amount_per_qualifying_person": 6000,
+    "age_requirement": "attained age 65 before the close of the taxable year (IRS: born before Jan 2, 1961 for 2025)",
+    "phaseout_threshold": {
+     "single": 75000,
+     "mfj": 150000
+    },
+    "phaseout_rate": 0.06,
+    "reduction_applies_per_person": true,
+    "magi_definition": "AGI increased by amounts excluded under IRC \u00a7911, \u00a7931, or \u00a7933 (Schedule 1-A Part I line 3 = Form 1040 line 11b + lines 2a-2d)",
+    "first_year": 2025,
+    "last_year": 2028,
+    "indexed": false,
+    "ssn_required": true,
+    "mfs_allowed": false,
+    "available_to_itemizers": true,
+    "irc_section": "\u00a7151(d)(5)(C) (NOT \u00a7151(f))"
+   },
+   "source": {
+    "doc": "P.L. 119-21 (OBBBA) \u00a770103(a), adding IRC \u00a7151(d)(5)(C)",
+    "section": "\u00a7151(d)(5)(C)(i)-(v)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf",
+    "quote": "the $6,000 amount in clause (i) shall be reduced (but not below zero) by 6 percent of so much of the taxpayer's modified adjusted gross income as exceeds $75,000 ($150,000 in the case of a joint return)",
+    "also": [
+     {
+      "doc": "P.L. 119-21 \u00a770103(a)",
+      "quote": "In the case of a taxable year beginning before January 1, 2029, there shall be allowed a deduction in an amount equal to $6,000 for each qualified individual",
+      "url": "https://www.govinfo.gov/content/pkg/PLAW-119publ21/pdf/PLAW-119publ21.pdf"
+     },
+     {
+      "doc": "2025 Schedule 1-A (Form 1040), Part V",
+      "section": "lines 31-37",
+      "url": "https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf",
+      "quote": "35 Subtract line 34 from $6,000 ... 36b If you are married filing jointly ... enter the amount from line 35"
+     },
+     {
+      "doc": "2025 Instructions for Form 1040, Schedule 1-A Part V",
+      "url": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+      "quote": "The maximum amount of the enhanced deduction for seniors is $6,000 per person ... the maximum amount ... is $12,000"
+     }
+    ]
+   },
+   "notes": "Statutory, unindexed; applies 2025-2028, so 2027 = same as 2025/2026."
+  }
+ ],
+ "not_published": [
+  {
+   "item": "Rev. Proc. for tax year 2027 inflation adjustments (brackets, LTCG breakpoints, standard deduction, additional 65+ amount)",
+   "status": "NOT published as of 2026-10-21. IRS newsroom current-month list (checked 2026-10-21, latest IR-2026-125 of Oct 21) shows no 2027 inflation release. Last year's came Oct 9, 2025. Values left null.",
+   "url": "https://www.irs.gov/newsroom/news-releases-for-current-month"
+  },
+  {
+   "item": "2027 QCD limit and split-interest limit (2027 retirement-plan COLA Notice)",
+   "status": "NOT published as of 2026-10-21 (2026 Notice 2025-67 came in November 2025)."
+  },
+  {
+   "item": "2026 Schedule 1-A / Schedule A / Form 1040 instructions",
+   "status": "2026 forms not final; 2026 SALT and senior-deduction values here come from the statute, not from IRS forms."
+  },
+  {
+   "item": "SALT cap/threshold 2027-2029",
+   "status": "Not published by IRS; values in table are DERIVED from statute (x1.01 per year, no rounding rule in statute)."
+  }
+ ],
+ "flags": [
+  "SENIOR DEDUCTION SECTION: it is IRC \u00a7151(d)(5)(C), added by OBBBA \u00a770103(a) - NOT \u00a7151(f). The brief's guess was wrong.",
+  "SENIOR DEDUCTION PHASE-OUT IS PER PERSON: the 6% reduction applies to each $6,000 (Schedule 1-A line 35 is entered once for each qualifying spouse), so an MFJ couple both 65+ loses $0.12 per $1 of MAGI over $150,000; zero at $250,000. If only one spouse qualifies, zero at $250,000 too (6% of $100,000).",
+  "2025 STANDARD DEDUCTION CHANGED MID-YEAR: Rev. Proc. 2024-40 said $15,000/$30,000; OBBBA (July 4, 2025) raised it to $15,750/$31,500, confirmed by Rev. Proc. 2025-32 \u00a73.01 and the 2025 Form 1040 instructions. Use the OBBBA numbers. The 2025 additional 65+ amounts ($1,600/$2,000) were NOT changed.",
+  "BRACKET INDEXING CHANGED BY OBBBA \u00a770101(b): the 10% and 12% bracket tops now index from 2016 instead of 2017, so they grow differently from the higher brackets. An engine that applies one inflation factor to all thresholds will drift. 2026 shows it: 10%/12% tops +3.98%/+3.97%, 22%+ thresholds +2.27%.",
+  "SINGLE vs MFS rounding: single brackets round to $25 (not $50) under \u00a71(j)(3)(B)(ii), which is why single shows $201,775 and $256,225.",
+  "LTCG 15% ceiling for single ($545,500 in 2026) is a separate \u00a71(j)(5)(B) number, not tied to any ordinary bracket edge; don't derive it from brackets.",
+  "SALT MFS floor: statute's $10,000 floor is on the 'applicable limitation amount', which \u00a7164(b)(6) then halves for MFS; IRS 2025 Schedule A worksheet confirms MFS floor = $5,000 (worksheet line 9 then 'half the amount on line 9'). Single and MFJ get the SAME $40,000 cap (no doubling).",
+  "SALT 2027-2029 values are not published and the statute gives no rounding rule (101% of prior year). I computed exact values ($40,804; $41,212.04; $41,624.16; thresholds $505,050; $510,100.50; $515,201.51) - treat as provisional until IRS publishes forms. Note the threshold keeps indexing after 2029 but the phasedown stops applying, so it's moot.",
+  "0.5% charitable floor is measured on 'contribution base' (AGI without NOL carrybacks), not AGI, though they are the same for nearly all retirees.",
+  "QCDs are not 'charitable contributions' for \u00a7170 (excluded from income, \u00a7408(d)(8)(E)), so neither the 0.5% floor nor the 2/37 limit touches them - a planning advantage, but this is my reading of the statute structure, not a quote from IRS guidance.",
+  "Age-55 separation exception does NOT apply to IRAs (\u00a772(t)(3)(A)). The 'year you turn 55' timing comes from IRS guidance I did not fetch here; the statute only says 'after attainment of age 55'.",
+  "US CODE CURRENCY: uscode.house.gov (OLRC) was in maintenance mode; it reports being current through P.L. 119-120 (Oct 7, 2026). I read unchanged sections (\u00a7\u00a71(f), 63, 72(t), 86, 170(p), 213, 408(d)(8), 1411) from govinfo's 2023 USC edition and applied OBBBA amendments from the enacted P.L. 119-21 text. I found no evidence of a later 2025-2026 law changing these parameters, but could not positively confirm against a current consolidated Code.",
+  "Rev. Proc. 2025-32 itself warns: if Code amendments for 2025 or 2026 are enacted after Oct 9, 2025, its adjustments may not apply. None found.",
+  "No conflicts found between primary sources for any value.",
+  "CORRECTION: salt_cap 2027-2029 magi_threshold recomputed as 505,000 x 1.01^n (2027 510,050; 2028 515,150.50; 2029 520,302.005); the first version had 505,050 for 2027."
+ ]
+}
