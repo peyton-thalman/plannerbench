@@ -119,3 +119,76 @@ def oracle(t, case):
         medicare = 12 * part_b("single", survivor["magi"]) - 24 * part_b("mfj", couple["magi"])
         return round(survivor["total_federal_tax"] - couple["total_federal_tax"] + medicare)
     return None
+
+
+# ---- The Gauntlet ------------------------------------------------------------------------------------------------
+
+def _years(plan):
+    return {y["year"]: y for y in plan["years"]}
+
+
+def gauntlet_oracle(t, case):
+    """A perfect tool user on one Gauntlet question: every answer read off real run_scenario / solve_roth_conversion
+    replies for the question's own facts. Returns (reply text, tool calls). The "tools are enough" check for the Gauntlet,
+    and the stand-in model for `run_models.py --set gauntlet --fake --tools`."""
+    import re
+
+    calls = []
+
+    def call(name, args):
+        out, err = t.call(name, args)
+        calls.append({"name": name, "input": args, "result": out, "is_error": err})
+        if err:
+            raise RuntimeError(f"{name}: {out}")
+        return json.loads(out)
+
+    if case["family"] == "trap":
+        return "The facts given can't settle this.\nPICK: CANT", calls
+    runs = {}
+    for letter, sc in case["scenarios"].items():
+        out = call("run_scenario", {"household": sc["household"], "plans": sc["plans"], "events": sc.get("events") or [], "assumptions": sc["assumptions"]})
+        runs[letter] = out["plans"][0]
+    yr = lambda l, y: _years(runs[l])[y]
+    ids = {name: pid for pid, name in case["names"].items()}
+    lines = []
+    if case["how_much"]:
+        sc = case["scenarios"]["A"]
+        s = call("solve_roth_conversion", {"household": sc["household"], "events": sc.get("events") or [], "assumptions": sc["assumptions"],
+                                           "from": case["how_much"]["from"], "max_years": case["how_much"]["maxYears"]})
+        # Flat plans are labeled "$85,000 a year for 9 years (2026–2034)"; the amounts list shows what was actually converted.
+        flat = [(m, x) for x in s["strategies"] if (m := re.match(r"\$([\d,]+) a year for (\d+) year", x["label"]))]
+        m, best = max(flat, key=lambda f: f[1]["after_tax_wealth_gain_todays_dollars"])
+        lines.append(f"PLAN: {m[1].replace(',', '')} x {m[2]}")
+    else:
+        wealth = {l: p["totals"]["after_tax_wealth_at_end_todays_dollars"] for l, p in runs.items()}
+        top = max(wealth.values())
+        near = [l for l in sorted(wealth, key=lambda l: -wealth[l]) if top - wealth[l] < 1000]
+        lines.append(f"PICK: CLOSE {','.join(near)}" if len(near) > 1 else f"PICK: {near[0]}")
+    for k, n in case["numbers"].items():
+        a = n["ask"]
+        if m := re.search(r"federal income tax would they owe for (\d{4}) under option (\w) than under option (\w)", a):
+            y, b, base = int(m[1]), m[2], m[3]
+            v = yr(b, y)["federal_tax"] - yr(base, y)["federal_tax"]
+        elif m := re.search(r"Medicare premiums for (\d{4}) under option (\w) than under option (\w)", a):
+            y, b, base = int(m[1]), m[2], m[3]
+            prem = lambda l: sum(x["premium"] for x in yr(l, y)["medicare"].values())
+            v = prem(b) - prem(base)
+        elif "converted" in a and "federal income tax" in a:
+            v = yr("P", 2026)["federal_tax"] - yr("A", 2026)["federal_tax"]
+        elif "converted" in a and "Medicare" in a:
+            prem = lambda l: sum(x["premium"] for x in yr(l, 2028)["medicare"].values())
+            v = prem("P") - prem("A")
+        elif m := re.search(r"Under option (\w), what is their total (\d{4}) senior deduction", a):
+            v = yr(m[1], int(m[2]))["senior_deduction"]
+        elif m := re.search(r"Under option (\w), how much of their (\d{4}) Social Security is taxable", a):
+            v = yr(m[1], int(m[2]))["taxable_social_security"]
+        elif m := re.search(r"Under option (\w), how much Social Security will (\w+) receive in total during (\d{4})", a):
+            v = yr(m[1], int(m[3]))["social_security_by_person"][ids[m[2]]]
+        elif m := re.search(r"What is (\w+)'s required minimum distribution for (\d{4})", a):
+            v = yr(next(iter(runs)), int(m[2]))["rmd_by_account"][f"{ids[m[1]]}_ira"]
+        elif m := re.search(r"required minimum distribution from (\w+)'s inherited IRA for (\d{4})", a):
+            v = yr(next(iter(runs)), int(m[2]))["rmd_by_account"][f"{ids[m[1]]}_inherited"]
+        else:
+            raise ValueError(f"{case['id']} {k}: no tool reading for {a!r}")
+        lines.append(f"{k}: {round(v)}")
+    return "From the planning tools.\n" + "\n".join(lines), calls

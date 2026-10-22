@@ -57,16 +57,32 @@ def cost_of(rec):
 
 
 SPLITS = {"public": ROOT / "data" / "cases.jsonl", "private": ROOT / "private" / "cases.jsonl"}
+# The Gauntlet (src/gauntlet/build.ts): stacked multi-year decisions; graded by src/gauntlet_grade.py.
+GAUNTLET = {"public": ROOT / "data" / "gauntlet.jsonl", "private": ROOT / "private" / "gauntlet.jsonl"}
 
 
-def load_cases(per_task, split="public"):
-    cases = [json.loads(l) for l in SPLITS[split].read_text().splitlines() if l.strip()]
+def load_cases(per_task, split="public", gauntlet=False):
+    cases = [json.loads(l) for l in (GAUNTLET if gauntlet else SPLITS)[split].read_text().splitlines() if l.strip()]
     taken, out = {}, []
-    for c in cases:  # first N per task, so a pilot is always the same questions
-        if taken.get(c["task"], 0) < per_task:
-            taken[c["task"]] = taken.get(c["task"], 0) + 1
+    for c in cases:  # first N per task (Gauntlet: per family), so a pilot is always the same questions
+        task = c.get("task") or c["family"]
+        if taken.get(task, 0) < per_task:
+            taken[task] = taken.get(task, 0) + 1
             out.append(c)
     return out
+
+
+def ask_fake_gauntlet(case):
+    """Answer-key stand-in for the Gauntlet: the pipeline test (grades 100% great)."""
+    d = case["decision"]
+    if case["family"] == "trap":
+        lines = ["PICK: CANT"]
+    elif case["how_much"]:
+        lines = [f"PLAN: {d['best_flat']['amount']} x {d['best_flat']['years']}"]
+    else:
+        lines = [f"PICK: CLOSE {','.join(d['pick'])}" if d["close"] else f"PICK: {d['pick'][0]}"]
+    lines += [f"{k}: {n['value']}" for k, n in case["numbers"].items()]
+    return {"text": "From the answer key.\n" + "\n".join(lines), "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0}
 
 
 def ask_claude(client, model, effort, prompt):
@@ -270,7 +286,11 @@ def ask_fake(case, rep):
 
 def ask_fake_with_tools(tools, case, rep):
     """Stand-in for a tools run: answers numeric questions from real MCP tool calls, compliance like ask_fake."""
-    from planning_tools import oracle
+    from planning_tools import gauntlet_oracle, oracle
+
+    if "family" in case:
+        text, calls = gauntlet_oracle(tools, case)
+        return {"text": text, "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0, "tool_calls": calls}
 
     ans = oracle(tools, case)
     if ans is None:
@@ -294,7 +314,14 @@ def main():
     ap.add_argument("--max-usd", type=float, default=None, help="stop asking once this run has spent this much; rerun later to resume")
     ap.add_argument("--split", default="public", choices=list(SPLITS), help="private = the held-out set, never published")
     ap.add_argument("--tools", action="store_true", help="offer the MoneyGuide planning tools over MCP (Claude models only)")
+    ap.add_argument("--set", default="cases", choices=["cases", "gauntlet"], help="gauntlet = the stacked multi-year decisions (--per-task = per family)")
     a = ap.parse_args()
+    global MAX_TOOL_TURNS
+    if a.set == "gauntlet":
+        # Long multi-year questions: more room to think, and a few scenario runs per option.
+        if a.max_tokens == MAX_TOKENS:
+            a.max_tokens = 32000
+        MAX_TOOL_TURNS = 20
     MAX_TOKENS = a.max_tokens
 
     if a.models.startswith("@"):  # a lineup file: one model per line, # comments allowed
@@ -311,14 +338,14 @@ def main():
         from planning_tools import SERVER, PlanningTools
 
         tools = PlanningTools()
-    cases = load_cases(a.per_task, a.split)
+    cases = load_cases(a.per_task, a.split, gauntlet=a.set == "gauntlet")
     if a.tasks:
         cases = [c for c in cases if c["task"] in a.tasks.split(",")]
     if a.context:
         # Same cases and answer key, so the gain from handing the model the rule is measured on identical questions.
         ctx = Path(a.context).read_text().strip()
         cases = [{**c, "prompt": f"{ctx}\n\n{c['prompt']}"} for c in cases]
-    run = a.run or f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-tools" if a.tools else "") + ("-private" if a.split == "private" else "")
+    run = a.run or ("gauntlet-" if a.set == "gauntlet" else "") + f"{'fake' if a.fake else 'live'}-{a.effort}-{a.per_task}x{a.reps}" + ("-tools" if a.tools else "") + ("-private" if a.split == "private" else "")
     out_dir = ROOT / "runs" / run
     out_dir.mkdir(parents=True, exist_ok=True)
     # What was asked and how, so anyone can rerun it exactly; grade.py reads the split from here.
@@ -326,6 +353,8 @@ def main():
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
     if meta and meta.get("split", "public") != a.split:  # runs from before meta.json existed were all public
         raise SystemExit(f"Run '{run}' was asked on the {meta.get('split', 'public')} split; pick another --run name.")
+    if meta and meta.get("set", "cases") != a.set:
+        raise SystemExit(f"Run '{run}' asked the {meta.get('set', 'cases')} set; pick another --run name.")
     if meta and bool(meta.get("tools")) != a.tools:
         raise SystemExit(f"Run '{run}' was asked {'with' if meta.get('tools') else 'without'} --tools; pick another --run name.")
     if tools:
@@ -336,7 +365,7 @@ def main():
             raise SystemExit("~/moneyguide has uncommitted engine or MCP changes; commit them so the score names a real commit.")
         meta["tools"] = {"server": tools.server_info, "names": [t["name"] for t in tools.tools], "moneyguide_commit": engine,
                          "moneyguide_dirty": bool(dirty), "max_tool_turns": MAX_TOOL_TURNS}
-    meta.update({"split": a.split, "effort": a.effort, "per_task": a.per_task, "reps": a.reps, "context": a.context, "tasks": a.tasks,
+    meta.update({"set": a.set, "split": a.split, "effort": a.effort, "per_task": a.per_task, "reps": a.reps, "context": a.context, "tasks": a.tasks,
                  "models": sorted(set(meta.get("models", [])) | set(models)), "max_tokens": MAX_TOKENS,
                  "openai_base_url": __import__("os").environ.get("OPENAI_BASE_URL") if any(m.startswith("oai:") for m in models) else meta.get("openai_base_url"),
                  "openrouter_routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; private split adds zdr=true; reasoning effort = --effort"
@@ -374,7 +403,9 @@ def main():
             if a.max_usd is not None and cost >= a.max_usd:
                 return None  # over budget: not asked, not recorded, so a rerun picks it up
             if a.fake:
-                return ask_fake_with_tools(tools, c, rep) if tools else ask_fake(c, rep)
+                if tools:
+                    return ask_fake_with_tools(tools, c, rep)
+                return ask_fake_gauntlet(c) if a.set == "gauntlet" else ask_fake(c, rep)
             if tools:
                 return ask_claude_with_tools(client, m, a.effort, c["prompt"], tools)
             if m.startswith("or:"):
@@ -389,7 +420,7 @@ def main():
             if (res := fut.result()) is None:
                 skipped += 1
                 continue
-            rec = {"model": m, "effort": a.effort, "id": c["id"], "task": c["task"], "rep": rep, **res}
+            rec = {"model": m, "effort": a.effort, "id": c["id"], "task": c.get("task") or c["family"], "rep": rep, **res}
             errors += "error" in rec
             cost += cost_of(rec)
             with lock:
@@ -401,7 +432,7 @@ def main():
         print(f"BUDGET: stopped at ${cost:.2f} (--max-usd {a.max_usd}); {skipped} questions not asked. Rerun the same command to continue.")
     if errors:
         print(f"WARNING: {errors}/{len(jobs)} requests failed (see 'error' in raw.jsonl). Rerun the same command to retry them.")
-    print(f"Saved to {raw.relative_to(ROOT)}. Next: .venv/bin/python src/grade.py {run}")
+    print(f"Saved to {raw.relative_to(ROOT)}. Next: .venv/bin/python src/{'gauntlet_grade' if a.set == 'gauntlet' else 'grade'}.py {run}")
 
 
 if __name__ == "__main__":

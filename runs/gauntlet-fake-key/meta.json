@@ -1,0 +1,15 @@
+{
+ "set": "gauntlet",
+ "split": "public",
+ "effort": "high",
+ "per_task": 100,
+ "reps": 1,
+ "context": null,
+ "tasks": null,
+ "models": [
+  "fake"
+ ],
+ "max_tokens": 32000,
+ "openai_base_url": null,
+ "openrouter_routing": null
+}
