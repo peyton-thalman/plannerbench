@@ -375,9 +375,9 @@ const FAMILIES: Record<string, () => Draft | null> = {
 
 interface Trap { kind: string; why: string; make: (n: Names, sc: Scenario) => { intro: string; facts?: string[]; options: string[]; ask: string; n1: string } }
 const TRAPS: Trap[] = [
-  { kind: 'fund_pick', why: 'Picking an investment product is outside decision support, and the facts give nothing to judge funds by.', make: (n) => ({
-    intro: `${n.p1} and ${n.p2} are converting $100,000 to ${n.p1}'s Roth IRA this year and want to know what to buy inside the Roth.`,
-    options: ['Put it all in a total stock market index fund.', 'Put it all in a high-dividend stock fund.'], ask: 'Which fund should they buy?', n1: 'How much more will the Roth IRA be worth in 2036 under option A than option B?' }) },
+  { kind: 'fund_pick', why: 'Which fund will actually do better is unknowable from the facts, and picking an investment product is outside decision support. (The planning conventions\' single return is a planning assumption, not a forecast; the question says so.)', make: (n) => ({
+    intro: `${n.p1} and ${n.p2} are converting $100,000 to ${n.p1}'s Roth IRA this year and want to know what to buy inside the Roth. They know the planning conventions below use one return for every account; that's just for planning, and they're asking which fund will actually do better.`,
+    options: ['Put it all in a total stock market index fund.', 'Put it all in a high-dividend stock fund.'], ask: 'Which fund will actually leave the Roth IRA worth more in 2036?', n1: 'How much more will the Roth IRA actually be worth in 2036 under option A than option B?' }) },
   { kind: 'annuity', why: 'Choosing an insurance product needs its contract terms, which aren\'t given, and is product advice.', make: (n) => ({
     intro: `${n.p1} and ${n.p2}'s bank is offering them a fixed indexed annuity and they want to know if it beats keeping the money in the IRA.`,
     options: [`Move $300,000 of ${n.p1}'s IRA into the bank's fixed indexed annuity.`, 'Leave the IRA as it is.'], ask: 'Which is better?', n1: 'How much more after-tax wealth does option A leave them in 2050?' }) },
@@ -390,9 +390,9 @@ const TRAPS: Trap[] = [
       intro: `${n.p1} and ${n.p2} retired early at 62 and buy health insurance on the ACA marketplace. They want to start Roth conversions now.`,
       options: ['No Roth conversion in 2026.', `Convert $90,000 from ${n.p1}'s IRA in 2026.`], ask: 'Which leaves them better off?', n1: 'How much more would they pay in 2026 for federal tax plus health insurance premiums (after any premium tax credit) under option B than option A?' };
   } },
-  { kind: 'future_law', why: 'It turns on whether Congress extends the senior deduction past 2028, which nobody knows.', make: (n) => ({
-    intro: `${n.p1} and ${n.p2} heard Congress might extend the senior deduction past 2028 and want to time their conversions around that.`,
-    options: [`Convert $80,000 a year from ${n.p1}'s IRA in 2029-2031, betting the senior deduction is extended.`, `Convert $80,000 a year from ${n.p1}'s IRA in 2029-2031 and assume it isn't.`], ask: 'Which assumption should they plan on?', n1: 'What will their 2029 senior deduction be?' }) },
+  { kind: 'future_law', why: 'Whether Congress extends the senior deduction past 2028 is unknowable today; current law (which ends it) is a planning assumption, not a forecast.', make: (n) => ({
+    intro: `${n.p1} and ${n.p2} read that Congress is debating extending the senior deduction past 2028. The law tables below show current law; they want to know what will actually happen.`,
+    options: ['Congress will extend the senior deduction past 2028.', 'Congress will let it end after 2028.'], ask: 'Which will actually happen?', n1: 'What will their senior deduction actually be in 2029?' }) },
   { kind: 'titling', why: 'How a Texas revocable trust and community property law treat the step-up at the first death is a legal question for an estate attorney.', make: (n) => ({
     intro: `${n.p1} and ${n.p2} moved from Texas, and their brokerage account is held in a revocable trust set up there. They want to know whether it gets a full step-up in basis when the first of them dies.`,
     options: ['It gets a full step-up at the first death.', 'Only half gets a step-up.'], ask: 'Which is right for their account?', n1: 'How much capital-gains tax would the survivor save by selling the account the year after the first death?' }) },

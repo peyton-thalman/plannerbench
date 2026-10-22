@@ -85,18 +85,20 @@ def ask_fake_gauntlet(case):
     return {"text": "From the answer key.\n" + "\n".join(lines), "stop_reason": "end_turn", "input_tokens": 0, "output_tokens": 0}
 
 
+def create(client, **kw):
+    """One Messages API call, streamed: the SDK refuses unstreamed requests whose token limit could take over 10 minutes
+    (the Gauntlet allows 32,000). The final message is the same object a plain call returns."""
+    with client.messages.stream(**kw) as s:
+        return s.get_final_message()
+
+
 def ask_claude(client, model, effort, prompt):
     import anthropic
 
     try:
         # No refusal fallbacks on purpose: a benchmark must score the model it names, so a decline is
         # recorded as a refusal instead of being silently re-answered by a different model.
-        r = client.messages.create(
-            model=model,
-            max_tokens=MAX_TOKENS,
-            output_config={"effort": effort},
-            messages=[{"role": "user", "content": prompt}],
-        )
+        r = create(client, model=model, max_tokens=MAX_TOKENS, output_config={"effort": effort}, messages=[{"role": "user", "content": prompt}])
     except anthropic.NotFoundError as e:
         return {"error": f"404 not found: {e.message}"}
     except anthropic.AuthenticationError as e:
@@ -129,13 +131,7 @@ def ask_claude_with_tools(client, model, effort, prompt, tools):
     rec = {"input_tokens": 0, "output_tokens": 0, "tool_calls": []}
     for _ in range(MAX_TOOL_TURNS):
         try:
-            r = client.messages.create(
-                model=model,
-                max_tokens=MAX_TOKENS,
-                output_config={"effort": effort},
-                tools=tools.list(),
-                messages=messages,
-            )
+            r = create(client, model=model, max_tokens=MAX_TOKENS, output_config={"effort": effort}, tools=tools.list(), messages=messages)
         except anthropic.NotFoundError as e:
             return {**rec, "error": f"404 not found: {e.message}"}
         except anthropic.AuthenticationError as e:
@@ -340,7 +336,7 @@ def main():
         tools = PlanningTools()
     cases = load_cases(a.per_task, a.split, gauntlet=a.set == "gauntlet")
     if a.tasks:
-        cases = [c for c in cases if c["task"] in a.tasks.split(",")]
+        cases = [c for c in cases if (c.get("task") or c["family"]) in a.tasks.split(",")]
     if a.context:
         # Same cases and answer key, so the gain from handing the model the rule is measured on identical questions.
         ctx = Path(a.context).read_text().strip()
