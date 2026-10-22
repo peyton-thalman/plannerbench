@@ -1,0 +1,31 @@
+{
+ "_about": "Numbers the home and method pages quote that don't come from a graded run. Each one names the file it is copied from; update both together.",
+ "cleanroom": {
+  "agree": 4000,
+  "of": 4000,
+  "within": "$1",
+  "source": "engine repo: verify/COMPARE.md"
+ },
+ "policyengine": {
+  "agree": 1600,
+  "of": 1600,
+  "within": "$2",
+  "private_agree": 400,
+  "private_of": 400,
+  "source": "checks/POLICYENGINE.md"
+ },
+ "gauntlet_keys": {
+  "agree": 203,
+  "of": 203,
+  "source": "checks/GAUNTLET.md"
+ },
+ "tools_check": {
+  "agree": 2750,
+  "of": 2750,
+  "source": "checks/tools_check.py (README log, 2026-10-21)"
+ },
+ "first_bug": {
+  "what": "MAGI exactly at the top IRMAA threshold was placed one tier low",
+  "source": "README log, 2026-10-20"
+ }
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Gauntlet · PlannerBench</title>
+<meta name="description" content="The planning engine as tools a model can call: how a tool that explains itself ended the model overruling it, and whole-household retirement decisions alone vs. with the engine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body data-page="gauntlet">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="gauntlet.html" aria-current="page">The Gauntlet</a>
+      <a href="method.html">Method</a>
+      <a href="built.html">How I built it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">With the engine</p>
+    <h1>Hand it the right answer, and it argues. Show it the rule, and it listens.</h1>
+    <div class="tldr">
+      <p class="label">In short</p>
+      <p>The planning engine is also a set of tools any model can call while it answers, over MCP (Model Context Protocol, the standard way to plug tools into AI models). A tool that only returned the right number got overruled. A tool that showed the rule and cited the IRS form line fixed every hard question. On whole-household decisions, both models tested got every decision and every number right with the engine.</p>
+    </div>
+  </section>
+
+  <section class="band" id="tools">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Step one · the benchmark’s hardest questions</p>
+        <h2>The same 50 questions, three ways</h2>
+        <p class="sub">These are the 50 hardest of the benchmark’s questions (multi-step and stacked), so Claude Haiku 5.5 scores lower here alone than its 77% across all of them. Tools 1.0 sent back only the answer; tools 1.1 sends back the answer, the rule behind it and the IRS form line. The tools are general calculators (federal tax, taxable Social Security, RMDs, claiming age, Medicare premiums, tax tables), not one per question, so the model still has to pick the inputs and combine the results.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="scores ladder" id="ladder">
+          <thead>
+            <tr><th scope="col">Claude Haiku 5.5</th><th scope="col">Public questions</th><th scope="col">Held-out questions</th><th scope="col" class="r">Dollars off per question, per year</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="ladder-note"></p>
+
+      <div class="worked tools-worked">
+        <div class="question">
+          <p class="label">With tools 1.0, on a senior-deduction question</p>
+          <blockquote class="quote" id="tools-quote">—</blockquote>
+          <dl class="answers" id="tools-answers"></dl>
+        </div>
+        <div class="form" aria-label="What tools 1.1 sent back">
+          <p class="label">What tools 1.1 sends back with the tax</p>
+          <ol class="lines" id="tools-lines"></ol>
+          <p class="rule-text" id="tools-rule">—</p>
+        </div>
+      </div>
+
+      <ul class="notes tools-notes">
+        <li><b>A right number wasn’t enough.</b> <span id="tools-whole">—</span></li>
+        <li><b>Showing the rule and its source was.</b> The engine’s answers didn’t change between 1.0 and 1.1. Only the reply did: it now works the deduction per person and names the form lines.</li>
+        <li><b>It holds on questions nobody tuned against.</b> <span id="tools-private">—</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="gauntlet">
+    <div class="section-head">
+      <p class="eyebrow">Step two · the Gauntlet</p>
+      <h2>Real retirement decisions, alone and with the engine</h2>
+      <p class="sub">The Gauntlet has 110 questions in 10 families: 77 public and 33 held back to check results later. The first run below asked one from each family plus a trap. Each question is a whole household (about 16 facts: Social Security, IRAs, a pension, a brokerage account) and a choice an advisor makes for real: whether and how much to convert to Roth, when to claim, how to give, how to empty an inherited IRA. Getting it right means stacking at least three rules across 25 years.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="scores ladder" id="gauntlet-table">
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">Fully right (decision and every number)</th><th scope="col" class="r">Ran out of room</th><th scope="col" class="r">Thinking per question</th><th scope="col" class="r">Cost per question</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="table-note" id="gauntlet-note"></p>
+
+    <div class="worked tools-worked">
+      <div class="question">
+        <p class="label">The same question, both ways</p>
+        <p class="prompt" id="gauntlet-intro">—</p>
+        <dl class="answers" id="gauntlet-side"></dl>
+      </div>
+      <div class="form">
+        <p class="label">Confident, wrong, and what it costs the household</p>
+        <ol class="lines" id="gauntlet-failures"></ol>
+      </div>
+    </div>
+
+    <ul class="notes tools-notes">
+      <li><b>The engine’s answers held.</b> <span id="gauntlet-overrides">—</span></li>
+      <li><b>Hard on purpose.</b> Code checks that no single tax rate and no skipped rule gets within 2% of the answer, and every key is recomputed by a second engine and by PolicyEngine-US.</li>
+      <li><b>Still small.</b> One question from each of the 10 families plus a trap, two models, one try each. The intervals are wide on purpose: this shows the gap, not a ranking. Other labs’ models haven’t been run.</li>
+      <li><b>Decision support, not advice.</b> The engine prices each choice; it never picks investments or products, and every answer ends with what to take to a professional.</li>
+    </ul>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="method.html"><span><span class="label">Next</span><b>Method: why you can trust the numbers</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=7"></script>
+</body>
+</html>

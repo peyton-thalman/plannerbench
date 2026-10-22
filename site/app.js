@@ -1,8 +1,10 @@
 // Fills the page from data/*.json, which src/build_site.py writes from the graded runs.
 (async () => {
   const get = (name) => fetch(`data/${name}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake, tools, toolsPrivate, gauntlet] = await Promise.all(
-    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake', 'tools', 'tools_private', 'gauntlet'].map(get));
+  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake, tools, toolsPrivate, gauntlet, harness, system] = await Promise.all(
+    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake', 'tools', 'tools_private', 'gauntlet', 'harness', 'system'].map(get));
+  // Every page shares this script; each block below runs only if its page has the element it fills.
+  const $ = (id) => document.getElementById(id);
 
   const pct = (x) => (x == null ? '—' : `${Math.round(x * 100)}%`);
   const usd = (x, cents = false) => '$' + Number(x).toLocaleString('en-US', { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
@@ -16,14 +18,95 @@
   const LEAD = 'claude-sonnet-5-5';
   const lead = models?.find((m) => m.model === LEAD) ?? models?.[0];
 
-  // Hero figures
-  const rule = ruleEffect?.find((r) => r.model === LEAD && r.task === 'senior_phaseout');
-  const fig = { single: lead && pct(lead.single_step_accuracy), stacked: lead && pct(lead.stacked_accuracy), rule: rule && pct(rule.with_rule),
-                questions: meta && meta.questions.toLocaleString('en-US') };
+  // Headline figures, wherever a page shows one (data-k="...")
+  const stages = tools?.hard.stages, gRows = gauntlet?.rows ?? [];
+  const gSum = (engine) => { const rs = gRows.filter((r) => r.engine === engine); return `${rs.reduce((t, r) => t + r.great, 0)}/${rs.reduce((t, r) => t + r.questions, 0)}`; };
+  // Models that gave the featured question's same wrong answer, counted once each, and the labs behind them
+  const misread = featured ? Object.entries(featured.replies).filter(([, r]) => r.mistake === 'combined senior phase-out').map(([id]) => id) : [];
+  const lab = (id) => (id.startsWith('or:') ? id.slice(3).split('/')[0] : 'anthropic');
+  const misreadNames = new Set(misread.map((id) => byId[id]?.name ?? id)), misreadLabs = new Set(misread.map(lab));
+  const h = harness?.[0], sys = system ?? {};
+  const fig = {
+    single: lead && pct(lead.single_step_accuracy), stacked: lead && pct(lead.stacked_accuracy),
+    questions: meta && meta.questions.toLocaleString('en-US'),
+    tools_from: stages && pct(stages[0].accuracy), tools_to: stages && pct(stages.at(-1).accuracy),
+    private_tools: toolsPrivate && `${pct(toolsPrivate.stages[0].accuracy)} → ${pct(toolsPrivate.stages.at(-1).accuracy)}`,
+    g_from: gRows.length ? gSum(false) : null, g_to: gRows.length ? gSum(true) : null,
+    g_worst: gauntlet && usd(Math.max(...gauntlet.failures.map((f) => f.lost))),
+    agree_models: misread.length ? String(misreadNames.size) : null,
+    agree_cap: misread.length ? `models from ${misreadLabs.size} labs gave the same wrong answer to the same question` : null,
+    cleanroom: sys.cleanroom && `${sys.cleanroom.agree.toLocaleString('en-US')} / ${sys.cleanroom.of.toLocaleString('en-US')}`,
+    harness: h && `${name(h.direct)} was asked the same ${h.questions} questions directly and through OpenRouter. It scored ${pct(h.direct_accuracy)} both ways, so routing doesn’t change scores.`,
+  };
   document.querySelectorAll('[data-k]').forEach((n) => { if (fig[n.dataset.k]) n.textContent = fig[n.dataset.k]; });
 
+  // Home: the system map. Each node's panel says what it is, why it exists and the number that proves it.
+  if ($('map-panel')) {
+    const sonnetG = gRows.find((r) => r.engine && r.model.includes('sonnet')), sonnetAlone = gRows.find((r) => !r.engine && r.model.includes('sonnet'));
+    const NODES = {
+      sources: ['Ground truth', 'Published rules',
+        'IRS forms and publications, SSA’s operating manual (POMS) and Medicare’s premium tables, for tax years 2025 and 2026. Every rule in the engine cites where it comes from.',
+        'When models disagree with the key, the published source decides, never a vote among models. That one rule settled every dispute so far.',
+        fig.agree_models, fig.agree_cap ? `${fig.agree_cap}; Schedule 1-A Part V showed the key was right` : '', 'results.html#worked'],
+      engine: ['The asset', 'The planning engine',
+        'Code for 2026 federal tax, taxable Social Security, required distributions and inherited IRAs, Medicare premiums, and 25-year retirement scenarios with a Roth-conversion solver. Every answer comes with a trace of the rules it used.',
+        'Models do arithmetic fine but don’t reliably know this year’s rules. So the rules live in tested code, and the model’s job becomes choosing inputs and explaining the result.',
+        fig.cleanroom, 'random households where a second, independently written engine agrees on every field, to the dollar', 'method.html'],
+      proof: ['Proof', 'Independent checks',
+        'A second engine written from the spec alone by an AI agent that was never allowed to read the first; PolicyEngine-US, an open-source tax model built by others; and rules that must hold for any household.',
+        'A benchmark graded against a buggy key grades your own bug. Independent builds catch what self-review can’t: the second engine found a real bug in a 2027 tax threshold on its first run.',
+        sys.policyengine && `${sys.policyengine.agree.toLocaleString('en-US')} / ${sys.policyengine.of.toLocaleString('en-US')}`, `tax answers that agree with PolicyEngine-US within ${sys.policyengine?.within ?? '$2'}`, 'method.html'],
+      bench: ['Measure', 'PlannerBench',
+        `${fig.questions ?? '2,800'} public questions across ${meta?.tasks ?? 14} tasks, plus a private held-out set, from one rule to many. A script grades every reply. ${models?.length ?? 7} model setups from ${new Set((models ?? []).map((m) => lab(m.model))).size || 5} labs so far.`,
+        'Find out exactly where models fail before building anything. It turned up one misreading of a 2025 rule behind most of the misses.',
+        fig.single && `${fig.single} → ${fig.stacked}`, 'Claude Sonnet 5.5 on one rule, then on several rules in one household', 'results.html'],
+      tools: ['Fix', 'MCP tools',
+        `The engine as tools any model can call over the Model Context Protocol: ${(tools?.tools ?? []).map((t) => t.replace(/_/g, ' ')).join(', ')}, plus a scenario runner and a Roth-conversion solver.`,
+        `Version 1.0 returned the right number, and the model replaced it with its own wrong rule on ${tools?.whole.overruled ?? 18} of its ${tools?.whole.misses ?? 22} misses. Version 1.1 shows the rule and cites the IRS form line. The lesson is about product design, not model size.`,
+        fig.tools_from && `${fig.tools_from} → ${fig.tools_to}`, `Claude Haiku 5.5 on the 50 hardest questions${fig.private_tools ? `; ${fig.private_tools} on held-out ones` : ''}`, 'gauntlet.html#tools'],
+      wizard: ['Use', 'Wizard',
+        'A live meeting-copilot demo: as an advisor and client talk, the intake form fills itself in, and a planning question asked out loud becomes an engine card a few seconds later.',
+        'Shows where the engine lives in a real workflow. Built to a generic intake form with fake households only; sensitive numbers are masked in the browser before any model sees them.',
+        'Frozen', 'features frozen on purpose: it’s the demo, the engine is the product', 'built.html#wizard'],
+      gauntlet: ['Prove it matters', 'The Gauntlet',
+        `${gauntlet?.families ?? 10} families of real decisions (Roth conversions, claiming age, giving, inherited IRAs) for whole households, each stacking three or more rules over 25 years. Code proves no shortcut lands within 2% of the answer.`,
+        'Single questions can be passed with a good guess. Decisions with dollars attached show what a mistake costs a family, and whether a model with the engine still overrules it.',
+        fig.g_from && `${fig.g_from} → ${fig.g_to}`, `decisions fully right, alone vs. with the engine${sonnetG && sonnetAlone ? `; Sonnet thought ${Math.round(sonnetAlone.output_tokens / sonnetG.output_tokens)}× less with it` : ''}`, 'gauntlet.html'],
+    };
+    const show = (key) => {
+      const [kind, title, what, why, proof, cap, href] = NODES[key];
+      $('mp-kind').textContent = kind; $('mp-title').textContent = title; $('mp-what').textContent = what; $('mp-why').textContent = why;
+      $('mp-proof').textContent = proof ?? '—'; $('mp-proof-cap').textContent = cap; $('mp-link').href = href;
+      document.querySelectorAll('.node').forEach((n) => n.setAttribute('aria-pressed', String(n.dataset.node === key)));
+    };
+    // On a phone the panel sits below the whole map, so bring it into view after a tap.
+    document.querySelectorAll('.node').forEach((n) => n.addEventListener('click', () => {
+      show(n.dataset.node);
+      if (innerWidth < 640) $('map-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }));
+    show('engine');
+  }
+
+  // Method: the proof stack, one card per independent check
+  if ($('proofs') && sys.cleanroom) {
+    const ratio = (o) => `${o.agree.toLocaleString('en-US')} / ${o.of.toLocaleString('en-US')}`;
+    const cards = [
+      [ratio(sys.cleanroom), 'A second engine, written blind', `An AI agent wrote a second engine in a different language from the written rules alone, and was never allowed to read the first. Both run on random households; every field of every year must agree within ${sys.cleanroom.within}. Its first run found a real bug in the main engine.`, sys.cleanroom.source],
+      [ratio(sys.policyengine), 'An outside tax model', `PolicyEngine-US, open-source and maintained by others, recomputes every tax answer; all agree within ${sys.policyengine.within}, the new senior deduction included. Held-out set: ${ratio({ agree: sys.policyengine.private_agree, of: sys.policyengine.private_of })}.`, sys.policyengine.source],
+      [ratio(sys.gauntlet_keys), 'Every Gauntlet option, recomputed', 'Each choice in every public Gauntlet question is rerun by the second engine and by PolicyEngine before the question can ship.', sys.gauntlet_keys.source],
+      [ratio(sys.tools_check), 'The tools can answer everything', 'Before any model used the tools, a script proved that calling them correctly reproduces every numeric answer in the benchmark.', sys.tools_check.source],
+      [h ? `${pct(h.direct_accuracy)} = ${pct(h.openrouter_accuracy)}` : '—', 'The harness is neutral', h ? `${name(h.direct)}, asked the same ${h.questions} questions directly and through OpenRouter, scored the same both ways.` : '', 'checks/HARNESS.md'],
+      ['REPRODUCED', 'One script rebuilds it all', 'reproduce.sh regenerates the questions, regrades every saved reply and rebuilds every number on this site. Any difference fails it.', 'reproduce.sh'],
+    ];
+    for (const [num, title, body, src] of cards) {
+      const c = el('div', 'proof-card');
+      c.append(el('b', null, num), el('span', 't', title), el('p', null, body), el('code', null, src));
+      $('proofs').append(c);
+    }
+  }
+
   // Worked question
-  if (featured) {
+  if (featured && $('featured-prompt')) {
     document.getElementById('featured-prompt').textContent = featured.prompt;
     const dl = document.getElementById('featured-answers');
     const row = (label, value, ok) => {
@@ -33,7 +116,8 @@
       d.append(dd); dl.append(d);
     };
     row('Answer key', usd(featured.answer));
-    for (const [m, r] of Object.entries(featured.replies)) row(name(m), usd(r.got), r.bucket === 'correct');
+    // A request that failed (rate limit, no reply) has no number to show and isn't graded right or wrong.
+    for (const [m, r] of Object.entries(featured.replies)) r.got == null ? row(name(m), 'No answer') : row(name(m), usd(r.got), r.bucket === 'correct');
     for (const [m, r] of Object.entries(featured.with_rule || {})) row(`${name(m)}, given the rule`, usd(r.got), r.bucket === 'correct');
 
     const s = featured.steps;
@@ -61,7 +145,7 @@
   }
 
   // Score table
-  if (models) {
+  if (models && $('scores')) {
     const tbody = document.querySelector('#scores tbody');
     const cols = ['single_step', 'multi_step', 'stacked', 'compliance'];
     const range = (lo, hi) => (lo == null ? '' : `${Math.round(lo * 100)}–${Math.round(hi * 100)}`);
@@ -88,7 +172,7 @@
   }
 
   // Dollars off: what each model's mistakes would cost a client who acted on them
-  if (models) {
+  if (models && $('dollars')) {
     const tbody = document.querySelector('#dollars tbody');
     const scored = models.filter((m) => m.dollars).sort((a, b) => a.dollars.dollars_off_per_question - b.dollars.dollars_off_per_question);
     for (const m of scored) {
@@ -123,7 +207,7 @@
   };
 
   // The Gauntlet: the same questions alone and with the engine's MCP tools (src/gauntlet_site.py)
-  if (gauntlet) {
+  if (gauntlet && $('gauntlet-table')) {
     const tbody = document.querySelector('#gauntlet-table tbody');
     for (const r of gauntlet.rows) {
       const tr = el('tr', r.engine ? 'best' : null);
@@ -134,7 +218,7 @@
       tbody.append(tr);
     }
     document.getElementById('gauntlet-note').textContent = `${gauntlet.questions} questions, one from each family plus a trap whose honest answer is “I can’t answer that.” `
-      + 'Ran out of room: used its whole 64,000-token budget thinking and never answered (scored as not right). Bars show 95% intervals.';
+      + 'Ran out of room: used its whole 64,000-token budget thinking and never answered (scored as not right). Sonnet alone shows 10 because one reply was cancelled to stay inside the run’s spending cap. Bars show 95% intervals.';
     const sb = gauntlet.side_by_side;
     document.getElementById('gauntlet-intro').textContent = sb.intro;
     const dl = document.getElementById('gauntlet-side');
@@ -160,7 +244,7 @@
       + `They also thought far less: about ${Math.round(gauntlet.rows.find((r) => r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k tokens for Sonnet instead of ${Math.round(gauntlet.rows.find((r) => !r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k.`;
   }
 
-  if (tools) {
+  if (tools && $('ladder')) {
     const tbody = document.querySelector('#ladder tbody');
     const priv = Object.fromEntries((toolsPrivate?.stages ?? []).map((s) => [s.key, s]));
     for (const s of tools.hard.stages) {
@@ -172,7 +256,7 @@
     }
     const p = tools.hard.pairs, fmtP = (x) => (x < 0.001 ? 'p < 0.001' : `p = ${x.toFixed(3)}`);
     document.getElementById('ladder-note').textContent = `The same ${tools.hard.questions} questions in every row (${tools.hard.tasks.length} tasks, 10 each). `
-      + `The right number alone fixed ${p.none_to_v1.fixed} and broke ${p.none_to_v1.broken}; adding the rule and its source fixed ${p.v1_to_v2.fixed} more and broke ${p.v1_to_v2.broken} (${fmtP(p.v1_to_v2.p)}, paired). `
+      + `The right number alone fixed ${p.none_to_v1.fixed} and broke ${p.none_to_v1.broken}; adding the rule and its source fixed ${p.v1_to_v2.fixed} more and broke ${p.v1_to_v2.broken} (${fmtP(p.v1_to_v2.p)}: same questions both ways, so very unlikely to be luck). `
       + (toolsPrivate ? `On ${toolsPrivate.questions} held-out questions, never seen while the tools were built: ${toolsPrivate.pairs.none_to_v2.fixed} fixed, ${toolsPrivate.pairs.none_to_v2.broken} broken. ` : '')
       + 'Shaded bands are 95% intervals.';
 
@@ -194,7 +278,7 @@
       ['People 65 or older', String(sd.people)], ['Senior deduction', usd(sd.total, true), true]]) {
       const li = el('li', total ? 'total' : null); li.append(el('span', 'what', what), el('span', 'amt', amt)); ol.append(li);
     }
-    document.getElementById('tools-rule').textContent = sd.rule;
+    document.getElementById('tools-rule').textContent = sd.rule.replace(/^OBBBA senior deduction/, 'The senior deduction from the 2025 tax law (OBBBA)');
 
     const w = tools.whole;
     document.getElementById('tools-whole').textContent = `Across all ${w.questions} questions, tools 1.0 lifted Haiku from ${pct(w.without.accuracy)} to ${pct(w.with.accuracy)} `
@@ -210,6 +294,7 @@
 
   function ruleChart() {
     const box = document.getElementById('rule-chart');
+    if (!box) return;
     if (!ruleEffect?.length) { box.textContent = 'No run with the rule yet.'; return; }
     box.textContent = '';
     const rows = ruleEffect.map((r) => ({ ...r, label: `${name(r.model).replace('Claude ', '')} · ${r.task.replace(/_/g, ' ')}` }));
@@ -235,6 +320,7 @@
 
   function mistakeChart() {
     const box = document.getElementById('mistake-chart');
+    if (!box) return;
     if (!mistakes?.length) { box.textContent = 'No wrong answers yet.'; return; }
     box.textContent = '';
     const ms = [...new Set(mistakes.map((r) => r.model))];
@@ -286,13 +372,13 @@
   // Question tiers
   const TIERS = [
     ['single-step', 'Single-step', 'One rule at a time: a tax bracket, an RMD divisor, a Social Security claiming factor, a Medicare premium tier.', 'single_step_accuracy'],
-    ['multi-step', 'Multi-step', 'Two rules that interact, like a Roth conversion that also makes more Social Security taxable.', 'multi_step_accuracy'],
-    ['stacked', 'Stacked', 'Tax, Social Security, the senior deduction and Medicare premiums meeting in one household.', 'stacked_accuracy'],
+    ['multi-step', 'Multi-step', 'Two rules that interact, like a Roth conversion that also makes more Social Security taxable (the “tax torpedo”).', 'multi_step_accuracy'],
+    ['stacked', 'Stacked', 'Tax, Social Security, the senior deduction and Medicare’s income-based premiums (IRMAA) meeting in one household.', 'stacked_accuracy'],
     ['compliance', 'Compliance review', 'A planted problem a reviewer must catch: a rollover issue, a missed sales-charge discount, a misleading sentence.', 'compliance_accuracy'],
   ];
   const fmtAnswer = (ex, v) => (ex.task === 'comms_review' ? (v === 'NONE' ? 'None' : `Sentences ${String(v).replace(/,/g, ', ')}`)
     : ex.task === 'breakpoint' ? `${v}%` : usd(v));
-  if (examples) {
+  if (examples && $('tiers')) {
     const host = document.getElementById('tiers');
     for (const [key, title, blurb, col] of TIERS) {
       const ex = examples.find((e) => e.tier === key);

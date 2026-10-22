@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How I Built It · PlannerBench</title>
+<meta name="description" content="A product case study: how a financial advisor, working with AI agents, built a verified planning engine, a benchmark that proves models need it, and a demo that puts it in a meeting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body data-page="built">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="gauntlet.html">The Gauntlet</a>
+      <a href="method.html">Method</a>
+      <a href="built.html" aria-current="page">How I built it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Case study</p>
+    <h1>A financial advisor, AI as the team, and a rule: build the judge first</h1>
+    <p class="lede">I’m a licensed financial advisor, not a software engineer. Over eight days in October 2026 I directed AI coding agents to build a planning engine, a benchmark that proves models need it, the tools that hand it to them, and a demo that puts it in a client meeting. This page is how the decisions got made.</p>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2>“Is AI smart?” is the wrong question</h2>
+      </div>
+      <ul class="notes">
+        <li><b>The real question.</b> Which planning questions can an advisor trust a model with on its own, and which need verified math behind it? Nobody could answer that with evidence.</li>
+        <li><b>Why it matters.</b> In this field a confident wrong number costs a family real money: a Roth conversion sized wrong here gave up $26,002. And a firm’s compliance team has to be able to defend every number a tool shows.</li>
+        <li><b>Who it’s for.</b> Wealth-tech product teams deciding what to build, compliance teams deciding what to allow, AI labs looking for hard, current, exact questions, and advisors asking “can I check this with AI?”</li>
+        <li><b>The bet.</b> Models are good at language and judgment, and unreliable at rules that change every year. So put the rules in tested code, and let the model choose the inputs and explain the result.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <p class="eyebrow">How I work</p>
+      <h2>Six principles, each with where it paid off</h2>
+    </div>
+    <div class="principles">
+      <div class="principle"><span class="n">01</span><h3>Build the judge before the feature</h3><p>Every piece started with the check that would prove it right: answer keys before questions, graders before models, fake meetings with answer keys before the meeting app.</p><p class="eg">The Gauntlet’s grader passed 12 stand-in checks, including a fake model that answers perfectly and one that lies, before a single real model was asked.</p></div>
+      <div class="principle"><span class="n">02</span><h3>The published source decides</h3><p>When the models and the key disagree, the IRS form, SSA’s manual or the CMS table settles it. Never a vote among models.</p><p class="eg">Four different models from three labs gave the same senior-deduction answer. Schedule 1-A Part V showed all four were wrong.</p></div>
+      <div class="principle"><span class="n">03</span><h3>Never let the builder grade itself</h3><p>A second engine was written from the written spec alone, by an AI agent that was never allowed to read the first one.</p><p class="eg">Its first run found 3 differences in 2,000 households. One was a real bug in the main engine (a 2027 tax threshold). Now 4,000 of 4,000 agree.</p></div>
+      <div class="principle"><span class="n">04</span><h3>Spend in capped steps</h3><p>A smoke test under $1, then a small run under $5, then a decision. Every run has a hard spending cap.</p><p class="eg">One run overshot its $5 cap by $0.39 because requests already in flight weren’t counted. The cap now reserves each request’s worst case.</p></div>
+      <div class="principle"><span class="n">05</span><h3>Hold out what you tune on</h3><p>Private questions from a secret seed are never published and never used to improve anything. They exist only to check that an improvement is real.</p><p class="eg">The tool redesign was built on public questions, then scored 48 of 50 on held-out questions it had never seen.</p></div>
+      <div class="principle"><span class="n">06</span><h3>Cut scope on purpose</h3><p>Speed comes from saying no. Once the engine proved to be the valuable part, the demo app’s features were frozen.</p><p class="eg">About 18 of 23 demo commits had gone to polish anyone could build. The next week went to the engine and the proof instead.</p></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Decisions</p>
+        <h2>The calls that shaped it</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="decisions">
+          <thead><tr><th scope="col">Decision</th><th scope="col">Options</th><th scope="col">Chose</th><th scope="col">Why</th></tr></thead>
+          <tbody>
+            <tr><td>Fix the model overruling a correct tool</td><td>Stronger prompt; a bigger model; change what the tool says back</td><td class="chose">Change the tool’s reply to show the rule and cite the form</td><td>A product fix works for every model that calls the tool. Same engine, new reply: 62% → 100%.</td></tr>
+            <tr><td>What “better plan” means</td><td>Lowest tax; highest income; most after-tax wealth</td><td class="chose">After-tax wealth at the end of the plan</td><td>It’s what the family keeps. Paying tax now to save more later nets out in one number.</td></tr>
+            <tr><td>When two plans are close</td><td>Pick the winner; show both</td><td class="chose">Show both, and say “it’s close”</td><td>When two plans land within a rounding error of each other over 25 years, naming one the winner is false precision.</td></tr>
+            <tr><td>Which models to run</td><td>Every frontier model; a few, cheapest first</td><td class="chose">Claude Haiku and Sonnet, plus four low-cost models from four other labs</td><td>The goal is to show the gap and its cause, not to run a leaderboard. Cost stayed in single dollars per run.</td></tr>
+            <tr><td>The demo’s role</td><td>Keep adding features; freeze it</td><td class="chose">Freeze it as the demo</td><td>Speech-to-text and form-filling are commodity. The verified engine is the defensible part.</td></tr>
+            <tr><td>Positioning</td><td>Integrate with one firm’s systems; stand alone</td><td class="chose">Stand alone, with a generic intake form</td><td>No firm data anywhere, and a clean story for any firm’s compliance review.</td></tr>
+            <tr><td>Public wording</td><td>“AI advisor”; “verified decision support”</td><td class="chose">Verified decision support</td><td>The engine prices choices. It never picks investments or products.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Timeline</p>
+        <h2>Eight days, four stages</h2>
+        <p class="sub">Each stage ended with a measured result before the next one started.</p>
+      </div>
+      <ol class="timeline">
+        <li><span class="when">Oct 15</span><h3>The engine</h3><p>A planning engine for federal tax, Social Security, RMDs and Medicare premiums, red-teamed the same day for rule errors.</p></li>
+        <li><span class="when">Oct 20</span><h3>The benchmark and the demo</h3><p>2,800 public and 700 held-out questions; PolicyEngine as an outside check (1,600 of 1,600 agree); seven model setups from five labs. The same day: the Wizard demo, built behind its own grader.</p></li>
+        <li><span class="when">Oct 21</span><h3>The fix, and the proof</h3><p>The engine as MCP tools. Version 1.0 got overruled; 1.1 showed its rule and went 50 for 50. The clean-room second engine and a year-by-year scenario runner for 25-year plans.</p></li>
+        <li><span class="when">Oct 22</span><h3>The Gauntlet</h3><p>A Roth-conversion solver, 110 whole-household decisions built so no shortcut works, a grader that tracks every time a model overrules the engine, and the first results: 22 of 22 with the engine.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">What’s next</p>
+        <h2>Ranked, with the reason for each</h2>
+        <p class="sub">Ordered by what most raises trust in the result per dollar spent.</p>
+      </div>
+      <ol class="roadmap">
+        <li><span><b>Run the full Gauntlet, including the 33 held-out questions.</b> Today’s gap rests on 11 questions with wide intervals. All 77 public questions turn “a clear gap” into a result (about $127 for three Claude models, so it waits for a go-ahead), and the 33 held-out ones then show it isn’t tuned.</span></li>
+        <li><span><b>A CPA signs off on the answer key.</b> Two engines and PolicyEngine agree, but a licensed outside reviewer is what a firm’s compliance team will ask for first. It costs time, not money.</span></li>
+        <li><span><b>Other labs’ models on the Gauntlet.</b> The fix is a tool design, not a Claude trick. Showing it works for other labs’ models proves that.</span></li>
+        <li><span><b>Gauntlet v2: ask before advising.</b> Real clients leave facts out. The next test is whether a model asks for the missing fact instead of guessing. It comes after the three above because it needs a trusted v1 to compare against.</span></li>
+        <li><span><b>Harder compliance questions.</b> Today’s define the issue in the question, so every model scores 91–100%. Useful, but it tests reading, not knowledge.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div>
+      <div class="section-head">
+        <p class="eyebrow">The team</p>
+        <h2>Who did what</h2>
+        <p class="sub">I set the problem, the domain rules, every go/no-go and every spending approval. AI agents did the building, and none of them grades its own work.</p>
+      </div>
+      <div class="crew">
+        <div><b>Me</b><span>Problem framing, retirement-planning rules, reading samples and signing off, every spend and scope call</span></div>
+        <div><b>Claude Code</b><span>Engineering partner: engine, harness, grader, tools, demo and this site, built to the plan I approved</span></div>
+        <div><b>Isolated agents</b><span>The clean-room engine, written from the spec alone; fake meeting small talk for the demo’s test set</span></div>
+        <div><b>PolicyEngine-US</b><span>The outside referee: an open-source tax model nobody on this project wrote</span></div>
+        <div><b>Models under test</b><span>Claude Haiku and Sonnet, DeepSeek, GLM, Qwen and gpt-oss, each pinned to one named host</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="wizard">
+    <div class="split">
+      <div>
+        <p class="eyebrow">The demo</p>
+        <h2>Wizard: where the engine meets a meeting</h2>
+      </div>
+      <ul class="notes">
+        <li><b>What it does.</b> As an advisor and a client talk, the intake form fills itself in. When someone asks a planning question out loud (“what if we converted some of Dana’s IRA?”), the engine’s answer appears as a card a few seconds later, in plain English, with every fact it used and where that fact came from.</li>
+        <li><b>Graded like everything else.</b> It was built against fake meetings with answer keys, up to an hour long, with hedges, corrections and spouses who disagree.</li>
+        <li><b>Safe by design.</b> Fake households only. Sensitive numbers are masked in the browser before any model sees them, and speech can be transcribed on the laptop so no audio leaves it.</li>
+        <li><b>Frozen on purpose.</b> It’s the demo. The engine and the proof are the product.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="./"><span><span class="label">Back to the start</span><b>The whole story on one page</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · built by Peyton Thalman</span>
+    <span>Decision support, not advice. Nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=7"></script>
+</body>
+</html>

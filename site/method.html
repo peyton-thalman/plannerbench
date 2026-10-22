@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Method · PlannerBench</title>
+<meta name="description" content="How every answer in PlannerBench is checked: a second engine written from the spec alone, PolicyEngine-US, published examples, invariants, a held-out set, and a script that rebuilds every number.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body data-page="method">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="gauntlet.html">The Gauntlet</a>
+      <a href="method.html" aria-current="page">Method</a>
+      <a href="built.html">How I built it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Method</p>
+    <h1>A benchmark is only as good as its answer key</h1>
+    <div class="tldr">
+      <p class="label">In short</p>
+      <p>If the key is wrong, you’re grading the model on your own bug. So the engine that writes the key is checked by people and programs that didn’t write it, and one script rebuilds every number on this site from the raw replies.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The proof, layer by layer</p>
+        <h2>Independent checks, with their scores</h2>
+      </div>
+      <div class="proofs" id="proofs"></div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Gates</p>
+        <h2>No question ships unless all of these pass</h2>
+        <p class="sub"><code>./reproduce.sh</code> reruns every one of them and must end with REPRODUCED.</p>
+      </div>
+      <ol class="checks">
+        <li><span><b>Published examples.</b> Cases whose answers come straight from IRS, SSA and CMS tables must match exactly.</span></li>
+        <li><span><b>Two independent programs.</b> The planning engine and a separately written checker compute every answer. They agree on all <span data-k="questions">—</span> questions.</span></li>
+        <li><span><b>Rules that must always hold.</b> Thousands of random households test things like “more income never lowers tax” and “waiting a month never lowers a Social Security check.”</span></li>
+        <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
+        <li><span><b>Human audit.</b> Random cases come with worked solutions a CPA can check with a calculator. (Outside sign-off is still open.)</span></li>
+        <li><span><b>An outside tax model.</b> PolicyEngine-US, open-source and written by others, recomputes every tax answer.</span></li>
+        <li><span><b>Same model, two routes.</b> <span data-k="harness">—</span></span></li>
+        <li><span><b>A held-out set.</b> Private questions from a secret seed pass the same checks and are never published, so a model that trained on the public set still meets new ones, and nothing is tuned on them.</span></li>
+      </ol>
+    </div>
+    <p class="aside">When models disagree with the key, the source decides, not the models. Models from several labs agreed with each other and against the key on the senior deduction; the IRS form, and separately PolicyEngine, showed the key was right. Several also answered Medicare premiums ten cents above the key; SSA’s 2026 table matches the key to the cent.</p>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Statistics</p>
+        <h2>How the numbers are reported</h2>
+      </div>
+      <ul class="notes">
+        <li><b>Every accuracy carries a 95% interval:</b> the range the true score likely sits in. Small runs show wide bands on purpose.</li>
+        <li><b>Comparisons are paired.</b> “Alone vs. with tools” asks the same model the same questions, and counts how many flipped each way (McNemar’s test).</li>
+        <li><b>Failures are their own bucket.</b> A reply that ran out of tokens is published and counted as not right, never quietly dropped.</li>
+        <li><b>Mistakes are priced.</b> Each wrong number is also scored in dollars a year off, so a ten-cent miss and a $9,000 miss don’t count the same.</li>
+        <li><b>Hosts are pinned.</b> Every outside model runs on one named host with data collection off; the private set never goes to free endpoints.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="built.html"><span><span class="label">Next</span><b>How I built it</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=7"></script>
+</body>
+</html>

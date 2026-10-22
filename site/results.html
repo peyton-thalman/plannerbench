@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Results · PlannerBench</title>
+<meta name="description" content="How AI models score on 2,800 retirement-planning questions with an exact answer key, where they go wrong, and what the mistakes would cost a client.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css?v=7">
+</head>
+<body data-page="results">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html" aria-current="page">Results</a>
+      <a href="gauntlet.html">The Gauntlet</a>
+      <a href="method.html">Method</a>
+      <a href="built.html">How I built it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Results · models alone</p>
+    <h1>Models do the math. They don’t reliably know the current rule.</h1>
+    <div class="tldr">
+      <p class="label">In short</p>
+      <p>Models are near-perfect when one long-standing rule applies, and fall apart when several rules meet in one household. Most of the misses trace back to one rule that changed in 2025. Give a model that rule and it gets the question right.</p>
+    </div>
+  </section>
+
+  <section class="band" id="worked">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">One question, worked</p>
+        <h2>Where the models go wrong</h2>
+        <p class="sub">A real question from the set. Models from several labs gave the same wrong answer, and the IRS form shows why.</p>
+      </div>
+      <div class="worked">
+        <div class="question">
+          <p class="label">The question</p>
+          <p class="prompt" id="featured-prompt">—</p>
+          <dl class="answers" id="featured-answers"></dl>
+        </div>
+        <div class="form" aria-label="Schedule 1-A Part V, worked">
+          <p class="label">IRS Schedule 1-A, Part V · Enhanced deduction for seniors</p>
+          <p class="rule-text">The 2025 tax law gave each person 65 or older an extra $6,000 deduction, shrinking by 6% of income over $150,000 on a joint return. Here is the IRS form, line by line:</p>
+          <ol class="lines" id="featured-lines"></ol>
+          <div class="misread">
+            <p class="label">What the models did</p>
+            <p id="featured-misread">—</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="scores-section">
+    <div class="section-head">
+      <p class="eyebrow">Scores</p>
+      <h2>Accuracy by kind of question</h2>
+      <p class="sub">Share of questions answered within the key’s tolerance. The bar is the score; the shaded band is where the true score likely sits (95% interval).</p>
+    </div>
+    <div class="table-wrap">
+      <table class="scores" id="scores">
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Ran out of tokens</th><th scope="col" class="r">Cost per 1,000 right</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <details class="fine">
+      <summary>How these were run</summary>
+      <p>Claude models were asked 10 questions per task through Anthropic’s API; the others 15 per task through OpenRouter, each pinned to one named host with data collection off. “Open weights” means anyone can download the model; fp8 and bf16 say how compressed the host’s copy is. “Ran out of tokens” means the model spent its whole 32,000-token budget thinking and never answered; that counts as not right. When two bands overlap heavily, the gap between those models may be noise.</p>
+    </details>
+
+    <div class="sub-head">
+      <h3>What the mistakes would cost a client</h3>
+      <p>Accuracy counts a Medicare premium ten cents off the same as a required distribution $9,000 too high. A planner wouldn’t. Here each answer is scored by how many dollars a year it is off; a miss of $1,000 a year or more is called material.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="scores dollars" id="dollars">
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col" class="r">Dollars off per question, per year</th><th scope="col" class="r">Material misses</th><th scope="col" class="r">Typical miss</th><th scope="col" class="r">Worst miss</th><th scope="col" class="r">Questions scored</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="table-note" id="dollars-note"></p>
+
+    <figure class="chart-card value-card">
+      <figcaption>
+        <h3>Right answers per dollar</h3>
+        <p>Accuracy against what each right answer actually cost, as billed. Up and to the left is better. A low price per token doesn’t mean a low price per answer: models that think until they run out of room cost the most.</p>
+      </figcaption>
+      <div class="chart" id="value-chart" role="img" aria-label="Accuracy against cost per right answer"></div>
+      <div class="legend"><span><i class="dot"></i>Closed weights</span><span><i class="dot open"></i>Open weights</span></div>
+    </figure>
+
+    <div class="pair">
+      <figure class="chart-card">
+        <figcaption>
+          <h3>Give it the rule</h3>
+          <p>The same questions, asked again with the two-line Schedule 1-A instructions placed in front.</p>
+        </figcaption>
+        <div class="chart" id="rule-chart" role="img" aria-label="Accuracy without and with the rule"></div>
+        <div class="legend"><span><i class="dot hollow"></i>Without the rule</span><span><i class="dot"></i>With the rule</span></div>
+      </figure>
+      <figure class="chart-card">
+        <figcaption>
+          <h3>What the wrong answers were</h3>
+          <p>Each wrong answer is checked against known misreadings. The senior-deduction misreading explains most of Claude’s and DeepSeek’s.</p>
+        </figcaption>
+        <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap section" id="questions">
+    <div class="section-head">
+      <p class="eyebrow">The questions</p>
+      <h2>Four kinds of question, from one rule to many</h2>
+      <p class="sub" id="questions-sub">Every question is generated from a household’s numbers, so there are as many as needed and none can be memorized from the web. Open a card to see a real one.</p>
+    </div>
+    <div class="tiers" id="tiers"></div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Reading the results</p>
+        <h2>What they mean, and what they don’t</h2>
+      </div>
+      <ul class="notes">
+        <li><b>The math isn’t the problem.</b> Models handle long-standing rules well. They slip on the newest ones and on several rules interacting at once.</li>
+        <li><b>It isn’t one lab’s blind spot.</b> DeepSeek and GLM made the same senior-deduction misreading as Claude. gpt-oss-120b used the RMD table that was replaced in 2022 on every RMD it got wrong. Models know the rules as they were, not as they are.</li>
+        <li><b>Price per token misleads.</b> DeepSeek V4.1 Flash tied Claude Haiku 5.5 overall, and Haiku was still the cheapest per right answer.</li>
+        <li><b>The compliance questions are too easy.</b> They define each issue in the question, so every model scores 91–100%. The next version names issues without defining them.</li>
+        <li><b>It’s still small.</b> 10–15 questions per task per model. A gap of a few points is within the noise; the intervals show how much.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="gauntlet.html"><span><span class="label">Next</span><b>The Gauntlet: what happens with the engine</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=7"></script>
+</body>
+</html>
