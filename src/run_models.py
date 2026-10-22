@@ -393,11 +393,31 @@ def main():
 
     lock = threading.Lock()
     cost = 0.0
+    # The cap holds even with several questions in flight: each one sets aside its worst case (the whole token budget,
+    # plus for tools the most input a Gauntlet tools reply has used, 150k tokens) before it's sent, and only starts if
+    # spent + set aside + its worst case stays under --max-usd. (2026-10-22: without this, 6 Sonnet questions in
+    # flight carried a $5 cap to $5.39.) Models without a list price (OpenRouter) set nothing aside.
+    reserved = [0.0]
+
+    def worst_case(m, c):
+        pin, pout = PRICES.get(m, (0, 0))
+        tokens_in = 150_000 if a.tools else len(c["prompt"]) / 3
+        return (tokens_in * pin + MAX_TOKENS * pout) / 1e6
     errors = skipped = 0
     with raw.open("a") as f, ThreadPoolExecutor(max_workers=1 if a.fake else a.workers) as pool:
         def ask(m, c, rep):
-            if a.max_usd is not None and cost >= a.max_usd:
-                return None  # over budget: not asked, not recorded, so a rerun picks it up
+            w = worst_case(m, c)
+            with lock:
+                if a.max_usd is not None and cost + reserved[0] + w > a.max_usd:
+                    return None  # over budget: not asked, not recorded, so a rerun picks it up
+                reserved[0] += w
+            try:
+                return answer(m, c, rep)
+            finally:
+                with lock:
+                    reserved[0] -= w
+
+        def answer(m, c, rep):
             if a.fake:
                 if tools:
                     return ask_fake_with_tools(tools, c, rep)

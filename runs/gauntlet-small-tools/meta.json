@@ -1,0 +1,35 @@
+{
+ "tools": {
+  "server": {
+   "name": "moneyguide",
+   "version": "2.1.0"
+  },
+  "names": [
+   "federal_income_tax",
+   "taxable_social_security",
+   "required_minimum_distribution",
+   "social_security_benefit",
+   "medicare_part_b_premium",
+   "tax_tables",
+   "run_scenario",
+   "solve_roth_conversion"
+  ],
+  "moneyguide_commit": "16b6a79",
+  "moneyguide_dirty": false,
+  "max_tool_turns": 20
+ },
+ "set": "gauntlet",
+ "split": "public",
+ "effort": "high",
+ "per_task": 1,
+ "reps": 1,
+ "context": null,
+ "tasks": null,
+ "models": [
+  "claude-haiku-5-5",
+  "claude-sonnet-5-5"
+ ],
+ "max_tokens": 64000,
+ "openai_base_url": null,
+ "openrouter_routing": null
+}
