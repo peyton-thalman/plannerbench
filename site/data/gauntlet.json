@@ -1,0 +1,123 @@
+{
+ "questions": 11,
+ "runs": [
+  "gauntlet-small",
+  "gauntlet-small-tools"
+ ],
+ "rows": [
+  {
+   "model": "claude-haiku-5-5",
+   "name": "Claude Haiku 5.5",
+   "engine": false,
+   "questions": 11,
+   "great": 4,
+   "lo": 0.15166223614131383,
+   "hi": 0.6462032231083628,
+   "decisions": 7,
+   "decisions_of": 10,
+   "numbers": 14,
+   "numbers_of": 20,
+   "out_of_room": 0,
+   "cost_per_question": 0.01716856,
+   "output_tokens": 33783,
+   "overrides": 0
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "name": "Claude Sonnet 5.5",
+   "engine": false,
+   "questions": 10,
+   "great": 7,
+   "lo": 0.39677321997956516,
+   "hi": 0.892210712513788,
+   "decisions": 6,
+   "decisions_of": 9,
+   "numbers": 12,
+   "numbers_of": 18,
+   "out_of_room": 3,
+   "cost_per_question": 0.3765708888888889,
+   "output_tokens": 37105,
+   "overrides": 0
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "name": "Claude Haiku 5.5",
+   "engine": true,
+   "questions": 11,
+   "great": 11,
+   "lo": 0.7411599827511859,
+   "hi": 1.0,
+   "decisions": 10,
+   "decisions_of": 10,
+   "numbers": 20,
+   "numbers_of": 20,
+   "out_of_room": 0,
+   "cost_per_question": 0.01271658,
+   "output_tokens": 9165,
+   "overrides": 0
+  },
+  {
+   "model": "claude-sonnet-5-5",
+   "name": "Claude Sonnet 5.5",
+   "engine": true,
+   "questions": 11,
+   "great": 11,
+   "lo": 0.7411599827511859,
+   "hi": 1.0,
+   "decisions": 10,
+   "decisions_of": 10,
+   "numbers": 20,
+   "numbers_of": 20,
+   "out_of_room": 0,
+   "cost_per_question": 0.1648624,
+   "output_tokens": 3141,
+   "overrides": 0
+  }
+ ],
+ "failures": [
+  {
+   "id": "g-how_much-1",
+   "model": "Claude Haiku 5.5",
+   "what": "How much to convert to Roth, and for how many years",
+   "why": "plan gives up $26,002",
+   "lost": 26002,
+   "shortcut": null,
+   "engine_great": true
+  },
+  {
+   "id": "g-first_rmd-1",
+   "model": "Claude Haiku 5.5",
+   "what": "A Roth conversion in the first-RMD year",
+   "why": "picked C; best was A",
+   "lost": 7161,
+   "shortcut": null,
+   "engine_great": true
+  },
+  {
+   "id": "g-torpedo_irmaa-1",
+   "model": "Claude Haiku 5.5",
+   "what": "A conversion that hits the tax torpedo and an IRMAA tier two years later",
+   "why": "picked B; best was A",
+   "lost": 4154,
+   "shortcut": "left out how the extra income pushes dividends into the 15% capital-gains rate",
+   "engine_great": true
+  }
+ ],
+ "side_by_side": {
+  "id": "g-how_much-1",
+  "model": "Claude Haiku 5.5",
+  "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
+  "alone": "200000 x 10",
+  "alone_lost": 26002,
+  "engine": "118000 x 8",
+  "engine_calls": [
+   "run_scenario",
+   "solve_roth_conversion",
+   "run_scenario",
+   "solve_roth_conversion"
+  ],
+  "best": "$118,000 a year for 8 years (2026\u20132033)",
+  "best_gain": 134445
+ },
+ "families": 10
+}

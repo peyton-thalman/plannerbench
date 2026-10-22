@@ -1,8 +1,8 @@
 // Fills the page from data/*.json, which src/build_site.py writes from the graded runs.
 (async () => {
   const get = (name) => fetch(`data/${name}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake, tools, toolsPrivate] = await Promise.all(
-    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake', 'tools', 'tools_private'].map(get));
+  const [models, mistakes, ruleEffect, examples, featured, meta, byMistake, tools, toolsPrivate, gauntlet] = await Promise.all(
+    ['models', 'mistakes', 'rule_effect', 'examples', 'featured', 'meta', 'dollars_by_mistake', 'tools', 'tools_private', 'gauntlet'].map(get));
 
   const pct = (x) => (x == null ? '—' : `${Math.round(x * 100)}%`);
   const usd = (x, cents = false) => '$' + Number(x).toLocaleString('en-US', { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
@@ -110,18 +110,57 @@
   }
 
   // With planning tools: the same hard questions without tools, with the right number, and with the rule shown
-  if (tools) {
-    const range = (lo, hi) => `${Math.round(lo * 100)}–${Math.round(hi * 100)}`;
-    const scoreCell = (s) => {
-      const td = el('td');
-      if (!s) { td.append(el('span', 'ci', 'not asked')); return td; }
-      const cell = el('div', `cell${s.accuracy < 0.5 ? ' low' : ''}`);
-      const track = el('div', 'track'), band = el('div', 'band-ci'), fill = el('div', 'fill');
-      band.style.left = `${s.lo * 100}%`; band.style.width = `${(s.hi - s.lo) * 100}%`; fill.style.width = `${s.accuracy * 100}%`;
-      track.append(band, fill);
-      const v = el('span', 'v', `${pct(s.accuracy)} · ${s.right}/${s.questions}`); v.append(el('span', 'ci', range(s.lo, s.hi)));
-      cell.append(v, track); td.append(cell); return td;
+  const range = (lo, hi) => `${Math.round(lo * 100)}–${Math.round(hi * 100)}`;
+  const scoreCell = (s) => {
+    const td = el('td');
+    if (!s) { td.append(el('span', 'ci', 'not asked')); return td; }
+    const cell = el('div', `cell${s.accuracy < 0.5 ? ' low' : ''}`);
+    const track = el('div', 'track'), band = el('div', 'band-ci'), fill = el('div', 'fill');
+    band.style.left = `${s.lo * 100}%`; band.style.width = `${(s.hi - s.lo) * 100}%`; fill.style.width = `${s.accuracy * 100}%`;
+    track.append(band, fill);
+    const v = el('span', 'v', `${pct(s.accuracy)} · ${s.right}/${s.questions}`); v.append(el('span', 'ci', range(s.lo, s.hi)));
+    cell.append(v, track); td.append(cell); return td;
+  };
+
+  // The Gauntlet: the same questions alone and with the engine's MCP tools (src/gauntlet_site.py)
+  if (gauntlet) {
+    const tbody = document.querySelector('#gauntlet-table tbody');
+    for (const r of gauntlet.rows) {
+      const tr = el('tr', r.engine ? 'best' : null);
+      tr.append(el('td', 'model', `${r.name}${r.engine ? ' + engine' : ', alone'}`),
+        scoreCell({ accuracy: r.great / r.questions, right: r.great, questions: r.questions, lo: r.lo, hi: r.hi }),
+        el('td', 'overall', `${r.out_of_room}`), el('td', 'overall', `${Math.round(r.output_tokens / 1000)}k tokens`),
+        el('td', 'overall', usd(r.cost_per_question, true)));
+      tbody.append(tr);
+    }
+    document.getElementById('gauntlet-note').textContent = `${gauntlet.questions} questions, one from each family plus a trap whose honest answer is “I can’t answer that.” `
+      + 'Ran out of room: used its whole 64,000-token budget thinking and never answered (scored as not right). Bars show 95% intervals.';
+    const sb = gauntlet.side_by_side;
+    document.getElementById('gauntlet-intro').textContent = sb.intro;
+    const dl = document.getElementById('gauntlet-side');
+    const row = (label, value, ok) => {
+      const d = el('div'); d.append(el('dt', null, label));
+      const dd = el('dd', null, value);
+      if (ok != null) dd.append(el('span', `mark ${ok ? 'ok' : 'bad'}`, ok ? 'Right' : 'Wrong'));
+      d.append(dd); dl.append(d);
     };
+    const plan = (p) => { const m = p.match(/([\d,]+)\s*x\s*(\d+)/); return m ? `${usd(Number(m[1].replace(/,/g, '')))} a year × ${m[2]} years` : p; };
+    row('Engine’s best plan', sb.best);
+    row(`${sb.model}, alone`, `${plan(sb.alone)} (gives up ${usd(sb.alone_lost)})`, false);
+    row(`${sb.model} + engine`, plan(sb.engine), true);
+    const ol = document.getElementById('gauntlet-failures');
+    gauntlet.failures.forEach((f, i) => {
+      const li = el('li');
+      li.append(el('span', 'no', `${i + 1}`), el('span', 'what', `${f.what} (${f.model}, alone)${f.shortcut ? `: it ${f.shortcut}` : ''}.${f.engine_great ? ' With the engine: right.' : ''}`),
+        el('span', 'amt', `−${usd(f.lost)}`));
+      ol.append(li);
+    });
+    const ov = gauntlet.rows.filter((r) => r.engine).reduce((t, r) => t + r.overrides, 0);
+    document.getElementById('gauntlet-overrides').textContent = `With the engine, both models got every decision and every number right${ov ? `, but went against it ${ov} times` : ' and never went against it'}. `
+      + `They also thought far less: about ${Math.round(gauntlet.rows.find((r) => r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k tokens for Sonnet instead of ${Math.round(gauntlet.rows.find((r) => !r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k.`;
+  }
+
+  if (tools) {
     const tbody = document.querySelector('#ladder tbody');
     const priv = Object.fromEntries((toolsPrivate?.stages ?? []).map((s) => [s.key, s]));
     for (const s of tools.hard.stages) {

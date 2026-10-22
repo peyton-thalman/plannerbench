@@ -27,6 +27,44 @@ The answer key comes from the MoneyGuide engine, whose tests check it against IR
 | `breakpoint` (compliance) | Sales charge after rights of accumulation (spouse and minor children count; adult child and other fund families don't) | Prospectus schedule given in the question |
 | `comms_review` (compliance) | Which sentences of a client email break Rule 2210(d)(1); compliant look-alikes share keywords | FINRA Rule 2210(d)(1) |
 
+## The Gauntlet (2026-10-22, first results)
+
+Whole-household retirement decisions instead of single calculations: a household of about 16 facts (Social Security,
+IRAs with after-tax basis, a pension, muni interest, a dividend-paying brokerage account) and a real choice: whether
+and how much to convert to Roth, when to claim, how to give, how to empty an inherited IRA. 10 families, 77 public
+questions + 33 held out, plus trap questions whose honest answer is "I can't answer that."
+
+- **Hard on purpose, checked by code:** each graded tax number needs at least two trap rules besides the brackets (the
+  torpedo, the senior-deduction phase-out, capital-gains stacking, NIIT), no single tax rate lands within 2% of it, and
+  lazy strategies ("always convert the most") do no better than guessing on the decisions.
+- **Keys checked outside the engine:** every option of every question agrees with the clean-room engine on every field
+  of every year, and every 2026 return agrees with PolicyEngine-US (`checks/GAUNTLET.md`: 290/290).
+- **Graded four ways:** right decision (or within $1,000 of the best), every number within 2%, traps declined and only
+  traps, and the format. Wrong picks are priced in dollars by the engine; wrong numbers are named by the shortcut they
+  match. With tools, every wrong answer is sorted into override / possible override / mistranslated / never called
+  (`checks/GAUNTLET-GRADER.md`: 12/12 stand-in checks, 0/141 false overrides).
+
+First results (11 questions, one per family plus a trap; `runs/gauntlet-small*`):
+
+| | Fully right | Ran out of room | Thinking per question | Cost per question |
+|---|---|---|---|---|
+| Claude Haiku 5.5, alone | 4/11 | 0 | 34k tokens | $0.02 |
+| Claude Sonnet 5.5, alone | 7/10 | 3 | 37k tokens | $0.38 |
+| Claude Haiku 5.5 + engine | **11/11** | 0 | 9k tokens | $0.01 |
+| Claude Sonnet 5.5 + engine | **11/11** | 0 | 3k tokens | $0.16 |
+
+With the engine, no model went against it. Small sample, wide intervals: it shows the gap, not a ranking. Opus and
+other labs' models haven't been run (estimate for the full public set: about $127 for three Claude models).
+
+```bash
+~/moneyguide/node_modules/.bin/vite-node src/gauntlet/build.ts                     # public set → data/gauntlet.jsonl
+~/moneyguide/node_modules/.bin/vite-node src/gauntlet/verify.ts                    # clean-room + PolicyEngine → checks/GAUNTLET.md
+.venv/bin/python -I checks/gauntlet_check.py                                       # grader stand-ins → checks/GAUNTLET-GRADER.md
+.venv/bin/python src/run_models.py --set gauntlet --models claude-haiku-5-5 --per-task 1 --max-tokens 64000 --max-usd 1 --run <name> [--tools]
+.venv/bin/python src/gauntlet_grade.py <name> [<tools run>]                        # → runs/<name>/GAUNTLET.md
+.venv/bin/python src/gauntlet_site.py <alone run> <tools run>                      # → site/data/gauntlet.json
+```
+
 ## Run
 
 ```bash

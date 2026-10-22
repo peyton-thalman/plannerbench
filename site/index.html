@@ -170,6 +170,42 @@
     </div>
   </section>
 
+  <section class="wrap section" id="gauntlet">
+    <div class="section-head">
+      <p class="eyebrow">The Gauntlet · first results</p>
+      <h2>Real retirement decisions, alone and with the engine</h2>
+      <p class="sub">Each Gauntlet question is a whole household (about 16 facts: Social Security, IRAs, a pension, muni interest, a brokerage account) and a choice an advisor makes for real: whether to convert to Roth and how much, when to claim, how to give, how to empty an inherited IRA. To get it right, a model has to stack at least three rules (the torpedo, the senior-deduction phase-out, capital-gains stacking, IRMAA two years later) across 25 years. Code checks that no single tax rate and no skipped rule gets within 2% of the answer. Every key is recomputed by the clean-room engine and PolicyEngine.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="scores ladder" id="gauntlet-table">
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">Fully right (decision and every number)</th><th scope="col" class="r">Ran out of room</th><th scope="col" class="r">Thinking per question</th><th scope="col" class="r">Cost per question</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="sub ladder-note" id="gauntlet-note"></p>
+
+    <div class="worked">
+      <div class="question">
+        <p class="label">The same question, both ways</p>
+        <p class="prompt" id="gauntlet-intro">—</p>
+        <dl class="answers" id="gauntlet-side"></dl>
+      </div>
+      <div class="form">
+        <p class="label">Confident, wrong, and what it costs the household</p>
+        <ol class="lines" id="gauntlet-failures"></ol>
+      </div>
+    </div>
+
+    <ul class="notes tools-notes">
+      <li><b>The engine’s answers held.</b> <span id="gauntlet-overrides">—</span></li>
+      <li><b>Still small.</b> One question from each of the 10 families plus a trap, two models, one try each. One Sonnet reply alone was cancelled for budget. The intervals are wide on purpose: this shows the gap, not a ranking. Opus and other labs’ models haven’t been run.</li>
+      <li><b>Decision support, not advice.</b> The engine prices each choice; it never picks investments or products, and every answer ends with what to take to a professional.</li>
+    </ul>
+  </section>
+
   <section class="wrap section" id="questions">
     <div>
       <div class="section-head">
