@@ -301,7 +301,9 @@ def pct(k, n):
 
 
 def report(run, graded, recs):
-    lines = [f"# Gauntlet: {run}", ""]
+    errors = sum(g["bucket"] == "error" for g in graded)
+    graded = [g for g in graded if g["bucket"] != "error"]  # failed API calls: not scored; rerun the run to fill them in
+    lines = [f"# Gauntlet: {run}", ""] + ([f"{errors} replies failed at the API and aren't scored (rerun the same command to retry them).", ""] if errors else [])
     by_model = defaultdict(list)
     for g in graded:
         if g["bucket"] != "error":
