@@ -8,3 +8,7 @@ private/
 # Private-split runs: replies restate the held-out questions' numbers, so only aggregate scores leave this machine.
 runs/*-private/
 !.env.example
+
+# Full outputs of the free stand-in checks (rebuilt on every run); their summaries are committed.
+runs/*-fake-*/raw.jsonl
+runs/*-fake-*/gauntlet_graded.jsonl
