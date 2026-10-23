@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body data-page="home">
 <header class="nav">
@@ -17,6 +17,7 @@
     <nav aria-label="Pages">
       <a href="results.html">Results</a>
       <a href="gauntlet.html">The Gauntlet</a>
+      <a href="chat.html">In the chat</a>
       <a href="replay.html">Replays</a>
       <a href="method.html">Method</a>
       <a href="built.html">How I built it</a>
@@ -54,7 +55,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">How it fits together</p>
-        <h2>One engine, proven three ways, used three ways</h2>
+        <h2>One engine, proven three ways, put to work four ways</h2>
         <p class="sub">Click any piece to see what it is, why it exists, and the number that proves it works.</p>
       </div>
 
@@ -75,12 +76,15 @@
           </button>
         </div>
         <div class="flow" aria-hidden="true"><span>powers</span></div>
-        <div class="map-row three">
+        <div class="map-row four">
           <button class="node" data-node="bench" aria-pressed="false" aria-controls="map-panel">
             <span class="k">Measure</span><span class="t">PlannerBench</span><span class="d">2,800 questions with an exact key</span>
           </button>
           <button class="node" data-node="tools" aria-pressed="false" aria-controls="map-panel">
             <span class="k">Fix</span><span class="t">MCP tools</span><span class="d">The engine as tools any AI model can call (MCP is the standard plug)</span>
+          </button>
+          <button class="node" data-node="chat" aria-pressed="false" aria-controls="map-panel">
+            <span class="k">Talk to it</span><span class="t">In the chat</span><span class="d">A connector for Claude and ChatGPT that asks the questions</span>
           </button>
           <button class="node" data-node="wizard" aria-pressed="false" aria-controls="map-panel">
             <span class="k">Use</span><span class="t">Wizard</span><span class="d">A live meeting-copilot demo</span>
@@ -112,7 +116,7 @@
   <section class="wrap section">
     <div class="section-head">
       <p class="eyebrow">The story</p>
-      <h2>Five steps, each one checked before the next</h2>
+      <h2>Six steps, each one checked before the next</h2>
     </div>
     <ol class="steps">
       <li>
@@ -154,6 +158,14 @@
           <a class="go" href="gauntlet.html">See the Gauntlet →</a>
         </div>
         <div class="stat"><b><span data-k="g_from">—</span> → <span data-k="g_to">—</span></b><span>decisions fully right across <span data-k="g_models">—</span> models, alone vs. with the engine. The worst plan made alone gave up <span data-k="g_worst">—</span>.</span></div>
+      </li>
+      <li>
+        <div>
+          <h3>Put it in people’s hands</h3>
+          <p>Turn the engine into a connector anyone can add to Claude or ChatGPT. The engine decides which question to ask next and the chat model just talks. I ran it as clients would, wrote down every rough edge, and saved each session as a test so it can’t slide back.</p>
+          <a class="go" href="chat.html">See it in the chat →</a>
+        </div>
+        <div class="stat"><b data-k="chat_judge">—</b><span>simulated clients who get the same answer as with every fact known, asked only questions that could change it</span></div>
       </li>
     </ol>
   </section>
@@ -200,6 +212,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=10"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>

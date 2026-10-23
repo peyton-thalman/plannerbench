@@ -536,5 +536,208 @@ class Projection(unittest.TestCase):
         self.assertEqual(prm.projected_years, set())
 
 
+# ---------------------------------------------------------------------------------------------------------
+# v1.3 / v1.4 changes (CHANGES-v1.2-to-v1.4.diff): survivor claim age (5.5), a spouse who died before the
+# plan (5.7), the earnings test (5.8), and pre-SECURE inherited IRAs (6A.9)
+# ---------------------------------------------------------------------------------------------------------
+def no_cola(raw):
+    return E.run(raw, Params(inflation=0.0, cola=0.0, overrides={"ss_cola": 0.0}))
+
+
+class SurvivorClaimAgeAndLateSpouse(unittest.TestCase):
+    """5.5 (v1.3) survivor_claim_age and claim_survivor_benefit; 5.7 a spouse who died before the plan."""
+
+    def widow(self, survivor_claim_age=None, actions=None):
+        raw = Example8Survivor.scenario(self, 1960, 70, 1964, 500, 67, 2025, 2026, 2031)
+        if survivor_claim_age is not None:
+            raw["household"]["people"][1]["social_security"]["survivor_claim_age"] = survivor_claim_age
+        raw["plans"][0]["actions"] = actions or []
+        return no_cola(raw)
+
+    def test_default_survivor_claim_at_60(self):
+        # d (PIA 2,000) dies in 2025 before he claims at 70, so his base is 2,000 with no delayed credits (5.5).
+        # s starts at 60 (Jan 2026), 60 months early on a 67 FRA: reduction 28.5% x 60/84 = 20.357%;
+        # 2,000 x (1 - 0.20357) = 1,592.86 -> 1,592 a month. 2026: 12 x 1,592 = 19,104.
+        out = self.widow()
+        self.assertEqual(row(out, 2026, "A")["social_security"]["s"], 1592 * 12)
+
+    def test_survivor_claim_age_67_has_no_reduction(self):
+        # survivor_claim_age 67 (804 months): s was born 1964, so age 67 is Jan 2031. Nothing before that; from
+        # Jan 2031 the full 2,000 with no reduction (larger than s's own 500): 2,000 x 12 = 24,000.
+        out = self.widow(survivor_claim_age=67)
+        self.assertEqual(row(out, 2030, "A")["social_security"]["s"], 0)
+        self.assertEqual(row(out, 2031, "A")["social_security"]["s"], 2000 * 12)
+
+    def test_claim_survivor_benefit_action_matches_the_input(self):
+        out = self.widow(actions=[{"type": "claim_survivor_benefit", "person": "s", "age": 67}])
+        self.assertEqual(row(out, 2031, "A")["social_security"]["s"], 2000 * 12)
+        self.assertEqual(row(out, 2030, "A")["social_security"]["s"], 0)
+
+    def late_raw(self, died=2020, survivor_claim_age=66.6667):
+        """Single worker born Jan 1960 (FRA 67; PIA 2,000, claims at 67). Late spouse born Jan 1950, died 2020,
+        PIA 1,000 at FRA, never claimed."""
+        person = {"id": "p", "born": 1960, "born_month": 1, "medicare": False,
+                  "social_security": {"monthly_at_fra": 2000, "claim_age": 67,
+                                      "survivor_claim_age": survivor_claim_age},
+                  "late_spouse": {"born": 1950, "born_month": 1, "died": died, "monthly_at_fra": 1000}}
+        return {
+            "household": {"filing": "single", "state": "none", "people": [person],
+                          "accounts": [{"id": "cash", "owner": "p", "type": "cash", "balance": 0}],
+                          "income": [], "spending_need": 0,
+                          "itemized": {"salt_other": 0, "mortgage_interest": 0, "medical": 0, "charity_cash": 0}},
+            "plans": [{"name": "A", "actions": []}], "events": [],
+            "assumptions": {"return": 0.0, "inflation": 0.0, "first_year": 2026, "last_year": 2027,
+                            "heirs_tax_rate": 0.0, "switches": {}},
+        }
+
+    def test_late_spouse_survivor_benefit(self):
+        # Late spouse died Jan 2020 at 70 (Nov 2020 = 850 months from birth on Jan 1950, 840 cap, FRA 66 = 792):
+        # 48 delayed months x 2/3% = 32%; PIA 1,000 x 1.32 = 1,320 (never claimed, so no widow's limit).
+        # Survivor claims at 66.6667 = 800 months = survivor FRA, so no reduction; from Sep 2026 (month 800 after
+        # Jan 1960) the 1,320 is paid, which beats nothing: 4 months = 5,280 in 2026. In 2027 her own 2,000 is
+        # bigger, so 2,000 x 12 = 24,000.
+        out = no_cola(self.late_raw())
+        self.assertEqual(row(out, 2026, "A")["social_security"]["p"], 4 * 1320)
+        self.assertEqual(row(out, 2027, "A")["social_security"]["p"], 2000 * 12)
+        self.assertEqual(out["plans"]["A"]["years"][0]["alive"], {"p": True})   # the late spouse is not a person
+
+    def test_late_spouse_claim_action_form(self):
+        raw = self.late_raw(survivor_claim_age=None)
+        raw["plans"][0]["actions"] = [{"type": "claim_survivor_benefit", "person": "p", "age": 66.6667}]
+        self.assertEqual(row(no_cola(raw), 2026, "A")["social_security"]["p"], 4 * 1320)
+
+    def test_late_spouse_input_checks(self):
+        with self.assertRaises(E.InputError):
+            E.run(self.late_raw(died=2026))                  # died in the plan, not before it
+        raw = self.late_raw()
+        raw["household"]["filing"] = "mfj"
+        raw["household"]["people"].append({"id": "q", "born": 1961, "medicare": False})
+        with self.assertRaises(E.InputError):
+            E.run(raw)                                       # a late spouse only in a single household
+
+
+class EarningsTest(unittest.TestCase):
+    """5.8 (v1.4). Born June 1960: FRA 67 is June 2027 (the year FRA is reached: k = 5 months before it).
+    Claims at 62: PIA 1,000 x 0.70 = 700 a month. Wages are the only income."""
+
+    def raw(self, wages, first=2026, last=2028, switches=None):
+        person = {"id": "p", "born": 1960, "born_month": 6, "medicare": False,
+                  "social_security": {"monthly_at_fra": 1000, "claim_age": 62}}
+        income = [{"type": "wages", "owner": "p", "annual": amt, "start_year": y, "end_year": y}
+                  for y, amt in wages.items()]
+        return {
+            "household": {"filing": "single", "state": "none", "people": [person],
+                          "accounts": [{"id": "cash", "owner": "p", "type": "cash", "balance": 0}],
+                          "income": income, "spending_need": 0,
+                          "itemized": {"salt_other": 0, "mortgage_interest": 0, "medical": 0, "charity_cash": 0}},
+            "plans": [{"name": "A", "actions": []}], "events": [],
+            "assumptions": {"return": 0.0, "inflation": 0.0, "first_year": first, "last_year": last,
+                            "heirs_tax_rate": 0.0, "switches": dict(switches or {})},
+        }
+
+    def ss(self, out, year):
+        return row(out, year, "A")["social_security"]["p"]
+
+    def test_before_fra_limit_24480(self):
+        # 2026 wages 31,480: excess = (31,480 - 24,480) / 2 = 3,500. Withhold whole payments from January:
+        # 5 x 700 = 3,500 (stop, since it is at least the excess). 2026 paid: 7 x 700 = 4,900.
+        # Credit back: 5 withheld months -> claim age 62 + 5 months: early 55 months, reduction 20% + 19 x 5/12%
+        # = 27.9167%, factor 0.720833; from June 2027 the own benefit is 720.80, paid as 720 (whole dollars).
+        # 2027: Jan-May 5 x 700 = 3,500 and Jun-Dec 7 x 720 = 5,040, total 8,540. 2028: 12 x 720 = 8,640.
+        out = no_cola(self.raw({2026: 31480}))
+        self.assertEqual(self.ss(out, 2026), 4900)
+        self.assertEqual(self.ss(out, 2027), 8540)
+        self.assertEqual(self.ss(out, 2028), 8640)
+
+    def test_fra_year_limit_65160(self):
+        # 2027 (the year FRA is reached) wages 160,704: k = 5 months before June. Excess =
+        # (160,704 x 5/12 - 65,160) / 3 = (66,960 - 65,160) / 3 = 600. Jan's 700 covers it: 1 month withheld.
+        # Feb-May paid 4 x 700 = 2,800; from June the own benefit has one credited month: claim age 745 months,
+        # early 59 months, reduction 20% + 23 x 5/12% = 29.5833%, factor 0.704167 -> 704 a month.
+        # 2027 = 2,800 + 7 x 704 = 7,728. 2028 = 12 x 704 = 8,448.
+        out = no_cola(self.raw({2027: 160704}))
+        self.assertEqual(self.ss(out, 2026), 8400)
+        self.assertEqual(self.ss(out, 2027), 7728)
+        self.assertEqual(self.ss(out, 2028), 8448)
+
+    def test_switch_false_is_v13(self):
+        # ss_earnings_test false: nothing is withheld and nothing is credited (v1.3 behaviour)
+        out = no_cola(self.raw({2026: 31480}, switches={"ss_earnings_test": False}))
+        self.assertEqual([self.ss(out, y) for y in (2026, 2027, 2028)], [8400, 8400, 8400])
+
+    def test_2025_limit_published(self):
+        # v1.4.1: 2025 under FRA is $23,400. Wages 33,000: excess = (33,000 - 23,400) / 2 = 4,800. Withhold
+        # Jan-Jul (7 x 700 = 4,900 covers it; 6 x 700 = 4,200 does not). 2025 paid: 5 x 700 = 3,500.
+        out = no_cola(self.raw({2025: 33000}, first=2025, last=2025))
+        self.assertEqual(self.ss(out, 2025), 3500)
+
+    def test_fra_year_credit_counts_earlier_withheld_months(self):
+        # v1.4.1: months withheld in the FRA year before the FRA month count for the credit from the FRA month on.
+        # 2027 wages 163,584: k = 5, excess = (163,584 x 5/12 - 65,160) / 3 = (68,160 - 65,160) / 3 = 1,000.
+        # Jan 700 is not enough; Jan + Feb 1,400 is. So 2 months withheld: Jan and Feb. Mar-May paid 3 x 700 = 2,100.
+        # Credit count is 2 from June on: claim age 746 months, early 58, reduction 20% + 22 x 5/12% = 29.1667%,
+        # factor 0.708333 -> 708.30 -> 708. 2027 = 2,100 + 7 x 708 = 7,056. 2028 = 12 x 708 = 8,496.
+        out = no_cola(self.raw({2027: 163584}))
+        self.assertEqual(self.ss(out, 2027), 7056)
+        self.assertEqual(self.ss(out, 2028), 8496)
+
+    def test_limits_after_2026_grow_with_inflation(self):
+        # 14.1 chain from the published 2026 values, rounded to $120:
+        # under FRA 2027: 24,480 x 1.03 = 25,214.40 -> nearest $120 = 25,200 (210 x 120)
+        # FRA year 2027: 65,160 x 1.03 = 67,114.80 -> nearest $120 = 67,080 (559 x 120)
+        prm = Params(inflation=0.03)
+        self.assertEqual(prm.get("ss_earnings_under", 2026), 24480)
+        self.assertEqual(prm.get("ss_earnings_under", 2027), 25200)
+        self.assertEqual(prm.get("ss_earnings_fra_year", 2027), 67080)
+        self.assertEqual(prm.projected_years, {2027})
+
+    def test_2025_values_are_published(self):
+        prm = Params(inflation=0.03)
+        self.assertEqual(prm.get("ss_earnings_under", 2025), 23400)
+        self.assertEqual(prm.get("ss_earnings_fra_year", 2025), 62160)
+        self.assertEqual(prm.projected_years, set())
+        with self.assertRaises(E.InputError):
+            E.limit(prm, "ss_earnings_under", 2024)
+
+
+class PreSecureInheritedIra(unittest.TestCase):
+    """6A.9 (v1.3): an owner who died before 2020 keeps the pre-SECURE stretch. Owner born 1945, died 2018 (after
+    the RBD, which was 2016), so the RBD test passes. Designated beneficiary born 1975."""
+
+    def sched(self, cls, born, died=2018):
+        acc = {"type": "inherited_ira", "inherited": {"from_born": 1945, "died": died, "beneficiary_class": cls}}
+        return E.inherited_setup(acc, {"born": born}, E.default_switches("single", "none"))
+
+    def test_designated_annual_no_deadline(self):
+        s = self.sched("designated", 1975)
+        self.assertTrue(s["rbd"])
+        self.assertIsNone(s["deadline"])                     # not D + 10 = 2028
+        self.assertEqual(s["start"], 2019)
+        # 2030 divisor: beneficiary (born 1975, age 44 in 2019) minus one for each year after 2019 = S(44) - 11;
+        # owner's remaining life expectancy at death (age 73) less 12 years = S(73) - 12; the longer one counts.
+        le_b = P.single_life(44) - (2030 - 2019)
+        le_o = P.single_life(73) - (2030 - 2018)
+        self.assertAlmostEqual(E.inherited_rmd(s, 2030, 100000, 100000, Params()), 100000 / max(le_b, le_o))
+        self.assertGreater(E.inherited_rmd(s, 2040, 100000, 100000, Params()), 0)   # still distributing in 2040
+
+    def test_minor_child_has_no_age_21_deadline(self):
+        # post-2019 rules would end this child's account 10 years after age 21 (2005 + 21 + 10 = 2036)
+        s = self.sched("minor_child", 2005)
+        self.assertIsNone(s["deadline"])
+        self.assertTrue(s["annual"])
+
+    def test_successor_after_2019_gets_ten_years(self):
+        # The designated beneficiary dies in 2025 (after 2019): SECURE Act 401(b)(5) gives 2025 + 10 = 2035.
+        s = self.sched("designated", 1975)
+        st = {"acc": {"ia": {"id": "ia", "owner": "d", "type": "inherited_ira", "bal": 1000.0, "basis": 0.0,
+                             "sched": s}},
+              "order": ["ia"], "basis8606": {"d": 0.0, "s": 0.0}, "deferred": {},
+              "roth": {"d": {"first": None, "contrib": 0.0, "layers": []},
+                       "s": {"first": None, "contrib": 0.0, "layers": []}}}
+        sc = {"switches": E.default_switches("mfj", "none"), "deaths": {"d": 2025}}
+        E.apply_death(st, sc, "d", "s")
+        self.assertEqual(st["acc"]["ia"]["sched"]["deadline"], 2035)
+
+
 if __name__ == "__main__":
     unittest.main()

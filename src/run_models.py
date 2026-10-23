@@ -12,6 +12,7 @@ import argparse
 import json
 import random
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -602,7 +603,12 @@ def main():
                     return {**rec, "_messages": msgs + [{"role": "assistant", "content": rec["text"]}]}
             return ask_first(turn, c)
 
-        futs = {pool.submit(ask, m, c, rep): (m, c, rep) for m, c, rep in jobs}
+        def timed(m, c, rep):  # wall-clock seconds per question, tool calls and retries included
+            t0 = time.monotonic()
+            res = ask(m, c, rep)
+            return res if res is None else {**res, "seconds": round(time.monotonic() - t0, 1)}
+
+        futs = {pool.submit(timed, m, c, rep): (m, c, rep) for m, c, rep in jobs}
         for n, fut in enumerate(as_completed(futs), 1):
             m, c, rep = futs[fut]
             if (res := fut.result()) is None:

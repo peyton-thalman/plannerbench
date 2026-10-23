@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>In the Chat · PlannerBench</title>
+<meta name="description" content="The planning engine as a connector inside Claude and ChatGPT: it asks the one question that matters, does every calculation, and says every assumption.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css?v=13">
+</head>
+<body data-page="chat">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="gauntlet.html">The Gauntlet</a>
+      <a href="chat.html" aria-current="page">In the chat</a>
+      <a href="replay.html">Replays</a>
+      <a href="method.html">Method</a>
+      <a href="built.html">How I built it</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">The engine, in the chat</p>
+    <h1>Ask in Claude or ChatGPT. <em>The engine</em> asks the questions and does the math.</h1>
+    <div class="tldr">
+      <p class="label">In short</p>
+      <p>The same planning engine is a connector a person adds to Claude or ChatGPT in a couple of minutes. They ask in everyday words. The engine, not the chat model, decides which fact to ask for next, runs every plan, and hands back the answer with every assumption named and the law behind every dollar. The chat model’s job is to be friendly and quote the numbers exactly.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">A conversation, from the engine’s side</p>
+        <h2>What the engine sends back, word for word</h2>
+        <p class="sub">These are real replies from the engine’s front-door tool, <code>plan_check</code>, for a made-up couple. The chat model turns them into conversation; it never adds a number of its own. Engine commit <code data-c="commit">—</code>.</p>
+      </div>
+
+      <ol class="turns">
+        <li class="turn">
+          <p class="label">1 · Someone asks, with no details yet</p>
+          <p class="said">“We’re both retired. Should we be converting some of our IRA to a Roth, and how much?”</p>
+          <div class="reply">
+            <p class="label">Engine: one question, why it matters, and what to have handy</p>
+            <p class="ask" data-c="ask">—</p>
+            <p class="why" data-c="ask_why">—</p>
+            <ul class="ready" id="c-ready"></ul>
+          </div>
+        </li>
+        <li class="turn">
+          <p class="label">2 · A few questions later, every fact in</p>
+          <p class="gap">The couple has answered ages, accounts, Social Security, spending and state, one question at a time.</p>
+          <div class="reply answer">
+            <p class="label">Engine: the answer, as sentences</p>
+            <p class="headline" data-c="headline">—</p>
+            <p data-c="subline">—</p>
+            <dl class="kv" id="c-keys"></dl>
+            <div class="sides">
+              <div><p class="label">What it costs now</p><ul id="c-costs"></ul></div>
+              <div><p class="label">What it saves later</p><ul id="c-saves"></ul></div>
+            </div>
+            <p class="label">Said out loud: what it assumed</p>
+            <ul class="assumed" id="c-assumed"></ul>
+            <p class="label">And what could change the answer</p>
+            <p id="c-sens">—</p>
+            <p class="meta" id="c-meta"></p>
+          </div>
+        </li>
+        <li class="turn">
+          <p class="label">3 · Someone types a Social Security number</p>
+          <p class="said">“My SSN is 000-12-3456, can you check my Social Security?”</p>
+          <div class="reply refuse">
+            <p class="label">Engine: turned away before it reaches any math</p>
+            <p data-c="rejected">—</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Product rules</p>
+        <h2>Built into the tool, not hoped for in a prompt</h2>
+        <p class="sub">Every reply repeats these rules to the chat model, and the reply’s shape enforces most of them.</p>
+      </div>
+      <ul class="notes">
+        <li><b>The engine picks the next question.</b> It reruns the plan with each unknown fact both ways and asks only for the one that could flip the choice or move the answer more than 2%. Every question has a skip option that names the assumption it will use instead.</li>
+        <li><b>No made-up numbers.</b> Every dollar amount comes from the engine. The model is told to quote, never compute, and a checker lists any number in a transcript that no tool reply contains.</li>
+        <li><b>Every fact is labeled.</b> Said, assumed (with the reason), or worked out. Ballparks are labeled estimated, never “you said.”</li>
+        <li><b>Close calls get both plans.</b> When two plans land within $1,000 over 25 years, it says “it’s close” instead of naming a winner.</li>
+        <li><b>Honest edges.</b> A question the engine doesn’t cover gets “the engine doesn’t cover that yet,” not a guess.</li>
+        <li><b>It keeps nothing.</b> No database, no files, no request bodies in logs. Anything that looks like a Social Security, account or ID number is refused and never repeated back.</li>
+        <li><b>Education, not advice.</b> Said once per conversation. It prices choices; it never picks investments or products.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it’s checked</p>
+        <h2>Graded before anyone used it, then fixed from real use</h2>
+      </div>
+      <div class="principles">
+        <div class="principle"><span class="n" data-c="judge">—</span><h3>Simulated clients</h3><p>For each ask-first Gauntlet question, a scripted client answers only what the engine asks. Pass means the same decision as with every fact known, the number within 2%, a first answer within 6 questions, the hidden fact asked for, and no wasted questions. Free to run; no model is called.</p></div>
+        <div class="principle"><span class="n" data-c="drives">—</span><h3>Test drives become tests</h3><p>I ran it in Claude as a client would, with hard households (a widow with inherited IRAs, wages that run past 62) and wrote down every rough edge. Each note was fixed and that whole session was saved as a test, so it can’t slide back. One note changed a headline: the Social Security earnings test erased a “claim at 62” gain.</p></div>
+        <div class="principle"><span class="n" data-c="tests">—</span><h3>Engine tests</h3><p>Every rule, the everyday-words conversion, the ID-number refusal, a full round trip over the network, and the card drawn from real replies. The Gauntlet’s answer key is reproduced to the dollar from everyday words.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="split">
+      <div>
+        <p class="eyebrow">For engineers</p>
+        <h2>The MCP server</h2>
+        <p class="sub">One server, two ways in: a local process for Claude Code and the benchmark runners, and a private web address for Claude and ChatGPT.</p>
+      </div>
+      <ul class="notes">
+        <li><b>Tools.</b> <code>plan_check</code> (the front door, in everyday terms) plus <span data-c="advanced_n">eight</span> calculators for builders: <span data-c="advanced">—</span>.</li>
+        <li><b>Replies</b> are one of <code>need_more</code> (one question), <code>answer</code>, <code>not_covered</code> or <code>rejected</code>, each with a <code>how_to_reply</code> the model follows, and the engine commit that produced it.</li>
+        <li><b>Stateless over HTTP</b> (Streamable HTTP, a fresh server per request): the conversation carries the facts, so there is nothing to store or leak. Requests capped at 64 KB, every list capped, a per-address rate limit.</li>
+        <li><b>A card inside the chat</b> (MCP Apps): the answer, the conversion curve and what it costs vs. saves, drawn from the reply. One self-contained file with no outside requests. The text reply is always the whole answer, for clients that don’t draw cards (today that includes Claude’s phone apps).</li>
+        <li><b>The benchmark sees the same engine.</b> PlannerBench runs the advanced tools over the local process, so a score on this site and an answer in the chat come from the same code.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="replay.html"><span><span class="label">Next</span><b>Replays: every tool call, step by step</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=11"></script>
+</body>
+</html>

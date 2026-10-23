@@ -4,7 +4,8 @@
   "agree": 4000,
   "of": 4000,
   "within": "$1",
-  "source": "engine repo: verify/COMPARE.md"
+  "rules": "v1.4.1",
+  "source": "engine repo: verify/COMPARE.md (rules v1.4.1, 2026-10-23)"
  },
  "policyengine": {
   "agree": 1600,
@@ -27,5 +28,28 @@
  "first_bug": {
   "what": "MAGI exactly at the top IRMAA threshold was placed one tier low",
   "source": "README log, 2026-10-20"
+ },
+ "connector": {
+  "judge_pass": 69,
+  "judge_of": 69,
+  "judge_source": "engine repo: verify/judge/RESULTS.md (npm run judge)",
+  "engine_tests": 210,
+  "tests_source": "engine repo: npx vitest run, commit 3b7d8bc",
+  "drive_notes": [
+   6,
+   17
+  ],
+  "drives_source": "engine repo: src/plain/karla.test.ts, karla2.test.ts (commits 67a0cd8, 28a15cf)",
+  "advanced": [
+   "federal_income_tax",
+   "taxable_social_security",
+   "required_minimum_distribution",
+   "social_security_benefit",
+   "medicare_part_b_premium",
+   "tax_tables",
+   "run_scenario",
+   "solve_roth_conversion"
+  ],
+  "advanced_source": "engine repo: mcp/server.ts (MCP 3.0)"
  }
 }

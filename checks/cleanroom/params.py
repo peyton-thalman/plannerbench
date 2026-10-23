@@ -86,6 +86,11 @@ PUBLISHED = {
     "az_standard_deduction": {2025: {"mfj": 31500, "single": 15750}},
     # other.json az_standard_deduction 2025 charitable_increase_pct 34 (Form 140 line 44; §43-1041(I)(1)).
     "az_charitable_std_increase_rate": {2025: 0.34},
+    # RULES 5.8 and A.3 (v1.4.1): earnings-test exempt amounts. Under FRA all year; the year FRA is reached.
+    # 2025: SSA notice (FR Doc 2024-24871). 2026: RULES 5.8. Later years: grown with inflation from 2026
+    # (14.1 chain), rounded to the nearest $120.
+    "ss_earnings_under": {2025: 23400, 2026: 24480},
+    "ss_earnings_fra_year": {2025: 62160, 2026: 65160},
 }
 
 # Statutory constants: the same every year, never "projected" (RULES 14.2 rows marked "no").
@@ -424,6 +429,20 @@ class Params:
         return {"cap": float(CONSTANTS["salt_cap_permanent"]), "threshold": None, "phasedown": False}
 
     # -- Social Security ----------------------------------------------------------------------------------
+    def _earnings_limit(self, table, year):
+        """RULES 5.8 (v1.4.1): published for 2025 and 2026; later years grow with inflation from 2026, nearest $120."""
+        seed, n, proj = self._chain(table, year, self.inflation)
+        if not proj:
+            return seed
+        self._mark(year)
+        return round_to(seed * (1 + self.inflation) ** n, 120)
+
+    def _ss_earnings_under(self, year):
+        return self._earnings_limit(PUBLISHED["ss_earnings_under"], year)
+
+    def _ss_earnings_fra_year(self, year):
+        return self._earnings_limit(PUBLISHED["ss_earnings_fra_year"], year)
+
     def _ss_cola(self, year):
         t = PUBLISHED["ss_cola"]
         if year in t:

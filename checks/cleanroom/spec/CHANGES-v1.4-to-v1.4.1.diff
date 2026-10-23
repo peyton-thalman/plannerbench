@@ -1,0 +1,24 @@
+3c3
+< Version 1.4, 2026-10-22 (v1.4: the earnings test, 5.8. v1.3: deaths before 2020 keep the stretch, 6A.9; a survivor whose spouse died before the plan, 5.7. v1.1: same-year conversions in Roth ordering, 7.5; SALT threshold arithmetic. v1.2, from a primary-source review of five questions: successor deadline only after an EDB, 6A.6; joint-account step-up by titling, 3.3; Arizona standard deduction follows the federal amount, 10.2; survivor base keeps delayed credits, 5.5). Law as enacted through that date, including P.L. 119-21 ("OBBBA", July 4, 2025)
+---
+> Version 1.4.1, 2026-10-23 (v1.4.1: 5.8 states the 2025 limits and when a withheld month in the FRA year starts to count, both found by the clean-room comparison. v1.4: the earnings test, 5.8. v1.3: deaths before 2020 keep the stretch, 6A.9; a survivor whose spouse died before the plan, 5.7. v1.1: same-year conversions in Roth ordering, 7.5; SALT threshold arithmetic. v1.2, from a primary-source review of five questions: successor deadline only after an EDB, 6A.6; joint-account step-up by titling, 3.3; Arizona standard deduction follows the federal amount, 10.2; survivor base keeps delayed credits, 5.5). Law as enacted through that date, including P.L. 119-21 ("OBBBA", July 4, 2025)
+35c35
+< - Out of scope (Appendix D): AMT, payroll taxes, credits, the Social Security earnings test, ACA premium credits,
+---
+> - Out of scope (Appendix D): AMT, payroll taxes, credits, ACA premium credits,
+401c401,406
+< - Limits after 2026: grown with inflation, rounded to $120 (they actually follow the national average wage index).
+---
+> - Limits: `ss_earnings_under[Y]` and `ss_earnings_fra_year[Y]` (Appendix A.3), published for 2025 and 2026. After
+>   2026: grown with inflation from 2026, rounded to the nearest $120 (they actually follow the national average wage
+>   index).
+> - **When the credit starts (v1.4.1):** the count used for a month is every month withheld before it, including months
+>   withheld earlier in the FRA year itself. So in the FRA year, the months from the FRA month on already include that
+>   January-on withholding.
+1387a1393
+> | `ss_earnings_under[year]`, `ss_earnings_fra_year[year]` | earnings-test exempt amounts (5.8): under FRA all year; the year FRA is reached | SSA §203(f)(8); 20 CFR 404.430; annual SSA notice in the Federal Register |
+1479,1480c1485
+< payroll taxes on wages; the Social Security retirement earnings test (SSA §203(b), 20 CFR 404.415/404.430) for
+< wages before FRA; the still-working exception for 401(k) RMDs; Social Security taxation lump-sum election;
+---
+> payroll taxes on wages (the earnings test is in scope since v1.4, 5.8); the still-working exception for 401(k) RMDs; Social Security taxation lump-sum election;

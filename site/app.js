@@ -39,6 +39,7 @@
     open_name: openRow(true)?.name,
     agree_models: misread.length ? String(misreadNames.size) : null,
     agree_cap: misread.length ? `models from ${misreadLabs.size} labs gave the same wrong answer to the same question` : null,
+    chat_judge: sys.connector && `${sys.connector.judge_pass} / ${sys.connector.judge_of}`,
     cleanroom: sys.cleanroom && `${sys.cleanroom.agree.toLocaleString('en-US')} / ${sys.cleanroom.of.toLocaleString('en-US')}`,
     harness: h && `${name(h.direct)} was asked the same ${h.questions} questions directly and through OpenRouter. It scored ${pct(h.direct_accuracy)} both ways, so routing doesn’t change scores.`,
   };
@@ -68,6 +69,10 @@
         `The engine as tools any model can call over the Model Context Protocol: ${(tools?.tools ?? []).map((t) => t.replace(/_/g, ' ')).join(', ')}, plus a scenario runner and a Roth-conversion solver.`,
         `Version 1.0 returned the right number, and the model replaced it with its own wrong rule on ${tools?.whole.overruled ?? 18} of its ${tools?.whole.misses ?? 22} misses. Version 1.1 shows the rule and cites the IRS form line. The lesson is about product design, not model size.`,
         fig.tools_from && `${fig.tools_from} → ${fig.tools_to}`, `Claude Haiku 5.5 on the 50 hardest questions${fig.private_tools ? `; ${fig.private_tools} on held-out ones` : ''}`, 'gauntlet.html#tools'],
+      chat: ['Talk to it', 'In the chat',
+        'A connector anyone can add to Claude or ChatGPT. A person asks in everyday words; the engine picks the one question that matters next, runs every plan, and replies with the answer, every assumption and the law behind each dollar. A card shows it inside the chat.',
+        'A planning engine only helps if people can reach it where they already ask questions. Putting the engine in charge of the questions keeps the chat model from guessing facts or doing math.',
+        fig.chat_judge, 'simulated clients get the same decision as with every fact known, within 6 questions, with no wasted questions', 'chat.html'],
       wizard: ['Use', 'Wizard',
         'A live meeting-copilot demo: as an advisor and client talk, the intake form fills itself in, and a planning question asked out loud becomes an engine card a few seconds later.',
         'Shows where the engine lives in a real workflow. Built to a generic intake form with fake households only; sensitive numbers are masked in the browser before any model sees them.',
@@ -89,6 +94,30 @@
       if (innerWidth < 640) $('map-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }));
     show('engine');
+  }
+
+  // In the chat: real plan_check replies for the sample couple (data/connector.json, made by the engine repo's
+  // verify/connector-sample.ts) and the connector's checks from system.json
+  if (document.body.dataset.page === 'chat') {
+    const cx = await get('connector'), cs = sys.connector;
+    const a = cx?.answer, words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    const C = {
+      commit: cx?.engine_commit, ask: cx?.first.ask.question, ask_why: cx && `Why it matters: ${cx.first.ask.why}`,
+      headline: a?.headline, subline: a?.subline, rejected: cx?.rejected.message,
+      judge: cs && `${cs.judge_pass} / ${cs.judge_of}`, tests: cs && String(cs.engine_tests),
+      drives: cs && `${cs.drive_notes.join(' + ')} notes`,
+      advanced_n: cs && words[cs.advanced.length], advanced: cs && cs.advanced.map((t) => t.replace(/_/g, ' ')).join(', '),
+    };
+    document.querySelectorAll('[data-c]').forEach((n) => { if (C[n.dataset.c]) n.textContent = C[n.dataset.c]; });
+    if (cx) {
+      for (const r of cx.first.have_ready) $('c-ready').append(el('li', null, r));
+      for (const k of a.key_numbers) { const d = el('div'); d.append(el('dt', null, k.label), el('dd', null, k.value)); $('c-keys').append(d); }
+      const reasons = (side, id) => { for (const r of side.reasons) { const li = el('li'); li.append(el('span', null, r.text), el('b', null, usd(Math.abs(r.amount))), el('small', null, r.law)); $(id).append(li); } };
+      reasons(a.costs_now, 'c-costs'); reasons(a.saves_later, 'c-saves');
+      for (const s of a.assumed) $('c-assumed').append(el('li', null, s));
+      $('c-sens').textContent = a.sensitivity.map((s) => `With ${s.if}, ${s.effect}.`).join(' ') || 'Nothing that was assumed would change the pick.';
+      $('c-meta').textContent = `${a.said} facts said, ${a.assumed_n} assumed, ${a.worked_out} worked out · ${a.engine_runs.toLocaleString('en-US')} plans run for this one answer, ${a.seconds_local.toFixed(1)} s on a laptop`;
+    }
   }
 
   // Method: the proof stack, one card per independent check

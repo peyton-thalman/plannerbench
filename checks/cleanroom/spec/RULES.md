@@ -1,6 +1,6 @@
 # RULES.md — US retirement tax rules for a year-by-year calculator
 
-Version 1.2, 2026-10-21 (v1.1: same-year conversions in Roth ordering, 7.5; SALT threshold arithmetic. v1.2, from a primary-source review of five questions: successor deadline only after an EDB, 6A.6; joint-account step-up by titling, 3.3; Arizona standard deduction follows the federal amount, 10.2; survivor base keeps delayed credits, 5.5). Law as enacted through that date, including P.L. 119-21 ("OBBBA", July 4, 2025)
+Version 1.4.1, 2026-10-23 (v1.4.1: 5.8 states the 2025 limits and when a withheld month in the FRA year starts to count, both found by the clean-room comparison. v1.4: the earnings test, 5.8. v1.3: deaths before 2020 keep the stretch, 6A.9; a survivor whose spouse died before the plan, 5.7. v1.1: same-year conversions in Roth ordering, 7.5; SALT threshold arithmetic. v1.2, from a primary-source review of five questions: successor deadline only after an EDB, 6A.6; joint-account step-up by titling, 3.3; Arizona standard deduction follows the federal amount, 10.2; survivor base keeps delayed credits, 5.5). Law as enacted through that date, including P.L. 119-21 ("OBBBA", July 4, 2025)
 and Arizona Laws 2026, ch. 140 (HB 4168, approved June 13, 2026).
 
 This is a specification, not code. A programmer should be able to build a calculator from it alone. Every rule
@@ -32,7 +32,7 @@ Words used with a fixed meaning:
   (or no state tax), Medicare Part B premiums and Part D income-related amounts.
 - Deterministic: one nominal return `assumptions.return` for every account and year, one inflation rate
   `assumptions.inflation` for projecting indexed amounts.
-- Out of scope (Appendix D): AMT, payroll taxes, credits, the Social Security earnings test, ACA premium credits,
+- Out of scope (Appendix D): AMT, payroll taxes, credits, ACA premium credits,
   state taxes other than Arizona, estate tax, and others listed there.
 
 ### 0.2 Notation
@@ -352,7 +352,8 @@ Source: Social Security Act §202(e),(f), §202(e)(2)(D) and (f)(3)(D) (the "wid
 404.410(b); POMS RS 00615.320.
 
 - Start month: the later of January of `D+1` and the month the survivor `s` reaches `ss_survivor_min_months`
-  (age 60).
+  (age 60), or (v1.3) the age `s` chose (`social_security.survivor_claim_age`, or a `claim_survivor_benefit` action),
+  if later.
 - **Base:**
   - If `d` had claimed by the end of `D`: `base = PIA[d] × max(1, factor[d])` — i.e. `d`'s PIA plus any delayed
     credits; early reduction is not carried into the base (20 CFR 404.313(e)(1)). **v1.2:** for a person entered with
@@ -372,8 +373,38 @@ Source: Social Security Act §202(e),(f), §202(e)(2)(D) and (f)(3)(D) (the "wid
 - **The survivor keeps the larger:** each month, `s` receives `max(own[s] if s is entitled that month, survivor[s])`
   (Social Security Act §202(k)(3): when entitled to two benefits, the person is paid the larger). **Convention:**
   if `s` has not yet claimed their own benefit, `s` takes the survivor benefit from its start month and starts
-  their own at their (unchanged) `claim_age`, being paid the larger each month. (Choosing to delay the survivor
-  benefit for a higher amount is a strategy the plan input does not express; out of scope.)
+  their own at their (unchanged) `claim_age`, being paid the larger each month. (v1.3: delaying the survivor benefit
+  is expressed by its own start age, above; "survivor at 60, own at 70" and the reverse are both plans.)
+
+### 5.7 A spouse who died before the plan (v1.3)
+
+A person entered with `late_spouse: { born, born_month?, died, monthly_at_fra, already_claimed_monthly? }` is paid
+5.5's survivor benefit on that record, with `D = died`. The late spouse is a record only: never paid, never on the
+return. `PIA[d]` is `monthly_at_fra` in `first_year`, indexed by 5.2. If `already_claimed_monthly` is given, `d`
+had claimed and `factor[d] = already_claimed_monthly / monthly_at_fra` (as 5.5, v1.2); otherwise `d` had not
+claimed and the delayed-credit rule of 5.5 applies at the age of death.
+
+### 5.8 The earnings test (v1.4)
+
+Source: Social Security Act §203(b), (f); 20 CFR 404.415, 404.430, 404.434; 404.412 (the adjustment at FRA);
+SSA "How Work Affects Your Benefits" (2026: $24,480 and $65,160).
+
+- Wages are the person's `wages` income items for `Y` (not pensions, IRA money or investment income).
+- `fra_year` = the calendar year `P` reaches `fra_months`. No test after `fra_year`.
+- Before `fra_year`: `excess = max0(wages − limit_under[Y]) / 2`. In `fra_year`: `excess = max0(wages × k/12 −
+  limit_fra_year[Y]) / 3`, where `k` = months of `Y` before the FRA month (**convention:** wages earned evenly).
+- Withholding: whole monthly payments (after 5.6 rounding), January on, among the `k` (or 12) months before FRA, until
+  the amount withheld is at least `excess`. **Convention:** no monthly "non-service month" test in the first year.
+- Credit back: each withheld month in which `P` was paid an own benefit adds one month to `P`'s own claim age for the
+  factor in 5.3, from the FRA month on; each withheld month with a survivor benefit reduces `early_s` in 5.5 by one,
+  from the survivor FRA month on.
+- Limits: `ss_earnings_under[Y]` and `ss_earnings_fra_year[Y]` (Appendix A.3), published for 2025 and 2026. After
+  2026: grown with inflation from 2026, rounded to the nearest $120 (they actually follow the national average wage
+  index).
+- **When the credit starts (v1.4.1):** the count used for a month is every month withheld before it, including months
+  withheld earlier in the FRA year itself. So in the FRA year, the months from the FRA month on already include that
+  January-on withholding.
+- Switch `ss_earnings_test` (default `true`; `false` is the v1.3 behaviour).
 
 ### 5.6 Annual amount and rounding
 
@@ -559,6 +590,19 @@ usual treatment of a recalculating life expectancy after death, Reg. §1.401(a)(
   ledger: the inherited Roth's contribution basis and conversion layers are unknown, so **convention:** the
   opening balance is treated as earnings unless the input supplies `contribution_basis`; taxable earnings are
   included in income without the 10% tax.
+
+### 6A.9 Owners who died before 2020 (pre-SECURE Act)
+
+The 10-year rule and the eligible-designated-beneficiary classes apply only when the owner died after December 31,
+2019 (SECURE Act §401(b)(1)). When `died < 2020`:
+
+- `spouse` and `non_designated`: as in 6A.4 (those rules didn't change).
+- Every other class (`designated`, `minor_child`, `disabled`, `chronically_ill`, `not_more_than_10_years_younger`):
+  annual RMD from `D+1` with `LE_b` ("minus one"), or the longer of `LE_b` and `LE_o` if the owner died on/after
+  the RBD; no deadline and no age-21 cutoff (pre-2020 Reg. §1.401(a)(9)-3, A-3 and -5, A-5). The EDB election
+  (6A.4) does not exist for these deaths. The 6A.5 waivers don't apply.
+- If that beneficiary dies after 2019, the successor must empty the account by Dec 31 of the 10th year after
+  (SECURE Act §401(b)(5)), as in 6A.6.
 
 ---
 
@@ -1346,6 +1390,7 @@ written in the cited section; "annual" means the IRS/SSA/CMS/ADOR document for t
 | `ss_survivor_max_reduction` (28.5%), `ss_survivor_min_months` (720) | widow(er) reduction at 60 | SSA §202(q)(1)(B); 20 CFR 404.410(b) |
 | `ss_rib_lim_rate` | 82.5% | SSA §202(e)(2)(D), (f)(3)(D) |
 | `ss_cola[year]` | COLA | 42 USC 415(i); annual SSA notice in the Federal Register |
+| `ss_earnings_under[year]`, `ss_earnings_fra_year[year]` | earnings-test exempt amounts (5.8): under FRA all year; the year FRA is reached | SSA §203(f)(8); 20 CFR 404.430; annual SSA notice in the Federal Register |
 
 ### A.4 Medicare
 
@@ -1389,6 +1434,7 @@ written in the cited section; "annual" means the IRS/SSA/CMS/ADOR document for t
 | `community_property` | **false** (v1.2: titling decides; this only covers untitled joint accounts) | 3.3 |
 | `ss_dollar_rounding` | **true** | 5.6 |
 | `round_8606_ratio_3dp` | **false** | 9.5 |
+| `ss_earnings_test` | **true** | 5.8 |
 | `annuity_is_nii` | **true** | 9.12 |
 | `az_senior_subtraction` | **true** | 10.1 |
 | `az_ltcg_acquired_after_2011` | **true** | 10.1 |
@@ -1436,8 +1482,7 @@ written in the cited section; "annual" means the IRS/SSA/CMS/ADOR document for t
 ## Appendix D — Out of scope
 
 AMT (IRC §55; OBBBA changed its phase-out; may bind for large SALT or gains — flag rather than compute);
-payroll taxes on wages; the Social Security retirement earnings test (SSA §203(b), 20 CFR 404.415/404.430) for
-wages before FRA; the still-working exception for 401(k) RMDs; Social Security taxation lump-sum election;
+payroll taxes on wages (the earnings test is in scope since v1.4, 5.8); the still-working exception for 401(k) RMDs; Social Security taxation lump-sum election;
 government pension offset/WEP (repealed by the Social Security Fairness Act, 2025, for benefits after Dec 2023);
 head of household, married filing separately and qualifying surviving spouse; dependents and all credits (federal
 and Arizona); ACA premium tax credits (MAGI is reported only); qualified business income, tips, overtime and car-loan

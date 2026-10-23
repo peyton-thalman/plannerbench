@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body data-page="built">
 <header class="nav">
@@ -17,6 +17,7 @@
     <nav aria-label="Pages">
       <a href="results.html">Results</a>
       <a href="gauntlet.html">The Gauntlet</a>
+      <a href="chat.html">In the chat</a>
       <a href="replay.html">Replays</a>
       <a href="method.html">Method</a>
       <a href="built.html" aria-current="page">How I built it</a>
@@ -28,7 +29,7 @@
   <section class="page-head wrap">
     <p class="eyebrow">Case study</p>
     <h1>A financial advisor, AI as the team, and a rule: build the judge first</h1>
-    <p class="lede">I’m a licensed financial advisor, not a software engineer. Over eight days in October 2026 I directed AI coding agents to build a planning engine, a benchmark that proves models need it, the tools that hand it to them, and a demo that puts it in a client meeting. This page is how the decisions got made.</p>
+    <p class="lede">I’m a licensed financial advisor, not a software engineer. Over eight days in October 2026 I directed AI coding agents to build a planning engine, a benchmark that proves models need it, the tools that hand it to them, a connector that puts it inside Claude and ChatGPT, and a demo that puts it in a client meeting. This page is how the decisions got made.</p>
   </section>
 
   <section class="band">
@@ -49,15 +50,16 @@
   <section class="wrap section">
     <div class="section-head">
       <p class="eyebrow">How I work</p>
-      <h2>Six principles, each with where it paid off</h2>
+      <h2>Seven principles, each with where it paid off</h2>
     </div>
     <div class="principles">
       <div class="principle"><span class="n">01</span><h3>Build the judge before the feature</h3><p>Every piece started with the check that would prove it right: answer keys before questions, graders before models, fake meetings with answer keys before the meeting app.</p><p class="eg">The Gauntlet’s grader passed 12 stand-in checks, including a fake model that answers perfectly and one that lies, before a single real model was asked.</p></div>
       <div class="principle"><span class="n">02</span><h3>The published source decides</h3><p>When the models and the key disagree, the IRS form, SSA’s manual or the CMS table settles it. Never a vote among models.</p><p class="eg">Four different models from three labs gave the same senior-deduction answer. Schedule 1-A Part V showed all four were wrong.</p></div>
-      <div class="principle"><span class="n">03</span><h3>Never let the builder grade itself</h3><p>A second engine was written from the written spec alone, by an AI agent that was never allowed to read the first one.</p><p class="eg">Its first run found 3 differences in 2,000 households. One was a real bug in the main engine (a 2027 tax threshold). Now 4,000 of 4,000 agree.</p></div>
+      <div class="principle"><span class="n">03</span><h3>Never let the builder grade itself</h3><p>A second engine was written from the written spec alone, by an AI agent that was never allowed to read the first one.</p><p class="eg">Its first run found 3 differences in 2,000 households. One was a real bug in the main engine (a 2027 tax threshold). When the rules grew, it caught two more, both in how Social Security holds back benefits from people still working. Now 4,000 of 4,000 agree.</p></div>
       <div class="principle"><span class="n">04</span><h3>Spend in capped steps</h3><p>A smoke test under $1, then a small run under $5, then a decision. Every run has a hard spending cap.</p><p class="eg">One run overshot its $5 cap by $0.39 because requests already in flight weren’t counted. The cap now reserves each request’s worst case.</p></div>
       <div class="principle"><span class="n">05</span><h3>Hold out what you tune on</h3><p>Private questions from a secret seed are never published and never used to improve anything. They exist only to check that an improvement is real.</p><p class="eg">The tool redesign was built on public questions, then scored 48 of 50 on held-out questions it had never seen.</p></div>
       <div class="principle"><span class="n">06</span><h3>Cut scope on purpose</h3><p>Speed comes from saying no. Once the engine proved to be the valuable part, the demo app’s features were frozen.</p><p class="eg">About 18 of 23 demo commits had gone to polish anyone could build. The next week went to the engine and the proof instead.</p></div>
+      <div class="principle"><span class="n">07</span><h3>Every rough edge becomes a test</h3><p>Use it the way a client would, write down everything that feels wrong, fix it, then save the whole session as a test so it can’t come back.</p><p class="eg">Two test drives gave 6 notes, then 17. One changed a headline: once the Social Security earnings test was modeled, a “claim at 62” gain of about $149,000 disappeared.</p></div>
     </div>
   </section>
 
@@ -77,6 +79,9 @@
             <tr><td>Which models to run</td><td>Every frontier model; a few, cheapest first</td><td class="chose">Claude Haiku and Sonnet, plus four low-cost models from four other labs</td><td>The goal is to show the gap and its cause, not to run a leaderboard. Cost stayed in single dollars per run.</td></tr>
             <tr><td>The demo’s role</td><td>Keep adding features; freeze it</td><td class="chose">Freeze it as the demo</td><td>Speech-to-text and form-filling are commodity. The verified engine is the defensible part.</td></tr>
             <tr><td>Positioning</td><td>Integrate with one firm’s systems; stand alone</td><td class="chose">Stand alone, with a generic intake form</td><td>No firm data anywhere, and a clean story for any firm’s compliance review.</td></tr>
+            <tr><td>Who picks the next question in a chat</td><td>The chat model; the engine</td><td class="chose">The engine</td><td>It reruns the plan with each unknown both ways and asks only what could change the answer. A chat model asks what sounds reasonable.</td></tr>
+            <tr><td>What the connector keeps</td><td>Conversations, for usage data; nothing</td><td class="chose">Nothing</td><td>People type real finances into it. The cost is no usage numbers, so quality is measured offline: simulated clients and test drives.</td></tr>
+            <tr><td>Where people reach it</td><td>A new app; a connector in Claude and ChatGPT</td><td class="chose">A connector</td><td>People already ask these questions there. A new app would need an audience first.</td></tr>
             <tr><td>Public wording</td><td>“AI advisor”; “verified decision support”</td><td class="chose">Verified decision support</td><td>The engine prices choices. It never picks investments or products.</td></tr>
           </tbody>
         </table>
@@ -88,7 +93,7 @@
     <div class="split">
       <div>
         <p class="eyebrow">Timeline</p>
-        <h2>Eight days, four stages</h2>
+        <h2>Eight days, five stages</h2>
         <p class="sub">Each stage ended with a measured result before the next one started.</p>
       </div>
       <ol class="timeline">
@@ -96,6 +101,7 @@
         <li><span class="when">Oct 20</span><h3>The benchmark and the demo</h3><p>2,800 public and 700 held-out questions; PolicyEngine as an outside check (1,600 of 1,600 agree); seven model setups from five labs. The same day: the Wizard demo, built behind its own grader.</p></li>
         <li><span class="when">Oct 21</span><h3>The fix, and the proof</h3><p>The engine as MCP tools. Version 1.0 got overruled; 1.1 showed its rule and went 50 for 50. The clean-room second engine and a year-by-year scenario runner for 25-year plans.</p></li>
         <li><span class="when">Oct 22</span><h3>The Gauntlet</h3><p>A Roth-conversion solver, 110 whole-household decisions built so no shortcut works, a grader that tracks every time a model overrules the engine, and the first results: 22 of 22 with the engine.</p></li>
+        <li><span class="when">Oct 22, night</span><h3>The connector</h3><p>The engine inside Claude and ChatGPT: a front-door tool that asks the one question that matters, a card drawn in the chat, and a private web address. Graded by simulated clients (69 of 69) before anyone used it, then two test drives turned into permanent tests.</p></li>
       </ol>
     </div>
   </section>
@@ -108,10 +114,10 @@
         <p class="sub">Ordered by what most raises trust in the result per dollar spent.</p>
       </div>
       <ol class="roadmap">
-        <li><span><b>Run the full Gauntlet, including the 33 held-out questions.</b> Today’s gap rests on 11 questions with wide intervals. All 77 public questions turn “a clear gap” into a result (about $127 for three Claude models, so it waits for a go-ahead), and the 33 held-out ones then show it isn’t tuned.</span></li>
+        <li><span><b>Run the 33 held-out Gauntlet questions once.</b> They were never used to build or tune anything, so they show whether the result holds on questions nobody has seen.</span></li>
         <li><span><b>A CPA signs off on the answer key.</b> Two engines and PolicyEngine agree, but a licensed outside reviewer is what a firm’s compliance team will ask for first. It costs time, not money.</span></li>
-        <li><span><b>Other labs’ models on the Gauntlet.</b> The fix is a tool design, not a Claude trick. Showing it works for other labs’ models proves that.</span></li>
-        <li><span><b>Gauntlet v2: ask before advising.</b> Real clients leave facts out. The next test is whether a model asks for the missing fact instead of guessing. It comes after the three above because it needs a trusted v1 to compare against.</span></li>
+        <li><span><b>A first-time user, with a stopwatch.</b> Someone who has never added a connector: set up in under 2 minutes, a first answer within 8 messages, and they can say back what it told them and what it assumed.</span></li>
+        <li><span><b>Faster answers online.</b> A Roth answer runs hundreds of 25-year plans and takes about 25 seconds at the private address. Fine for a test, too slow for a conversation.</span></li>
         <li><span><b>Harder compliance questions.</b> Today’s define the issue in the question, so every model scores 91–100%. Useful, but it tests reading, not knowledge.</span></li>
       </ol>
     </div>
@@ -125,7 +131,7 @@
         <p class="sub">I set the problem, the domain rules, every go/no-go and every spending approval. AI agents did the building, and none of them grades its own work.</p>
       </div>
       <div class="crew">
-        <div><b>Me</b><span>Problem framing, retirement-planning rules, reading samples and signing off, every spend and scope call</span></div>
+        <div><b>Me</b><span>Problem framing, retirement-planning rules, reading samples and signing off, test drives as a client, every spend and scope call</span></div>
         <div><b>Claude Code</b><span>Engineering partner: engine, harness, grader, tools, demo and this site, built to the plan I approved</span></div>
         <div><b>Isolated agents</b><span>The clean-room engine, written from the spec alone; fake meeting small talk for the demo’s test set</span></div>
         <div><b>PolicyEngine-US</b><span>The outside referee: an open-source tax model nobody on this project wrote</span></div>
@@ -161,6 +167,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=10"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>

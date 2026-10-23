@@ -122,6 +122,78 @@ Section numbers refer to RULES.md.
     `Example8Survivor.test_v12_already_claimed_ratio_keeps_drcs`,
     `test_v12_unclaimed_death_credits_through_november`.
 
+## v1.3–v1.4
+
+Changes from `spec/CHANGES-v1.2-to-v1.4.diff`: survivor claim age and `claim_survivor_benefit` (5.5, v1.3); a spouse
+who died before the plan, `late_spouse` (5.7, v1.3); the earnings test with switch `ss_earnings_test` (5.8, v1.4);
+pre-SECURE inherited IRAs (6A.9, v1.3); the Appendix B row. Tests: `SurvivorClaimAgeAndLateSpouse`,
+`EarningsTest`, `PreSecureInheritedIra` in `test_engine.py`. Wage-free households give identical output to v1.2
+(checked on `sample.json` and 300 random households with deaths and early claims).
+
+Implemented (v1.4): 5.5 survivor start by `survivor_claim_age` or the action; 5.7 `late_spouse` (single household
+only); 5.8 withholding, the own and survivor credits, and the limits (2026 published, later years projected);
+6A.9 deaths before 2020 (annual on the non-recalculated divisor, no deadline, no successor limit unless the holder
+died after 2019); `ss_earnings_test` switch.
+
+34. **Earnings test for survivor benefits (5.8, literal).** The test is keyed to the worker's own FRA (`fra_months`)
+    for every benefit the worker is paid (own, spousal, survivor). The survivor credit reduces `early_s` from the
+    survivor FRA month on, as 5.8 says. SSA tests widow(er)s against the survivor FRA; the spec's text does not say
+    so, so this is not done. Reading: keep to the text.
+35. **Which months are withheld (5.8).** Candidates are the months before the worker's FRA month with a positive
+    payment, in calendar order, January first. Whole payments, after dollar rounding (5.6). Withholding stops once
+    the withheld total is at least the excess. Non-service months are ignored, as 5.8 says.
+36. **Which credit a withheld month earns (5.8).** An own credit when the paid amount includes own benefit (own
+    alone, or own plus spousal, or own when own is at least the survivor amount). A survivor credit when the survivor
+    amount is the larger. A spousal-only month earns no own credit.
+37. **Survivor credit floor (5.8).** `early_s` minus withheld survivor months is held at zero (no bonus above the
+    FRA amount). The spec does not say what happens if the months outrun `early_s`.
+38. **Credit timing and feedback.** Credits apply from the FRA month on (own) or the survivor FRA month on (survivor).
+    Withholding can depend on those amounts when the survivor FRA falls before the worker's FRA. The engine repeats
+    the month-by-month pass until the credit counts stop changing (at most 50 passes). In 200 random households with
+    wages and deaths it took at most two passes. If the cap were ever reached, the last pass would be reported.
+39. **Already-claimed worker with no `claimed_at_months` (5.8 with 1.1).** The earnings test still withholds, but the
+    claim month is unknown, so no own credit is given. Otherwise the credit is the ratio of the claim-age factors.
+40. **Decedent's own benefit in the widow's limit (5.5 RIB-LIM).** The decedent's own amount for the year includes
+    any credits earned before death, because the RIB-LIM test uses that amount.
+41. **Earnings-test amounts (5.8).** The 2026 amounts are $24,480 and $65,160 (in RULES 5.8). Later years grow with
+    `assumptions.inflation` along the 14.1 chain and round to the nearest $120. The statute rounds down to the next
+    lower $120. The spec says "rounded to $120", so nearest was used. Years before 2025 have no amount in RULES.md, so
+    the engine raises an input error when the test would need one. (v1.4.1 settled nearest and added 2025.)
+42. **Wages (5.8).** Only `wages` income items count. They stop at the owner's death, like other income. Wages are
+    spread evenly over the year (the k/12 in the FRA year).
+43. **Benefits withheld are not reported (5.6).** The withheld months are left out of `social_security`, so they are
+    not in SSA-1099 totals or taxable Social Security either.
+44. **`claim_survivor_benefit` (5.5, v1.3).** The action takes `person` (the survivor) and `age`, like
+    `claim_social_security`. The spec does not name its fields; this is the most literal reading. It is not a
+    December 31 transaction and is excluded from 7. Its `years` are not used.
+45. **`late_spouse` (5.7).** Only in single households (an mfj household raises an input error). The death year must be
+    before `first_year`, or it raises an input error. The person must also have `social_security`. The late spouse's
+    own claim is never modelled. With `already_claimed_monthly` the ratio is used, as 5.5 v1.2; without it the
+    delayed-credit rule applies at the age of death, as 5.5.
+46. **Survivor claim age under 60.** The later-of rule in 5.5 means the survivor start is never before age 60, whatever
+    age is chosen.
+47. **Appendix D conflict.** Resolved in v1.4.1: Appendix D no longer lists the earnings test; 5.8 implements it.
+48. **6A.9 successor (pre-2020 owner).** When a pre-2020 beneficiary on a life-expectancy schedule dies after 2019, the
+    successor's deadline is 10 years after that death. This applies to `designated` and to EDB classes alike, because
+    6A.9 keeps those beneficiaries on the life-expectancy schedule. `spouse` and `non_designated` follow 6A.4 and 6A.6.
+49. **6A.9 minor child.** A pre-2020 minor child has no age-21 cutoff or deadline. The annual RMD continues on the
+    non-recalculated divisor until the balance is gone.
+50. **6A.9 RBD.** Whether the owner had reached the RBD is derived as in 6A.1, using the owner's birth year.
+
+### v1.4.1
+
+Spec update (`spec/CHANGES-v1.4-to-v1.4.1.diff`), applied in `params.py`, `engine.py` and `test_engine.py`:
+- 5.8 limits are the named parameters `ss_earnings_under[Y]` and `ss_earnings_fra_year[Y]` (renamed from
+  `ss_earnings_fra`), published for 2025 ($23,400 and $62,160) and 2026 ($24,480 and $65,160). After 2026 they grow
+  with inflation from 2026, rounded to the nearest $120. A 2025 plan no longer raises an input error. Item 41's
+  nearest-$120 choice is now the spec's rule.
+- 5.8 credit timing: the withheld-month count for a month is every month withheld before it, including FRA-year
+  months withheld January-on before the FRA month. The engine already did this, because the count is the total over
+  the whole pass. Tests: `EarningsTest.test_fra_year_credit_counts_earlier_withheld_months` (two months withheld in
+  the FRA year, credit 2 from June), `test_fra_year_limit_65160`.
+- Appendix D no longer lists the earnings test (item 47 resolved).
+- Tests: `test_2025_limit_published`, `test_2025_values_are_published`. Input error for years before 2025 is kept.
+
 ## B. Places I believe RULES.md may be wrong about the law (followed anyway)
 
 Status after v1.2: items 1, 2, 3 and 5 were adopted into the spec (see A3); item 4 is still open.
@@ -158,4 +230,4 @@ No disagreements were found with the law tables' numbers. The SALT 2027–2029 f
   computed internally (8606, QDCG, AZ) but not printed, because the contract fixes the output shape.
 - Switch `use_tax_table` (accepted, ignored; exact-dollar computation always). Switch `az_assume_future_conformity
   = false` changes nothing (there is no alternative Arizona law to apply).
-- Everything in Appendix D.
+- Everything in Appendix D except the Social Security earnings test, which v1.4 (5.8) implements.

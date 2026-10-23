@@ -1,0 +1,162 @@
+{
+ "_about": "Real plan_check replies for the made-up sample couple, written by scripts in the engine repo run against the engine commit below. Regenerate, never edit by hand.",
+ "engine_commit": "3b7d8bc",
+ "generated": "2026-10-23",
+ "first": {
+  "status": "need_more",
+  "ask": {
+   "fact_id": "people",
+   "question": "How old are you and your spouse this year?",
+   "why": "Age decides when required withdrawals start, Medicare, and how long the plan runs; being married decides the tax brackets, and a widow or widower may have survivor benefits and a spouse's options on inherited accounts.",
+   "if_skipped": "I need at least approximate ages to run anything."
+  },
+  "have_ready": [
+   "Birth dates for both of you",
+   "Social Security statements from ssa.gov for both of you",
+   "The latest statement for every account (IRAs, 401(k)s, Roth IRAs, brokerage, savings), with what you paid (cost basis) for brokerage accounts",
+   "Paychecks or yearly wages, and any pension or annuity amounts",
+   "Your last two tax returns (they set Medicare premiums, and Form 8606 shows any after-tax IRA money)",
+   "Roughly what you spend in a year"
+  ]
+ },
+ "answer": {
+  "status": "answer",
+  "headline": "Convert about $56,000 a year from Dana's IRA, 2026 through 2035.",
+  "subline": "By 2055 that leaves the family about $132,193 better off after taxes, in today's money, than not converting.",
+  "key_numbers": [
+   {
+    "label": "Best plan",
+    "value": "$56,000 a year for 10 years (2026–2035)"
+   },
+   {
+    "label": "Total converted",
+    "value": "$560,000"
+   },
+   {
+    "label": "Better off by 2055 (today's money)",
+    "value": "+$132,193"
+   },
+   {
+    "label": "Change in lifetime tax (today's money)",
+    "value": "−$113,779"
+   },
+   {
+    "label": "Change in lifetime Medicare premiums (today's money)",
+    "value": "+$0"
+   }
+  ],
+  "options": [
+   {
+    "label": "$56,000 a year for 10 years (2026–2035)",
+    "gain": 132193,
+    "pick": true
+   },
+   {
+    "label": "fill the 12% bracket each year for 10 years (2026–2035)",
+    "gain": 127350,
+    "pick": false
+   },
+   {
+    "label": "stay under the first IRMAA tier each year for 3 years (2026–2028)",
+    "gain": 105523,
+    "pick": false
+   },
+   {
+    "label": "stay at or under IRMAA tier 1 each year for 2 years (2026–2027)",
+    "gain": 85764,
+    "pick": false
+   }
+  ],
+  "costs_now": {
+   "amount": 91434,
+   "years": "2026–2035",
+   "reasons": [
+    {
+     "rule": "income",
+     "text": "Income tax on the extra money taken out or converted",
+     "amount": 62206,
+     "years": "2026–2035",
+     "law": "IRC §1(j); Rev. Proc. 2025-32"
+    },
+    {
+     "rule": "arizona",
+     "text": "Arizona income tax (2.5%)",
+     "amount": 11422,
+     "years": "2026–2035",
+     "law": "A.R.S. §43-1011; Arizona Form 140"
+    },
+    {
+     "rule": "capital_gains_stacking",
+     "text": "Dividends and gains lose their 0% tax rate as income rises",
+     "amount": 9503,
+     "years": "2029–2035",
+     "law": "IRC §1(h); Qualified Dividends and Capital Gain Tax Worksheet"
+    },
+    {
+     "rule": "social_security_torpedo",
+     "text": "More of their Social Security becomes taxable as other income rises (the \"tax torpedo\")",
+     "amount": 8246,
+     "years": "2028–2030",
+     "law": "IRC §86; IRS Pub 915 Worksheet 1"
+    }
+   ]
+  },
+  "saves_later": {
+   "amount": -331742,
+   "years": "2036–2055",
+   "reasons": [
+    {
+     "rule": "income",
+     "text": "Less income tax later, because the IRA is smaller and so are the required withdrawals",
+     "amount": -247329,
+     "years": "2036–2055",
+     "law": "IRC §1(j)"
+    },
+    {
+     "rule": "arizona",
+     "text": "Less Arizona income tax",
+     "amount": -33371,
+     "years": "2036–2055",
+     "law": "A.R.S. §43-1011; Arizona Form 140"
+    },
+    {
+     "rule": "capital_gains_stacking",
+     "text": "More dividends and gains stay at the 0% rate",
+     "amount": -29207,
+     "years": "2036–2055",
+     "law": "IRC §1(h); Qualified Dividends and Capital Gain Tax Worksheet"
+    },
+    {
+     "rule": "niit",
+     "text": "Less of the 3.8% tax on investment income",
+     "amount": -21835,
+     "years": "2043–2055",
+     "law": "IRC §1411; Form 8960"
+    }
+   ]
+  },
+  "assumed": [
+   "Assumed: Dana on Medicare: Yes, from 65, because nearly everyone enrolls at 65.",
+   "Assumed: Lee on Medicare: Yes, from 65, because nearly everyone enrolls at 65.",
+   "Assumed: The plan runs through: 2055, because until the younger one would be 95.",
+   "Assumed: Investment return: 5% a year on every account, because a planning assumption, steady every year.",
+   "Assumed: Inflation: 2.5% a year, because tax brackets and Medicare lines rise with it after 2026."
+  ],
+  "sensitivity": [
+   {
+    "what": "Expected investment return",
+    "if": "a 7% return",
+    "effect": "the better choice becomes $100,000 a year for 10 years (about $85,666 better)"
+   }
+  ],
+  "said": 24,
+  "assumed_n": 5,
+  "worked_out": 1,
+  "engine_runs": 1402,
+  "seconds_local": 1.432
+ },
+ "rejected": {
+  "status": "rejected",
+  "message": "That looks like a Social Security, account or ID number. The engine doesn't need it, so please leave it out and send the rest again. Nothing you sent was kept."
+ }
+}
