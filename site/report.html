@@ -7,8 +7,8 @@
 <meta name="description" content="The PlannerBench v2 report: bad inputs, the hard tier and tool use, with method, results, failure examples and limits.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=14">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
+<link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body data-page="report">
 <header class="nav">
@@ -16,10 +16,8 @@
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
       <a href="results.html">Results</a>
-      <a href="gauntlet.html">The Gauntlet</a>
-      <a href="chat.html">In the chat</a>
-      <a href="replay.html">Replays</a>
-      <a href="v2.html">v2</a>
+      <a href="v2.html">Bad inputs</a>
+      <a href="gauntlet.html">With tools</a>
       <a href="method.html">Method</a>
       <a href="built.html">How I built it</a>
     </nav>
@@ -105,7 +103,7 @@
 <h2>What I'd do next</h2>
 <ol><li><strong>Subtle corruptions.</strong> A dose-response curve: the same note with spending 1.2×, 2×, 5× and 10× too high, and birth years off by 1, 5 and 50. Where each model starts to notice is the useful number.</li><li><strong>Take away the way out.</strong> Rerun with no mention of NEED_INFO, and with a system prompt that says "always give a number", to measure how much the instruction is doing.</li><li><strong>Put validation in the tool.</strong> v1 showed a tool that explains its rule beats one that returns a number. The same should hold for inputs: have the engine reject a 14-year-old retiree, and measure whether cheap models pass the rejection on.</li><li><strong>Three runs for everyone, high effort for the top tier.</strong> About $40.</li><li><strong>Human labels on 100 replies</strong> to replace "two models agree" with a measured judge error rate.</li></ol>
 <h2>Reproduce</h2>
-<pre class="rp-raw" style="white-space:pre-wrap;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1rem;font-family:var(--mono)">.venv/bin/python v2/build_hard.py     # 42 hard items; fails if the two engines disagree
+<pre class="rp-raw" style="white-space:pre-wrap;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1rem;font-family:var(--mono)">.venv/bin/python v2/build_hard.py     # 42 hard items; fails if the two engines disagree
 .venv/bin/python v2/build_bad.py      # 70 notes; fails if the engine and the checker disagree
 ./v2/run_all.sh                       # every run, resumable, stops at the cap in v2/runs/ledger.json
 .venv/bin/python v2/grade.py judge    # then: grade.py judge --second
@@ -119,7 +117,7 @@
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules</span>
+    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">In the chat</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>

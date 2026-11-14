@@ -8,7 +8,7 @@ Reads v2/results/summary.json (from v2/grade.py) and REPORT.md. Writes:
   site/data/v2.json           the numbers the v2 page shows
   site/v2.html                the v2 leaderboard
   site/report.html            REPORT.md as a page
-and adds one "v2" link to the nav of the existing pages (v1 scores and data are untouched).
+in the shared site style (v1 scores and data are untouched). The nav lives in each page; NAV here must match it.
 """
 import html
 import json
@@ -27,8 +27,8 @@ TIER = {"frontier": "#1f8a6b", "mid": "#c2571a", "cheap": "#2a78d6"}
 TIER_NAME = {"frontier": "Frontier", "mid": "Mid-tier", "cheap": "Cheap / open weights"}
 OUT = {"caught": ("#1f8a6b", "Caught it: named the problem, gave no number"), "flagged_but_answered": ("#d99a1e", "Named it, gave a number anyway"),
        "silent_number": ("#b5402f", "Gave a number, said nothing"), "declined_other_reason": ("#9a958c", "Declined for another reason")}
-INK, MUTED, RULE, PAPER = "#1a1a1a", "#5f5a53", "#e6e0d6", "#faf8f5"
-FONT = 'font-family="Inter, -apple-system, Segoe UI, Roboto, sans-serif"'
+INK, MUTED, RULE, PAPER = "#16181c", "#4d525b", "#e7e8e8", "#ffffff"
+FONT = 'font-family="Geist, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif"'
 e = html.escape
 
 
@@ -138,8 +138,7 @@ def chart_tools():
 
 # ---- pages ----------------------------------------------------------------------------------------------------------
 
-NAV = [("results.html", "Results"), ("gauntlet.html", "The Gauntlet"), ("chat.html", "In the chat"), ("replay.html", "Replays"), ("v2.html", "v2"),
-       ("method.html", "Method"), ("built.html", "How I built it")]
+NAV = [('results.html', 'Results'), ('v2.html', 'Bad inputs'), ('gauntlet.html', 'With tools'), ('method.html', 'Method'), ('built.html', 'How I built it')]
 
 
 def page(title, desc, current, main, name):
@@ -153,8 +152,8 @@ def page(title, desc, current, main, name):
 <meta name="description" content="{e(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=14">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
+<link rel="stylesheet" href="styles.css?v=15">
 </head>
 <body data-page="{name}">
 <header class="nav">
@@ -172,7 +171,7 @@ def page(title, desc, current, main, name):
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules</span>
+    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">In the chat</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
@@ -223,7 +222,7 @@ def v2_page():
     best = bad[0]
     j = S["judge_check"]
     main = f"""  <section class="page-head wrap">
-    <p class="eyebrow">PlannerBench v2 · preview</p>
+    <p class="eyebrow">PlannerBench v2 · 2026-11-14</p>
     <h1>The math got easy. Catching a bad input didn’t.</h1>
     <p class="lede">v2 adds two things v1 couldn’t measure: a hard tier where retirement rules collide, and a bad-inputs track where the client’s own facts are wrong on purpose. {len(MODELS)} models, three price tiers, every reply saved.</p>
     <div class="tldr">
@@ -309,7 +308,7 @@ def markdown(md):
             j = i + 1
             while j < len(lines) and not lines[j].startswith("```"):
                 j += 1
-            out.append('<pre class="rp-raw" style="white-space:pre-wrap;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1rem;font-family:var(--mono)">' + e("\n".join(lines[i + 1:j])) + "</pre>")
+            out.append('<pre class="rp-raw" style="white-space:pre-wrap;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:1rem;font-family:var(--mono)">' + e("\n".join(lines[i + 1:j])) + "</pre>")
             i = j + 1
         elif l.startswith("#"):
             n = len(l) - len(l.lstrip("#"))
@@ -389,12 +388,6 @@ def main():
     (SITE / "v2.html").write_text(v2_page())
     if (ROOT / "REPORT.md").exists():
         (SITE / "report.html").write_text(report_page())
-    link = '      <a href="v2.html">v2</a>\n'
-    for f in ("index.html", "results.html", "gauntlet.html", "chat.html", "replay.html", "method.html", "built.html"):
-        s = (SITE / f).read_text()
-        if 'href="v2.html"' not in s:
-            s = re.sub(r'(\n\s*<a href="method\.html")', "\n" + link.rstrip("\n") + r"\1", s, count=1)
-            (SITE / f).write_text(s)
     print("site built")
 
 

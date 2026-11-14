@@ -1,12 +1,17 @@
 # PlannerBench: notes for the next session
 
 A benchmark of AI models on retirement-planning math (2026 federal tax, Social Security, RMDs, Medicare IRMAA) plus
-a compliance track, with an exact answer key. Site: https://plannerbench.vercel.app (deployed from `site/`), behind
-Vercel login since 2026-10-21 (`ssoProtection: all`; "all_except_custom_domains" left the production .vercel.app
-address open) until the owner's FINRA 3290 clearance; `checks/site_check.py` can't reach it while locked: run it against a local copy (`python3 -m http.server 4173 --directory site`, then `site_check.py http://localhost:4173`), and spot-check the live deploy with `vercel curl /data/tools.json --deployment <url>`. The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
-Site layout (2026-10-22 redesign, owner's picks: story home + 4 pages, warm light look matching Wizard, engine called
-"the planning engine" everywhere, never MoneyGuide): `index.html` (story, clickable system map, five steps),
-`results.html`, `gauntlet.html` (tools ladder + Gauntlet), `method.html` (proof cards), `built.html` (PM case study).
+a compliance track, with an exact answer key. Site: https://plannerbench.vercel.app (deployed from `site/`, public; the owner
+cleared the outside-activity question on 2026-11-14, so don't raise FINRA 3290 again). After a deploy run
+`.venv/bin/python -I checks/site_check.py`; previews sit behind Vercel login, so check those against a local copy
+(`python3 -m http.server 4173 --directory site`, then `site_check.py http://localhost:4173`). The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
+Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
+white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
+Nav is five links: Results, Bad inputs (`v2.html`), With tools (`gauntlet.html`), Method, How I built it; `chat.html`,
+`replay.html` and `report.html` are linked from the footer. The home page is hero + the story steps (the clickable
+system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.
+PlannerBench v2 (hard tier, bad inputs, tool use) lives in `v2/`; see `PROGRESS.md` and `REPORT.md`;
+`v2/build_site.py` writes `site/v2.html`, `site/report.html` and the charts.
 One shared `app.js` fills every page from `data/*.json`; each block runs only if its page has the element. Numbers
 not from a graded run live in `data/system.json`, each with its source file; update both together. Bump the `?v=`
 on the CSS/JS links when changing them. Code: https://github.com/peyton-thalman/plannerbench
@@ -51,8 +56,7 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
 3. Bigger runs (50/task) on DeepSeek V4.1 Flash, Haiku, GLM, and the first private-split run.
 4. Same model on different hosts (fp8 vs fp4) as its own finding.
 5. CPA sign-off on `checks/AUDIT.md`. Nobody outside has ticked it yet.
-6. Write-up for publishing. Before anything new goes public, flag the outside-activity question (FINRA Rule 3290)
-   to the owner. Keep their employer's name, data and time out of the project entirely.
+6. Write-up for publishing (v2 draft: `REPORT.md`). Keep their employer's name, data and time out of the project entirely.
 
 ## Rules that keep the benchmark credible
 
