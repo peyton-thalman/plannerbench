@@ -8,7 +8,7 @@ cleared the outside-activity question on 2026-11-14, so don't raise FINRA 3290 a
 Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
 white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
 Nav is five links: Results, Bad inputs (`v2.html`), With tools (`gauntlet.html`), Method, How I built it; `chat.html`,
-`replay.html` and `report.html` are linked from the footer. The home page is hero + the story steps (the clickable
+`replay.html` and `report.html` are linked from the footer. The home page tells the owner's story first (why I made this, four findings, what I built, check it yourself; first person, "door to door as a financial advisor", employer never named); numbers quoted as text there are logged in `data/system.json` `home_v2`. Charts on `v2.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
 system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.
 PlannerBench v2 (hard tier, bad inputs, tool use) lives in `v2/`; see `PROGRESS.md` and `REPORT.md`;
 `v2/build_site.py` writes `site/v2.html`, `site/report.html` and the charts.

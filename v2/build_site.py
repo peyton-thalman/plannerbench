@@ -25,8 +25,8 @@ MODELS = S["models"]
 # so every amber mark carries a visible label and each chart has a table beside it.
 TIER = {"frontier": "#1f8a6b", "mid": "#c2571a", "cheap": "#2a78d6"}
 TIER_NAME = {"frontier": "Frontier", "mid": "Mid-tier", "cheap": "Cheap / open weights"}
-OUT = {"caught": ("#1f8a6b", "Caught it: named the problem, gave no number"), "flagged_but_answered": ("#d99a1e", "Named it, gave a number anyway"),
-       "silent_number": ("#b5402f", "Gave a number, said nothing"), "declined_other_reason": ("#9a958c", "Declined for another reason")}
+OUT = {"caught": ("#1f8a6b", "Caught the mistake and asked"), "flagged_but_answered": ("#d99a1e", "Noticed it, answered anyway"),
+       "silent_number": ("#b5402f", "Missed it, answered anyway"), "declined_other_reason": ("#9a958c", "Wouldn't answer, for another reason")}
 INK, MUTED, RULE, PAPER = "#16181c", "#4d525b", "#e7e8e8", "#ffffff"
 FONT = 'font-family="Geist, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif"'
 e = html.escape
@@ -51,13 +51,13 @@ def chart_catch():
     pw, ph = W - L - R, H - T - B
     X = lambda v: L + pw * v
     Y = lambda v: T + ph * (1 - v)
-    b = [text(L, 22, "Bad inputs: caught the planted problem vs. cried wolf on a clean note", 15, INK, weight=600),
+    b = [text(L, 22, "Caught the planted mistake vs. refused a note that was fine", 15, INK, weight=600),
          text(L, 40, "Each dot is one model. Up and to the left is better.", 12)]
     for v in (0, .25, .5, .75, 1):
         b.append(f'<line x1="{L}" x2="{L + pw}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="{RULE}"/>' + text(L - 10, Y(v) + 4, f"{v:.0%}", anchor="end"))
         b.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{T}" y2="{T + ph}" stroke="{RULE}"/>' + text(X(v), T + ph + 20, f"{v:.0%}", anchor="middle"))
-    b.append(text(L + pw / 2, H - 10, "False alarms: said NEED_INFO on a clean or odd-but-valid note", 12, anchor="middle"))
-    b.append(f'<text transform="translate(16 {T + ph / 2:.0f}) rotate(-90)" font-size="12" fill="{MUTED}" text-anchor="middle">Caught: named the problem and gave no number</text>')
+    b.append(text(L + pw / 2, H - 10, "Refused a note that was fine (false alarm)", 12, anchor="middle"))
+    b.append(f'<text transform="translate(16 {T + ph / 2:.0f}) rotate(-90)" font-size="12" fill="{MUTED}" text-anchor="middle">Caught the planted mistake</text>')
     pts = sorted([(m["bad"]["false_alarm"]["rate"], m["bad"]["caught"]["rate"], m) for m in MODELS if m["bad"]], key=lambda p: -p[1])
     placed = []
     dots = [(X(fa), Y(c)) for fa, c, _ in pts]
@@ -79,30 +79,48 @@ def chart_catch():
 
 
 def chart_outcomes():
-    """What each model did with a corrupted note: four outcomes that add to 100%."""
+    """What each model did with a note that had a mistake planted in it: four outcomes that add to 100%."""
     ms = sorted([m for m in MODELS if m["bad"]], key=lambda m: (-m["bad"]["caught"]["rate"], m["bad"]["silent_number"]["rate"]))
-    W, L, R, T, row = 760, 170, 24, 84, 30
-    H = T + row * len(ms) + 24
+    W, L, R, T, row = 760, 170, 24, 112, 30
+    H = T + row * len(ms) + 16
     pw = W - L - R
-    b = [text(L, 22, "What each model did with a corrupted note", 15, INK, weight=600), text(L, 40, "Share of the 30 corrupted notes, averaged over runs.", 12)]
-    lx = L
-    for k, (col, name) in OUT.items():
-        short = {"caught": "Caught it", "flagged_but_answered": "Named it, answered anyway", "silent_number": "Silent number", "declined_other_reason": "Declined, other reason"}[k]
-        b.append(f'<rect x="{lx}" y="54" width="12" height="12" rx="2" fill="{col}"/>' + text(lx + 17, 64, short, 12))
-        lx += 30 + 6.6 * len(short)
+    b = [text(16, 24, "30 client notes, each with one mistake planted. What did each model do?", 16, INK, weight=600),
+         text(16, 44, "Green is what you want. Red is a confident answer built on a wrong fact.", 12.5)]
+    for n, (k, (col, name)) in enumerate(OUT.items()):
+        lx, ly = 16 + (n % 2) * 300, 62 + (n // 2) * 20
+        b.append(f'<rect x="{lx}" y="{ly}" width="12" height="12" rx="2" fill="{col}"/>' + text(lx + 18, ly + 10.5, name, 12.5))
     for n, m in enumerate(ms):
         y = T + n * row
-        b.append(text(L - 10, y + 15, m["name"], 12, INK, "end"))
+        b.append(text(L - 10, y + 15, m["name"], 12.5, INK, "end"))
         x = L
         for k, (col, name) in OUT.items():
-            v = m["bad"][{"caught": "caught", "flagged_but_answered": "flagged_but_answered", "silent_number": "silent_number", "declined_other_reason": "declined_other_reason"}[k]]["rate"]
+            v = m["bad"][k]["rate"]
             w = pw * v
             if w > 0.5:
                 b.append(f'<rect x="{x + 1:.1f}" y="{y}" width="{max(0.5, w - 2):.1f}" height="20" rx="3" fill="{col}"><title>{e(m["name"])}: {e(name)} {v:.0%}</title></rect>')
                 if v >= 0.07:
                     b.append(text(x + w / 2, y + 14, f"{v:.0%}", 11, "#ffffff" if k != "flagged_but_answered" else INK, "middle", 600))
             x += w
-    return svg(W, H, "".join(b), "Outcomes on corrupted notes by model")
+    return svg(W, H, "".join(b), "What each model did with a note that had a mistake planted in it")
+
+
+def chart_false_alarms():
+    """How often each model refused a note that was fine. One series, sorted, value at the end of each bar."""
+    ms = sorted([m for m in MODELS if m["bad"]], key=lambda m: (m["bad"]["false_alarm"]["rate"], -m["bad"]["caught"]["rate"]))
+    W, L, R, T, row = 760, 170, 60, 64, 26
+    H = T + row * len(ms) + 12
+    pw = W - L - R
+    b = [text(16, 24, "The other way to fail: refusing a note that was fine", 16, INK, weight=600),
+         text(16, 44, "Share of 40 correct notes where the model said it couldn't answer. Shorter is better.", 12.5)]
+    for n, m in enumerate(ms):
+        y = T + n * row
+        v = m["bad"]["false_alarm"]["rate"]
+        b.append(text(L - 10, y + 14, m["name"], 12.5, INK, "end"))
+        b.append(f'<rect x="{L}" y="{y}" width="{pw}" height="18" rx="3" fill="#f1f1ef"/>')
+        if v > 0:
+            b.append(f'<rect x="{L}" y="{y}" width="{max(3, pw * v):.1f}" height="18" rx="3" fill="{INK}"><title>{e(m["name"])}: refused {v:.0%} of correct notes</title></rect>')
+        b.append(text(L + pw * v + 8, y + 14, f"{v:.0%}", 12.5, INK, weight=600))
+    return svg(W, H, "".join(b), "Share of correct notes each model refused to answer")
 
 
 def chart_tools():
@@ -112,9 +130,9 @@ def chart_tools():
     H = T + row * len(ms) + 40
     pw = W - L - R
     X = lambda v: L + pw * v
-    b = [text(L, 22, "Hard tier: alone, and with the Planning Engine as a tool", 15, INK, weight=600),
-         text(L, 40, "Share of the 42 hard questions answered within tolerance.", 12),
-         f'<circle cx="{L + 6}" cy="60" r="6" fill="{PAPER}" stroke="{INK}" stroke-width="2"/>' + text(L + 18, 64, "Alone", 12),
+    b = [text(16, 24, "Hard questions answered right: on its own, then with the planning engine", 16, INK, weight=600),
+         text(16, 44, "42 questions where several rules meet. Hollow dot: the model alone. Solid dot: with the engine to call.", 12.5),
+         f'<circle cx="{L + 6}" cy="60" r="6" fill="{PAPER}" stroke="{INK}" stroke-width="2"/>' + text(L + 18, 64, "Alone", 12.5),
          f'<circle cx="{L + 76}" cy="60" r="6" fill="{INK}"/>' + text(L + 88, 64, "With the engine", 12)]
     for v in (0, .25, .5, .75, 1):
         b.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{T - 6}" y2="{T + row * len(ms)}" stroke="{RULE}"/>' + text(X(v), T + row * len(ms) + 18, f"{v:.0%}", anchor="middle"))
@@ -153,7 +171,7 @@ def page(title, desc, current, main, name):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body data-page="{name}">
 <header class="nav">
@@ -224,63 +242,76 @@ def v2_page():
     main = f"""  <section class="page-head wrap">
     <p class="eyebrow">PlannerBench v2 · 2026-11-14</p>
     <h1>The math got easy. Catching a bad input didn’t.</h1>
-    <p class="lede">v2 adds two things v1 couldn’t measure: a hard tier where retirement rules collide, and a bad-inputs track where the client’s own facts are wrong on purpose. {len(MODELS)} models, three price tiers, every reply saved.</p>
-    <div class="tldr">
-      <p class="label">In short</p>
-      <p>{e(HEADLINE)}</p>
+    <p class="lede">People give AI the wrong facts all the time: a mistyped balance, the wrong birth year, a guess at what they spend. Then they make decisions from the answer. So I planted one mistake in each of 30 client notes and watched what {len(MODELS)} models did.</p>
+    <div class="example">
+      <p class="label">One example</p>
+      <p>The note said a retired school administrator with a $785,000 IRA was born in 2012, and asked for this year’s required withdrawal. One model replied:</p>
+      <blockquote>“Priya will be 14 years old throughout 2026 … no required minimum distribution is required. ANSWER: 0”</blockquote>
+      <p>With her real birth year the answer is $34,279. The model saw the age and didn’t question it.</p>
     </div>
-    <p class="cta"><a class="btn" href="report.html">Read the report</a></p>
+    <p class="cta"><a class="btn primary" href="report.html">Read the report</a></p>
   </section>
 
   <section class="band">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Bad inputs · the headline track</p>
         <h2>Who notices when the client’s facts can’t be right?</h2>
-        <p class="sub">30 intake notes with one planted problem each (swapped digits, an impossible birth year, spending that can’t fit, two facts that conflict, an amount over the legal limit), their 30 clean twins, and 10 notes that look odd but are fine. A model may answer with a number or with NEED_INFO.</p>
+        <p class="sub">Each note had one planted mistake: two digits swapped, an impossible birth year, spending far beyond what the household has, two facts that conflict, or an amount over a legal limit. A model could answer with a number or say it needed more information.</p>
       </div>
-      <figure class="chart-card"><div class="chart"><img src="charts/catch_vs_false_alarm.svg" alt="Catch rate against false-alarm rate, one dot per model; the table below has the same numbers" style="width:100%;height:auto"></div></figure>
-      <div class="table-wrap" style="margin-top:2rem">
-        <table class="scores">
-          <thead><tr><th scope="col">Model</th><th scope="col">Caught the problem</th><th scope="col">Silent number</th><th scope="col">False alarms</th><th scope="col">Clean notes answered right</th><th scope="col" class="r">Net (caught − false alarms)</th></tr></thead>
-          <tbody>{rows}</tbody>
-        </table>
-      </div>
-      <p class="table-note">Caught = named the planted problem and gave no number. Silent number = a confident number with no mention of the problem. False alarms = NEED_INFO on a clean or odd-but-valid note. Bars show the score; the shaded band is the 95% interval. “Named the problem” is judged by a second model ({e(j["judge"].split("/")[-1].split("@")[0])}); the other columns are rule-based.</p>
-      <figure class="chart-card value-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with a corrupted note, as shares that add to 100%" style="width:100%;height:auto"></div></figure>
-      <div class="sub-head"><h3>By kind of problem</h3><p>Share of corrupted notes caught, by what was planted.</p></div>
-      <div class="table-wrap">
-        <table class="scores">
-          <thead><tr><th scope="col">Model</th><th scope="col" class="r">Swapped digits</th><th scope="col" class="r">Impossible age</th><th scope="col" class="r">Spending can’t fit</th><th scope="col" class="r">Facts conflict</th><th scope="col" class="r">Over a legal limit</th></tr></thead>
-          <tbody>{trows}</tbody>
-        </table>
-      </div>
+      <figure class="chart-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with a note that had a mistake planted in it, as shares that add to 100%; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
+      <p class="takeaway"><b>What it shows.</b> The best models caught about three mistakes in four. Three of the five cheapest gave a confident answer more than eight times in ten. Every model was worst at the same kind: a believable amount that is over a legal limit.</p>
+      <figure class="chart-card value-card"><div class="chart"><img src="charts/false_alarms.svg" alt="Share of correct notes each model refused to answer; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
+      <p class="takeaway"><b>What it shows.</b> A model can’t win by refusing everything. Each mistaken note had a correct twin, plus ten notes that look odd but are fine. The two Gemini models refused half or more of those, mostly because they didn’t know this year’s tax law.</p>
+      <details class="fine wide">
+        <summary>Full table, with 95% intervals</summary>
+        <div class="table-wrap">
+          <table class="scores">
+            <thead><tr><th scope="col">Model</th><th scope="col">Caught the mistake</th><th scope="col">Missed it, answered anyway</th><th scope="col">Refused a correct note</th><th scope="col">Correct notes answered right</th><th scope="col" class="r">Net (caught − refused)</th></tr></thead>
+            <tbody>{rows}</tbody>
+          </table>
+        </div>
+        <p class="table-note">Caught = named the planted mistake and gave no number. Bars show the score; the shaded band is the 95% interval. Whether a reply named the mistake is judged by a second model ({e(j["judge"].split("/")[-1].split("@")[0])}); the other columns are rule-based.</p>
+      </details>
+      <details class="fine wide">
+        <summary>Caught, by kind of mistake</summary>
+        <div class="table-wrap">
+          <table class="scores">
+            <thead><tr><th scope="col">Model</th><th scope="col" class="r">Swapped digits</th><th scope="col" class="r">Impossible age</th><th scope="col" class="r">Spending can’t fit</th><th scope="col" class="r">Facts conflict</th><th scope="col" class="r">Over a legal limit</th></tr></thead>
+            <tbody>{trows}</tbody>
+          </table>
+        </div>
+      </details>
     </div>
   </section>
 
   <section class="wrap section">
     <div class="section-head">
-      <p class="eyebrow">Hard tier · with and without the engine</p>
-      <h2>Rules that collide, and whether a tool rescues a cheap model</h2>
-      <p class="sub">42 questions in seven families: IRMAA two years out, a Roth conversion in Arizona, Social Security taxation with muni interest and a QCD, inherited-IRA RMDs, QCDs against RMDs, a widow’s first year, Arizona tax. Every key is the Planning Engine’s number, matched to the dollar by a second engine written from the rules alone.</p>
+      <h2>Harder questions, and whether a tool rescues a cheap model</h2>
+      <p class="sub">42 new questions where several rules meet: a Roth conversion that changes Medicare premiums two years later, an inherited IRA, a widow’s first tax year, state tax on top of federal. Each answer comes from the planning engine and is matched to the dollar by a second engine written separately.</p>
     </div>
-    <figure class="chart-card"><div class="chart"><img src="charts/hard_tools.svg" alt="Hard-tier accuracy alone and with the engine, by model; the table below has the same numbers" style="width:100%;height:auto"></div></figure>
-    <div class="table-wrap" style="margin-top:2rem">
-      <table class="scores">
-        <thead><tr><th scope="col">Model</th><th scope="col">Alone</th><th scope="col" class="r">Ran out of tokens</th><th scope="col">With the engine</th><th scope="col" class="r">Called a tool</th><th scope="col" class="r">Cost per 1,000 right, alone</th><th scope="col" class="r">With the engine</th></tr></thead>
-        <tbody>{hrows}</tbody>
-      </table>
-    </div>
-    <div class="sub-head"><h3>By family, models alone</h3></div>
-    <div class="table-wrap">
-      <table class="scores">
-        <thead><tr><th scope="col">Model</th>{"".join(f'<th scope="col" class="r">{e(f.replace("_", " "))}</th>' for f in fams)}</tr></thead>
-        <tbody>{frows}</tbody>
-      </table>
-    </div>
+    <figure class="chart-card"><div class="chart"><img src="charts/hard_tools.svg" alt="Hard questions answered right by each model, alone and with the engine; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
+    <p class="takeaway"><b>What it shows.</b> With the engine to call, one cheap model (DeepSeek) went from 29% to 79%, past a far pricier model working alone. Three other cheap models called the engine and still got the answer wrong, so the tool only helps a model that can use it.</p>
+    <details class="fine wide">
+      <summary>Full table, with cost per right answer</summary>
+      <div class="table-wrap">
+        <table class="scores">
+          <thead><tr><th scope="col">Model</th><th scope="col">Alone</th><th scope="col" class="r">Ran out of room</th><th scope="col">With the engine</th><th scope="col" class="r">Called the engine</th><th scope="col" class="r">Cost per 1,000 right, alone</th><th scope="col" class="r">With the engine</th></tr></thead>
+          <tbody>{hrows}</tbody>
+        </table>
+      </div>
+    </details>
+    <details class="fine wide">
+      <summary>By kind of question, models alone</summary>
+      <div class="table-wrap">
+        <table class="scores">
+          <thead><tr><th scope="col">Model</th>{"".join(f'<th scope="col" class="r">{e(f.replace("_", " "))}</th>' for f in fams)}</tr></thead>
+          <tbody>{frows}</tbody>
+        </table>
+      </div>
+    </details>
     <details class="fine">
       <summary>How these were run</summary>
-      <p>Every model through OpenRouter, pinned to one host, data collection off, one user message and no system prompt. Reasoning effort low and a 4,000-token reply limit for all (Mistral Small with reasoning off). Total spend ${S["spend"]["spent_usd"]:.2f} against a $5 cap, which is why frontier models have one run per item. Small samples: read the intervals, not the ranks.</p>
+      <p>Every model through OpenRouter, pinned to one host, data collection off, one user message and no system prompt. Reasoning effort low and a 4,000-token reply limit for all (Mistral Small with reasoning off). Total spend ${S["spend"]["spent_usd"]:.2f} against a $5 cap, which is why the most expensive models have one run per item. Small samples: read the intervals, not the ranks.</p>
     </details>
   </section>
 """
@@ -379,6 +410,7 @@ def main():
     charts.mkdir(exist_ok=True)
     (charts / "catch_vs_false_alarm.svg").write_text(chart_catch())
     (charts / "outcomes.svg").write_text(chart_outcomes())
+    (charts / "false_alarms.svg").write_text(chart_false_alarms())
     (charts / "hard_tools.svg").write_text(chart_tools())
     (SITE / "charts").mkdir(exist_ok=True)
     for f in charts.glob("*.svg"):

@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PlannerBench</title>
-<meta name="description" content="AI models get stacked retirement decisions wrong. A verified planning engine, handed to them as tools, gets them right. The benchmark, the engine, and the proof.">
+<meta name="description" content="A financial advisor tested AI models on real retirement-planning questions against a proven answer key: where they slip, by how much, and what fixes it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body data-page="home">
 <header class="nav">
@@ -26,112 +26,97 @@
 
 <main>
   <section class="hero wrap">
-    <p class="eyebrow">Verified decision support for retirement planning</p>
-    <h1>AI models slip when retirement rules stack up. A verified engine gets them right.</h1>
-    <p class="lede">PlannerBench tests AI models on the math financial planners do every week, against an exact answer key built from IRS, Social Security and Medicare rules. The planning engine that writes the key can also be handed to a model as tools.</p>
-    <div class="thesis" aria-label="Headline results">
-      <div class="figure">
-        <span class="num" data-k="stacked">—</span>
-        <span class="cap">Claude Sonnet 5.5 alone, when several tax rules meet in one household (<span data-k="single">—</span> on one rule at a time)</span>
-      </div>
-      <div class="figure accent">
-        <span class="num"><span class="from"><span data-k="tools_from">—</span> →</span> <span data-k="tools_to">—</span></span>
-        <span class="cap">Claude Haiku 5.5 on the 50 hardest benchmark questions: alone, then with the engine as tools</span>
-      </div>
-      <div class="figure accent">
-        <span class="num"><span class="from"><span data-k="open_from">—</span> →</span> <span data-k="open_to">—</span></span>
-        <span class="cap">Whole-household retirement decisions fully right by <span data-k="open_name">an open model</span>, alone vs. with the engine, at under a cent a question</span>
-      </div>
-    </div>
-    <p class="thesis-note">Early, small runs with honest 95% intervals; each page shows the details and the caveats.</p>
+    <p class="eyebrow">PlannerBench · built by Peyton Thalman</p>
+    <h1>People ask AI about retirement. I tested how often it’s right.</h1>
+    <p class="lede">AI models are good at one money rule at a time. They slip when several rules meet in one household, and most don’t notice when the facts they were given are wrong. This site shows where, by how much, and what fixes it.</p>
     <div class="cta">
-      <a class="btn primary" href="results.html">See the results</a>
-      <a class="btn" href="report.html">Read the new report</a>
-      <a class="btn" href="built.html">How I built it</a>
+      <a class="btn primary" href="#found">What I found</a>
+      <a class="btn" href="report.html">Read the report</a>
     </div>
   </section>
 
-  <section class="wrap section">
-    <div class="section-head">
-      <p class="eyebrow">The story</p>
-      <h2>The story, each step checked before the next</h2>
+  <section class="band" id="why">
+    <div class="wrap split">
+      <div>
+        <h2>Why I made this</h2>
+      </div>
+      <div class="prose">
+        <p>I’m a financial advisor, and I meet most people by knocking on their door. More and more of them tell me they get their financial advice from ChatGPT.</p>
+        <p>So I ask: how do you know it’s right? The usual answer is that they Google it afterwards and read the top result. These days the top result is another AI’s answer. Now two AI models have told them two different things about the same question, and they don’t know which one to trust. Many would still rather ask a chatbot than an advisor.</p>
+        <p>I wanted to know what the models still get wrong. So I wrote the questions planners work through every week, built an answer key I could prove, and tested the models one by one.</p>
+      </div>
     </div>
-    <ol class="steps">
-      <li>
-        <div>
-          <h3>Measure</h3>
-          <p>Ask models the questions planners actually compute: tax, Social Security, required distributions, Medicare premiums. Each has one exact answer under 2026 rules, so a script grades every reply.</p>
-          <a class="go" href="results.html">See the results →</a>
-        </div>
-        <div class="stat"><b><span data-k="single">—</span> → <span data-k="stacked">—</span></b><span>Claude Sonnet 5.5 on one rule at a time, then on several rules meeting in one household</span></div>
-      </li>
-      <li>
-        <div>
-          <h3>Diagnose</h3>
-          <p>Most misses came from one misread rule: the senior deduction new in 2025. Models took its 6% phase-out once off a couple’s combined $12,000 instead of off each spouse’s $6,000. They agreed with each other, and the IRS form showed they were wrong.</p>
-          <a class="go" href="results.html#worked">See the worked question →</a>
-        </div>
-        <div class="stat"><b data-k="agree_models">—</b><span data-k="agree_cap">models gave the same wrong answer</span></div>
-      </li>
-      <li>
-        <div>
-          <h3>Fix</h3>
-          <p>Hand the model the engine as tools. The first version returned the right number, and the model overruled it with its own wrong rule. Version 1.1 shows the rule and cites the IRS form line. The engine didn’t change; the explanation did.</p>
-          <a class="go" href="gauntlet.html#tools">See the fix →</a>
-        </div>
-        <div class="stat"><b><span data-k="tools_from">—</span> → <span data-k="tools_to">—</span></b><span>Claude Haiku 5.5 on the 50 hardest questions; <span data-k="private_tools">—</span> on held-out questions it never saw</span></div>
-      </li>
-      <li>
-        <div>
-          <h3>Prove</h3>
-          <p>A benchmark graded against a buggy key grades your bug. So the engine is checked by a second engine written by an agent that was never allowed to read the first, and by PolicyEngine-US, an open-source tax model built by others.</p>
-          <a class="go" href="method.html">See the method →</a>
-        </div>
-        <div class="stat"><b data-k="cleanroom">—</b><span>random households where the two engines agree on every field, to the dollar</span></div>
-      </li>
-      <li>
-        <div>
-          <h3>Stress-test</h3>
-          <p>Then the hard part: whole households and real choices (how much to convert to Roth, when to claim, how to give) where three or more rules stack across 25 years. Code proves no shortcut gets within 2% of the answer. With the engine, even a cheap open model gets them right, and when a key fact is left out, it asks the client instead of guessing.</p>
-          <a class="go" href="gauntlet.html">See the Gauntlet →</a>
-        </div>
-        <div class="stat"><b><span data-k="g_from">—</span> → <span data-k="g_to">—</span></b><span>decisions fully right across <span data-k="g_models">—</span> models, alone vs. with the engine. The worst plan made alone gave up <span data-k="g_worst">—</span>.</span></div>
-      </li>
-      <li>
-        <div>
-          <h3>Put it in people’s hands</h3>
-          <p>Turn the engine into a connector anyone can add to Claude or ChatGPT. The engine decides which question to ask next and the chat model just talks. I ran it as clients would, wrote down every rough edge, and saved each session as a test so it can’t slide back.</p>
-          <a class="go" href="chat.html">See it in the chat →</a>
-        </div>
-        <div class="stat"><b data-k="chat_judge">—</b><span>simulated clients who get the same answer as with every fact known, asked only questions that could change it</span></div>
-      </li>
-      <li>
-        <div>
-          <h3>Break the inputs</h3>
-          <p>New in v2: every earlier question assumed the client’s facts were true. So 30 intake notes each got one planted error (swapped digits, a client aged 14, an amount over a legal limit) to see who notices before computing.</p>
-          <a class="go" href="v2.html">See the bad-inputs track →</a>
-        </div>
-        <div class="stat"><b>73% vs 1–3%</b><span>planted errors caught by the two best models, and by three of the five cheap open models</span></div>
-      </li>
-    </ol>
+  </section>
+
+  <section class="wrap section" id="found">
+    <div class="section-head">
+      <h2>What I found</h2>
+      <p class="sub">Four results. Each links to the page with the details and the caveats.</p>
+    </div>
+    <div class="finds">
+      <a class="find" href="results.html">
+        <span class="n">1</span>
+        <h3>One rule at a time, they do well</h3>
+        <p class="big"><span data-k="single">—</span></p>
+        <p>of single-rule questions right for Claude Sonnet 5.5: a tax bracket, a required withdrawal, a Medicare premium.</p>
+      </a>
+      <a class="find" href="results.html">
+        <span class="n">2</span>
+        <h3>When rules stack up, they slip</h3>
+        <p class="big"><span data-k="stacked">—</span></p>
+        <p>right for the same model once several rules meet in one household. On the hardest questions a wrong answer was typically off by about $1,100 for a single year.</p>
+      </a>
+      <a class="find" href="gauntlet.html">
+        <span class="n">3</span>
+        <h3>A checked calculator fixes it</h3>
+        <p class="big"><span data-k="tools_from">—</span> → <span data-k="tools_to">—</span></p>
+        <p>for Claude Haiku 5.5 on 50 hard questions, once it could call the planning engine and was shown the rule behind each number.</p>
+      </a>
+      <a class="find" href="v2.html">
+        <span class="n">4</span>
+        <h3>Wrong facts in, confident answer out</h3>
+        <p class="big">73% vs 1–3%</p>
+        <p>of planted mistakes caught (a swapped digit, a client aged 14) by the two best models, and by three of the five cheapest.</p>
+      </a>
+    </div>
   </section>
 
   <section class="band">
     <div class="wrap split">
       <div>
-        <p class="eyebrow">Who it’s for</p>
-        <h2>The decision it changes</h2>
+        <h2>What I built to find out</h2>
       </div>
       <ul class="notes">
-        <li><b>A wealth-tech team adding an AI assistant to its planning software.</b> Today they guess what the assistant can safely answer. With PlannerBench they know: one-rule questions it handles alone; stacked ones (a Roth conversion, a claiming age, a widow’s taxes) go through the engine. The decision it changes is what the assistant is allowed to answer on its own.</li>
-        <li><b>Their compliance team.</b> Every number the assistant shows comes from the engine, carries the rule and its IRS or SSA source, and was checked by programs that didn’t write it. That’s a review they can sign.</li>
-        <li><b>AI labs.</b> Exact, current, hard-to-memorize questions in a field where a small error costs a family real money.</li>
+        <li><b>An answer key I could prove.</b> A planning engine: the 2026 tax, Social Security, withdrawal and Medicare rules written as code. A second engine, written separately from the published rules alone, agrees with it on <span data-k="cleanroom">—</span> random households to the dollar.</li>
+        <li><b>A benchmark.</b> <span data-k="questions">—</span> questions with one exact answer each, so a script does the grading and nobody’s opinion is involved. A newer set adds harder questions and client notes with mistakes planted in them.</li>
+        <li><b>The engine as a tool.</b> The same engine plugs into Claude or ChatGPT, so the model asks it for the number and explains the result, and has no reason to make one up.</li>
       </ul>
     </div>
   </section>
 
   <section class="wrap section">
-    <a class="next" href="results.html"><span><span class="label">Next</span><b>Results: where the models go wrong</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <div class="split">
+      <div>
+        <h2>Check it yourself</h2>
+      </div>
+      <ul class="notes">
+        <li><b>Every number here can be rebuilt.</b> Each model reply is saved, and one command regrades all of them from scratch.</li>
+        <li><b>The published source decides.</b> When models agreed with each other against the key, the IRS form settled it, never a vote. When a check found a mistake on my side, I fixed it and logged it.</li>
+        <li><b>It’s a benchmark, so it runs on any model.</b> Part of the question set is held back so answers can’t be memorized. If you’d like a model tested, <a href="https://peytonthalman.com">get in touch</a>.</li>
+        <li><b>The limits are written down.</b> Small samples, 95% intervals on every score, and a list of what wasn’t tested, in the <a href="report.html">report</a> and on the <a href="method.html">method page</a>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><h2>Where to go next</h2></div>
+    <ul class="go-list">
+      <li><a href="results.html"><b>Results</b><span>Model by model, and the one misread rule behind most misses</span></a></li>
+      <li><a href="v2.html"><b>Bad inputs</b><span>Who notices when a client’s facts can’t be right</span></a></li>
+      <li><a href="gauntlet.html"><b>With tools</b><span>The same models with the planning engine to call</span></a></li>
+      <li><a href="method.html"><b>Method</b><span>How the answer key is checked</span></a></li>
+      <li><a href="built.html"><b>How I built it</b><span>The decisions, the dead ends and what it cost</span></a></li>
+    </ul>
   </section>
 </main>
 

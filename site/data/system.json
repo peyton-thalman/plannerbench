@@ -51,5 +51,12 @@
    "solve_roth_conversion"
   ],
   "advanced_source": "engine repo: mcp/server.ts (MCP 3.0)"
+ },
+ "home_v2": {
+  "caught_best": "73%",
+  "caught_cheap": "1–3%",
+  "typical_miss_usd": 1135,
+  "typical_miss_note": "median absolute error of the 354 wrong, untruncated replies on v2 hard-tier dollar questions (models alone, headroom family left out)",
+  "source": "v2/results/summary.json and v2/results/hard_graded.jsonl; quoted as text in site/index.html"
  }
 }
