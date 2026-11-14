@@ -437,9 +437,9 @@
 
   // Question tiers
   const TIERS = [
-    ['single-step', 'Single-step', 'One rule at a time: a tax bracket, an RMD divisor, a Social Security claiming factor, a Medicare premium tier.', 'single_step_accuracy'],
-    ['multi-step', 'Multi-step', 'Two rules that interact, like a Roth conversion that also makes more Social Security taxable (the “tax torpedo”).', 'multi_step_accuracy'],
-    ['stacked', 'Stacked', 'Tax, Social Security, the senior deduction and Medicare’s income-based premiums (IRMAA) meeting in one household.', 'stacked_accuracy'],
+    ['single-step', 'One rule', 'One rule at a time: a tax bracket, an RMD divisor, a Social Security claiming factor, a Medicare premium tier.', 'single_step_accuracy'],
+    ['multi-step', 'A few steps', 'Two rules that interact, like a Roth conversion that also makes more Social Security taxable (the “tax torpedo”).', 'multi_step_accuracy'],
+    ['stacked', 'Several rules at once', 'Tax, Social Security, the senior deduction and Medicare’s income-based premiums (IRMAA) meeting in one household.', 'stacked_accuracy'],
     ['compliance', 'Compliance review', 'A planted problem a reviewer must catch: a rollover issue, a missed sales-charge discount, a misleading sentence.', 'compliance_accuracy'],
   ];
   const fmtAnswer = (ex, v) => (ex.task === 'comms_review' ? (v === 'NONE' ? 'None' : `Sentences ${String(v).replace(/,/g, ', ')}`)

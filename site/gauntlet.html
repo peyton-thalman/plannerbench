@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body data-page="gauntlet">
 <header class="nav">
@@ -26,11 +26,11 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">With the engine</p>
+    <p class="eyebrow">With tools · AI plus a calculator it can trust</p>
     <h1>Hand it the right answer, and it argues. Show it the rule, and it listens.</h1>
     <div class="tldr">
       <p class="label">In short</p>
-      <p>The planning engine is also a set of tools any model can call while it answers, over MCP (Model Context Protocol, the standard way to plug tools into AI models). A tool that only returned the right number got overruled. A tool that showed the rule and cited the IRS form line fixed every hard question. On whole-household decisions, every model tested got every decision and every number right with the engine, including DeepSeek, an open model that costs under a cent a question and got 2 of 11 right on its own. Leave a key fact out, and with the engine it asks the client for it before answering.</p>
+      <p>I turned the answer key into a calculator the AI can use while it answers. At first the calculator only gave back the right number, and the AI overruled it with its own wrong rule. Once the calculator also showed the rule and the IRS form line, the AI got every hard question right. On whole-household decisions, every AI I tested got everything right with the calculator, including a cheap one that got 2 of 11 right on its own. And when a key fact was left out, it asked for it before answering. (For the technical reader: the calculator is an MCP server, the standard way to plug tools into AI models.)</p>
     </div>
   </section>
 
@@ -38,8 +38,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Step one · the benchmark’s hardest questions</p>
-        <h2>The same 50 questions, three ways</h2>
-        <p class="sub">These are the 50 hardest of the benchmark’s questions (multi-step and stacked), so Claude Haiku 5.5 scores lower here alone than its 77% across all of them. Tools 1.0 sent back only the answer; tools 1.1 sends back the answer, the rule behind it and the IRS form line. The tools are general calculators (federal tax, taxable Social Security, RMDs, claiming age, Medicare premiums, tax tables), not one per question, so the model still has to pick the inputs and combine the results.</p>
+        <h2>The same 50 hard questions, asked three ways</h2>
+        <p class="sub">First the AI on its own. Then with a calculator that sent back only the answer (tools 1.0). Then with one that sent back the answer, the rule behind it and the IRS form line (tools 1.1). The calculators are general ones (federal tax, Social Security, required withdrawals, Medicare premiums), so the AI still has to choose what to put in and combine what comes out. These are the 50 hardest questions, which is why Claude Haiku scores lower here than its 77% overall.</p>
       </div>
       <div class="table-wrap">
         <table class="scores ladder" id="ladder">
@@ -75,8 +75,8 @@
   <section class="wrap section" id="gauntlet">
     <div class="section-head">
       <p class="eyebrow">Step two · the Gauntlet</p>
-      <h2>Real retirement decisions, alone and with the engine</h2>
-      <p class="sub">The Gauntlet has 110 questions in 10 families: 77 public and 33 held back to check results later. The first run below asked one from each family plus a trap. Each question is a whole household (about 16 facts: Social Security, IRAs, a pension, a brokerage account) and a choice an advisor makes for real: whether and how much to convert to Roth, when to claim, how to give, how to empty an inherited IRA. Getting it right means stacking at least three rules across 25 years.</p>
+      <h2>Real retirement decisions, with and without the calculator</h2>
+      <p class="sub">I call this set the Gauntlet. Each question is a whole made-up household (about 16 facts: Social Security, IRAs, a pension, a brokerage account) and a choice people really face: how much to convert to a Roth, when to claim Social Security, how to give to charity, how to empty an inherited IRA. Getting it right means combining at least three rules over 25 years. There are 110 of these; the first run below asked one of each kind plus a trap.</p>
     </div>
 
     <div class="table-wrap">
@@ -153,6 +153,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=11"></script>
+<script src="app.js?v=12"></script>
 </body>
 </html>

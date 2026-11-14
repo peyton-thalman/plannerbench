@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body data-page="results">
 <header class="nav">
@@ -26,11 +26,11 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Results · models alone</p>
-    <h1>Models do the math. They don’t reliably know the current rule.</h1>
+    <p class="eyebrow">Results · AI on its own</p>
+    <h1>AI can do the math. It often doesn’t know this year’s rule.</h1>
     <div class="tldr">
       <p class="label">In short</p>
-      <p>Models are near-perfect when one long-standing rule applies, and fall apart when several rules meet in one household. Most of the misses trace back to one rule that changed in 2025. Give a model that rule and it gets the question right.</p>
+      <p>Ask about one old, well-known rule and AI is almost always right. Ask a question where several rules meet, the way they do in a real household, and it gets most of them wrong. Most of the wrong answers come from one rule that changed in 2025. Show the AI that rule and it gets the question right.</p>
     </div>
   </section>
 
@@ -38,8 +38,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">One question, worked</p>
-        <h2>Where the models go wrong</h2>
-        <p class="sub">A real question from the set. Models from several labs gave the same wrong answer, and the IRS form shows why.</p>
+        <h2>One question, and where it goes wrong</h2>
+        <p class="sub">This is a real question from the test. AI models from different companies all gave the same wrong answer. The IRS form shows why.</p>
       </div>
       <div class="worked">
         <div class="question">
@@ -52,7 +52,7 @@
           <p class="rule-text">The 2025 tax law gave each person 65 or older an extra $6,000 deduction, shrinking by 6% of income over $150,000 on a joint return. Here is the IRS form, line by line:</p>
           <ol class="lines" id="featured-lines"></ol>
           <div class="misread">
-            <p class="label">What the models did</p>
+            <p class="label">What the AI models did</p>
             <p id="featured-misread">—</p>
           </div>
         </div>
@@ -63,30 +63,30 @@
   <section class="wrap section" id="scores-section">
     <div class="section-head">
       <p class="eyebrow">Scores</p>
-      <h2>Accuracy by kind of question</h2>
-      <p class="sub">Share of questions answered within the key’s tolerance. The bar is the score; the shaded band is where the true score likely sits (95% interval).</p>
+      <h2>How many each AI got right</h2>
+      <p class="sub">The percent of questions each AI answered correctly, from easy questions on the left to hard ones on the right. The dark bar is the score. The lighter band shows how far off it could be, since each AI only answered a small number of questions.</p>
     </div>
     <div class="table-wrap">
       <table class="scores" id="scores">
         <thead>
-          <tr><th scope="col">Model</th><th scope="col">Single-step</th><th scope="col">Multi-step</th><th scope="col">Stacked</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Ran out of tokens</th><th scope="col" class="r">Cost per 1,000 right</th></tr>
+          <tr><th scope="col">Model</th><th scope="col">One rule</th><th scope="col">A few steps</th><th scope="col">Several rules at once</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Never finished</th><th scope="col" class="r">Cost per 1,000 right</th></tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
     <details class="fine">
       <summary>How these were run</summary>
-      <p>Claude models were asked 10 questions per task through Anthropic’s API; the others 15 per task through OpenRouter, each pinned to one named host with data collection off. “Open weights” means anyone can download the model; fp8 and bf16 say how compressed the host’s copy is. “Ran out of tokens” means the model spent its whole 32,000-token budget thinking and never answered; that counts as not right. When two bands overlap heavily, the gap between those models may be noise.</p>
+      <p>Claude models were asked 10 questions per task through Anthropic’s API; the others 15 per task through OpenRouter, each pinned to one named host with data collection off. “Open weights” means anyone can download the model; fp8 and bf16 say how compressed the host’s copy is. “Never finished” means the model spent its whole 32,000-token budget thinking and never answered; that counts as not right. When two bands overlap heavily, the gap between those models may be noise.</p>
     </details>
 
     <div class="sub-head">
       <h3>What the mistakes would cost a client</h3>
-      <p>Accuracy counts a Medicare premium ten cents off the same as a required distribution $9,000 too high. A planner wouldn’t. Here each answer is scored by how many dollars a year it is off; a miss of $1,000 a year or more is called material.</p>
+      <p>A right-or-wrong score treats a Medicare premium that is ten cents off the same as a required withdrawal that is $9,000 too high. A planner wouldn’t. So here each answer is scored by how many dollars a year it is off. A miss of $1,000 a year or more counts as a big one.</p>
     </div>
     <div class="table-wrap">
       <table class="scores dollars" id="dollars">
         <thead>
-          <tr><th scope="col">Model</th><th scope="col" class="r">Dollars off per question, per year</th><th scope="col" class="r">Material misses</th><th scope="col" class="r">Typical miss</th><th scope="col" class="r">Worst miss</th><th scope="col" class="r">Questions scored</th></tr>
+          <tr><th scope="col">Model</th><th scope="col" class="r">Dollars off per question, per year</th><th scope="col" class="r">Big misses ($1,000+)</th><th scope="col" class="r">Typical miss</th><th scope="col" class="r">Worst miss</th><th scope="col" class="r">Questions scored</th></tr>
         </thead>
         <tbody></tbody>
       </table>
@@ -96,7 +96,7 @@
     <figure class="chart-card value-card">
       <figcaption>
         <h3>Right answers per dollar</h3>
-        <p>Accuracy against what each right answer actually cost, as billed. Up and to the left is better. A low price per token doesn’t mean a low price per answer: models that think until they run out of room cost the most.</p>
+        <p>How often each AI was right, against what each right answer cost me. Higher and further left is better. A cheap AI isn’t always cheap per answer: some think for so long that they run out of room and never answer.</p>
       </figcaption>
       <div class="chart" id="value-chart" role="img" aria-label="Accuracy against cost per right answer"></div>
       <div class="legend"><span><i class="dot"></i>Closed weights</span><span><i class="dot open"></i>Open weights</span></div>
@@ -106,7 +106,7 @@
       <figure class="chart-card">
         <figcaption>
           <h3>Give it the rule</h3>
-          <p>The same questions, asked again with the two-line Schedule 1-A instructions placed in front.</p>
+          <p>The same questions again, this time with the IRS’s two-line instructions for the new rule pasted in front.</p>
         </figcaption>
         <div class="chart" id="rule-chart" role="img" aria-label="Accuracy without and with the rule"></div>
         <div class="legend"><span><i class="dot hollow"></i>Without the rule</span><span><i class="dot"></i>With the rule</span></div>
@@ -114,7 +114,7 @@
       <figure class="chart-card">
         <figcaption>
           <h3>What the wrong answers were</h3>
-          <p>Each wrong answer is checked against known misreadings. The senior-deduction misreading explains most of Claude’s and DeepSeek’s.</p>
+          <p>I checked each wrong answer against known ways of misreading the rules. One misreading of the new senior deduction explains most of them.</p>
         </figcaption>
         <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
       </figure>
@@ -124,7 +124,7 @@
   <section class="wrap section" id="questions">
     <div class="section-head">
       <p class="eyebrow">The questions</p>
-      <h2>Four kinds of question, from one rule to many</h2>
+      <h2>Four kinds of question, from easy to hard</h2>
       <p class="sub" id="questions-sub">Every question is generated from a household’s numbers, so there are as many as needed and none can be memorized from the web. Open a card to see a real one.</p>
     </div>
     <div class="tiers" id="tiers"></div>
@@ -147,7 +147,7 @@
   </section>
 
   <section class="wrap section">
-    <a class="next" href="gauntlet.html"><span><span class="label">Next</span><b>The Gauntlet: what happens with the engine</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="next" href="gauntlet.html"><span><span class="label">Next</span><b>With tools: what happens when AI gets a calculator</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
@@ -158,6 +158,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=11"></script>
+<script src="app.js?v=12"></script>
 </body>
 </html>
