@@ -1,8 +1,8 @@
 # PlannerBench v2: progress
 
-**Preview link:** https://plannerbench-prhy0dghb-peytonthalman-1489s-projects.vercel.app/v2.html (report: `/report.html`)
-Preview only, behind Vercel login (sign in as the project owner). Production is untouched (still the 2026-10-22 deploy).
-To promote: `cd site && vercel promote <that URL>`. **Read `REPORT.md` first; its last five lines are the summary.**
+**Live:** https://plannerbench.vercel.app/v2.html (report: `/report.html`). Deployed to production and pushed to
+`origin v2` on 2026-11-14 at the owner's say-so, with the site restyled to match peytonthalman.com.
+**Read `REPORT.md` first; its last five lines are the summary.**
 
 Branch `v2`. Everything for v2 lives in `v2/`; nothing under `data/`, `runs/`, `leaderboard/` or the v1 site data is changed.
 A new session can pick up from "Next step" at the bottom.
@@ -80,8 +80,8 @@ Done spending. $0.49 of the cap is unused.
     (97.7% agreement, kappa 0.95). No human labels; the report says so.
 15. **Site.** One new nav entry, "v2", on every page; the report page is linked from it. v1 pages are otherwise
     unchanged and `checks/site_check.py` passes against a local copy.
-16. **Not pushed.** The four new commits are on local branch `v2` only. The brief asked for commits and a preview,
-    not a push.
+16. **Pushed and deployed (owner, 2026-11-14).** Branch `v2` is on `origin`; production serves it. Not merged into
+    `master`.
 
 ## Assumptions
 
