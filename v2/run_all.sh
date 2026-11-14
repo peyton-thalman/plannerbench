@@ -14,3 +14,4 @@ $R --set hard --tier cheap --reps 2
 $R --set hard --tools --models "$(python3 -c "import json;print(','.join(m['id'] for m in json.load(open('v2/lineup.json'))['models'] if m['tier']=='cheap' or 'haiku' in m['id']))")" --reps 1
 $R --set hard --tools --models "or:openai/gpt-6.1-sol@openai/flex" --per-group 1 --reps 1
 echo ALL-DONE
+$R --cap 4.75 --set hard --tools --models "or:openai/gpt-6.1-sol@openai/flex,or:openai/gpt-6.1-terra@openai/flex" --reps 1   # added after the first pass came in under budget

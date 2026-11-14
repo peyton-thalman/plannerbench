@@ -16,6 +16,8 @@
   "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
   "or:meta-llama/llama-4-maverick@parasail/fp8",
   "or:mistralai/mistral-small-2603@mistral/zdr",
+  "or:openai/gpt-6.1-sol@openai/flex",
+  "or:openai/gpt-6.1-terra@openai/flex",
   "or:openai/gpt-oss-120b@deepinfra/bf16",
   "or:z-ai/glm-5.3-flash@z-ai/fp8"
  ],

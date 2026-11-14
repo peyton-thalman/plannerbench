@@ -126,13 +126,16 @@ def main():
             body = rm.openrouter_body(m, a.effort, msgs)
             if known.get(m, {}).get("reasoning") == "off":  # see lineup.json: these spent the whole reply limit thinking at effort low
                 body["reasoning"] = {"enabled": False}
-            if tools:
-                res = rm.ask_chat_with_tools(rm.openrouter_post, body, tools)
-                res.pop("_messages", None)
-            else:
-                body["reasoning"]["exclude"] = True  # reasoning text isn't graded; it is still used and billed
-                r, err = rm.openrouter_post(body)
-                res = {"error": err} if err else rm.openrouter_rec(r)
+            try:
+                if tools:
+                    res = rm.ask_chat_with_tools(rm.openrouter_post, body, tools)
+                    res.pop("_messages", None)
+                else:
+                    body["reasoning"]["exclude"] = True  # reasoning text isn't graded; it is still used and billed
+                    r, err = rm.openrouter_post(body)
+                    res = {"error": err} if err else rm.openrouter_rec(r)
+            except (KeyError, IndexError, TypeError) as e:  # a 200 reply with no choices (the host returned an error body)
+                res = {"error": f"malformed reply from host: {type(e).__name__} {e}"}
             res["seconds"] = round(time.monotonic() - t0, 1)
             return res
         finally:

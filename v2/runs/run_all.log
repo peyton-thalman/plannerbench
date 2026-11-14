@@ -14,3 +14,107 @@ bad: 70 items x 3 models x 3 reps; 597 to ask, 287 done; ledger $1.292 of $4.45
   100/597  ledger $1.362
   125/597  ledger $1.385
   150/597  ledger $1.407
+bad: 70 items x 3 models x 1 reps; 42 to ask, 356 done; ledger $1.415 of $4.45
+  25/42  ledger $1.506
+  42/42  ledger $1.570
+bad: 70 items x 3 models x 2 reps; 268 to ask, 398 done; ledger $1.570 of $4.45
+  25/268  ledger $1.591
+  50/268  ledger $1.608
+  75/268  ledger $1.627
+  100/268  ledger $1.644
+  125/268  ledger $1.660
+  150/268  ledger $1.675
+  175/268  ledger $1.695
+  200/268  ledger $1.717
+  225/268  ledger $1.740
+  250/268  ledger $1.762
+  268/268  ledger $1.777
+bad: 70 items x 5 models x 3 reps; 1014 to ask, 666 done; ledger $1.777 of $4.45
+  25/1014  ledger $1.783
+  50/1014  ledger $1.790
+  75/1014  ledger $1.795
+  100/1014  ledger $1.799
+  125/1014  ledger $1.803
+  150/1014  ledger $1.808
+  175/1014  ledger $1.821
+  200/1014  ledger $1.829
+  225/1014  ledger $1.837
+  250/1014  ledger $1.847
+  275/1014  ledger $1.859
+  300/1014  ledger $1.869
+  325/1014  ledger $1.875
+  350/1014  ledger $1.881
+  375/1014  ledger $1.890
+  400/1014  ledger $1.894
+  425/1014  ledger $1.899
+  450/1014  ledger $1.903
+  475/1014  ledger $1.910
+  500/1014  ledger $1.915
+  525/1014  ledger $1.923
+  550/1014  ledger $1.932
+  575/1014  ledger $1.940
+  600/1014  ledger $1.952
+  625/1014  ledger $1.963
+  650/1014  ledger $1.970
+  675/1014  ledger $1.979
+  700/1014  ledger $1.988
+  725/1014  ledger $1.996
+  750/1014  ledger $2.003
+  775/1014  ledger $2.009
+  800/1014  ledger $2.013
+  825/1014  ledger $2.017
+  850/1014  ledger $2.025
+  875/1014  ledger $2.033
+  900/1014  ledger $2.044
+  925/1014  ledger $2.052
+  950/1014  ledger $2.066
+  975/1014  ledger $2.074
+  1000/1014  ledger $2.085
+  1014/1014  ledger $2.095
+hard: 42 items x 3 models x 1 reps; 105 to ask, 77 done; ledger $2.095 of $4.45
+  25/105  ledger $2.373
+  50/105  ledger $2.549
+  75/105  ledger $2.738
+  100/105  ledger $3.025
+  105/105  ledger $3.097
+hard: 42 items x 2 models x 2 reps; 154 to ask, 182 done; ledger $3.097 of $4.45
+  25/154  ledger $3.132
+  50/154  ledger $3.158
+  75/154  ledger $3.195
+  100/154  ledger $3.228
+  125/154  ledger $3.255
+  150/154  ledger $3.293
+  154/154  ledger $3.300
+hard: 42 items x 1 models x 1 reps; 35 to ask, 336 done; ledger $3.300 of $4.45
+  25/35  ledger $3.425
+  35/35  ledger $3.492
+hard: 42 items x 5 models x 2 reps; 385 to ask, 371 done; ledger $3.492 of $4.45
+  25/385  ledger $3.510
+  50/385  ledger $3.530
+  75/385  ledger $3.543
+  100/385  ledger $3.554
+  125/385  ledger $3.575
+  150/385  ledger $3.603
+  175/385  ledger $3.623
+  200/385  ledger $3.642
+  225/385  ledger $3.665
+  250/385  ledger $3.680
+  275/385  ledger $3.690
+  300/385  ledger $3.711
+  325/385  ledger $3.730
+  350/385  ledger $3.758
+  375/385  ledger $3.778
+  385/385  ledger $3.789
+hard-tools: 42 items x 6 models x 1 reps; 210 to ask, 42 done; ledger $3.789 of $4.45
+  25/210  ledger $3.832
+  50/210  ledger $3.877
+  75/210  ledger $3.908
+  100/210  ledger $3.932
+  125/210  ledger $3.958
+  150/210  ledger $3.995
+  175/210  ledger $4.042
+  200/210  ledger $4.072
+  210/210  ledger $4.081
+hard-tools: 7 items x 1 models x 1 reps; 7 to ask, 252 done; ledger $4.081 of $4.45
+  7/7  ledger $4.108
+ALL-DONE
