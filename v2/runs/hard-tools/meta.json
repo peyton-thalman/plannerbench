@@ -1,0 +1,32 @@
+{
+ "set": "hard",
+ "tools": [
+  "federal_income_tax",
+  "taxable_social_security",
+  "required_minimum_distribution",
+  "social_security_benefit",
+  "medicare_part_b_premium",
+  "tax_tables",
+  "run_scenario"
+ ],
+ "effort": "low",
+ "max_tokens": 4000,
+ "models": [
+  "or:anthropic/claude-haiku-5.5@anthropic",
+  "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+  "or:meta-llama/llama-4-maverick@parasail/fp8",
+  "or:mistralai/mistral-small-2603@mistral/zdr",
+  "or:openai/gpt-oss-120b@deepinfra/bf16",
+  "or:z-ai/glm-5.3-flash@z-ai/fp8"
+ ],
+ "routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; one user message, no system prompt",
+ "engine": {
+  "server": {
+   "name": "planning-engine",
+   "title": "Planning Engine",
+   "version": "3.0.0"
+  },
+  "commit": "3b7d8bc",
+  "max_tool_turns": 8
+ }
+}

@@ -1,0 +1,10 @@
+{
+ "spent_usd": 1.415333,
+ "by_run": {
+  "smoke-bad": 0.257655,
+  "smoke-mistral": 0.001605,
+  "hard": 0.28595,
+  "hard-tools": 0.066338,
+  "bad": 0.80379
+ }
+}

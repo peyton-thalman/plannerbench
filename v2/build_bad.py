@@ -195,7 +195,7 @@ def conflict(rng, n):
         name = f"{w} {last}"
         pension, ss = rng.randrange(40000, 90000, 1000), rng.randrange(40000, 66000, 600)
         lines = lambda f: [f"Marital status: married to {m} {last}; they live together. Both are over 65 and retired.", f"Tax filing status for 2026: {f}.",
-                           f"Household income for 2026: pensions {money(pension)}, Social Security {money(ss)} (both spouses combined). No other income."]
+                           f"Household income for 2026: pensions {money(pension)} (fully taxable), Social Security {money(ss)} (both spouses combined). No other income."]
         pair("conflict", n, name, lines("married filing jointly"), lines("single"), f"{LAW} What is the household's total 2026 federal income tax, to the nearest dollar?",
              tax("mfj", 2, ordinary=pension, ss=ss), 2, "The notes say the client is married and living with a spouse but list the filing status as single, "
              "which a married person living with their spouse can't use; the tax depends on the real status.", "Rev. Proc. 2025-32; Pub 915; Schedule 1-A Part V; IRS Pub 501 (filing status)")
@@ -205,7 +205,7 @@ def conflict(rng, n):
         pension, ss = rng.randrange(25000, 60000, 1000), rng.randrange(22000, 38000, 600)
         yr = rng.choice([2017, 2018, 2019, 2020])
         lines = lambda f: [f"Marital status: widowed in {yr}; has not remarried. Age 72, retired, no dependents.", f"Tax filing status for 2026: {f}.",
-                           f"Income for 2026: pension {money(pension)}, Social Security {money(ss)}. No other income."]
+                           f"Income for 2026: pension {money(pension)} (fully taxable), Social Security {money(ss)}. No other income."]
         pair("conflict", n, name, lines("single"), lines("married filing jointly with spouse"), f"{LAW} What is {w}'s total 2026 federal income tax, to the nearest dollar?",
              tax("single", 1, ordinary=pension, ss=ss), 2, f"The notes say the client was widowed in {yr} and hasn't remarried, but list the filing status as married "
              "filing jointly with a spouse; both can't be true and the tax depends on which is.", "Rev. Proc. 2025-32; Pub 915; Schedule 1-A Part V; IRS Pub 501 (filing status)")
@@ -214,7 +214,7 @@ def conflict(rng, n):
         name = f"{m} {last}"
         wages, pension = rng.randrange(70000, 120000, 1000), rng.randrange(20000, 45000, 1000)
         work = lambda ok: ("Employment: works full time as an operations manager." if ok else "Employment: fully retired since 2021; no earned income of any kind.")
-        lines = lambda ok: ["Age 61, single, no dependents.", work(ok), f"Income for 2026: W-2 wages {money(wages)}; pension from a former employer {money(pension)}. No other income."]
+        lines = lambda ok: ["Age 61, single, no dependents.", work(ok), f"Income for 2026: W-2 wages {money(wages)}; pension from a former employer {money(pension)} (fully taxable). No other income."]
         pair("conflict", n, name, lines(True), lines(False), f"{LAW} What is {m}'s total 2026 federal income tax, to the nearest dollar?",
              tax("single", 0, wages=wages, ordinary=pension), 2, f"The notes say the client has been fully retired with no earned income since 2021, but list {money(wages)} "
              "of W-2 wages for 2026; both can't be true and the tax depends on which is.", "Rev. Proc. 2025-32; engine federal_income_tax")
@@ -267,10 +267,10 @@ def valid_odd(rng):
         f"{LAW} What is {f}'s total 2026 federal income tax after the IRA deduction, to the nearest dollar?", tax("single", 0, wages=96000 - 8600), 2,
         "$8,600 is exactly the 2026 limit with the age-50 catch-up.", LIMITS)
     a = n(); f = a.split()[0]
-    odd(2, a, ["Age 55, single, no dependents.", "Salary for 2026: $185,000 before any 401(k) deferral. No other income.",
+    odd(2, a, ["Age 55, single, no dependents.", "Salary for 2026: $128,000 before any 401(k) deferral (2025 wages were $124,000). No other income.",
                "Is deferring $32,500 of salary into the traditional (pre-tax) 401(k) for 2026. No employer match."],
-        f"{LAW} What is {f}'s total 2026 federal income tax, to the nearest dollar?", tax("single", 0, wages=185000 - 32500), 2,
-        "$32,500 is exactly the 2026 deferral limit with the age-50 catch-up.", LIMITS)
+        f"{LAW} What is {f}'s total 2026 federal income tax, to the nearest dollar?", tax("single", 0, wages=128000 - 32500), 2,
+        "$32,500 is exactly the 2026 deferral limit with the age-50 catch-up; 2025 wages under $150,000 keep the catch-up pre-tax (SECURE 2.0 §603).", LIMITS)
     a = n(); f = a.split()[0]
     odd(3, a, ["Born in 1947, single.", "Will take $190,000 out of a traditional IRA in 2026 (more than the required minimum).",
                "Of that, $111,000 goes directly from the IRA to qualified charities as a qualified charitable distribution, all of it left out of income.",
@@ -279,7 +279,7 @@ def valid_odd(rng):
         "$111,000 is exactly the 2026 QCD limit.", LIMITS)
     w, m, last = rng.choice(WOMEN), rng.choice(MEN), rng.choice(LAST)
     odd(4, f"{m} {last}", [f"Marital status: married to {w} {last}; they live together. {m} is 79 and retired; {w} is 51 and not working.",
-                           "Tax filing status for 2026: married filing jointly.", "Household income for 2026: pension $84,000, Social Security $31,200. No other income."],
+                           "Tax filing status for 2026: married filing jointly.", "Household income for 2026: pension $84,000 (fully taxable), Social Security $31,200. No other income."],
         f"{LAW} What is the household's total 2026 federal income tax, to the nearest dollar?", tax("mfj", 1, ordinary=84000, ss=31200), 2,
         "A 28-year age gap is unusual, not inconsistent; one spouse is 65 or older.", "Rev. Proc. 2025-32; Pub 915; Schedule 1-A Part V")
     w, m, last = rng.choice(WOMEN), rng.choice(MEN), rng.choice(LAST)

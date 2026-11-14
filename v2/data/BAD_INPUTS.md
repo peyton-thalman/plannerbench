@@ -120,7 +120,7 @@ Planted: Spending of $66,500 a month ($798,000 a year) can't fit a household wit
 Client intake notes: Imani Calloway
 - Marital status: married to Mateo Calloway; they live together. Both are over 65 and retired.
 - Tax filing status for 2026: married filing jointly.
-- Household income for 2026: pensions $62,000, Social Security $53,200 (both spouses combined). No other income.
+- Household income for 2026: pensions $62,000 (fully taxable), Social Security $53,200 (both spouses combined). No other income.
 
 Question from the planner: Use 2026 federal tax law (IRS Rev. Proc. 2025-32 and the One Big Beautiful Bill Act, including the $6,000 senior deduction); standard deduction, no credits. What is the household's total 2026 federal income tax, to the nearest dollar?
 
@@ -133,7 +133,7 @@ Reply to the planner in a few sentences. End with a line of the form "ANSWER: <n
 Client intake notes: Imani Calloway
 - Marital status: married to Mateo Calloway; they live together. Both are over 65 and retired.
 - Tax filing status for 2026: single.
-- Household income for 2026: pensions $62,000, Social Security $53,200 (both spouses combined). No other income.
+- Household income for 2026: pensions $62,000 (fully taxable), Social Security $53,200 (both spouses combined). No other income.
 
 Question from the planner: Use 2026 federal tax law (IRS Rev. Proc. 2025-32 and the One Big Beautiful Bill Act, including the $6,000 senior deduction); standard deduction, no credits. What is the household's total 2026 federal income tax, to the nearest dollar?
 

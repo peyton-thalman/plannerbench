@@ -1,0 +1,3676 @@
+{
+ "generated_from": "v2/runs/*/raw.jsonl and v2/runs/bad/judge.jsonl",
+ "settings": {
+  "effort": "low",
+  "max_tokens": 4000
+ },
+ "spend": {
+  "spent_usd": 1.30303,
+  "by_run": {
+   "smoke-bad": 0.257655,
+   "smoke-mistral": 0.001605,
+   "hard": 0.28595,
+   "hard-tools": 0.066338,
+   "bad": 0.691484
+  }
+ },
+ "items": {
+  "hard": 42,
+  "bad_corrupted": 30,
+  "bad_clean": 30,
+  "bad_valid_odd": 10
+ },
+ "models": [
+  {
+   "model": "or:anthropic/claude-sonnet-5.5@anthropic",
+   "name": "Claude Sonnet 5.5",
+   "lab": "Anthropic",
+   "tier": "frontier",
+   "open_weights": false,
+   "host": "anthropic",
+   "price": [
+    2.0,
+    10.0
+   ],
+   "hard": {
+    "k": 3.0,
+    "n": 7,
+    "rate": 0.4286,
+    "lo": 0.1582,
+    "hi": 0.7495,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.072,
+    "cost_per_correct": 0.02399,
+    "cost_per_question": 0.01028,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": null,
+   "bad": {
+    "replies": 70,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 30,
+    "caught": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "no_number": {
+     "k": 23.0,
+     "n": 30,
+     "rate": 0.7667,
+     "lo": 0.5907,
+     "hi": 0.8821
+    },
+    "silent_number": {
+     "k": 7.0,
+     "n": 30,
+     "rate": 0.2333,
+     "lo": 0.1179,
+     "hi": 0.4093
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "declined_other_reason": {
+     "k": 23.0,
+     "n": 30,
+     "rate": 0.7667,
+     "lo": 0.5907,
+     "hi": 0.8821
+    },
+    "clean_correct": {
+     "k": 28.0,
+     "n": 30,
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
+    },
+    "false_alarm_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "false_alarm": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "control_correct": {
+     "k": 38.0,
+     "n": 40,
+     "rate": 0.95,
+     "lo": 0.835,
+     "hi": 0.9862
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.3878,
+    "cost_per_question": 0.00554,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     }
+    },
+    "net": 0.0,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    }
+   }
+  },
+  {
+   "model": "or:openai/gpt-6.1-sol@openai/flex",
+   "name": "GPT-6.1 Sol",
+   "lab": "OpenAI",
+   "tier": "frontier",
+   "open_weights": false,
+   "host": "openai/flex",
+   "price": [
+    1.0,
+    5.0
+   ],
+   "hard": {
+    "k": 7.0,
+    "n": 7,
+    "rate": 1.0,
+    "lo": 0.6457,
+    "hi": 1.0,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0216,
+    "cost_per_correct": 0.00308,
+    "cost_per_question": 0.00308,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "az_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     }
+    }
+   },
+   "hard_tools": null,
+   "bad": {
+    "replies": 70,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 30,
+    "caught": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "no_number": {
+     "k": 24.0,
+     "n": 30,
+     "rate": 0.8,
+     "lo": 0.6269,
+     "hi": 0.905
+    },
+    "silent_number": {
+     "k": 6.0,
+     "n": 30,
+     "rate": 0.2,
+     "lo": 0.095,
+     "hi": 0.3731
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "declined_other_reason": {
+     "k": 24.0,
+     "n": 30,
+     "rate": 0.8,
+     "lo": 0.6269,
+     "hi": 0.905
+    },
+    "clean_correct": {
+     "k": 25.0,
+     "n": 30,
+     "rate": 0.8333,
+     "lo": 0.6644,
+     "hi": 0.9266
+    },
+    "false_alarm_clean": {
+     "k": 5.0,
+     "n": 30,
+     "rate": 0.1667,
+     "lo": 0.0734,
+     "hi": 0.3356
+    },
+    "false_alarm_odd": {
+     "k": 3.0,
+     "n": 10,
+     "rate": 0.3,
+     "lo": 0.1078,
+     "hi": 0.6032
+    },
+    "false_alarm": {
+     "k": 8.0,
+     "n": 40,
+     "rate": 0.2,
+     "lo": 0.105,
+     "hi": 0.3476
+    },
+    "control_correct": {
+     "k": 32.0,
+     "n": 40,
+     "rate": 0.8,
+     "lo": 0.6524,
+     "hi": 0.895
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0924,
+    "cost_per_question": 0.00132,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     }
+    },
+    "net": -0.2,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    }
+   }
+  },
+  {
+   "model": "or:google/gemini-3.1-pro-preview@google-ai-studio/flex",
+   "name": "Gemini 3.1 Pro",
+   "lab": "Google",
+   "tier": "frontier",
+   "open_weights": false,
+   "host": "google-ai-studio/flex",
+   "price": [
+    1.0,
+    6.0
+   ],
+   "hard": {
+    "k": 2.0,
+    "n": 7,
+    "rate": 0.2857,
+    "lo": 0.0822,
+    "hi": 0.6411,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.1035,
+    "cost_per_correct": 0.05176,
+    "cost_per_question": 0.01479,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": null,
+   "bad": {
+    "replies": 70,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 30,
+    "caught": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "no_number": {
+     "k": 29.0,
+     "n": 30,
+     "rate": 0.9667,
+     "lo": 0.8333,
+     "hi": 0.9941
+    },
+    "silent_number": {
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "declined_other_reason": {
+     "k": 29.0,
+     "n": 30,
+     "rate": 0.9667,
+     "lo": 0.8333,
+     "hi": 0.9941
+    },
+    "clean_correct": {
+     "k": 9.0,
+     "n": 30,
+     "rate": 0.3,
+     "lo": 0.1666,
+     "hi": 0.4788
+    },
+    "false_alarm_clean": {
+     "k": 21.0,
+     "n": 30,
+     "rate": 0.7,
+     "lo": 0.5212,
+     "hi": 0.8334
+    },
+    "false_alarm_odd": {
+     "k": 6.0,
+     "n": 10,
+     "rate": 0.6,
+     "lo": 0.3127,
+     "hi": 0.8318
+    },
+    "false_alarm": {
+     "k": 27.0,
+     "n": 40,
+     "rate": 0.675,
+     "lo": 0.5202,
+     "hi": 0.7992
+    },
+    "control_correct": {
+     "k": 13.0,
+     "n": 40,
+     "rate": 0.325,
+     "lo": 0.2008,
+     "hi": 0.4798
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.3204,
+    "cost_per_question": 0.00458,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      }
+     }
+    },
+    "net": -0.675,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    }
+   }
+  },
+  {
+   "model": "or:openai/gpt-6.1-terra@openai/flex",
+   "name": "GPT-6.1 Terra",
+   "lab": "OpenAI",
+   "tier": "mid",
+   "open_weights": false,
+   "host": "openai/flex",
+   "price": [
+    0.5,
+    2.5
+   ],
+   "hard": {
+    "k": 5.0,
+    "n": 7,
+    "rate": 0.7143,
+    "lo": 0.3589,
+    "hi": 0.9178,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0123,
+    "cost_per_correct": 0.00245,
+    "cost_per_question": 0.00175,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": null,
+   "bad": {
+    "replies": 19,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 9,
+    "caught": {
+     "k": 0.0,
+     "n": 9,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2992
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 9,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2992
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 9,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2992
+    },
+    "no_number": {
+     "k": 7.0,
+     "n": 9,
+     "rate": 0.7778,
+     "lo": 0.4526,
+     "hi": 0.9368
+    },
+    "silent_number": {
+     "k": 2.0,
+     "n": 9,
+     "rate": 0.2222,
+     "lo": 0.0632,
+     "hi": 0.5474
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 9,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2992
+    },
+    "declined_other_reason": {
+     "k": 7.0,
+     "n": 9,
+     "rate": 0.7778,
+     "lo": 0.4526,
+     "hi": 0.9368
+    },
+    "clean_correct": {
+     "k": 8.0,
+     "n": 9,
+     "rate": 0.8889,
+     "lo": 0.565,
+     "hi": 0.9801
+    },
+    "false_alarm_clean": {
+     "k": 1.0,
+     "n": 9,
+     "rate": 0.1111,
+     "lo": 0.0199,
+     "hi": 0.435
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 1.0,
+     "n": 10,
+     "rate": 0.1,
+     "lo": 0.0179,
+     "hi": 0.4042
+    },
+    "control_correct": {
+     "k": 9.0,
+     "n": 10,
+     "rate": 0.9,
+     "lo": 0.5958,
+     "hi": 0.9821
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0117,
+    "cost_per_question": 0.00062,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 5,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.4345
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 5,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.4345
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 5,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.4345
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 1.0,
+       "n": 1,
+       "rate": 1.0,
+       "lo": 0.2065,
+       "hi": 1.0
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     }
+    },
+    "net": -0.1,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 9,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2992
+    }
+   }
+  },
+  {
+   "model": "or:google/gemini-3.8-flash@google-ai-studio/flex",
+   "name": "Gemini 3.8 Flash",
+   "lab": "Google",
+   "tier": "mid",
+   "open_weights": false,
+   "host": "google-ai-studio/flex",
+   "price": [
+    0.38,
+    1.88
+   ],
+   "hard": {
+    "k": 1.0,
+    "n": 7,
+    "rate": 0.1429,
+    "lo": 0.0257,
+    "hi": 0.5131,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.4286,
+    "no_answer": 0.0,
+    "cost_usd": 0.0412,
+    "cost_per_correct": 0.04117,
+    "cost_per_question": 0.00588,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": null,
+   "bad": {
+    "replies": 15,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 7,
+    "caught": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "no_number": {
+     "k": 7.0,
+     "n": 7,
+     "rate": 1.0,
+     "lo": 0.6457,
+     "hi": 1.0
+    },
+    "silent_number": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "declined_other_reason": {
+     "k": 7.0,
+     "n": 7,
+     "rate": 1.0,
+     "lo": 0.6457,
+     "hi": 1.0
+    },
+    "clean_correct": {
+     "k": 4.0,
+     "n": 7,
+     "rate": 0.5714,
+     "lo": 0.2505,
+     "hi": 0.8418
+    },
+    "false_alarm_clean": {
+     "k": 3.0,
+     "n": 7,
+     "rate": 0.4286,
+     "lo": 0.1582,
+     "hi": 0.7495
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 3.0,
+     "n": 8,
+     "rate": 0.375,
+     "lo": 0.1368,
+     "hi": 0.6943
+    },
+    "control_correct": {
+     "k": 5.0,
+     "n": 8,
+     "rate": 0.625,
+     "lo": 0.3057,
+     "hi": 0.8632
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0162,
+    "cost_per_question": 0.00108,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 3,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.5615
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 3,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.5615
+      },
+      "false_alarm": {
+       "k": 1.0,
+       "n": 3,
+       "rate": 0.3333,
+       "lo": 0.0615,
+       "hi": 0.7923
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 1.0,
+       "n": 1,
+       "rate": 1.0,
+       "lo": 0.2065,
+       "hi": 1.0
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 1.0,
+       "n": 1,
+       "rate": 1.0,
+       "lo": 0.2065,
+       "hi": 1.0
+      }
+     }
+    },
+    "net": -0.375,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    }
+   }
+  },
+  {
+   "model": "or:anthropic/claude-haiku-5.5@anthropic",
+   "name": "Claude Haiku 5.5",
+   "lab": "Anthropic",
+   "tier": "mid",
+   "open_weights": false,
+   "host": "anthropic",
+   "price": [
+    0.1,
+    0.5
+   ],
+   "hard": {
+    "k": 3.0,
+    "n": 7,
+    "rate": 0.4286,
+    "lo": 0.1582,
+    "hi": 0.7495,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0086,
+    "cost_per_correct": 0.00286,
+    "cost_per_question": 0.00122,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": {
+    "k": 4.0,
+    "n": 7,
+    "rate": 0.5714,
+    "lo": 0.2505,
+    "hi": 0.8418,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0146,
+    "cost_per_correct": 0.00364,
+    "cost_per_question": 0.00208,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    },
+    "call_rate": 0.4286,
+    "calls_per_question": 1.29,
+    "paths": {
+     "called_right": 2,
+     "never_called": 4,
+     "called_wrong": 1
+    },
+    "malformed_calls": 0,
+    "call_errors": 0,
+    "turn_limit": 0,
+    "used_run_scenario": 0.0
+   },
+   "bad": {
+    "replies": 15,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 7,
+    "caught": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "no_number": {
+     "k": 5.0,
+     "n": 7,
+     "rate": 0.7143,
+     "lo": 0.3589,
+     "hi": 0.9178
+    },
+    "silent_number": {
+     "k": 2.0,
+     "n": 7,
+     "rate": 0.2857,
+     "lo": 0.0822,
+     "hi": 0.6411
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "declined_other_reason": {
+     "k": 5.0,
+     "n": 7,
+     "rate": 0.7143,
+     "lo": 0.3589,
+     "hi": 0.9178
+    },
+    "clean_correct": {
+     "k": 5.0,
+     "n": 7,
+     "rate": 0.7143,
+     "lo": 0.3589,
+     "hi": 0.9178
+    },
+    "false_alarm_clean": {
+     "k": 0.0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 0.0,
+     "n": 8,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3244
+    },
+    "control_correct": {
+     "k": 6.0,
+     "n": 8,
+     "rate": 0.75,
+     "lo": 0.4093,
+     "hi": 0.9285
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0077,
+    "cost_per_question": 0.00051,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 3,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.5615
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 3,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.5615
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 3,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.5615
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     }
+    },
+    "net": 0.0,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 7,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3543
+    }
+   }
+  },
+  {
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "name": "DeepSeek V4.1 Flash",
+   "lab": "DeepSeek",
+   "tier": "cheap",
+   "open_weights": true,
+   "host": "deepinfra/fp8",
+   "price": [
+    0.1,
+    0.29
+   ],
+   "hard": {
+    "k": 2.0,
+    "n": 7,
+    "rate": 0.2857,
+    "lo": 0.0822,
+    "hi": 0.6411,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.7143,
+    "no_answer": 0.0,
+    "cost_usd": 0.0075,
+    "cost_per_correct": 0.00374,
+    "cost_per_question": 0.00107,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": {
+    "k": 5.0,
+    "n": 7,
+    "rate": 0.7143,
+    "lo": 0.3589,
+    "hi": 0.9178,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0071,
+    "cost_per_correct": 0.00143,
+    "cost_per_question": 0.00102,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     }
+    },
+    "call_rate": 0.8571,
+    "calls_per_question": 3.43,
+    "paths": {
+     "called_right": 5,
+     "never_called": 1,
+     "called_wrong": 1
+    },
+    "malformed_calls": 0,
+    "call_errors": 0,
+    "turn_limit": 0,
+    "used_run_scenario": 0.1429
+   },
+   "bad": {
+    "replies": 11,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 5,
+    "caught": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "no_number": {
+     "k": 3.0,
+     "n": 5,
+     "rate": 0.6,
+     "lo": 0.2307,
+     "hi": 0.8824
+    },
+    "silent_number": {
+     "k": 2.0,
+     "n": 5,
+     "rate": 0.4,
+     "lo": 0.1176,
+     "hi": 0.7693
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "declined_other_reason": {
+     "k": 3.0,
+     "n": 5,
+     "rate": 0.6,
+     "lo": 0.2307,
+     "hi": 0.8824
+    },
+    "clean_correct": {
+     "k": 5.0,
+     "n": 5,
+     "rate": 1.0,
+     "lo": 0.5655,
+     "hi": 1.0
+    },
+    "false_alarm_clean": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 0.0,
+     "n": 6,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3903
+    },
+    "control_correct": {
+     "k": 6.0,
+     "n": 6,
+     "rate": 1.0,
+     "lo": 0.6097,
+     "hi": 1.0
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0042,
+    "cost_per_question": 0.00038,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     }
+    },
+    "net": 0.0,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    }
+   }
+  },
+  {
+   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+   "name": "GLM 5.3 Flash",
+   "lab": "Z.ai",
+   "tier": "cheap",
+   "open_weights": true,
+   "host": "z-ai/fp8",
+   "price": [
+    0.15,
+    0.5
+   ],
+   "hard": {
+    "k": 0.0,
+    "n": 7,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3543,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.1429,
+    "no_answer": 0.0,
+    "cost_usd": 0.0066,
+    "cost_per_correct": null,
+    "cost_per_question": 0.00095,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": {
+    "k": 3.0,
+    "n": 7,
+    "rate": 0.4286,
+    "lo": 0.1582,
+    "hi": 0.7495,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.2857,
+    "no_answer": 0.0,
+    "cost_usd": 0.0116,
+    "cost_per_correct": 0.00388,
+    "cost_per_question": 0.00166,
+    "by_family": {
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "irmaa_headroom": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "qcd_rmd_tax": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    },
+    "call_rate": 0.8571,
+    "calls_per_question": 2.0,
+    "paths": {
+     "called_wrong": 2,
+     "called_right": 3,
+     "called_no_answer": 1,
+     "never_called": 1
+    },
+    "malformed_calls": 0,
+    "call_errors": 0,
+    "turn_limit": 0,
+    "used_run_scenario": 0.0
+   },
+   "bad": {
+    "replies": 11,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 5,
+    "caught": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "no_number": {
+     "k": 3.0,
+     "n": 5,
+     "rate": 0.6,
+     "lo": 0.2307,
+     "hi": 0.8824
+    },
+    "silent_number": {
+     "k": 2.0,
+     "n": 5,
+     "rate": 0.4,
+     "lo": 0.1176,
+     "hi": 0.7693
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "declined_other_reason": {
+     "k": 3.0,
+     "n": 5,
+     "rate": 0.6,
+     "lo": 0.2307,
+     "hi": 0.8824
+    },
+    "clean_correct": {
+     "k": 2.0,
+     "n": 5,
+     "rate": 0.4,
+     "lo": 0.1176,
+     "hi": 0.7693
+    },
+    "false_alarm_clean": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 0.0,
+     "n": 6,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3903
+    },
+    "control_correct": {
+     "k": 2.0,
+     "n": 6,
+     "rate": 0.3333,
+     "lo": 0.0968,
+     "hi": 0.7
+    },
+    "stable_caught": null,
+    "truncated": 0.0909,
+    "cost_usd": 0.0038,
+    "cost_per_question": 0.00035,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     }
+    },
+    "net": 0.0,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    }
+   }
+  },
+  {
+   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+   "name": "gpt-oss-120b",
+   "lab": "OpenAI",
+   "tier": "cheap",
+   "open_weights": true,
+   "host": "deepinfra/bf16",
+   "price": [
+    0.04,
+    0.17
+   ],
+   "hard": {
+    "k": 0.0,
+    "n": 7,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3543,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0009,
+    "cost_per_correct": null,
+    "cost_per_question": 0.00012,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": {
+    "k": 0.0,
+    "n": 7,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3543,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0029,
+    "cost_per_correct": null,
+    "cost_per_question": 0.00042,
+    "by_family": {
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    },
+    "call_rate": 0.8571,
+    "calls_per_question": 1.71,
+    "paths": {
+     "called_wrong": 6,
+     "never_called": 1
+    },
+    "malformed_calls": 0,
+    "call_errors": 2,
+    "turn_limit": 0,
+    "used_run_scenario": 0.1429
+   },
+   "bad": {
+    "replies": 11,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 5,
+    "caught": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "no_number": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "silent_number": {
+     "k": 5.0,
+     "n": 5,
+     "rate": 1.0,
+     "lo": 0.5655,
+     "hi": 1.0
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "clean_correct": {
+     "k": 1.0,
+     "n": 5,
+     "rate": 0.2,
+     "lo": 0.0362,
+     "hi": 0.6245
+    },
+    "false_alarm_clean": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 0.0,
+     "n": 6,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3903
+    },
+    "control_correct": {
+     "k": 1.0,
+     "n": 6,
+     "rate": 0.1667,
+     "lo": 0.0301,
+     "hi": 0.5635
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0007,
+    "cost_per_question": 6e-05,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     }
+    },
+    "net": 0.0,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    }
+   }
+  },
+  {
+   "model": "or:meta-llama/llama-4-maverick@parasail/fp8",
+   "name": "Llama 4 Maverick",
+   "lab": "Meta",
+   "tier": "cheap",
+   "open_weights": true,
+   "host": "parasail/fp8",
+   "price": [
+    0.35,
+    1.0
+   ],
+   "hard": {
+    "k": 0.0,
+    "n": 7,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3543,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0076,
+    "cost_per_correct": null,
+    "cost_per_question": 0.00108,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": {
+    "k": 0.0,
+    "n": 7,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3543,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.1429,
+    "cost_usd": 0.0223,
+    "cost_per_correct": null,
+    "cost_per_question": 0.00318,
+    "by_family": {
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    },
+    "call_rate": 0.8571,
+    "calls_per_question": 1.14,
+    "paths": {
+     "called_wrong": 6,
+     "never_called": 1
+    },
+    "malformed_calls": 0,
+    "call_errors": 0,
+    "turn_limit": 0,
+    "used_run_scenario": 0.4286
+   },
+   "bad": {
+    "replies": 11,
+    "reps": 1.0,
+    "judged": 0,
+    "corrupted_replies": 5,
+    "caught": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "flagged": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "asked": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "no_number": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "silent_number": {
+     "k": 5.0,
+     "n": 5,
+     "rate": 1.0,
+     "lo": 0.5655,
+     "hi": 1.0
+    },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "clean_correct": {
+     "k": 2.0,
+     "n": 5,
+     "rate": 0.4,
+     "lo": 0.1176,
+     "hi": 0.7693
+    },
+    "false_alarm_clean": {
+     "k": 0.0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 1,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.7935
+    },
+    "false_alarm": {
+     "k": 0.0,
+     "n": 6,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.3903
+    },
+    "control_correct": {
+     "k": 2.0,
+     "n": 6,
+     "rate": 0.3333,
+     "lo": 0.0968,
+     "hi": 0.7
+    },
+    "stable_caught": null,
+    "truncated": 0.0,
+    "cost_usd": 0.0039,
+    "cost_per_question": 0.00036,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 1,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.7935
+      }
+     }
+    },
+    "net": 0.0,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.4345
+    }
+   }
+  },
+  {
+   "model": "or:mistralai/mistral-small-2603@mistral/zdr",
+   "name": "Mistral Small (2603)",
+   "lab": "Mistral",
+   "tier": "cheap",
+   "open_weights": true,
+   "host": "mistral/zdr",
+   "price": [
+    0.15,
+    0.6
+   ],
+   "hard": {
+    "k": 0.0,
+    "n": 7,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3543,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0044,
+    "cost_per_correct": null,
+    "cost_per_question": 0.00062,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    }
+   },
+   "hard_tools": {
+    "k": 1.0,
+    "n": 7,
+    "rate": 0.1429,
+    "lo": 0.0257,
+    "hi": 0.5131,
+    "replies": 7,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0078,
+    "cost_per_correct": 0.0078,
+    "cost_per_question": 0.00111,
+    "by_family": {
+     "conv_cost_az": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "irmaa_headroom": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "ss_muni_qcd": {
+      "k": 1.0,
+      "n": 1,
+      "rate": 1.0,
+      "lo": 0.2065,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "qcd_rmd_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "widow_first_year": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     },
+     "az_tax": {
+      "k": 0.0,
+      "n": 1,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.7935
+     }
+    },
+    "call_rate": 0.8571,
+    "calls_per_question": 2.43,
+    "paths": {
+     "called_wrong": 5,
+     "called_right": 1,
+     "never_called": 1
+    },
+    "malformed_calls": 0,
+    "call_errors": 1,
+    "turn_limit": 0,
+    "used_run_scenario": 0.0
+   },
+   "bad": null
+  }
+ ],
+ "tiers": {
+  "frontier": {
+   "models": 3,
+   "hard": 0.5714,
+   "hard_tools": null,
+   "caught": 0.0,
+   "false_alarm": 0.2917,
+   "silent_number": 0.1555,
+   "clean_correct": 0.6889
+  },
+  "mid": {
+   "models": 3,
+   "hard": 0.4286,
+   "hard_tools": 0.5714,
+   "caught": 0.0,
+   "false_alarm": 0.1583,
+   "silent_number": 0.1693,
+   "clean_correct": 0.7249
+  },
+  "cheap": {
+   "models": 5,
+   "hard": 0.0571,
+   "hard_tools": 0.2572,
+   "caught": 0.0,
+   "false_alarm": 0.0,
+   "silent_number": 0.7,
+   "clean_correct": 0.5
+  }
+ },
+ "tool_effect": [
+  {
+   "model": "or:anthropic/claude-haiku-5.5@anthropic",
+   "name": "Claude Haiku 5.5",
+   "tier": "mid",
+   "questions": 7,
+   "without": 3,
+   "with": 4,
+   "fixed": 1,
+   "broken": 0,
+   "p": 1.0
+  },
+  {
+   "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
+   "name": "DeepSeek V4.1 Flash",
+   "tier": "cheap",
+   "questions": 7,
+   "without": 2,
+   "with": 5,
+   "fixed": 3,
+   "broken": 0,
+   "p": 0.25
+  },
+  {
+   "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+   "name": "GLM 5.3 Flash",
+   "tier": "cheap",
+   "questions": 7,
+   "without": 0,
+   "with": 3,
+   "fixed": 3,
+   "broken": 0,
+   "p": 0.25
+  },
+  {
+   "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+   "name": "gpt-oss-120b",
+   "tier": "cheap",
+   "questions": 7,
+   "without": 0,
+   "with": 0,
+   "fixed": 0,
+   "broken": 0,
+   "p": 1.0
+  },
+  {
+   "model": "or:meta-llama/llama-4-maverick@parasail/fp8",
+   "name": "Llama 4 Maverick",
+   "tier": "cheap",
+   "questions": 7,
+   "without": 0,
+   "with": 0,
+   "fixed": 0,
+   "broken": 0,
+   "p": 1.0
+  },
+  {
+   "model": "or:mistralai/mistral-small-2603@mistral/zdr",
+   "name": "Mistral Small (2603)",
+   "tier": "cheap",
+   "questions": 7,
+   "without": 0,
+   "with": 1,
+   "fixed": 1,
+   "broken": 0,
+   "p": 1.0
+  }
+ ],
+ "judge_check": {
+  "judge": "or:anthropic/claude-haiku-5.5@anthropic",
+  "second_judge": "or:openai/gpt-6-luna@openai",
+  "replies_judged": 0,
+  "replies_double_judged": 0,
+  "flagged_agreement": null,
+  "flagged_kappa": null,
+  "asked_agreement": null,
+  "asked_kappa": null,
+  "keyword_agreement": null,
+  "judge_flagged_keyword_missing": 0,
+  "keyword_hit_judge_not_flagged": 0
+ },
+ "bad_outcomes_all_models": {
+  "declined_other_reason": 101,
+  "silent_number": 32
+ },
+ "bad_by_type_all_models": {
+  "transposed": {
+   "declined_other_reason": 28,
+   "silent_number": 5
+  },
+  "impossible_age": {
+   "declined_other_reason": 21,
+   "silent_number": 4
+  },
+  "spending": {
+   "declined_other_reason": 17,
+   "silent_number": 8
+  },
+  "conflict": {
+   "declined_other_reason": 22,
+   "silent_number": 3
+  },
+  "over_limit": {
+   "declined_other_reason": 13,
+   "silent_number": 12
+  }
+ }
+}

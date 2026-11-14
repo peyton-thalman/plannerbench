@@ -1,0 +1,11 @@
+{
+ "set": "bad",
+ "tools": null,
+ "effort": "low",
+ "max_tokens": 4000,
+ "models": [
+  "or:mistralai/mistral-large-4-0@mistral/zdr",
+  "or:mistralai/mistral-small-2603@mistral/zdr"
+ ],
+ "routing": "data_collection=deny; @host pins only=[host], allow_fallbacks=false; one user message, no system prompt"
+}

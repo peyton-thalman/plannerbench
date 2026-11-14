@@ -1,0 +1,17 @@
+{
+ "_note": "PlannerBench v2 lineup, checked against openrouter.ai/api/v1/models/<id>/endpoints on 2026-11-14. Each model is pinned to one host: the maker's own endpoint where there is one (its half-price 'flex' queue when offered: same model, slower), else a full-precision host. Tiers follow list price and how the maker positions the model. $ per million tokens in/out at that host on that date.",
+ "models": [
+  { "id": "or:anthropic/claude-sonnet-5.5@anthropic", "name": "Claude Sonnet 5.5", "lab": "Anthropic", "tier": "frontier", "open_weights": false, "price": [  2.0,  10.0 ] },
+  { "id": "or:openai/gpt-6.1-sol@openai/flex", "name": "GPT-6.1 Sol", "lab": "OpenAI", "tier": "frontier", "open_weights": false, "price": [  1.0,  5.0 ] },
+  { "id": "or:google/gemini-3.1-pro-preview@google-ai-studio/flex", "name": "Gemini 3.1 Pro", "lab": "Google", "tier": "frontier", "open_weights": false, "price": [  1.0,  6.0 ] },
+  { "id": "or:openai/gpt-6.1-terra@openai/flex", "name": "GPT-6.1 Terra", "lab": "OpenAI", "tier": "mid", "open_weights": false, "price": [  0.5,  2.5 ] },
+  { "id": "or:google/gemini-3.8-flash@google-ai-studio/flex", "name": "Gemini 3.8 Flash", "lab": "Google", "tier": "mid", "open_weights": false, "price": [  0.38,  1.88 ] },
+  { "id": "or:anthropic/claude-haiku-5.5@anthropic", "name": "Claude Haiku 5.5", "lab": "Anthropic", "tier": "mid", "open_weights": false, "price": [  0.1,  0.5 ] },
+  { "id": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8", "name": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "tier": "cheap", "open_weights": true, "price": [  0.1,  0.29 ] },
+  { "id": "or:z-ai/glm-5.3-flash@z-ai/fp8", "name": "GLM 5.3 Flash", "lab": "Z.ai", "tier": "cheap", "open_weights": true, "price": [  0.15,  0.5 ] },
+  { "id": "or:openai/gpt-oss-120b@deepinfra/bf16", "name": "gpt-oss-120b", "lab": "OpenAI", "tier": "cheap", "open_weights": true, "price": [  0.04,  0.17 ] },
+  { "id": "or:meta-llama/llama-4-maverick@parasail/fp8", "name": "Llama 4 Maverick", "lab": "Meta", "tier": "cheap", "open_weights": true, "price": [  0.35,  1.0 ] },
+  { "id": "or:mistralai/mistral-small-2603@mistral/zdr", "name": "Mistral Small (2603)", "lab": "Mistral", "tier": "cheap", "open_weights": true, "price": [  0.15,  0.6 ], "reasoning": "off" }
+ ],
+ "_dropped": "Mistral Large 4 (or:mistralai/mistral-large-4-0@mistral/zdr): in the smoke test it spent the whole 4,000-token reply limit thinking on 8 of 11 questions at effort low ($0.08 for 11 questions), and its API refuses reasoning off. Dropped for cost. Mistral Small (2603) runs with reasoning off for the same reason (7 of 11 truncated with it on)."
+}
