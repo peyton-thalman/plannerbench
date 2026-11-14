@@ -77,7 +77,6 @@ code { font-family: var(--mono); font-size: 0.875em; }
 
 /* Home hero */
 .hero { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 5vw, 4rem); display: grid; gap: 1.5rem; }
-.hero h1 em { font-style: italic; color: var(--accent); }
 .thesis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(1.5rem, 4vw, 2.5rem); border-top: 1px solid var(--ink); }
 .figure { display: grid; gap: 0.5rem; align-content: start; padding: 1.25rem 1.5rem 0 0; }
 .figure + .figure { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
@@ -421,7 +420,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline-color: va
 .btn:hover { background: var(--band); border-color: var(--ink); }
 .btn.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
 .btn.primary:hover { background: #2c3038; }
-.hero h1 em { color: inherit; }
 .tldr { border: 1px solid var(--rule); }
 .node:hover { transform: none; }
 .next:hover, .node:hover { border-color: var(--ink); }

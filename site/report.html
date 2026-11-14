@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles.css?v=16">
 </head>
 <body data-page="report">
 <header class="nav">
@@ -40,7 +40,7 @@
       .report blockquote p + p { margin-top: 0.6rem; }
       .report a { color: var(--accent); }
     </style>
-<p><em>PlannerBench v2 · 2026-11-14 · 11 models, 112 new items, 2,772 graded replies, $4.50 of API spend</em></p>
+<p>PlannerBench v2 · 2026-11-14 · 11 models, 112 new items, 2,772 graded replies, $4.50 of API spend</p>
 <p><strong>The finding.</strong> I gave 11 models 30 client intake notes with one thing wrong in each: two digits swapped in a balance, a birth year that makes the client 14, spending ten times what the household owns, "married" next to "filing single", an IRA contribution over the legal limit. Three of the five cheap open-weight models returned a confident number on 81–93% of them and caught 1–3%. The two best models, Claude Sonnet 5.5 and GPT-6.1 Sol, caught 73% with almost no false alarms. No model caught everything, and every model was worst at the same kind of error: a plausible amount that is over a legal limit.</p>
 <p>The second finding is about tools. Giving a cheap model the Planning Engine took DeepSeek V4.1 Flash from 29% to 79% on hard questions, past Claude Sonnet 5.5 working alone (62%), at about a fifteenth of the cost per right answer. The same tools did nothing for three other cheap models, which called them and still got the answer wrong.</p>
 <p><img src="charts/catch_vs_false_alarm.svg" alt="Catch rate against false-alarm rate" style="width:100%;height:auto"></p>
