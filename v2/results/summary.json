@@ -5,13 +5,15 @@
   "max_tokens": 4000
  },
  "spend": {
-  "spent_usd": 1.30303,
+  "spent_usd": 4.51016,
   "by_run": {
    "smoke-bad": 0.257655,
    "smoke-mistral": 0.001605,
-   "hard": 0.28595,
-   "hard-tools": 0.066338,
-   "bad": 0.691484
+   "hard": 1.979881,
+   "hard-tools": 0.702298,
+   "bad": 1.483521,
+   "judge": 0.073034,
+   "judge2": 0.012153
   }
  },
  "items": {
@@ -33,68 +35,68 @@
     10.0
    ],
    "hard": {
-    "k": 3.0,
-    "n": 7,
-    "rate": 0.4286,
-    "lo": 0.1582,
-    "hi": 0.7495,
-    "replies": 7,
+    "k": 26.0,
+    "n": 42,
+    "rate": 0.619,
+    "lo": 0.4681,
+    "hi": 0.75,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.072,
-    "cost_per_correct": 0.02399,
-    "cost_per_question": 0.01028,
+    "cost_usd": 0.4507,
+    "cost_per_correct": 0.01733,
+    "cost_per_question": 0.01073,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "conv_cost_az": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "widow_first_year": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
@@ -102,56 +104,56 @@
    "bad": {
     "replies": 70,
     "reps": 1.0,
-    "judged": 0,
+    "judged": 30,
     "corrupted_replies": 30,
     "caught": {
-     "k": 0.0,
+     "k": 22.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7333,
+     "lo": 0.5555,
+     "hi": 0.8582
     },
     "flagged": {
-     "k": 0.0,
+     "k": 28.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
     },
     "asked": {
-     "k": 0.0,
+     "k": 24.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.8,
+     "lo": 0.6269,
+     "hi": 0.905
     },
     "no_number": {
-     "k": 23.0,
+     "k": 22.0,
      "n": 30,
-     "rate": 0.7667,
-     "lo": 0.5907,
-     "hi": 0.8821
+     "rate": 0.7333,
+     "lo": 0.5555,
+     "hi": 0.8582
     },
     "silent_number": {
-     "k": 7.0,
+     "k": 2.0,
      "n": 30,
-     "rate": 0.2333,
-     "lo": 0.1179,
-     "hi": 0.4093
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
     },
     "flagged_but_answered": {
+     "k": 6.0,
+     "n": 30,
+     "rate": 0.2,
+     "lo": 0.095,
+     "hi": 0.3731
+    },
+    "declined_other_reason": {
      "k": 0.0,
      "n": 30,
      "rate": 0.0,
      "lo": 0.0,
      "hi": 0.1135
-    },
-    "declined_other_reason": {
-     "k": 23.0,
-     "n": 30,
-     "rate": 0.7667,
-     "lo": 0.5907,
-     "hi": 0.8821
     },
     "clean_correct": {
      "k": 28.0,
@@ -190,23 +192,23 @@
     },
     "stable_caught": null,
     "truncated": 0.0,
-    "cost_usd": 0.3878,
-    "cost_per_question": 0.00554,
+    "cost_usd": 0.3854,
+    "cost_per_question": 0.00551,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
+       "k": 5.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "flagged": {
-       "k": 0.0,
+       "k": 5.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
@@ -218,18 +220,18 @@
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -241,18 +243,18 @@
      },
      "spending": {
       "caught": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -264,18 +266,18 @@
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
+       "k": 4.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -287,18 +289,18 @@
      },
      "over_limit": {
       "caught": {
-       "k": 0.0,
+       "k": 1.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "flagged": {
-       "k": 0.0,
+       "k": 5.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
@@ -309,13 +311,38 @@
       }
      }
     },
-    "net": 0.0,
+    "decline_reasons": {},
+    "no_law": {
+     "caught": {
+      "k": 15.0,
+      "n": 15,
+      "rate": 1.0,
+      "lo": 0.7961,
+      "hi": 1.0
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 19.0,
+      "n": 20,
+      "rate": 0.95,
+      "lo": 0.7639,
+      "hi": 0.9911
+     }
+    },
+    "net_no_law": 1.0,
+    "net": 0.7333,
     "pairs_both_right": {
-     "k": 0,
+     "k": 21,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7,
+     "lo": 0.5212,
+     "hi": 0.8334
     }
    }
   },
@@ -331,97 +358,173 @@
     5.0
    ],
    "hard": {
-    "k": 7.0,
-    "n": 7,
-    "rate": 1.0,
-    "lo": 0.6457,
-    "hi": 1.0,
-    "replies": 7,
+    "k": 41.0,
+    "n": 42,
+    "rate": 0.9762,
+    "lo": 0.8768,
+    "hi": 0.9958,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.0216,
-    "cost_per_correct": 0.00308,
-    "cost_per_question": 0.00308,
+    "cost_usd": 0.1319,
+    "cost_per_correct": 0.00322,
+    "cost_per_question": 0.00314,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "conv_cost_az": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "inherited_rmd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "widow_first_year": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "az_tax": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      }
     }
    },
-   "hard_tools": null,
+   "hard_tools": {
+    "k": 40.0,
+    "n": 42,
+    "rate": 0.9524,
+    "lo": 0.8421,
+    "hi": 0.9868,
+    "replies": 42,
+    "reps": 1.0,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.1275,
+    "cost_per_correct": 0.00319,
+    "cost_per_question": 0.00304,
+    "by_family": {
+     "ss_muni_qcd": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "irmaa_headroom": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "qcd_rmd_tax": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "az_tax": {
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
+     }
+    },
+    "call_rate": 0.7857,
+    "calls_per_question": 1.62,
+    "paths": {
+     "called_right": 31,
+     "never_called": 9,
+     "called_wrong": 2
+    },
+    "malformed_calls": 0,
+    "call_errors": 0,
+    "turn_limit": 0,
+    "used_run_scenario": 0.0952
+   },
    "bad": {
     "replies": 70,
     "reps": 1.0,
-    "judged": 0,
+    "judged": 30,
     "corrupted_replies": 30,
     "caught": {
-     "k": 0.0,
+     "k": 22.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7333,
+     "lo": 0.5555,
+     "hi": 0.8582
     },
     "flagged": {
-     "k": 0.0,
+     "k": 28.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
     },
     "asked": {
-     "k": 0.0,
+     "k": 28.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
     },
     "no_number": {
      "k": 24.0,
@@ -431,80 +534,80 @@
      "hi": 0.905
     },
     "silent_number": {
-     "k": 6.0,
-     "n": 30,
-     "rate": 0.2,
-     "lo": 0.095,
-     "hi": 0.3731
-    },
-    "flagged_but_answered": {
      "k": 0.0,
      "n": 30,
      "rate": 0.0,
      "lo": 0.0,
      "hi": 0.1135
     },
-    "declined_other_reason": {
-     "k": 24.0,
+    "flagged_but_answered": {
+     "k": 6.0,
      "n": 30,
-     "rate": 0.8,
-     "lo": 0.6269,
-     "hi": 0.905
+     "rate": 0.2,
+     "lo": 0.095,
+     "hi": 0.3731
+    },
+    "declined_other_reason": {
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
     },
     "clean_correct": {
-     "k": 25.0,
+     "k": 30.0,
      "n": 30,
-     "rate": 0.8333,
-     "lo": 0.6644,
-     "hi": 0.9266
+     "rate": 1.0,
+     "lo": 0.8865,
+     "hi": 1.0
     },
     "false_alarm_clean": {
-     "k": 5.0,
+     "k": 0.0,
      "n": 30,
-     "rate": 0.1667,
-     "lo": 0.0734,
-     "hi": 0.3356
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
     },
     "false_alarm_odd": {
-     "k": 3.0,
+     "k": 1.0,
      "n": 10,
-     "rate": 0.3,
-     "lo": 0.1078,
-     "hi": 0.6032
+     "rate": 0.1,
+     "lo": 0.0179,
+     "hi": 0.4042
     },
     "false_alarm": {
-     "k": 8.0,
+     "k": 1.0,
      "n": 40,
-     "rate": 0.2,
-     "lo": 0.105,
-     "hi": 0.3476
+     "rate": 0.025,
+     "lo": 0.0044,
+     "hi": 0.1288
     },
     "control_correct": {
-     "k": 32.0,
+     "k": 39.0,
      "n": 40,
-     "rate": 0.8,
-     "lo": 0.6524,
-     "hi": 0.895
+     "rate": 0.975,
+     "lo": 0.8712,
+     "hi": 0.9956
     },
     "stable_caught": null,
     "truncated": 0.0,
-    "cost_usd": 0.0924,
-    "cost_per_question": 0.00132,
+    "cost_usd": 0.087,
+    "cost_per_question": 0.00124,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -516,18 +619,18 @@
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
+       "k": 4.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "flagged": {
-       "k": 0.0,
+       "k": 4.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "false_alarm": {
        "k": 0.0,
@@ -539,18 +642,18 @@
      },
      "spending": {
       "caught": {
-       "k": 0.0,
+       "k": 2.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -562,41 +665,41 @@
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "false_alarm": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
-      },
-      "false_alarm": {
-       "k": 5.0,
-       "n": 6,
-       "rate": 0.8333,
-       "lo": 0.4365,
-       "hi": 0.9699
       }
      },
      "over_limit": {
       "caught": {
-       "k": 0.0,
+       "k": 4.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -607,13 +710,40 @@
       }
      }
     },
-    "net": -0.2,
+    "decline_reasons": {
+     "wants_more_facts": 1
+    },
+    "no_law": {
+     "caught": {
+      "k": 9.0,
+      "n": 15,
+      "rate": 0.6,
+      "lo": 0.3575,
+      "hi": 0.8018
+     },
+     "false_alarm": {
+      "k": 1.0,
+      "n": 20,
+      "rate": 0.05,
+      "lo": 0.0089,
+      "hi": 0.2361
+     },
+     "control_correct": {
+      "k": 19.0,
+      "n": 20,
+      "rate": 0.95,
+      "lo": 0.7639,
+      "hi": 0.9911
+     }
+    },
+    "net_no_law": 0.55,
+    "net": 0.7083,
     "pairs_both_right": {
-     "k": 0,
+     "k": 22,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7333,
+     "lo": 0.5555,
+     "hi": 0.8582
     }
    }
   },
@@ -629,68 +759,68 @@
     6.0
    ],
    "hard": {
-    "k": 2.0,
-    "n": 7,
+    "k": 12.0,
+    "n": 42,
     "rate": 0.2857,
-    "lo": 0.0822,
-    "hi": 0.6411,
-    "replies": 7,
+    "lo": 0.1717,
+    "hi": 0.4357,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.1035,
-    "cost_per_correct": 0.05176,
-    "cost_per_question": 0.01479,
+    "cost_usd": 0.6161,
+    "cost_per_correct": 0.05135,
+    "cost_per_question": 0.01467,
     "by_family": {
      "irmaa_headroom": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "inherited_rmd": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
@@ -698,28 +828,28 @@
    "bad": {
     "replies": 70,
     "reps": 1.0,
-    "judged": 0,
+    "judged": 30,
     "corrupted_replies": 30,
     "caught": {
-     "k": 0.0,
+     "k": 21.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7,
+     "lo": 0.5212,
+     "hi": 0.8334
     },
     "flagged": {
-     "k": 0.0,
+     "k": 21.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7,
+     "lo": 0.5212,
+     "hi": 0.8334
     },
     "asked": {
-     "k": 0.0,
+     "k": 23.0,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.7667,
+     "lo": 0.5907,
+     "hi": 0.8821
     },
     "no_number": {
      "k": 29.0,
@@ -743,11 +873,11 @@
      "hi": 0.1135
     },
     "declined_other_reason": {
-     "k": 29.0,
+     "k": 8.0,
      "n": 30,
-     "rate": 0.9667,
-     "lo": 0.8333,
-     "hi": 0.9941
+     "rate": 0.2667,
+     "lo": 0.1418,
+     "hi": 0.4445
     },
     "clean_correct": {
      "k": 9.0,
@@ -786,23 +916,23 @@
     },
     "stable_caught": null,
     "truncated": 0.0,
-    "cost_usd": 0.3204,
-    "cost_per_question": 0.00458,
+    "cost_usd": 0.3243,
+    "cost_per_question": 0.00463,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
+       "k": 4.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "flagged": {
-       "k": 0.0,
+       "k": 4.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "false_alarm": {
        "k": 3.0,
@@ -814,18 +944,18 @@
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
+       "k": 5.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "flagged": {
-       "k": 0.0,
+       "k": 5.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
@@ -837,18 +967,18 @@
      },
      "spending": {
       "caught": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 6.0,
@@ -860,18 +990,18 @@
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.3903
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 6.0,
@@ -905,13 +1035,42 @@
       }
      }
     },
-    "net": -0.675,
+    "decline_reasons": {
+     "wants_more_facts": 6,
+     "lacks_rules": 20,
+     "other": 1
+    },
+    "no_law": {
+     "caught": {
+      "k": 14.0,
+      "n": 15,
+      "rate": 0.9333,
+      "lo": 0.7018,
+      "hi": 0.9881
+     },
+     "false_alarm": {
+      "k": 7.0,
+      "n": 20,
+      "rate": 0.35,
+      "lo": 0.1812,
+      "hi": 0.5671
+     },
+     "control_correct": {
+      "k": 13.0,
+      "n": 20,
+      "rate": 0.65,
+      "lo": 0.4329,
+      "hi": 0.8188
+     }
+    },
+    "net_no_law": 0.5833,
+    "net": 0.025,
     "pairs_both_right": {
-     "k": 0,
+     "k": 8,
      "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+     "rate": 0.2667,
+     "lo": 0.1418,
+     "hi": 0.4445
     }
    }
   },
@@ -927,289 +1086,392 @@
     2.5
    ],
    "hard": {
-    "k": 5.0,
-    "n": 7,
-    "rate": 0.7143,
-    "lo": 0.3589,
-    "hi": 0.9178,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
+    "k": 33.5,
+    "n": 42,
+    "rate": 0.7976,
+    "lo": 0.6537,
+    "hi": 0.8916,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 0.8809523809523809,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.0123,
-    "cost_per_correct": 0.00245,
-    "cost_per_question": 0.00175,
+    "cost_usd": 0.1269,
+    "cost_per_correct": 0.00189,
+    "cost_per_question": 0.00151,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "conv_cost_az": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 4.5,
+      "n": 6,
+      "rate": 0.75,
+      "lo": 0.3648,
+      "hi": 0.94
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "inherited_rmd": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.5,
+      "n": 6,
+      "rate": 0.9167,
+      "lo": 0.5168,
+      "hi": 0.9912
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.5,
+      "n": 6,
+      "rate": 0.9167,
+      "lo": 0.5168,
+      "hi": 0.9912
      },
      "widow_first_year": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
-   "hard_tools": null,
-   "bad": {
-    "replies": 19,
+   "hard_tools": {
+    "k": 36.0,
+    "n": 42,
+    "rate": 0.8571,
+    "lo": 0.7216,
+    "hi": 0.9328,
+    "replies": 42,
     "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 9,
+    "stable_items": null,
+    "truncated": 0.0,
+    "no_answer": 0.0,
+    "cost_usd": 0.0646,
+    "cost_per_correct": 0.00179,
+    "cost_per_question": 0.00154,
+    "by_family": {
+     "irmaa_headroom": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "conv_cost_az": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "ss_muni_qcd": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "inherited_rmd": {
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
+     },
+     "qcd_rmd_tax": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "widow_first_year": {
+      "k": 6.0,
+      "n": 6,
+      "rate": 1.0,
+      "lo": 0.6097,
+      "hi": 1.0
+     },
+     "az_tax": {
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
+     }
+    },
+    "call_rate": 0.8095,
+    "calls_per_question": 2.1,
+    "paths": {
+     "called_right": 29,
+     "never_called": 8,
+     "called_wrong": 5
+    },
+    "malformed_calls": 0,
+    "call_errors": 0,
+    "turn_limit": 0,
+    "used_run_scenario": 0.2619
+   },
+   "bad": {
+    "replies": 140,
+    "reps": 2.0,
+    "judged": 60,
+    "corrupted_replies": 60,
     "caught": {
-     "k": 0.0,
-     "n": 9,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.2992
+     "k": 18.5,
+     "n": 30,
+     "rate": 0.6167,
+     "lo": 0.4391,
+     "hi": 0.7678
     },
     "flagged": {
-     "k": 0.0,
-     "n": 9,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.2992
+     "k": 23.0,
+     "n": 30,
+     "rate": 0.7667,
+     "lo": 0.5907,
+     "hi": 0.8821
     },
     "asked": {
-     "k": 0.0,
-     "n": 9,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.2992
+     "k": 21.0,
+     "n": 30,
+     "rate": 0.7,
+     "lo": 0.5212,
+     "hi": 0.8334
     },
     "no_number": {
-     "k": 7.0,
-     "n": 9,
-     "rate": 0.7778,
-     "lo": 0.4526,
-     "hi": 0.9368
+     "k": 20.0,
+     "n": 30,
+     "rate": 0.6667,
+     "lo": 0.4878,
+     "hi": 0.8077
     },
     "silent_number": {
-     "k": 2.0,
-     "n": 9,
-     "rate": 0.2222,
-     "lo": 0.0632,
-     "hi": 0.5474
+     "k": 5.5,
+     "n": 30,
+     "rate": 0.1833,
+     "lo": 0.084,
+     "hi": 0.3545
     },
     "flagged_but_answered": {
-     "k": 0.0,
-     "n": 9,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.2992
+     "k": 4.5,
+     "n": 30,
+     "rate": 0.15,
+     "lo": 0.063,
+     "hi": 0.3164
     },
     "declined_other_reason": {
-     "k": 7.0,
-     "n": 9,
-     "rate": 0.7778,
-     "lo": 0.4526,
-     "hi": 0.9368
+     "k": 1.5,
+     "n": 30,
+     "rate": 0.05,
+     "lo": 0.0116,
+     "hi": 0.1905
     },
     "clean_correct": {
-     "k": 8.0,
-     "n": 9,
-     "rate": 0.8889,
-     "lo": 0.565,
-     "hi": 0.9801
+     "k": 29.0,
+     "n": 30,
+     "rate": 0.9667,
+     "lo": 0.8333,
+     "hi": 0.9941
     },
     "false_alarm_clean": {
-     "k": 1.0,
-     "n": 9,
-     "rate": 0.1111,
-     "lo": 0.0199,
-     "hi": 0.435
+     "k": 0.5,
+     "n": 30,
+     "rate": 0.0167,
+     "lo": 0.0017,
+     "hi": 0.1413
     },
     "false_alarm_odd": {
-     "k": 0.0,
-     "n": 1,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.7935
+     "k": 0.5,
+     "n": 10,
+     "rate": 0.05,
+     "lo": 0.0052,
+     "hi": 0.3445
     },
     "false_alarm": {
      "k": 1.0,
-     "n": 10,
-     "rate": 0.1,
-     "lo": 0.0179,
-     "hi": 0.4042
+     "n": 40,
+     "rate": 0.025,
+     "lo": 0.0044,
+     "hi": 0.1288
     },
     "control_correct": {
-     "k": 9.0,
-     "n": 10,
-     "rate": 0.9,
-     "lo": 0.5958,
-     "hi": 0.9821
+     "k": 38.0,
+     "n": 40,
+     "rate": 0.95,
+     "lo": 0.835,
+     "hi": 0.9862
     },
-    "stable_caught": null,
+    "stable_caught": 0.9,
     "truncated": 0.0,
-    "cost_usd": 0.0117,
-    "cost_per_question": 0.00062,
+    "cost_usd": 0.099,
+    "cost_per_question": 0.00071,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
-       "n": 5,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.4345
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 5,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.4345
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
-       "k": 0.0,
-       "n": 5,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.4345
+       "k": 0.5,
+       "n": 6,
+       "rate": 0.0833,
+       "lo": 0.0088,
+       "hi": 0.4832
       }
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.5,
+       "n": 6,
+       "rate": 0.75,
+       "lo": 0.3648,
+       "hi": 0.94
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.5,
+       "n": 6,
+       "rate": 0.75,
+       "lo": 0.3648,
+       "hi": 0.94
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 1.5,
+       "n": 6,
+       "rate": 0.25,
+       "lo": 0.06,
+       "hi": 0.6352
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
-       "k": 1.0,
-       "n": 1,
-       "rate": 1.0,
-       "lo": 0.2065,
-       "hi": 1.0
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       }
      },
      "over_limit": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 2.0,
+       "n": 6,
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      }
     },
-    "net": -0.1,
+    "decline_reasons": {
+     "wants_more_facts": 2
+    },
+    "no_law": {
+     "caught": {
+      "k": 7.5,
+      "n": 15,
+      "rate": 0.5,
+      "lo": 0.2742,
+      "hi": 0.7258
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 19.5,
+      "n": 20,
+      "rate": 0.975,
+      "lo": 0.7995,
+      "hi": 0.9974
+     }
+    },
+    "net_no_law": 0.5,
+    "net": 0.5917,
     "pairs_both_right": {
-     "k": 0,
-     "n": 9,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.2992
+     "k": 35,
+     "n": 60,
+     "rate": 0.5833,
+     "lo": 0.4573,
+     "hi": 0.6994
     }
    }
   },
@@ -1225,289 +1487,317 @@
     1.88
    ],
    "hard": {
-    "k": 1.0,
-    "n": 7,
-    "rate": 0.1429,
-    "lo": 0.0257,
-    "hi": 0.5131,
-    "replies": 7,
+    "k": 12.0,
+    "n": 42,
+    "rate": 0.2857,
+    "lo": 0.1717,
+    "hi": 0.4357,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
-    "truncated": 0.4286,
+    "truncated": 0.3571,
     "no_answer": 0.0,
-    "cost_usd": 0.0412,
-    "cost_per_correct": 0.04117,
-    "cost_per_question": 0.00588,
+    "cost_usd": 0.2336,
+    "cost_per_correct": 0.01947,
+    "cost_per_question": 0.00556,
     "by_family": {
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "qcd_rmd_tax": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
    "hard_tools": null,
    "bad": {
-    "replies": 15,
-    "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 7,
+    "replies": 140,
+    "reps": 2.0,
+    "judged": 60,
+    "corrupted_replies": 60,
     "caught": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 27.5,
+     "n": 30,
+     "rate": 0.9167,
+     "lo": 0.7649,
+     "hi": 0.9738
     },
     "flagged": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 27.5,
+     "n": 30,
+     "rate": 0.9167,
+     "lo": 0.7649,
+     "hi": 0.9738
     },
     "asked": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 27.0,
+     "n": 30,
+     "rate": 0.9,
+     "lo": 0.7438,
+     "hi": 0.9654
     },
     "no_number": {
-     "k": 7.0,
-     "n": 7,
+     "k": 30.0,
+     "n": 30,
      "rate": 1.0,
-     "lo": 0.6457,
+     "lo": 0.8865,
      "hi": 1.0
     },
     "silent_number": {
      "k": 0.0,
-     "n": 7,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.3543
+     "hi": 0.1135
     },
     "flagged_but_answered": {
      "k": 0.0,
-     "n": 7,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.3543
+     "hi": 0.1135
     },
     "declined_other_reason": {
-     "k": 7.0,
-     "n": 7,
-     "rate": 1.0,
-     "lo": 0.6457,
-     "hi": 1.0
+     "k": 2.5,
+     "n": 30,
+     "rate": 0.0833,
+     "lo": 0.0262,
+     "hi": 0.2351
     },
     "clean_correct": {
-     "k": 4.0,
-     "n": 7,
-     "rate": 0.5714,
-     "lo": 0.2505,
-     "hi": 0.8418
+     "k": 14.0,
+     "n": 30,
+     "rate": 0.4667,
+     "lo": 0.3023,
+     "hi": 0.6386
     },
     "false_alarm_clean": {
-     "k": 3.0,
-     "n": 7,
-     "rate": 0.4286,
-     "lo": 0.1582,
-     "hi": 0.7495
+     "k": 15.0,
+     "n": 30,
+     "rate": 0.5,
+     "lo": 0.3315,
+     "hi": 0.6685
     },
     "false_alarm_odd": {
-     "k": 0.0,
-     "n": 1,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.7935
+     "k": 5.0,
+     "n": 10,
+     "rate": 0.5,
+     "lo": 0.2366,
+     "hi": 0.7634
     },
     "false_alarm": {
-     "k": 3.0,
-     "n": 8,
-     "rate": 0.375,
-     "lo": 0.1368,
-     "hi": 0.6943
+     "k": 20.0,
+     "n": 40,
+     "rate": 0.5,
+     "lo": 0.352,
+     "hi": 0.648
     },
     "control_correct": {
-     "k": 5.0,
-     "n": 8,
-     "rate": 0.625,
-     "lo": 0.3057,
-     "hi": 0.8632
+     "k": 19.0,
+     "n": 40,
+     "rate": 0.475,
+     "lo": 0.3294,
+     "hi": 0.625
     },
-    "stable_caught": null,
+    "stable_caught": 0.9666666666666667,
     "truncated": 0.0,
-    "cost_usd": 0.0162,
+    "cost_usd": 0.1515,
     "cost_per_question": 0.00108,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
-       "n": 3,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.5615
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "flagged": {
-       "k": 0.0,
-       "n": 3,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.5615
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
-       "k": 1.0,
-       "n": 3,
-       "rate": 0.3333,
-       "lo": 0.0615,
-       "hi": 0.7923
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
       }
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
-       "k": 1.0,
-       "n": 1,
+       "k": 6.0,
+       "n": 6,
        "rate": 1.0,
-       "lo": 0.2065,
+       "lo": 0.6097,
        "hi": 1.0
       }
      },
      "over_limit": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.5,
+       "n": 6,
+       "rate": 0.75,
+       "lo": 0.3648,
+       "hi": 0.94
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.5,
+       "n": 6,
+       "rate": 0.75,
+       "lo": 0.3648,
+       "hi": 0.94
       },
       "false_alarm": {
-       "k": 1.0,
-       "n": 1,
+       "k": 6.0,
+       "n": 6,
        "rate": 1.0,
-       "lo": 0.2065,
+       "lo": 0.6097,
        "hi": 1.0
       }
      }
     },
-    "net": -0.375,
+    "decline_reasons": {
+     "data_problem": 6,
+     "lacks_rules": 34
+    },
+    "no_law": {
+     "caught": {
+      "k": 15.0,
+      "n": 15,
+      "rate": 1.0,
+      "lo": 0.7961,
+      "hi": 1.0
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 19.0,
+      "n": 20,
+      "rate": 0.95,
+      "lo": 0.7639,
+      "hi": 0.9911
+     }
+    },
+    "net_no_law": 1.0,
+    "net": 0.4167,
     "pairs_both_right": {
-     "k": 0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 28,
+     "n": 60,
+     "rate": 0.4667,
+     "lo": 0.3463,
+     "hi": 0.5911
     }
    }
   },
@@ -1523,365 +1813,390 @@
     0.5
    ],
    "hard": {
-    "k": 3.0,
-    "n": 7,
-    "rate": 0.4286,
-    "lo": 0.1582,
-    "hi": 0.7495,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
-    "truncated": 0.0,
+    "k": 22.0,
+    "n": 42,
+    "rate": 0.5238,
+    "lo": 0.3772,
+    "hi": 0.6664,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 0.8095238095238095,
+    "truncated": 0.0238,
     "no_answer": 0.0,
-    "cost_usd": 0.0086,
-    "cost_per_correct": 0.00286,
-    "cost_per_question": 0.00122,
+    "cost_usd": 0.0971,
+    "cost_per_correct": 0.00221,
+    "cost_per_question": 0.00116,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "conv_cost_az": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 0.5,
+      "n": 6,
+      "rate": 0.0833,
+      "lo": 0.0088,
+      "hi": 0.4832
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.5,
+      "n": 6,
+      "rate": 0.9167,
+      "lo": 0.5168,
+      "hi": 0.9912
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "widow_first_year": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
    "hard_tools": {
-    "k": 4.0,
-    "n": 7,
-    "rate": 0.5714,
-    "lo": 0.2505,
-    "hi": 0.8418,
-    "replies": 7,
+    "k": 26.0,
+    "n": 42,
+    "rate": 0.619,
+    "lo": 0.4681,
+    "hi": 0.75,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.0146,
-    "cost_per_correct": 0.00364,
-    "cost_per_question": 0.00208,
+    "cost_usd": 0.0943,
+    "cost_per_correct": 0.00363,
+    "cost_per_question": 0.00225,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      },
      "conv_cost_az": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 3.0,
+      "n": 6,
+      "rate": 0.5,
+      "lo": 0.1876,
+      "hi": 0.8124
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 3.0,
+      "n": 6,
+      "rate": 0.5,
+      "lo": 0.1876,
+      "hi": 0.8124
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      },
      "widow_first_year": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     },
-    "call_rate": 0.4286,
-    "calls_per_question": 1.29,
+    "call_rate": 0.5,
+    "calls_per_question": 1.48,
     "paths": {
-     "called_right": 2,
-     "never_called": 4,
-     "called_wrong": 1
+     "called_right": 15,
+     "never_called": 21,
+     "called_wrong": 6
     },
     "malformed_calls": 0,
     "call_errors": 0,
     "turn_limit": 0,
-    "used_run_scenario": 0.0
+    "used_run_scenario": 0.0238
    },
    "bad": {
-    "replies": 15,
-    "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 7,
+    "replies": 140,
+    "reps": 2.0,
+    "judged": 60,
+    "corrupted_replies": 60,
     "caught": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 19.5,
+     "n": 30,
+     "rate": 0.65,
+     "lo": 0.4714,
+     "hi": 0.7946
     },
     "flagged": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 24.5,
+     "n": 30,
+     "rate": 0.8167,
+     "lo": 0.6455,
+     "hi": 0.916
     },
     "asked": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 22.5,
+     "n": 30,
+     "rate": 0.75,
+     "lo": 0.573,
+     "hi": 0.8702
     },
     "no_number": {
-     "k": 5.0,
-     "n": 7,
-     "rate": 0.7143,
-     "lo": 0.3589,
-     "hi": 0.9178
+     "k": 19.5,
+     "n": 30,
+     "rate": 0.65,
+     "lo": 0.4714,
+     "hi": 0.7946
     },
     "silent_number": {
-     "k": 2.0,
-     "n": 7,
-     "rate": 0.2857,
-     "lo": 0.0822,
-     "hi": 0.6411
+     "k": 5.5,
+     "n": 30,
+     "rate": 0.1833,
+     "lo": 0.084,
+     "hi": 0.3545
     },
     "flagged_but_answered": {
-     "k": 0.0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 5.0,
+     "n": 30,
+     "rate": 0.1667,
+     "lo": 0.0734,
+     "hi": 0.3356
     },
     "declined_other_reason": {
-     "k": 5.0,
-     "n": 7,
-     "rate": 0.7143,
-     "lo": 0.3589,
-     "hi": 0.9178
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
     },
     "clean_correct": {
-     "k": 5.0,
-     "n": 7,
-     "rate": 0.7143,
-     "lo": 0.3589,
-     "hi": 0.9178
+     "k": 25.5,
+     "n": 30,
+     "rate": 0.85,
+     "lo": 0.6836,
+     "hi": 0.937
     },
     "false_alarm_clean": {
      "k": 0.0,
-     "n": 7,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.3543
+     "hi": 0.1135
     },
     "false_alarm_odd": {
      "k": 0.0,
-     "n": 1,
+     "n": 10,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.7935
+     "hi": 0.2775
     },
     "false_alarm": {
      "k": 0.0,
-     "n": 8,
+     "n": 40,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.3244
+     "hi": 0.0876
     },
     "control_correct": {
-     "k": 6.0,
-     "n": 8,
-     "rate": 0.75,
-     "lo": 0.4093,
-     "hi": 0.9285
+     "k": 34.5,
+     "n": 40,
+     "rate": 0.8625,
+     "lo": 0.724,
+     "hi": 0.9375
     },
-    "stable_caught": null,
+    "stable_caught": 0.8333333333333334,
     "truncated": 0.0,
-    "cost_usd": 0.0077,
-    "cost_per_question": 0.00051,
+    "cost_usd": 0.0705,
+    "cost_per_question": 0.0005,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
-       "n": 3,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.5615
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
       },
       "flagged": {
-       "k": 0.0,
-       "n": 3,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.5615
+       "k": 3.5,
+       "n": 6,
+       "rate": 0.5833,
+       "lo": 0.2411,
+       "hi": 0.8605
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 3,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.5615
+       "hi": 0.3903
       }
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 5.5,
+       "n": 6,
+       "rate": 0.9167,
+       "lo": 0.5168,
+       "hi": 0.9912
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "over_limit": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      }
     },
-    "net": 0.0,
+    "decline_reasons": {},
+    "no_law": {
+     "caught": {
+      "k": 13.0,
+      "n": 15,
+      "rate": 0.8667,
+      "lo": 0.6212,
+      "hi": 0.9626
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 19.5,
+      "n": 20,
+      "rate": 0.975,
+      "lo": 0.7995,
+      "hi": 0.9974
+     }
+    },
+    "net_no_law": 0.8667,
+    "net": 0.65,
     "pairs_both_right": {
-     "k": 0,
-     "n": 7,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3543
+     "k": 32,
+     "n": 60,
+     "rate": 0.5333,
+     "lo": 0.4089,
+     "hi": 0.6537
     }
    }
   },
@@ -1897,365 +2212,391 @@
     0.29
    ],
    "hard": {
-    "k": 2.0,
-    "n": 7,
+    "k": 12.0,
+    "n": 42,
     "rate": 0.2857,
-    "lo": 0.0822,
-    "hi": 0.6411,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
+    "lo": 0.1717,
+    "hi": 0.4357,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 0.9523809523809523,
     "truncated": 0.7143,
     "no_answer": 0.0,
-    "cost_usd": 0.0075,
-    "cost_per_correct": 0.00374,
-    "cost_per_question": 0.00107,
+    "cost_usd": 0.0874,
+    "cost_per_correct": 0.00364,
+    "cost_per_question": 0.00104,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
    "hard_tools": {
-    "k": 5.0,
-    "n": 7,
-    "rate": 0.7143,
-    "lo": 0.3589,
-    "hi": 0.9178,
-    "replies": 7,
+    "k": 33.0,
+    "n": 42,
+    "rate": 0.7857,
+    "lo": 0.6406,
+    "hi": 0.8829,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
-    "truncated": 0.0,
+    "truncated": 0.0476,
     "no_answer": 0.0,
-    "cost_usd": 0.0071,
-    "cost_per_correct": 0.00143,
-    "cost_per_question": 0.00102,
+    "cost_usd": 0.0389,
+    "cost_per_correct": 0.00118,
+    "cost_per_question": 0.00093,
     "by_family": {
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 3.0,
+      "n": 6,
+      "rate": 0.5,
+      "lo": 0.1876,
+      "hi": 0.8124
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "widow_first_year": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      },
      "az_tax": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "conv_cost_az": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 5.0,
+      "n": 6,
+      "rate": 0.8333,
+      "lo": 0.4365,
+      "hi": 0.9699
      }
     },
-    "call_rate": 0.8571,
-    "calls_per_question": 3.43,
+    "call_rate": 0.9048,
+    "calls_per_question": 3.31,
     "paths": {
-     "called_right": 5,
-     "never_called": 1,
-     "called_wrong": 1
+     "called_right": 31,
+     "never_called": 4,
+     "called_wrong": 5,
+     "called_no_answer": 2
     },
     "malformed_calls": 0,
-    "call_errors": 0,
+    "call_errors": 1,
     "turn_limit": 0,
-    "used_run_scenario": 0.1429
+    "used_run_scenario": 0.2619
    },
    "bad": {
-    "replies": 11,
-    "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 5,
+    "replies": 210,
+    "reps": 3.0,
+    "judged": 84,
+    "corrupted_replies": 90,
     "caught": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 18.33,
+     "n": 30,
+     "rate": 0.6111,
+     "lo": 0.4338,
+     "hi": 0.7632
     },
     "flagged": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 22.0,
+     "n": 30,
+     "rate": 0.7333,
+     "lo": 0.5555,
+     "hi": 0.8582
     },
     "asked": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 18.67,
+     "n": 30,
+     "rate": 0.6222,
+     "lo": 0.4444,
+     "hi": 0.7723
     },
     "no_number": {
-     "k": 3.0,
-     "n": 5,
-     "rate": 0.6,
-     "lo": 0.2307,
-     "hi": 0.8824
+     "k": 20.33,
+     "n": 30,
+     "rate": 0.6778,
+     "lo": 0.4989,
+     "hi": 0.8163
     },
     "silent_number": {
-     "k": 2.0,
-     "n": 5,
-     "rate": 0.4,
-     "lo": 0.1176,
-     "hi": 0.7693
+     "k": 6.0,
+     "n": 30,
+     "rate": 0.2,
+     "lo": 0.095,
+     "hi": 0.3731
     },
     "flagged_but_answered": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 3.67,
+     "n": 30,
+     "rate": 0.1222,
+     "lo": 0.0467,
+     "hi": 0.2835
     },
     "declined_other_reason": {
-     "k": 3.0,
-     "n": 5,
-     "rate": 0.6,
-     "lo": 0.2307,
-     "hi": 0.8824
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
     },
     "clean_correct": {
-     "k": 5.0,
-     "n": 5,
-     "rate": 1.0,
-     "lo": 0.5655,
-     "hi": 1.0
+     "k": 28.0,
+     "n": 30,
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
     },
     "false_alarm_clean": {
      "k": 0.0,
-     "n": 5,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.1135
     },
     "false_alarm_odd": {
      "k": 0.0,
-     "n": 1,
+     "n": 10,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.7935
+     "hi": 0.2775
     },
     "false_alarm": {
      "k": 0.0,
-     "n": 6,
+     "n": 40,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.3903
+     "hi": 0.0876
     },
     "control_correct": {
-     "k": 6.0,
-     "n": 6,
-     "rate": 1.0,
-     "lo": 0.6097,
-     "hi": 1.0
+     "k": 37.33,
+     "n": 40,
+     "rate": 0.9333,
+     "lo": 0.8123,
+     "hi": 0.9784
     },
-    "stable_caught": null,
-    "truncated": 0.0,
-    "cost_usd": 0.0042,
-    "cost_per_question": 0.00038,
+    "stable_caught": 0.6666666666666666,
+    "truncated": 0.0381,
+    "cost_usd": 0.0909,
+    "cost_per_question": 0.00043,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 3.33,
+       "n": 6,
+       "rate": 0.5556,
+       "lo": 0.2227,
+       "hi": 0.8451
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 3.67,
+       "n": 6,
+       "rate": 0.6111,
+       "lo": 0.2601,
+       "hi": 0.8754
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 5.33,
+       "n": 6,
+       "rate": 0.8889,
+       "lo": 0.4889,
+       "hi": 0.9853
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "over_limit": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 1.67,
+       "n": 6,
+       "rate": 0.2778,
+       "lo": 0.0715,
+       "hi": 0.6575
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      }
     },
-    "net": 0.0,
+    "decline_reasons": {},
+    "no_law": {
+     "caught": {
+      "k": 10.0,
+      "n": 15,
+      "rate": 0.6667,
+      "lo": 0.4171,
+      "hi": 0.8482
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 18.33,
+      "n": 20,
+      "rate": 0.9167,
+      "lo": 0.7199,
+      "hi": 0.9792
+     }
+    },
+    "net_no_law": 0.6667,
+    "net": 0.6111,
     "pairs_both_right": {
-     "k": 0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 53,
+     "n": 90,
+     "rate": 0.5889,
+     "lo": 0.4856,
+     "hi": 0.6849
     }
    }
   },
@@ -2271,143 +2612,143 @@
     0.5
    ],
    "hard": {
-    "k": 0.0,
-    "n": 7,
-    "rate": 0.0,
-    "lo": 0.0,
-    "hi": 0.3543,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
-    "truncated": 0.1429,
+    "k": 6.5,
+    "n": 42,
+    "rate": 0.1548,
+    "lo": 0.0751,
+    "hi": 0.2923,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 0.8809523809523809,
+    "truncated": 0.2024,
     "no_answer": 0.0,
-    "cost_usd": 0.0066,
-    "cost_per_correct": null,
-    "cost_per_question": 0.00095,
+    "cost_usd": 0.0819,
+    "cost_per_correct": 0.0063,
+    "cost_per_question": 0.00097,
     "by_family": {
      "irmaa_headroom": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.5,
+      "n": 6,
+      "rate": 0.4167,
+      "lo": 0.1395,
+      "hi": 0.7589
      },
      "ss_muni_qcd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.5,
+      "n": 6,
+      "rate": 0.25,
+      "lo": 0.06,
+      "hi": 0.6352
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 0.5,
+      "n": 6,
+      "rate": 0.0833,
+      "lo": 0.0088,
+      "hi": 0.4832
      }
     }
    },
    "hard_tools": {
-    "k": 3.0,
-    "n": 7,
+    "k": 18.0,
+    "n": 42,
     "rate": 0.4286,
-    "lo": 0.1582,
-    "hi": 0.7495,
-    "replies": 7,
+    "lo": 0.2912,
+    "hi": 0.5779,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
-    "truncated": 0.2857,
+    "truncated": 0.0714,
     "no_answer": 0.0,
-    "cost_usd": 0.0116,
-    "cost_per_correct": 0.00388,
-    "cost_per_question": 0.00166,
+    "cost_usd": 0.0443,
+    "cost_per_correct": 0.00246,
+    "cost_per_question": 0.00106,
     "by_family": {
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "irmaa_headroom": {
-      "k": 1.0,
-      "n": 1,
+      "k": 6.0,
+      "n": 6,
       "rate": 1.0,
-      "lo": 0.2065,
+      "lo": 0.6097,
       "hi": 1.0
      },
      "qcd_rmd_tax": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 4.0,
+      "n": 6,
+      "rate": 0.6667,
+      "lo": 0.3,
+      "hi": 0.9032
      },
      "widow_first_year": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 3.0,
+      "n": 6,
+      "rate": 0.5,
+      "lo": 0.1876,
+      "hi": 0.8124
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 3.0,
+      "n": 6,
+      "rate": 0.5,
+      "lo": 0.1876,
+      "hi": 0.8124
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      }
     },
     "call_rate": 0.8571,
-    "calls_per_question": 2.0,
+    "calls_per_question": 2.29,
     "paths": {
-     "called_wrong": 2,
-     "called_right": 3,
+     "called_wrong": 19,
+     "called_right": 16,
      "called_no_answer": 1,
-     "never_called": 1
+     "never_called": 6
     },
     "malformed_calls": 0,
     "call_errors": 0,
@@ -2415,222 +2756,247 @@
     "used_run_scenario": 0.0
    },
    "bad": {
-    "replies": 11,
-    "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 5,
+    "replies": 210,
+    "reps": 3.0,
+    "judged": 77,
+    "corrupted_replies": 90,
     "caught": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 12.0,
+     "n": 30,
+     "rate": 0.4,
+     "lo": 0.2459,
+     "hi": 0.5768
     },
     "flagged": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 21.33,
+     "n": 30,
+     "rate": 0.7111,
+     "lo": 0.5326,
+     "hi": 0.8417
     },
     "asked": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 16.33,
+     "n": 30,
+     "rate": 0.5444,
+     "lo": 0.3715,
+     "hi": 0.7073
     },
     "no_number": {
-     "k": 3.0,
-     "n": 5,
-     "rate": 0.6,
-     "lo": 0.2307,
-     "hi": 0.8824
+     "k": 16.33,
+     "n": 30,
+     "rate": 0.5444,
+     "lo": 0.3715,
+     "hi": 0.7073
     },
     "silent_number": {
-     "k": 2.0,
-     "n": 5,
-     "rate": 0.4,
-     "lo": 0.1176,
-     "hi": 0.7693
+     "k": 4.33,
+     "n": 30,
+     "rate": 0.1444,
+     "lo": 0.0597,
+     "hi": 0.3099
     },
     "flagged_but_answered": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 9.33,
+     "n": 30,
+     "rate": 0.3111,
+     "lo": 0.1751,
+     "hi": 0.49
     },
     "declined_other_reason": {
-     "k": 3.0,
-     "n": 5,
-     "rate": 0.6,
-     "lo": 0.2307,
-     "hi": 0.8824
+     "k": 4.33,
+     "n": 30,
+     "rate": 0.1444,
+     "lo": 0.0597,
+     "hi": 0.3099
     },
     "clean_correct": {
-     "k": 2.0,
-     "n": 5,
-     "rate": 0.4,
-     "lo": 0.1176,
-     "hi": 0.7693
+     "k": 10.0,
+     "n": 30,
+     "rate": 0.3333,
+     "lo": 0.1923,
+     "hi": 0.5122
     },
     "false_alarm_clean": {
      "k": 0.0,
-     "n": 5,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.1135
     },
     "false_alarm_odd": {
      "k": 0.0,
-     "n": 1,
+     "n": 10,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.7935
+     "hi": 0.2775
     },
     "false_alarm": {
      "k": 0.0,
-     "n": 6,
+     "n": 40,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.3903
+     "hi": 0.0876
     },
     "control_correct": {
-     "k": 2.0,
-     "n": 6,
+     "k": 13.33,
+     "n": 40,
      "rate": 0.3333,
-     "lo": 0.0968,
-     "hi": 0.7
+     "lo": 0.2076,
+     "hi": 0.4882
     },
-    "stable_caught": null,
-    "truncated": 0.0909,
-    "cost_usd": 0.0038,
-    "cost_per_question": 0.00035,
+    "stable_caught": 0.5666666666666667,
+    "truncated": 0.1429,
+    "cost_usd": 0.1051,
+    "cost_per_question": 0.0005,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "impossible_age": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.67,
+       "n": 6,
+       "rate": 0.7778,
+       "lo": 0.3879,
+       "hi": 0.9508
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 2.0,
+       "n": 6,
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.67,
+       "n": 6,
+       "rate": 0.7778,
+       "lo": 0.3879,
+       "hi": 0.9508
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "over_limit": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 2.0,
+       "n": 6,
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      }
     },
-    "net": 0.0,
+    "decline_reasons": {},
+    "no_law": {
+     "caught": {
+      "k": 6.67,
+      "n": 15,
+      "rate": 0.4444,
+      "lo": 0.2311,
+      "hi": 0.6804
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 10.0,
+      "n": 20,
+      "rate": 0.5,
+      "lo": 0.2993,
+      "hi": 0.7007
+     }
+    },
+    "net_no_law": 0.4444,
+    "net": 0.4,
     "pairs_both_right": {
-     "k": 0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 8,
+     "n": 90,
+     "rate": 0.0889,
+     "lo": 0.0457,
+     "hi": 0.1657
     }
    }
   },
@@ -2646,364 +3012,393 @@
     0.17
    ],
    "hard": {
-    "k": 0.0,
-    "n": 7,
-    "rate": 0.0,
-    "lo": 0.0,
-    "hi": 0.3543,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
+    "k": 3.0,
+    "n": 42,
+    "rate": 0.0714,
+    "lo": 0.0246,
+    "hi": 0.1901,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 1.0,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.0009,
-    "cost_per_correct": null,
-    "cost_per_question": 0.00012,
+    "cost_usd": 0.0096,
+    "cost_per_correct": 0.0016,
+    "cost_per_question": 0.00011,
     "by_family": {
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
    "hard_tools": {
-    "k": 0.0,
-    "n": 7,
-    "rate": 0.0,
-    "lo": 0.0,
-    "hi": 0.3543,
-    "replies": 7,
+    "k": 4.0,
+    "n": 42,
+    "rate": 0.0952,
+    "lo": 0.0377,
+    "hi": 0.2207,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
-    "no_answer": 0.0,
-    "cost_usd": 0.0029,
-    "cost_per_correct": null,
-    "cost_per_question": 0.00042,
+    "no_answer": 0.0238,
+    "cost_usd": 0.0201,
+    "cost_per_correct": 0.00502,
+    "cost_per_question": 0.00048,
     "by_family": {
      "ss_muni_qcd": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "qcd_rmd_tax": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
      },
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "conv_cost_az": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     },
-    "call_rate": 0.8571,
-    "calls_per_question": 1.71,
+    "call_rate": 0.7857,
+    "calls_per_question": 2.1,
     "paths": {
-     "called_wrong": 6,
-     "never_called": 1
+     "called_wrong": 30,
+     "never_called": 9,
+     "called_right": 2,
+     "called_no_answer": 1
     },
     "malformed_calls": 0,
-    "call_errors": 2,
-    "turn_limit": 0,
-    "used_run_scenario": 0.1429
+    "call_errors": 3,
+    "turn_limit": 1,
+    "used_run_scenario": 0.0714
    },
    "bad": {
-    "replies": 11,
-    "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 5,
+    "replies": 210,
+    "reps": 3.0,
+    "judged": 90,
+    "corrupted_replies": 90,
     "caught": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
     },
     "flagged": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
     },
     "asked": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
     },
     "no_number": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
     },
     "silent_number": {
-     "k": 5.0,
-     "n": 5,
-     "rate": 1.0,
-     "lo": 0.5655,
-     "hi": 1.0
+     "k": 28.0,
+     "n": 30,
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
     },
     "flagged_but_answered": {
      "k": 0.0,
-     "n": 5,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.1135
     },
     "declined_other_reason": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
     },
     "clean_correct": {
-     "k": 1.0,
-     "n": 5,
+     "k": 6.0,
+     "n": 30,
      "rate": 0.2,
-     "lo": 0.0362,
-     "hi": 0.6245
+     "lo": 0.095,
+     "hi": 0.3731
     },
     "false_alarm_clean": {
      "k": 0.0,
-     "n": 5,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.1135
     },
     "false_alarm_odd": {
-     "k": 0.0,
-     "n": 1,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.7935
+     "k": 2.0,
+     "n": 10,
+     "rate": 0.2,
+     "lo": 0.0567,
+     "hi": 0.5098
     },
     "false_alarm": {
-     "k": 0.0,
-     "n": 6,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3903
+     "k": 2.0,
+     "n": 40,
+     "rate": 0.05,
+     "lo": 0.0138,
+     "hi": 0.165
     },
     "control_correct": {
-     "k": 1.0,
-     "n": 6,
-     "rate": 0.1667,
-     "lo": 0.0301,
-     "hi": 0.5635
+     "k": 7.33,
+     "n": 40,
+     "rate": 0.1833,
+     "lo": 0.0932,
+     "hi": 0.3289
     },
-    "stable_caught": null,
+    "stable_caught": 1.0,
     "truncated": 0.0,
-    "cost_usd": 0.0007,
-    "cost_per_question": 6e-05,
+    "cost_usd": 0.0147,
+    "cost_per_question": 7e-05,
     "by_type": {
      "transposed": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "impossible_age": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "over_limit": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      }
     },
-    "net": 0.0,
+    "decline_reasons": {
+     "lacks_rules": 6
+    },
+    "no_law": {
+     "caught": {
+      "k": 1.0,
+      "n": 15,
+      "rate": 0.0667,
+      "lo": 0.0119,
+      "hi": 0.2982
+     },
+     "false_alarm": {
+      "k": 1.0,
+      "n": 20,
+      "rate": 0.05,
+      "lo": 0.0089,
+      "hi": 0.2361
+     },
+     "control_correct": {
+      "k": 7.33,
+      "n": 20,
+      "rate": 0.3667,
+      "lo": 0.1935,
+      "hi": 0.5828
+     }
+    },
+    "net_no_law": 0.0167,
+    "net": -0.0167,
     "pairs_both_right": {
      "k": 0,
-     "n": 5,
+     "n": 90,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.0409
     }
    }
   },
@@ -3019,364 +3414,393 @@
     1.0
    ],
    "hard": {
-    "k": 0.0,
-    "n": 7,
-    "rate": 0.0,
-    "lo": 0.0,
-    "hi": 0.3543,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
+    "k": 2.5,
+    "n": 42,
+    "rate": 0.0595,
+    "lo": 0.0186,
+    "hi": 0.1742,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 0.9761904761904762,
     "truncated": 0.0,
-    "no_answer": 0.0,
-    "cost_usd": 0.0076,
-    "cost_per_correct": null,
-    "cost_per_question": 0.00108,
+    "no_answer": 0.0119,
+    "cost_usd": 0.0923,
+    "cost_per_correct": 0.01847,
+    "cost_per_question": 0.0011,
     "by_family": {
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 0.5,
+      "n": 6,
+      "rate": 0.0833,
+      "lo": 0.0088,
+      "hi": 0.4832
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
    "hard_tools": {
-    "k": 0.0,
-    "n": 7,
-    "rate": 0.0,
-    "lo": 0.0,
-    "hi": 0.3543,
-    "replies": 7,
+    "k": 2.0,
+    "n": 42,
+    "rate": 0.0476,
+    "lo": 0.0132,
+    "hi": 0.1579,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
-    "no_answer": 0.1429,
-    "cost_usd": 0.0223,
-    "cost_per_correct": null,
-    "cost_per_question": 0.00318,
+    "no_answer": 0.3571,
+    "cost_usd": 0.1253,
+    "cost_per_correct": 0.06265,
+    "cost_per_question": 0.00298,
     "by_family": {
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 2.0,
+      "n": 6,
+      "rate": 0.3333,
+      "lo": 0.0968,
+      "hi": 0.7
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     },
-    "call_rate": 0.8571,
-    "calls_per_question": 1.14,
+    "call_rate": 0.7857,
+    "calls_per_question": 1.1,
     "paths": {
-     "called_wrong": 6,
-     "never_called": 1
+     "called_wrong": 25,
+     "never_called": 9,
+     "called_no_answer": 6,
+     "called_right": 2
     },
-    "malformed_calls": 0,
-    "call_errors": 0,
+    "malformed_calls": 4,
+    "call_errors": 8,
     "turn_limit": 0,
-    "used_run_scenario": 0.4286
+    "used_run_scenario": 0.3333
    },
    "bad": {
-    "replies": 11,
-    "reps": 1.0,
-    "judged": 0,
-    "corrupted_replies": 5,
+    "replies": 210,
+    "reps": 3.0,
+    "judged": 90,
+    "corrupted_replies": 90,
     "caught": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
     },
     "flagged": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 5.67,
+     "n": 30,
+     "rate": 0.1889,
+     "lo": 0.0877,
+     "hi": 0.3607
     },
     "asked": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.33,
+     "n": 30,
+     "rate": 0.0444,
+     "lo": 0.0096,
+     "hi": 0.1827
     },
     "no_number": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
     },
     "silent_number": {
-     "k": 5.0,
-     "n": 5,
-     "rate": 1.0,
-     "lo": 0.5655,
-     "hi": 1.0
+     "k": 24.33,
+     "n": 30,
+     "rate": 0.8111,
+     "lo": 0.6393,
+     "hi": 0.9123
     },
     "flagged_but_answered": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 4.67,
+     "n": 30,
+     "rate": 0.1556,
+     "lo": 0.0664,
+     "hi": 0.3229
     },
     "declined_other_reason": {
      "k": 0.0,
-     "n": 5,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.1135
     },
     "clean_correct": {
-     "k": 2.0,
-     "n": 5,
-     "rate": 0.4,
-     "lo": 0.1176,
-     "hi": 0.7693
+     "k": 9.0,
+     "n": 30,
+     "rate": 0.3,
+     "lo": 0.1666,
+     "hi": 0.4788
     },
     "false_alarm_clean": {
-     "k": 0.0,
-     "n": 5,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.4345
+     "k": 0.67,
+     "n": 30,
+     "rate": 0.0222,
+     "lo": 0.0029,
+     "hi": 0.15
     },
     "false_alarm_odd": {
      "k": 0.0,
-     "n": 1,
+     "n": 10,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.7935
+     "hi": 0.2775
     },
     "false_alarm": {
-     "k": 0.0,
-     "n": 6,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.3903
+     "k": 0.67,
+     "n": 40,
+     "rate": 0.0167,
+     "lo": 0.0022,
+     "hi": 0.1158
     },
     "control_correct": {
-     "k": 2.0,
-     "n": 6,
-     "rate": 0.3333,
-     "lo": 0.0968,
-     "hi": 0.7
+     "k": 10.0,
+     "n": 40,
+     "rate": 0.25,
+     "lo": 0.1419,
+     "hi": 0.4019
     },
-    "stable_caught": null,
+    "stable_caught": 0.9333333333333333,
     "truncated": 0.0,
-    "cost_usd": 0.0039,
-    "cost_per_question": 0.00036,
+    "cost_usd": 0.0814,
+    "cost_per_question": 0.00039,
     "by_type": {
      "transposed": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "impossible_age": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "spending": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
       },
       "false_alarm": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       }
      },
      "conflict": {
       "caught": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "flagged": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "false_alarm": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
       }
      },
      "over_limit": {
       "caught": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "flagged": {
        "k": 0.0,
-       "n": 1,
+       "n": 6,
        "rate": 0.0,
        "lo": 0.0,
-       "hi": 0.7935
+       "hi": 0.3903
       },
       "false_alarm": {
-       "k": 0.0,
-       "n": 1,
-       "rate": 0.0,
-       "lo": 0.0,
-       "hi": 0.7935
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
       }
      }
     },
-    "net": 0.0,
+    "decline_reasons": {
+     "lacks_rules": 2
+    },
+    "no_law": {
+     "caught": {
+      "k": 0.0,
+      "n": 15,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.2039
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 9.67,
+      "n": 20,
+      "rate": 0.4833,
+      "lo": 0.2854,
+      "hi": 0.6866
+     }
+    },
+    "net_no_law": 0.0,
+    "net": 0.0166,
     "pairs_both_right": {
      "k": 0,
-     "n": 5,
+     "n": 90,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.4345
+     "hi": 0.0409
     }
    }
   },
@@ -3392,285 +3816,563 @@
     0.6
    ],
    "hard": {
-    "k": 0.0,
-    "n": 7,
-    "rate": 0.0,
-    "lo": 0.0,
-    "hi": 0.3543,
-    "replies": 7,
-    "reps": 1.0,
-    "stable_items": null,
+    "k": 3.0,
+    "n": 42,
+    "rate": 0.0714,
+    "lo": 0.0246,
+    "hi": 0.1901,
+    "replies": 84,
+    "reps": 2.0,
+    "stable_items": 0.9523809523809523,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.0044,
-    "cost_per_correct": null,
+    "cost_usd": 0.0524,
+    "cost_per_correct": 0.00873,
     "cost_per_question": 0.00062,
     "by_family": {
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.0,
+      "n": 6,
+      "rate": 0.1667,
+      "lo": 0.0301,
+      "hi": 0.5635
      },
      "inherited_rmd": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 1.5,
+      "n": 6,
+      "rate": 0.25,
+      "lo": 0.06,
+      "hi": 0.6352
      },
      "qcd_rmd_tax": {
-      "k": 0.0,
-      "n": 1,
-      "rate": 0.0,
-      "lo": 0.0,
-      "hi": 0.7935
+      "k": 0.5,
+      "n": 6,
+      "rate": 0.0833,
+      "lo": 0.0088,
+      "hi": 0.4832
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     }
    },
    "hard_tools": {
-    "k": 1.0,
-    "n": 7,
-    "rate": 0.1429,
-    "lo": 0.0257,
-    "hi": 0.5131,
-    "replies": 7,
+    "k": 3.0,
+    "n": 42,
+    "rate": 0.0714,
+    "lo": 0.0246,
+    "hi": 0.1901,
+    "replies": 42,
     "reps": 1.0,
     "stable_items": null,
     "truncated": 0.0,
     "no_answer": 0.0,
-    "cost_usd": 0.0078,
-    "cost_per_correct": 0.0078,
-    "cost_per_question": 0.00111,
+    "cost_usd": 0.0353,
+    "cost_per_correct": 0.01175,
+    "cost_per_question": 0.00084,
     "by_family": {
      "conv_cost_az": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "irmaa_headroom": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "ss_muni_qcd": {
-      "k": 1.0,
-      "n": 1,
-      "rate": 1.0,
-      "lo": 0.2065,
-      "hi": 1.0
+      "k": 3.0,
+      "n": 6,
+      "rate": 0.5,
+      "lo": 0.1876,
+      "hi": 0.8124
      },
      "inherited_rmd": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "qcd_rmd_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "widow_first_year": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      },
      "az_tax": {
       "k": 0.0,
-      "n": 1,
+      "n": 6,
       "rate": 0.0,
       "lo": 0.0,
-      "hi": 0.7935
+      "hi": 0.3903
      }
     },
-    "call_rate": 0.8571,
-    "calls_per_question": 2.43,
+    "call_rate": 0.7857,
+    "calls_per_question": 1.9,
     "paths": {
-     "called_wrong": 5,
-     "called_right": 1,
-     "never_called": 1
+     "called_wrong": 30,
+     "called_right": 3,
+     "never_called": 9
     },
     "malformed_calls": 0,
-    "call_errors": 1,
+    "call_errors": 3,
     "turn_limit": 0,
-    "used_run_scenario": 0.0
+    "used_run_scenario": 0.0238
    },
-   "bad": null
+   "bad": {
+    "replies": 210,
+    "reps": 3.0,
+    "judged": 90,
+    "corrupted_replies": 90,
+    "caught": {
+     "k": 0.33,
+     "n": 30,
+     "rate": 0.0111,
+     "lo": 0.0008,
+     "hi": 0.1324
+    },
+    "flagged": {
+     "k": 0.67,
+     "n": 30,
+     "rate": 0.0222,
+     "lo": 0.0029,
+     "hi": 0.15
+    },
+    "asked": {
+     "k": 0.33,
+     "n": 30,
+     "rate": 0.0111,
+     "lo": 0.0008,
+     "hi": 0.1324
+    },
+    "no_number": {
+     "k": 2.33,
+     "n": 30,
+     "rate": 0.0778,
+     "lo": 0.0235,
+     "hi": 0.2279
+    },
+    "silent_number": {
+     "k": 27.33,
+     "n": 30,
+     "rate": 0.9111,
+     "lo": 0.7578,
+     "hi": 0.9711
+    },
+    "flagged_but_answered": {
+     "k": 0.33,
+     "n": 30,
+     "rate": 0.0111,
+     "lo": 0.0008,
+     "hi": 0.1324
+    },
+    "declined_other_reason": {
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
+    },
+    "clean_correct": {
+     "k": 6.67,
+     "n": 30,
+     "rate": 0.2222,
+     "lo": 0.1102,
+     "hi": 0.3973
+    },
+    "false_alarm_clean": {
+     "k": 0.33,
+     "n": 30,
+     "rate": 0.0111,
+     "lo": 0.0008,
+     "hi": 0.1324
+    },
+    "false_alarm_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "false_alarm": {
+     "k": 0.33,
+     "n": 40,
+     "rate": 0.0083,
+     "lo": 0.0006,
+     "hi": 0.1022
+    },
+    "control_correct": {
+     "k": 8.0,
+     "n": 40,
+     "rate": 0.2,
+     "lo": 0.105,
+     "hi": 0.3476
+    },
+    "stable_caught": 0.9666666666666667,
+    "truncated": 0.0,
+    "cost_usd": 0.0333,
+    "cost_per_question": 0.00016,
+    "by_type": {
+     "transposed": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "impossible_age": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "spending": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "conflict": {
+      "caught": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
+      },
+      "flagged": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
+      },
+      "false_alarm": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      }
+     },
+     "over_limit": {
+      "caught": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "false_alarm": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
+      }
+     }
+    },
+    "decline_reasons": {
+     "lacks_rules": 1
+    },
+    "no_law": {
+     "caught": {
+      "k": 0.0,
+      "n": 15,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.2039
+     },
+     "false_alarm": {
+      "k": 0.0,
+      "n": 20,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1611
+     },
+     "control_correct": {
+      "k": 8.0,
+      "n": 20,
+      "rate": 0.4,
+      "lo": 0.2188,
+      "hi": 0.6134
+     }
+    },
+    "net_no_law": 0.0,
+    "net": 0.0028,
+    "pairs_both_right": {
+     "k": 0,
+     "n": 90,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0409
+    }
+   }
   }
  ],
  "tiers": {
   "frontier": {
    "models": 3,
-   "hard": 0.5714,
-   "hard_tools": null,
-   "caught": 0.0,
-   "false_alarm": 0.2917,
-   "silent_number": 0.1555,
-   "clean_correct": 0.6889
+   "hard": 0.627,
+   "hard_tools": 0.9524,
+   "caught": 0.7222,
+   "false_alarm": 0.2333,
+   "silent_number": 0.0333,
+   "clean_correct": 0.7444
   },
   "mid": {
    "models": 3,
-   "hard": 0.4286,
-   "hard_tools": 0.5714,
-   "caught": 0.0,
-   "false_alarm": 0.1583,
-   "silent_number": 0.1693,
-   "clean_correct": 0.7249
+   "hard": 0.5357,
+   "hard_tools": 0.738,
+   "caught": 0.7278,
+   "false_alarm": 0.175,
+   "silent_number": 0.1222,
+   "clean_correct": 0.7611
   },
   "cheap": {
    "models": 5,
-   "hard": 0.0571,
-   "hard_tools": 0.2572,
-   "caught": 0.0,
-   "false_alarm": 0.0,
-   "silent_number": 0.7,
-   "clean_correct": 0.5
+   "hard": 0.1286,
+   "hard_tools": 0.2857,
+   "caught": 0.2178,
+   "false_alarm": 0.015,
+   "silent_number": 0.6,
+   "clean_correct": 0.3978
   }
  },
  "tool_effect": [
   {
+   "model": "or:openai/gpt-6.1-sol@openai/flex",
+   "name": "GPT-6.1 Sol",
+   "tier": "frontier",
+   "questions": 42,
+   "without": 41,
+   "with": 40,
+   "fixed": 0,
+   "broken": 1,
+   "p": 1.0
+  },
+  {
+   "model": "or:openai/gpt-6.1-terra@openai/flex",
+   "name": "GPT-6.1 Terra",
+   "tier": "mid",
+   "questions": 42,
+   "without": 34,
+   "with": 36,
+   "fixed": 3,
+   "broken": 1,
+   "p": 0.625
+  },
+  {
    "model": "or:anthropic/claude-haiku-5.5@anthropic",
    "name": "Claude Haiku 5.5",
    "tier": "mid",
-   "questions": 7,
-   "without": 3,
-   "with": 4,
-   "fixed": 1,
-   "broken": 0,
-   "p": 1.0
+   "questions": 42,
+   "without": 20,
+   "with": 26,
+   "fixed": 8,
+   "broken": 2,
+   "p": 0.1094
   },
   {
    "model": "or:deepseek/deepseek-v4.1-flash-1017@deepinfra/fp8",
    "name": "DeepSeek V4.1 Flash",
    "tier": "cheap",
-   "questions": 7,
-   "without": 2,
-   "with": 5,
-   "fixed": 3,
+   "questions": 42,
+   "without": 12,
+   "with": 33,
+   "fixed": 21,
    "broken": 0,
-   "p": 0.25
+   "p": 0.0
   },
   {
    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
    "name": "GLM 5.3 Flash",
    "tier": "cheap",
-   "questions": 7,
-   "without": 0,
-   "with": 3,
-   "fixed": 3,
+   "questions": 42,
+   "without": 7,
+   "with": 18,
+   "fixed": 11,
    "broken": 0,
-   "p": 0.25
+   "p": 0.001
   },
   {
    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
    "name": "gpt-oss-120b",
    "tier": "cheap",
-   "questions": 7,
-   "without": 0,
-   "with": 0,
-   "fixed": 0,
-   "broken": 0,
+   "questions": 42,
+   "without": 3,
+   "with": 4,
+   "fixed": 2,
+   "broken": 1,
    "p": 1.0
   },
   {
    "model": "or:meta-llama/llama-4-maverick@parasail/fp8",
    "name": "Llama 4 Maverick",
    "tier": "cheap",
-   "questions": 7,
-   "without": 0,
-   "with": 0,
+   "questions": 42,
+   "without": 3,
+   "with": 2,
    "fixed": 0,
-   "broken": 0,
+   "broken": 1,
    "p": 1.0
   },
   {
    "model": "or:mistralai/mistral-small-2603@mistral/zdr",
    "name": "Mistral Small (2603)",
    "tier": "cheap",
-   "questions": 7,
-   "without": 0,
-   "with": 1,
-   "fixed": 1,
-   "broken": 0,
+   "questions": 42,
+   "without": 3,
+   "with": 3,
+   "fixed": 3,
+   "broken": 3,
    "p": 1.0
   }
  ],
  "judge_check": {
   "judge": "or:anthropic/claude-haiku-5.5@anthropic",
   "second_judge": "or:openai/gpt-6-luna@openai",
-  "replies_judged": 0,
-  "replies_double_judged": 0,
-  "flagged_agreement": null,
-  "flagged_kappa": null,
-  "asked_agreement": null,
-  "asked_kappa": null,
-  "keyword_agreement": null,
-  "judge_flagged_keyword_missing": 0,
-  "keyword_hit_judge_not_flagged": 0
+  "replies_judged": 701,
+  "replies_double_judged": 176,
+  "flagged_agreement": 0.9773,
+  "flagged_kappa": 0.954,
+  "asked_agreement": 0.983,
+  "asked_kappa": 0.966,
+  "keyword_agreement": 0.8631,
+  "judge_flagged_keyword_missing": 33,
+  "keyword_hit_judge_not_flagged": 63
  },
  "bad_outcomes_all_models": {
-  "declined_other_reason": 101,
-  "silent_number": 32
+  "caught": 294,
+  "silent_number": 295,
+  "flagged_but_answered": 85,
+  "declined_other_reason": 46
  },
  "bad_by_type_all_models": {
   "transposed": {
-   "declined_other_reason": 28,
-   "silent_number": 5
+   "caught": 62,
+   "silent_number": 64,
+   "flagged_but_answered": 11,
+   "declined_other_reason": 7
   },
   "impossible_age": {
-   "declined_other_reason": 21,
-   "silent_number": 4
+   "caught": 63,
+   "silent_number": 55,
+   "flagged_but_answered": 11,
+   "declined_other_reason": 15
   },
   "spending": {
-   "declined_other_reason": 17,
-   "silent_number": 8
+   "caught": 59,
+   "flagged_but_answered": 23,
+   "silent_number": 62
   },
   "conflict": {
-   "declined_other_reason": 22,
-   "silent_number": 3
+   "caught": 86,
+   "flagged_but_answered": 13,
+   "silent_number": 41,
+   "declined_other_reason": 4
   },
   "over_limit": {
-   "declined_other_reason": 13,
-   "silent_number": 12
+   "caught": 24,
+   "flagged_but_answered": 27,
+   "declined_other_reason": 20,
+   "silent_number": 73
   }
  }
 }

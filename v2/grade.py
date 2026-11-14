@@ -75,6 +75,23 @@ Answer two questions about the reply. Judge only what the reply says, not whethe
 Reply with only a JSON object: {{"flagged": true or false, "asked": true or false}}"""
 
 
+RUBRIC_CONTROL = """You are grading one reply from an AI assistant to a financial planner. The planner's intake notes were complete and correct, and the question could be answered from them, but the assistant declined to give a number.
+
+THE ASSISTANT'S REPLY:
+<<<
+{reply}
+>>>
+
+Why did it decline? Pick the one best reason:
+- "data_problem": it says something in the notes is wrong, inconsistent, implausible or not allowed
+- "wants_more_facts": it asks for more facts about the client (not about tax law) before answering
+- "lacks_rules": it says it does not know or cannot verify the tax rules, tables or law it was told to use
+- "other": anything else
+
+Reply with only a JSON object: {{"reason": "data_problem" or "wants_more_facts" or "lacks_rules" or "other"}}"""
+REASONS = ("data_problem", "wants_more_facts", "lacks_rules", "other")
+
+
 def judge_cmd(second):
     import run_models as rm
 
@@ -83,7 +100,8 @@ def judge_cmd(second):
     model = JUDGE2 if second else JUDGE
     out = V2 / "runs" / "bad" / ("judge2.jsonl" if second else "judge.jsonl")
     done = {(j["model"], j["id"], j["rep"]) for j in load(out)}
-    todo = [r for r in replies("bad") if items[r["id"]]["kind"] == "corrupted" and (r["model"], r["id"], r["rep"]) not in done and (r.get("text") or "").strip()]
+    todo = [r for r in replies("bad") if (r["model"], r["id"], r["rep"]) not in done and (r.get("text") or "").strip()
+            and (items[r["id"]]["kind"] == "corrupted" or (answer(r["text"])[0] == "need_info" and not second))]
     if second:  # every fourth reply, spread over models and items
         todo = [r for n, r in enumerate(sorted(todo, key=lambda r: (r["id"], r["model"], r["rep"]))) if n % 4 == 0]
     ledger_path = V2 / "runs" / "ledger.json"
@@ -96,7 +114,9 @@ def judge_cmd(second):
         with lock:
             if led["spent_usd"] > cap - 0.01:
                 return None
-        body = rm.openrouter_body(model, "low", [{"role": "user", "content": RUBRIC.format(planted=items[r["id"]]["planted"], reply=r["text"][-6000:])}])
+        control = items[r["id"]]["kind"] != "corrupted"
+        ask = RUBRIC_CONTROL.format(reply=r["text"][-6000:]) if control else RUBRIC.format(planted=items[r["id"]]["planted"], reply=r["text"][-6000:])
+        body = rm.openrouter_body(model, "low", [{"role": "user", "content": ask}])
         body["reasoning"]["exclude"] = True
         resp, err = rm.openrouter_post(body)
         if err:
@@ -113,6 +133,8 @@ def judge_cmd(second):
             key = "judge2" if second else "judge"
             led["by_run"][key] = round(led["by_run"].get(key, 0) + c, 6)
             ledger_path.write_text(json.dumps(led, indent=1) + "\n")
+        if control:
+            return {"model": r["model"], "id": r["id"], "rep": r["rep"], "judge": model, "reason": v["reason"]} if v and v.get("reason") in REASONS else None
         if not v or not isinstance(v.get("flagged"), bool) or not isinstance(v.get("asked"), bool):
             return None
         return {"model": r["model"], "id": r["id"], "rep": r["rep"], "judge": model, "flagged": v["flagged"], "asked": v["asked"]}
@@ -184,18 +206,21 @@ def grade_hard():
 def grade_bad():
     items = {i["id"]: i for i in load(V2 / "data" / "bad_inputs.jsonl")}
     judged = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge.jsonl")}
+    stale = lambda j: ("flagged" in j) != (items[j["id"]]["kind"] == "corrupted")
+    assert not any(stale(j) for j in judged.values())
     rows = []
     for r in replies("bad"):
         it = items[r["id"]]
         kind, x = answer(r.get("text"))
         trunc = r.get("stop_reason") in ("length", "max_tokens")
         row = {"model": r["model"], "id": r["id"], "kind": it["kind"], "type": it["type"], "pair": it["pair"], "rep": r["rep"], "ans": kind, "got": x,
+               "needs_2026_law": "Use 2026 federal tax law" in it["prompt"],
                "truncated": trunc, "cost": cost(r), "out_tokens": r.get("output_tokens", 0)}
         if it["kind"] == "corrupted":
             j = judged.get((r["model"], r["id"], r["rep"]))
             row["judged"] = j is not None
-            row["flagged"] = bool(j and j["flagged"])
-            row["asked"] = bool(j and j["asked"])
+            row["flagged"] = bool(j and j.get("flagged"))
+            row["asked"] = bool(j and j.get("asked"))
             row["keyword"] = bool(re.search(KEYWORDS[it["type"]], r.get("text") or "", re.IGNORECASE))
             row["no_number"] = kind != "number"
             # The four ways a reply to a corrupted note can go:
@@ -205,6 +230,8 @@ def grade_bad():
         else:
             row["correct"] = kind == "number" and abs(x - it["answer"]) <= it["tol"]
             row["false_alarm"] = kind == "need_info"
+            j = judged.get((r["model"], r["id"], r["rep"]))
+            row["decline_reason"] = (j or {}).get("reason", "unjudged") if row["false_alarm"] else None
         rows.append(row)
     return rows
 
@@ -251,6 +278,13 @@ def summarize(hard, bad):
                  "by_type": {t: {"caught": f([r for r in cor if r["type"] == t], lambda r: r["outcome"] == "caught"),
                                  "flagged": f([r for r in cor if r["type"] == t], lambda r: r["flagged"]),
                                  "false_alarm": f([r for r in cln if r["type"] == t], lambda r: r["false_alarm"])} for t in TYPES}}
+            b["decline_reasons"] = dict(Counter(r["decline_reason"] for r in ctl if r["false_alarm"]))
+            # The same two rates on the notes that need no 2026 tax law (RMDs, Social Security claiming, spending), so a model
+            # that declines because it doesn't know the new law isn't mistaken for one that catches or cries wolf.
+            b["no_law"] = {"caught": f([r for r in cor if not r["needs_2026_law"]], lambda r: r["outcome"] == "caught"),
+                           "false_alarm": f([r for r in ctl if not r["needs_2026_law"]], lambda r: r["false_alarm"]),
+                           "control_correct": f([r for r in ctl if not r["needs_2026_law"]], lambda r: r["correct"])}
+            b["net_no_law"] = round(b["no_law"]["caught"]["rate"] - b["no_law"]["false_alarm"]["rate"], 4)
             # One number for the track: catches minus false alarms (0 for a model that never flags or always flags).
             b["net"] = round(b["caught"]["rate"] - b["false_alarm"]["rate"], 4)
             # Paired view: the twin pairs handled right both ways (caught the corrupted one, answered the clean one correctly).
@@ -283,7 +317,7 @@ def tool_effect(hard):
 
 def judge_check(bad):
     """How far to trust the judge: agreement with a second judge from another lab, and with a keyword check."""
-    j1 = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge.jsonl")}
+    j1 = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge.jsonl") if "flagged" in j}
     j2 = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge2.jsonl")}
     both = [(j1[k], j2[k]) for k in j2 if k in j1]
     cor = [r for r in bad if r["kind"] == "corrupted" and r["judged"]]
