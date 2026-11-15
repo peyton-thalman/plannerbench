@@ -593,3 +593,23 @@ details.fine .notes { margin-top: 0.75rem; }
 @media (max-width: 40rem) { .go-list.path a { grid-template-columns: minmax(0, 1fr); } }
 .scores.luna td.r, .scores.luna th.r { text-align: right; }
 .scores.luna .model { font-weight: 500; }
+
+/* Home, structural pass (2026-11-15): three result cards, the 60-second story, the experiment map */
+.finds.three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.finds.three-up .find:nth-child(3) { padding-left: 1.25rem; border-left: 1px solid var(--rule); border-top: 0; }
+@media (max-width: 60rem) { .finds.three-up { grid-template-columns: minmax(0, 1fr); } .finds.three-up .find, .finds.three-up .find + .find, .finds.three-up .find:nth-child(3) { padding: 1.25rem 0; border-left: 0; } .finds.three-up .find + .find { border-top: 1px solid var(--rule); } }
+.story60 p { margin: 0 0 0.75rem; }
+.story60 b { color: var(--ink); font-weight: 600; }
+.exp-map { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.exp-map th { text-align: left; font: 500 0.75rem/1.4 var(--mono); color: var(--muted); letter-spacing: 0.03em; text-transform: uppercase; padding: 0.75rem 1rem 0.75rem 0; border-bottom: 1px solid var(--rule); }
+.exp-map td { padding: 0.7rem 1rem 0.7rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--muted); }
+.exp-map td:first-child { color: var(--ink); font-weight: 600; }
+.exp-map td:first-child a { text-underline-offset: 3px; text-decoration-color: var(--rule-2); }
+@media (max-width: 40rem) {
+  .exp-map thead { display: none; }
+  .exp-map tr { display: grid; grid-template-columns: minmax(0, 1fr); padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+  .exp-map td { padding: 0.1rem 0; border: 0; }
+  .exp-map td:nth-child(2)::before { content: "When: "; color: var(--dim); }
+  .exp-map td:nth-child(3)::before { content: "Questions: "; color: var(--dim); }
+  .exp-map td:nth-child(4)::before { content: "Models: "; color: var(--dim); }
+}

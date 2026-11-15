@@ -53,13 +53,14 @@ def expected():
     st = tools["hard"]["stages"]
     cr = system["cleanroom"]
     v2 = load("v2"); v2m = {m["name"]: m for m in v2["models"]}
-    home = {"single": pct(lead["single_step_accuracy"]), "stacked": pct(lead["stacked_accuracy"]),
+    # The first test's several-rules score moved from Home to AI on its own (Home: structural pass, 2026-11-15); checked there.
+    home = {"single": pct(lead["single_step_accuracy"]),
             "tools_from": pct(st[0]["accuracy"]), "tools_to": pct(st[-1]["accuracy"]),
             "questions": f"{meta['questions']:,}", "cleanroom": f"{cr['agree']:,} / {cr['of']:,}"}
     text = {
         "index": [span([v2m["GPT-6.1 Sol"]["bad"]["caught"]["rate"], v2m["Claude Sonnet 5.5"]["bad"]["caught"]["rate"]]),
                   span([m["bad"]["caught"]["rate"] for m in sorted(v2["models"], key=lambda m: m["bad"]["caught"]["rate"])[:3]])],
-        "alone": [m["name"] for m in models] + [pct(m["accuracy"]) for m in models],
+        "alone": [m["name"] for m in models] + [pct(m["accuracy"]) for m in models] + [pct(lead["stacked_accuracy"])],
         "calculator": [f"{s['right']}/{s['questions']}" for s in st],
         "method": [f"{meta['questions']:,}"],
     }

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=24">
+<link rel="stylesheet" href="styles.css?v=25">
 </head>
 <body data-page="home">
 <header class="nav">
@@ -29,100 +29,100 @@
   <section class="hero wrap">
     <p class="eyebrow">PlannerBench · by Peyton Thalman, financial advisor</p>
     <h1>AI gets simple retirement questions right. On real ones, it depends which AI you ask.</h1>
+    <p class="lede">Trust the best AIs on a single rule. Check them on your whole situation, and check what you type in.</p>
     <div class="answer-box bottom-line">
       <p class="label">The bottom line</p>
       <ul>
-        <li><b>One rule at a time: the best AIs I tested were almost always right.</b> Ask this year’s tax on an income, or how much you must take out of an IRA (a retirement account you haven’t paid tax on yet), and Claude Sonnet 5.5 got <span data-k="single">—</span> right.</li>
-        <li><b>Several rules at once: it depends which AI.</b> When taxes, Social Security and Medicare affect each other, GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> of my hardest questions right. <b>ChatGPT’s model, on my regular subscription, got only <span data-v="luna:hard.rate" data-f="pct">—</span></b> (a different model and setup from Sol’s, tested separately; details below).</li>
-        <li><b>AI can accept impossible facts, so check what you type.</b> Given client files with one planted mistake each (like a retiree who is 14), even the best models didn’t catch <span data-k="a_best_missed">—</span> of them, and ChatGPT didn’t catch <span data-k="a_luna_missed">—</span>.</li>
+        <li><b>One rule (a question that needs just one): the best AIs were almost always right.</b> Claude Sonnet 5.5 got <span data-k="single">—</span> of questions like this year’s tax on an income.</li>
+        <li><b>Several rules at once (taxes, Social Security and Medicare affecting each other): it depends which AI.</b> GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> of my hardest questions. <b>ChatGPT’s model on my regular subscription got <span data-v="luna:hard.rate" data-f="pct">—</span></b> (a different model and setup, tested separately).</li>
+        <li><b>Some accept impossible facts, so check what you type.</b> Even the best two missed <span data-k="a_best_missed">—</span> of the mistakes I planted (like a retiree who is 14); ChatGPT missed <span data-k="a_luna_missed">—</span>.</li>
       </ul>
-      <p class="sure"><b>How sure am I?</b> Every answer is worked out by separate programs that have to agree, and I publish every check. A CPA (licensed tax accountant) hasn’t signed off yet; that’s next. <a href="method.html">How I checked →</a></p>
+      <p class="sure"><b>How sure am I?</b> Separate programs that didn’t write each other must agree on every answer. No CPA (licensed tax accountant) has signed off yet; that’s next. <a href="method.html">How I checked →</a></p>
       <div class="this-week">
         <p class="label">What to do this week</p>
-        <p>Ask the AI you use one retirement question you care about. Then read back every age, balance and income in its answer, and ask it to name the rule it used and where that rule comes from (an IRS form, Social Security’s rules). If a fact is wrong or it can’t name the rule, don’t act on the number. Take anything you can’t undo, like when to claim Social Security, to a professional.</p>
+        <p>Ask your AI one retirement question you care about. Check every age, balance and income it used, and ask which rule it applied. If a fact is wrong or it can’t name the rule, don’t act on the number; take anything you can’t undo, like when to claim Social Security, to a professional.</p>
       </div>
     </div>
   </section>
 
-  <section class="band" id="why">
-    <div class="wrap split">
-      <div>
-        <h2>Why I made this</h2>
-      </div>
-      <div class="prose">
-        <p>I’m a financial advisor, and I meet most people by knocking on their door. My dad became a financial advisor in 1999; watching him take care of people is why I do this work.</p>
-        <p>More and more people tell me they get financial advice from ChatGPT. When I ask how they know it’s right, they Google it, and the top result is often another AI’s answer. So I wrote the questions planners work through every week, worked out the right answer to each one, and tested the AI models people use.</p>
+  <section class="wrap section" id="story">
+    <div class="split">
+      <div><h2>The story in 60 seconds</h2></div>
+      <div class="prose story60">
+        <p><b>The problem.</b> I’m a door-to-door financial advisor. More and more clients ask ChatGPT about retirement, and nobody checks the answers.</p>
+        <p><b>What I built.</b> An answer key first (the right answer to every question), from a planning engine (a program for the 2026 IRS, Social Security and Medicare rules) that separate programs recheck. Then the questions. AI agents built it; I made the calls.</p>
+        <p><b>The strongest result.</b> Handed the right answer by my calculator, a model argued with it. Once the calculator also showed the rule and the IRS form line, it agreed: <span data-k="tools_from">—</span> → <span data-v="tools:hard.stages.[key=v1].accuracy" data-f="pct">—</span> → <span data-k="tools_to">—</span> on <span data-v="tools:hard.questions" data-f="int">—</span> hard questions; <span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on <span data-v="tools_private:questions" data-f="int">—</span> held back.</p>
+        <p><b>The limits.</b> Small samples, an AI judge on one test, no CPA sign-off yet.</p>
       </div>
     </div>
   </section>
 
   <section class="wrap section" id="found">
-    <div class="section-head">
-      <h2>Three results to remember</h2>
-    </div>
+    <div class="section-head"><h2>Three results</h2></div>
     <div class="finds three-up">
       <a class="find" href="alone.html#november">
         <span class="n">It depends which AI</span>
-        <p class="big"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span></p>
-        <p>GPT-6.1 Sol on the <span data-v="v2:items.hard" data-f="int">—</span> questions of my newer, harder set (November), where several rules meet in one household. Claude Sonnet 5.5 got <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>; <span data-k="a_cheap_under30">—</span> cheap and free models scored under 30%.</p>
-        <p class="catch"><b>Catch:</b> only <span data-v="v2:items.hard" data-f="int">—</span> questions, answered quickly, so models with close scores could swap places on a rerun.</p>
+        <p class="big"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> <span class="vs">vs</span> <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span></p>
+        <p>GPT-6.1 Sol vs Claude Sonnet 5.5 on my <span data-v="v2:items.hard" data-f="int">—</span> hardest questions; <span data-k="a_cheap_under30">—</span> cheap and free models under 30%.</p>
+        <p class="catch"><b>ChatGPT, <span data-v="luna:hard.rate" data-f="pct">—</span>:</b> same questions, different setup (more time to think, no length limit), so not ranked.</p>
         <span class="more">AI on its own →</span>
       </a>
-      <a class="find" href="alone.html#chatgpt">
-        <span class="n">ChatGPT’s model, on a subscription</span>
-        <p class="big"><span data-v="luna:hard.rate" data-f="pct">—</span></p>
-        <p>GPT-6 Luna, the model in my regular ChatGPT subscription, run through OpenAI’s Codex app with code and web turned off, on the same <span data-v="v2:items.hard" data-f="int">—</span> questions, graded the same way. On one-rule questions it got <span data-v="luna:first_test.single_step.rate" data-f="pct">—</span>.</p>
-        <p class="catch"><b>Catch:</b> a different setup from the other models (more time to think, no length limit, questions sent in small batches), so it’s shown on its own, not ranked with them. Like the others, it wasn’t allowed to run code.</p>
-        <span class="more">AI on its own →</span>
+      <a class="find" href="calculator.html#tools">
+        <span class="n">Hand it the answer and it argues</span>
+        <p class="big"><span data-k="tools_from">—</span> → <span data-k="tools_to">—</span></p>
+        <p>Claude Haiku 5.5. Given only the number, it often overruled the calculator; shown the rule too, it got every one.</p>
+        <p class="catch"><b>Catch:</b> DeepSeek V4.1 Flash rose <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.rate" data-f="pct">—</span> → <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard_tools.rate" data-f="pct">—</span>; <span data-k="a_tools_weak">—</span> other cheap models stayed at 10% or less.</p>
+        <span class="more">With a calculator →</span>
       </a>
       <a class="find" href="wrong-facts.html">
-        <span class="n">Some accept impossible facts</span>
+        <span class="n">It accepts impossible facts</span>
         <p class="big"><span data-k="a_low_caught">—</span></p>
-        <p><span data-k="a_low_cheap">—</span> (<span data-k="a_low_names">—</span>) caught <span data-k="a_low_caught">—</span> of <span data-v="v2:items.bad_corrupted" data-f="int">—</span> planted mistakes and gave a confident answer <span data-k="a_low_silent">—</span> of the time. The best models caught <span data-k="a_best_caught">—</span>; ChatGPT <span data-v="luna:bad.caught.rate" data-f="pct">—</span>. “Caught” means it named the mistake and gave no number.</p>
-        <p class="catch"><b>Catch:</b> an AI judge decided what counts as caught; a second AI agreed, and a person still has to spot-check it.</p>
+        <p>Of <span data-v="v2:items.bad_corrupted" data-f="int">—</span> planted mistakes, <span data-k="a_low_names">—</span> caught <span data-k="a_low_caught">—</span>; the best two <span data-k="a_best_caught">—</span>. <b>Caught</b> = recognized the mistake <i>and</i> stopped to ask, no number.</p>
+        <p class="catch"><b>Catch:</b> an AI judge decided “recognized”; no person has checked it yet.</p>
         <span class="more">Wrong facts →</span>
       </a>
     </div>
   </section>
 
-  <section class="wrap section" id="read">
-    <div class="read-box">
-      <p class="label">How to read the numbers</p>
-      <dl>
-        <div><dt>The first test</dt><dd>October 2026. I generated <span data-k="questions">—</span> questions across <span data-v="meta:tasks" data-f="int">—</span> kinds of task; each model was asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span>–<span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> of each kind (<span data-k="a_v1_per_model">—</span> questions per model), not all of them. GPT and Gemini weren’t in it.</dd></div>
-        <div><dt>The newer, harder set</dt><dd>November 2026. <span data-v="v2:items.hard" data-f="int">—</span> hard questions and <span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files with a planted mistake, asked of <span data-k="a_v2_models">—</span> models. Each was told to answer quickly (little thinking time, a short reply), so don’t compare these scores with October’s.</dd></div>
-        <div><dt>The answer key</dt><dd>The right answer to every question, which every AI reply is graded against.</dd></div>
-        <div><dt>The planning engine</dt><dd>The program that works out the answer key from the 2026 IRS, Social Security and Medicare rules. I had AI agents build it; programs that didn’t write it check it. Turned into a tool an AI can call while it answers, it’s “the calculator.”</dd></div>
-        <div><dt>The model groups</dt><dd><b>The best models:</b> GPT-6.1 Sol and Claude Sonnet 5.5. <b>Mid-priced:</b> GPT-6.1 Terra, Gemini 3.8 Flash, Claude Haiku 5.5. <b>Cheap and free models:</b> DeepSeek V4.1 Flash, GLM 5.3 Flash, gpt-oss-120b, Llama 4 Maverick, Mistral Small (“free” means anyone can download them). Gemini 3.1 Pro is priced like the best models but scored well below them. <b>ChatGPT</b> is GPT-6 Luna through a regular ChatGPT subscription, tested separately.</dd></div>
-        <div><dt>“Best”</dt><dd>Right most often and, on wrong facts, catching the most mistakes without false alarms (refusing files that were fine).</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <section class="band" id="trust">
+  <section class="band" id="decided">
     <div class="wrap split">
+      <div><h2>What I decided</h2></div>
       <div>
-        <h2>How I checked, in one paragraph</h2>
-      </div>
-      <div class="prose">
-        <p>I directed AI coding agents, mostly Claude Code, to build and run all of this, so every right answer was recomputed by programs that didn’t write it: a second engine, built separately from the written rules, agrees on <span data-k="cleanroom">—</span> random households, and outside tax software written by other people agrees on the tax answers. An AI from another company audited the project and found <span data-v="system:audit.errors" data-f="int">—</span> errors, all fixed and listed in the <a href="report.html">report</a>; a CPA (a licensed tax accountant) hasn’t signed off yet. <a href="method.html">How I checked →</a></p>
+        <ul class="notes">
+          <li><b>Build the checker before the questions.</b> A second engine, written separately, matches mine on <span data-k="cleanroom">—</span> random households.</li>
+          <li><b>Fix the calculator’s reply, not the prompt.</b> Show the rule, not just the number.</li>
+          <li><b>Keep a test set nobody tunes on.</b> Secret questions, only for checking that a fix is real.</li>
+          <li><b>Have another company’s model audit it.</b> GPT-6.1 Sol found <span data-v="system:audit.errors" data-f="int">—</span> errors; all fixed and published.</li>
+        </ul>
+        <p class="more-link"><a href="built.html">How I built it →</a></p>
       </div>
     </div>
   </section>
 
-  <section class="wrap section" id="path">
-    <div class="section-head"><h2>Read it in this order</h2></div>
-    <ul class="go-list path">
-      <li><a href="alone.html"><b>1 · AI on its own</b><span>One rule: Claude Sonnet 5.5 got <span data-k="single">—</span>. Several rules at once: <span data-k="stacked">—</span> (first test). The newer set, and ChatGPT.</span></a></li>
-      <li><a href="calculator.html"><b>2 · With a calculator</b><span>Claude Haiku 5.5 went from <span data-k="tools_from">—</span> to <span data-k="tools_to">—</span> on the <span data-v="tools:hard.questions" data-f="int">—</span> hardest first-test questions (the <span data-k="a_hard_tasks">—</span> kinds that chain or stack rules, <span data-v="system:first_test.per_task_claude" data-f="int">—</span> each) once the calculator showed the rule, and <span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on <span data-v="tools_private:questions" data-f="int">—</span> held-back ones (questions kept private, so nothing was tuned on them). It doesn’t rescue every model: <span data-k="a_tools_weak">—</span> cheap and free models still scored 10% or less with it.</span></a></li>
-      <li><a href="wrong-facts.html"><b>3 · Wrong facts</b><span><span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files, one planted mistake each: who notices, and who answers anyway.</span></a></li>
-      <li><a href="method.html"><b>4 · How I checked</b><span>How every answer was verified, and the human checks still owed.</span></a></li>
-      <li><a href="built.html"><b>5 · How I built it</b><span>What I decided, what AI agents did, what went wrong and what it cost.</span></a></li>
-    </ul>
+  <section class="wrap section" id="map">
+    <div class="section-head">
+      <h2>The experiments</h2>
+      <p class="sub">Every page uses these names. October’s models had time to think; November’s answered quickly, so don’t compare the two.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="exp-map">
+        <thead><tr><th scope="col">Experiment</th><th scope="col">When</th><th scope="col">Questions</th><th scope="col">Models</th></tr></thead>
+        <tbody>
+          <tr><td><a href="alone.html#october">First test: one rule, then several</a></td><td>Oct</td><td><span data-k="a_v1_per_model">—</span> each, of <span data-k="questions">—</span></td><td><span data-k="a_v1_models">—</span></td></tr>
+          <tr><td><a href="alone.html#november">Newer, harder set</a></td><td>Nov</td><td><span data-v="v2:items.hard" data-f="int">—</span></td><td><span data-k="a_v2_models">—</span></td></tr>
+          <tr><td><a href="alone.html#chatgpt">ChatGPT on a subscription</a></td><td>Nov</td><td><span data-v="luna:hard.n" data-f="int">—</span> + <span data-v="luna:first_test.overall.n" data-f="int">—</span> first-test</td><td>GPT-6 Luna</td></tr>
+          <tr><td><a href="calculator.html#tools">Calculator test 1: number vs rule</a></td><td>Oct</td><td><span data-v="tools:hard.questions" data-f="int">—</span> + <span data-v="tools_private:questions" data-f="int">—</span> held back</td><td>Claude Haiku 5.5</td></tr>
+          <tr><td><a href="calculator.html#cheap">Calculator test 2: who it rescues</a></td><td>Nov</td><td><span data-v="v2:items.hard" data-f="int">—</span></td><td><span data-v="v2:tool_effect.length" data-f="int">—</span></td></tr>
+          <tr><td><a href="calculator.html#gauntlet">Calculator test 3: whole-household decisions</a></td><td>Oct</td><td><span data-v="gauntlet:questions" data-f="int">—</span></td><td><span data-k="g_models">—</span></td></tr>
+          <tr><td><a href="wrong-facts.html">Wrong facts: a fact that can’t be right</a></td><td>Nov</td><td><span data-v="v2:items.bad_corrupted" data-f="int">—</span> + <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> fine</td><td><span data-k="a_v2_models">—</span> + ChatGPT</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">All in 2026. <b>Best models:</b> GPT-6.1 Sol, Claude Sonnet 5.5. <b>Cheap and free:</b> DeepSeek V4.1 Flash, GLM 5.3 Flash, gpt-oss-120b, Llama 4 Maverick, Mistral Small.</p>
   </section>
 
   <section class="wrap section">
-    <a class="next" href="alone.html"><span><span class="label">Next</span><b>AI on its own: one rule versus a real household</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="next" href="alone.html"><span><span class="label">Next</span><b>AI on its own: one rule versus several</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
