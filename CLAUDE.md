@@ -22,7 +22,7 @@ One shared `web/app.js` fills every page from `data/*.json` at bake time (the de
 only if its page has the element. Numbers
 not from a graded run live in `data/system.json`, each with its source file; update both together. Bump the `?v=`
 on the CSS/JS links when changing them. Code: https://github.com/peyton-thalman/plannerbench
-(private until the owner decides to publish; push to `origin master`).
+(public on GitHub as of 2026-11-15; v2 and story work on branches `v2`, `story`).
 Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every number is made) first.
 
 ## Where it stands (paused 2026-10-20)
