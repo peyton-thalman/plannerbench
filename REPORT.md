@@ -333,7 +333,7 @@ not inside them. In real ChatGPT the model may choose to run code; here it didn'
 - **It accepts impossible facts like the cheap models do.** "Priya is only 14 in 2026, so age-based required minimum
   distributions do not apply to her traditional IRA... Her RMD is therefore zero." It caught none of the over-limit
   amounts and a third of the impossible ages, but every conflicting fact and most swapped digits.
-- **Without a calculator, it mostly knew it couldn't do whole-household plans.** It declined all 10 that had an answer ("A reliable
+- **Without a calculator, it said it couldn’t do whole-household plans.** It declined all 10 that had an answer ("A reliable
   answer requires a full multi-year projection"). Honest, but no help to the person asking, which is the case for
   giving it a calculator.
 - **How it was run, and what went wrong.** The first attempt (batches of 11–35) was thrown out: most replies were a
