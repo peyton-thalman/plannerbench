@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>v2: bad inputs and the hard tier · PlannerBench</title>
-<meta name="description" content="PlannerBench v2: does a model notice when a client&#x27;s facts are wrong, and does a planning engine rescue a cheap model on hard retirement questions?">
+<title>Wrong facts · PlannerBench</title>
+<meta name="description" content="I planted one mistake in each of 30 client files, like a retiree who is 14. Most AI models didn't notice and gave a confident answer anyway. The best caught about three in four.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=19">
+<link rel="stylesheet" href="styles.css?v=20">
 </head>
-<body data-page="v2">
+<body data-page="wrong-facts">
 <header class="nav">
   <div class="wrap nav-row">
     <a class="wordmark" href="./">PlannerBench</a>
@@ -27,81 +27,151 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">PlannerBench v2 · 2026-11-14</p>
-    <h1>The math got easy. Catching a bad input didn’t.</h1>
-    <p class="lede">People give AI the wrong facts all the time: a mistyped balance, the wrong birth year, a guess at what they spend. Then they make decisions from the answer. So I planted one mistake in each of 30 client notes and watched what 11 models did.</p>
+    <p class="eyebrow">Finding 4 · Wrong facts · the newer, harder set (November 2026)</p>
+    <h1>Tell it something wrong, and most AI models won’t notice.</h1>
+    <div class="tldr">
+      <p class="label">The plain answer</p>
+      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right. The two best, Claude Sonnet 5.5 and GPT-6.1 Sol, caught <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> of the mistakes. Three cheap models caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time. This is the biggest gap I found: the math is often fine, but the answer is built on a fact nobody checked.</p>
+    </div>
     <div class="example">
       <p class="label">One example</p>
-      <p>The note said a retired school administrator with a $785,000 IRA was born in 2012, and asked for this year’s required withdrawal. One model replied:</p>
+      <p>A client file said a retired school administrator with a $785,000 IRA was born in 2012, and asked how much she must withdraw this year. One model (gpt-oss-120b) replied:</p>
       <blockquote>“Priya will be 14 years old throughout 2026 … no required minimum distribution is required. ANSWER: 0”</blockquote>
-      <p>With her real birth year the answer is $34,279. The model saw the age and didn’t question it.</p>
+      <p>It saw that she was 14 and kept going. With her real birth year, the answer is $34,279.</p>
     </div>
-    <p class="cta"><a class="btn primary" href="report.html">Read the report</a></p>
   </section>
 
   <section class="band">
     <div class="wrap">
       <div class="section-head">
-        <h2>Who notices when the client’s facts can’t be right?</h2>
-        <p class="sub">Each note had one planted mistake: two digits swapped, an impossible birth year, spending far beyond what the household has, two facts that conflict, or an amount over a legal limit. A model could answer with a number or say it needed more information.</p>
+        <p class="eyebrow">How the test works</p>
+        <h2><span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files with one planted mistake, and <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> that were fine</h2>
+        <p class="sub">I wrote <span data-v="v2:items.bad_corrupted" data-f="int">—</span> short client files, the kind a planner jots down at a first meeting, each with one mistake planted in it: two digits swapped in a balance, a birth year that makes a retiree 14, monthly spending ten or twelve times too high (more than the family owns, every year), “married” next to “filing single”, or a contribution over the legal limit. Each one has a clean twin that is identical except the mistake is gone, so I can tell a model that spots the error from one that just refuses hard questions. <span data-v="v2:items.bad_valid_odd" data-f="int">—</span> more files look odd but are fine (a 90-year-old IRA owner, a contribution exactly at the limit), so flagging everything unusual doesn’t win.</p>
       </div>
-      <figure class="chart-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with a note that had a mistake planted in it, as shares that add to 100%; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
-      <p class="takeaway"><b>What it shows.</b> The best models caught about three mistakes in four. Three of the five cheapest gave a confident answer more than eight times in ten. Every model was worst at the same kind: a believable amount that is over a legal limit.</p>
-      <figure class="chart-card value-card"><div class="chart"><img src="charts/false_alarms.svg" alt="Share of correct notes each model refused to answer; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
-      <p class="takeaway"><b>What it shows.</b> A model can’t win by refusing everything. Each mistaken note had a correct twin, plus ten notes that look odd but are fine. The two Gemini models refused half or more of those, mostly because they didn’t know this year’s tax law.</p>
+      <p class="takeaway">Every file ended the same way: give a number, or say you need more information and what you need. So every model had an easy way out.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <p class="eyebrow">What the models did</p>
+      <h2>The best caught most mistakes. Three cheap models caught almost none.</h2>
+      <p class="sub">Each reply to a file with a planted mistake lands in one of these places:</p>
+    </div>
+    <ul class="notes wf-outcomes">
+      <li><b>Caught it.</b> Named the planted mistake and gave no number. This is what you want.</li>
+      <li><b>Noticed, answered anyway.</b> Mentioned the problem, then gave a number built on it.</li>
+      <li><b>Missed it, answered anyway.</b> A confident number with no mention of the problem. This is the dangerous one.</li>
+      <li><b>Declined for another reason.</b> Gave no number, but not because of the planted mistake.</li>
+      <li><b>Ran out of room.</b> Used up its reply limit before giving any answer. Counted as a failure.</li>
+    </ul>
+    <figure class="chart-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with the 30 files that had a mistake planted in them, as shares that add to 100%; the table under the toggle below has the same numbers" style="width:100%;height:auto"></div></figure>
+    <p class="takeaway"><b>What it shows.</b> Across all <span data-w="all_replies">—</span> replies to a file with a planted mistake, <span data-w="all_caught">—</span> caught it and <span data-w="all_silent">—</span> missed it and answered anyway. The split is mostly by model: Claude Sonnet 5.5 and GPT-6.1 Sol stopped most of the time; gpt-oss-120b, Llama 4 Maverick and Mistral Small almost never did. One cheap model, DeepSeek V4.1 Flash, caught <span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span>, close to the middle-priced models.</p>
+    <p class="takeaway"><b>Noticing isn’t stopping.</b> Some replies saw the problem and gave a number anyway: <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.flagged_but_answered.rate" data-f="pct">—</span> of Claude Sonnet 5.5’s and <span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged_but_answered.rate" data-f="pct">—</span> of GPT-6.1 Sol’s. A number like that still ends up in someone’s plan.</p>
+
+    <figure class="chart-card value-card"><div class="chart"><img src="charts/false_alarms.svg" alt="Share of the 40 fine files each model refused to answer; the table under the toggle below has the same numbers" style="width:100%;height:auto"></div></figure>
+    <p class="takeaway"><b>What it shows.</b> The other way to fail is refusing a file that was fine. Most models almost never did. The two Gemini models refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Gemini 3.1 Pro].bad.false_alarm.rate" data-f="pct">—</span> of the 40 fine files, mostly because they didn’t believe this year’s tax law was real (it was passed after their training ended). So their high catch rates come with a lot of crying wolf.</p>
+
+    <details class="fine wide">
+      <summary>Every model, every outcome</summary>
+      <div class="table-wrap">
+        <table class="scores" id="wf-table">
+          <thead><tr><th scope="col">Model</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note">The outcome columns are shares of the <span data-v="v2:items.bad_corrupted" data-f="int">—</span> files with a planted mistake and add to 100%. False alarms are out of all <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> files that were fine (<span data-v="v2:items.bad_clean" data-f="int">—</span> clean twins plus <span data-v="v2:items.bad_valid_odd" data-f="int">—</span> odd-but-valid files). “Clean twins answered right” is out of the <span data-v="v2:items.bad_clean" data-f="int">—</span> clean twins only: the two columns use different denominators. Sorted by caught minus false alarms. Bars show the score; the shaded band is the 95% interval. Price tier is by price per token.</p>
+    </details>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Which mistakes slip through</p>
+        <h2>A believable amount over a legal limit was caught least often</h2>
+        <p class="sub">Pooling every model’s replies, <span data-w="pooled_top_kind">—</span> were caught <span data-w="pooled_top">—</span> of the time; <span data-w="pooled_low_kind">—</span> only <span data-w="pooled_low">—</span>. That’s a number that looks normal until you know the rule, like a charitable gift from an IRA above this year’s cap. Not every model followed the pattern: GPT-6.1 Sol caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.by_type.over_limit.caught.rate" data-f="pct">—</span> of over-limit amounts but only <span data-v="v2:models.[name=GPT-6.1 Sol].bad.by_type.spending.caught.rate" data-f="pct">—</span> of the impossible spending.</p>
+      </div>
       <details class="fine wide">
-        <summary>Full table, with 95% intervals</summary>
+        <summary>Caught, by kind of mistake, for every model</summary>
         <div class="table-wrap">
-          <table class="scores">
-            <thead><tr><th scope="col">Model</th><th scope="col">Caught the mistake</th><th scope="col">Missed it, answered anyway</th><th scope="col">Refused a correct note</th><th scope="col">Correct notes answered right</th><th scope="col" class="r">Net (caught − refused)</th></tr></thead>
-            <tbody><tr><td class="model">Claude Sonnet 5.5<span class="via">frontier · 1 run per note</span></td><td><div class="cell"><span class="v">73%</span><div class="track"><div class="band-ci" style="left:55.5%;width:30.3%"></div><div class="fill" style="width:73.3%"></div></div><span class="ci">56%–86%</span></div></td><td><div class="cell"><span class="v">7%</span><div class="track"><div class="band-ci" style="left:1.8%;width:19.5%"></div><div class="fill" style="width:6.7%"></div></div><span class="ci">2%–21%</span></div></td><td><div class="cell"><span class="v">0%</span><div class="track"><div class="band-ci" style="left:0.0%;width:8.8%"></div><div class="fill" style="width:0.0%"></div></div><span class="ci">0%–9%</span></div></td><td><div class="cell"><span class="v">93%</span><div class="track"><div class="band-ci" style="left:78.7%;width:19.5%"></div><div class="fill" style="width:93.3%"></div></div><span class="ci">79%–98%</span></div></td><td class="overall">+73</td></tr><tr><td class="model">GPT-6.1 Sol<span class="via">frontier · 1 run per note</span></td><td><div class="cell"><span class="v">73%</span><div class="track"><div class="band-ci" style="left:55.5%;width:30.3%"></div><div class="fill" style="width:73.3%"></div></div><span class="ci">56%–86%</span></div></td><td><div class="cell"><span class="v">0%</span><div class="track"><div class="band-ci" style="left:0.0%;width:11.3%"></div><div class="fill" style="width:0.0%"></div></div><span class="ci">0%–11%</span></div></td><td><div class="cell"><span class="v">2%</span><div class="track"><div class="band-ci" style="left:0.4%;width:12.4%"></div><div class="fill" style="width:2.5%"></div></div><span class="ci">0%–13%</span></div></td><td><div class="cell"><span class="v">100%</span><div class="track"><div class="band-ci" style="left:88.6%;width:11.4%"></div><div class="fill" style="width:100.0%"></div></div><span class="ci">89%–100%</span></div></td><td class="overall">+71</td></tr><tr><td class="model">Claude Haiku 5.5<span class="via">mid-tier · 2 runs per note</span></td><td><div class="cell"><span class="v">65%</span><div class="track"><div class="band-ci" style="left:47.1%;width:32.3%"></div><div class="fill" style="width:65.0%"></div></div><span class="ci">47%–79%</span></div></td><td><div class="cell"><span class="v">18%</span><div class="track"><div class="band-ci" style="left:8.4%;width:27.0%"></div><div class="fill" style="width:18.3%"></div></div><span class="ci">8%–35%</span></div></td><td><div class="cell"><span class="v">0%</span><div class="track"><div class="band-ci" style="left:0.0%;width:8.8%"></div><div class="fill" style="width:0.0%"></div></div><span class="ci">0%–9%</span></div></td><td><div class="cell"><span class="v">85%</span><div class="track"><div class="band-ci" style="left:68.4%;width:25.3%"></div><div class="fill" style="width:85.0%"></div></div><span class="ci">68%–94%</span></div></td><td class="overall">+65</td></tr><tr><td class="model">DeepSeek V4.1 Flash<span class="via">cheap / open weights · 3 runs per note</span></td><td><div class="cell"><span class="v">61%</span><div class="track"><div class="band-ci" style="left:43.4%;width:32.9%"></div><div class="fill" style="width:61.1%"></div></div><span class="ci">43%–76%</span></div></td><td><div class="cell"><span class="v">20%</span><div class="track"><div class="band-ci" style="left:9.5%;width:27.8%"></div><div class="fill" style="width:20.0%"></div></div><span class="ci">10%–37%</span></div></td><td><div class="cell"><span class="v">0%</span><div class="track"><div class="band-ci" style="left:0.0%;width:8.8%"></div><div class="fill" style="width:0.0%"></div></div><span class="ci">0%–9%</span></div></td><td><div class="cell"><span class="v">93%</span><div class="track"><div class="band-ci" style="left:78.7%;width:19.5%"></div><div class="fill" style="width:93.3%"></div></div><span class="ci">79%–98%</span></div></td><td class="overall">+61</td></tr><tr><td class="model">GPT-6.1 Terra<span class="via">mid-tier · 2 runs per note</span></td><td><div class="cell"><span class="v">62%</span><div class="track"><div class="band-ci" style="left:43.9%;width:32.9%"></div><div class="fill" style="width:61.7%"></div></div><span class="ci">44%–77%</span></div></td><td><div class="cell"><span class="v">18%</span><div class="track"><div class="band-ci" style="left:8.4%;width:27.0%"></div><div class="fill" style="width:18.3%"></div></div><span class="ci">8%–35%</span></div></td><td><div class="cell"><span class="v">2%</span><div class="track"><div class="band-ci" style="left:0.4%;width:12.4%"></div><div class="fill" style="width:2.5%"></div></div><span class="ci">0%–13%</span></div></td><td><div class="cell"><span class="v">97%</span><div class="track"><div class="band-ci" style="left:83.3%;width:16.1%"></div><div class="fill" style="width:96.7%"></div></div><span class="ci">83%–99%</span></div></td><td class="overall">+59</td></tr><tr><td class="model">Gemini 3.8 Flash<span class="via">mid-tier · 2 runs per note</span></td><td><div class="cell"><span class="v">92%</span><div class="track"><div class="band-ci" style="left:76.5%;width:20.9%"></div><div class="fill" style="width:91.7%"></div></div><span class="ci">76%–97%</span></div></td><td><div class="cell"><span class="v">0%</span><div class="track"><div class="band-ci" style="left:0.0%;width:11.3%"></div><div class="fill" style="width:0.0%"></div></div><span class="ci">0%–11%</span></div></td><td><div class="cell"><span class="v">50%</span><div class="track"><div class="band-ci" style="left:35.2%;width:29.6%"></div><div class="fill" style="width:50.0%"></div></div><span class="ci">35%–65%</span></div></td><td><div class="cell"><span class="v">47%</span><div class="track"><div class="band-ci" style="left:30.2%;width:33.6%"></div><div class="fill" style="width:46.7%"></div></div><span class="ci">30%–64%</span></div></td><td class="overall">+42</td></tr><tr><td class="model">GLM 5.3 Flash<span class="via">cheap / open weights · 3 runs per note</span></td><td><div class="cell low"><span class="v">40%</span><div class="track"><div class="band-ci" style="left:24.6%;width:33.1%"></div><div class="fill" style="width:40.0%"></div></div><span class="ci">25%–58%</span></div></td><td><div class="cell"><span class="v">14%</span><div class="track"><div class="band-ci" style="left:6.0%;width:25.0%"></div><div class="fill" style="width:14.4%"></div></div><span class="ci">6%–31%</span></div></td><td><div class="cell"><span class="v">0%</span><div class="track"><div class="band-ci" style="left:0.0%;width:8.8%"></div><div class="fill" style="width:0.0%"></div></div><span class="ci">0%–9%</span></div></td><td><div class="cell"><span class="v">33%</span><div class="track"><div class="band-ci" style="left:19.2%;width:32.0%"></div><div class="fill" style="width:33.3%"></div></div><span class="ci">19%–51%</span></div></td><td class="overall">+40</td></tr><tr><td class="model">Gemini 3.1 Pro<span class="via">frontier · 1 run per note</span></td><td><div class="cell"><span class="v">70%</span><div class="track"><div class="band-ci" style="left:52.1%;width:31.2%"></div><div class="fill" style="width:70.0%"></div></div><span class="ci">52%–83%</span></div></td><td><div class="cell"><span class="v">3%</span><div class="track"><div class="band-ci" style="left:0.6%;width:16.1%"></div><div class="fill" style="width:3.3%"></div></div><span class="ci">1%–17%</span></div></td><td><div class="cell"><span class="v">68%</span><div class="track"><div class="band-ci" style="left:52.0%;width:27.9%"></div><div class="fill" style="width:67.5%"></div></div><span class="ci">52%–80%</span></div></td><td><div class="cell"><span class="v">30%</span><div class="track"><div class="band-ci" style="left:16.7%;width:31.2%"></div><div class="fill" style="width:30.0%"></div></div><span class="ci">17%–48%</span></div></td><td class="overall">+2</td></tr><tr><td class="model">Llama 4 Maverick<span class="via">cheap / open weights · 3 runs per note</span></td><td><div class="cell low"><span class="v">3%</span><div class="track"><div class="band-ci" style="left:0.6%;width:16.1%"></div><div class="fill" style="width:3.3%"></div></div><span class="ci">1%–17%</span></div></td><td><div class="cell"><span class="v">81%</span><div class="track"><div class="band-ci" style="left:63.9%;width:27.3%"></div><div class="fill" style="width:81.1%"></div></div><span class="ci">64%–91%</span></div></td><td><div class="cell"><span class="v">2%</span><div class="track"><div class="band-ci" style="left:0.2%;width:11.4%"></div><div class="fill" style="width:1.7%"></div></div><span class="ci">0%–12%</span></div></td><td><div class="cell"><span class="v">30%</span><div class="track"><div class="band-ci" style="left:16.7%;width:31.2%"></div><div class="fill" style="width:30.0%"></div></div><span class="ci">17%–48%</span></div></td><td class="overall">+2</td></tr><tr><td class="model">Mistral Small (2603)<span class="via">cheap / open weights · 3 runs per note</span></td><td><div class="cell low"><span class="v">1%</span><div class="track"><div class="band-ci" style="left:0.1%;width:13.2%"></div><div class="fill" style="width:1.1%"></div></div><span class="ci">0%–13%</span></div></td><td><div class="cell"><span class="v">91%</span><div class="track"><div class="band-ci" style="left:75.8%;width:21.3%"></div><div class="fill" style="width:91.1%"></div></div><span class="ci">76%–97%</span></div></td><td><div class="cell"><span class="v">1%</span><div class="track"><div class="band-ci" style="left:0.1%;width:10.2%"></div><div class="fill" style="width:0.8%"></div></div><span class="ci">0%–10%</span></div></td><td><div class="cell"><span class="v">22%</span><div class="track"><div class="band-ci" style="left:11.0%;width:28.7%"></div><div class="fill" style="width:22.2%"></div></div><span class="ci">11%–40%</span></div></td><td class="overall">+0</td></tr><tr><td class="model">gpt-oss-120b<span class="via">cheap / open weights · 3 runs per note</span></td><td><div class="cell low"><span class="v">3%</span><div class="track"><div class="band-ci" style="left:0.6%;width:16.1%"></div><div class="fill" style="width:3.3%"></div></div><span class="ci">1%–17%</span></div></td><td><div class="cell"><span class="v">93%</span><div class="track"><div class="band-ci" style="left:78.7%;width:19.5%"></div><div class="fill" style="width:93.3%"></div></div><span class="ci">79%–98%</span></div></td><td><div class="cell"><span class="v">5%</span><div class="track"><div class="band-ci" style="left:1.4%;width:15.1%"></div><div class="fill" style="width:5.0%"></div></div><span class="ci">1%–16%</span></div></td><td><div class="cell"><span class="v">20%</span><div class="track"><div class="band-ci" style="left:9.5%;width:27.8%"></div><div class="fill" style="width:20.0%"></div></div><span class="ci">10%–37%</span></div></td><td class="overall">-2</td></tr></tbody>
+          <table class="scores" id="wf-kind">
+            <thead><tr><th scope="col">Model</th></tr></thead>
+            <tbody></tbody>
           </table>
         </div>
-        <p class="table-note">Caught = named the planted mistake and gave no number. Bars show the score; the shaded band is the 95% interval. Whether a reply named the mistake is judged by a second model (claude-haiku-5.5); the other columns are rule-based.</p>
-      </details>
-      <details class="fine wide">
-        <summary>Caught, by kind of mistake</summary>
-        <div class="table-wrap">
-          <table class="scores">
-            <thead><tr><th scope="col">Model</th><th scope="col" class="r">Swapped digits</th><th scope="col" class="r">Impossible age</th><th scope="col" class="r">Spending can’t fit</th><th scope="col" class="r">Facts conflict</th><th scope="col" class="r">Over a legal limit</th></tr></thead>
-            <tbody><tr><td class="model">Claude Sonnet 5.5<span class="via">frontier · caught, by kind of problem</span></td><td class="cost">83%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">67%</td><td class="cost">17%</td></tr><tr><td class="model">GPT-6.1 Sol<span class="via">frontier · caught, by kind of problem</span></td><td class="cost">100%</td><td class="cost">67%</td><td class="cost">33%</td><td class="cost">100%</td><td class="cost">67%</td></tr><tr><td class="model">Claude Haiku 5.5<span class="via">mid-tier · caught, by kind of problem</span></td><td class="cost">50%</td><td class="cost">83%</td><td class="cost">92%</td><td class="cost">100%</td><td class="cost">0%</td></tr><tr><td class="model">DeepSeek V4.1 Flash<span class="via">cheap / open weights · caught, by kind of problem</span></td><td class="cost">44%</td><td class="cost">44%</td><td class="cost">89%</td><td class="cost">100%</td><td class="cost">28%</td></tr><tr><td class="model">GPT-6.1 Terra<span class="via">mid-tier · caught, by kind of problem</span></td><td class="cost">100%</td><td class="cost">75%</td><td class="cost">0%</td><td class="cost">100%</td><td class="cost">33%</td></tr><tr><td class="model">Gemini 3.8 Flash<span class="via">mid-tier · caught, by kind of problem</span></td><td class="cost">83%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">75%</td></tr><tr><td class="model">GLM 5.3 Flash<span class="via">cheap / open weights · caught, by kind of problem</span></td><td class="cost">44%</td><td class="cost">50%</td><td class="cost">33%</td><td class="cost">67%</td><td class="cost">6%</td></tr><tr><td class="model">Gemini 3.1 Pro<span class="via">frontier · caught, by kind of problem</span></td><td class="cost">67%</td><td class="cost">83%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">0%</td></tr><tr><td class="model">Llama 4 Maverick<span class="via">cheap / open weights · caught, by kind of problem</span></td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">17%</td><td class="cost">0%</td></tr><tr><td class="model">Mistral Small (2603)<span class="via">cheap / open weights · caught, by kind of problem</span></td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">6%</td><td class="cost">0%</td></tr><tr><td class="model">gpt-oss-120b<span class="via">cheap / open weights · caught, by kind of problem</span></td><td class="cost">17%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td></tr></tbody>
-          </table>
-        </div>
+        <p class="table-note">Six files of each kind. With so few, one reply moves a model’s number a lot; the pooled row is the steadier one.</p>
       </details>
     </div>
   </section>
 
   <section class="wrap section">
     <div class="section-head">
-      <h2>Harder questions, and whether a tool rescues a cheap model</h2>
-      <p class="sub">42 new questions where several rules meet: a Roth conversion that changes Medicare premiums two years later, an inherited IRA, a widow’s first tax year, state tax on top of federal. Each answer comes from the planning engine and is matched to the dollar by a second engine written separately.</p>
+      <p class="eyebrow">How it fails, in their own words</p>
+      <h2>Real replies</h2>
+      <p class="sub">Short excerpts from saved replies. The clients are made up.</p>
     </div>
-    <figure class="chart-card"><div class="chart"><img src="charts/hard_tools.svg" alt="Hard questions answered right by each model, alone and with the engine; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
-    <p class="takeaway"><b>What it shows.</b> With the engine to call, one cheap model (DeepSeek) went from 29% to 79%, past a far pricier model working alone. Three other cheap models called the engine and still got the answer wrong, so the tool only helps a model that can use it.</p>
-    <details class="fine wide">
-      <summary>Full table, with cost per right answer</summary>
-      <div class="table-wrap">
-        <table class="scores">
-          <thead><tr><th scope="col">Model</th><th scope="col">Alone</th><th scope="col" class="r">Ran out of room</th><th scope="col">With the engine</th><th scope="col" class="r">Called the engine</th><th scope="col" class="r">Cost per 1,000 right, alone</th><th scope="col" class="r">With the engine</th></tr></thead>
-          <tbody><tr><td class="model">GPT-6.1 Sol<span class="via">frontier · 1 run per question</span></td><td><div class="cell"><span class="v">98%</span><div class="track"><div class="band-ci" style="left:87.7%;width:11.9%"></div><div class="fill" style="width:97.6%"></div></div><span class="ci">88%–100%</span></div></td><td class="cost">0%</td><td><div class="cell"><span class="v">95%</span><div class="track"><div class="band-ci" style="left:84.2%;width:14.5%"></div><div class="fill" style="width:95.2%"></div></div><span class="ci">84%–99%</span></div></td><td class="cost">79%</td><td class="cost">$3.22</td><td class="cost">$3.19</td></tr><tr><td class="model">GPT-6.1 Terra<span class="via">mid-tier · 2 runs per question</span></td><td><div class="cell"><span class="v">80%</span><div class="track"><div class="band-ci" style="left:65.4%;width:23.8%"></div><div class="fill" style="width:79.8%"></div></div><span class="ci">65%–89%</span></div></td><td class="cost">0%</td><td><div class="cell"><span class="v">86%</span><div class="track"><div class="band-ci" style="left:72.2%;width:21.1%"></div><div class="fill" style="width:85.7%"></div></div><span class="ci">72%–93%</span></div></td><td class="cost">81%</td><td class="cost">$1.89</td><td class="cost">$1.79</td></tr><tr><td class="model">Claude Sonnet 5.5<span class="via">frontier · 1 run per question</span></td><td><div class="cell"><span class="v">62%</span><div class="track"><div class="band-ci" style="left:46.8%;width:28.2%"></div><div class="fill" style="width:61.9%"></div></div><span class="ci">47%–75%</span></div></td><td class="cost">0%</td><td><span class="ci">not run</span></td><td class="cost">–</td><td class="cost">$17.33</td><td class="cost">–</td></tr><tr><td class="model">Claude Haiku 5.5<span class="via">mid-tier · 2 runs per question</span></td><td><div class="cell"><span class="v">52%</span><div class="track"><div class="band-ci" style="left:37.7%;width:28.9%"></div><div class="fill" style="width:52.4%"></div></div><span class="ci">38%–67%</span></div></td><td class="cost">2%</td><td><div class="cell"><span class="v">62%</span><div class="track"><div class="band-ci" style="left:46.8%;width:28.2%"></div><div class="fill" style="width:61.9%"></div></div><span class="ci">47%–75%</span></div></td><td class="cost">50%</td><td class="cost">$2.21</td><td class="cost">$3.63</td></tr><tr><td class="model">Gemini 3.1 Pro<span class="via">frontier · 1 run per question</span></td><td><div class="cell"><span class="v">29%</span><div class="track"><div class="band-ci" style="left:17.2%;width:26.4%"></div><div class="fill" style="width:28.6%"></div></div><span class="ci">17%–44%</span></div></td><td class="cost">0%</td><td><span class="ci">not run</span></td><td class="cost">–</td><td class="cost">$51.35</td><td class="cost">–</td></tr><tr><td class="model">Gemini 3.8 Flash<span class="via">mid-tier · 1 run per question</span></td><td><div class="cell"><span class="v">29%</span><div class="track"><div class="band-ci" style="left:17.2%;width:26.4%"></div><div class="fill" style="width:28.6%"></div></div><span class="ci">17%–44%</span></div></td><td class="cost">36%</td><td><span class="ci">not run</span></td><td class="cost">–</td><td class="cost">$19.47</td><td class="cost">–</td></tr><tr><td class="model">DeepSeek V4.1 Flash<span class="via">cheap / open weights · 2 runs per question</span></td><td><div class="cell"><span class="v">29%</span><div class="track"><div class="band-ci" style="left:17.2%;width:26.4%"></div><div class="fill" style="width:28.6%"></div></div><span class="ci">17%–44%</span></div></td><td class="cost">71%</td><td><div class="cell"><span class="v">79%</span><div class="track"><div class="band-ci" style="left:64.1%;width:24.2%"></div><div class="fill" style="width:78.6%"></div></div><span class="ci">64%–88%</span></div></td><td class="cost">90%</td><td class="cost">$3.64</td><td class="cost">$1.18</td></tr><tr><td class="model">GLM 5.3 Flash<span class="via">cheap / open weights · 2 runs per question</span></td><td><div class="cell"><span class="v">15%</span><div class="track"><div class="band-ci" style="left:7.5%;width:21.7%"></div><div class="fill" style="width:15.5%"></div></div><span class="ci">8%–29%</span></div></td><td class="cost">20%</td><td><div class="cell"><span class="v">43%</span><div class="track"><div class="band-ci" style="left:29.1%;width:28.7%"></div><div class="fill" style="width:42.9%"></div></div><span class="ci">29%–58%</span></div></td><td class="cost">86%</td><td class="cost">$6.30</td><td class="cost">$2.46</td></tr><tr><td class="model">gpt-oss-120b<span class="via">cheap / open weights · 2 runs per question</span></td><td><div class="cell"><span class="v">7%</span><div class="track"><div class="band-ci" style="left:2.5%;width:16.5%"></div><div class="fill" style="width:7.1%"></div></div><span class="ci">2%–19%</span></div></td><td class="cost">0%</td><td><div class="cell"><span class="v">10%</span><div class="track"><div class="band-ci" style="left:3.8%;width:18.3%"></div><div class="fill" style="width:9.5%"></div></div><span class="ci">4%–22%</span></div></td><td class="cost">79%</td><td class="cost">$1.60</td><td class="cost">$5.02</td></tr><tr><td class="model">Mistral Small (2603)<span class="via">cheap / open weights · 2 runs per question</span></td><td><div class="cell"><span class="v">7%</span><div class="track"><div class="band-ci" style="left:2.5%;width:16.5%"></div><div class="fill" style="width:7.1%"></div></div><span class="ci">2%–19%</span></div></td><td class="cost">0%</td><td><div class="cell"><span class="v">7%</span><div class="track"><div class="band-ci" style="left:2.5%;width:16.5%"></div><div class="fill" style="width:7.1%"></div></div><span class="ci">2%–19%</span></div></td><td class="cost">79%</td><td class="cost">$8.73</td><td class="cost">$11.75</td></tr><tr><td class="model">Llama 4 Maverick<span class="via">cheap / open weights · 2 runs per question</span></td><td><div class="cell"><span class="v">6%</span><div class="track"><div class="band-ci" style="left:1.9%;width:15.6%"></div><div class="fill" style="width:5.9%"></div></div><span class="ci">2%–17%</span></div></td><td class="cost">0%</td><td><div class="cell"><span class="v">5%</span><div class="track"><div class="band-ci" style="left:1.3%;width:14.5%"></div><div class="fill" style="width:4.8%"></div></div><span class="ci">1%–16%</span></div></td><td class="cost">79%</td><td class="cost">$18.47</td><td class="cost">$62.65</td></tr></tbody>
-        </table>
+    <div class="wf-quotes">
+      <div class="example">
+        <p class="label">Missed it, answered anyway</p>
+        <p>The file gave spending of $66,500 a month for a couple with $70,200 a year of income and $675,000 in total.</p>
+        <blockquote>“Their annual spending is $66,500 * 12 = $798,000. Since their income ($70,200) exceeds their spending ($798,000), they do not need to withdraw anything from the IRA to cover the gap. ANSWER: 0”</blockquote>
+        <p>Mistral Small. It did the multiplication, then compared the numbers backwards.</p>
       </div>
-    </details>
-    <details class="fine wide">
-      <summary>By kind of question, models alone</summary>
-      <div class="table-wrap">
-        <table class="scores">
-          <thead><tr><th scope="col">Model</th><th scope="col" class="r">irmaa headroom</th><th scope="col" class="r">conv cost az</th><th scope="col" class="r">ss muni qcd</th><th scope="col" class="r">inherited rmd</th><th scope="col" class="r">qcd rmd tax</th><th scope="col" class="r">widow first year</th><th scope="col" class="r">az tax</th></tr></thead>
-          <tbody><tr><td class="model">GPT-6.1 Sol<span class="via">frontier · alone</span></td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">100%</td><td class="cost">83%</td></tr><tr><td class="model">GPT-6.1 Terra<span class="via">mid-tier · alone</span></td><td class="cost">100%</td><td class="cost">75%</td><td class="cost">100%</td><td class="cost">92%</td><td class="cost">92%</td><td class="cost">100%</td><td class="cost">0%</td></tr><tr><td class="model">Claude Sonnet 5.5<span class="via">frontier · alone</span></td><td class="cost">100%</td><td class="cost">17%</td><td class="cost">100%</td><td class="cost">83%</td><td class="cost">67%</td><td class="cost">67%</td><td class="cost">0%</td></tr><tr><td class="model">Claude Haiku 5.5<span class="via">mid-tier · alone</span></td><td class="cost">100%</td><td class="cost">8%</td><td class="cost">92%</td><td class="cost">33%</td><td class="cost">67%</td><td class="cost">67%</td><td class="cost">0%</td></tr><tr><td class="model">Gemini 3.1 Pro<span class="via">frontier · alone</span></td><td class="cost">17%</td><td class="cost">0%</td><td class="cost">100%</td><td class="cost">83%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td></tr><tr><td class="model">Gemini 3.8 Flash<span class="via">mid-tier · alone</span></td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">100%</td><td class="cost">67%</td><td class="cost">33%</td><td class="cost">0%</td><td class="cost">0%</td></tr><tr><td class="model">DeepSeek V4.1 Flash<span class="via">cheap / open weights · alone</span></td><td class="cost">67%</td><td class="cost">0%</td><td class="cost">100%</td><td class="cost">33%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td></tr><tr><td class="model">GLM 5.3 Flash<span class="via">cheap / open weights · alone</span></td><td class="cost">42%</td><td class="cost">0%</td><td class="cost">33%</td><td class="cost">25%</td><td class="cost">0%</td><td class="cost">8%</td><td class="cost">0%</td></tr><tr><td class="model">gpt-oss-120b<span class="via">cheap / open weights · alone</span></td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">17%</td><td class="cost">33%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td></tr><tr><td class="model">Mistral Small (2603)<span class="via">cheap / open weights · alone</span></td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">17%</td><td class="cost">25%</td><td class="cost">8%</td><td class="cost">0%</td><td class="cost">0%</td></tr><tr><td class="model">Llama 4 Maverick<span class="via">cheap / open weights · alone</span></td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">8%</td><td class="cost">33%</td><td class="cost">0%</td><td class="cost">0%</td><td class="cost">0%</td></tr></tbody>
-        </table>
+      <div class="example">
+        <p class="label">Noticed, answered anyway</p>
+        <blockquote>“They would need $620,400 from the IRA to cover the gap, but its $400,000 balance cannot fund that withdrawal. Confirm that the spending figure is monthly, not annual. ANSWER: 620400”</blockquote>
+        <p>GPT-6.1 Sol. Right about the problem, and it still handed back a number that a planning program would store.</p>
       </div>
-    </details>
-    <details class="fine">
-      <summary>How these were run</summary>
-      <p>Every model through OpenRouter, pinned to one host, data collection off, one user message and no system prompt. Reasoning effort low and a 4,000-token reply limit for all (Mistral Small with reasoning off). Total spend $4.51 against a $5 cap, which is why the most expensive models have one run per item. Small samples: read the intervals, not the ranks.</p>
-    </details>
+      <div class="example">
+        <p class="label">Knew the rule, didn’t check the number</p>
+        <p>A $140,000 gift to charity straight from an IRA (a “qualified charitable distribution”), over this year’s $111,000 limit:</p>
+        <blockquote>“This assumes the QCD is fully eligible, since it is under the $111,000 2026 limit…”</blockquote>
+        <p>Claude Sonnet 5.5. It knew the limit and never compared the amount to it.</p>
+      </div>
+    </div>
   </section>
 
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What this means for you</p>
+        <h2>Check what you type in</h2>
+      </div>
+      <ul class="notes">
+        <li><b>Most models trust whatever you tell them.</b> If a balance, a birth year or a spending figure is wrong, expect an answer built on it, stated with confidence.</li>
+        <li><b>Even the best missed some.</b> The quiet ones slip through most: a normal-looking amount that breaks a rule.</li>
+        <li><b>Read the reply for a warning.</b> Several models mentioned the problem and answered anyway. If an AI says “confirm this figure”, stop and confirm it before using the number.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <p class="eyebrow">Limits</p>
+      <h2>What this test can’t tell you</h2>
+    </div>
+    <ul class="notes">
+      <li><b>Small.</b> <span data-v="v2:items.bad_corrupted" data-f="int">—</span> planted mistakes, six of each kind. Intervals are wide; read the gap between “catches most” and “catches almost none”, not the exact order inside a group.</li>
+      <li><b>The mistakes are big.</b> A 14-year-old retiree, monthly spending ten times too high. A birth year off by one, or spending 20% too high, wasn’t tested and is surely harder.</li>
+      <li><b>The easy way out was offered.</b> Every file said “you may say you need more information”. Without that line, catch rates would likely be lower. I didn’t test that.</li>
+      <li><b>A model judged whether the mistake was named</b>, and no person has yet checked a sample of those labels. Details below.</li>
+    </ul>
+    <details class="fine">
+      <summary>How this was graded</summary>
+      <p>Whether a reply ended in a number or in “I need more information” is read by code. Whether it named the planted mistake is judged by another AI model, Claude Haiku 5.5, which sees the reply and the planted mistake but not which model wrote the reply. A second model from another lab, GPT-6 Luna, judged <span data-v="v2:judge_check.replies_double_judged" data-f="int">—</span> of the replies again; the two agreed on whether the mistake was named <span data-v="v2:judge_check.flagged_agreement" data-f="pct1">—</span> of the time.</p>
+      <p>That is two models agreeing, not a measured error rate. Where the judge was plainly wrong (for example, a reply that spelled out the excess over a limit but was scored as missing it), the AI agent leading this project corrected the label by the same rule for every model, and the scores here include those corrections. A person checking a random sample of labels is still owed, and I’ll publish it when it’s done.</p>
+      <p>“Missed it, answered anyway” depends on that judgment too: it means the reply gave a number and the judge found no mention of the mistake.</p>
+    </details>
+    <details class="fine">
+      <summary>For the technical reader: how this was run</summary>
+      <p><span data-w="models_n">—</span> models through OpenRouter, each pinned to one host with data collection off. One user message, no system prompt, reasoning effort low, a reply limit of <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens. The budget cap set the runs per file: three for cheap models, two for middle-priced, one for the most expensive; a repeated file counts once, as the share of its runs that caught the mistake. Intervals are 95% Wilson intervals over files. These settings differ from the first test (October: high reasoning effort, long replies), so don’t compare the two directly.</p>
+    </details>
+    <p class="more-link"><a href="report.html">Read the full report →</a></p>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="method.html"><span><span class="label">Next</span><b>How I checked: why you can trust the answer key</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
 </main>
 
 <footer class="foot">
@@ -110,5 +180,7 @@
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
+
+<script src="app.js?v=14"></script>
 </body>
 </html>

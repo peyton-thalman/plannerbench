@@ -58,5 +58,45 @@
   "typical_miss_usd": 1135,
   "typical_miss_note": "median absolute error of the 354 wrong, untruncated replies on v2 hard-tier dollar questions (models alone, headroom family left out)",
   "source": "v2/results/summary.json and v2/results/hard_graded.jsonl; quoted as text in web/index.html"
+ },
+ "calculator_v2": {
+  "ds_tools_vs_sonnet_alone": {
+   "ds_tools_right": 33,
+   "sonnet_right": 26,
+   "of": 42,
+   "discordant_ds_only": 10,
+   "discordant_sonnet_only": 3,
+   "mcnemar_exact_p": 0.092,
+   "source": "v2/results/hard_graded.jsonl (DeepSeek V4.1 Flash with tools vs Claude Sonnet 5.5 alone, all reps right per item); exact two-sided McNemar; matches docs/AUDIT-2026-11-15.md overclaims #3"
+  },
+  "tokens_per_turn": 4000,
+  "max_tool_turns": 8,
+  "replies_over_4000_total": 10,
+  "tool_replies": 336,
+  "max_total_output_tokens": 7135,
+  "tokens_source": "v2/runs/hard-tools/meta.json (engine.max_tool_turns) and raw.jsonl output_tokens; docs/AUDIT-2026-11-15.md overclaims #2",
+  "gauntlet_reply_limits": {
+   "claude": 64000,
+   "deepseek": 32000,
+   "effort": "high",
+   "source": "runs/gauntlet-small*/meta.json, runs/ds-smoke-tools/meta.json, runs/ds-ask-smoke-tools/meta.json"
+  }
+ },
+ "wrong_facts_text": {
+  "quoted": [
+   "$785,000 IRA, born 2012, real answer $34,279 (impossible_age-00)",
+   "$66,500 a month, $70,200 income, $675,000 total, $798,000 (Mistral Small)",
+   "$620,400 needed, $400,000 balance (GPT-6.1 Sol)",
+   "$140,000 QCD vs $111,000 limit (Claude Sonnet 5.5)"
+  ],
+  "runs_per_item": "three for cheap models, two for middle-priced, one for top-priced",
+  "source": "REPORT.md 'How it fails'; replies in v2/runs/bad/raw.jsonl; answer key in v2/data/bad_inputs.jsonl; quoted as text in web/wrong-facts.html"
+ },
+ "calculator_text": {
+  "quoted": [
+   "GPT-6.1 Sol Arizona reply: $17,900 × 2.5% = $447.50, ANSWER 448, key $395, missed $2,100 age-65 exemption",
+   "gpt-oss-120b: ANSWER 1115, key $9,614"
+  ],
+  "source": "REPORT.md 'How it fails' 6; replies in v2/runs/hard-tools/raw.jsonl; quoted as text in web/calculator.html"
  }
 }

@@ -481,3 +481,15 @@ details.fine.wide .table-wrap { margin-top: 0.75rem; }
 /* Baked charts: src/bake_site.py ships each app.js chart drawn at desktop and at phone width; show the one that fits. */
 .chart svg.chart-narrow { display: none; }
 @media (max-width: 40rem) { .chart svg.chart-wide { display: none; } .chart svg.chart-narrow { display: block; } }
+
+/* writer B */
+/* Wrong facts, With a calculator, Try it in Claude or ChatGPT */
+.wf-quotes { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); align-items: start; }
+.wf-quotes .example { max-width: none; }
+.wf-quotes .example > p:last-child { color: var(--muted); font-size: 0.9375rem; }
+.wf-outcomes { max-width: 66ch; margin-bottom: 1.5rem; }
+.wf-outcomes li { padding: 0.6rem 0; }
+.example blockquote { overflow-wrap: anywhere; }
+.status { display: grid; gap: 0.5rem; max-width: 62ch; padding: 1rem 1.25rem; border: 1px solid var(--rule-2); border-left: 2px solid var(--accent); border-radius: var(--r); background: #fff; }
+.status p { color: var(--ink); }
+.status .label { color: var(--muted); }

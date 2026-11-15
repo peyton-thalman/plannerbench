@@ -50,7 +50,8 @@
   // data-v = "<file in data/ without .json>:<dot path>" (array items by index, or by [key=value], e.g. models.[model=x].acc).
   // data-f = pct (0.73 → 73%), pct1, usd, int (1,234), frac (needs data-of: "<file>:<path>" → "22/30"), or raw (default).
   const files = {}; const load = async (f) => (files[f] ??= get(f));
-  const dig = (o, path) => path.split('.').reduce((x, k) => {
+  // [key=value] may contain dots (model names like "GPT-6.1 Sol"), so split on dots outside brackets only.
+  const dig = (o, path) => path.match(/\[[^\]]*\]|[^.]+/g).reduce((x, k) => {
     if (x == null) return x;
     const m = k.match(/^\[(.+?)=(.+)\]$/);
     return m ? (Array.isArray(x) ? x.find((it) => String(it?.[m[1]]) === m[2]) : undefined) : x[k];
@@ -371,6 +372,99 @@
     document.getElementById('tools-private').textContent = toolsPrivate
       ? `On ${toolsPrivate.questions} private questions from a secret seed: ${pct(toolsPrivate.stages[0].accuracy)} without tools, ${pct(toolsPrivate.stages.at(-1).accuracy)} with tools 1.1. Both misses were Haiku overruling the tool again, with the rule in front of it.`
       : 'Held-out results aren’t published yet.';
+  }
+
+  // --- wrong-facts (writer B) ---
+  // Wrong facts and With a calculator: tables and figures from data/v2.json. Plain numbers use data-v above; the ones
+  // here need a calculation (a range across models, a pooled rate, a cost ratio) and fill <span data-w="key">.
+  const v2 = document.querySelector('[data-w], #wf-table, #wf-kind, #calc-v2') ? await load('v2') : null;
+  if (v2) {
+    const M = v2.models, find = (s) => M.find((m) => m.model.includes(s));
+    const both = (lo, hi, f) => (f(lo) === f(hi) ? f(lo) : `${f(lo).replace(/%$/, '')}–${f(hi)}`);
+    const spread = (xs, f) => both(Math.min(...xs), Math.max(...xs), f);
+    const KIND = { transposed: 'two digits swapped', impossible_age: 'an impossible age', spending: 'spending that can’t fit',
+      conflict: 'two facts that conflict', over_limit: 'an amount over a legal limit' };
+    const KINDS = { transposed: 'swapped digits', impossible_age: 'impossible ages', spending: 'impossible spending',
+      conflict: 'facts that conflict', over_limit: 'amounts over a legal limit' };
+    const TIER_W = { frontier: 'top price', mid: 'middle price', cheap: 'cheap' };
+    const runs = (r) => `${r} run${r === 1 ? '' : 's'} per item`;
+    // Every outcome a reply to a planted-mistake note can land in, in the order the page explains them.
+    const OUT = [['caught', 'Caught it'], ['flagged_but_answered', 'Noticed, answered anyway'], ['silent_number', 'Missed it, answered anyway'],
+      ['declined_other_reason', 'Declined for another reason'], ['ran_out_of_room', 'Ran out of room']]
+      .filter(([k]) => M.some((m) => m.bad?.[k]?.rate != null));
+    const sumAll = (o) => Object.values(o).reduce((s, n) => s + n, 0);
+    const pooled = Object.entries(v2.bad_by_type_all_models).map(([t, o]) => [t, o.caught / sumAll(o)]).sort((a, b) => b[1] - a[1]);
+    const lowCatch = M.filter((m) => m.bad).sort((a, b) => a.bad.caught.rate - b.bad.caught.rate).slice(0, 3);
+    const weakTools = M.filter((m) => m.hard_tools && m.hard_tools.rate < 0.15);
+    const ds = find('deepseek'), sonnet = find('claude-sonnet');
+    const per1k = (x) => usd(x * 1000, true);
+    const W = {
+      low_caught: spread(lowCatch.map((m) => m.bad.caught.rate), pct),
+      low_silent: spread(lowCatch.map((m) => m.bad.silent_number.rate), pct),
+      all_caught: pct(v2.bad_outcomes_all_models.caught / sumAll(v2.bad_outcomes_all_models)),
+      all_silent: pct(v2.bad_outcomes_all_models.silent_number / sumAll(v2.bad_outcomes_all_models)),
+      all_replies: sumAll(v2.bad_outcomes_all_models).toLocaleString('en-US'),
+      pooled_top_kind: KINDS[pooled[0][0]], pooled_top: pct(pooled[0][1]),
+      pooled_low_kind: KINDS[pooled.at(-1)[0]], pooled_low: pct(pooled.at(-1)[1]),
+      models_n: String(M.length),
+      cost_ratio: ds?.hard_tools && sonnet && String(Math.round(sonnet.hard.cost_per_correct / ds.hard_tools.cost_per_correct)),
+      ds_tools_per1k: ds?.hard_tools && per1k(ds.hard_tools.cost_per_correct), sonnet_per1k: sonnet && per1k(sonnet.hard.cost_per_correct),
+      weak_n: String(weakTools.length), weak_right: weakTools.length ? `${spread(weakTools.map((m) => m.hard_tools.k), String)} of ${weakTools[0].hard_tools.n}` : null,
+      weak_called: weakTools.length ? spread(weakTools.map((m) => m.hard_tools.call_rate), pct) : null,
+    };
+    document.querySelectorAll('[data-w]').forEach((n) => { if (W[n.dataset.w] != null) n.textContent = W[n.dataset.w]; else console.warn('data-w not found:', n.dataset.w); });
+
+    const who = (m, extra) => { const td = el('td', 'model', m.name); td.append(el('span', 'via', `${TIER_W[m.tier]} · ${extra}`)); return td; };
+    const bar = (s) => {
+      const td = el('td'); if (!s) { td.append(el('span', 'ci', 'not run')); return td; }
+      const cell = el('div', `cell${s.rate < 0.5 ? ' low' : ''}`), track = el('div', 'track'), band = el('div', 'band-ci'), fill = el('div', 'fill');
+      band.style.left = `${s.lo * 100}%`; band.style.width = `${(s.hi - s.lo) * 100}%`; fill.style.width = `${s.rate * 100}%`;
+      track.append(band, fill); const v = el('span', 'v', pct(s.rate)); v.append(el('span', 'ci', range(s.lo, s.hi)));
+      cell.append(v, track); td.append(cell); return td;
+    };
+    const head = (id, cols) => { const tr = document.querySelector(`#${id} thead tr`); tr.textContent = ''; cols.forEach(([t, r]) => { const th = el('th', r ? 'r' : null, t); th.scope = 'col'; tr.append(th); }); };
+
+    // Wrong facts: what each model did with the 30 planted-mistake notes, and how often it refused a fine one
+    if ($('wf-table')) {
+      head('wf-table', [['Model'], ...OUT.map(([, t], i) => [t, i > 0]), ['False alarms, of 40 fine notes', true], ['Clean twins answered right, of 30', true]]);
+      const tbody = document.querySelector('#wf-table tbody');
+      for (const m of M.filter((x) => x.bad).sort((a, b) => (b.bad.caught.rate - b.bad.false_alarm.rate) - (a.bad.caught.rate - a.bad.false_alarm.rate))) {
+        const tr = el('tr'); tr.append(who(m, runs(m.bad.reps)));
+        OUT.forEach(([k], i) => tr.append(i === 0 ? bar(m.bad[k]) : el('td', 'cost', pct(m.bad[k]?.rate ?? 0))));
+        tr.append(el('td', 'cost', pct(m.bad.false_alarm.rate)), el('td', 'cost', pct(m.bad.clean_correct.rate)));
+        tbody.append(tr);
+      }
+    }
+    // Caught, by kind of mistake: each model, then every model's replies pooled
+    if ($('wf-kind')) {
+      const kinds = Object.keys(KIND);
+      head('wf-kind', [['Model'], ...kinds.map((k) => [KIND[k][0].toUpperCase() + KIND[k].slice(1), true])]);
+      const tbody = document.querySelector('#wf-kind tbody');
+      for (const m of M.filter((x) => x.bad)) {
+        const tr = el('tr'); tr.append(who(m, runs(m.bad.reps)));
+        kinds.forEach((k) => tr.append(el('td', 'cost', pct(m.bad.by_type[k]?.caught?.rate))));
+        tbody.append(tr);
+      }
+      const tr = el('tr', 'best'), td = el('td', 'model', `All ${M.length} models together`); td.append(el('span', 'via', 'every reply, pooled'));
+      tr.append(td); kinds.forEach((k) => tr.append(el('td', 'cost', pct(pooled.find(([t]) => t === k)?.[1])))); tbody.append(tr);
+    }
+    // With a calculator, November set: each model alone and with the planning engine to call
+    const calcRows = (id, keep) => {
+      if (!$(id)) return;
+      head(id, [['Model'], ['On its own'], ['With the calculator'], ['Called it', true], ['Cost per 1,000 right, on its own → with it', true]]);
+      const tbody = document.querySelector(`#${id} tbody`);
+      const rows = M.filter((m) => !keep || keep.some((s) => m.model.includes(s)))
+        .sort((a, b) => (b.hard_tools?.rate ?? b.hard.rate) - (a.hard_tools?.rate ?? a.hard.rate));
+      for (const m of rows) {
+        const tr = el('tr', m.hard_tools && m.hard_tools.rate - m.hard.rate > 0.3 ? 'best' : null);
+        tr.append(who(m, runs(m.hard.reps)), bar(m.hard), bar(m.hard_tools),
+          el('td', 'cost', m.hard_tools ? pct(m.hard_tools.call_rate) : '–'),
+          el('td', 'cost', `${per1k(m.hard.cost_per_correct)}${m.hard_tools ? ` → ${per1k(m.hard_tools.cost_per_correct)}` : ''}`));
+        tbody.append(tr);
+      }
+    };
+    calcRows('calc-v2-key', ['deepseek', 'claude-sonnet', 'gpt-6.1-sol', 'gpt-oss', 'llama-4', 'mistral-small']);
+    calcRows('calc-v2');
   }
 
   // Charts are drawn at the container's width, so redraw on resize.
