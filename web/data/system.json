@@ -59,6 +59,27 @@
   "typical_miss_note": "median absolute error of the 354 wrong, untruncated replies on v2 hard-tier dollar questions (models alone, headroom family left out)",
   "source": "v2/results/summary.json and v2/results/hard_graded.jsonl; quoted as text in web/index.html"
  },
+ "first_test": {
+  "effort": "high",
+  "max_tokens_claude": 16000,
+  "max_tokens_openrouter": 32000,
+  "per_task_claude": 10,
+  "per_task_openrouter": 15,
+  "source": "METHODOLOGY.md (token limits per run); runs/or-5models-15x1/meta.json; leaderboard/RUNS (live-high-10x1 = Claude direct, 10 per task). Shown on web/alone.html"
+ },
+ "senior_deduction": {
+  "per_person": 6000,
+  "phaseout_rate": 0.06,
+  "threshold_joint": 150000,
+  "form": "IRS Schedule 1-A (2025), Part V, lines 31-37",
+  "source": "IRS 2025 Schedule 1-A Part V; METHODOLOGY.md; featured.json steps.threshold. Shown on web/alone.html"
+ },
+ "audit": {
+  "date": "2026-11-15",
+  "auditor": "GPT-6.1 Sol",
+  "errors": 12,
+  "source": "docs/AUDIT-2026-11-15.md (Confirmed errors 1-12). Shown on web/index.html and web/method.html"
+ },
  "calculator_v2": {
   "gauntlet_reply_limits": {
    "claude": 64000,

@@ -41,7 +41,7 @@
     agree_cap: misread.length ? `models from ${misreadLabs.size} labs gave the same wrong answer to the same question` : null,
     chat_judge: sys.connector && `${sys.connector.judge_pass} / ${sys.connector.judge_of}`,
     cleanroom: sys.cleanroom && `${sys.cleanroom.agree.toLocaleString('en-US')} / ${sys.cleanroom.of.toLocaleString('en-US')}`,
-    harness: h && `${name(h.direct)} was asked the same ${h.questions} questions directly and through OpenRouter. It scored ${pct(h.direct_accuracy)} both ways, so routing doesn’t change scores.`,
+    harness: h && `${name(h.direct)} was asked the same ${h.questions} questions directly and through OpenRouter. It scored ${pct(h.direct_accuracy)} both ways: no difference detected in this check.`,
   };
   document.querySelectorAll('[data-k]').forEach((n) => { if (fig[n.dataset.k]) n.textContent = fig[n.dataset.k]; });
 
@@ -139,16 +139,16 @@
     }
   }
 
-  // Method: the proof stack, one card per independent check
+  // --- method (writer A) --- the proof stack, one card per independent check, each saying exactly what it covers
   if ($('proofs') && sys.cleanroom) {
     const ratio = (o) => `${o.agree.toLocaleString('en-US')} / ${o.of.toLocaleString('en-US')}`;
     const cards = [
-      [ratio(sys.cleanroom), 'A second engine, written blind', `An AI agent wrote a second engine in a different language from the written rules alone, and was never allowed to read the first. Both run on random households; every field of every year must agree within ${sys.cleanroom.within}. Its first run found a real bug in the main engine.`, sys.cleanroom.source],
-      [ratio(sys.policyengine), 'An outside tax model', `PolicyEngine-US, open-source and maintained by others, recomputes every tax answer; all agree within ${sys.policyengine.within}, the new senior deduction included. Held-out set: ${ratio({ agree: sys.policyengine.private_agree, of: sys.policyengine.private_of })}.`, sys.policyengine.source],
-      [ratio(sys.gauntlet_keys), 'Every Gauntlet option, recomputed', 'Each choice in every public Gauntlet question is rerun by the second engine and by PolicyEngine before the question can ship.', sys.gauntlet_keys.source],
-      [ratio(sys.tools_check), 'The tools can answer everything', 'Before any model used the tools, a script proved that calling them correctly reproduces every numeric answer in the benchmark.', sys.tools_check.source],
-      [h ? `${pct(h.direct_accuracy)} = ${pct(h.openrouter_accuracy)}` : '—', 'The harness is neutral', h ? `${name(h.direct)}, asked the same ${h.questions} questions directly and through OpenRouter, scored the same both ways.` : '', 'checks/HARNESS.md'],
-      ['REPRODUCED', 'One script rebuilds it all', 'reproduce.sh regenerates the questions, regrades every saved reply and rebuilds every number on this site. Any difference fails it.', 'reproduce.sh'],
+      [ratio(sys.cleanroom), 'A second engine, written blind', `A separate AI agent wrote a second engine, in a different programming language, from the written rules alone, and was never allowed to read the first. Both run on random households; every number for every year must agree within ${sys.cleanroom.within}. Its first run found a real bug in the main engine. Every question in the newer, harder set also has to match it before it can be used.`, sys.cleanroom.source],
+      [ratio(sys.policyengine), 'Outside tax code', `PolicyEngine-US, open-source tax software written by other people, recomputes every tax answer in the first test, all within ${sys.policyengine.within}, the new senior deduction included; held-back questions ${ratio({ agree: sys.policyengine.private_agree, of: sys.policyengine.private_of })}. It doesn't model required withdrawals, Social Security claiming or Medicare premiums, so those rest on the published tables and the second engine.`, sys.policyengine.source],
+      [ratio(sys.gauntlet_keys), 'Whole-household decisions, recomputed', 'Every option in every public whole-household question is rerun by the second engine, and its 2026 federal tax return by PolicyEngine, before the question can be used.', sys.gauntlet_keys.source],
+      [ratio(sys.tools_check), 'The calculator can answer everything', 'Before any model used the calculator, a script proved that calling it correctly reproduces every numeric answer in the first test.', sys.tools_check.source],
+      [h ? `${pct(h.direct_accuracy)} = ${pct(h.openrouter_accuracy)}` : '—', 'Same model, two routes', h ? `${name(h.direct)} answered the same ${h.questions} questions directly and through OpenRouter (a service that relays requests to many models). Same score both ways: no difference detected in this check, which is not proof the route never matters.` : '', 'checks/HARNESS.md'],
+      ['REPRODUCED', 'One script rebuilds the first test', `reproduce.sh re-checks the first test’s answer key, regrades every saved first-test reply, rebuilds its scores (and the calculator runs on its ${tools?.hard.questions ?? 50} hardest questions) and compares them with the published copy; any difference fails it. It doesn’t regenerate the questions or cover the newer set, wrong facts or whole-household decisions; those have their own scripts.`, 'reproduce.sh'],
     ];
     for (const [num, title, body, src] of cards) {
       const c = el('div', 'proof-card');
@@ -179,8 +179,9 @@
       ['33', 'Line 31 minus line 32', usd(s.agi - s.threshold, true)],
       ['34', 'Line 33 × 6%', usd(s.cut, true)],
       ['35', '$6,000 minus line 34', usd(6000 - s.cut, true)],
-      ['36a', 'You, born before 1961: line 35', usd(6000 - s.cut, true)],
-      ['36b', 'Your spouse, born before 1961: line 35', usd(6000 - s.cut, true)],
+      // writer A: these are the 2025 form's lines and birth date (audit #9); alone.html labels the form as 2025
+      ['36a', 'You, born before January 2, 1961: line 35', usd(6000 - s.cut, true)],
+      ['36b', 'Your spouse, born before January 2, 1961: line 35', usd(6000 - s.cut, true)],
       ['37', 'Enhanced deduction for seniors', usd(s.per_spouse, true), true],
     ];
     const ol = document.getElementById('featured-lines');
@@ -658,6 +659,87 @@
       if (Math.abs(spot.ly - p.cy) > 2)
         svg.append(svgEl('line', { x1: p.cx + (spot.right ? 6 : -6), y1: p.cy, x2: spot.right ? spot.b.x0 - 2 : spot.b.x1 + 2, y2: spot.ly, style: 'stroke:var(--muted);stroke-width:1' }));
     }
+  }
+
+  // --- home, alone, method (writer A) ---
+  // Numbers the story pages say in sentences, worked out here from the data files so a regrade changes the words with it.
+  // Fills <span data-k="a_*"> (the bake checks every data-k slot is filled) and the two short tables on alone.html.
+  if (document.querySelector('[data-k^="a_"], #a-v1-top, #a-v2-top')) {
+    const V2 = await load('v2'), A = {};
+    const span = (xs) => { const [lo, hi] = [Math.min(...xs), Math.max(...xs)]; return pct(lo) === pct(hi) ? pct(lo) : `${pct(lo).replace('%', '')}–${pct(hi)}`; };
+    const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
+    const vm = V2?.models ?? [], vName = (n) => vm.find((m) => m.name === n);
+    const sol = vName('GPT-6.1 Sol'), son = vName('Claude Sonnet 5.5'), dsk = vName('DeepSeek V4.1 Flash');
+    const cheap = vm.filter((m) => m.tier === 'cheap');
+    if (vm.length) {
+      const under30 = cheap.filter((m) => m.hard.rate < 0.3).length;
+      A.a_v2_models = String(vm.length);
+      A.a_cheap_under30 = under30 === cheap.length ? `all ${cheap.length}` : `${under30} of the ${cheap.length}`;
+      A.a_tools_weak = words[cheap.filter((m) => m !== dsk && m.hard_tools && m.hard_tools.rate < 0.1).length];
+      // Wrong facts: the two best models' catch rate, and the three models that caught least (as on wrong-facts.html)
+      A.a_best_caught = sol && son && span([sol.bad.caught.rate, son.bad.caught.rate]);
+      const low3 = vm.filter((m) => m.bad).sort((a, b) => a.bad.caught.rate - b.bad.caught.rate).slice(0, 3);
+      A.a_low_caught = span(low3.map((m) => m.bad.caught.rate));
+      A.a_low_silent = span(low3.map((m) => m.bad.silent_number.rate));
+      A.a_low_cheap = low3.every((m) => m.tier === 'cheap') ? 'Three cheap models' : 'Three models';
+    }
+    // First test: how much of the wrong-answer pile one misreading explains (both published runs, every model)
+    if (mistakes?.length) {
+      const SD = 'combined senior phase-out', sum = (f) => mistakes.filter(f).reduce((t, r) => t + r.count, 0);
+      const wrong = sum(() => true), named = sum((r) => r.mistake !== 'unexplained'), sd = sum((r) => r.mistake === SD);
+      Object.assign(A, { a_sd: String(sd), a_wrong: String(wrong), a_named: String(named), a_sd_of_wrong: pct(sd / wrong), a_sd_of_named: pct(sd / named),
+        a_son_sd: `${sum((r) => r.model === LEAD && r.mistake === SD)} of its ${sum((r) => r.model === LEAD)}` });
+    }
+    const re = (m) => ruleEffect?.find((r) => r.model === m && r.task === 'senior_phaseout');
+    if (re(LEAD)) A.a_rule_son = `${pct(re(LEAD).without_rule)} to ${pct(re(LEAD).with_rule)}`;
+    if (re('claude-haiku-5-5')) A.a_rule_haiku = `${pct(re('claude-haiku-5-5').without_rule)} to ${pct(re('claude-haiku-5-5').with_rule)}`;
+    if (models?.length) {
+      const comp = models.map((m) => m.compliance_accuracy).filter((x) => x != null);
+      A.a_comp = span(comp); A.a_setups = words[models.length] ?? String(models.length);
+      A.a_v1_labs = words[new Set(models.map((m) => m.lab)).size];
+    }
+    document.querySelectorAll('[data-k^="a_"]').forEach((n) => { if (A[n.dataset.k] != null) n.textContent = A[n.dataset.k]; else console.warn('data-k not found:', n.dataset.k); });
+
+    // alone.html: two short tables up front (a few rows that tell the story); the full ones sit in <details>
+    const bar = (v, lo, hi, extra) => {
+      const td = el('td'); if (v == null) { td.append(el('span', 'ci', 'not run')); return td; }
+      const cell = el('div', `cell${v < 0.5 ? ' low' : ''}`), track = el('div', 'track'), band = el('div', 'band-ci'), fill = el('div', 'fill');
+      band.style.left = `${lo * 100}%`; band.style.width = `${(hi - lo) * 100}%`; fill.style.width = `${v * 100}%`;
+      track.append(band, fill); const t = el('span', 'v', `${pct(v)}${extra ? ` · ${extra}` : ''}`); t.append(el('span', 'ci', range(lo, hi)));
+      cell.append(t, track); td.append(cell); return td;
+    };
+    const who = (label, via) => { const td = el('td', 'model', label); if (via) td.append(el('span', 'via', via)); return td; };
+    if ($('a-v1-top') && models) {
+      const tb = document.querySelector('#a-v1-top tbody');
+      for (const id of [LEAD, 'claude-haiku-5-5', 'or:deepseek/deepseek-v4.1-flash@deepinfra/fp8', 'or:z-ai/glm-5.3-flash@z-ai/fp8', 'or:openai/gpt-oss-120b@deepinfra/bf16']) {
+        const m = byId[id]; if (!m) continue;
+        const tr = el('tr'); tr.append(who(name(id), `${m.lab}${m.open_weights ? ' · free to download' : ''}`),
+          bar(m.single_step_accuracy, m.single_step_lo, m.single_step_hi), bar(m.stacked_accuracy, m.stacked_lo, m.stacked_hi));
+        tb.append(tr);
+      }
+    }
+    const v2row = (m) => {
+      const h = m.hard, tr = el('tr');
+      tr.append(who(m.name, `${m.lab}${m.tier === 'cheap' ? ' · cheap' : ''}`), bar(h.rate, h.lo, h.hi, `${h.k}/${h.n}`), el('td', 'cost', h.truncated ? pct(h.truncated) : '–'));
+      return tr;
+    };
+    if ($('a-v2-top') && vm.length) {
+      const tb = document.querySelector('#a-v2-top tbody');
+      ['GPT-6.1 Sol', 'Claude Sonnet 5.5', 'Gemini 3.1 Pro', 'DeepSeek V4.1 Flash', 'Llama 4 Maverick'].map(vName).filter(Boolean)
+        .sort((a, b) => b.hard.rate - a.hard.rate).forEach((m) => tb.append(v2row(m)));
+    }
+    if ($('a-v2-all') && vm.length) {
+      const tb = document.querySelector('#a-v2-all tbody');
+      for (const m of [...vm].sort((a, b) => b.hard.rate - a.hard.rate)) {
+        const tr = v2row(m), h = m.hard;
+        tr.append(el('td', 'cost', String(h.reps)), el('td', 'cost', h.cost_per_correct == null ? '–' : usd(h.cost_per_correct * 1000, true)));
+        tb.append(tr);
+      }
+    }
+    // A chart in a closed <details> has no width to draw at; open those for the drawing below and close them after it.
+    const shut = [...document.querySelectorAll('details.draw-open:not([open])')];
+    shut.forEach((d) => { d.open = true; });
+    queueMicrotask(() => shut.forEach((d) => { d.open = false; }));
   }
 
   const draw = () => { ruleChart(); mistakeChart(); valueChart(); };
