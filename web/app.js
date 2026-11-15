@@ -304,7 +304,7 @@
     const ov = gauntlet.rows.filter((r) => r.engine).reduce((t, r) => t + r.overrides, 0);
     const withEngine = gauntlet.rows.filter((r) => r.engine);
     const allRight = withEngine.every((r) => r.great === r.questions);
-    document.getElementById('gauntlet-overrides').textContent = `With the calculator, ${allRight ? `all ${withEngine.length} models got every decision and every number right` : 'the models mostly got every decision and number right'}${ov ? `, but went against it ${ov} times` : ' and never went against it'}. `
+    document.getElementById('gauntlet-overrides').textContent = `With the calculator, ${allRight ? `all ${withEngine.length} models made the right decision on every question, with every number within 2% of the key` : 'the models mostly made the right decision, with every number within 2% of the key'}${ov ? `, but went against it ${ov} times` : ', and never went against it'}. `
       + `They also thought far less: about ${Math.round(gauntlet.rows.find((r) => r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k tokens for Sonnet instead of ${Math.round(gauntlet.rows.find((r) => !r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k.`;
   }
 
@@ -394,7 +394,9 @@
       conflict: 'two facts that conflict', over_limit: 'an amount over a legal limit' };
     const KINDS = { transposed: 'swapped digits', impossible_age: 'impossible ages', spending: 'impossible spending',
       conflict: 'facts that conflict', over_limit: 'amounts over a legal limit' };
-    const TIER_W = { frontier: 'top price', mid: 'middle price', cheap: 'cheap' };
+    const TIER_W = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap or free' };
+    // round 3: one label per price group on every page, and the plural used in sentences
+    const TIER_G = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' };
     const runs = (r) => `${r} run${r === 1 ? '' : 's'} per item`;
     // Every outcome a reply to a planted-mistake note can land in, in the order the page explains them.
     const OUT = [['caught', 'Caught it'], ['flagged_but_answered', 'Noticed, answered anyway'], ['silent_number', 'Missed it, answered anyway'],
@@ -421,6 +423,17 @@
       weak_n: String(weakTools.length), weak_right: weakTools.length ? `${spread(weakTools.map((m) => m.hard_tools.k), String)} of ${weakTools[0].hard_tools.n}` : null,
       weak_called: weakTools.length ? spread(weakTools.map((m) => m.hard_tools.call_rate), pct) : null,
       spent: v2.spent_usd != null ? usd(v2.spent_usd, true) : null, // writer B, round 2: built.html
+      // round 3: the models in each price group, and how the pooled reply count is made (files × runs per model)
+      ...Object.fromEntries(Object.keys(TIER_G).map((t) => [`tier_${t}`, M.filter((m) => m.tier === t).map((m) => m.name).join(', ')])),
+      cheap_n: ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'][M.filter((m) => m.tier === 'cheap').length] ?? String(M.filter((m) => m.tier === 'cheap').length),
+      reps_breakdown: (() => {
+        const times = ['', 'once', 'twice', 'three times', 'four times'];
+        const parts = [...new Set(M.filter((m) => m.bad).map((m) => m.bad.reps))].sort((a, b) => a - b).map((r) => {
+          const ms = M.filter((m) => m.bad?.reps === r), tiers = [...new Set(ms.map((m) => TIER_G[m.tier]))].join(' or ');
+          return `${times[r] ?? `${r} times`} of each of the ${ms.length} ${tiers} models`;
+        });
+        return parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0];
+      })(),
     };
     document.querySelectorAll('[data-w]').forEach((n) => { if (W[n.dataset.w] != null) n.textContent = W[n.dataset.w]; else console.warn('data-w not found:', n.dataset.w); });
 

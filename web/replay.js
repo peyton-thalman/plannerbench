@@ -8,7 +8,20 @@
   const all = data.replays;
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const usd = (x) => (x < 0 ? '−' : '') + '$' + Math.abs(Math.round(x)).toLocaleString('en-US');
-  const label = (r) => `${r.what}${r.ask_first ? ' · ask first' : ''} (${r.id.replace(/^g-/, '')})`;
+  // Plain names for the selector and the heading; the question's own short title (r.what) uses planner shorthand.
+  const PLAIN = { claim_age: 'Waiting to 70 for Social Security, and converting to a Roth before then',
+    first_rmd: 'A Roth conversion in the first year IRA withdrawals are required',
+    gains_vs_conversion: 'Selling investments at a 0% tax rate, or converting to a Roth',
+    how_much: 'How much to convert to a Roth, and for how many years',
+    inherited_ira: 'Emptying an inherited IRA within 10 years',
+    muni_stack: 'A Roth conversion when tax-free bond interest still raises Medicare premiums',
+    qcd_giving: 'Giving to charity by check, or straight from an IRA',
+    senior_phaseout: 'A Roth conversion while the new tax break for people over 65 phases out',
+    torpedo_irmaa: 'A Roth conversion that makes more Social Security taxable and raises Medicare premiums later',
+    trap: 'A trap: a question the facts can’t settle',
+    widow: 'A Roth conversion before or after a spouse dies' };
+  const plain = (r) => PLAIN[Object.keys(PLAIN).find((k) => r.id.replace(/^g-/, '').startsWith(k))] ?? r.what;
+  const label = (r) => `${plain(r)}${r.ask_first ? ' · one fact left out' : ''}`;
   const key = (r) => `${r.id}|${r.ask_first}`;
   const mkey = (r) => `${r.model}|${r.engine}`;
   const cents = (c) => (c < 0.01 ? 'under 1¢' : c < 1 ? `${Math.round(c * 100)}¢` : `$${c.toFixed(2)}`);
@@ -100,7 +113,9 @@
   const GLOSS = [[/\bPIA\b/, 'PIA: the monthly Social Security benefit at full retirement age.'],
     [/IRMAA/, 'MAGI and IRMAA: Medicare sets premiums from income two years earlier (MAGI); higher income adds a surcharge (IRMAA).'],
     [/8606/, 'After-tax basis (Form 8606): money already taxed, so it isn’t taxed again when it comes out.'],
-    [/\bRMD/, 'RMD: the withdrawal the IRS requires from a traditional IRA each year from a set age.']];
+    [/\bRMD/, 'RMD: the withdrawal the IRS requires from a traditional IRA each year from a set age.'],
+    [/\bmuni/i, 'Muni interest: interest from state or city bonds; free of federal tax, but it still counts in the income Medicare uses for premiums.'],
+    [/\bQCD/, 'QCD (qualified charitable distribution): a gift to charity straight from an IRA; it counts toward the required withdrawal and isn’t taxed.']];
   const gloss = (facts) => { const t = facts.join(' '), hits = GLOSS.filter(([re]) => re.test(t)).map(([, g]) => g); return hits.length ? `<p class="rp-gloss">${hits.map(esc).join(' ')}</p>` : ''; };
 
   function render() {
@@ -117,7 +132,7 @@
     const hh = r.household ?? { intro: '', facts: [] };
     const asked = (r.asks ?? []).map((q) => `<li>${esc(q)}</li>`).join('');
     view.innerHTML = `
-      <section class="rp-card"><p class="label">The household</p><h2 class="rp-h">${esc(r.what)}</h2>
+      <section class="rp-card"><p class="label">The household</p><h2 class="rp-h">${esc(plain(r))}</h2>
         ${hh.intro ? `<p class="rp-intro">${esc(hh.intro)}</p>` : ''}
         ${hh.facts.length ? `<p class="rp-who">What the model was told</p><ul class="rp-facts">${hh.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
         ${gloss(hh.facts)}

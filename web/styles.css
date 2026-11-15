@@ -564,3 +564,10 @@ details.fine .notes { margin-top: 0.75rem; }
 .rp-asked { margin-top: 0.25rem; }
 .rp-card .rp-opts + .rp-who { margin-top: 1rem; }
 .rp-gloss { margin: 0.5rem 0 0; font-size: 0.8125rem; line-height: 1.5; color: var(--muted); max-width: 72ch; }
+
+/* writer B, round 3 */
+/* Wrong facts and With a calculator: ChatGPT (GPT-6 Luna on a subscription) is its own boxed result, kept apart from the ranked models. */
+.subpart.solo { border: 1px solid var(--rule-2); border-radius: 6px; padding: clamp(1rem, 3vw, 1.75rem); }
+.subpart.solo > .label { margin: 0 0 0.35rem; }
+.subpart.solo .example { margin-top: 1rem; }
+.subpart.solo .result:last-of-type { margin-bottom: 0; }

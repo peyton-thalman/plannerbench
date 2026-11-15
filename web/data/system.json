@@ -121,3 +121,11 @@
   "source": "engine repo: mcp/card.ts line 72 (the note the chat card prints under the costs and savings); data/connector.json. Shown on web/chat.html"
  }
 }
+ },
+ "luna_text": {
+  "quoted": [
+   "Priya is only 14 in 2026 ... Her RMD is therefore zero. ANSWER: 0 (wrong facts, impossible_age)",
+   "A reliable answer requires a full multi-year projection of taxes, RMDs, premiums, and account balances. (whole-household, declined)"
+  ],
+  "note": "The first ChatGPT attempt was archived unscored because the agent wrote bare final numbers; one session refused a batch of hard tax questions 'from memory'. Numbers shown come from data/luna.json.",
+  "source": "replies in v2/runs/luna-codex/raw.jsonl (wrong facts) and runs/luna-gauntlet/raw.jsonl (whole-household); v2/runs/luna-codex/ADJUDICATION.md; quoted as text in web/wrong-facts.html, web/calculator.html, web/built.html"

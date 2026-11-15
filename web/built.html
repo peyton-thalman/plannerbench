@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="styles.css?v=24">
 </head>
 <body data-page="built">
 <header class="nav">
@@ -40,7 +40,7 @@
       </div>
       <ul class="notes">
         <li><b>The real question.</b> Which planning questions can an advisor trust a model with on its own, and which need verified math behind it? I couldn’t find anyone answering that with evidence.</li>
-        <li><b>Why it matters.</b> In this field a confident wrong number costs a family real money: a Roth conversion sized wrong here gave up $26,002. And a firm’s compliance team has to be able to defend every number a tool shows.</li>
+        <li><b>Why it matters.</b> In this field a confident wrong number costs a family real money. In one of my simulated households, a Roth conversion that a model sized wrong left <span data-v="gauntlet:failures.2.lost" data-f="usd">—</span> less projected after-tax wealth over 25 years than the best plan (a simulation, not a real client). And a firm’s compliance team has to be able to defend every number a tool shows.</li>
         <li><b>Who it’s for.</b> Wealth-tech product teams deciding what to build, compliance teams deciding what to allow, AI labs looking for hard, current, exact questions, and advisors asking “can I check this with AI?”</li>
         <li><b>The bet.</b> Models are good at language and judgment, and unreliable at rules that change every year. So put the rules in tested code, and let the model choose the inputs and explain the result.</li>
       </ul>
@@ -55,9 +55,9 @@
     <div class="principles">
       <div class="principle"><span class="n">01</span><h3>Build the judge before the feature</h3><p>Every piece started with the check that would prove it right: answer keys before questions, graders before models, fake meetings with answer keys before the meeting app.</p><p class="eg">The grader for the whole-household decisions passed 12 stand-in checks, including a fake model that answers perfectly and one that lies, before a single real model was asked.</p></div>
       <div class="principle"><span class="n">02</span><h3>The published source decides</h3><p>When the models and the key disagree, the IRS form, SSA’s manual or the CMS table settles it. Never a vote among models.</p><p class="eg">Several models from different labs gave the same answer on the new senior deduction, against my key. The IRS form (Schedule 1-A Part V) showed the key was right.</p></div>
-      <div class="principle"><span class="n">03</span><h3>Don’t let the builder be the only grader</h3><p>Claude Code built the engine, so something else checks it: a second engine written by a separate agent that never saw the first; PolicyEngine-US, outside tax software nobody here wrote; a model from another lab (GPT-6 Luna) re-judging wrong-facts replies; and another lab’s model (GPT-6.1 Sol) auditing every published claim.</p><p class="eg">Where I fell short, said plainly: on the wrong-facts test the lead agent itself re-checked judge labels and changed <span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> of them, under the judge’s written rule and with every change listed. A person spot-checking those labels is still pending.</p></div>
+      <div class="principle"><span class="n">03</span><h3>Don’t let the builder be the only grader</h3><p>Claude Code built the engine, so other things check it: a second engine written separately, outside tax software, and models from another lab. The full list, with results, is on <a href="method.html">How I checked</a>.</p><p class="eg">Where I fell short, said plainly: on the wrong-facts test the lead agent itself re-checked judge labels and changed <span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> of them, under the judge’s written rule and with every change listed. A person spot-checking those labels is still pending.</p></div>
       <div class="principle"><span class="n">04</span><h3>Spend in capped steps</h3><p>A smoke test under $1, then a small run under $5, then a decision. Every run has a hard spending cap.</p><p class="eg">The whole November round, <span data-w="models_n">—</span> models on two tests, cost <span data-w="spent">—</span> against a $5 cap.</p></div>
-      <div class="principle"><span class="n">05</span><h3>Keep a test set nobody tunes on</h3><p>Some questions are generated from a secret seed, never published and never used to improve anything. They exist only to check that an improvement is real.</p><p class="eg">The tool redesign was built on public questions, then scored 48 of 50 on held-out questions it had never seen.</p></div>
+      <div class="principle"><span class="n">05</span><h3>Keep a test set nobody tunes on</h3><p>Some questions are generated from a secret seed, never published and never used to improve anything. They exist only to check that an improvement is real.</p><p class="eg">The calculator redesign was built on public questions, then scored <span data-v="tools_private:stages.[key=v2].right" data-f="int">—</span> of <span data-v="tools_private:questions" data-f="int">—</span> on held-back questions nobody had seen (Claude Haiku 5.5, high effort, one run each, graded by code against the key: <a href="calculator.html#tools">experiment 1</a>).</p></div>
       <div class="principle"><span class="n">06</span><h3>Cut scope on purpose</h3><p>Speed comes from saying no. Once the engine proved to be the valuable part, the demo app’s features were frozen.</p><p class="eg">About 18 of 23 demo commits had gone to polish anyone could build. The next week went to the engine and the proof instead.</p></div>
       <div class="principle"><span class="n">07</span><h3>Every rough edge becomes a test</h3><p>Use it the way a client would, write down everything that feels wrong, fix it, then save the whole session as a test so it can’t come back.</p><p class="eg">Two test drives gave 6 notes, then 17. One changed a headline: once the Social Security earnings test was modeled, a “claim at 62” gain of about $149,000 disappeared.</p></div>
     </div>
@@ -76,7 +76,7 @@
             <tr><td>Fix the model overruling a correct tool</td><td>Stronger prompt; a bigger model; change what the tool says back</td><td class="chose">Change the tool’s reply to show the rule and cite the form</td><td>It fixes the cause, not one prompt. It worked for the model I built it on; in November, other models gained anywhere from nothing to a lot (<a href="calculator.html">With a calculator</a>).</td></tr>
             <tr><td>What “better plan” means</td><td>Lowest tax; highest income; most after-tax wealth</td><td class="chose">After-tax wealth at the end of the plan</td><td>It’s what the family keeps. Paying tax now to save more later nets out in one number.</td></tr>
             <tr><td>When two plans are close</td><td>Pick the winner; show both</td><td class="chose">Show both, and say “it’s close”</td><td>When two plans land within a rounding error of each other over 25 years, naming one the winner is false precision.</td></tr>
-            <tr><td>Which models to run</td><td>Every frontier model; a few, cheapest first</td><td class="chose">October: Claude Haiku and Sonnet plus four low-cost models from other labs. November: 11 models from seven labs, best to cheapest</td><td>The goal is to show the gap and its cause, not to run a leaderboard, and to stay inside small capped budgets.</td></tr>
+            <tr><td>Which models to run</td><td>Every frontier model; a few, cheapest first</td><td class="chose">October: Claude Haiku and Sonnet plus four low-cost models from other labs. November: <span data-w="models_n">—</span> models from <span data-k="a_v2_labs">—</span> labs, best to cheapest, plus ChatGPT tested the way people use it</td><td>The goal is to show the gap and its cause, not to run a leaderboard, and to stay inside small capped budgets.</td></tr>
             <tr><td>The demo’s role</td><td>Keep adding features; freeze it</td><td class="chose">Freeze it as the demo</td><td>Speech-to-text and form-filling are commodity. The verified engine is the defensible part.</td></tr>
             <tr><td>Positioning</td><td>Integrate with one firm’s systems; stand alone</td><td class="chose">Stand alone, with a generic intake form</td><td>No firm data anywhere, and a clean story for any firm’s compliance review.</td></tr>
             <tr><td>Who picks the next question in a chat</td><td>The chat model; the engine</td><td class="chose">The engine</td><td>It reruns the plan with each unknown both ways and asks only what could change the answer. A chat model asks what sounds reasonable.</td></tr>
@@ -99,7 +99,7 @@
       <ol class="timeline">
         <li><span class="when">Oct 15</span><h3>The engine</h3><p>A planning engine for federal tax, Social Security, required IRA withdrawals and Medicare premiums, checked for rule errors the same day.</p></li>
         <li><span class="when">Oct 20</span><h3>The first test</h3><p>Questions with an answer key I could prove, an outside tax model as referee, and the first models scored. The same day: the Wizard meeting demo, built behind its own grader.</p></li>
-        <li><span class="when">Oct 21</span><h3>The calculator, and why it got ignored</h3><p>The engine as tools a model can call. Version 1.0 returned only the number and got overruled; 1.1 showed the rule and the form line, and the overruling stopped. Also: a second engine written from the rules alone, and a year-by-year runner for 25-year plans.</p></li>
+        <li><span class="when">Oct 21</span><h3>The calculator, and why it got ignored</h3><p>The engine as tools a model can call. Version 1.0 returned only the number and got overruled; 1.1 showed the rule and the form line, and the overruling almost stopped (both misses on the held-back questions were still overrules). Also: a second engine written from the rules alone, and a year-by-year runner for 25-year plans.</p></li>
         <li><span class="when">Oct 22</span><h3>Whole-household decisions, and the connector</h3><p>Decisions built so no shortcut works, a grader that tracks every time a model overrules the engine, then the engine inside Claude and ChatGPT, graded by simulated clients before anyone used it.</p></li>
         <li><span class="when">Nov 14</span><h3>The newer, harder set and wrong facts</h3><p>An audit of my own first test found the best models had nearly maxed it, and that every fact I gave them was true. So I added harder questions and client files with one planted mistake each.</p></li>
         <li><span class="when">Nov 15</span><h3>An outside audit, and this rewrite</h3><p>GPT-6.1 Sol, from a different lab than the agents that built it, checked every published claim against the raw data. It found <span data-v="system:audit.errors" data-f="int">—</span> errors. They are fixed on this version, and the site was rewritten so the story reads in order.</p></li>
@@ -115,10 +115,11 @@
         <p class="sub">AI agents did most of the work, so I assumed they would make mistakes and built things to catch them. These are the ones that got caught.</p>
       </div>
       <ul class="notes">
-        <li><b>A bug in the engine itself.</b> The second engine, written without seeing the first, disagreed on 3 of 2,000 households. One was a real error in the main engine: a 2027 tax threshold. Fixed, then 4,000 of 4,000 agreed.</li>
+        <li><b>A bug in the engine itself.</b> The second engine, written without seeing the first, disagreed on 3 of 2,000 households. One was a real error in the main engine: a 2027 tax threshold. Fixed; after that, the two engines agreed on all <span data-v="system:cleanroom.agree" data-f="int">—</span> households in the next comparison.</li>
         <li><b>A Medicare premium off by a tier.</b> Income exactly at a threshold was placed one tier too low. Found by a check, fixed, logged.</li>
         <li><b>Questions that weren’t fair.</b> Reading the first replies on the wrong-facts test, a model rightly asked about a fact the notes never stated. 14 notes were ambiguous. I fixed them, re-asked, and kept the old replies out of the scores.</li>
         <li><b>A spending cap that leaked.</b> One run went $0.39 over its cap because requests already in flight weren’t counted. The cap now reserves each request’s worst case.</li>
+        <li><b>Testing ChatGPT the way people use it.</b> I wanted a result for ChatGPT on an ordinary subscription, not only through the API. An AI agent (Codex) answered the questions in my account. The first attempt was thrown out: asked to do dozens at once, the agent wrote bare final numbers instead of answering each question the way a chat would. The re-run used small batches, each question treated as its own chat; even then, one session refused a whole batch of hard tax questions as impossible “from memory”. The lesson: an AI agent asked to do work in bulk cuts corners, so check how the work was done, not only the score.</li>
         <li><b>Grading and wording errors.</b> The outside audit found replies that ran out of room counted as a choice to decline, some judge labels that missed a model naming the mistake, and sentences stronger than the evidence (like “every model was worst at” one kind of error, when two weren’t). All fixed here; the report lists each one.</li>
       </ul>
     </div>
@@ -154,7 +155,7 @@
         <div><b>Isolated agents</b><span>The second engine, written blind from the rules alone; fake meeting small talk for the demo’s test set</span></div>
         <div><b>PolicyEngine-US</b><span>The outside referee: an open-source tax model nobody on this project wrote</span></div>
         <div><b>Another lab’s model</b><span>GPT-6.1 Sol audited every claim on the site against the raw data (Nov 15); GPT-6 Luna re-judged a quarter of the wrong-facts replies</span></div>
-        <div><b>Models under test</b><span>Claude, GPT and Gemini models plus free and open models (DeepSeek, GLM, Qwen, gpt-oss, Llama, Mistral), each pinned to one named host</span></div>
+        <div><b>Models under test</b><span>Claude, GPT and Gemini models plus cheap and free models (DeepSeek, GLM, Qwen, gpt-oss, Llama, Mistral), each pinned to one named host; and GPT-6 Luna through my ChatGPT subscription, tested separately</span></div>
       </div>
     </div>
   </section>
@@ -187,6 +188,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>

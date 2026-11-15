@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>With a calculator · PlannerBench</title>
-<meta name="description" content="Three experiments with a calculator AI models can call while they answer: it fixed one model once it showed the rule, lifted a cheap model above a pricier one, and got every whole-household decision right for three models. It did nothing for others.">
+<meta name="description" content="Three experiments with a calculator AI models can call while they answer: it fixed one model once it showed the rule, lifted a cheap model above a pricier one, and, for three models, got every whole-household decision right with every number within 2%. It did nothing for others. ChatGPT without a calculator mostly declined those decisions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="styles.css?v=24">
 </head>
 <body data-page="calculator">
 <header class="nav">
@@ -48,7 +48,7 @@
       <ol>
         <li><a href="#tools"><b>October: show it the rule.</b></a> One model, the hardest first-test questions. A right number wasn’t enough; the rule behind it was.</li>
         <li><a href="#cheap"><b>November: who it rescues.</b></a> Eight models on the newer, harder set. A cheap model jumped; three others didn’t move.</li>
-        <li><a href="#gauntlet"><b>Whole-household decisions.</b></a> Real choices over 25 years, three models. Plus a short test: leave a fact out, and see if it asks.</li>
+        <li><a href="#gauntlet"><b>Whole-household decisions.</b></a> Real choices over 25 years, three models. Plus ChatGPT without a calculator, and a short test: leave a fact out, and see if it asks.</li>
       </ol>
     </div>
   </section>
@@ -148,7 +148,7 @@
           <tbody></tbody>
         </table>
       </div>
-      <p class="table-note">Unlike the table above, “On its own” here averages every run of a question (two for most models, one for the most expensive), so Claude Haiku 5.5 shows <span data-v="v2:models.[name=Claude Haiku 5.5].hard.rate" data-f="pct">—</span> here and <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].without" data-f="frac" data-of="v2:tool_effect.[name=Claude Haiku 5.5].questions">—</span> (its first run) above. Each row says how many runs went into each column. Price tier is the model’s price per token: top, middle or cheap.</p>
+      <p class="table-note">Unlike the table above, “On its own” here averages every run of a question (two for most models, one for the most expensive), so Claude Haiku 5.5 shows <span data-v="v2:models.[name=Claude Haiku 5.5].hard.rate" data-f="pct">—</span> here and <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].without" data-f="frac" data-of="v2:tool_effect.[name=Claude Haiku 5.5].questions">—</span> (its first run) above. Each row says how many runs went into each column. Price group is by the model’s price per token: top-priced, mid-priced, or cheap or free.</p>
     </details>
     <details class="fine wide">
       <summary>By kind of question</summary>
@@ -166,7 +166,7 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Experiment 3 of 3 · Whole-household decisions</p>
-        <h2>Real retirement decisions: with the calculator, all three models got every one right</h2>
+        <h2>Real retirement decisions: with the calculator, all three models made the right decision, with every number within 2%, every time</h2>
       </div>
       <dl class="idline" aria-label="How experiment 3 was run">
         <div><dt>Questions</dt><dd><span data-v="gauntlet:questions" data-f="int">—</span> whole made-up households (about 16 facts each: Social Security, IRAs, a pension, savings), one from each of <span data-v="gauntlet:families" data-f="int">—</span> kinds of decision plus a trap with no honest answer</dd></div>
@@ -175,7 +175,7 @@
         <div><dt>Graded</dt><dd>by code: “fully right” means the right decision and every number within 2% of the key</dd></div>
         <div><dt>Held out</dt><dd>no: <span data-v="system:calculator_r2.gauntlet_held_back" data-f="int">—</span> held-back questions are built but not yet run</dd></div>
       </dl>
-      <p class="result"><b>Result.</b> Each choice is one people really face: how much to convert to a Roth, when to claim Social Security, how to give to charity, how fast to empty an IRA inherited from someone who died. Getting it right means combining at least three rules over 25 years. With the calculator, all <span data-k="g_models">—</span> models got every question fully right. On its own, DeepSeek V4.1 Flash got <span data-k="open_from">—</span>.</p>
+      <p class="result"><b>Result.</b> Each choice is one people really face: how much to convert to a Roth, when to claim Social Security, how to give to charity, how fast to empty an IRA inherited from someone who died. Getting it right means combining at least three rules over 25 years. With the calculator, all <span data-k="g_models">—</span> models got every question fully right: the right decision, and every number within 2% of the key. On its own, DeepSeek V4.1 Flash got <span data-k="open_from">—</span>.</p>
 
       <div class="table-wrap">
         <table class="scores ladder" id="gauntlet-table">
@@ -204,6 +204,19 @@
         <li><b>Hard on purpose.</b> Code checks that no single tax rate or skipped rule lands within 2% of the answer. Every option is recomputed by a second, separately written engine, and its 2026 tax return by PolicyEngine-US, an outside tax model (<span data-v="system:gauntlet_keys.agree" data-f="int">—</span> of <span data-v="system:gauntlet_keys.of" data-f="int">—</span> agree).</li>
         <li><b>Still small.</b> One try per question, three models. The intervals are wide on purpose: this shows the gap, not a ranking.</li>
       </ul>
+
+      <div class="subpart solo" id="chatgpt-household">
+        <p class="label">A separate result, not in the table above</p>
+        <h3>ChatGPT without a calculator: it mostly said it couldn’t</h3>
+        <dl class="idline" aria-label="How the ChatGPT household test was run">
+          <div><dt>Questions</dt><dd>the same <span data-v="luna:household.n" data-f="int">—</span> households, trap included</dd></div>
+          <div><dt>Model</dt><dd>GPT-6 Luna, through my own ChatGPT subscription (in Codex, OpenAI’s agent app), with no calculator, code or web</dd></div>
+          <div><dt>Settings</dt><dd>medium effort, no length limit, one try each; a different setup from the three models above</dd></div>
+          <div><dt>Graded</dt><dd>the same way: the right decision, and every number within 2%</dd></div>
+        </dl>
+        <p class="result"><b>Result.</b> It declined all <span data-v="luna:household.declined_answerable" data-f="int">—</span> questions that had an answer, typically like this: “A reliable answer requires a full multi-year projection of taxes, RMDs, premiums, and account balances.” (RMDs are the withdrawals the IRS requires from retirement accounts.) It also rightly declined the trap, so it scored <span data-v="luna:household.great" data-f="int">—</span> of <span data-v="luna:household.n" data-f="int">—</span>.</p>
+        <p class="result"><b>Why this matters.</b> That’s an honest answer, and it’s the case for a calculator. A real decision needs a 25-year projection, which a chat can’t do in its head. Without one, the best you can hope for is a model that knows it can’t; with one, three models got every decision right.</p>
+      </div>
 
       <div class="subpart" id="ask-first">
         <h3>Short test: leave a fact out. Does it ask, or guess?</h3>
@@ -249,7 +262,7 @@
     <details class="fine">
       <summary>For the technical reader</summary>
       <p>The calculator is an MCP server (the Model Context Protocol, the standard way to plug tools into AI models). The benchmark runners and the chat add-on call the same code. The first test offered federal tax, taxable Social Security, required withdrawals, Social Security benefits, Medicare premiums and tax tables. The November set offered those plus a year-by-year scenario runner; the Roth-conversion solver and the chat front door were left out to keep the instructions short.</p>
-      <p>Token budget in the November set: <span data-v="v2:tool_budget.tokens_per_turn" data-f="int">—</span> output tokens per turn, up to <span data-v="v2:tool_budget.max_tool_turns" data-f="int">—</span> turns. <span data-v="v2:tool_budget.over_4000_total" data-f="int">—</span> of <span data-v="v2:tool_budget.replies" data-f="int">—</span> calculator replies used more than <span data-v="v2:settings.max_tokens" data-f="int">—</span> in total, the longest <span data-v="v2:tool_budget.max_output_tokens" data-f="int">—</span>.</p>
+      <p><b>Experiment 2</b> (the <span data-v="v2:items.hard" data-f="int">—</span> questions in the newer set; low effort; one run each way; graded by code within <span data-v="system:calculator_r2.newer_set_tolerance">—</span>). Token budget: <span data-v="v2:tool_budget.tokens_per_turn" data-f="int">—</span> output tokens per turn, up to <span data-v="v2:tool_budget.max_tool_turns" data-f="int">—</span> turns. <span data-v="v2:tool_budget.over_4000_total" data-f="int">—</span> of <span data-v="v2:tool_budget.replies" data-f="int">—</span> calculator replies used more than <span data-v="v2:settings.max_tokens" data-f="int">—</span> in total, the longest <span data-v="v2:tool_budget.max_output_tokens" data-f="int">—</span>.</p>
       <p>DeepSeek V4.1 Flash with the calculator against Claude Sonnet 5.5 on its own, the same <span data-v="v2:comparisons.0.questions" data-f="int">—</span> questions, first run each: <span data-v="v2:comparisons.0.only_a" data-f="int">—</span> only DeepSeek got right, <span data-v="v2:comparisons.0.only_b" data-f="int">—</span> only Sonnet got right; exact McNemar p ≈ <span data-v="v2:comparisons.0.p_exact_mcnemar" data-f="raw">—</span>. Higher observed score, not a significant difference. DeepSeek alone → with: <span data-v="v2:tool_effect.[name=DeepSeek V4.1 Flash].fixed" data-f="int">—</span> fixed, <span data-v="v2:tool_effect.[name=DeepSeek V4.1 Flash].broken" data-f="int">—</span> broken, p &lt; 0.001. Claude Haiku 5.5: <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].fixed" data-f="int">—</span> fixed, <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].broken" data-f="int">—</span> broken, p = <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].p" data-f="raw">—</span>.</p>
       <p>First test: Claude Haiku 5.5 through Anthropic’s API. November set: every model through OpenRouter (a service that relays requests to many models), each pinned to one host. The calculator prices each choice; it never picks investments or products.</p>
     </details>
@@ -268,6 +281,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>
