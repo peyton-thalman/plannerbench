@@ -139,7 +139,8 @@
     }
   }
 
-  // --- method (writer A) --- the proof stack, one card per independent check, each saying exactly what it covers
+  // --- method (writer A) --- the proof stack, one card per independent check, each saying exactly what it covers.
+  // round 2: the cards stay plain; file names, the two-routes check and reproduce.sh go in the technical toggle (#proof-tech).
   if ($('proofs') && sys.cleanroom) {
     const ratio = (o) => `${o.agree.toLocaleString('en-US')} / ${o.of.toLocaleString('en-US')}`;
     const cards = [
@@ -147,13 +148,17 @@
       [ratio(sys.policyengine), 'Outside tax code', `PolicyEngine-US, open-source tax software written by other people, recomputes every tax answer in the first test, all within ${sys.policyengine.within}, the new senior deduction included; held-back questions ${ratio({ agree: sys.policyengine.private_agree, of: sys.policyengine.private_of })}. It doesn't model required withdrawals, Social Security claiming or Medicare premiums, so those rest on the published tables and the second engine.`, sys.policyengine.source],
       [ratio(sys.gauntlet_keys), 'Whole-household decisions, recomputed', 'Every option in every public whole-household question is rerun by the second engine, and its 2026 federal tax return by PolicyEngine, before the question can be used.', sys.gauntlet_keys.source],
       [ratio(sys.tools_check), 'The calculator can answer everything', 'Before any model used the calculator, a script proved that calling it correctly reproduces every numeric answer in the first test.', sys.tools_check.source],
-      [h ? `${pct(h.direct_accuracy)} = ${pct(h.openrouter_accuracy)}` : '—', 'Same model, two routes', h ? `${name(h.direct)} answered the same ${h.questions} questions directly and through OpenRouter (a service that relays requests to many models). Same score both ways: no difference detected in this check, which is not proof the route never matters.` : '', 'checks/HARNESS.md'],
-      ['REPRODUCED', 'One script rebuilds the first test', `reproduce.sh re-checks the first test’s answer key, regrades every saved first-test reply, rebuilds its scores (and the calculator runs on its ${tools?.hard.questions ?? 50} hardest questions) and compares them with the published copy; any difference fails it. It doesn’t regenerate the questions or cover the newer set, wrong facts or whole-household decisions; those have their own scripts.`, 'reproduce.sh'],
     ];
-    for (const [num, title, body, src] of cards) {
+    for (const [num, title, body] of cards) {
       const c = el('div', 'proof-card');
-      c.append(el('b', null, num), el('span', 't', title), el('p', null, body), el('code', null, src));
+      c.append(el('b', null, num), el('span', 't', title), el('p', null, body));
       $('proofs').append(c);
+    }
+    if ($('proof-tech')) {
+      const item = (b, t) => { const li = el('li'); li.append(el('b', null, b), document.createTextNode(' ' + t)); $('proof-tech').append(li); };
+      if (h) item('Same model, two routes.', `${name(h.direct)} answered the same ${h.questions} questions directly and through OpenRouter (a service that relays requests to many models): ${pct(h.direct_accuracy)} and ${pct(h.openrouter_accuracy)}. No difference detected in this check, which is not proof the route never matters. (checks/HARNESS.md)`);
+      item('One script rebuilds the first test.', `reproduce.sh (a script anyone can run from the code) re-checks the first test’s answer key, regrades every saved first-test reply, rebuilds its scores and the calculator runs on its ${tools?.hard.questions ?? 50} hardest questions, and compares them with the published copy; any difference fails it. It doesn’t regenerate the questions or cover the newer set.`);
+      item('Where each check’s record lives.', cards.map(([, title, , src]) => `${title}: ${src}`).join(' · ') + '. (“engine repo” is the planning engine’s own code repository; verify/COMPARE.md there is the two engines’ comparison report.)');
     }
   }
 
@@ -674,6 +679,7 @@
     if (vm.length) {
       const under30 = cheap.filter((m) => m.hard.rate < 0.3).length;
       A.a_v2_models = String(vm.length);
+      A.a_v2_labs = words[new Set(vm.map((m) => m.lab)).size];
       A.a_cheap_under30 = under30 === cheap.length ? `all ${cheap.length}` : `${under30} of the ${cheap.length}`;
       A.a_tools_weak = words[cheap.filter((m) => m !== dsk && m.hard_tools && m.hard_tools.rate < 0.1).length];
       // Wrong facts: the two best models' catch rate, and the three models that caught least (as on wrong-facts.html)
@@ -682,7 +688,14 @@
       A.a_low_caught = span(low3.map((m) => m.bad.caught.rate));
       A.a_low_silent = span(low3.map((m) => m.bad.silent_number.rate));
       A.a_low_cheap = low3.every((m) => m.tier === 'cheap') ? 'Three cheap models' : 'Three models';
+      // round 2: how many planted mistakes even the two best missed (home's straight answer)
+      A.a_best_missed = sol && son && span([1 - sol.bad.caught.rate, 1 - son.bad.caught.rate]);
     }
+    // round 2: first-test questions actually asked of each model (per-task count × tasks), next to the 2,800 generated
+    const ft = sys.first_test;
+    if (ft && meta) A.a_v1_per_model = `${ft.per_task_claude * meta.tasks}–${ft.per_task_openrouter * meta.tasks}`;
+    // round 2: the worked question's table shows one row per setup; Claude Haiku 5.5 was asked two ways
+    if (misread.length) A.a_misread_rows = words[misread.length];
     // First test: how much of the wrong-answer pile one misreading explains (both published runs, every model)
     if (mistakes?.length) {
       const SD = 'combined senior phase-out', sum = (f) => mistakes.filter(f).reduce((t, r) => t + r.count, 0);
@@ -697,6 +710,7 @@
       const comp = models.map((m) => m.compliance_accuracy).filter((x) => x != null);
       A.a_comp = span(comp); A.a_setups = words[models.length] ?? String(models.length);
       A.a_v1_labs = words[new Set(models.map((m) => m.lab)).size];
+      A.a_v1_models = words[new Set(models.map((m) => m.name)).size];
     }
     document.querySelectorAll('[data-k^="a_"]').forEach((n) => { if (A[n.dataset.k] != null) n.textContent = A[n.dataset.k]; else console.warn('data-k not found:', n.dataset.k); });
 
@@ -735,6 +749,15 @@
         tr.append(el('td', 'cost', String(h.reps)), el('td', 'cost', h.cost_per_correct == null ? '–' : usd(h.cost_per_correct * 1000, true)));
         tb.append(tr);
       }
+    }
+    // round 2: the full first-test tables say who made each model; the route and host (with fp8/bf16) are listed
+    // only in the technical toggle (#a-hosts), so a normal reader never meets "OpenRouter → DeepInfra (fp8)".
+    if (models && $('scores')) {
+      const plain = Object.fromEntries(models.map((m) => [m.access + (m.open_weights ? ' · open weights' : ''), `${m.lab}${m.open_weights ? ' · free to download' : ''}`]));
+      document.querySelectorAll('#scores .via, #dollars .via').forEach((n) => { if (plain[n.textContent]) n.textContent = plain[n.textContent]; });
+    }
+    if (models && $('a-hosts')) {
+      for (const m of models) { const li = el('li'); li.append(el('b', null, name(m.model)), document.createTextNode(` ${m.access}`)); $('a-hosts').append(li); }
     }
     // A chart in a closed <details> has no width to draw at; open those for the drawing below and close them after it.
     const shut = [...document.querySelectorAll('details.draw-open:not([open])')];

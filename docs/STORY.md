@@ -16,8 +16,12 @@ Target: both human readers score it 10/10 for "easy to follow the story."
 ## The one sentence
 
 AI is great at simple retirement questions; on real ones it depends heavily on which AI you ask; a trusted
-calculator rescues some models but not others; and when you tell it something wrong, the cheap ones almost never
-notice and even the best miss some, which is now the biggest gap.
+calculator rescues some models but not others; and when you tell it something wrong, three cheap models almost never
+noticed and even the best two missed about one in four or five (20–27%).
+
+Home page's one-sentence version (names names): the best AI I tested, GPT-6.1 Sol, got 98% of my hardest questions
+right and Claude Sonnet 5.5 got 62%; all five cheap and free models scored under 30%, and three of them almost never
+noticed a fact that couldn't be true. "Best" = right most often; on wrong facts, catching the most without false alarms.
 
 ## Why I made this (the opening, first person)
 
@@ -39,9 +43,9 @@ notice and even the best miss some, which is now the biggest gap.
 - For a single, well-known rule (this year's tax bracket, an IRA withdrawal), the best AIs are almost always right.
 - For your whole situation (taxes, Social Security and Medicare at once), it depends a lot on which AI. Free or
   cheap ones get most of these wrong; the very best got nearly all right in my newest test.
-- The biggest risk isn't the math. It's what you type in. Cheap AIs almost never notice if a number you gave them can't
-  be right, and even the best miss about one in four; they hand back a confident answer anyway. Double-check your inputs, and take big decisions to a
-  professional.
+- Check what you type in. Say what was measured, not "the biggest risk": in my tests, three cheap models almost never
+  questioned an impossible fact, and even the best two missed 20–27%; they handed back a confident answer anyway.
+  (Don't say "the math isn't the problem": one model said $70,200 exceeds $798,000.)
 
 ## The four findings (order is fixed; each links to its page)
 
@@ -68,7 +72,8 @@ notice and even the best miss some, which is now the biggest gap.
      right (one per family plus a trap), including DeepSeek, which got 2 of 11 alone. Small sample.
    - Leave a fact out: with the calculator, DeepSeek asked for the missing fact 9 of 10 times.
    - Try it yourself: it plugs into Claude and ChatGPT (chat.html).
-4. **Tell it something wrong: the best catch most, the cheap ones almost none. This is the biggest open gap.**
+4. **Tell it something wrong: the best catch most, three cheap models almost none.** (Say "three cheap models", not
+   "cheap models": DeepSeek V4.1 Flash caught 61% and GLM 5.3 Flash 40%. "Caught" = named the mistake and gave no number.)
    (Not "most won't notice": 7 of 11 models caught at least half. "Best" = catching without false alarms;
    Gemini 3.8 Flash caught 92% but flagged half the valid files.) 30 client files, one planted
    mistake each (a retiree who is 14, spending ten times what the family owns, a contribution over the legal limit).
@@ -76,8 +81,16 @@ notice and even the best miss some, which is now the biggest gap.
    number 81–93% of the time. Some noticed the problem and answered anyway. Every model was worst at a plausible
    amount that's over a legal limit. Page: Wrong facts (wrong-facts.html).
 
-Then: **What this means for you** (three plain bullets), **How I checked** (method.html), **How I built it**
-(built.html: phase 1 October, phase 2 November).
+Home page order (round 2): one-sentence answer naming names + what "best" means; why I made this; the straight answer;
+"How to read the numbers" (the first test: 2,800 generated, each model asked 10–15 per task = 140–210; the newer set:
+42 hard questions + 30 client files, 11 models; the answer key; the calculator = the answer key as a tool an AI can
+call, not usable on the site, chat demo private); four finding cards (one number, model, test, catch beside it);
+why you can trust the numbers (AI-built, so independent programs; audit found and fixed 12 errors, public; pending CPA
+is an extra check, the independent programs already agree within $1–2); ends with **Before you trust an AI with a
+retirement number: three things**. Verification language: "within $1" / "within $2", never "to the dollar".
+
+Reading order and every page's bottom "Next" link: home → AI on its own → With a calculator → Wrong facts →
+How I checked → How I built it.
 
 ## Names (use these; never the old ones in public text)
 

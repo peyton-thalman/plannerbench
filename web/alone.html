@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body data-page="results">
 <header class="nav">
@@ -39,7 +39,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>One question, and where it goes wrong</h2>
-        <p class="sub">A real question from the first test (October 2026). <span data-k="agree_models">—</span> <span data-k="agree_cap">—</span>, to the dollar. The IRS form shows why.</p>
+        <p class="sub">A real question from the first test (October 2026). <span data-k="agree_models">—</span> <span data-k="agree_cap">—</span>: <span data-v="featured:replies.claude-sonnet-5-5.got" data-f="usd">—</span>. The list below has <span data-k="a_misread_rows">—</span> rows with that number because I asked Claude Haiku 5.5 two ways, directly and through a relay service, and it made the mistake both times. The IRS form shows why.</p>
       </div>
       <div class="worked">
         <div class="question">
@@ -49,7 +49,7 @@
         </div>
         <div class="form" aria-label="Schedule 1-A Part V, worked">
           <p class="label">IRS Schedule 1-A, Part V (2025 form) · Enhanced deduction for seniors</p>
-          <p class="rule-text">A 2025 tax law gave each person 65 or older an extra <span data-v="system:senior_deduction.per_person" data-f="usd">—</span> deduction (an amount taken off income before tax). It shrinks by <span data-v="system:senior_deduction.phaseout_rate" data-f="pct">—</span> of income over <span data-v="featured:steps.threshold" data-f="usd">—</span> on a joint return. Below is the 2025 version of the form, line by line; the question is about 2026, and the 2026 form runs the same steps on renumbered lines.</p>
+          <p class="rule-text">A 2025 tax law gave each person 65 or older an extra <span data-v="system:senior_deduction.per_person" data-f="usd">—</span> deduction (an amount taken off income before tax). It shrinks by <span data-v="system:senior_deduction.phaseout_rate" data-f="pct">—</span> of income (the form’s “modified adjusted gross income”: roughly your total income before the standard deduction) over <span data-v="featured:steps.threshold" data-f="usd">—</span> on a joint return. Below is the 2025 version of the form, line by line; the question is about 2026, and the 2026 form runs the same steps on renumbered lines.</p>
           <ol class="lines" id="featured-lines"></ol>
           <div class="misread">
             <p class="label">What the AI models did</p>
@@ -59,7 +59,7 @@
       </div>
       <div class="takeaway-row">
         <p class="takeaway"><b>How common was this mistake?</b> Across the two runs of the first test, <span data-k="a_sd">—</span> of the <span data-k="a_wrong">—</span> wrong answers (<span data-k="a_sd_of_wrong">—</span>) were this exact misreading. Most wrong answers matched no known misreading at all; of the <span data-k="a_named">—</span> we could trace to a named one, it explains <span data-k="a_sd_of_named">—</span>. For Claude Sonnet 5.5 it was <span data-k="a_son_sd">—</span> wrong answers.</p>
-        <p class="takeaway"><b>Show it the rule, and it gets it right.</b> When I pasted the IRS’s instructions for the new deduction in front of the same questions, Claude Sonnet 5.5 went from <span data-k="a_rule_son">—</span> on the senior-deduction questions, and Claude Haiku 5.5 from <span data-k="a_rule_haiku">—</span>. The math was fine; the rule was the gap.</p>
+        <p class="takeaway"><b>Show it the rule, and it gets it right.</b> When I pasted the IRS’s instructions for the new deduction in front of the same questions, Claude Sonnet 5.5 went from <span data-k="a_rule_son">—</span> on the senior-deduction questions, and Claude Haiku 5.5 from <span data-k="a_rule_haiku">—</span>. On these questions, not knowing the new rule was the gap.</p>
       </div>
     </div>
   </section>
@@ -68,7 +68,8 @@
     <div class="section-head">
       <p class="label">Test 1 · October 2026</p>
       <h2>The first test: simple questions almost always right, stacked ones mostly wrong</h2>
-      <p class="sub"><span data-k="questions">—</span> questions, from one rule to several rules meeting in one household. I tested <span data-k="a_setups">—</span> model setups from <span data-k="a_v1_labs">—</span> companies, each set to think hard and allowed long replies.</p>
+      <p class="sub">A <b>one-rule question</b> applies a single rule, like the tax on an income or this year’s required IRA withdrawal. A <b>several-rules question</b> makes rules meet in one household, the way taxes, Social Security and Medicare do in real life.</p>
+      <p class="id-line"><b>Questions per model:</b> <span data-k="a_v1_per_model">—</span> of the <span data-k="questions">—</span> generated (<span data-v="system:first_test.per_task_claude" data-f="int">—</span>–<span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> per task) · <b>Models:</b> <span data-k="a_v1_models">—</span> from <span data-k="a_v1_labs">—</span> companies (<span data-k="a_setups">—</span> rows, because Claude Haiku 5.5 was asked two ways) · <b>Settings:</b> high reasoning effort, long replies · <b>Graded:</b> by a script against the answer key, within a dollar or two</p>
     </div>
     <div class="table-wrap">
       <table class="scores compact" id="a-v1-top">
@@ -81,14 +82,14 @@
     <figure class="chart-card value-card">
       <figcaption>
         <h3>What the wrong answers were</h3>
-        <p>Each wrong answer checked against known ways of misreading the rules. The senior-deduction misreading is the biggest named cause; most other wrong answers matched no known misreading (“Unexplained”). One cheap model, gpt-oss-120b, used the required-withdrawal table the IRS replaced in 2022.</p>
+        <p>Each wrong answer checked against known ways of misreading the rules. The senior-deduction misreading is the biggest named cause; most other wrong answers matched no known misreading (“Unexplained”). One cheap model, gpt-oss-120b, used the required-withdrawal table the IRS replaced in 2022. (RMD, required minimum distribution: the amount you must take out of a traditional IRA each year once you reach your seventies.)</p>
       </figcaption>
       <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
     </figure>
 
     <details class="fine wide draw-open">
       <summary>All models and columns (first test)</summary>
-      <p>Every model setup, every kind of question. “Compliance” questions ask a reviewer to catch a planted problem. In this test they were too easy: each question defined the issue it was about, so all <span data-k="a_setups">—</span> setups scored <span data-k="a_comp">—</span>. The next version names issues without defining them. “Never finished” means the model used its whole reply budget thinking and never answered; that counts as not right.</p>
+      <p>Every model setup, every kind of question. “Compliance” questions ask a reviewer to catch a planted problem. In this test they were too easy: each question defined the issue it was about, so all <span data-k="a_setups">—</span> setups scored <span data-k="a_comp">—</span>. The next version names issues without defining them. “Never finished” means the model used its whole reply budget thinking and never answered; that counts as not right. “A few steps” questions chain two or three calculations. “Overall” is every kind of question together. “Cost per 1,000 right” is what I paid in usage fees for every 1,000 right answers.</p>
       <div class="table-wrap">
         <table class="scores" id="scores">
           <thead>
@@ -135,7 +136,9 @@
 
     <details class="fine">
       <summary>How the first test was run</summary>
-      <p>Claude models were asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span> questions per task through Anthropic’s API, with up to <span data-v="system:first_test.max_tokens_claude" data-f="int">—</span> tokens per reply; the others <span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> per task through OpenRouter (a service that relays requests to many models), with up to <span data-v="system:first_test.max_tokens_openrouter" data-f="int">—</span>. Reasoning effort was <span data-v="system:first_test.effort">—</span> for all. Each outside model was pinned to one named host with data collection off; “fp8” and “bf16” say how compressed that host’s copy is. Ranges are 95% intervals; when two overlap heavily, the gap between those models may be noise.</p>
+      <p>Claude models were asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span> questions per task through Anthropic’s API, with up to <span data-v="system:first_test.max_tokens_claude" data-f="int">—</span> tokens per reply; the others <span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> per task through OpenRouter (a service that relays requests to many models), with up to <span data-v="system:first_test.max_tokens_openrouter" data-f="int">—</span>. Reasoning effort was <span data-v="system:first_test.effort">—</span> for all. Each outside model was pinned to one named host with data collection off; “fp8” and “bf16” say how compressed that host’s copy is. Route and host for each row:</p>
+      <ul class="notes hosts" id="a-hosts"></ul>
+      <p> Ranges are 95% intervals; when two overlap heavily, the gap between those models may be noise.</p>
     </details>
   </section>
 
@@ -146,6 +149,7 @@
         <h2>The newer, harder set: it depends which AI you ask</h2>
         <p class="sub">A month later I wrote <span data-v="v2:items.hard" data-f="int">—</span> harder questions, each making two or more rules meet: the largest Roth conversion (paying tax now to move savings into an account that’s tax-free later) that won’t raise Medicare premiums two years later, a widow’s first year of taxes, Arizona state tax for retirees. I tested <span data-k="a_v2_models">—</span> models, including OpenAI’s GPT and Google’s Gemini.</p>
       </div>
+      <p class="id-line"><b>Questions per model:</b> all <span data-v="v2:items.hard" data-f="int">—</span>, most models run twice and averaged · <b>Models:</b> <span data-k="a_v2_models">—</span> from <span data-k="a_v2_labs">—</span> companies · <b>Settings:</b> <span data-v="v2:settings.effort">—</span> reasoning effort, replies up to <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens · <b>Graded:</b> by a script against the answer key, which a second, separately written engine must match</p>
       <p class="settings"><b>Different settings from the first test.</b> Every model ran at <span data-v="v2:settings.effort">—</span> reasoning effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token reply limit, a quick answer rather than a long think. Don’t compare these scores with the October ones.</p>
       <div class="table-wrap">
         <table class="scores compact" id="a-v2-top">
@@ -174,7 +178,7 @@
         <h2>What the results mean, and what they don’t</h2>
       </div>
       <ul class="notes">
-        <li><b>The math isn’t the problem.</b> In the first test, models handled long-standing rules well. They slipped on the newest rules and on several rules meeting at once.</li>
+        <li><b>A new rule was a measured gap.</b> Shown the IRS’s instructions for the 2025 senior deduction, Claude Sonnet 5.5 went from <span data-k="a_rule_son">—</span> on those questions. Most other wrong answers matched no known misreading, so I can’t say what caused them; arithmetic slips happen too (one shows up on the <a href="wrong-facts.html">wrong-facts</a> page).</li>
         <li><b>It isn’t one company’s blind spot.</b> In the first test, DeepSeek and GLM made the same senior-deduction misreading as Claude. Models know the rules as they were, not as they are.</li>
         <li><b>Price per word misleads.</b> A model that’s cheap to run can cost more per right answer if it thinks so long it never answers. The cost columns are in the full tables above.</li>
         <li><b>It’s still small.</b> <span data-v="system:first_test.per_task_claude" data-f="int">—</span>–<span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> questions per task per model in the first test, <span data-v="v2:items.hard" data-f="int">—</span> in the newer set. A gap of a few points is within the noise; the ranges show how much.</li>
@@ -190,10 +194,11 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=16"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

@@ -97,5 +97,27 @@
    "gpt-oss-120b: ANSWER 1115, key $9,614"
   ],
   "source": "REPORT.md 'How it fails' 6; replies in v2/runs/hard-tools/raw.jsonl; quoted as text in web/calculator.html"
+ },
+ "two_way_check": {
+  "agree": 2800,
+  "of": 2800,
+  "within": "$2",
+  "note": "per-task tolerance is $1 or $2 (Medicare premiums within a cent, code answers exact)",
+  "source": "TRUST.md (Two-way check, engine vs. independent: 2800/2800); data/cases.jsonl tol per task; checks/independent_check.py. Shown on web/index.html and web/method.html"
+ },
+ "calculator_r2": {
+  "first_test_tolerance": "$1–2",
+  "newer_set_tolerance": "$2–5",
+  "ds_within_4000": {
+   "right": 27,
+   "of": 42,
+   "rate": 0.6429
+  },
+  "gauntlet_held_back": 33,
+  "source": "first_test_tolerance: METHODOLOGY.md 'What is measured'; newer_set_tolerance: tol field in v2/data/hard.jsonl (18 at $2, 24 at $5); ds_within_4000: REPORT.md Finding 3, recomputed with v2/grade.py grade_hard() (DeepSeek V4.1 Flash, hard-tools, rep 0, correct and output_tokens <= 4000); gauntlet_held_back: README.md line 70. Shown on web/calculator.html"
+ },
+ "chat_r2": {
+  "accounting": "costs_now and saves_later are each year's own dollars, as on the tax returns; the 'better off' figure and the lifetime tax change are in today's money, and 'better off' counts what's left in every account at the end",
+  "source": "engine repo: mcp/card.ts line 72 (the note the chat card prints under the costs and savings); data/connector.json. Shown on web/chat.html"
  }
 }

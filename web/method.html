@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>How I checked · PlannerBench</title>
-<meta name="description" content="How every PlannerBench answer is proven: a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus what is still owed.">
+<meta name="description" content="How every PlannerBench answer is proven: a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body data-page="method">
 <header class="nav">
@@ -31,7 +31,8 @@
     <h1>Before grading the AI, I had to prove my own answers</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
-      <p>If the answer key is wrong, you end up grading the AI on your own mistake. So every answer comes from a program that is checked against published IRS, Social Security and Medicare tables, and against other programs that didn’t write it. Two human checks are still owed, and they’re listed below.</p>
+      <p>Two separately written programs compute every answer in the first test and must agree within <span data-v="system:two_way_check.within">—</span>, and outside tax software built by other people recomputes the tax answers. A third engine, written by an AI agent that never saw the first, agrees within <span data-v="system:cleanroom.within">—</span> on <span data-v="system:cleanroom.of" data-f="int">—</span> random households, and every question in the newer set must match it. Two human checks are still owed: a CPA’s sign-off and a person spot-checking the AI judge in the wrong-facts test.</p>
+      <p class="stop-here">That’s the whole idea. The rest of this page is the detail.</p>
     </div>
   </section>
 
@@ -41,9 +42,9 @@
         <h2>The answer key, in plain words</h2>
       </div>
       <div class="prose">
-        <p>Every question has one exact answer, usually a dollar amount. The planning engine, a program I directed AI agents to build, computes it from the 2026 rules: IRS forms and publications, the Social Security Administration’s operating manual, and Medicare’s premium tables.</p>
-        <p>Because one exact answer exists, a script does the grading. Nobody’s opinion is involved, including mine.</p>
-        <p>When AI models disagree with the key, the published source decides, not the models. In the first test, models from several companies agreed with each other and against the key on the new senior deduction. The IRS form, and separately PolicyEngine, showed the key was right. Several also put Medicare premiums ten cents above the key; the 2026 premium table matches the key to the cent.</p>
+        <p>Every number question has one exact answer, usually a dollar amount. The planning engine, a program I directed AI agents to build, computes it from the 2026 rules: IRS forms and publications, the Social Security Administration’s operating manual, and Medicare’s premium tables.</p>
+        <p>For those number questions a script does the grading, so nobody’s opinion is involved, including mine. The wrong-facts test is the exception: whether a reply flagged a planted mistake takes judgment, so an AI judge decides, checked as described below.</p>
+        <p>When AI models disagree with the key, the published source decides, not the models. In the first test, models from several companies agreed with each other and against the key on the new senior deduction. The IRS form, and separately PolicyEngine, showed the key was right.</p>
       </div>
     </div>
   </section>
@@ -63,11 +64,10 @@
       </div>
       <ul class="notes">
         <li><b>AI built it and graded it.</b> The lead AI coding agent (Claude Code, working under my direction) wrote the planning engine, the questions, the grader and this site, and ran every test. I decided what to test, what counts as right, when to spend money and what to publish.</li>
-        <li><b>Check 1: a second engine written from the rules alone.</b> A separate agent built it from the written rules and was never allowed to read the first engine.</li>
-        <li><b>Check 2: outside code.</b> PolicyEngine-US, open-source tax software written by other people, recomputes the tax answers.</li>
-        <li><b>Check 3: a second judge from another lab.</b> In the wrong-facts test, an AI judge (Claude Haiku 5.5) reads each reply and records whether it flagged the problem. A judge from OpenAI (GPT-6 Luna) re-read <span data-v="v2:judge_check.replies_double_judged" data-f="int">—</span> of those replies and agreed on <span data-v="v2:judge_check.flagged_agreement" data-f="pct1">—</span>. Where a reply plainly named the problem but the judge marked it as missed (the audit found such cases), the lead AI agent corrected the label (<span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> replies). Two AIs agreeing, or one AI correcting another, is not the same as a person checking.</li>
-        <li><b>Check 4: an outside audit.</b> On November 15, 2026, OpenAI’s GPT-6.1 Sol read the whole project, without changing anything, and looked for errors. It found <span data-v="system:audit.errors" data-f="int">—</span>, all fixed on this version; the list is in the <a href="report.html">report</a>.</li>
-        <li><b>Still owed.</b> A CPA (a licensed tax accountant) hasn’t signed off on the answer key yet; worked solutions are ready for one to check with a calculator. And no person has yet spot-checked the AI judge’s labels in the wrong-facts test.</li>
+        <li><b>The engines above.</b> A second engine written by a separate agent that never read the first, and outside tax software written by people, recompute the answers.</li>
+        <li><b>A second judge from another lab.</b> In the wrong-facts test, an AI judge (Claude Haiku 5.5) reads each reply and records whether it flagged the problem. A judge from OpenAI (GPT-6 Luna) re-read <span data-v="v2:judge_check.replies_double_judged" data-f="int">—</span> of those replies and agreed on <span data-v="v2:judge_check.flagged_agreement" data-f="pct1">—</span>. Where a reply plainly named the problem but the judge marked it as missed, the lead AI agent corrected the label (<span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> replies). Two AIs agreeing, or one AI correcting another, is not the same as a person checking.</li>
+        <li><b>An outside audit.</b> On November 15, 2026, OpenAI’s GPT-6.1 Sol read the whole project, without changing anything, and looked for errors. It found <span data-v="system:audit.errors" data-f="int">—</span>, all fixed on this version; the list is in the <a href="report.html">report</a>.</li>
+        <li><b>Still owed.</b> A CPA (a licensed tax accountant) hasn’t signed off on the answer key yet; worked solutions are ready for one to check with a calculator. That would be a human check on top of the independent programs, which already agree. And no person has yet spot-checked the AI judge’s labels in the wrong-facts test.</li>
       </ul>
     </div>
   </section>
@@ -75,45 +75,47 @@
   <section class="wrap section">
     <div class="split">
       <div>
-        <h2>No question is used unless all of these pass</h2>
+        <h2>What every first-test question must pass</h2>
       </div>
-      <ol class="checks">
-        <li><span><b>Published examples.</b> Cases whose answers come straight from IRS, Social Security and Medicare tables must match exactly.</span></li>
-        <li><span><b>Two independent programs.</b> The planning engine and a separately written checker compute every answer. They agree on all <span data-k="questions">—</span> questions in the first test.</span></li>
-        <li><span><b>Rules that must always hold.</b> Thousands of random households test things like “more income never lowers tax” and “waiting a month never lowers a Social Security check.”</span></li>
-        <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
-        <li><span><b>An outside tax model, where it reaches.</b> PolicyEngine-US recomputes the first test’s tax answers and the 2026 federal returns in the whole-household decisions. It doesn’t cover required withdrawals, Social Security claiming or Medicare premiums, and nothing outside checks the newer set’s Arizona state-tax questions.</span></li>
-        <li><span><b>Same model, two routes.</b> <span data-k="harness">—</span></span></li>
-        <li><span><b>A held-back set.</b> Private questions from a secret seed pass the same checks and are never published, so a model that trained on the public set still meets new ones, and nothing is tuned on them.</span></li>
-        <li><span><b>Human audit (still open).</b> Random cases come with worked solutions a CPA can check with a calculator. No outside accountant has signed off yet.</span></li>
-      </ol>
+      <div>
+        <ol class="checks">
+          <li><span><b>Published examples.</b> Cases whose answers come straight from IRS, Social Security and Medicare tables must match exactly.</span></li>
+          <li><span><b>Two independent programs.</b> The planning engine and a separately written checker compute every answer and must agree within <span data-v="system:two_way_check.within">—</span>. They agree on all <span data-k="questions">—</span> questions in the first test.</span></li>
+          <li><span><b>Rules that must always hold.</b> Thousands of random households test things like “more income never lowers tax” and “waiting a month never lowers a Social Security check.”</span></li>
+          <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
+          <li><span><b>An outside tax model, where it reaches.</b> PolicyEngine-US recomputes the first test’s tax answers and the 2026 federal returns in the whole-household decisions. It doesn’t cover required withdrawals, Social Security claiming or Medicare premiums.</span></li>
+        </ol>
+        <p class="table-note">The newer set’s questions must match the second engine before they’re used; its Arizona state-tax questions have no outside check. The human checks above are still open, so these are the automatic checks, not a sign-off.</p>
+      </div>
     </div>
 
     <details class="fine">
-      <summary>For the technical reader: how the numbers are reported</summary>
-      <ul class="notes">
+      <summary>For the technical reader: statistics, scripts and where each check lives</summary>
+      <ul class="notes" id="proof-tech">
         <li><b>Every accuracy carries a 95% interval:</b> the range the true score likely sits in. Small runs show wide ranges on purpose.</li>
-        <li><b>Comparisons are paired.</b> “Alone vs. with the calculator” asks the same model the same questions and counts how many flipped each way (McNemar’s test).</li>
+        <li><b>Comparisons are paired.</b> “Alone vs. with the calculator” asks the same model the same questions and counts how many flipped each way, then uses McNemar’s test (a standard check of whether that many one-way flips could be luck).</li>
         <li><b>Failures are their own bucket.</b> A reply that ran out of tokens is published and counted as not right, never quietly dropped.</li>
         <li><b>Mistakes are priced.</b> Each wrong number in the first test is also scored in dollars a year off, so a ten-cent miss and a large one don’t count the same.</li>
         <li><b>Hosts are pinned.</b> Every outside model runs on one named host with data collection off; the private set never goes to free endpoints.</li>
-        <li><b>What rebuilds what.</b> <code>./reproduce.sh</code> covers the first test (answer key, regrading, scores, the calculator runs on its hardest questions). The newer set is rebuilt from saved replies by <code>v2/grade.py</code>, and its questions by <code>v2/build_hard.py</code> and <code>v2/build_bad.py</code>, which stop if the engine and an independent check disagree.</li>
+        <li><b>A held-back set.</b> Private questions from a secret seed pass the same checks and are never published, so a model that trained on the public set still meets new ones, and nothing is tuned on them.</li>
+        <li><b>What rebuilds the newer set.</b> <code>v2/grade.py</code> regrades it from saved replies; <code>v2/build_hard.py</code> and <code>v2/build_bad.py</code> rebuild its questions and stop if the engine and an independent check disagree.</li>
       </ul>
     </details>
   </section>
 
   <section class="wrap section">
-    <a class="next" href="built.html"><span><span class="label">Next</span><b>How I built it</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="next" href="built.html"><span><span class="label">Next</span><b>How I built it: what I decided, what AI agents did, and what it cost</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=16"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

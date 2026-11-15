@@ -514,3 +514,25 @@ details.fine .notes { margin-top: 0.75rem; }
 .scores.compact { min-width: 0; }
 .scores.compact .model { white-space: normal; }
 .scores.compact .cell { min-width: 5.5rem; }
+/* writer A, round 2 */
+/* Home: the definition of "best" under the lede, the "How to read the numbers" box, each finding's catch line,
+   and the closing three things. alone.html: one ID line per test. method.html: "you can stop here" line. */
+.best-def { max-width: 62ch; color: var(--muted); font-size: 0.9375rem; }
+.best-def b { color: var(--ink); font-weight: 600; }
+.read-box { max-width: 52rem; padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--rule-2); border-radius: var(--r); background: var(--card); display: grid; gap: 0.75rem; }
+.read-box dl { margin: 0; display: grid; border-top: 1px solid var(--rule); }
+.read-box dl > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.25rem 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+.read-box dl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.read-box dt { font-weight: 600; }
+.read-box dd { margin: 0; color: var(--muted); line-height: 1.55; }
+@media (max-width: 640px) { .read-box dl > div { grid-template-columns: minmax(0, 1fr); } }
+.find .catch { font-size: 0.875rem; color: var(--muted); padding-left: 0.7rem; border-left: 2px solid var(--rule-2); }
+.find .catch b { color: var(--ink); font-weight: 600; }
+.three { margin: 0; padding: 0; list-style: none; counter-reset: t; max-width: 52rem; border-top: 1px solid var(--ink); }
+.three li { counter-increment: t; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0.75rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); color: var(--muted); line-height: 1.6; }
+.three li::before { content: counter(t); font: 500 1.25rem/1.4 var(--serif); color: var(--ink); }
+.three b { color: var(--ink); font-weight: 600; }
+.id-line { max-width: 75ch; font: 400 0.8125rem/1.6 var(--mono); color: var(--muted); padding: 0.6rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 0 0 1.25rem; }
+.id-line b { color: var(--ink); font-weight: 500; }
+.stop-here { color: var(--muted) !important; font-size: 0.9375rem; }
+.hosts { font-size: 0.9375rem; }

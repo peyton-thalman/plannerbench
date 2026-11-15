@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PlannerBench</title>
-<meta name="description" content="A financial advisor tested AI models on the retirement questions families ask, against a proven answer key. Simple questions: almost always right. Real ones: it depends which AI. Wrong facts: many don’t notice.">
+<meta name="description" content="A financial advisor tested AI models on the retirement questions families ask, against a proven answer key. Simple questions: almost always right. Real ones: it depends which AI. Wrong facts: the best catch most, three cheap models almost none.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body data-page="home">
 <header class="nav">
@@ -29,11 +29,8 @@
   <section class="hero wrap">
     <p class="eyebrow">PlannerBench · by Peyton Thalman, financial advisor</p>
     <h1>AI gets simple retirement questions right. On real ones, it depends which AI you ask.</h1>
-    <p class="lede">I tested AI models on the retirement questions I work through with families, against answers I could prove. A trusted calculator rescues some models but not others. And many don’t notice when you tell them something wrong, which is now the biggest gap.</p>
-    <div class="cta">
-      <a class="btn primary" href="#answer">Should I trust it?</a>
-      <a class="btn" href="#found">What I found</a>
-    </div>
+    <p class="lede">The best AI I tested, OpenAI’s GPT-6.1 Sol, got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> of my hardest retirement questions right and Claude Sonnet 5.5 got <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>; <span data-k="a_cheap_under30">—</span> cheap and free models scored under 30%, and three of them almost never noticed a fact that couldn’t be true.</p>
+    <p class="best-def"><b>“Best”</b> on this site means right most often and, on wrong facts, catching the most mistakes without false alarms (refusing files that were fine).</p>
   </section>
 
   <section class="band" id="why">
@@ -42,9 +39,8 @@
         <h2>Why I made this</h2>
       </div>
       <div class="prose">
-        <p>I’m a financial advisor, and I meet most people by knocking on their door. My dad became a financial advisor in 1999. Watching him take care of people is why I do this work.</p>
-        <p>More and more people tell me they get their financial advice from ChatGPT. When I ask how they know it’s right, they say they Google it. These days the top result is often another AI’s answer.</p>
-        <p>So I wrote the questions planners work through every week, built an answer key I could prove, and tested the AI models people use: Anthropic’s Claude, GPT from OpenAI (the company behind ChatGPT), Google’s Gemini, and several cheaper or free models anyone can download.</p>
+        <p>I’m a financial advisor, and I meet most people by knocking on their door. My dad became a financial advisor in 1999; watching him take care of people is why I do this work.</p>
+        <p>More and more people tell me they get financial advice from ChatGPT. When I ask how they know it’s right, they Google it, and the top result is often another AI’s answer. So I wrote the questions planners work through every week, built an answer key I could prove, and tested the AI models people use: Anthropic’s Claude, OpenAI’s GPT, Google’s Gemini, and cheaper or free models anyone can download.</p>
       </div>
     </div>
   </section>
@@ -54,113 +50,103 @@
       <p class="label">The straight answer</p>
       <h2>Should I trust AI with my retirement questions?</h2>
       <ul>
-        <li><b>For one well-known rule, mostly yes.</b> This year’s tax brackets, or how much you must take out of an IRA (a retirement account you haven’t paid tax on yet): the best AIs I tested are almost always right.</li>
-        <li><b>For your whole situation, it depends a lot on which AI.</b> When taxes, Social Security and Medicare all affect each other, the cheap and free models I tested got most of my hardest questions wrong. The very best got nearly all of them right in my newest test.</li>
-        <li><b>The biggest risk is what you type in.</b> Many AIs won’t notice when a number you gave them can’t be right, and they’ll hand back a confident answer anyway. Double-check what you tell it, and take big decisions to a professional.</li>
+        <li><b>For one well-known rule, mostly yes.</b> This year’s tax brackets, or how much you must take out of an IRA (a retirement account you haven’t paid tax on yet): Claude Sonnet 5.5 got <span data-k="single">—</span> of these right.</li>
+        <li><b>For your whole situation, it depends a lot on which AI.</b> When taxes, Social Security and Medicare all affect each other, GPT-6.1 Sol got nearly all of my hardest questions right; the cheap and free models got most of them wrong.</li>
+        <li><b>Check what you type in.</b> In my tests, three cheap models almost never questioned an impossible fact, and even the best two missed <span data-k="a_best_missed">—</span> of them. They handed back a confident answer anyway.</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="read">
+    <div class="read-box">
+      <p class="label">How to read the numbers</p>
+      <dl>
+        <div><dt>The first test</dt><dd>October 2026. I generated <span data-k="questions">—</span> questions across <span data-v="meta:tasks" data-f="int">—</span> kinds of task; each model was asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span>–<span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> of each kind (<span data-k="a_v1_per_model">—</span> questions per model), not all of them. GPT and Gemini weren’t in it.</dd></div>
+        <div><dt>The newer, harder set</dt><dd>November 2026. <span data-v="v2:items.hard" data-f="int">—</span> hard questions and <span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files with a planted mistake, asked of <span data-k="a_v2_models">—</span> models, with quicker-answer settings. Don’t compare its scores with October’s.</dd></div>
+        <div><dt>The answer key</dt><dd>The proven right answer to every question, computed by a program I had built for the 2026 rules (the planning engine) and checked by programs that didn’t write it.</dd></div>
+        <div><dt>The calculator</dt><dd>That answer key turned into a tool an AI can call while it answers. It isn’t something to use on this site; the chat version is a private demo for now.</dd></div>
+      </dl>
     </div>
   </section>
 
   <section class="wrap section" id="found">
     <div class="section-head">
       <h2>What I found</h2>
-      <p class="sub">Four findings, in order. Each one says which models and which test the number comes from. There were two tests: the first in October 2026, and a newer, harder set in November.</p>
+      <p class="sub">Four findings, in reading order. Each card has one number, who it’s about, which test, and its catch.</p>
     </div>
     <div class="finds">
       <a class="find" href="alone.html">
         <span class="n">1 · AI on its own</span>
         <h3>Simple questions: almost always right.</h3>
         <p class="big"><span data-k="single">—</span></p>
-        <p>Claude Sonnet 5.5 got <span data-k="single">—</span> of one-rule questions right, and Claude Haiku 5.5 got <span data-v="models:[model=claude-haiku-5-5].single_step_accuracy" data-f="pct">—</span>. Questions like “what’s the tax on this income?” First test, October 2026.</p>
+        <p>Claude Sonnet 5.5 on one-rule questions, like “what’s the tax on this income?” First test, October.</p>
+        <p class="catch"><b>Catch:</b> one rule at a time. On questions where several rules met in one household, the same model got <span data-k="stacked">—</span> (finding 2).</p>
         <span class="more">AI on its own →</span>
       </a>
       <a class="find" href="alone.html#november">
         <span class="n">2 · AI on its own</span>
         <h3>Real-life questions: it depends which AI.</h3>
-        <p class="big"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> <span class="vs">vs</span> <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span></p>
-        <p>On the <span data-v="v2:items.hard" data-f="int">—</span> questions in the newer, harder set (November), OpenAI’s GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> right and Claude Sonnet 5.5 got <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>; <span data-k="a_cheap_under30">—</span> cheap models I tested scored under 30%. In the first test (October, different settings), Sonnet got <span data-k="stacked">—</span> of questions that stack several rules.</p>
+        <p class="big"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span></p>
+        <p>GPT-6.1 Sol on the <span data-v="v2:items.hard" data-f="int">—</span> questions of the newer, harder set, where several rules meet. Claude Sonnet 5.5 got <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>; <span data-k="a_cheap_under30">—</span> cheap models under 30%. November.</p>
+        <p class="catch"><b>Catch:</b> only <span data-v="v2:items.hard" data-f="int">—</span> questions, at quick-answer settings, so models with close scores could swap places on a rerun.</p>
         <span class="more">AI on its own →</span>
       </a>
       <a class="find" href="calculator.html">
         <span class="n">3 · With a calculator</span>
-        <h3>Give it a calculator it can trust, and some models get nearly all right.</h3>
+        <h3>Give it a calculator that shows the rule, and some models get nearly all right.</h3>
         <p class="big"><span data-k="tools_from">—</span> → <span data-k="tools_to">—</span></p>
-        <p>Claude Haiku 5.5 on the <span data-v="tools:hard.questions" data-f="int">—</span> hardest questions from the first test, once my calculator showed the rule along with the number (<span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on questions held back from tuning). In the newer set, the cheap DeepSeek V4.1 Flash went from <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.rate" data-f="pct">—</span> to <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard_tools.rate" data-f="pct">—</span>. But <span data-k="a_tools_weak">—</span> other cheap models still scored under 10% with it.</p>
+        <p>Claude Haiku 5.5 on the <span data-v="tools:hard.questions" data-f="int">—</span> hardest questions from the first test, alone and then with the calculator showing the rule along with the number.</p>
+        <p class="catch"><b>Catch:</b> one model, <span data-v="tools:hard.questions" data-f="int">—</span> questions (<span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on <span data-v="tools_private:questions" data-f="int">—</span> held-back ones). It doesn’t rescue every model: <span data-k="a_tools_weak">—</span> cheap models still scored under 10% with it.</p>
         <span class="more">With a calculator →</span>
       </a>
       <a class="find" href="wrong-facts.html">
         <span class="n">4 · Wrong facts</span>
-        <h3>Tell it something wrong, and many won’t notice. This is the biggest gap.</h3>
-        <p class="big"><span data-k="a_best_caught">—</span> <span class="vs">vs</span> <span data-k="a_low_caught">—</span></p>
-        <p>I planted one mistake in each of <span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files, like a retiree who is 14 years old. The most careful, Claude Sonnet 5.5 and GPT-6.1 Sol, caught <span data-k="a_best_caught">—</span> with almost no false alarms on files that were fine. <span data-k="a_low_cheap">—</span> caught <span data-k="a_low_caught">—</span> and gave a confident answer <span data-k="a_low_silent">—</span> of the time. Newer set, November.</p>
+        <h3>Tell it something wrong: the best catch most, three cheap models almost none.</h3>
+        <p class="big"><span data-k="a_low_caught">—</span></p>
+        <p><span data-k="a_low_cheap">—</span> caught <span data-k="a_low_caught">—</span> of <span data-v="v2:items.bad_corrupted" data-f="int">—</span> planted mistakes (like a retiree who is 14) and gave a confident answer <span data-k="a_low_silent">—</span> of the time. GPT-6.1 Sol and Claude Sonnet 5.5 caught <span data-k="a_best_caught">—</span>. Newer set, November.</p>
+        <p class="catch"><b>Catch:</b> an AI judge decided what counts as caught (named the mistake, gave no number); a second AI agreed, and a human spot-check is still owed.</p>
         <span class="more">Wrong facts →</span>
       </a>
     </div>
   </section>
 
-  <section class="band" id="for-you">
+  <section class="band" id="trust">
     <div class="wrap split">
       <div>
-        <h2>What this means for you</h2>
-      </div>
-      <ul class="notes">
-        <li><b>Use AI to learn a rule, not to make the decision.</b> It’s good at explaining one rule at a time. It’s much less reliable when your taxes, Social Security and Medicare all affect each other.</li>
-        <li><b>Check what you typed.</b> A wrong age, balance or income gets you a confident wrong answer. Read your numbers back before you trust the result.</li>
-        <li><b>The AI you pick matters.</b> On my hardest questions, a free model could be far worse than the best one. For big moves, like when to claim Social Security or a Roth conversion (paying tax now to move savings into an account that’s tax-free later), get a professional to check it.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="wrap section" id="checked">
-    <div class="split">
-      <div>
-        <h2>How I know the answers are right</h2>
+        <h2>Why you can trust the numbers</h2>
       </div>
       <div class="prose">
-        <p>Grading AI is only fair if the answer key is right. So I wrote the 2026 tax, Social Security, required-withdrawal and Medicare rules as a program, the planning engine, and had it checked by things that didn’t write it.</p>
-        <ul class="notes">
-          <li><b>A second engine, written blind.</b> A separate AI agent wrote it from the written rules alone, never seeing the first. The two agree on <span data-k="cleanroom">—</span> random households, to the dollar.</li>
-          <li><b>Outside tax code.</b> PolicyEngine-US, open-source tax software built by other people, agrees on <span data-v="system:policyengine.agree" data-f="int">—</span> of <span data-v="system:policyengine.of" data-f="int">—</span> tax answers in the first test.</li>
-          <li><b>The rulebook decides.</b> The first test has <span data-k="questions">—</span> questions with one exact answer each, so a script does the grading. When AI models agreed with each other against my key, the IRS form decided, never a vote.</li>
-        </ul>
-        <p><a href="method.html">How I checked, and what’s still owed →</a></p>
+        <p>I don’t have a computer science degree. I directed AI coding agents, mostly Claude Code, to build and run all of it; I decided what to test, what counts as right, when to spend money and what to publish.</p>
+        <p>That’s exactly why nothing rests on one program. Every answer is computed by two separately written programs that must agree within <span data-v="system:two_way_check.within">—</span>, and tax answers also by outside tax software built by other people. A third engine, written by an AI agent that never saw the first, agrees on <span data-k="cleanroom">—</span> random households within <span data-v="system:cleanroom.within">—</span>.</p>
+        <p>Then a model from another lab, OpenAI’s GPT-6.1 Sol, audited the whole project and found <span data-v="system:audit.errors" data-f="int">—</span> errors. All are fixed and listed in the <a href="report.html">report</a>. That makes the numbers more trustworthy, not less: someone other than the builder looked hard, and what they found is public.</p>
+        <p>A CPA (a licensed tax accountant) hasn’t signed off yet. That’s an extra human check on top, not the only one: the independent programs above already agree.</p>
+        <p><a href="method.html">How I checked →</a> · <a href="built.html">How I built it →</a></p>
       </div>
     </div>
   </section>
 
-  <section class="band" id="built">
-    <div class="wrap split">
-      <div>
-        <h2>How this was built</h2>
-      </div>
-      <div class="prose">
-        <p>I don’t have a computer science degree. I directed AI coding agents, mostly Claude Code, to build and run all of it. I made the calls: what to test, what counts as right, when to spend money on a run, and what to publish.</p>
-        <p>Because AI did much of the work, I didn’t want anyone to take it on trust, including me. That’s why the checks above are independent of the agent that built the rest. On November 15, 2026, a model from another lab, OpenAI’s GPT-6.1 Sol, audited the whole project. It found <span data-v="system:audit.errors" data-f="int">—</span> errors, all fixed on this version.</p>
-        <p><a href="built.html">How I built it: the decisions, dead ends and costs →</a></p>
-      </div>
-    </div>
+  <section class="wrap section" id="three-things">
+    <div class="section-head"><h2>Before you trust an AI with a retirement number: three things</h2></div>
+    <ol class="three">
+      <li><b>Give it your real numbers, then check what it used.</b> Read back the ages, balances and income in its answer. A wrong fact gets you a confident wrong answer.</li>
+      <li><b>For a whole-household decision, use one of the best models, or one connected to a real calculator, and ask it to show the rule.</b> In my tests, the calculator helped most when it showed the rule and its source along with the number.</li>
+      <li><b>Take big moves to a professional.</b> When to claim Social Security, a Roth conversion (paying tax now so savings grow tax-free later), anything you can’t undo.</li>
+    </ol>
   </section>
 
   <section class="wrap section">
-    <div class="section-head"><h2>Where to go next</h2></div>
-    <ul class="go-list">
-      <li><a href="alone.html"><b>AI on its own</b><span>Findings 1 and 2: scores for each model, and the one 2025 rule many of them misread</span></a></li>
-      <li><a href="calculator.html"><b>With a calculator</b><span>Finding 3: what changes when AI can call a checked calculator</span></a></li>
-      <li><a href="wrong-facts.html"><b>Wrong facts</b><span>Finding 4: who notices when a client’s facts can’t be right</span></a></li>
-      <li><a href="method.html"><b>How I checked</b><span>How the answer key is proven, and what’s still owed</span></a></li>
-      <li><a href="built.html"><b>How I built it</b><span>What I decided, what AI agents did, and what it cost</span></a></li>
-      <li><a href="chat.html"><b>Try it in your chat</b><span>The calculator plugs into Claude and ChatGPT</span></a></li>
-    </ul>
+    <a class="next" href="alone.html"><span><span class="label">Next · findings 1 and 2</span><b>AI on its own: one rule versus a real household</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=16"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>
