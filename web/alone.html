@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="styles.css?v=24">
 </head>
 <body data-page="results">
 <header class="nav">
@@ -20,7 +20,7 @@
       <a href="wrong-facts.html">Wrong facts</a>
       <a href="method.html">How I checked</a>
       <a href="built.html">How I built it</a>
-      <span class="mode" role="group" aria-label="Reading mode"><a class="mode-human" href="alone.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html">Agent</a></span>
+      <span class="mode" role="group" aria-label="Version: for people, or plain text for AI agents"><a class="mode-human" href="alone.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html">Agent (plain text)</a></span>
     </nav>
   </div>
 </header>
@@ -31,7 +31,7 @@
     <h1>AI gets one rule right. When rules meet, it depends which AI you ask.</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
-      <p>Ask about one well-known rule and the best AIs I tested are almost always right. Ask a question where several rules meet, the way they do in a real household, and scores spread out: in my newer, harder set, the best model got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> right and <span data-k="a_cheap_under30">—</span> cheap models scored under 30%. In the first test, many models made the same mistake on a tax rule that is new since 2025.</p>
+      <p>Ask about one well-known rule and the best AIs I tested are almost always right. Ask a question where several rules meet, the way they do in a real household, and scores spread out: in my newer, harder set, GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> right and <span data-k="a_cheap_under30">—</span> cheap and free models scored under 30%. ChatGPT on a regular subscription, tested separately, got <span data-v="luna:hard.rate" data-f="pct">—</span>. In the first test, many models made the same mistake on a tax rule that is new since 2025.</p>
     </div>
   </section>
 
@@ -39,7 +39,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>One question, and where it goes wrong</h2>
-        <p class="sub">A real question from the first test (October 2026). <span data-k="agree_models">—</span> <span data-k="agree_cap">—</span>: <span data-v="featured:replies.claude-sonnet-5-5.got" data-f="usd">—</span>. The list below has <span data-k="a_misread_rows">—</span> rows with that number because I asked Claude Haiku 5.5 two ways, directly and through a relay service, and it made the mistake both times. The IRS form shows why.</p>
+        <p class="sub">A real question from the first test (October 2026). <span data-k="agree_models">—</span> <span data-k="agree_cap">—</span>: <span data-v="featured:replies.claude-sonnet-5-5.got" data-f="usd">—</span>. The list below has <span data-k="a_misread_rows">—</span> rows with that number because I asked Claude Haiku 5.5 two separate ways (“second way” below; details under “How the first test was run”), and it made the mistake both times. The IRS form shows why.</p>
       </div>
       <div class="worked">
         <div class="question">
@@ -136,7 +136,7 @@
 
     <details class="fine">
       <summary>How the first test was run</summary>
-      <p>Claude models were asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span> questions per task through Anthropic’s API, with up to <span data-v="system:first_test.max_tokens_claude" data-f="int">—</span> tokens per reply; the others <span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> per task through OpenRouter (a service that relays requests to many models), with up to <span data-v="system:first_test.max_tokens_openrouter" data-f="int">—</span>. Reasoning effort was <span data-v="system:first_test.effort">—</span> for all. Each outside model was pinned to one named host with data collection off; “fp8” and “bf16” say how compressed that host’s copy is. Route and host for each row:</p>
+      <p>Claude models were asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span> questions per task through Anthropic’s API, with up to <span data-v="system:first_test.max_tokens_claude" data-f="int">—</span> tokens per reply; the others <span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> per task through OpenRouter (a service that relays requests to many models), with up to <span data-v="system:first_test.max_tokens_openrouter" data-f="int">—</span>. Reasoning effort was <span data-v="system:first_test.effort">—</span> for all. Each outside model was pinned to one named host with data collection off; “fp8” and “bf16” say how compressed that host’s copy is. Route and host for each row (Claude Haiku 5.5’s “second way” is the OpenRouter route):</p>
       <ul class="notes hosts" id="a-hosts"></ul>
       <p> Ranges are 95% intervals; when two overlap heavily, the gap between those models may be noise.</p>
     </details>
@@ -149,7 +149,7 @@
         <h2>The newer, harder set: it depends which AI you ask</h2>
         <p class="sub">A month later I wrote <span data-v="v2:items.hard" data-f="int">—</span> harder questions, each making two or more rules meet: the largest Roth conversion (paying tax now to move savings into an account that’s tax-free later) that won’t raise Medicare premiums two years later, a widow’s first year of taxes, Arizona state tax for retirees. I tested <span data-k="a_v2_models">—</span> models, including OpenAI’s GPT and Google’s Gemini.</p>
       </div>
-      <p class="id-line"><b>Questions per model:</b> all <span data-v="v2:items.hard" data-f="int">—</span>, most models run twice and averaged · <b>Models:</b> <span data-k="a_v2_models">—</span> from <span data-k="a_v2_labs">—</span> companies · <b>Settings:</b> <span data-v="v2:settings.effort">—</span> reasoning effort, replies up to <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens · <b>Graded:</b> by a script against the answer key, which a second, separately written engine must match</p>
+      <p class="id-line"><b>Questions per model:</b> all <span data-v="v2:items.hard" data-f="int">—</span>, most models run twice and averaged · <b>Models:</b> <span data-k="a_v2_models">—</span> from <span data-k="a_v2_labs">—</span> companies: the best models (GPT-6.1 Sol, Claude Sonnet 5.5), mid-priced, and cheap and free; the grey line under each name says which · <b>Settings:</b> <span data-v="v2:settings.effort">—</span> reasoning effort, replies up to <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens · <b>Graded:</b> by a script against the answer key, which a second, separately written engine must match</p>
       <p class="settings"><b>Different settings from the first test.</b> Every model ran at <span data-v="v2:settings.effort">—</span> reasoning effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token reply limit, a quick answer rather than a long think. Don’t compare these scores with the October ones.</p>
       <div class="table-wrap">
         <table class="scores compact" id="a-v2-top">
@@ -157,7 +157,7 @@
           <tbody></tbody>
         </table>
       </div>
-      <p class="table-note">The spread is the finding: GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span>, Claude Sonnet 5.5 <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>, and <span data-k="a_cheap_under30">—</span> cheap models under 30%. A low score can mean wrong math or simply running out of room: DeepSeek V4.1 Flash hit the reply limit before answering on <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.truncated" data-f="pct">—</span> of questions, which counts as not right.</p>
+      <p class="table-note">The spread is the finding: GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span>, Claude Sonnet 5.5 <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>, and <span data-k="a_cheap_under30">—</span> cheap and free models under 30%. A low score can mean wrong math or simply running out of room: DeepSeek V4.1 Flash hit the reply limit before answering on <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.truncated" data-f="pct">—</span> of questions, which counts as not right.</p>
 
       <details class="fine wide">
         <summary>All <span data-v="v2:items.hard" data-f="int">—</span> questions, all models</summary>
@@ -172,8 +172,36 @@
     </div>
   </section>
 
-  <section class="wrap section">
-    <div class="split">
+
+  <section class="wrap section" id="chatgpt">
+    <div class="section-head">
+      <p class="label">A separate result · November 2026</p>
+      <h2>ChatGPT, as most people use it: often right on one rule, almost never when rules meet</h2>
+      <p class="sub">Most people don’t reach an AI through a developer account; they type into ChatGPT. So I asked GPT-6 Luna, the model in my own regular ChatGPT subscription, the same questions, and graded its replies with the same answer key and the same grading script as everyone else.</p>
+    </div>
+    <p class="id-line"><b>Questions:</b> <span data-v="luna:first_test.overall.n" data-f="int">—</span> of the <span data-v="luna:first_test.asked_of" data-f="int">—</span> first-test questions the Claude models got (one went unanswered), the <span data-v="luna:hard.n" data-f="int">—</span> of the newer set, <span data-v="luna:bad.corrupted" data-f="int">—</span> wrong-facts files and <span data-v="luna:household.n" data-f="int">—</span> whole-household decisions · <b>Settings:</b> <span data-v="luna:effort">—</span> reasoning effort, no reply limit, no code, calculator or web · <b>Graded:</b> by the same script against the same answer key; wrong facts by the same AI judge</p>
+    <div class="table-wrap">
+      <table class="scores compact luna">
+        <thead><tr><th scope="col">Questions</th><th scope="col" class="r">ChatGPT (GPT-6 Luna)</th></tr></thead>
+        <tbody>
+          <tr><td class="model">First test · one rule</td><td class="r"><span data-v="luna:first_test.single_step.rate" data-f="pct">—</span> · <span data-v="luna:first_test.single_step.k" data-f="int">—</span> of <span data-v="luna:first_test.single_step.n" data-f="int">—</span></td></tr>
+          <tr><td class="model">First test · the <span data-k="a_luna_hard_n">—</span> that chain or stack rules</td><td class="r"><span data-k="a_luna_hard_rate">—</span> · <span data-k="a_luna_hard_kn">—</span></td></tr>
+          <tr><td class="model">Newer, harder set</td><td class="r"><span data-v="luna:hard.rate" data-f="pct">—</span> · <span data-v="luna:hard.k" data-f="int">—</span> of <span data-v="luna:hard.n" data-f="int">—</span></td></tr>
+          <tr><td class="model">Wrong facts · caught the planted mistake</td><td class="r"><span data-v="luna:bad.caught.rate" data-f="pct">—</span> · <span data-v="luna:bad.caught.k" data-f="int">—</span> of <span data-v="luna:bad.caught.n" data-f="int">—</span></td></tr>
+          <tr><td class="model">Whole-household decisions</td><td class="r">declined <span data-k="a_luna_household">—</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">On one-rule questions it was right about <span data-v="luna:first_test.single_step.rate" data-f="pct">—</span> of the time. Once rules had to work together, it almost never was. On the whole-household decisions it didn’t try: it answered that each one needed a full multi-year projection, and it did correctly turn down the one question that can’t be answered. On wrong facts it caught half the planted mistakes and gave a number anyway on <span data-v="luna:bad.silent_number.rate" data-f="pct">—</span> without saying anything looked wrong.</p>
+    <p class="settings"><b>Why it isn’t in the tables above.</b> The setup differs. The other models got one message per question, at low reasoning effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token reply limit. ChatGPT ran at <span data-v="luna:effort">—</span> effort with no limit, and I sent the questions in small batches, each to be answered as its own chat. In the regular ChatGPT app the model can choose to run code; here it was told not to, like every other model on this page.</p>
+    <details class="fine">
+      <summary>How the ChatGPT run was done</summary>
+      <p>The questions went through Codex, OpenAI’s coding app, which runs on a ChatGPT subscription, so no per-question fee and no developer account were involved. Each batch had a handful of questions with their answers removed and their names replaced by plain codes, and the instruction to answer each as its own chat, showing the reasoning, with no code, calculator, web search or other files. A first attempt was thrown out because most replies were a bare final number with no reasoning, which isn’t how ChatGPT answers a person. In the second attempt, one session refused a whole batch and some questions were skipped; those were asked again in a fill-in batch, and one first-test question still went unanswered, so its first-test score is out of <span data-v="luna:first_test.overall.n" data-f="int">—</span>. Within a batch, earlier questions stayed in the conversation, which a fresh chat wouldn’t have. Ranges (95%): newer set <span data-k="a_luna_hard_ci">—</span>; one rule <span data-k="a_luna_single_ci">—</span>. Grading checks are on <a href="method.html#ai-work">How I checked</a>.</p>
+    </details>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
       <div>
         <h2>What the results mean, and what they don’t</h2>
       </div>
@@ -194,11 +222,11 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
-    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
+    <span>Human | Agent (plain text), top right: the same site as plain text for AI readers, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>

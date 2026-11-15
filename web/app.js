@@ -11,7 +11,7 @@
   // Names come from models.json; when one model was run two ways (direct and via OpenRouter), say which.
   const byId = Object.fromEntries((models ?? []).map((m) => [m.model, m]));
   const dupes = new Set((models ?? []).map((m) => m.name).filter((n, i, all) => all.indexOf(n) !== i));
-  const name = (id) => { const m = byId[id]; if (!m) return id; return dupes.has(m.name) && id.startsWith('or:') ? `${m.name} via OpenRouter` : m.name; };
+  const name = (id) => { const m = byId[id]; if (!m) return id; return dupes.has(m.name) && id.startsWith('or:') ? `${m.name} (second way)` : m.name; }; // writer A, round 3: route named only in alone.html's technical toggle
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const NS = 'http://www.w3.org/2000/svg';
   const svgEl = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
@@ -144,10 +144,10 @@
   if ($('proofs') && sys.cleanroom) {
     const ratio = (o) => `${o.agree.toLocaleString('en-US')} / ${o.of.toLocaleString('en-US')}`;
     const cards = [
-      [ratio(sys.cleanroom), 'A second engine, written blind', `A separate AI agent wrote a second engine, in a different programming language, from the written rules alone, and was never allowed to read the first. Both run on random households; every number for every year must agree within ${sys.cleanroom.within}. Its first run found a real bug in the main engine. Every question in the newer, harder set also has to match it before it can be used.`, sys.cleanroom.source],
-      [ratio(sys.policyengine), 'Outside tax code', `PolicyEngine-US, open-source tax software written by other people, recomputes every tax answer in the first test, all within ${sys.policyengine.within}, the new senior deduction included; held-back questions ${ratio({ agree: sys.policyengine.private_agree, of: sys.policyengine.private_of })}. It doesn't model required withdrawals, Social Security claiming or Medicare premiums, so those rest on the published tables and the second engine.`, sys.policyengine.source],
+      [ratio(sys.cleanroom), 'Another engine, written without seeing the first', `A separate AI agent wrote another engine, in a different programming language, from the written rules alone, and was never allowed to read the first. Both run on random households; every number for every year must agree within ${sys.cleanroom.within}. Its first run found a real bug in the main engine. Every question in the newer, harder set also has to match it before it can be used.`, sys.cleanroom.source],
+      [ratio(sys.policyengine), 'Outside tax code', `PolicyEngine-US, open-source tax software written by other people, recomputes every tax answer in the first test, all within ${sys.policyengine.within}, the new senior deduction included; and ${ratio({ agree: sys.policyengine.private_agree, of: sys.policyengine.private_of })} on the held-back questions (private ones never published). It doesn't model required withdrawals, Social Security claiming or Medicare premiums, so those rest on the published tables and the second engine.`, sys.policyengine.source],
       [ratio(sys.gauntlet_keys), 'Whole-household decisions, recomputed', 'Every option in every public whole-household question is rerun by the second engine, and its 2026 federal tax return by PolicyEngine, before the question can be used.', sys.gauntlet_keys.source],
-      [ratio(sys.tools_check), 'The calculator can answer everything', 'Before any model used the calculator, a script proved that calling it correctly reproduces every numeric answer in the first test.', sys.tools_check.source],
+      [ratio(sys.tools_check), 'The calculator can answer everything', `Before any model used the calculator, a script checked that calling it correctly reproduces every number answer in the first test${sys.tools_check.public_numeric ? `: the ${sys.tools_check.public_numeric.toLocaleString('en-US')} public questions that have a number, plus ${sys.tools_check.private_numeric.toLocaleString('en-US')} held-back ones. The other ${meta ? (meta.questions - sys.tools_check.public_numeric).toLocaleString('en-US') : ''} of the ${meta ? meta.questions.toLocaleString('en-US') : ''} public questions are compliance questions, answered with sentences or flags rather than a number, so there is nothing for a calculator to compute` : ''}.`, sys.tools_check.source],
     ];
     for (const [num, title, body] of cards) {
       const c = el('div', 'proof-card');
@@ -728,7 +728,7 @@
     const span = (xs) => { const [lo, hi] = [Math.min(...xs), Math.max(...xs)]; return pct(lo) === pct(hi) ? pct(lo) : `${pct(lo).replace('%', '')}–${pct(hi)}`; };
     const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
     const vm = V2?.models ?? [], vName = (n) => vm.find((m) => m.name === n);
-    const sol = vName('GPT-6.1 Sol'), son = vName('Claude Sonnet 5.5'), dsk = vName('DeepSeek V4.1 Flash');
+    const sol = vName('GPT-6.1 Sol'), son = vName('Claude Sonnet 5.5'), dsk = vName('DeepSeek V4.1 Flash'), BEST = ['GPT-6.1 Sol', 'Claude Sonnet 5.5'];
     const cheap = vm.filter((m) => m.tier === 'cheap');
     if (vm.length) {
       const under30 = cheap.filter((m) => m.hard.rate < 0.3).length;
@@ -741,10 +741,26 @@
       const low3 = vm.filter((m) => m.bad).sort((a, b) => a.bad.caught.rate - b.bad.caught.rate).slice(0, 3);
       A.a_low_caught = span(low3.map((m) => m.bad.caught.rate));
       A.a_low_silent = span(low3.map((m) => m.bad.silent_number.rate));
-      A.a_low_cheap = low3.every((m) => m.tier === 'cheap') ? 'Three cheap models' : 'Three models';
+      A.a_low_cheap = low3.every((m) => m.tier === 'cheap') ? 'Three of the cheap and free models' : 'Three models';
+      A.a_low_names = low3.map((m) => m.name.replace(/ \(\d+\)$/, '')).join(', ').replace(/, ([^,]*)$/, ' and $1');
       // round 2: how many planted mistakes even the two best missed (home's straight answer)
       A.a_best_missed = sol && son && span([1 - sol.bad.caught.rate, 1 - son.bad.caught.rate]);
     }
+    // round 3: ChatGPT (GPT-6 Luna on a subscription, data/luna.json). Its multi-step and stacked tiers are added together:
+    // that is exactly the five chaining/stacking tasks (10 each) and doesn't depend on which tier senior_phaseout sits in.
+    const LU = await load('luna');
+    if (LU) {
+      const ms = LU.first_test.multi_step, st = LU.first_test.stacked, k = ms.k + st.k, n = ms.n + st.n;
+      Object.assign(A, { a_luna_hard_n: String(n), a_luna_hard_rate: pct(k / n), a_luna_hard_kn: `${k} of ${n}`,
+        a_luna_missed: pct(1 - LU.bad.caught.rate), a_luna_hard_ci: range(LU.hard.lo, LU.hard.hi) + '%',
+        a_luna_single_ci: range(LU.first_test.single_step.lo, LU.first_test.single_step.hi) + '%',
+        a_luna_unnamed: String(LU.bad.judged - LU.bad.named.k) });
+      // whole-household: one question per family plus one trap whose honest answer is "can't answer"
+      const hh = LU.household, answerable = hh.n - 1;
+      A.a_luna_household = `${hh.declined_answerable === answerable ? 'all' : hh.declined_answerable + ' of'} ${answerable} answerable ones`;
+    }
+    // round 3: home's reading path says how the 50 hardest first-test questions were picked (the multi-step and stacked kinds)
+    if (meta?.tiers) A.a_hard_tasks = words[meta.tiers['multi-step'].length + meta.tiers.stacked.length];
     // round 2: first-test questions actually asked of each model (per-task count × tasks), next to the 2,800 generated
     const ft = sys.first_test;
     if (ft && meta) A.a_v1_per_model = `${ft.per_task_claude * meta.tasks}–${ft.per_task_openrouter * meta.tasks}`;
@@ -788,7 +804,9 @@
     }
     const v2row = (m) => {
       const h = m.hard, tr = el('tr');
-      tr.append(who(m.name, `${m.lab}${m.tier === 'cheap' ? ' · cheap' : ''}`), bar(h.rate, h.lo, h.hi, `${h.k}/${h.n}`), el('td', 'cost', h.truncated ? pct(h.truncated) : '–'));
+      // round 3: one group label per model, the same words as home's "How to read the numbers"
+      const group = BEST.includes(m.name) ? 'the best models' : { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' }[m.tier] ?? '';
+      tr.append(who(m.name, `${m.lab}${group ? ` · ${group}` : ''}`), bar(h.rate, h.lo, h.hi, `${h.k}/${h.n}`), el('td', 'cost', h.truncated ? pct(h.truncated) : '–'));
       return tr;
     };
     if ($('a-v2-top') && vm.length) {
@@ -813,6 +831,14 @@
     if (models && $('a-hosts')) {
       for (const m of models) { const li = el('li'); li.append(el('b', null, name(m.model)), document.createTextNode(` ${m.access}`)); $('a-hosts').append(li); }
     }
+    // round 3: the compliance example quotes a rule number a normal reader can't use; say it in plain words instead
+    document.querySelectorAll('#tiers details').forEach((d) => {
+      const sm = d.querySelector('summary'), q = d.querySelector('p.q');
+      if (!/Rule 2210/.test(sm?.textContent ?? '')) return;
+      sm.textContent = 'Spotting misleading sentences in an email to clients';
+      q.textContent = q.textContent.replace(/FINRA Rule 2210\(d\)\(1\)/g, '[The securities industry’s rule on advertising to clients]').replace(/Rule 2210\(d\)\(1\)/g, '[that rule]');
+      q.after(el('p', 'rp-gloss', 'Rule numbers are replaced with plain words in brackets; the exact wording is in data/cases.jsonl in the code.'));
+    });
     // A chart in a closed <details> has no width to draw at; open those for the drawing below and close them after it.
     const shut = [...document.querySelectorAll('details.draw-open:not([open])')];
     shut.forEach((d) => { d.open = true; });

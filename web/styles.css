@@ -571,3 +571,25 @@ details.fine .notes { margin-top: 0.75rem; }
 .subpart.solo > .label { margin: 0 0 0.35rem; }
 .subpart.solo .example { margin-top: 1rem; }
 .subpart.solo .result:last-of-type { margin-bottom: 0; }
+
+/* writer A, round 3 */
+/* Home: the bottom line at the top with "what to do this week", three result cards, the reading path.
+   alone.html: the ChatGPT table. */
+.hero .bottom-line { margin-top: 0.5rem; }
+.this-week { display: grid; gap: 0.4rem; padding: 0.9rem 1rem; border-left: 2px solid var(--accent); background: var(--card); border-radius: 0 var(--r) var(--r) 0; }
+.this-week p:not(.label) { color: var(--ink); font-size: 1.0625rem; line-height: 1.6; max-width: 66ch; }
+.finds.three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.finds.three-up .find:nth-child(n) { padding: 1.25rem 1.5rem 1.5rem; border-top: 0; border-left: 1px solid var(--rule); }
+.finds.three-up .find:first-child { padding-left: 0; border-left: 0; }
+.finds.three-up .find:last-child { padding-right: 0; }
+@media (max-width: 60rem) {
+  .finds.three-up { grid-template-columns: minmax(0, 1fr); }
+  .finds.three-up .find:nth-child(n) { padding: 1.25rem 0; border-left: 0; }
+  .finds.three-up .find + .find { border-top: 1px solid var(--rule); }
+}
+.go-list.path a { grid-template-columns: 13rem minmax(0, 1fr); }
+.go-list.path a > span { line-height: 1.55; }
+.go-list.path a > span span { color: inherit; }
+@media (max-width: 40rem) { .go-list.path a { grid-template-columns: minmax(0, 1fr); } }
+.scores.luna td.r, .scores.luna th.r { text-align: right; }
+.scores.luna .model { font-weight: 500; }

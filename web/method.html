@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>How I checked · PlannerBench</title>
-<meta name="description" content="How every PlannerBench answer is proven: a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
+<meta name="description" content="How every PlannerBench answer is checked: a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="styles.css?v=24">
 </head>
 <body data-page="method">
 <header class="nav">
@@ -20,7 +20,7 @@
       <a href="wrong-facts.html">Wrong facts</a>
       <a href="method.html" aria-current="page">How I checked</a>
       <a href="built.html">How I built it</a>
-      <span class="mode" role="group" aria-label="Reading mode"><a class="mode-human" href="method.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html">Agent</a></span>
+      <span class="mode" role="group" aria-label="Version: for people, or plain text for AI agents"><a class="mode-human" href="method.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html">Agent (plain text)</a></span>
     </nav>
   </div>
 </header>
@@ -28,10 +28,10 @@
 <main>
   <section class="page-head wrap">
     <p class="eyebrow">How I checked</p>
-    <h1>Before grading the AI, I had to prove my own answers</h1>
+    <h1>Before grading the AI, I had to check my own answers</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
-      <p>The planning engine and a separately written checker compute every answer in the first test and must agree within <span data-v="system:two_way_check.within">—</span>, and outside tax software built by other people recomputes the tax answers. A second engine, written blind by an AI agent that never saw the planning engine, agrees within <span data-v="system:cleanroom.within">—</span> on <span data-v="system:cleanroom.of" data-f="int">—</span> random households, and every question in the newer set must match it. Two human checks are still owed: a CPA’s sign-off and a person spot-checking the AI judge in the wrong-facts test.</p>
+      <p>The planning engine (the program that works out the right answers) and a second, separately written program both compute every answer in the first test, and they must agree within <span data-v="system:two_way_check.within">—</span>. Outside tax software built by other people recomputes the tax answers. Another engine, written by a separate AI agent that was never allowed to see the planning engine’s code, agrees within <span data-v="system:cleanroom.within">—</span> on every one of <span data-v="system:cleanroom.of" data-f="int">—</span> random households, and every question in the newer set must match it. Two human checks are still owed: a CPA’s sign-off and a person spot-checking the AI judge in the wrong-facts test.</p>
       <p class="stop-here">That’s the whole idea. The rest of this page is the detail.</p>
     </div>
   </section>
@@ -66,6 +66,7 @@
         <li><b>AI built it and graded it.</b> The lead AI coding agent (Claude Code, working under my direction) wrote the planning engine, the questions, the grader and this site, and ran every test. I decided what to test, what counts as right, when to spend money and what to publish.</li>
         <li><b>The engines above.</b> A second engine written by a separate agent that never read the first, and outside tax software written by people, recompute the answers.</li>
         <li><b>A second judge from another lab.</b> In the wrong-facts test, an AI judge (Claude Haiku 5.5) reads each reply and records whether it flagged the problem. A judge from OpenAI (GPT-6 Luna) re-read <span data-v="v2:judge_check.replies_double_judged" data-f="int">—</span> of those replies and agreed on <span data-v="v2:judge_check.flagged_agreement" data-f="pct1">—</span>. Where a reply plainly named the problem but the judge marked it as missed, the lead AI agent corrected the label (<span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> replies). Two AIs agreeing, or one AI correcting another, is not the same as a person checking.</li>
+        <li><b>The ChatGPT run.</b> GPT-6 Luna’s replies were graded by the same answer keys and the same scripts as every other model. On wrong facts the same judge (Claude Haiku 5.5) used the same instructions, and the lead AI agent read every reply the judge marked as not catching the mistake (<span data-k="a_luna_unnamed">—</span> replies; <span data-v="luna:bad.labels_changed" data-f="int">—</span> labels changed). The replies the judge marked as caught haven’t been re-read yet. A first attempt was thrown out because most replies were a bare final number with no reasoning, which isn’t how ChatGPT answers a person; the details are on <a href="alone.html#chatgpt">AI on its own</a>.</li>
         <li><b>An outside audit.</b> On November 15, 2026, OpenAI’s GPT-6.1 Sol read the whole project, without changing anything, and looked for errors. It found <span data-v="system:audit.errors" data-f="int">—</span>, all fixed on this version; the list is in the <a href="report.html">report</a>.</li>
         <li><b>Still owed.</b> A CPA (a licensed tax accountant) hasn’t signed off on the answer key yet; worked solutions are ready for one to check with a calculator. That would be a human check on top of the independent programs, which already agree. And no person has yet spot-checked the AI judge’s labels in the wrong-facts test.</li>
       </ul>
@@ -80,7 +81,7 @@
       <div>
         <ol class="checks">
           <li><span><b>Published examples.</b> Cases whose answers come straight from IRS, Social Security and Medicare tables must match exactly.</span></li>
-          <li><span><b>Two independent programs.</b> The planning engine and a separately written checker compute every answer and must agree within <span data-v="system:two_way_check.within">—</span>. They agree on all <span data-k="questions">—</span> questions in the first test.</span></li>
+          <li><span><b>Two independent programs.</b> The planning engine and a second, separately written program compute every answer and must agree within <span data-v="system:two_way_check.within">—</span>. They agree on all <span data-k="questions">—</span> questions in the first test.</span></li>
           <li><span><b>Rules that must always hold.</b> Thousands of random households test things like “more income never lowers tax” and “waiting a month never lowers a Social Security check.”</span></li>
           <li><span><b>Dataset health.</b> No duplicates, and no task where one answer is common enough to guess.</span></li>
           <li><span><b>An outside tax model, where it reaches.</b> PolicyEngine-US recomputes the first test’s tax answers and the 2026 federal returns in the whole-household decisions. It doesn’t cover required withdrawals, Social Security claiming or Medicare premiums.</span></li>
@@ -97,7 +98,7 @@
         <li><b>Failures are their own bucket.</b> A reply that ran out of tokens is published and counted as not right, never quietly dropped.</li>
         <li><b>Mistakes are priced.</b> Each wrong number in the first test is also scored in dollars a year off, so a ten-cent miss and a large one don’t count the same.</li>
         <li><b>Hosts are pinned.</b> Every outside model runs on one named host with data collection off; the private set never goes to free endpoints.</li>
-        <li><b>A held-back set.</b> Private questions from a secret seed pass the same checks and are never published, so a model that trained on the public set still meets new ones, and nothing is tuned on them.</li>
+        <li><b>A held-back set.</b> Held-back questions are private questions, made from a secret seed (a starting number for the generator), that pass the same checks and are never published, so a model that trained on the public set still meets new ones, and nothing is tuned on them.</li>
         <li><b>What rebuilds the newer set.</b> <code>v2/grade.py</code> regrades it from saved replies; <code>v2/build_hard.py</code> and <code>v2/build_bad.py</code> rebuild its questions and stop if the engine and an independent check disagree.</li>
       </ul>
     </details>
@@ -111,11 +112,11 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
-    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
+    <span>Human | Agent (plain text), top right: the same site as plain text for AI readers, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>

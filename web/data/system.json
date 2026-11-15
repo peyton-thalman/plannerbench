@@ -23,7 +23,10 @@
  "tools_check": {
   "agree": 2750,
   "of": 2750,
-  "source": "checks/tools_check.py (README log, 2026-10-21)"
+  "source": "checks/tools_check.py (README log, 2026-10-21)",
+  "public_numeric": 2200,
+  "private_numeric": 550,
+  "split_source": "METHODOLOGY.md line 42 and README log 2026-10-21 (2,200/2,200 public, 550/550 private); the 600 public compliance questions have no number and are skipped (checks/tools_check.py). Shown on web/method.html"
  },
  "first_bug": {
   "what": "MAGI exactly at the top IRMAA threshold was placed one tier low",
