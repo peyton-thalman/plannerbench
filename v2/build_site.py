@@ -25,15 +25,17 @@ MODELS = S["models"]
 # so every amber mark carries a visible label and each chart has a table beside it.
 TIER = {"frontier": "#1f8a6b", "mid": "#c2571a", "cheap": "#2a78d6"}
 TIER_NAME = {"frontier": "Frontier", "mid": "Mid-tier", "cheap": "Cheap / open weights"}
-OUT = {"caught": ("#1f8a6b", "Caught the mistake and asked"), "flagged_but_answered": ("#d99a1e", "Noticed it, answered anyway"),
-       "silent_number": ("#b5402f", "Missed it, answered anyway"), "declined_other_reason": ("#9a958c", "Wouldn't answer, for another reason")}
+# The five outcomes of a reply to a corrupted note (v2/grade.py OUTCOMES). "Caught it" doesn't require asking a question.
+OUT = {"caught": ("#1f8a6b", "Caught it"), "flagged_but_answered": ("#d99a1e", "Noticed, answered anyway"),
+       "silent_number": ("#b5402f", "Missed it, answered anyway"), "declined_other_reason": ("#9a958c", "Declined for another reason"),
+       "ran_out_of_room": ("#5e6e85", "Ran out of room")}
 INK, MUTED, RULE, PAPER = "#16181c", "#4d525b", "#e7e8e8", "#ffffff"
 FONT = 'font-family="Geist, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif"'
 e = html.escape
 
 
 HEADLINE = ("Given client notes with one planted error, three of five cheap open-weight models answered "
-            "confidently 81–93% of the time and caught 1–3%. The best models caught 73% with almost no false "
+            "confidently 81–93% of the time and caught 1–3%. The best models caught 73–80% with almost no false "
             "alarms. With the planning engine as a tool, a cheap model went from 29% to 79% on hard questions.")
 
 def svg(w, h, body, label):
@@ -87,7 +89,7 @@ def chart_outcomes():
     b = [text(16, 24, "30 client notes, each with one mistake planted. What did each model do?", 16, INK, weight=600),
          text(16, 44, "Green is what you want. Red is a confident answer built on a wrong fact.", 12.5)]
     for n, (k, (col, name)) in enumerate(OUT.items()):
-        lx, ly = 16 + (n % 2) * 300, 62 + (n // 2) * 20
+        lx, ly = 16 + (n % 3) * 245, 62 + (n // 3) * 20
         b.append(f'<rect x="{lx}" y="{ly}" width="12" height="12" rx="2" fill="{col}"/>' + text(lx + 18, ly + 10.5, name, 12.5))
     for n, m in enumerate(ms):
         y = T + n * row
@@ -302,8 +304,10 @@ def main():
     (SITE / "charts").mkdir(exist_ok=True)
     for f in charts.glob("*.svg"):
         shutil.copy(f, SITE / "charts" / f.name)
-    (SITE / "data" / "v2.json").write_text(json.dumps({k: S[k] for k in ("settings", "items", "models", "tiers", "tool_effect", "judge_check", "bad_outcomes_all_models", "bad_by_type_all_models")}
-                                                      | {"headline": HEADLINE, "spent_usd": S["spend"]["spent_usd"]}, indent=1) + "\n")
+    keys = ("settings", "items", "outcomes", "models", "tiers", "tool_effect", "judge_check", "bad_outcomes_all_models", "bad_outcomes_all_models_judge_only",
+            "bad_ran_out_of_room_controls_all_models", "bad_by_type_all_models", "catch_by_type", "tool_budget", "comparisons")
+    (SITE / "data" / "v2.json").write_text(json.dumps({k: S[k] for k in keys}
+                                                      | {"outcome_labels": {k: name for k, (_, name) in OUT.items()}, "headline": HEADLINE, "spent_usd": S["spend"]["spent_usd"]}, indent=1) + "\n")
     if (ROOT / "REPORT.md").exists():
         (SITE / "report.html").write_text(report_page())
     print("site built")

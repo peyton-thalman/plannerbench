@@ -1,7 +1,9 @@
 {
  "settings": {
   "effort": "low",
-  "max_tokens": 4000
+  "max_tokens": 4000,
+  "max_tokens_applies_to": "each reply; in the tool track each turn, up to 8 turns",
+  "max_tool_turns": 8
  },
  "items": {
   "hard": 42,
@@ -9,6 +11,13 @@
   "bad_clean": 30,
   "bad_valid_odd": 10
  },
+ "outcomes": [
+  "caught",
+  "flagged_but_answered",
+  "silent_number",
+  "declined_other_reason",
+  "ran_out_of_room"
+ ],
  "models": [
   {
    "model": "or:anthropic/claude-sonnet-5.5@anthropic",
@@ -100,6 +109,34 @@
      "lo": 0.5555,
      "hi": 0.8582
     },
+    "flagged_but_answered": {
+     "k": 6.0,
+     "n": 30,
+     "rate": 0.2,
+     "lo": 0.095,
+     "hi": 0.3731
+    },
+    "silent_number": {
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 28.0,
      "n": 30,
@@ -121,26 +158,55 @@
      "lo": 0.5555,
      "hi": 0.8582
     },
-    "silent_number": {
-     "k": 2.0,
-     "n": 30,
-     "rate": 0.0667,
-     "lo": 0.0185,
-     "hi": 0.2132
+    "judge_only": {
+     "caught": {
+      "k": 22.0,
+      "n": 30,
+      "rate": 0.7333,
+      "lo": 0.5555,
+      "hi": 0.8582
+     },
+     "flagged_but_answered": {
+      "k": 6.0,
+      "n": 30,
+      "rate": 0.2,
+      "lo": 0.095,
+      "hi": 0.3731
+     },
+     "silent_number": {
+      "k": 2.0,
+      "n": 30,
+      "rate": 0.0667,
+      "lo": 0.0185,
+      "hi": 0.2132
+     },
+     "declined_other_reason": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 28.0,
+      "n": 30,
+      "rate": 0.9333,
+      "lo": 0.7868,
+      "hi": 0.9815
+     }
     },
-    "flagged_but_answered": {
-     "k": 6.0,
-     "n": 30,
-     "rate": 0.2,
-     "lo": 0.095,
-     "hi": 0.3731
-    },
-    "declined_other_reason": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 28.0,
@@ -177,7 +243,31 @@
      "lo": 0.835,
      "hi": 0.9862
     },
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": null,
+    "stable_outcome_judge_only": null,
     "stable_caught": null,
+    "stable_items": 0,
     "truncated": 0.0,
     "cost_usd": 0.3854,
     "cost_per_question": 0.00551,
@@ -190,12 +280,26 @@
        "lo": 0.4365,
        "hi": 0.9699
       },
+      "caught_judge_only": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
+      },
       "flagged": {
        "k": 5.0,
        "n": 6,
        "rate": 0.8333,
        "lo": 0.4365,
        "hi": 0.9699
+      },
+      "silent_number": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
@@ -213,12 +317,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -236,12 +354,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -259,12 +391,26 @@
        "lo": 0.3,
        "hi": 0.9032
       },
+      "caught_judge_only": {
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -282,12 +428,26 @@
        "lo": 0.0301,
        "hi": 0.5635
       },
+      "caught_judge_only": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
+      },
       "flagged": {
        "k": 5.0,
        "n": 6,
        "rate": 0.8333,
        "lo": 0.4365,
        "hi": 0.9699
+      },
+      "silent_number": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
@@ -298,6 +458,9 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "over_limit"
+    ],
     "decline_reasons": {},
     "no_law": {
      "caught": {
@@ -325,7 +488,7 @@
     "net_no_law": 1.0,
     "net": 0.7333,
     "pairs_both_right": {
-     "k": 21,
+     "k": 21.0,
      "n": 30,
      "rate": 0.7,
      "lo": 0.5212,
@@ -493,18 +656,46 @@
     "judged": 30,
     "corrupted_replies": 30,
     "caught": {
-     "k": 22.0,
+     "k": 24.0,
      "n": 30,
-     "rate": 0.7333,
-     "lo": 0.5555,
-     "hi": 0.8582
+     "rate": 0.8,
+     "lo": 0.6269,
+     "hi": 0.905
+    },
+    "flagged_but_answered": {
+     "k": 6.0,
+     "n": 30,
+     "rate": 0.2,
+     "lo": 0.095,
+     "hi": 0.3731
+    },
+    "silent_number": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
     },
     "flagged": {
-     "k": 28.0,
+     "k": 30.0,
      "n": 30,
-     "rate": 0.9333,
-     "lo": 0.7868,
-     "hi": 0.9815
+     "rate": 1.0,
+     "lo": 0.8865,
+     "hi": 1.0
     },
     "asked": {
      "k": 28.0,
@@ -520,26 +711,57 @@
      "lo": 0.6269,
      "hi": 0.905
     },
-    "silent_number": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+    "judge_only": {
+     "caught": {
+      "k": 22.0,
+      "n": 30,
+      "rate": 0.7333,
+      "lo": 0.5555,
+      "hi": 0.8582
+     },
+     "flagged_but_answered": {
+      "k": 6.0,
+      "n": 30,
+      "rate": 0.2,
+      "lo": 0.095,
+      "hi": 0.3731
+     },
+     "silent_number": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "declined_other_reason": {
+      "k": 2.0,
+      "n": 30,
+      "rate": 0.0667,
+      "lo": 0.0185,
+      "hi": 0.2132
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 28.0,
+      "n": 30,
+      "rate": 0.9333,
+      "lo": 0.7868,
+      "hi": 0.9815
+     }
     },
-    "flagged_but_answered": {
-     "k": 6.0,
-     "n": 30,
-     "rate": 0.2,
-     "lo": 0.095,
-     "hi": 0.3731
-    },
-    "declined_other_reason": {
-     "k": 2.0,
-     "n": 30,
-     "rate": 0.0667,
-     "lo": 0.0185,
-     "hi": 0.2132
+    "adjudication": {
+     "labels_changed": 2,
+     "false_to_true": 2,
+     "true_to_false": 0,
+     "outcome_changes": {
+      "declined_other_reason->caught": 2
+     }
     },
     "clean_correct": {
      "k": 30.0,
@@ -576,7 +798,31 @@
      "lo": 0.8712,
      "hi": 0.9956
     },
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": null,
+    "stable_outcome_judge_only": null,
     "stable_caught": null,
+    "stable_items": 0,
     "truncated": 0.0,
     "cost_usd": 0.087,
     "cost_per_question": 0.00124,
@@ -589,12 +835,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -606,6 +866,13 @@
      },
      "impossible_age": {
       "caught": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "caught_judge_only": {
        "k": 4.0,
        "n": 6,
        "rate": 0.6667,
@@ -613,11 +880,18 @@
        "hi": 0.9032
       },
       "flagged": {
-       "k": 4.0,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.6667,
-       "lo": 0.3,
-       "hi": 0.9032
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -635,12 +909,26 @@
        "lo": 0.0968,
        "hi": 0.7
       },
+      "caught_judge_only": {
+       "k": 2.0,
+       "n": 6,
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -658,12 +946,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -681,12 +983,26 @@
        "lo": 0.3,
        "hi": 0.9032
       },
+      "caught_judge_only": {
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -697,16 +1013,19 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "spending"
+    ],
     "decline_reasons": {
      "wants_more_facts": 1
     },
     "no_law": {
      "caught": {
-      "k": 9.0,
+      "k": 11.0,
       "n": 15,
-      "rate": 0.6,
-      "lo": 0.3575,
-      "hi": 0.8018
+      "rate": 0.7333,
+      "lo": 0.4805,
+      "hi": 0.891
      },
      "false_alarm": {
       "k": 1.0,
@@ -723,14 +1042,14 @@
       "hi": 0.9911
      }
     },
-    "net_no_law": 0.55,
-    "net": 0.7083,
+    "net_no_law": 0.6833,
+    "net": 0.775,
     "pairs_both_right": {
-     "k": 22,
+     "k": 24.0,
      "n": 30,
-     "rate": 0.7333,
-     "lo": 0.5555,
-     "hi": 0.8582
+     "rate": 0.8,
+     "lo": 0.6269,
+     "hi": 0.905
     }
    }
   },
@@ -824,6 +1143,34 @@
      "lo": 0.5212,
      "hi": 0.8334
     },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "silent_number": {
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
+    },
+    "declined_other_reason": {
+     "k": 8.0,
+     "n": 30,
+     "rate": 0.2667,
+     "lo": 0.1418,
+     "hi": 0.4445
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 21.0,
      "n": 30,
@@ -845,26 +1192,55 @@
      "lo": 0.8333,
      "hi": 0.9941
     },
-    "silent_number": {
-     "k": 1.0,
-     "n": 30,
-     "rate": 0.0333,
-     "lo": 0.0059,
-     "hi": 0.1667
+    "judge_only": {
+     "caught": {
+      "k": 21.0,
+      "n": 30,
+      "rate": 0.7,
+      "lo": 0.5212,
+      "hi": 0.8334
+     },
+     "flagged_but_answered": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "silent_number": {
+      "k": 1.0,
+      "n": 30,
+      "rate": 0.0333,
+      "lo": 0.0059,
+      "hi": 0.1667
+     },
+     "declined_other_reason": {
+      "k": 8.0,
+      "n": 30,
+      "rate": 0.2667,
+      "lo": 0.1418,
+      "hi": 0.4445
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 21.0,
+      "n": 30,
+      "rate": 0.7,
+      "lo": 0.5212,
+      "hi": 0.8334
+     }
     },
-    "flagged_but_answered": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
-    },
-    "declined_other_reason": {
-     "k": 8.0,
-     "n": 30,
-     "rate": 0.2667,
-     "lo": 0.1418,
-     "hi": 0.4445
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 9.0,
@@ -901,7 +1277,31 @@
      "lo": 0.2008,
      "hi": 0.4798
     },
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": null,
+    "stable_outcome_judge_only": null,
     "stable_caught": null,
+    "stable_items": 0,
     "truncated": 0.0,
     "cost_usd": 0.3243,
     "cost_per_question": 0.00463,
@@ -914,12 +1314,26 @@
        "lo": 0.3,
        "hi": 0.9032
       },
+      "caught_judge_only": {
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
+      },
       "flagged": {
        "k": 4.0,
        "n": 6,
        "rate": 0.6667,
        "lo": 0.3,
        "hi": 0.9032
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 3.0,
@@ -937,12 +1351,26 @@
        "lo": 0.4365,
        "hi": 0.9699
       },
+      "caught_judge_only": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
+      },
       "flagged": {
        "k": 5.0,
        "n": 6,
        "rate": 0.8333,
        "lo": 0.4365,
        "hi": 0.9699
+      },
+      "silent_number": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
@@ -960,12 +1388,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 6.0,
@@ -983,12 +1425,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 6.0,
@@ -1006,7 +1462,21 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "silent_number": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
@@ -1022,6 +1492,9 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "over_limit"
+    ],
     "decline_reasons": {
      "wants_more_facts": 6,
      "lacks_rules": 20,
@@ -1053,7 +1526,7 @@
     "net_no_law": 0.5833,
     "net": 0.025,
     "pairs_both_right": {
-     "k": 8,
+     "k": 8.0,
      "n": 30,
      "rate": 0.2667,
      "lo": 0.1418,
@@ -1221,18 +1694,46 @@
     "judged": 60,
     "corrupted_replies": 60,
     "caught": {
-     "k": 18.5,
+     "k": 20.0,
      "n": 30,
-     "rate": 0.6167,
-     "lo": 0.4391,
-     "hi": 0.7678
+     "rate": 0.6667,
+     "lo": 0.4878,
+     "hi": 0.8077
+    },
+    "flagged_but_answered": {
+     "k": 10.0,
+     "n": 30,
+     "rate": 0.3333,
+     "lo": 0.1923,
+     "hi": 0.5122
+    },
+    "silent_number": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
     },
     "flagged": {
-     "k": 23.0,
+     "k": 30.0,
      "n": 30,
-     "rate": 0.7667,
-     "lo": 0.5907,
-     "hi": 0.8821
+     "rate": 1.0,
+     "lo": 0.8865,
+     "hi": 1.0
     },
     "asked": {
      "k": 21.0,
@@ -1248,26 +1749,58 @@
      "lo": 0.4878,
      "hi": 0.8077
     },
-    "silent_number": {
-     "k": 5.5,
-     "n": 30,
-     "rate": 0.1833,
-     "lo": 0.084,
-     "hi": 0.3545
+    "judge_only": {
+     "caught": {
+      "k": 18.5,
+      "n": 30,
+      "rate": 0.6167,
+      "lo": 0.4391,
+      "hi": 0.7678
+     },
+     "flagged_but_answered": {
+      "k": 4.5,
+      "n": 30,
+      "rate": 0.15,
+      "lo": 0.063,
+      "hi": 0.3164
+     },
+     "silent_number": {
+      "k": 5.5,
+      "n": 30,
+      "rate": 0.1833,
+      "lo": 0.084,
+      "hi": 0.3545
+     },
+     "declined_other_reason": {
+      "k": 1.5,
+      "n": 30,
+      "rate": 0.05,
+      "lo": 0.0116,
+      "hi": 0.1905
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 23.0,
+      "n": 30,
+      "rate": 0.7667,
+      "lo": 0.5907,
+      "hi": 0.8821
+     }
     },
-    "flagged_but_answered": {
-     "k": 4.5,
-     "n": 30,
-     "rate": 0.15,
-     "lo": 0.063,
-     "hi": 0.3164
-    },
-    "declined_other_reason": {
-     "k": 1.5,
-     "n": 30,
-     "rate": 0.05,
-     "lo": 0.0116,
-     "hi": 0.1905
+    "adjudication": {
+     "labels_changed": 14,
+     "false_to_true": 14,
+     "true_to_false": 0,
+     "outcome_changes": {
+      "declined_other_reason->caught": 3,
+      "silent_number->flagged_but_answered": 11
+     }
     },
     "clean_correct": {
      "k": 29.0,
@@ -1304,7 +1837,31 @@
      "lo": 0.835,
      "hi": 0.9862
     },
-    "stable_caught": 0.9,
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": 0.9333,
+    "stable_outcome_judge_only": 0.7333,
+    "stable_caught": 0.9333,
+    "stable_items": 30,
     "truncated": 0.0,
     "cost_usd": 0.099,
     "cost_per_question": 0.00071,
@@ -1317,12 +1874,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.5,
@@ -1334,6 +1905,13 @@
      },
      "impossible_age": {
       "caught": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "caught_judge_only": {
        "k": 4.5,
        "n": 6,
        "rate": 0.75,
@@ -1341,11 +1919,18 @@
        "hi": 0.94
       },
       "flagged": {
-       "k": 4.5,
+       "k": 6.0,
        "n": 6,
-       "rate": 0.75,
-       "lo": 0.3648,
-       "hi": 0.94
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -1363,12 +1948,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
-      "flagged": {
-       "k": 1.5,
+      "caught_judge_only": {
+       "k": 0.0,
        "n": 6,
-       "rate": 0.25,
-       "lo": 0.06,
-       "hi": 0.6352
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
+      "flagged": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -1386,12 +1985,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -1409,12 +2022,26 @@
        "lo": 0.0968,
        "hi": 0.7
       },
-      "flagged": {
-       "k": 5.0,
+      "caught_judge_only": {
+       "k": 2.0,
        "n": 6,
-       "rate": 0.8333,
-       "lo": 0.4365,
-       "hi": 0.9699
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
+      },
+      "flagged": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -1425,16 +2052,19 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "spending"
+    ],
     "decline_reasons": {
      "wants_more_facts": 2
     },
     "no_law": {
      "caught": {
-      "k": 7.5,
+      "k": 9.0,
       "n": 15,
-      "rate": 0.5,
-      "lo": 0.2742,
-      "hi": 0.7258
+      "rate": 0.6,
+      "lo": 0.3575,
+      "hi": 0.8018
      },
      "false_alarm": {
       "k": 0.0,
@@ -1451,14 +2081,14 @@
       "hi": 0.9974
      }
     },
-    "net_no_law": 0.5,
-    "net": 0.5917,
+    "net_no_law": 0.6,
+    "net": 0.6417,
     "pairs_both_right": {
-     "k": 35,
-     "n": 60,
-     "rate": 0.5833,
-     "lo": 0.4573,
-     "hi": 0.6994
+     "k": 19.0,
+     "n": 30,
+     "rate": 0.6333,
+     "lo": 0.4551,
+     "hi": 0.7813
     }
    }
   },
@@ -1552,6 +2182,34 @@
      "lo": 0.7649,
      "hi": 0.9738
     },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "silent_number": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "declined_other_reason": {
+     "k": 2.5,
+     "n": 30,
+     "rate": 0.0833,
+     "lo": 0.0262,
+     "hi": 0.2351
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 27.5,
      "n": 30,
@@ -1573,26 +2231,55 @@
      "lo": 0.8865,
      "hi": 1.0
     },
-    "silent_number": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+    "judge_only": {
+     "caught": {
+      "k": 27.5,
+      "n": 30,
+      "rate": 0.9167,
+      "lo": 0.7649,
+      "hi": 0.9738
+     },
+     "flagged_but_answered": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "silent_number": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "declined_other_reason": {
+      "k": 2.5,
+      "n": 30,
+      "rate": 0.0833,
+      "lo": 0.0262,
+      "hi": 0.2351
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 27.5,
+      "n": 30,
+      "rate": 0.9167,
+      "lo": 0.7649,
+      "hi": 0.9738
+     }
     },
-    "flagged_but_answered": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
-    },
-    "declined_other_reason": {
-     "k": 2.5,
-     "n": 30,
-     "rate": 0.0833,
-     "lo": 0.0262,
-     "hi": 0.2351
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 14.0,
@@ -1629,7 +2316,31 @@
      "lo": 0.3294,
      "hi": 0.625
     },
-    "stable_caught": 0.9666666666666667,
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": 0.9667,
+    "stable_outcome_judge_only": 0.9667,
+    "stable_caught": 0.9667,
+    "stable_items": 30,
     "truncated": 0.0,
     "cost_usd": 0.1515,
     "cost_per_question": 0.00108,
@@ -1642,12 +2353,26 @@
        "lo": 0.4365,
        "hi": 0.9699
       },
+      "caught_judge_only": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
+      },
       "flagged": {
        "k": 5.0,
        "n": 6,
        "rate": 0.8333,
        "lo": 0.4365,
        "hi": 0.9699
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 3.0,
@@ -1665,12 +2390,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -1688,12 +2427,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -1711,12 +2464,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 6.0,
@@ -1734,12 +2501,26 @@
        "lo": 0.3648,
        "hi": 0.94
       },
+      "caught_judge_only": {
+       "k": 4.5,
+       "n": 6,
+       "rate": 0.75,
+       "lo": 0.3648,
+       "hi": 0.94
+      },
       "flagged": {
        "k": 4.5,
        "n": 6,
        "rate": 0.75,
        "lo": 0.3648,
        "hi": 0.94
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 6.0,
@@ -1750,6 +2531,9 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "over_limit"
+    ],
     "decline_reasons": {
      "data_problem": 6,
      "lacks_rules": 34
@@ -1780,11 +2564,11 @@
     "net_no_law": 1.0,
     "net": 0.4167,
     "pairs_both_right": {
-     "k": 28,
-     "n": 60,
+     "k": 14.0,
+     "n": 30,
      "rate": 0.4667,
-     "lo": 0.3463,
-     "hi": 0.5911
+     "lo": 0.3023,
+     "hi": 0.6386
     }
    }
   },
@@ -1954,6 +2738,34 @@
      "lo": 0.4714,
      "hi": 0.7946
     },
+    "flagged_but_answered": {
+     "k": 5.0,
+     "n": 30,
+     "rate": 0.1667,
+     "lo": 0.0734,
+     "hi": 0.3356
+    },
+    "silent_number": {
+     "k": 5.5,
+     "n": 30,
+     "rate": 0.1833,
+     "lo": 0.084,
+     "hi": 0.3545
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 24.5,
      "n": 30,
@@ -1975,26 +2787,55 @@
      "lo": 0.4714,
      "hi": 0.7946
     },
-    "silent_number": {
-     "k": 5.5,
-     "n": 30,
-     "rate": 0.1833,
-     "lo": 0.084,
-     "hi": 0.3545
+    "judge_only": {
+     "caught": {
+      "k": 19.5,
+      "n": 30,
+      "rate": 0.65,
+      "lo": 0.4714,
+      "hi": 0.7946
+     },
+     "flagged_but_answered": {
+      "k": 5.0,
+      "n": 30,
+      "rate": 0.1667,
+      "lo": 0.0734,
+      "hi": 0.3356
+     },
+     "silent_number": {
+      "k": 5.5,
+      "n": 30,
+      "rate": 0.1833,
+      "lo": 0.084,
+      "hi": 0.3545
+     },
+     "declined_other_reason": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 24.5,
+      "n": 30,
+      "rate": 0.8167,
+      "lo": 0.6455,
+      "hi": 0.916
+     }
     },
-    "flagged_but_answered": {
-     "k": 5.0,
-     "n": 30,
-     "rate": 0.1667,
-     "lo": 0.0734,
-     "hi": 0.3356
-    },
-    "declined_other_reason": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 25.5,
@@ -2031,7 +2872,31 @@
      "lo": 0.724,
      "hi": 0.9375
     },
-    "stable_caught": 0.8333333333333334,
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": 0.7667,
+    "stable_outcome_judge_only": 0.7667,
+    "stable_caught": 0.8333,
+    "stable_items": 30,
     "truncated": 0.0,
     "cost_usd": 0.0705,
     "cost_per_question": 0.0005,
@@ -2044,12 +2909,26 @@
        "lo": 0.1876,
        "hi": 0.8124
       },
+      "caught_judge_only": {
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
+      },
       "flagged": {
        "k": 3.5,
        "n": 6,
        "rate": 0.5833,
        "lo": 0.2411,
        "hi": 0.8605
+      },
+      "silent_number": {
+       "k": 2.5,
+       "n": 6,
+       "rate": 0.4167,
+       "lo": 0.1395,
+       "hi": 0.7589
       },
       "false_alarm": {
        "k": 0.0,
@@ -2067,12 +2946,26 @@
        "lo": 0.4365,
        "hi": 0.9699
       },
+      "caught_judge_only": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2090,12 +2983,26 @@
        "lo": 0.5168,
        "hi": 0.9912
       },
+      "caught_judge_only": {
+       "k": 5.5,
+       "n": 6,
+       "rate": 0.9167,
+       "lo": 0.5168,
+       "hi": 0.9912
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2113,12 +3020,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2136,7 +3057,21 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
+      },
+      "silent_number": {
        "k": 3.0,
        "n": 6,
        "rate": 0.5,
@@ -2152,6 +3087,9 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "over_limit"
+    ],
     "decline_reasons": {},
     "no_law": {
      "caught": {
@@ -2179,11 +3117,11 @@
     "net_no_law": 0.8667,
     "net": 0.65,
     "pairs_both_right": {
-     "k": 32,
-     "n": 60,
+     "k": 16.0,
+     "n": 30,
      "rate": 0.5333,
-     "lo": 0.4089,
-     "hi": 0.6537
+     "lo": 0.3614,
+     "hi": 0.6977
     }
    }
   },
@@ -2354,12 +3292,40 @@
      "lo": 0.4338,
      "hi": 0.7632
     },
-    "flagged": {
-     "k": 22.0,
+    "flagged_but_answered": {
+     "k": 4.33,
      "n": 30,
-     "rate": 0.7333,
-     "lo": 0.5555,
-     "hi": 0.8582
+     "rate": 0.1444,
+     "lo": 0.0597,
+     "hi": 0.3099
+    },
+    "silent_number": {
+     "k": 5.33,
+     "n": 30,
+     "rate": 0.1778,
+     "lo": 0.0804,
+     "hi": 0.3483
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
+    },
+    "flagged": {
+     "k": 22.67,
+     "n": 30,
+     "rate": 0.7556,
+     "lo": 0.5789,
+     "hi": 0.8742
     },
     "asked": {
      "k": 18.67,
@@ -2375,26 +3341,57 @@
      "lo": 0.4989,
      "hi": 0.8163
     },
-    "silent_number": {
-     "k": 6.0,
-     "n": 30,
-     "rate": 0.2,
-     "lo": 0.095,
-     "hi": 0.3731
+    "judge_only": {
+     "caught": {
+      "k": 18.33,
+      "n": 30,
+      "rate": 0.6111,
+      "lo": 0.4338,
+      "hi": 0.7632
+     },
+     "flagged_but_answered": {
+      "k": 3.67,
+      "n": 30,
+      "rate": 0.1222,
+      "lo": 0.0467,
+      "hi": 0.2835
+     },
+     "silent_number": {
+      "k": 6.0,
+      "n": 30,
+      "rate": 0.2,
+      "lo": 0.095,
+      "hi": 0.3731
+     },
+     "declined_other_reason": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "ran_out_of_room": {
+      "k": 2.0,
+      "n": 30,
+      "rate": 0.0667,
+      "lo": 0.0185,
+      "hi": 0.2132
+     },
+     "flagged": {
+      "k": 22.0,
+      "n": 30,
+      "rate": 0.7333,
+      "lo": 0.5555,
+      "hi": 0.8582
+     }
     },
-    "flagged_but_answered": {
-     "k": 3.67,
-     "n": 30,
-     "rate": 0.1222,
-     "lo": 0.0467,
-     "hi": 0.2835
-    },
-    "declined_other_reason": {
-     "k": 2.0,
-     "n": 30,
-     "rate": 0.0667,
-     "lo": 0.0185,
-     "hi": 0.2132
+    "adjudication": {
+     "labels_changed": 2,
+     "false_to_true": 2,
+     "true_to_false": 0,
+     "outcome_changes": {
+      "silent_number->flagged_but_answered": 2
+     }
     },
     "clean_correct": {
      "k": 28.0,
@@ -2431,7 +3428,31 @@
      "lo": 0.8123,
      "hi": 0.9784
     },
-    "stable_caught": 0.6666666666666666,
+    "ran_out_of_room_clean": {
+     "k": 0.33,
+     "n": 30,
+     "rate": 0.0111,
+     "lo": 0.0008,
+     "hi": 0.1324
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.33,
+     "n": 10,
+     "rate": 0.0333,
+     "lo": 0.0025,
+     "hi": 0.3232
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.67,
+     "n": 40,
+     "rate": 0.0167,
+     "lo": 0.0022,
+     "hi": 0.1158
+    },
+    "stable_outcome": 0.6,
+    "stable_outcome_judge_only": 0.5667,
+    "stable_caught": 0.6667,
+    "stable_items": 30,
     "truncated": 0.0381,
     "cost_usd": 0.0909,
     "cost_per_question": 0.00043,
@@ -2444,12 +3465,26 @@
        "lo": 0.1549,
        "hi": 0.7773
       },
+      "caught_judge_only": {
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
+      },
       "flagged": {
        "k": 3.33,
        "n": 6,
        "rate": 0.5556,
        "lo": 0.2227,
        "hi": 0.8451
+      },
+      "silent_number": {
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
       },
       "false_alarm": {
        "k": 0.0,
@@ -2467,12 +3502,26 @@
        "lo": 0.1549,
        "hi": 0.7773
       },
+      "caught_judge_only": {
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
+      },
       "flagged": {
        "k": 3.67,
        "n": 6,
        "rate": 0.6111,
        "lo": 0.2601,
        "hi": 0.8754
+      },
+      "silent_number": {
+       "k": 2.33,
+       "n": 6,
+       "rate": 0.3889,
+       "lo": 0.1246,
+       "hi": 0.7399
       },
       "false_alarm": {
        "k": 0.0,
@@ -2490,12 +3539,26 @@
        "lo": 0.4889,
        "hi": 0.9853
       },
+      "caught_judge_only": {
+       "k": 5.33,
+       "n": 6,
+       "rate": 0.8889,
+       "lo": 0.4889,
+       "hi": 0.9853
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2513,12 +3576,26 @@
        "lo": 0.6097,
        "hi": 1.0
       },
+      "caught_judge_only": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2536,12 +3613,26 @@
        "lo": 0.0715,
        "hi": 0.6575
       },
-      "flagged": {
-       "k": 3.0,
+      "caught_judge_only": {
+       "k": 1.67,
        "n": 6,
-       "rate": 0.5,
-       "lo": 0.1876,
-       "hi": 0.8124
+       "rate": 0.2778,
+       "lo": 0.0715,
+       "hi": 0.6575
+      },
+      "flagged": {
+       "k": 3.67,
+       "n": 6,
+       "rate": 0.6111,
+       "lo": 0.2601,
+       "hi": 0.8754
+      },
+      "silent_number": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
       },
       "false_alarm": {
        "k": 0.0,
@@ -2552,6 +3643,9 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "over_limit"
+    ],
     "decline_reasons": {},
     "no_law": {
      "caught": {
@@ -2579,11 +3673,11 @@
     "net_no_law": 0.6667,
     "net": 0.6111,
     "pairs_both_right": {
-     "k": 53,
-     "n": 90,
+     "k": 17.67,
+     "n": 30,
      "rate": 0.5889,
-     "lo": 0.4856,
-     "hi": 0.6849
+     "lo": 0.4127,
+     "hi": 0.7449
     }
    }
   },
@@ -2754,6 +3848,34 @@
      "lo": 0.2459,
      "hi": 0.5768
     },
+    "flagged_but_answered": {
+     "k": 9.33,
+     "n": 30,
+     "rate": 0.3111,
+     "lo": 0.1751,
+     "hi": 0.49
+    },
+    "silent_number": {
+     "k": 4.33,
+     "n": 30,
+     "rate": 0.1444,
+     "lo": 0.0597,
+     "hi": 0.3099
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 4.33,
+     "n": 30,
+     "rate": 0.1444,
+     "lo": 0.0597,
+     "hi": 0.3099
+    },
     "flagged": {
      "k": 21.33,
      "n": 30,
@@ -2775,26 +3897,55 @@
      "lo": 0.3715,
      "hi": 0.7073
     },
-    "silent_number": {
-     "k": 4.33,
-     "n": 30,
-     "rate": 0.1444,
-     "lo": 0.0597,
-     "hi": 0.3099
+    "judge_only": {
+     "caught": {
+      "k": 12.0,
+      "n": 30,
+      "rate": 0.4,
+      "lo": 0.2459,
+      "hi": 0.5768
+     },
+     "flagged_but_answered": {
+      "k": 9.33,
+      "n": 30,
+      "rate": 0.3111,
+      "lo": 0.1751,
+      "hi": 0.49
+     },
+     "silent_number": {
+      "k": 4.33,
+      "n": 30,
+      "rate": 0.1444,
+      "lo": 0.0597,
+      "hi": 0.3099
+     },
+     "declined_other_reason": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "ran_out_of_room": {
+      "k": 4.33,
+      "n": 30,
+      "rate": 0.1444,
+      "lo": 0.0597,
+      "hi": 0.3099
+     },
+     "flagged": {
+      "k": 21.33,
+      "n": 30,
+      "rate": 0.7111,
+      "lo": 0.5326,
+      "hi": 0.8417
+     }
     },
-    "flagged_but_answered": {
-     "k": 9.33,
-     "n": 30,
-     "rate": 0.3111,
-     "lo": 0.1751,
-     "hi": 0.49
-    },
-    "declined_other_reason": {
-     "k": 4.33,
-     "n": 30,
-     "rate": 0.1444,
-     "lo": 0.0597,
-     "hi": 0.3099
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 10.0,
@@ -2831,7 +3982,31 @@
      "lo": 0.2076,
      "hi": 0.4882
     },
-    "stable_caught": 0.5666666666666667,
+    "ran_out_of_room_clean": {
+     "k": 4.67,
+     "n": 30,
+     "rate": 0.1556,
+     "lo": 0.0664,
+     "hi": 0.3229
+    },
+    "ran_out_of_room_odd": {
+     "k": 1.0,
+     "n": 10,
+     "rate": 0.1,
+     "lo": 0.0179,
+     "hi": 0.4042
+    },
+    "ran_out_of_room_controls": {
+     "k": 5.67,
+     "n": 40,
+     "rate": 0.1417,
+     "lo": 0.0652,
+     "hi": 0.281
+    },
+    "stable_outcome": 0.2667,
+    "stable_outcome_judge_only": 0.2667,
+    "stable_caught": 0.5667,
+    "stable_items": 30,
     "truncated": 0.1429,
     "cost_usd": 0.1051,
     "cost_per_question": 0.0005,
@@ -2844,12 +4019,26 @@
        "lo": 0.1549,
        "hi": 0.7773
       },
+      "caught_judge_only": {
+       "k": 2.67,
+       "n": 6,
+       "rate": 0.4444,
+       "lo": 0.1549,
+       "hi": 0.7773
+      },
       "flagged": {
        "k": 4.0,
        "n": 6,
        "rate": 0.6667,
        "lo": 0.3,
        "hi": 0.9032
+      },
+      "silent_number": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
@@ -2867,12 +4056,26 @@
        "lo": 0.1876,
        "hi": 0.8124
       },
+      "caught_judge_only": {
+       "k": 3.0,
+       "n": 6,
+       "rate": 0.5,
+       "lo": 0.1876,
+       "hi": 0.8124
+      },
       "flagged": {
        "k": 4.67,
        "n": 6,
        "rate": 0.7778,
        "lo": 0.3879,
        "hi": 0.9508
+      },
+      "silent_number": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
       },
       "false_alarm": {
        "k": 0.0,
@@ -2890,12 +4093,26 @@
        "lo": 0.0968,
        "hi": 0.7
       },
+      "caught_judge_only": {
+       "k": 2.0,
+       "n": 6,
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
+      },
       "flagged": {
        "k": 6.0,
        "n": 6,
        "rate": 1.0,
        "lo": 0.6097,
        "hi": 1.0
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2913,12 +4130,26 @@
        "lo": 0.3,
        "hi": 0.9032
       },
+      "caught_judge_only": {
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
+      },
       "flagged": {
        "k": 4.67,
        "n": 6,
        "rate": 0.7778,
        "lo": 0.3879,
        "hi": 0.9508
+      },
+      "silent_number": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
       },
       "false_alarm": {
        "k": 0.0,
@@ -2936,12 +4167,26 @@
        "lo": 0.0041,
        "hi": 0.4539
       },
+      "caught_judge_only": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
+      },
       "flagged": {
        "k": 2.0,
        "n": 6,
        "rate": 0.3333,
        "lo": 0.0968,
        "hi": 0.7
+      },
+      "silent_number": {
+       "k": 2.33,
+       "n": 6,
+       "rate": 0.3889,
+       "lo": 0.1246,
+       "hi": 0.7399
       },
       "false_alarm": {
        "k": 0.0,
@@ -2952,6 +4197,9 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "over_limit"
+    ],
     "decline_reasons": {},
     "no_law": {
      "caught": {
@@ -2979,11 +4227,11 @@
     "net_no_law": 0.4444,
     "net": 0.4,
     "pairs_both_right": {
-     "k": 8,
-     "n": 90,
+     "k": 2.67,
+     "n": 30,
      "rate": 0.0889,
-     "lo": 0.0457,
-     "hi": 0.1657
+     "lo": 0.0289,
+     "hi": 0.2422
     }
    }
   },
@@ -3154,6 +4402,34 @@
      "lo": 0.0059,
      "hi": 0.1667
     },
+    "flagged_but_answered": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "silent_number": {
+     "k": 28.0,
+     "n": 30,
+     "rate": 0.9333,
+     "lo": 0.7868,
+     "hi": 0.9815
+    },
+    "declined_other_reason": {
+     "k": 1.0,
+     "n": 30,
+     "rate": 0.0333,
+     "lo": 0.0059,
+     "hi": 0.1667
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 1.0,
      "n": 30,
@@ -3175,26 +4451,55 @@
      "lo": 0.0185,
      "hi": 0.2132
     },
-    "silent_number": {
-     "k": 28.0,
-     "n": 30,
-     "rate": 0.9333,
-     "lo": 0.7868,
-     "hi": 0.9815
+    "judge_only": {
+     "caught": {
+      "k": 1.0,
+      "n": 30,
+      "rate": 0.0333,
+      "lo": 0.0059,
+      "hi": 0.1667
+     },
+     "flagged_but_answered": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "silent_number": {
+      "k": 28.0,
+      "n": 30,
+      "rate": 0.9333,
+      "lo": 0.7868,
+      "hi": 0.9815
+     },
+     "declined_other_reason": {
+      "k": 1.0,
+      "n": 30,
+      "rate": 0.0333,
+      "lo": 0.0059,
+      "hi": 0.1667
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 1.0,
+      "n": 30,
+      "rate": 0.0333,
+      "lo": 0.0059,
+      "hi": 0.1667
+     }
     },
-    "flagged_but_answered": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
-    },
-    "declined_other_reason": {
-     "k": 1.0,
-     "n": 30,
-     "rate": 0.0333,
-     "lo": 0.0059,
-     "hi": 0.1667
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 6.0,
@@ -3231,7 +4536,31 @@
      "lo": 0.0932,
      "hi": 0.3289
     },
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": 1.0,
+    "stable_outcome_judge_only": 1.0,
     "stable_caught": 1.0,
+    "stable_items": 30,
     "truncated": 0.0,
     "cost_usd": 0.0147,
     "cost_per_question": 7e-05,
@@ -3244,12 +4573,26 @@
        "lo": 0.0301,
        "hi": 0.5635
       },
+      "caught_judge_only": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
+      },
       "flagged": {
        "k": 1.0,
        "n": 6,
        "rate": 0.1667,
        "lo": 0.0301,
        "hi": 0.5635
+      },
+      "silent_number": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
@@ -3267,12 +4610,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
@@ -3290,12 +4647,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -3313,12 +4684,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -3336,12 +4721,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -3352,6 +4751,12 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "impossible_age",
+     "spending",
+     "conflict",
+     "over_limit"
+    ],
     "decline_reasons": {
      "lacks_rules": 6
     },
@@ -3381,11 +4786,11 @@
     "net_no_law": 0.0167,
     "net": -0.0167,
     "pairs_both_right": {
-     "k": 0,
-     "n": 90,
+     "k": 0.0,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.0409
+     "hi": 0.1135
     }
    }
   },
@@ -3556,6 +4961,34 @@
      "lo": 0.0059,
      "hi": 0.1667
     },
+    "flagged_but_answered": {
+     "k": 4.67,
+     "n": 30,
+     "rate": 0.1556,
+     "lo": 0.0664,
+     "hi": 0.3229
+    },
+    "silent_number": {
+     "k": 24.33,
+     "n": 30,
+     "rate": 0.8111,
+     "lo": 0.6393,
+     "hi": 0.9123
+    },
+    "declined_other_reason": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 5.67,
      "n": 30,
@@ -3577,26 +5010,55 @@
      "lo": 0.0059,
      "hi": 0.1667
     },
-    "silent_number": {
-     "k": 24.33,
-     "n": 30,
-     "rate": 0.8111,
-     "lo": 0.6393,
-     "hi": 0.9123
+    "judge_only": {
+     "caught": {
+      "k": 1.0,
+      "n": 30,
+      "rate": 0.0333,
+      "lo": 0.0059,
+      "hi": 0.1667
+     },
+     "flagged_but_answered": {
+      "k": 4.67,
+      "n": 30,
+      "rate": 0.1556,
+      "lo": 0.0664,
+      "hi": 0.3229
+     },
+     "silent_number": {
+      "k": 24.33,
+      "n": 30,
+      "rate": 0.8111,
+      "lo": 0.6393,
+      "hi": 0.9123
+     },
+     "declined_other_reason": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 5.67,
+      "n": 30,
+      "rate": 0.1889,
+      "lo": 0.0877,
+      "hi": 0.3607
+     }
     },
-    "flagged_but_answered": {
-     "k": 4.67,
-     "n": 30,
-     "rate": 0.1556,
-     "lo": 0.0664,
-     "hi": 0.3229
-    },
-    "declined_other_reason": {
-     "k": 0.0,
-     "n": 30,
-     "rate": 0.0,
-     "lo": 0.0,
-     "hi": 0.1135
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 9.0,
@@ -3633,7 +5095,31 @@
      "lo": 0.1419,
      "hi": 0.4019
     },
-    "stable_caught": 0.9333333333333333,
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": 0.8,
+    "stable_outcome_judge_only": 0.8,
+    "stable_caught": 0.9333,
+    "stable_items": 30,
     "truncated": 0.0,
     "cost_usd": 0.0814,
     "cost_per_question": 0.00039,
@@ -3646,12 +5132,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 1.0,
        "n": 6,
        "rate": 0.1667,
        "lo": 0.0301,
        "hi": 0.5635
+      },
+      "silent_number": {
+       "k": 5.0,
+       "n": 6,
+       "rate": 0.8333,
+       "lo": 0.4365,
+       "hi": 0.9699
       },
       "false_alarm": {
        "k": 0.0,
@@ -3669,12 +5169,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.33,
        "n": 6,
        "rate": 0.0556,
        "lo": 0.0041,
        "hi": 0.4539
+      },
+      "silent_number": {
+       "k": 5.67,
+       "n": 6,
+       "rate": 0.9444,
+       "lo": 0.5461,
+       "hi": 0.9959
       },
       "false_alarm": {
        "k": 0.0,
@@ -3692,12 +5206,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.33,
        "n": 6,
        "rate": 0.0556,
        "lo": 0.0041,
        "hi": 0.4539
+      },
+      "silent_number": {
+       "k": 5.67,
+       "n": 6,
+       "rate": 0.9444,
+       "lo": 0.5461,
+       "hi": 0.9959
       },
       "false_alarm": {
        "k": 0.0,
@@ -3715,12 +5243,26 @@
        "lo": 0.0301,
        "hi": 0.5635
       },
+      "caught_judge_only": {
+       "k": 1.0,
+       "n": 6,
+       "rate": 0.1667,
+       "lo": 0.0301,
+       "hi": 0.5635
+      },
       "flagged": {
        "k": 4.0,
        "n": 6,
        "rate": 0.6667,
        "lo": 0.3,
        "hi": 0.9032
+      },
+      "silent_number": {
+       "k": 2.0,
+       "n": 6,
+       "rate": 0.3333,
+       "lo": 0.0968,
+       "hi": 0.7
       },
       "false_alarm": {
        "k": 0.33,
@@ -3738,12 +5280,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.33,
@@ -3754,6 +5310,12 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "transposed",
+     "impossible_age",
+     "spending",
+     "over_limit"
+    ],
     "decline_reasons": {
      "lacks_rules": 2
     },
@@ -3783,11 +5345,11 @@
     "net_no_law": 0.0,
     "net": 0.0166,
     "pairs_both_right": {
-     "k": 0,
-     "n": 90,
+     "k": 0.0,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.0409
+     "hi": 0.1135
     }
    }
   },
@@ -3957,6 +5519,34 @@
      "lo": 0.0008,
      "hi": 0.1324
     },
+    "flagged_but_answered": {
+     "k": 0.33,
+     "n": 30,
+     "rate": 0.0111,
+     "lo": 0.0008,
+     "hi": 0.1324
+    },
+    "silent_number": {
+     "k": 27.33,
+     "n": 30,
+     "rate": 0.9111,
+     "lo": 0.7578,
+     "hi": 0.9711
+    },
+    "declined_other_reason": {
+     "k": 2.0,
+     "n": 30,
+     "rate": 0.0667,
+     "lo": 0.0185,
+     "hi": 0.2132
+    },
+    "ran_out_of_room": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
     "flagged": {
      "k": 0.67,
      "n": 30,
@@ -3978,26 +5568,55 @@
      "lo": 0.0235,
      "hi": 0.2279
     },
-    "silent_number": {
-     "k": 27.33,
-     "n": 30,
-     "rate": 0.9111,
-     "lo": 0.7578,
-     "hi": 0.9711
+    "judge_only": {
+     "caught": {
+      "k": 0.33,
+      "n": 30,
+      "rate": 0.0111,
+      "lo": 0.0008,
+      "hi": 0.1324
+     },
+     "flagged_but_answered": {
+      "k": 0.33,
+      "n": 30,
+      "rate": 0.0111,
+      "lo": 0.0008,
+      "hi": 0.1324
+     },
+     "silent_number": {
+      "k": 27.33,
+      "n": 30,
+      "rate": 0.9111,
+      "lo": 0.7578,
+      "hi": 0.9711
+     },
+     "declined_other_reason": {
+      "k": 2.0,
+      "n": 30,
+      "rate": 0.0667,
+      "lo": 0.0185,
+      "hi": 0.2132
+     },
+     "ran_out_of_room": {
+      "k": 0.0,
+      "n": 30,
+      "rate": 0.0,
+      "lo": 0.0,
+      "hi": 0.1135
+     },
+     "flagged": {
+      "k": 0.67,
+      "n": 30,
+      "rate": 0.0222,
+      "lo": 0.0029,
+      "hi": 0.15
+     }
     },
-    "flagged_but_answered": {
-     "k": 0.33,
-     "n": 30,
-     "rate": 0.0111,
-     "lo": 0.0008,
-     "hi": 0.1324
-    },
-    "declined_other_reason": {
-     "k": 2.0,
-     "n": 30,
-     "rate": 0.0667,
-     "lo": 0.0185,
-     "hi": 0.2132
+    "adjudication": {
+     "labels_changed": 0,
+     "false_to_true": 0,
+     "true_to_false": 0,
+     "outcome_changes": {}
     },
     "clean_correct": {
      "k": 6.67,
@@ -4034,7 +5653,31 @@
      "lo": 0.105,
      "hi": 0.3476
     },
-    "stable_caught": 0.9666666666666667,
+    "ran_out_of_room_clean": {
+     "k": 0.0,
+     "n": 30,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.1135
+    },
+    "ran_out_of_room_odd": {
+     "k": 0.0,
+     "n": 10,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.2775
+    },
+    "ran_out_of_room_controls": {
+     "k": 0.0,
+     "n": 40,
+     "rate": 0.0,
+     "lo": 0.0,
+     "hi": 0.0876
+    },
+    "stable_outcome": 0.8667,
+    "stable_outcome_judge_only": 0.8667,
+    "stable_caught": 0.9667,
+    "stable_items": 30,
     "truncated": 0.0,
     "cost_usd": 0.0333,
     "cost_per_question": 0.00016,
@@ -4047,12 +5690,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.33,
        "n": 6,
        "rate": 0.0556,
        "lo": 0.0041,
        "hi": 0.4539
+      },
+      "silent_number": {
+       "k": 5.67,
+       "n": 6,
+       "rate": 0.9444,
+       "lo": 0.5461,
+       "hi": 0.9959
       },
       "false_alarm": {
        "k": 0.0,
@@ -4070,12 +5727,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 4.0,
+       "n": 6,
+       "rate": 0.6667,
+       "lo": 0.3,
+       "hi": 0.9032
       },
       "false_alarm": {
        "k": 0.0,
@@ -4093,12 +5764,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.0,
@@ -4116,12 +5801,26 @@
        "lo": 0.0041,
        "hi": 0.4539
       },
+      "caught_judge_only": {
+       "k": 0.33,
+       "n": 6,
+       "rate": 0.0556,
+       "lo": 0.0041,
+       "hi": 0.4539
+      },
       "flagged": {
        "k": 0.33,
        "n": 6,
        "rate": 0.0556,
        "lo": 0.0041,
        "hi": 0.4539
+      },
+      "silent_number": {
+       "k": 5.67,
+       "n": 6,
+       "rate": 0.9444,
+       "lo": 0.5461,
+       "hi": 0.9959
       },
       "false_alarm": {
        "k": 0.0,
@@ -4139,12 +5838,26 @@
        "lo": 0.0,
        "hi": 0.3903
       },
+      "caught_judge_only": {
+       "k": 0.0,
+       "n": 6,
+       "rate": 0.0,
+       "lo": 0.0,
+       "hi": 0.3903
+      },
       "flagged": {
        "k": 0.0,
        "n": 6,
        "rate": 0.0,
        "lo": 0.0,
        "hi": 0.3903
+      },
+      "silent_number": {
+       "k": 6.0,
+       "n": 6,
+       "rate": 1.0,
+       "lo": 0.6097,
+       "hi": 1.0
       },
       "false_alarm": {
        "k": 0.33,
@@ -4155,6 +5868,12 @@
       }
      }
     },
+    "lowest_catch_types": [
+     "transposed",
+     "impossible_age",
+     "spending",
+     "over_limit"
+    ],
     "decline_reasons": {
      "lacks_rules": 1
     },
@@ -4184,11 +5903,11 @@
     "net_no_law": 0.0,
     "net": 0.0028,
     "pairs_both_right": {
-     "k": 0,
-     "n": 90,
+     "k": 0.0,
+     "n": 30,
      "rate": 0.0,
      "lo": 0.0,
-     "hi": 0.0409
+     "hi": 0.1135
     }
    }
   }
@@ -4198,19 +5917,21 @@
    "models": 3,
    "hard": 0.627,
    "hard_tools": 0.9524,
-   "caught": 0.7222,
+   "caught": 0.7444,
    "false_alarm": 0.2333,
    "silent_number": 0.0333,
-   "clean_correct": 0.7444
+   "clean_correct": 0.7444,
+   "ran_out_of_room": 0.0
   },
   "mid": {
    "models": 3,
    "hard": 0.5357,
    "hard_tools": 0.738,
-   "caught": 0.7278,
+   "caught": 0.7445,
    "false_alarm": 0.175,
-   "silent_number": 0.1222,
-   "clean_correct": 0.7611
+   "silent_number": 0.0611,
+   "clean_correct": 0.7611,
+   "ran_out_of_room": 0.0
   },
   "cheap": {
    "models": 5,
@@ -4218,8 +5939,9 @@
    "hard_tools": 0.2857,
    "caught": 0.2178,
    "false_alarm": 0.015,
-   "silent_number": 0.6,
-   "clean_correct": 0.3978
+   "silent_number": 0.5955,
+   "clean_correct": 0.3978,
+   "ran_out_of_room": 0.0422
   }
  },
  "tool_effect": [
@@ -4323,45 +6045,313 @@
   "asked_kappa": 0.966,
   "keyword_agreement": 0.8631,
   "judge_flagged_keyword_missing": 33,
-  "keyword_hit_judge_not_flagged": 63
+  "keyword_hit_judge_not_flagged": 63,
+  "adjudication": {
+   "file": "v2/runs/bad/adjudication.jsonl",
+   "overrides": 18,
+   "false_to_true": 18,
+   "true_to_false": 0,
+   "adjudicator": "Claude (the lead AI agent), not a human; a human spot-check is still owed"
+  }
  },
  "bad_outcomes_all_models": {
-  "caught": 294,
-  "silent_number": 295,
-  "flagged_but_answered": 85,
-  "declined_other_reason": 46
+  "caught": 299,
+  "flagged_but_answered": 98,
+  "silent_number": 282,
+  "declined_other_reason": 22,
+  "ran_out_of_room": 19
  },
+ "bad_outcomes_all_models_judge_only": {
+  "caught": 294,
+  "flagged_but_answered": 85,
+  "silent_number": 295,
+  "declined_other_reason": 27,
+  "ran_out_of_room": 19
+ },
+ "bad_ran_out_of_room_controls_all_models": 19,
  "bad_by_type_all_models": {
   "transposed": {
    "caught": 62,
-   "silent_number": 64,
    "flagged_but_answered": 11,
-   "declined_other_reason": 7
+   "silent_number": 64,
+   "declined_other_reason": 4,
+   "ran_out_of_room": 3
   },
   "impossible_age": {
-   "caught": 63,
-   "silent_number": 55,
+   "caught": 68,
    "flagged_but_answered": 11,
-   "declined_other_reason": 15
+   "silent_number": 55,
+   "declined_other_reason": 9,
+   "ran_out_of_room": 1
   },
   "spending": {
    "caught": 59,
-   "flagged_but_answered": 23,
-   "silent_number": 62
+   "flagged_but_answered": 32,
+   "silent_number": 53,
+   "declined_other_reason": 0,
+   "ran_out_of_room": 0
   },
   "conflict": {
    "caught": 86,
    "flagged_but_answered": 13,
    "silent_number": 41,
-   "declined_other_reason": 4
+   "declined_other_reason": 0,
+   "ran_out_of_room": 4
   },
   "over_limit": {
    "caught": 24,
-   "flagged_but_answered": 27,
-   "declined_other_reason": 20,
-   "silent_number": 73
+   "flagged_but_answered": 31,
+   "silent_number": 69,
+   "declined_other_reason": 9,
+   "ran_out_of_room": 11
   }
  },
- "headline": "Given client notes with one planted error, three of five cheap open-weight models answered confidently 81\u201393% of the time and caught 1\u20133%. The best models caught 73% with almost no false alarms. With the planning engine as a tool, a cheap model went from 29% to 79% on hard questions.",
+ "catch_by_type": {
+  "note": "pooled = share of all replies to corrupted notes of that type that were caught (adjudicated); model_mean = average of the per-model rates",
+  "pooled": {
+   "transposed": {
+    "k": 62,
+    "n": 144,
+    "rate": 0.4306,
+    "lo": 0.3525,
+    "hi": 0.5122
+   },
+   "impossible_age": {
+    "k": 68,
+    "n": 144,
+    "rate": 0.4722,
+    "lo": 0.3925,
+    "hi": 0.5534
+   },
+   "spending": {
+    "k": 59,
+    "n": 144,
+    "rate": 0.4097,
+    "lo": 0.3328,
+    "hi": 0.4914
+   },
+   "conflict": {
+    "k": 86,
+    "n": 144,
+    "rate": 0.5972,
+    "lo": 0.5156,
+    "hi": 0.6738
+   },
+   "over_limit": {
+    "k": 24,
+    "n": 144,
+    "rate": 0.1667,
+    "lo": 0.1146,
+    "hi": 0.236
+   }
+  },
+  "pooled_judge_only": {
+   "transposed": {
+    "k": 62,
+    "n": 144,
+    "rate": 0.4306,
+    "lo": 0.3525,
+    "hi": 0.5122
+   },
+   "impossible_age": {
+    "k": 63,
+    "n": 144,
+    "rate": 0.4375,
+    "lo": 0.3591,
+    "hi": 0.5191
+   },
+   "spending": {
+    "k": 59,
+    "n": 144,
+    "rate": 0.4097,
+    "lo": 0.3328,
+    "hi": 0.4914
+   },
+   "conflict": {
+    "k": 86,
+    "n": 144,
+    "rate": 0.5972,
+    "lo": 0.5156,
+    "hi": 0.6738
+   },
+   "over_limit": {
+    "k": 24,
+    "n": 144,
+    "rate": 0.1667,
+    "lo": 0.1146,
+    "hi": 0.236
+   }
+  },
+  "model_mean": {
+   "transposed": 0.5353,
+   "impossible_age": 0.601,
+   "spending": 0.4975,
+   "conflict": 0.6869,
+   "over_limit": 0.2046
+  },
+  "lowest_pooled": "over_limit",
+  "per_model": {
+   "Claude Sonnet 5.5": {
+    "transposed": 0.8333,
+    "impossible_age": 1.0,
+    "spending": 1.0,
+    "conflict": 0.6667,
+    "over_limit": 0.1667
+   },
+   "GPT-6.1 Sol": {
+    "transposed": 1.0,
+    "impossible_age": 1.0,
+    "spending": 0.3333,
+    "conflict": 1.0,
+    "over_limit": 0.6667
+   },
+   "Gemini 3.1 Pro": {
+    "transposed": 0.6667,
+    "impossible_age": 0.8333,
+    "spending": 1.0,
+    "conflict": 1.0,
+    "over_limit": 0.0
+   },
+   "GPT-6.1 Terra": {
+    "transposed": 1.0,
+    "impossible_age": 1.0,
+    "spending": 0.0,
+    "conflict": 1.0,
+    "over_limit": 0.3333
+   },
+   "Gemini 3.8 Flash": {
+    "transposed": 0.8333,
+    "impossible_age": 1.0,
+    "spending": 1.0,
+    "conflict": 1.0,
+    "over_limit": 0.75
+   },
+   "Claude Haiku 5.5": {
+    "transposed": 0.5,
+    "impossible_age": 0.8333,
+    "spending": 0.9167,
+    "conflict": 1.0,
+    "over_limit": 0.0
+   },
+   "DeepSeek V4.1 Flash": {
+    "transposed": 0.4444,
+    "impossible_age": 0.4444,
+    "spending": 0.8889,
+    "conflict": 1.0,
+    "over_limit": 0.2778
+   },
+   "GLM 5.3 Flash": {
+    "transposed": 0.4444,
+    "impossible_age": 0.5,
+    "spending": 0.3333,
+    "conflict": 0.6667,
+    "over_limit": 0.0556
+   },
+   "gpt-oss-120b": {
+    "transposed": 0.1667,
+    "impossible_age": 0.0,
+    "spending": 0.0,
+    "conflict": 0.0,
+    "over_limit": 0.0
+   },
+   "Llama 4 Maverick": {
+    "transposed": 0.0,
+    "impossible_age": 0.0,
+    "spending": 0.0,
+    "conflict": 0.1667,
+    "over_limit": 0.0
+   },
+   "Mistral Small (2603)": {
+    "transposed": 0.0,
+    "impossible_age": 0.0,
+    "spending": 0.0,
+    "conflict": 0.0556,
+    "over_limit": 0.0
+   }
+  },
+  "models_not_lowest_on_over_limit": [
+   "GPT-6.1 Sol",
+   "GPT-6.1 Terra",
+   "gpt-oss-120b",
+   "Llama 4 Maverick",
+   "Mistral Small (2603)"
+  ],
+  "models_with_another_type_below_over_limit": [
+   "GPT-6.1 Sol",
+   "GPT-6.1 Terra"
+  ]
+ },
+ "tool_budget": {
+  "tokens_per_turn": 4000,
+  "max_tool_turns": 8,
+  "replies": 336,
+  "over_4000_total": 10,
+  "max_output_tokens": 7135,
+  "by_model": {
+   "Llama 4 Maverick": {
+    "replies": 42,
+    "over_4000_total": 0,
+    "max_output_tokens": 1130
+   },
+   "Mistral Small (2603)": {
+    "replies": 42,
+    "over_4000_total": 0,
+    "max_output_tokens": 1898
+   },
+   "Claude Haiku 5.5": {
+    "replies": 42,
+    "over_4000_total": 0,
+    "max_output_tokens": 3475
+   },
+   "gpt-oss-120b": {
+    "replies": 42,
+    "over_4000_total": 0,
+    "max_output_tokens": 1431
+   },
+   "DeepSeek V4.1 Flash": {
+    "replies": 42,
+    "over_4000_total": 9,
+    "max_output_tokens": 7135
+   },
+   "GLM 5.3 Flash": {
+    "replies": 42,
+    "over_4000_total": 1,
+    "max_output_tokens": 4211
+   },
+   "GPT-6.1 Sol": {
+    "replies": 42,
+    "over_4000_total": 0,
+    "max_output_tokens": 901
+   },
+   "GPT-6.1 Terra": {
+    "replies": 42,
+    "over_4000_total": 0,
+    "max_output_tokens": 801
+   }
+  }
+ },
+ "comparisons": [
+  {
+   "a": "DeepSeek V4.1 Flash with the engine",
+   "b": "Claude Sonnet 5.5 alone",
+   "questions": 42,
+   "a_right": 33,
+   "b_right": 26,
+   "both_right": 23,
+   "only_a": 10,
+   "only_b": 3,
+   "neither": 6,
+   "p_exact_mcnemar": 0.0923,
+   "runs": "first run of each (rep 0)"
+  }
+ ],
+ "outcome_labels": {
+  "caught": "Caught it",
+  "flagged_but_answered": "Noticed, answered anyway",
+  "silent_number": "Missed it, answered anyway",
+  "declined_other_reason": "Declined for another reason",
+  "ran_out_of_room": "Ran out of room"
+ },
+ "headline": "Given client notes with one planted error, three of five cheap open-weight models answered confidently 81\u201393% of the time and caught 1\u20133%. The best models caught 73\u201380% with almost no false alarms. With the planning engine as a tool, a cheap model went from 29% to 79% on hard questions.",
  "spent_usd": 4.51016
 }
