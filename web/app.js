@@ -731,7 +731,7 @@
     const span = (xs) => { const [lo, hi] = [Math.min(...xs), Math.max(...xs)]; return pct(lo) === pct(hi) ? pct(lo) : `${pct(lo).replace('%', '')}–${pct(hi)}`; };
     const words = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
     const vm = V2?.models ?? [], vName = (n) => vm.find((m) => m.name === n);
-    const sol = vName('GPT-6.1 Sol'), son = vName('Claude Sonnet 5.5'), dsk = vName('DeepSeek V4.1 Flash'), BEST = ['GPT-6.1 Sol', 'Claude Sonnet 5.5'];
+    const sol = vName('GPT-6.1 Sol'), son = vName('Claude Sonnet 5.5'), dsk = vName('DeepSeek V4.1 Flash');
     const cheap = vm.filter((m) => m.tier === 'cheap');
     if (vm.length) {
       const under30 = cheap.filter((m) => m.hard.rate < 0.3).length;
@@ -807,22 +807,24 @@
         tb.append(tr);
       }
     }
-    const v2row = (m) => {
+    const v2row = (m, full) => {
       const h = m.hard, tr = el('tr');
-      // round 3: one group label per model, the same words as home's "How to read the numbers"
-      const group = BEST.includes(m.name) ? 'the best models' : { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' }[m.tier] ?? '';
-      tr.append(who(m.name, `${m.lab}${group ? ` · ${group}` : ''}`), bar(h.rate, h.lo, h.hi, `${h.k}/${h.n}`), el('td', 'cost', h.truncated ? pct(h.truncated) : '–'));
+      // One label per model: its price group (home's map lists the groups). No "best models" group: who is best depends on the measure.
+      const group = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' }[m.tier] ?? '';
+      tr.append(who(m.name, `${m.lab}${group ? ` · ${group}` : ''}`), bar(h.rate, h.lo, h.hi, `${h.k}/${h.n}`));
+      // "Ran out of room" only in the full table (behind the toggle); the short table up front keeps to the score
+      if (full) tr.append(el('td', 'cost', h.truncated ? pct(h.truncated) : '–'));
       return tr;
     };
     if ($('a-v2-top') && vm.length) {
       const tb = document.querySelector('#a-v2-top tbody');
-      ['GPT-6.1 Sol', 'Claude Sonnet 5.5', 'Gemini 3.1 Pro', 'DeepSeek V4.1 Flash', 'Llama 4 Maverick'].map(vName).filter(Boolean)
+      ['GPT-6.1 Sol', 'GPT-6.1 Terra', 'Claude Sonnet 5.5', 'DeepSeek V4.1 Flash', 'Llama 4 Maverick'].map(vName).filter(Boolean)
         .sort((a, b) => b.hard.rate - a.hard.rate).forEach((m) => tb.append(v2row(m)));
     }
     if ($('a-v2-all') && vm.length) {
       const tb = document.querySelector('#a-v2-all tbody');
       for (const m of [...vm].sort((a, b) => b.hard.rate - a.hard.rate)) {
-        const tr = v2row(m), h = m.hard;
+        const tr = v2row(m, true), h = m.hard;
         tr.append(el('td', 'cost', String(h.reps)), el('td', 'cost', h.cost_per_correct == null ? '–' : usd(h.cost_per_correct * 1000, true)));
         tb.append(tr);
       }
