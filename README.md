@@ -67,7 +67,7 @@ three Claude models).
 questions and never volunteers (stand-ins: asker 69/69, guesser 0/69, vague asker never told). DeepSeek with the engine:
 9/10 fully right, asked for the missing fact 9 times (its one miss said it was asking but never wrote the `ASK:` line).
 Alone: 2/5 (run stopped early; each answer took 10–15 minutes). Every engine call and client question is on
-`site/replay.html`.
+`replay.html`.
 
 ```bash
 ~/moneyguide/node_modules/.bin/vite-node src/gauntlet/build.ts                     # public set → data/gauntlet.jsonl
@@ -79,8 +79,8 @@ Alone: 2/5 (run stopped early; each answer took 10–15 minutes). Every engine c
 .venv/bin/python src/run_models.py --set gauntlet --fake --tools --chat --per-task 100 --run <name>   # stand-in through the open-model tool loop
 .venv/bin/python src/gauntlet_ask.py build                                         # ask-first set → data/gauntlet-ask.jsonl (~13 min)
 .venv/bin/python src/run_models.py --set gauntlet-ask [--tools] --models or:... --per-task 1 --max-usd 0.30 --run <name>
-.venv/bin/python src/gauntlet_site.py <alone runs> <tools runs> [<ask-first runs>] # comma-separated → site/data/gauntlet.json
-.venv/bin/python src/replay_site.py <run> [<run> ...]                              # → site/data/replays.json (site/replay.html)
+.venv/bin/python src/gauntlet_site.py <alone runs> <tools runs> [<ask-first runs>] # comma-separated → web/data/gauntlet.json
+.venv/bin/python src/replay_site.py <run> [<run> ...]                              # → web/data/replays.json (web/replay.html)
 ```
 
 ## Run
@@ -132,14 +132,21 @@ Each run saves replies as they arrive, so if it stops you can run the same comma
 
 ## Site
 
-The public page lives in `site/` (plain HTML, CSS and JS, no build step) and reads `site/data/`, which comes from the graded runs:
+Page sources live in `web/` (plain HTML and CSS; `web/app.js` fills numbers, tables and charts from `web/data/*.json`). `src/bake_site.py` renders every page with headless Chrome and writes finished, JavaScript-free HTML to `site/`, which is what gets deployed. `site/` is build output (git-ignored apart from its dotfiles); edit `web/`, never `site/`.
 
 ```bash
 .venv/bin/python src/leaderboard.py live-high-10x1 with-rule-10x1
 .venv/bin/python src/tools_board.py                    # leaderboard/tools.json (+ tools_private.json where private runs exist)
-.venv/bin/python src/build_site.py live-high-10x1+or-5models-15x1 with-rule-10x1
+.venv/bin/python src/build_site.py live-high-10x1+or-5models-15x1 with-rule-10x1   # → web/data/
+.venv/bin/python v2/build_site.py                      # → web/charts/, web/data/v2.json, web/report.html (from REPORT.md)
+.venv/bin/python src/bake_site.py                      # web/ → site/ (needs Google Chrome; about 10 seconds)
+python3 -m http.server 4173 --directory site           # then, in another shell:
+.venv/bin/python -I checks/static_check.py http://localhost:4173   # every page readable with no JavaScript
+.venv/bin/python -I checks/site_check.py http://localhost:4173     # data files match leaderboard/
 cd site && vercel deploy --prod      # Vercel project "plannerbench" → plannerbench.vercel.app
 ```
+
+The bake fails, leaving `site/` as it was, if any slot `app.js` fills is still empty or "—" or a table body is empty. Besides the pages it writes, for AI readers: a Markdown twin of every page (`/index.md`, `/alone.md`, …; charts become tables of their numbers), `/llms.txt`, `/llms-full.txt` (the whole site in one file), `sitemap.xml`, `robots.txt`, and `vercel.json` with permanent redirects from the old page names (`/v2.html` → `/wrong-facts.html`, `/gauntlet.html` → `/calculator.html`, `/results.html` → `/alone.html`). `/agent.html` (the "Agent" side of the nav switch) links to all of them.
 
 ## Log
 

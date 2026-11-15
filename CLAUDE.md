@@ -1,18 +1,25 @@
 # PlannerBench: notes for the next session
 
 A benchmark of AI models on retirement-planning math (2026 federal tax, Social Security, RMDs, Medicare IRMAA) plus
-a compliance track, with an exact answer key. Site: https://plannerbench.vercel.app (deployed from `site/`, public; the owner
-cleared the outside-activity question on 2026-11-14, so don't raise FINRA 3290 again). After a deploy run
-`.venv/bin/python -I checks/site_check.py`; previews sit behind Vercel login, so check those against a local copy
-(`python3 -m http.server 4173 --directory site`, then `site_check.py http://localhost:4173`). The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
+a compliance track, with an exact answer key. Site: https://plannerbench.vercel.app (public; the owner
+cleared the outside-activity question on 2026-11-14, so don't raise FINRA 3290 again). Page sources are in `web/`; edit
+those, never `site/`. Build: the data builders write `web/data/` and `web/charts/` (`src/build_site.py`, `src/gauntlet_site.py`,
+`src/replay_site.py`, `v2/build_site.py`), then `.venv/bin/python src/bake_site.py` renders every page with headless Chrome into
+`site/` as plain HTML with no JavaScript (plus a `.md` twin of each page, `llms.txt`, `llms-full.txt`, sitemap, robots and
+`vercel.json` redirects from the old names v2/gauntlet/results). Deploy from `site/` (`cd site && vercel deploy --prod`). Check a
+local copy first (`python3 -m http.server 4173 --directory site`, then `checks/static_check.py http://localhost:4173` and
+`site_check.py http://localhost:4173`; previews sit behind Vercel login); after a deploy run both with no argument. The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
 Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
 white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
-Nav is five links: Results, Bad inputs (`wrong-facts.html`), With tools (`calculator.html`), Method, How I built it; `chat.html`,
-`replay.html` and `report.html` are linked from the footer. The home page tells the owner's story first (why I made this, four findings, what I built, check it yourself; first person, "door to door as a financial advisor", employer never named); numbers quoted as text there are logged in `data/system.json` `home_v2`. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
+Nav is five links: Results (`alone.html`), Bad inputs (`wrong-facts.html`), With tools (`calculator.html`), Method, How I built it,
+plus a Human / Agent switch at the right (Agent → `agent.html`, the plain-text side); `chat.html`, `replay.html` and `report.html`
+are linked from the footer. The home page tells the owner's story first (why I made this, four findings, what I built, check it yourself; first person, "door to door as a financial advisor", employer never named); numbers quoted as text there are logged in `data/system.json` `home_v2`. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
 system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.
 PlannerBench v2 (hard tier, bad inputs, tool use) lives in `v2/`; see `PROGRESS.md` and `REPORT.md`;
-`v2/build_site.py` writes `site/wrong-facts.html`, `site/report.html` and the charts.
-One shared `app.js` fills every page from `data/*.json`; each block runs only if its page has the element. Numbers
+`v2/build_site.py` writes `web/report.html` (from REPORT.md, nav copied from `web/index.html`), `web/data/v2.json` and the
+charts; `web/wrong-facts.html` is hand-edited like the other pages.
+One shared `web/app.js` fills every page from `data/*.json` at bake time (the deployed pages don't load it); each block runs
+only if its page has the element. Numbers
 not from a graded run live in `data/system.json`, each with its source file; update both together. Bump the `?v=`
 on the CSS/JS links when changing them. Code: https://github.com/peyton-thalman/plannerbench
 (private until the owner decides to publish; push to `origin master`).
@@ -66,7 +73,7 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
 - Never send the private set to free endpoints (the runner refuses). OpenRouter models are pinned to one host
   (`or:<vendor>/<model>@<host>`, see `lineups/`), with `data_collection: deny`.
 - Truncated replies (hit the token limit) are their own grade bucket, counted as not right and published.
-- After any site deploy, run `.venv/bin/python -I checks/site_check.py` and require PASS.
+- After any site deploy, run `.venv/bin/python -I checks/site_check.py` and `checks/static_check.py` and require PASS.
 - Don't run Claude Opus models unless the owner asks (cost).
 - Spending money (API runs) needs the owner's go-ahead and a `--max-usd` cap.
 
@@ -79,4 +86,5 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
 - Regenerating cases needs the MoneyGuide engine at `~/moneyguide` (not in this repo; private backup at github.com/peyton-thalman/moneyguide, IRMAA fix in commit e26ba54); checks don't need it.
 - Low-cost reasoning models are slow (Qwen3.8 Flash writes ~11k tokens/question). Use `--workers 40`,
   `--max-tokens 32000`, and run in the background.
-- `site/.env.local` holds a Vercel token; `site/.vercelignore` keeps env files out of deploys.
+- `site/.env.local` holds a Vercel token; `site/.vercelignore` keeps env files out of deploys. The bake replaces everything in
+  `site/` except dotfiles, so `.vercel/`, `.env.local` and the ignore files survive it.
