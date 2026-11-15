@@ -263,14 +263,14 @@
     const tbody = document.querySelector('#gauntlet-table tbody');
     for (const r of gauntlet.rows) {
       const tr = el('tr', r.engine ? 'best' : null);
-      tr.append(el('td', 'model', `${r.name}${r.open ? ' (open model)' : ''}${r.engine ? ' + engine' : ', alone'}`),
+      tr.append(el('td', 'model', `${r.name}${r.engine ? ' + calculator' : ', on its own'}`),
         scoreCell({ accuracy: r.great / r.questions, right: r.great, questions: r.questions, lo: r.lo, hi: r.hi }),
         el('td', 'overall', `${r.out_of_room}`), el('td', 'overall', `${Math.round(r.output_tokens / 1000)}k tokens`),
         el('td', 'overall', usd(r.cost_per_question, true)));
       tbody.append(tr);
     }
     document.getElementById('gauntlet-note').textContent = `${gauntlet.questions} questions, one from each family plus a trap whose honest answer is “I can’t answer that.” `
-      + 'Ran out of room: used its whole 64,000-token budget thinking and never answered (scored as not right). Sonnet alone shows 10 because one reply was cancelled to stay inside the run’s spending cap. Bars show 95% intervals.';
+      + 'Ran out of room: used its whole reply budget thinking and never answered (scored as not right). Sonnet alone shows 10 because one reply was cancelled to stay inside the run’s spending cap. Bars show 95% intervals.';
     const sb = gauntlet.side_by_side;
     document.getElementById('gauntlet-intro').textContent = sb.intro;
     const dl = document.getElementById('gauntlet-side');
@@ -285,20 +285,20 @@
       if (!m) return p;
       return Number(m[1].replace(/,/g, '')) === 0 || m[2] === '0' ? 'Convert nothing' : `${usd(Number(m[1].replace(/,/g, '')))} a year × ${m[2]} years`;
     };
-    row('Engine’s best plan', sb.best);
-    row(`${sb.model}, alone`, `${plan(sb.alone)} (gives up ${usd(sb.alone_lost)})`, false);
-    row(`${sb.model} + engine`, plan(sb.engine), true);
+    row('The calculator’s best plan', sb.best);
+    row(`${sb.model}, on its own`, `${plan(sb.alone)} (gives up ${usd(sb.alone_lost)})`, false);
+    row(`${sb.model} + calculator`, plan(sb.engine), true);
     const ol = document.getElementById('gauntlet-failures');
     gauntlet.failures.forEach((f, i) => {
       const li = el('li');
-      li.append(el('span', 'no', `${i + 1}`), el('span', 'what', `${f.what} (${f.model}, alone)${f.shortcut ? `: it ${f.shortcut}` : ''}.${f.engine_great ? ' With the engine: right.' : ''}`),
+      li.append(el('span', 'no', `${i + 1}`), el('span', 'what', `${f.what} (${f.model}, on its own)${f.shortcut ? `: it ${f.shortcut}` : ''}.${f.engine_great ? ' With the calculator: right.' : ''}`),
         el('span', 'amt', `−${usd(f.lost)}`));
       ol.append(li);
     });
     const ov = gauntlet.rows.filter((r) => r.engine).reduce((t, r) => t + r.overrides, 0);
     const withEngine = gauntlet.rows.filter((r) => r.engine);
     const allRight = withEngine.every((r) => r.great === r.questions);
-    document.getElementById('gauntlet-overrides').textContent = `With the engine, ${allRight ? `all ${withEngine.length} models got every decision and every number right` : 'the models mostly got every decision and number right'}${ov ? `, but went against it ${ov} times` : ' and never went against it'}. `
+    document.getElementById('gauntlet-overrides').textContent = `With the calculator, ${allRight ? `all ${withEngine.length} models got every decision and every number right` : 'the models mostly got every decision and number right'}${ov ? `, but went against it ${ov} times` : ' and never went against it'}. `
       + `They also thought far less: about ${Math.round(gauntlet.rows.find((r) => r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k tokens for Sonnet instead of ${Math.round(gauntlet.rows.find((r) => !r.engine && r.model.includes('sonnet'))?.output_tokens / 1000)}k.`;
   }
 
@@ -308,13 +308,13 @@
     const tbody = document.querySelector('#ask-table tbody');
     for (const r of ask.rows) {
       const tr = el('tr', r.engine ? 'best' : null);
-      tr.append(el('td', 'model', `${r.name}${r.open ? ' (open model)' : ''}${r.engine ? ' + engine' : ', alone'}`),
+      tr.append(el('td', 'model', `${r.name}${r.engine ? ' + calculator' : ', on its own'}`),
         scoreCell({ accuracy: r.great / r.questions, right: r.great, questions: r.questions, lo: r.lo, hi: r.hi }),
         el('td', 'overall', `${r.got_fact} of ${r.questions}`), el('td', 'overall', usd(r.cost_per_question, true)));
       tbody.append(tr);
     }
     const alone = ask.rows.find((r) => !r.engine);
-    $('ask-note').textContent = `One question per family (the trap has nothing to leave out).${alone && alone.questions < 10 ? ` The alone run was stopped after ${alone.questions} questions: answering without the engine took 10–15 minutes each.` : ''} `
+    $('ask-note').textContent = `One question per family (the trap has nothing to leave out).${alone && alone.questions < 10 ? ` The alone run was stopped after ${alone.questions} questions: answering without the calculator took 10–15 minutes each.` : ''} `
       + 'Fully right is graded against the full facts, by the same grader as above. Bars show 95% intervals.';
     const quotes = $('ask-quotes');
     const clip = (t) => (t.length > 220 ? t.slice(0, t.lastIndexOf(' ', 210)) + ' …' : t);
@@ -334,15 +334,17 @@
     const priv = Object.fromEntries((toolsPrivate?.stages ?? []).map((s) => [s.key, s]));
     for (const s of tools.hard.stages) {
       const tr = el('tr', s.key === 'v2' ? 'best' : null);
-      tr.append(el('td', 'model', s.label), scoreCell(s), scoreCell(priv[s.key]));
+      // writer B: plain names for the three ways the questions were asked
+      const LADDER = { none: 'On its own', v1: 'Calculator 1.0: just the number', v2: 'Calculator 1.1: the number, the rule and its source' };
+      tr.append(el('td', 'model', LADDER[s.key] ?? s.label), scoreCell(s), scoreCell(priv[s.key]));
       const off = el('td', 'overall', usd(s.dollars_off));
-      if (priv[s.key]) off.append(el('span', 'ci', `held-out ${usd(priv[s.key].dollars_off)}`));
+      if (priv[s.key]) off.append(el('span', 'ci', `held-back ${usd(priv[s.key].dollars_off)}`));
       tr.append(off); tbody.append(tr);
     }
     const p = tools.hard.pairs, fmtP = (x) => (x < 0.001 ? 'p < 0.001' : `p = ${x.toFixed(3)}`);
     document.getElementById('ladder-note').textContent = `The same ${tools.hard.questions} questions in every row (${tools.hard.tasks.length} tasks, 10 each). `
       + `The right number alone fixed ${p.none_to_v1.fixed} and broke ${p.none_to_v1.broken}; adding the rule and its source fixed ${p.v1_to_v2.fixed} more and broke ${p.v1_to_v2.broken} (${fmtP(p.v1_to_v2.p)}: same questions both ways, so very unlikely to be luck). `
-      + (toolsPrivate ? `On ${toolsPrivate.questions} held-out questions, never seen while the tools were built: ${toolsPrivate.pairs.none_to_v2.fixed} fixed, ${toolsPrivate.pairs.none_to_v2.broken} broken. ` : '')
+      + (toolsPrivate ? `On ${toolsPrivate.questions} held-back questions, never seen while the calculator was built: ${toolsPrivate.pairs.none_to_v2.fixed} fixed, ${toolsPrivate.pairs.none_to_v2.broken} broken. ` : '')
       + 'Shaded bands are 95% intervals.';
 
     const q = tools.quote;
@@ -353,12 +355,12 @@
       if (ok != null) dd.append(el('span', `mark ${ok ? 'ok' : 'bad'}`, ok ? 'Right' : 'Wrong'));
       d.append(dd); dl.append(d);
     };
-    row('Tool’s answer, and the key', usd(q.key));
-    row('Haiku with tools 1.0', usd(q.answered), q.answered === q.key);
-    row('Haiku with tools 1.1', usd(q.answered_v2), q.v2_right);
+    row('The calculator’s answer (and the key)', usd(q.key));
+    row('Haiku with calculator 1.0', usd(q.answered), q.answered === q.key);
+    row('Haiku with calculator 1.1', usd(q.answered_v2), q.v2_right);
 
     const sd = q.v2_senior_deduction, ol = document.getElementById('tools-lines');
-    for (const [what, amt, total] of [['MAGI over the $150,000 threshold', usd(sd.magi_over_threshold, true)],
+    for (const [what, amt, total] of [['Income (MAGI) over the $150,000 threshold', usd(sd.magi_over_threshold, true)],
       ['Reduction per person (6%)', usd(sd.reduction_per_person, true)], ['Senior deduction per person', usd(sd.per_person, true)],
       ['People 65 or older', String(sd.people)], ['Senior deduction', usd(sd.total, true), true]]) {
       const li = el('li', total ? 'total' : null); li.append(el('span', 'what', what), el('span', 'amt', amt)); ol.append(li);
@@ -366,11 +368,11 @@
     document.getElementById('tools-rule').textContent = sd.rule.replace(/^OBBBA senior deduction/, 'The senior deduction from the 2025 tax law (OBBBA)');
 
     const w = tools.whole;
-    document.getElementById('tools-whole').textContent = `Across all ${w.questions} questions, tools 1.0 lifted Haiku from ${pct(w.without.accuracy)} to ${pct(w.with.accuracy)} `
+    document.getElementById('tools-whole').textContent = `Across all ${w.questions} questions, calculator 1.0 lifted Haiku from ${pct(w.without.accuracy)} to ${pct(w.with.accuracy)} `
       + `(${w.fixed} fixed, ${w.broken} broken, ${fmtP(w.p)}); single-step questions were already at ${pct(w.by_tier['single-step'].without)}. `
-      + `But ${w.overruled} of the ${w.misses} misses left were Haiku getting the right number from the tool and replacing it, every time saying so.`;
+      + `But ${w.overruled} of the ${w.misses} misses left were Haiku getting the right number from the calculator and replacing it with its own, every time saying so.`;
     document.getElementById('tools-private').textContent = toolsPrivate
-      ? `On ${toolsPrivate.questions} private questions from a secret seed: ${pct(toolsPrivate.stages[0].accuracy)} without tools, ${pct(toolsPrivate.stages.at(-1).accuracy)} with tools 1.1. Both misses were Haiku overruling the tool again, with the rule in front of it.`
+      ? `On ${toolsPrivate.questions} questions held back from a secret seed and never used while building the calculator: ${pct(toolsPrivate.stages[0].accuracy)} on its own, ${pct(toolsPrivate.stages.at(-1).accuracy)} with calculator 1.1. Both misses were Haiku overruling the calculator again, with the rule in front of it.`
       : 'Held-out results aren’t published yet.';
   }
 
@@ -465,6 +467,17 @@
     };
     calcRows('calc-v2-key', ['deepseek', 'claude-sonnet', 'gpt-6.1-sol', 'gpt-oss', 'llama-4', 'mistral-small']);
     calcRows('calc-v2');
+    if ($('calc-family')) {
+      const FAM = { irmaa_headroom: 'Roth conversion, Medicare-safe', conv_cost_az: 'Roth conversion cost with Arizona tax', ss_muni_qcd: 'Taxable Social Security',
+        inherited_rmd: 'Inherited IRA withdrawal', qcd_rmd_tax: 'Charity from a required withdrawal', widow_first_year: 'Widow’s first year', az_tax: 'Arizona tax' };
+      head('calc-family', [['Model'], ...Object.values(FAM).map((t) => [t, true])]);
+      const tbody = document.querySelector('#calc-family tbody');
+      for (const m of [...M].sort((a, b) => (b.hard_tools?.rate ?? b.hard.rate) - (a.hard_tools?.rate ?? a.hard.rate))) {
+        const tr = el('tr'); tr.append(who(m, m.hard_tools ? 'on its own → with it' : 'on its own'));
+        Object.keys(FAM).forEach((f) => tr.append(el('td', 'cost', `${pct(m.hard.by_family[f]?.rate)}${m.hard_tools ? ` → ${pct(m.hard_tools.by_family?.[f]?.rate)}` : ''}`)));
+        tbody.append(tr);
+      }
+    }
   }
 
   // Charts are drawn at the container's width, so redraw on resize.

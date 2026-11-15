@@ -493,3 +493,20 @@ details.fine.wide .table-wrap { margin-top: 0.75rem; }
 .status { display: grid; gap: 0.5rem; max-width: 62ch; padding: 1rem 1.25rem; border: 1px solid var(--rule-2); border-left: 2px solid var(--accent); border-radius: var(--r); background: #fff; }
 .status p { color: var(--ink); }
 .status .label { color: var(--muted); }
+
+/* writer A */
+/* Home: the boxed straight answer; finding cards' "read more" line. alone.html: settings line and the two takeaways. */
+.answer-box { display: grid; gap: 0.9rem; max-width: 52rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--ink); border-radius: var(--r); background: #fff; }
+.answer-box h2 { max-width: none; }
+.answer-box ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.answer-box li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 1.0625rem; line-height: 1.6; }
+.answer-box li:last-child { border-bottom: 0; padding-bottom: 0; }
+.answer-box b { color: var(--ink); font-weight: 600; }
+.find .more { font: 400 0.8125rem/1.4 var(--mono); color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule-2); }
+.find p.big + p { color: var(--muted); }
+.takeaway-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: 0.5rem clamp(1.5rem, 3vw, 2.5rem); margin-top: clamp(2rem, 4vw, 3rem); }
+.takeaway-row .takeaway { margin-top: 0; }
+.settings { max-width: 66ch; margin: 0 0 1.25rem; padding: 0.75rem 1rem; border-left: 2px solid var(--ink); color: var(--muted); }
+.settings b { color: var(--ink); font-weight: 600; }
+.prose .notes { font-size: 1rem; line-height: 1.6; }
+details.fine .notes { margin-top: 0.75rem; }

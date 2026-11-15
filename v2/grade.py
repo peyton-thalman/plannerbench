@@ -364,8 +364,8 @@ def catch_by_type(bad, models):
     cor = [r for r in bad if r["kind"] == "corrupted"]
     pooled = {t: rate(sum(r["outcome"] == "caught" for r in cor if r["type"] == t), sum(r["type"] == t for r in cor)) for t in TYPES}
     judge = {t: rate(sum(r["outcome_judge"] == "caught" for r in cor if r["type"] == t), sum(r["type"] == t for r in cor)) for t in TYPES}
-    per_model = {m["name"]: {t: m["bad"]["by_type"][t]["caught"]["rate"] for t in TYPES} for m in models if m["bad"]}
-    mean = {t: round(sum(v[t] for v in per_model.values()) / len(per_model), 4) for t in TYPES}
+    per_model = [{"name": m["name"], **{t: m["bad"]["by_type"][t]["caught"]["rate"] for t in TYPES}, "lowest": m["bad"]["lowest_catch_types"]} for m in models if m["bad"]]
+    mean = {t: round(sum(v[t] for v in per_model) / len(per_model), 4) for t in TYPES}
     lowest = min(TYPES, key=lambda t: pooled[t]["rate"])
     return {"note": "pooled = share of all replies to corrupted notes of that type that were caught (adjudicated); model_mean = average of the per-model rates",
             "pooled": pooled, "pooled_judge_only": judge, "model_mean": mean, "lowest_pooled": lowest, "per_model": per_model,
@@ -379,13 +379,13 @@ def tool_budget():
     out = {}
     for r in replies("hard-tools"):
         name = NAME[r["model"]]["name"]
-        o = out.setdefault(name, {"replies": 0, "over_4000_total": 0, "max_output_tokens": 0})
+        o = out.setdefault(name, {"name": name, "replies": 0, "over_4000_total": 0, "max_output_tokens": 0})
         t = r.get("output_tokens") or 0
         o["replies"] += 1
         o["over_4000_total"] += t > TOKENS_PER_TURN
         o["max_output_tokens"] = max(o["max_output_tokens"], t)
     return {"tokens_per_turn": TOKENS_PER_TURN, "max_tool_turns": TOOL_TURNS, "replies": sum(o["replies"] for o in out.values()),
-            "over_4000_total": sum(o["over_4000_total"] for o in out.values()), "max_output_tokens": max(o["max_output_tokens"] for o in out.values()), "by_model": out}
+            "over_4000_total": sum(o["over_4000_total"] for o in out.values()), "max_output_tokens": max(o["max_output_tokens"] for o in out.values()), "by_model": list(out.values())}
 
 
 def paired(hard, a_model, a_tools, b_model, b_tools):
@@ -481,8 +481,8 @@ def main():
            f"Replies to correct notes that ran out of room (not counted as false alarms, not right): {summary['bad_ran_out_of_room_controls_all_models']}.",
            "", "### Catch rate by error type", "", "| Model | " + " | ".join(TYPES) + " |", "|---|" + "---|" * len(TYPES)]
     cbt = summary["catch_by_type"]
-    for name, v in cbt["per_model"].items():
-        md.append(f"| {name} | " + " | ".join(pct(v[t]) for t in TYPES) + " |")
+    for v in cbt["per_model"]:
+        md.append(f"| {v['name']} | " + " | ".join(pct(v[t]) for t in TYPES) + " |")
     md.append("| **All replies, pooled** | " + " | ".join(ci(cbt["pooled"][t]) for t in TYPES) + " |")
     md.append("| Mean of the model rates | " + " | ".join(pct(cbt["model_mean"][t]) for t in TYPES) + " |")
     md += ["", "### Run-to-run agreement (corrupted notes asked more than once)", "",
@@ -502,7 +502,7 @@ def main():
     md += ["", f"### Tool track token budget", "", f"The {tb['tokens_per_turn']:,}-token limit applies to each turn of the tool loop, up to {tb['max_tool_turns']} turns. "
            f"{tb['over_4000_total']} of {tb['replies']} tool-track replies used more than {tb['tokens_per_turn']:,} output tokens in total; the most was {tb['max_output_tokens']:,}.", "",
            "| Model | Replies | Over 4,000 in total | Most output tokens |", "|---|---|---|---|"]
-    md += [f"| {k} | {v['replies']} | {v['over_4000_total']} | {v['max_output_tokens']:,} |" for k, v in tb["by_model"].items()]
+    md += [f"| {v['name']} | {v['replies']} | {v['over_4000_total']} | {v['max_output_tokens']:,} |" for v in tb["by_model"]]
     md += ["", "### Paired comparisons (same 42 hard questions, first run of each)", "", "| A | B | A right | B right | Both | Only A | Only B | Neither | Exact McNemar p |", "|---|---|---|---|---|---|---|---|---|"]
     md += [f"| {c['a']} | {c['b']} | {c['a_right']} | {c['b_right']} | {c['both_right']} | {c['only_a']} | {c['only_b']} | {c['neither']} | {c['p_exact_mcnemar']:.3f} |" for c in summary["comparisons"]]
     (RES / "RESULTS.md").write_text("\n".join(md) + "\n")

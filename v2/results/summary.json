@@ -6203,85 +6203,138 @@
    "over_limit": 0.2046
   },
   "lowest_pooled": "over_limit",
-  "per_model": {
-   "Claude Sonnet 5.5": {
+  "per_model": [
+   {
+    "name": "Claude Sonnet 5.5",
     "transposed": 0.8333,
     "impossible_age": 1.0,
     "spending": 1.0,
     "conflict": 0.6667,
-    "over_limit": 0.1667
+    "over_limit": 0.1667,
+    "lowest": [
+     "over_limit"
+    ]
    },
-   "GPT-6.1 Sol": {
+   {
+    "name": "GPT-6.1 Sol",
     "transposed": 1.0,
     "impossible_age": 1.0,
     "spending": 0.3333,
     "conflict": 1.0,
-    "over_limit": 0.6667
+    "over_limit": 0.6667,
+    "lowest": [
+     "spending"
+    ]
    },
-   "Gemini 3.1 Pro": {
+   {
+    "name": "Gemini 3.1 Pro",
     "transposed": 0.6667,
     "impossible_age": 0.8333,
     "spending": 1.0,
     "conflict": 1.0,
-    "over_limit": 0.0
+    "over_limit": 0.0,
+    "lowest": [
+     "over_limit"
+    ]
    },
-   "GPT-6.1 Terra": {
+   {
+    "name": "GPT-6.1 Terra",
     "transposed": 1.0,
     "impossible_age": 1.0,
     "spending": 0.0,
     "conflict": 1.0,
-    "over_limit": 0.3333
+    "over_limit": 0.3333,
+    "lowest": [
+     "spending"
+    ]
    },
-   "Gemini 3.8 Flash": {
+   {
+    "name": "Gemini 3.8 Flash",
     "transposed": 0.8333,
     "impossible_age": 1.0,
     "spending": 1.0,
     "conflict": 1.0,
-    "over_limit": 0.75
+    "over_limit": 0.75,
+    "lowest": [
+     "over_limit"
+    ]
    },
-   "Claude Haiku 5.5": {
+   {
+    "name": "Claude Haiku 5.5",
     "transposed": 0.5,
     "impossible_age": 0.8333,
     "spending": 0.9167,
     "conflict": 1.0,
-    "over_limit": 0.0
+    "over_limit": 0.0,
+    "lowest": [
+     "over_limit"
+    ]
    },
-   "DeepSeek V4.1 Flash": {
+   {
+    "name": "DeepSeek V4.1 Flash",
     "transposed": 0.4444,
     "impossible_age": 0.4444,
     "spending": 0.8889,
     "conflict": 1.0,
-    "over_limit": 0.2778
+    "over_limit": 0.2778,
+    "lowest": [
+     "over_limit"
+    ]
    },
-   "GLM 5.3 Flash": {
+   {
+    "name": "GLM 5.3 Flash",
     "transposed": 0.4444,
     "impossible_age": 0.5,
     "spending": 0.3333,
     "conflict": 0.6667,
-    "over_limit": 0.0556
+    "over_limit": 0.0556,
+    "lowest": [
+     "over_limit"
+    ]
    },
-   "gpt-oss-120b": {
+   {
+    "name": "gpt-oss-120b",
     "transposed": 0.1667,
     "impossible_age": 0.0,
     "spending": 0.0,
     "conflict": 0.0,
-    "over_limit": 0.0
+    "over_limit": 0.0,
+    "lowest": [
+     "impossible_age",
+     "spending",
+     "conflict",
+     "over_limit"
+    ]
    },
-   "Llama 4 Maverick": {
+   {
+    "name": "Llama 4 Maverick",
     "transposed": 0.0,
     "impossible_age": 0.0,
     "spending": 0.0,
     "conflict": 0.1667,
-    "over_limit": 0.0
+    "over_limit": 0.0,
+    "lowest": [
+     "transposed",
+     "impossible_age",
+     "spending",
+     "over_limit"
+    ]
    },
-   "Mistral Small (2603)": {
+   {
+    "name": "Mistral Small (2603)",
     "transposed": 0.0,
     "impossible_age": 0.0,
     "spending": 0.0,
     "conflict": 0.0556,
-    "over_limit": 0.0
+    "over_limit": 0.0,
+    "lowest": [
+     "transposed",
+     "impossible_age",
+     "spending",
+     "over_limit"
+    ]
    }
-  },
+  ],
   "models_not_lowest_on_over_limit": [
    "GPT-6.1 Sol",
    "GPT-6.1 Terra",
@@ -6300,48 +6353,56 @@
   "replies": 336,
   "over_4000_total": 10,
   "max_output_tokens": 7135,
-  "by_model": {
-   "Llama 4 Maverick": {
+  "by_model": [
+   {
+    "name": "Llama 4 Maverick",
     "replies": 42,
     "over_4000_total": 0,
     "max_output_tokens": 1130
    },
-   "Mistral Small (2603)": {
+   {
+    "name": "Mistral Small (2603)",
     "replies": 42,
     "over_4000_total": 0,
     "max_output_tokens": 1898
    },
-   "Claude Haiku 5.5": {
+   {
+    "name": "Claude Haiku 5.5",
     "replies": 42,
     "over_4000_total": 0,
     "max_output_tokens": 3475
    },
-   "gpt-oss-120b": {
+   {
+    "name": "gpt-oss-120b",
     "replies": 42,
     "over_4000_total": 0,
     "max_output_tokens": 1431
    },
-   "DeepSeek V4.1 Flash": {
+   {
+    "name": "DeepSeek V4.1 Flash",
     "replies": 42,
     "over_4000_total": 9,
     "max_output_tokens": 7135
    },
-   "GLM 5.3 Flash": {
+   {
+    "name": "GLM 5.3 Flash",
     "replies": 42,
     "over_4000_total": 1,
     "max_output_tokens": 4211
    },
-   "GPT-6.1 Sol": {
+   {
+    "name": "GPT-6.1 Sol",
     "replies": 42,
     "over_4000_total": 0,
     "max_output_tokens": 901
    },
-   "GPT-6.1 Terra": {
+   {
+    "name": "GPT-6.1 Terra",
     "replies": 42,
     "over_4000_total": 0,
     "max_output_tokens": 801
    }
-  }
+  ]
  },
  "comparisons": [
   {
