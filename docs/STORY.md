@@ -89,8 +89,8 @@ why you can trust the numbers (AI-built, so independent programs; audit found an
 is an extra check, the independent programs already agree within $1–2); ends with **Before you trust an AI with a
 retirement number: three things**. Verification language: "within $1" / "within $2", never "to the dollar".
 
-Reading order and every page's bottom "Next" link: home → AI on its own → With a calculator → Wrong facts →
-How I checked → How I built it.
+Reading order, the nav, and every page's bottom "Next" link: home → AI on its own → With a calculator → Wrong facts →
+How I built it → How I checked → home. (Decisions come before method: hiring managers were finding them last.)
 
 ## Names (use these; never the old ones in public text)
 
@@ -100,7 +100,7 @@ How I checked → How I built it.
 | the newer, harder set (November 2026) | v2, hard tier |
 | whole-household decisions | the Gauntlet |
 | the planning engine / the calculator | MoneyGuide, MCP server (except one technical aside) |
-| AI on its own · With a calculator · Wrong facts · How I checked · How I built it | Results · With tools · Bad inputs · Method |
+| AI on its own · With a calculator · Wrong facts · How I built it · How I checked | Results · With tools · Bad inputs · Method |
 | the 50 hardest questions from the first test / the 42 questions in the newer set | "50 hard questions" and "42 hard questions" side by side unexplained |
 | cheap / free models, the best models | frontier, mid-tier, open weights (unless explained once) |
 
