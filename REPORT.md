@@ -328,12 +328,12 @@ not inside them. In real ChatGPT the model may choose to run code; here it didn'
 | Newer, harder set | 17% (7/42) |
 | Wrong facts: caught / noticed, answered anyway / missed, answered anyway | 50% / 10% / 40% (of 30) |
 | Wrong facts: false alarms (40 valid notes) / clean twins right (30) | 10% / 43% |
-| Whole-household decisions | declined 10 of 11 answerable questions; correctly declined the trap |
+| Whole-household decisions | declined all 10 questions that had an answer; correctly declined the trap |
 
 - **It accepts impossible facts like the cheap models do.** "Priya is only 14 in 2026, so age-based required minimum
   distributions do not apply to her traditional IRA... Her RMD is therefore zero." It caught none of the over-limit
   amounts and a third of the impossible ages, but every conflicting fact and most swapped digits.
-- **Without a calculator, it mostly knew it couldn't do whole-household plans.** It declined 10 of 11 ("A reliable
+- **Without a calculator, it mostly knew it couldn't do whole-household plans.** It declined all 10 that had an answer ("A reliable
   answer requires a full multi-year projection"). Honest, but no help to the person asking, which is the case for
   giving it a calculator.
 - **How it was run, and what went wrong.** The first attempt (batches of 11–35) was thrown out: most replies were a
