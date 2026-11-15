@@ -357,7 +357,7 @@ claim against the saved data, read-only. What it found and what changed:
 | 4 | `reproduce.sh` was described as rebuilding every number on the site | It rebuilds and checks the first test's leaderboard; the newer set regrades with `v2/grade.py`; the text says which is which |
 | 5 | Replies that ran out of room were counted as declining for another reason | A separate "ran out of room" outcome (19 replies, 6 DeepSeek and 13 GLM), still counted as not caught |
 | 6 | Run-to-run stability measured caught/not-caught but was described as "same outcome" | Both numbers reported and labeled |
-| 7 | Chart label "Caught the mistake and asked" (catching doesn't require asking); text said the other columns were rule-based | Label is "Caught it"; the judge's role is described |
+| 7 | Chart label "Caught the mistake and asked", but the grade doesn't check for a question; text said the other columns were rule-based | Label is "Caught it": named the mistake and gave no number. Almost every caught reply also asked for the right fact (294 of 299), which is why the site says "stopped to ask"; the judge's role is described |
 | 8 | Twin pairs counted each repeated run as a separate item | Runs averaged within each of the 30 pairs |
 | 9 | The worked IRS form showed 2025 line numbers next to a 2026 question | Labeled as the 2025 form the 2026 rule comes from |
 | 10 | "Single IRMAA thresholds are half the joint ones" | Not at the top tier ($500,000 single, $750,000 joint); corrected |
