@@ -505,11 +505,13 @@
     // --- calculator, chat (writer B, round 2) ---
     // With a calculator, experiment 2: the paired comparison. Both columns are one run per question (the first run on
     // its own, the one run with the calculator), from v2.tool_effect; Sonnet on its own is the reference row.
-    if ($('calc-paired')) {
+    // structural pass: the visible table keeps five rows (four models + Sonnet's reference row); #calc-paired-all has every model
+    for (const [id, keep] of [['calc-paired', ['DeepSeek V4.1 Flash', 'GPT-6.1 Sol', 'Claude Haiku 5.5', 'gpt-oss-120b']], ['calc-paired-all', null]]) {
+    if ($(id)) {
       const wilson = (k, n) => { const z = 1.96, p = k / n, d = 1 + z * z / n, c = (p + z * z / (2 * n)) / d, w = (z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))) / d; return [Math.max(0, c - w), Math.min(1, c + w)]; };
       const frac = (k, n) => { const [lo, hi] = wilson(k, n), td = bar({ rate: k / n, lo, hi }); td.querySelector('.v').firstChild.textContent = `${pct(k / n)} · ${k}/${n}`; return td; };
-      const tbody = document.querySelector('#calc-paired tbody');
-      for (const t of [...v2.tool_effect].sort((a, b) => b.with - a.with)) {
+      const tbody = document.querySelector(`#${id} tbody`);
+      for (const t of [...v2.tool_effect].filter((x) => !keep || keep.includes(x.name)).sort((a, b) => b.with - a.with)) {
         const m = M.find((x) => x.name === t.name), tr = el('tr', (t.with - t.without) / t.questions > 0.3 ? 'best' : null);
         tr.append(who(m, 'one run each way'), frac(t.without, t.questions), frac(t.with, t.questions),
           el('td', 'cost', `${t.fixed} / ${t.broken}`), el('td', 'cost', pct(m.hard_tools.call_rate)));
@@ -520,6 +522,7 @@
         const tr = el('tr'); tr.append(who(sonnet, 'reference: not run with the calculator'), frac(c.b_right, c.questions), el('td', null, ''), el('td', 'cost', '–'), el('td', 'cost', '–'));
         tr.children[2].append(el('span', 'ci', 'not run')); tbody.append(tr);
       }
+    }
     }
   }
 
