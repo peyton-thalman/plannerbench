@@ -468,7 +468,7 @@ def main():
           "the other four depend on whether the reply named the problem, which Claude Haiku 5.5 judged and the lead AI agent (Claude) adjudicated "
           "where the judge's label contradicted the reply's own words (`v2/runs/bad/adjudication.jsonl`, `v2/results/ADJUDICATION.md`). "
           "\"Judge only\" is the catch rate before adjudication; \"Labels changed\" counts the replies whose label was overridden.", "",
-          "| Model | Tier | Runs/item | Caught it | Noticed, answered anyway | Missed it, answered anyway | Declined for another reason | Ran out of room | Caught (judge only) | Labels changed | False alarm (clean + odd) | Correct notes: ran out of room | Clean answers right | Net |",
+          "| Model | Tier | Runs/item | Caught it | Recognized it, answered anyway | Missed it, answered anyway | Declined for another reason | Ran out of room | Caught (judge only) | Labels changed | False alarm (clean + odd) | Correct notes: ran out of room | Clean answers right | Net |",
           "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for m in sorted([m for m in models if m["bad"]], key=lambda m: -m["bad"]["net"]):
         b = m["bad"]

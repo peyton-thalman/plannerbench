@@ -6408,7 +6408,7 @@
  ],
  "outcome_labels": {
   "caught": "Caught it",
-  "flagged_but_answered": "Noticed, answered anyway",
+  "flagged_but_answered": "Recognized it, answered anyway",
   "silent_number": "Missed it, answered anyway",
   "declined_other_reason": "Declined for another reason",
   "ran_out_of_room": "Ran out of room"

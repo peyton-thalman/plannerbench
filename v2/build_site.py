@@ -26,7 +26,7 @@ MODELS = S["models"]
 TIER = {"frontier": "#1f8a6b", "mid": "#c2571a", "cheap": "#2a78d6"}
 TIER_NAME = {"frontier": "Frontier", "mid": "Mid-tier", "cheap": "Cheap / open weights"}
 # The five outcomes of a reply to a corrupted note (v2/grade.py OUTCOMES). "Caught it" doesn't require asking a question.
-OUT = {"caught": ("#1f8a6b", "Caught it"), "flagged_but_answered": ("#d99a1e", "Noticed, answered anyway"),
+OUT = {"caught": ("#1f8a6b", "Caught it"), "flagged_but_answered": ("#d99a1e", "Recognized it, answered anyway"),
        "silent_number": ("#b5402f", "Missed it, answered anyway"), "declined_other_reason": ("#9a958c", "Declined for another reason"),
        "ran_out_of_room": ("#5e6e85", "Ran out of room")}
 INK, MUTED, RULE, PAPER = "#16181c", "#4d525b", "#e7e8e8", "#ffffff"

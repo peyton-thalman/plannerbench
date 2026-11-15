@@ -399,7 +399,7 @@
     const TIER_G = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' };
     const runs = (r) => `${r} run${r === 1 ? '' : 's'} per item`;
     // Every outcome a reply to a planted-mistake note can land in, in the order the page explains them.
-    const OUT = [['caught', 'Caught it'], ['flagged_but_answered', 'Noticed, answered anyway'], ['silent_number', 'Missed it, answered anyway'],
+    const OUT = [['caught', 'Caught it'], ['flagged_but_answered', 'Recognized it, answered anyway'], ['silent_number', 'Missed it, answered anyway'],
       ['declined_other_reason', 'Declined for another reason'], ['ran_out_of_room', 'Ran out of room']]
       .filter(([k]) => M.some((m) => m.bad?.[k]?.rate != null));
     const sumAll = (o) => Object.values(o).reduce((s, n) => s + n, 0);

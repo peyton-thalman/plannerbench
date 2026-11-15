@@ -185,7 +185,7 @@ can't win by flagging anything unusual. Every prompt ends the same way: give a n
 A reply to a corrupted note lands in one of five places:
 
 - **Caught it**: named the planted problem and gave no number.
-- **Noticed, answered anyway**: named the problem and still ended with a number.
+- **Recognized it, answered anyway**: named the problem and still ended with a number.
 - **Missed it, answered anyway**: a confident number with no mention of the problem.
 - **Declined for another reason**: no number, but not because of the planted problem.
 - **Ran out of room**: no answer because the reply hit the token limit. Counted as not caught.
@@ -195,7 +195,7 @@ Claude Haiku 5.5, which saw the reply and the planted problem but not which mode
 lab (GPT-6 Luna) re-judged 176 of the corrupted-note replies and agreed with the first on 97.7% of "named the problem"
 labels (kappa 0.95). Then the lead AI agent (Claude), not a person, adjudicated every reply the judge marked as not naming the problem (details below).
 
-| Model | Caught it | Noticed, answered anyway | Missed it, answered anyway | Declined, other reason | Ran out of room | False alarms (40 valid notes) | Clean twins right (30) |
+| Model | Caught it | Recognized it, answered anyway | Missed it, answered anyway | Declined, other reason | Ran out of room | False alarms (40 valid notes) | Clean twins right (30) |
 |---|---|---|---|---|---|---|---|
 | GPT-6.1 Sol | 80% [63–90] | 20% | 0% | 0% | 0% | 2% | 100% |
 | Claude Sonnet 5.5 | 73% [56–86] | 20% | 7% | 0% | 0% | 0% | 93% |
@@ -266,7 +266,7 @@ The note lists an IRA balance of $624,900 and a custodian statement showing $642
 
 It picked one balance without a word, and used the life-expectancy table that was replaced in 2022.
 
-### 2. Noticed, answered anyway
+### 2. Recognized it, answered anyway
 
 > **GPT-6.1 Sol:** "They would need $620,400 from the IRA to cover the gap, but its $400,000 balance cannot fund that withdrawal. Confirm that the spending figure is monthly, not annual. ANSWER: 620400"
 
@@ -388,7 +388,7 @@ Arizona. The full list is in [docs/AUDIT-2026-11-15.md](docs/AUDIT-2026-11-15.md
   error rate.
 - **Clean accuracy mixes two things.** Half the notes need 2026 tax law. A model that answers a clean tax note wrong
   may be weak at tax, not at reading notes. The split is in `v2/results/summary.json` (`no_law`).
-- **"Noticed, answered anyway" isn't always wrong.** For an amount over a limit, computing with the legal maximum and
+- **"Recognized it, answered anyway" isn't always wrong.** For an amount over a limit, computing with the legal maximum and
   saying so is reasonable. It is counted separately for that reason.
 - **Fourteen notes were fixed after I read the first replies.** The clean "conflict" notes didn't say the pension was
   fully taxable, and one odd-but-valid control was underspecified (whether a 401(k) catch-up must be Roth in 2026

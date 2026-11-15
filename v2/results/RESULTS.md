@@ -6,7 +6,7 @@ Built by `v2/grade.py` from the saved replies. Brackets are 95% Wilson intervals
 
 What each model did with the 30 corrupted notes. The five outcomes add to 100%. "Caught it" = named the planted problem and gave no number (asking a question is not required). Only "Ran out of room" (no answer because the reply hit the 4,000-token limit) is purely rule-based; the other four depend on whether the reply named the problem, which Claude Haiku 5.5 judged and the lead AI agent (Claude) adjudicated where the judge's label contradicted the reply's own words (`v2/runs/bad/adjudication.jsonl`, `v2/results/ADJUDICATION.md`). "Judge only" is the catch rate before adjudication; "Labels changed" counts the replies whose label was overridden.
 
-| Model | Tier | Runs/item | Caught it | Noticed, answered anyway | Missed it, answered anyway | Declined for another reason | Ran out of room | Caught (judge only) | Labels changed | False alarm (clean + odd) | Correct notes: ran out of room | Clean answers right | Net |
+| Model | Tier | Runs/item | Caught it | Recognized it, answered anyway | Missed it, answered anyway | Declined for another reason | Ran out of room | Caught (judge only) | Labels changed | False alarm (clean + odd) | Correct notes: ran out of room | Clean answers right | Net |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | GPT-6.1 Sol | frontier | 1 | 80% [63–90] | 20% | 0% | 0% | 0% | 73% | 2 | 2% [0–13] | 0% | 100% | +78 |
 | Claude Sonnet 5.5 | frontier | 1 | 73% [56–86] | 20% | 7% | 0% | 0% | 73% | 0 | 0% [0–9] | 0% | 93% | +73 |

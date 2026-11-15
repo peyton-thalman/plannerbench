@@ -11,9 +11,11 @@ local copy first (`python3 -m http.server 4173 --directory site`, then `checks/s
 `site_check.py http://localhost:4173`; previews sit behind Vercel login); after a deploy run both with no argument. The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
 Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
 white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
-Nav is five links: Results (`alone.html`), Bad inputs (`wrong-facts.html`), With tools (`calculator.html`), Method, How I built it,
-plus a Human / Agent switch at the right (Agent → `agent.html`, the plain-text side); `chat.html`, `replay.html` and `report.html`
-are linked from the footer. The home page tells the owner's story first (why I made this, four findings, what I built, check it yourself; first person, "door to door as a financial advisor", employer never named); numbers quoted as text there are logged in `data/system.json` `home_v2`. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
+Nav is five links in reading order: AI on its own (`alone.html`), With a calculator (`calculator.html`), Wrong facts
+(`wrong-facts.html`), How I built it, How I checked (`method.html`), plus a Human / Agent (plain text) switch at the right
+(Agent → `agent.html`); `chat.html` (Chat demo), `replay.html` and `report.html` are linked from the footer. The brief for
+every page is `docs/STORY.md` (home order, names, voice); keep it and the pages in step. Numbers typed as text are logged
+in `web/data/system.json` with their source. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
 system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.
 PlannerBench v2 (hard tier, bad inputs, tool use) lives in `v2/`; see `PROGRESS.md` and `REPORT.md`;
 `v2/build_site.py` writes `web/report.html` (from REPORT.md, nav copied from `web/index.html`), `web/data/v2.json` and the
