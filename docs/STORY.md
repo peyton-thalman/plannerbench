@@ -73,7 +73,7 @@ noticed a fact that couldn't be true. "Best" = right most often; on wrong facts,
    - Leave a fact out: with the calculator, DeepSeek asked for the missing fact 9 of 10 times.
    - Try it yourself: it plugs into Claude and ChatGPT (chat.html).
 4. **Tell it something wrong: the best catch most, three cheap models almost none.** (Say "three cheap models", not
-   "cheap models": DeepSeek V4.1 Flash caught 61% and GLM 5.3 Flash 40%. "Caught" = named the mistake and gave no number.)
+   "cheap models": DeepSeek V4.1 Flash caught 61% and GLM 5.3 Flash 40%. "Caught" = recognized the mistake and stopped and asked, giving no number.)
    (Not "most won't notice": 7 of 11 models caught at least half. "Best" = catching without false alarms;
    Gemini 3.8 Flash caught 92% but flagged half the valid files.) 30 client files, one planted
    mistake each (a retiree who is 14, spending ten times what the family owns, a contribution over the legal limit).
@@ -81,13 +81,38 @@ noticed a fact that couldn't be true. "Best" = right most often; on wrong facts,
    number 81–93% of the time. Some noticed the problem and answered anyway. Every model was worst at a plausible
    amount that's over a legal limit. Page: Wrong facts (wrong-facts.html).
 
-Home page order (round 2): one-sentence answer naming names + what "best" means; why I made this; the straight answer;
-"How to read the numbers" (the first test: 2,800 generated, each model asked 10–15 per task = 140–210; the newer set:
-42 hard questions + 30 client files, 11 models; the answer key; the calculator = the answer key as a tool an AI can
-call, not usable on the site, chat demo private); four finding cards (one number, model, test, catch beside it);
-why you can trust the numbers (AI-built, so independent programs; audit found and fixed 12 errors, public; pending CPA
-is an extra check, the independent programs already agree within $1–2); ends with **Before you trust an AI with a
-retirement number: three things**. Verification language: "within $1" / "within $2", never "to the dollar".
+Home page order (structural pass, 2026-11-15; aim: half the old length, now about 720 visible words, was about 1,090):
+1. Headline + a one-sentence plain answer ("Trust the best AIs on a single rule. Check them on your whole situation, and
+   check what you type in.").
+2. The bottom-line box: three bullets (one rule; several rules at once, with ChatGPT's 17% and its setup note; impossible
+   facts), the How-sure line (separate programs must agree; no CPA yet) and What to do this week.
+3. **The story in 60 seconds**: the problem (door-to-door advisor; clients ask ChatGPT), what I built (answer key from the
+   planning engine, rechecked by separate programs, then the questions; AI agents built it, I made the calls), the strongest
+   result (calculator test 1: 40% → 62% → 100% on 50, 96% on 50 held back), the limits (small samples, an AI judge, no CPA).
+4. **Three results**: It depends which AI (Sol vs Sonnet vs cheap; ChatGPT on its own line with its setup note) · Hand it
+   the answer and it argues (Haiku 40% → 100%; catch: DeepSeek rose, three cheap models didn't) · It accepts impossible
+   facts (caught = recognized + stopped and asked).
+5. **What I decided**: build the checker before the questions; fix the calculator's reply, not the prompt; keep a test set
+   nobody tunes on; have another company's model audit it and publish the 12 errors. Link to How I built it.
+6. **The experiments** map (name · when · questions · models), linking to each page, with the October/November settings
+   note and the model groups in one line.
+7. Next → AI on its own.
+Plain definitions at first use on Home: "one rule", "several rules at once", "answer key", "planning engine".
+Not on Home any more: "Why I made this" (the dad line moved to How I built it's lede), "How to read the numbers", the
+trust paragraph, the reading list. Verification language: "within $1" / "within $2", never "to the dollar".
+
+Experiment names (use the same words on Home's map, page eyebrows and anchors):
+First test (Oct) · Newer, harder set (Nov) · ChatGPT on a subscription (Nov) · Calculator test 1: number vs rule (Oct) ·
+Calculator test 2: who it rescues (Nov) · Calculator test 3: whole-household decisions (Oct) · Wrong facts (Nov).
+
+Wrong facts uses two named measures everywhere: **recognized the mistake** (the reply named it) and **stopped and asked**
+(gave no number, asked for the fact instead). **Caught** = both. The four outcome buckets are the 2×2 of those measures
+(Caught it · Noticed, answered anyway · Declined for another reason · Missed it, answered anyway), plus Ran out of room.
+
+Page rules from the structural pass: each finding page opens with its own 2–3 sentence answer and doesn't re-summarize
+the other findings or re-explain verification (one line + a link to How I checked at most). The first thing after the
+plain answer is prose or a table of 5 rows or fewer; full tables sit behind `<details>` labeled "All models and columns
+(for the detail-minded)". How I built it: decisions first, then mistakes caught, who did what; no restated findings.
 
 Reading order, the nav, and every page's bottom "Next" link: home → AI on its own → With a calculator → Wrong facts →
 How I built it → How I checked → home. (Decisions come before method: hiring managers were finding them last.)
