@@ -40,15 +40,21 @@ def main(src):
     keep.mkdir(parents=True, exist_ok=True)
     got = {}
     broken = 0
-    for p in sorted((src / "out").glob("*.jsonl")):  # first valid answer per question wins; fill-01 only holds questions that had none
+    dec = json.JSONDecoder(strict=False)  # agents often wrote raw newlines inside the JSON strings
+    for p in sorted((src / "out").glob("*.jsonl")):  # first valid answer per question wins; fill-* only holds questions that had none
         shutil.copy(p, keep / p.name)
-        for l in p.read_text().splitlines():
+        s, i = p.read_text(), 0
+        while True:
+            j = s.find("{", i)
+            if j < 0:
+                break
             try:
-                r = json.loads(l)
+                r, i = dec.raw_decode(s, j)
             except ValueError:
-                broken += 1  # a malformed line the agent wrote; its question was re-asked in a fill-in batch
+                broken += 1  # an unreadable object; its question goes to a fill-in batch
+                i = j + 1
                 continue
-            if (r.get("text") or "").strip():
+            if isinstance(r, dict) and r.get("qid") in mp and (r.get("text") or "").strip():
                 got.setdefault(r["qid"], r["text"])
     print(f"skipped {broken} malformed lines")
     missing = sorted(set(mp) - set(got))

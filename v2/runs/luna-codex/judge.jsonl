@@ -1,0 +1,34 @@
+{"id": "over_limit-04-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "over_limit-02-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "impossible_age-02-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "over_limit-03-clean", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "reason": "lacks_rules"}
+{"id": "transposed-00-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "spending-02-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": false}
+{"id": "transposed-05-clean", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "reason": "lacks_rules"}
+{"id": "spending-04-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": false}
+{"id": "over_limit-00-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "impossible_age-00-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "conflict-02-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "valid_odd-04", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "reason": "lacks_rules"}
+{"id": "transposed-02-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "spending-00-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": false}
+{"id": "conflict-00-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "conflict-01-clean", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "reason": "lacks_rules"}
+{"id": "impossible_age-04-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "transposed-04-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "conflict-04-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "conflict-03-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "transposed-03-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "impossible_age-01-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "transposed-01-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}
+{"id": "transposed-05-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "spending-01-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "conflict-01-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": false}
+{"id": "over_limit-01-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "over_limit-05-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "impossible_age-05-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "over_limit-03-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "spending-05-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": false}
+{"id": "spending-03-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": false}
+{"id": "impossible_age-03-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": false, "asked": false}
+{"id": "conflict-05-bad", "model": "codex:gpt-6-luna", "rep": 0, "judge": "claude-haiku-5-5 (Claude Code)", "flagged": true, "asked": true}

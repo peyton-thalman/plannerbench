@@ -1,0 +1,20 @@
+{"qid": "q170", "text": "The 2026 Part B IRMAA calculation uses 2024 income. A joint MAGI of $339,600 falls in the $272,000\u2013$342,000 tier. Adding that tier\u2019s surcharge to the 2026 standard premium gives $527.50 per person monthly.
+ANSWER: 527.50"}
+{"qid": "q142", "text": "A joint MAGI of $342,800 falls in the next 2026 IRMAA tier, $342,000\u2013$410,000. The standard Part B premium plus the tier surcharge is $608.90 per person monthly.
+ANSWER: 608.90"}
+{"qid": "q162", "text": "IRS Publication 915 uses provisional income: other income plus half the Social Security benefits. Here that is $80,000 + $21,500 = $101,500, well above the upper threshold. Thus 85% of benefits are taxable: $43,000 \u00d7 0.85 = $36,550.
+ANSWER: 36550"}
+{"qid": "q252", "text": "At age 80, the Uniform Lifetime Table divisor is 20.2. Divide the prior December 31 balance by that factor: $2,257,000 \u00f7 20.2 = $111,732.67, which rounds to $111,733.
+ANSWER: 111733"}
+{"qid": "q169", "text": "Before the conversion, $8,500 of IRA income plus half of benefits ($15,500) gives provisional income of $24,000, below the $25,000 single threshold, so no Social Security is taxable. After the $9,000 conversion, provisional income is $33,000; taxable Social Security is $4,000 under the worksheet formula. AGI is then $21,500. The standard deduction and senior deduction exceed that amount, so taxable income and federal income tax remain zero.
+ANSWER: 0"}
+{"qid": "q175", "text": "At age 80, the Uniform Lifetime Table divisor is 20.2. The 2026 RMD is $2,362,000 \u00f7 20.2 = $116,930.69, rounded to $116,931.
+ANSWER: 116931"}
+{"qid": "q247", "text": "AGI is $203,000 + $84,500 = $287,500. Subtracting the 2026 joint standard deduction of $32,200 leaves $255,300 taxable income. Applying the 10%, 12%, 22%, and 24% brackets gives $46,468. There are no net investment income amounts here, so NIIT is zero.
+ANSWER: 46468"}
+{"qid": "q183", "text": "The purchase plus eligible same-family holdings totals $81,000 + $36,000 = $117,000. The client\u2019s IRA qualifies under the stated aggregation rule, placing the order in the $100,000 to less than $250,000 tier.
+ANSWER: 3.5"}
+{"qid": "q240", "text": "Only the 14-year-old child\u2019s $4,000 same-family holding qualifies. The eligible total is $31,000 + $4,000 = $35,000, below $50,000. The adult child\u2019s and different-fund-family holdings do not count, so the charge is 5.75%.
+ANSWER: 5.75"}
+{"qid": "q160", "text": "AGE55 applies: the client separated in the year they turned 58, is under 59\u00bd, and needs withdrawals now, so the plan\u2019s age-55 exception can matter. NUA applies because rolling low-basis employer stock into the IRA forfeits that treatment. COST does not apply: the IRA\u2019s stated 0.05% fund cost and 0% advisory fee are below the plan\u2019s 1.4%.
+ANSWER: AGE55, NUA"}

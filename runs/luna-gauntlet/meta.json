@@ -1,0 +1,8 @@
+{
+ "model": "codex:gpt-6-luna",
+ "effort": "medium",
+ "via": "Codex agent on a ChatGPT subscription, batches of 11-35 prompts per agent session, no code/web/files, no token limit set",
+ "date": "2026-11-15",
+ "note": "Not the same setup as the API runs (one message per question, fixed token limits). Reported separately.",
+ "max_tokens": null
+}

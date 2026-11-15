@@ -1,0 +1,26 @@
+{"qid": "q028", "text": "Taxable Social Security is $28,900; after deductions, the remaining taxable income is taxed through the 10% and 12% brackets.
+ANSWER: 1514"}
+{"qid": "q081", "text": "A reliable answer requires a full multi-year projection of taxes, RMDs, premiums, and account balances.
+PICK: CANT"}
+{"qid": "q095", "text": "The conversion adds $60,000 of ordinary income and phases down the senior deduction by $3,600. The federal and state increases total approximately $14,700.
+ANSWER: 14700"}
+{"qid": "q098", "text": "The two versions use different RMD calculations, filing status, Social Security taxation, and deductions. I cannot responsibly give an exact difference without completing both returns.
+ANSWER: 0"}
+{"qid": "q090", "text": "The 10-year rule applies, with no annual withdrawal required in 2026.
+ANSWER: 0"}
+{"qid": "q083", "text": "Felix\u2019s RMD is about $33,476 using the age-81 divisor of 23.3. After the $24,000 QCD, include the remaining RMD, pension, and taxable Social Security, then deduct the standard, age, and senior amounts.
+ANSWER: 1480"}
+{"qid": "q092", "text": "A precise comparison requires calculating each version\u2019s RMD, taxable Social Security, and tax under its filing status.
+ANSWER: 0"}
+{"qid": "q101", "text": "Provisional income is $31,400. Taxable benefits are half the $6,400 excess over the $25,000 base amount.
+ANSWER: 3200"}
+{"qid": "q102", "text": "Annual beneficiary RMDs continue because the owner had begun RMDs, but the exact amount requires the applicable life-expectancy factor.
+ANSWER: NEED_INFO"}
+{"qid": "q113", "text": "Provisional income is $40,525. Half the $8,525 excess over the joint base amount is $4,262.50, rounded to $4,263.
+ANSWER: 4263"}
+{"qid": "q120", "text": "The conversion raises ordinary income and taxable Social Security; accounting for federal brackets, the senior deduction, and Arizona tax gives approximately $9,900.
+ANSWER: 9900"}
+{"qid": "q082", "text": "The comparison requires both RMD calculations and separate joint and single tax computations.
+ANSWER: 0"}
+{"qid": "q121", "text": "The conversion adds $90,000 to ordinary income and phases down the senior deduction. Combined federal and Arizona tax rises approximately $21,800.
+ANSWER: 21800"}

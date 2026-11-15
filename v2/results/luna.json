@@ -1,0 +1,167 @@
+{
+ "model": "GPT-6 Luna",
+ "via": "Codex agent, ChatGPT subscription",
+ "effort": "medium",
+ "date": "2026-11-15",
+ "setup_note": "Answered in agent sessions of 11-35 prompts each, told to treat each as its own chat, no code, web or files; no token limit. The 11 API models got one message per question at low effort with a 4,000-token limit.",
+ "hard": {
+  "k": 7,
+  "n": 42,
+  "rate": 0.1667,
+  "lo": 0.0832,
+  "hi": 0.306,
+  "no_answer": 1,
+  "by_family": {
+   "az_tax": {
+    "k": 0,
+    "n": 6,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3903
+   },
+   "conv_cost_az": {
+    "k": 0,
+    "n": 6,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3903
+   },
+   "inherited_rmd": {
+    "k": 3,
+    "n": 6,
+    "rate": 0.5,
+    "lo": 0.1876,
+    "hi": 0.8124
+   },
+   "irmaa_headroom": {
+    "k": 2,
+    "n": 6,
+    "rate": 0.3333,
+    "lo": 0.0968,
+    "hi": 0.7
+   },
+   "qcd_rmd_tax": {
+    "k": 0,
+    "n": 6,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3903
+   },
+   "ss_muni_qcd": {
+    "k": 2,
+    "n": 6,
+    "rate": 0.3333,
+    "lo": 0.0968,
+    "hi": 0.7
+   },
+   "widow_first_year": {
+    "k": 0,
+    "n": 6,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3903
+   }
+  }
+ },
+ "bad": {
+  "corrupted": 30,
+  "judged": 30,
+  "caught": {
+   "k": 15,
+   "n": 30,
+   "rate": 0.5,
+   "lo": 0.3315,
+   "hi": 0.6685
+  },
+  "flagged_but_answered": {
+   "k": 3,
+   "n": 30,
+   "rate": 0.1,
+   "lo": 0.0346,
+   "hi": 0.2562
+  },
+  "silent_number": {
+   "k": 12,
+   "n": 30,
+   "rate": 0.4,
+   "lo": 0.2459,
+   "hi": 0.5768
+  },
+  "declined_other_reason": {
+   "k": 0,
+   "n": 30,
+   "rate": 0.0,
+   "lo": 0.0,
+   "hi": 0.1135
+  },
+  "named": {
+   "k": 18,
+   "n": 30,
+   "rate": 0.6,
+   "lo": 0.4232,
+   "hi": 0.7541
+  },
+  "judge_only_caught": {
+   "k": 15,
+   "n": 30,
+   "rate": 0.5,
+   "lo": 0.3315,
+   "hi": 0.6685
+  },
+  "labels_changed": 0,
+  "false_alarm": {
+   "k": 4,
+   "n": 40,
+   "rate": 0.1,
+   "lo": 0.0396,
+   "hi": 0.2305
+  },
+  "clean_correct": {
+   "k": 13,
+   "n": 30,
+   "rate": 0.4333,
+   "lo": 0.2738,
+   "hi": 0.608
+  },
+  "decline_reasons": {
+   "lacks_rules": 4
+  },
+  "by_type": {
+   "transposed": {
+    "k": 5,
+    "n": 6,
+    "rate": 0.8333,
+    "lo": 0.4365,
+    "hi": 0.9699
+   },
+   "impossible_age": {
+    "k": 2,
+    "n": 6,
+    "rate": 0.3333,
+    "lo": 0.0968,
+    "hi": 0.7
+   },
+   "spending": {
+    "k": 2,
+    "n": 6,
+    "rate": 0.3333,
+    "lo": 0.0968,
+    "hi": 0.7
+   },
+   "conflict": {
+    "k": 6,
+    "n": 6,
+    "rate": 1.0,
+    "lo": 0.6097,
+    "hi": 1.0
+   },
+   "over_limit": {
+    "k": 0,
+    "n": 6,
+    "rate": 0.0,
+    "lo": 0.0,
+    "hi": 0.3903
+   }
+  }
+ }
+}
