@@ -60,8 +60,8 @@ def serve():
     return httpd
 
 
-def render(url, profile):
-    cmd = [CHROME, "--headless=new", "--disable-gpu", "--virtual-time-budget=20000", "--window-size=1280,1000",
+def render(url, profile, width=1280):
+    cmd = [CHROME, "--headless=new", "--disable-gpu", "--virtual-time-budget=20000", f"--window-size={width},1000",
            "--hide-scrollbars", "--no-first-run", "--no-default-browser-check", "--disable-extensions",
            f"--user-data-dir={profile}", "--dump-dom", url]
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
@@ -420,6 +420,22 @@ def json_ld(desc):
     }
 
 
+NARROW = 420  # headless Chrome lays out no narrower than about 500px, which still gives the phone version of each chart
+CHART_RE = re.compile(r'(<div class="chart"[^>]*\bid="([\w-]+)"[^>]*>)(<svg\b.*?</svg>)', re.S)
+
+
+def add_narrow_charts(wide, narrow):
+    """Each app.js chart twice: the desktop drawing (svg.chart-wide) and the phone one (svg.chart-narrow); CSS shows one."""
+    small = {m[2]: m[3] for m in CHART_RE.finditer(narrow)}
+
+    def both(m):
+        alt = small.get(m[2])
+        if not alt:
+            return m[0]
+        return m[1] + m[3].replace("<svg", '<svg class="chart-wide"', 1) + alt.replace("<svg", '<svg class="chart-narrow" aria-hidden="true"', 1)
+    return CHART_RE.sub(both, wide)
+
+
 def finish_html(name, src, desc):
     """Baked DOM → the HTML we ship: no app.js, plus canonical, Markdown alternate and (home) JSON-LD."""
     src = re.sub(r'\s*<script\b[^>]*\bsrc="app\.js[^"]*"[^>]*>\s*</script>', "", src)
@@ -514,6 +530,12 @@ def main():
         with tempfile.TemporaryDirectory(prefix="bake-") as tmp, concurrent.futures.ThreadPoolExecutor(max_workers=min(6, len(names))) as pool:
             jobs = {n: pool.submit(render, f"http://127.0.0.1:{port}/{n}.html", f"{tmp}/{n}") for n in names}
             dom = {n: j.result() for n, j in jobs.items()}
+            # app.js draws some charts at the container's width and redrew them on resize. Baked, a desktop-width
+            # chart would shrink to unreadable text on a phone, so pages with such charts are rendered narrow too.
+            narrow = [n for n in names if CHART_RE.search(dom[n])]
+            jobs = {n: pool.submit(render, f"http://127.0.0.1:{port}/{n}.html", f"{tmp}/{n}-narrow", NARROW) for n in narrow}
+            for n, j in jobs.items():
+                dom[n] = add_narrow_charts(dom[n], j.result())
     finally:
         httpd.shutdown()
 
