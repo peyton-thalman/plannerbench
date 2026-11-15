@@ -1,0 +1,1054 @@
+{
+ "q001": {
+  "set": "bad",
+  "id": "over_limit-04-bad"
+ },
+ "q002": {
+  "set": "bad",
+  "id": "over_limit-02-bad"
+ },
+ "q003": {
+  "set": "bad",
+  "id": "impossible_age-02-bad"
+ },
+ "q004": {
+  "set": "bad",
+  "id": "over_limit-03-clean"
+ },
+ "q005": {
+  "set": "bad",
+  "id": "valid_odd-06"
+ },
+ "q006": {
+  "set": "bad",
+  "id": "spending-03-clean"
+ },
+ "q007": {
+  "set": "bad",
+  "id": "transposed-00-bad"
+ },
+ "q008": {
+  "set": "bad",
+  "id": "transposed-03-clean"
+ },
+ "q009": {
+  "set": "bad",
+  "id": "impossible_age-01-clean"
+ },
+ "q010": {
+  "set": "bad",
+  "id": "spending-02-bad"
+ },
+ "q011": {
+  "set": "bad",
+  "id": "impossible_age-03-clean"
+ },
+ "q012": {
+  "set": "bad",
+  "id": "conflict-05-clean"
+ },
+ "q013": {
+  "set": "bad",
+  "id": "spending-05-clean"
+ },
+ "q014": {
+  "set": "bad",
+  "id": "transposed-05-clean"
+ },
+ "q015": {
+  "set": "bad",
+  "id": "spending-04-bad"
+ },
+ "q016": {
+  "set": "bad",
+  "id": "over_limit-00-bad"
+ },
+ "q017": {
+  "set": "bad",
+  "id": "impossible_age-00-bad"
+ },
+ "q018": {
+  "set": "bad",
+  "id": "conflict-02-bad"
+ },
+ "q019": {
+  "set": "bad",
+  "id": "transposed-01-clean"
+ },
+ "q020": {
+  "set": "bad",
+  "id": "valid_odd-04"
+ },
+ "q021": {
+  "set": "bad",
+  "id": "impossible_age-05-clean"
+ },
+ "q022": {
+  "set": "bad",
+  "id": "transposed-02-bad"
+ },
+ "q023": {
+  "set": "bad",
+  "id": "over_limit-05-clean"
+ },
+ "q024": {
+  "set": "bad",
+  "id": "valid_odd-08"
+ },
+ "q025": {
+  "set": "bad",
+  "id": "spending-00-bad"
+ },
+ "q026": {
+  "set": "bad",
+  "id": "conflict-00-bad"
+ },
+ "q027": {
+  "set": "bad",
+  "id": "valid_odd-00"
+ },
+ "q028": {
+  "set": "bad",
+  "id": "conflict-01-clean"
+ },
+ "q029": {
+  "set": "bad",
+  "id": "spending-01-clean"
+ },
+ "q030": {
+  "set": "bad",
+  "id": "valid_odd-02"
+ },
+ "q031": {
+  "set": "bad",
+  "id": "conflict-03-clean"
+ },
+ "q032": {
+  "set": "bad",
+  "id": "impossible_age-04-bad"
+ },
+ "q033": {
+  "set": "bad",
+  "id": "transposed-04-bad"
+ },
+ "q034": {
+  "set": "bad",
+  "id": "over_limit-01-clean"
+ },
+ "q035": {
+  "set": "bad",
+  "id": "conflict-04-bad"
+ },
+ "q036": {
+  "set": "bad",
+  "id": "transposed-04-clean"
+ },
+ "q037": {
+  "set": "bad",
+  "id": "spending-00-clean"
+ },
+ "q038": {
+  "set": "bad",
+  "id": "conflict-03-bad"
+ },
+ "q039": {
+  "set": "bad",
+  "id": "transposed-03-bad"
+ },
+ "q040": {
+  "set": "bad",
+  "id": "over_limit-02-clean"
+ },
+ "q041": {
+  "set": "bad",
+  "id": "over_limit-00-clean"
+ },
+ "q042": {
+  "set": "bad",
+  "id": "impossible_age-01-bad"
+ },
+ "q043": {
+  "set": "bad",
+  "id": "conflict-02-clean"
+ },
+ "q044": {
+  "set": "bad",
+  "id": "transposed-01-bad"
+ },
+ "q045": {
+  "set": "bad",
+  "id": "transposed-05-bad"
+ },
+ "q046": {
+  "set": "bad",
+  "id": "spending-01-bad"
+ },
+ "q047": {
+  "set": "bad",
+  "id": "spending-02-clean"
+ },
+ "q048": {
+  "set": "bad",
+  "id": "conflict-01-bad"
+ },
+ "q049": {
+  "set": "bad",
+  "id": "over_limit-01-bad"
+ },
+ "q050": {
+  "set": "bad",
+  "id": "impossible_age-04-clean"
+ },
+ "q051": {
+  "set": "bad",
+  "id": "valid_odd-07"
+ },
+ "q052": {
+  "set": "bad",
+  "id": "valid_odd-03"
+ },
+ "q053": {
+  "set": "bad",
+  "id": "valid_odd-01"
+ },
+ "q054": {
+  "set": "bad",
+  "id": "over_limit-05-bad"
+ },
+ "q055": {
+  "set": "bad",
+  "id": "conflict-04-clean"
+ },
+ "q056": {
+  "set": "bad",
+  "id": "impossible_age-05-bad"
+ },
+ "q057": {
+  "set": "bad",
+  "id": "transposed-00-clean"
+ },
+ "q058": {
+  "set": "bad",
+  "id": "valid_odd-05"
+ },
+ "q059": {
+  "set": "bad",
+  "id": "conflict-00-clean"
+ },
+ "q060": {
+  "set": "bad",
+  "id": "over_limit-04-clean"
+ },
+ "q061": {
+  "set": "bad",
+  "id": "valid_odd-09"
+ },
+ "q062": {
+  "set": "bad",
+  "id": "spending-04-clean"
+ },
+ "q063": {
+  "set": "bad",
+  "id": "transposed-02-clean"
+ },
+ "q064": {
+  "set": "bad",
+  "id": "over_limit-03-bad"
+ },
+ "q065": {
+  "set": "bad",
+  "id": "impossible_age-02-clean"
+ },
+ "q066": {
+  "set": "bad",
+  "id": "spending-05-bad"
+ },
+ "q067": {
+  "set": "bad",
+  "id": "spending-03-bad"
+ },
+ "q068": {
+  "set": "bad",
+  "id": "impossible_age-00-clean"
+ },
+ "q069": {
+  "set": "bad",
+  "id": "impossible_age-03-bad"
+ },
+ "q070": {
+  "set": "bad",
+  "id": "conflict-05-bad"
+ },
+ "q071": {
+  "set": "gauntlet",
+  "id": "g-claim_age-1"
+ },
+ "q072": {
+  "set": "gauntlet",
+  "id": "g-first_rmd-1"
+ },
+ "q073": {
+  "set": "gauntlet",
+  "id": "g-gains_vs_conversion-1"
+ },
+ "q074": {
+  "set": "gauntlet",
+  "id": "g-how_much-1"
+ },
+ "q075": {
+  "set": "gauntlet",
+  "id": "g-inherited_ira-1"
+ },
+ "q076": {
+  "set": "gauntlet",
+  "id": "g-muni_stack-1"
+ },
+ "q077": {
+  "set": "gauntlet",
+  "id": "g-qcd_giving-1"
+ },
+ "q078": {
+  "set": "gauntlet",
+  "id": "g-senior_phaseout-1"
+ },
+ "q079": {
+  "set": "gauntlet",
+  "id": "g-torpedo_irmaa-1"
+ },
+ "q080": {
+  "set": "gauntlet",
+  "id": "g-trap-fund_pick"
+ },
+ "q081": {
+  "set": "gauntlet",
+  "id": "g-widow-1"
+ },
+ "q082": {
+  "set": "hard",
+  "id": "widow_first_year-00"
+ },
+ "q083": {
+  "set": "hard",
+  "id": "qcd_rmd_tax-03"
+ },
+ "q084": {
+  "set": "hard",
+  "id": "widow_first_year-02"
+ },
+ "q085": {
+  "set": "hard",
+  "id": "irmaa_headroom-03"
+ },
+ "q086": {
+  "set": "hard",
+  "id": "qcd_rmd_tax-01"
+ },
+ "q087": {
+  "set": "hard",
+  "id": "qcd_rmd_tax-05"
+ },
+ "q088": {
+  "set": "hard",
+  "id": "ss_muni_qcd-00"
+ },
+ "q089": {
+  "set": "hard",
+  "id": "conv_cost_az-01"
+ },
+ "q090": {
+  "set": "hard",
+  "id": "inherited_rmd-05"
+ },
+ "q091": {
+  "set": "hard",
+  "id": "qcd_rmd_tax-04"
+ },
+ "q092": {
+  "set": "hard",
+  "id": "widow_first_year-05"
+ },
+ "q093": {
+  "set": "hard",
+  "id": "ss_muni_qcd-01"
+ },
+ "q094": {
+  "set": "hard",
+  "id": "widow_first_year-01"
+ },
+ "q095": {
+  "set": "hard",
+  "id": "conv_cost_az-02"
+ },
+ "q096": {
+  "set": "hard",
+  "id": "inherited_rmd-00"
+ },
+ "q097": {
+  "set": "hard",
+  "id": "ss_muni_qcd-03"
+ },
+ "q098": {
+  "set": "hard",
+  "id": "widow_first_year-03"
+ },
+ "q099": {
+  "set": "hard",
+  "id": "az_tax-01"
+ },
+ "q100": {
+  "set": "hard",
+  "id": "irmaa_headroom-05"
+ },
+ "q101": {
+  "set": "hard",
+  "id": "ss_muni_qcd-02"
+ },
+ "q102": {
+  "set": "hard",
+  "id": "inherited_rmd-04"
+ },
+ "q103": {
+  "set": "hard",
+  "id": "irmaa_headroom-02"
+ },
+ "q104": {
+  "set": "hard",
+  "id": "ss_muni_qcd-04"
+ },
+ "q105": {
+  "set": "hard",
+  "id": "az_tax-03"
+ },
+ "q106": {
+  "set": "hard",
+  "id": "inherited_rmd-02"
+ },
+ "q107": {
+  "set": "hard",
+  "id": "conv_cost_az-00"
+ },
+ "q108": {
+  "set": "hard",
+  "id": "inherited_rmd-03"
+ },
+ "q109": {
+  "set": "hard",
+  "id": "az_tax-04"
+ },
+ "q110": {
+  "set": "hard",
+  "id": "irmaa_headroom-01"
+ },
+ "q111": {
+  "set": "hard",
+  "id": "conv_cost_az-04"
+ },
+ "q112": {
+  "set": "hard",
+  "id": "inherited_rmd-01"
+ },
+ "q113": {
+  "set": "hard",
+  "id": "ss_muni_qcd-05"
+ },
+ "q114": {
+  "set": "hard",
+  "id": "irmaa_headroom-04"
+ },
+ "q115": {
+  "set": "hard",
+  "id": "widow_first_year-04"
+ },
+ "q116": {
+  "set": "hard",
+  "id": "az_tax-00"
+ },
+ "q117": {
+  "set": "hard",
+  "id": "az_tax-05"
+ },
+ "q118": {
+  "set": "hard",
+  "id": "irmaa_headroom-00"
+ },
+ "q119": {
+  "set": "hard",
+  "id": "az_tax-02"
+ },
+ "q120": {
+  "set": "hard",
+  "id": "conv_cost_az-05"
+ },
+ "q121": {
+  "set": "hard",
+  "id": "conv_cost_az-03"
+ },
+ "q122": {
+  "set": "hard",
+  "id": "qcd_rmd_tax-00"
+ },
+ "q123": {
+  "set": "hard",
+  "id": "qcd_rmd_tax-02"
+ },
+ "q124": {
+  "set": "v1",
+  "id": "comms_review-005"
+ },
+ "q125": {
+  "set": "v1",
+  "id": "rmd-004"
+ },
+ "q126": {
+  "set": "v1",
+  "id": "senior_phaseout-006"
+ },
+ "q127": {
+  "set": "v1",
+  "id": "rollover_flags-006"
+ },
+ "q128": {
+  "set": "v1",
+  "id": "ss_claim-005"
+ },
+ "q129": {
+  "set": "v1",
+  "id": "widow_all_in-004"
+ },
+ "q130": {
+  "set": "v1",
+  "id": "rmd-002"
+ },
+ "q131": {
+  "set": "v1",
+  "id": "rmd-001"
+ },
+ "q132": {
+  "set": "v1",
+  "id": "federal_tax-008"
+ },
+ "q133": {
+  "set": "v1",
+  "id": "conversion_all_in-006"
+ },
+ "q134": {
+  "set": "v1",
+  "id": "ss_claim-004"
+ },
+ "q135": {
+  "set": "v1",
+  "id": "federal_tax-000"
+ },
+ "q136": {
+  "set": "v1",
+  "id": "taxable_ss-008"
+ },
+ "q137": {
+  "set": "v1",
+  "id": "ss_claim-008"
+ },
+ "q138": {
+  "set": "v1",
+  "id": "widow_all_in-007"
+ },
+ "q139": {
+  "set": "v1",
+  "id": "rollover_flags-001"
+ },
+ "q140": {
+  "set": "v1",
+  "id": "widow_all_in-000"
+ },
+ "q141": {
+  "set": "v1",
+  "id": "tax_torpedo-005"
+ },
+ "q142": {
+  "set": "v1",
+  "id": "irmaa-003"
+ },
+ "q143": {
+  "set": "v1",
+  "id": "ss_claim-003"
+ },
+ "q144": {
+  "set": "v1",
+  "id": "ss_claim-007"
+ },
+ "q145": {
+  "set": "v1",
+  "id": "irmaa-001"
+ },
+ "q146": {
+  "set": "v1",
+  "id": "conversion_all_in-004"
+ },
+ "q147": {
+  "set": "v1",
+  "id": "rollover_flags-007"
+ },
+ "q148": {
+  "set": "v1",
+  "id": "rmd-005"
+ },
+ "q149": {
+  "set": "v1",
+  "id": "tax_torpedo-004"
+ },
+ "q150": {
+  "set": "v1",
+  "id": "widow_all_in-008"
+ },
+ "q151": {
+  "set": "v1",
+  "id": "federal_tax-002"
+ },
+ "q152": {
+  "set": "v1",
+  "id": "widow_penalty-009"
+ },
+ "q153": {
+  "set": "v1",
+  "id": "irmaa-007"
+ },
+ "q154": {
+  "set": "v1",
+  "id": "conversion_all_in-001"
+ },
+ "q155": {
+  "set": "v1",
+  "id": "widow_all_in-001"
+ },
+ "q156": {
+  "set": "v1",
+  "id": "widow_all_in-005"
+ },
+ "q157": {
+  "set": "v1",
+  "id": "taxable_ss-000"
+ },
+ "q158": {
+  "set": "v1",
+  "id": "taxable_ss-007"
+ },
+ "q159": {
+  "set": "v1",
+  "id": "bracket_room-005"
+ },
+ "q160": {
+  "set": "v1",
+  "id": "rollover_flags-004"
+ },
+ "q161": {
+  "set": "v1",
+  "id": "bracket_room-007"
+ },
+ "q162": {
+  "set": "v1",
+  "id": "taxable_ss-001"
+ },
+ "q163": {
+  "set": "v1",
+  "id": "comms_review-004"
+ },
+ "q164": {
+  "set": "v1",
+  "id": "senior_phaseout-009"
+ },
+ "q165": {
+  "set": "v1",
+  "id": "widow_penalty-007"
+ },
+ "q166": {
+  "set": "v1",
+  "id": "senior_phaseout-008"
+ },
+ "q167": {
+  "set": "v1",
+  "id": "irmaa-002"
+ },
+ "q168": {
+  "set": "v1",
+  "id": "rollover_flags-008"
+ },
+ "q169": {
+  "set": "v1",
+  "id": "tax_torpedo-006"
+ },
+ "q170": {
+  "set": "v1",
+  "id": "irmaa-005"
+ },
+ "q171": {
+  "set": "v1",
+  "id": "bracket_room-002"
+ },
+ "q172": {
+  "set": "v1",
+  "id": "ss_claim-000"
+ },
+ "q173": {
+  "set": "v1",
+  "id": "federal_tax-003"
+ },
+ "q174": {
+  "set": "v1",
+  "id": "widow_penalty-008"
+ },
+ "q175": {
+  "set": "v1",
+  "id": "rmd-008"
+ },
+ "q176": {
+  "set": "v1",
+  "id": "widow_all_in-002"
+ },
+ "q177": {
+  "set": "v1",
+  "id": "breakpoint-003"
+ },
+ "q178": {
+  "set": "v1",
+  "id": "rmd-009"
+ },
+ "q179": {
+  "set": "v1",
+  "id": "taxable_ss-006"
+ },
+ "q180": {
+  "set": "v1",
+  "id": "taxable_ss-005"
+ },
+ "q181": {
+  "set": "v1",
+  "id": "widow_penalty-000"
+ },
+ "q182": {
+  "set": "v1",
+  "id": "comms_review-002"
+ },
+ "q183": {
+  "set": "v1",
+  "id": "breakpoint-008"
+ },
+ "q184": {
+  "set": "v1",
+  "id": "breakpoint-006"
+ },
+ "q185": {
+  "set": "v1",
+  "id": "rmd-000"
+ },
+ "q186": {
+  "set": "v1",
+  "id": "tax_torpedo-008"
+ },
+ "q187": {
+  "set": "v1",
+  "id": "widow_penalty-002"
+ },
+ "q188": {
+  "set": "v1",
+  "id": "tax_torpedo-007"
+ },
+ "q189": {
+  "set": "v1",
+  "id": "federal_tax-009"
+ },
+ "q190": {
+  "set": "v1",
+  "id": "comms_review-000"
+ },
+ "q191": {
+  "set": "v1",
+  "id": "rollover_flags-005"
+ },
+ "q192": {
+  "set": "v1",
+  "id": "conversion_all_in-002"
+ },
+ "q193": {
+  "set": "v1",
+  "id": "taxable_ss-004"
+ },
+ "q194": {
+  "set": "v1",
+  "id": "federal_tax-006"
+ },
+ "q195": {
+  "set": "v1",
+  "id": "rmd-003"
+ },
+ "q196": {
+  "set": "v1",
+  "id": "widow_penalty-006"
+ },
+ "q197": {
+  "set": "v1",
+  "id": "comms_review-003"
+ },
+ "q198": {
+  "set": "v1",
+  "id": "widow_penalty-005"
+ },
+ "q199": {
+  "set": "v1",
+  "id": "bracket_room-006"
+ },
+ "q200": {
+  "set": "v1",
+  "id": "senior_phaseout-000"
+ },
+ "q201": {
+  "set": "v1",
+  "id": "rollover_flags-000"
+ },
+ "q202": {
+  "set": "v1",
+  "id": "bracket_room-009"
+ },
+ "q203": {
+  "set": "v1",
+  "id": "breakpoint-002"
+ },
+ "q204": {
+  "set": "v1",
+  "id": "senior_phaseout-005"
+ },
+ "q205": {
+  "set": "v1",
+  "id": "federal_tax-001"
+ },
+ "q206": {
+  "set": "v1",
+  "id": "bracket_room-001"
+ },
+ "q207": {
+  "set": "v1",
+  "id": "bracket_room-000"
+ },
+ "q208": {
+  "set": "v1",
+  "id": "breakpoint-009"
+ },
+ "q209": {
+  "set": "v1",
+  "id": "comms_review-009"
+ },
+ "q210": {
+  "set": "v1",
+  "id": "rmd-006"
+ },
+ "q211": {
+  "set": "v1",
+  "id": "tax_torpedo-000"
+ },
+ "q212": {
+  "set": "v1",
+  "id": "senior_phaseout-003"
+ },
+ "q213": {
+  "set": "v1",
+  "id": "senior_phaseout-004"
+ },
+ "q214": {
+  "set": "v1",
+  "id": "irmaa-008"
+ },
+ "q215": {
+  "set": "v1",
+  "id": "comms_review-006"
+ },
+ "q216": {
+  "set": "v1",
+  "id": "federal_tax-007"
+ },
+ "q217": {
+  "set": "v1",
+  "id": "senior_phaseout-007"
+ },
+ "q218": {
+  "set": "v1",
+  "id": "widow_all_in-006"
+ },
+ "q219": {
+  "set": "v1",
+  "id": "irmaa-000"
+ },
+ "q220": {
+  "set": "v1",
+  "id": "comms_review-008"
+ },
+ "q221": {
+  "set": "v1",
+  "id": "breakpoint-001"
+ },
+ "q222": {
+  "set": "v1",
+  "id": "irmaa-004"
+ },
+ "q223": {
+  "set": "v1",
+  "id": "tax_torpedo-001"
+ },
+ "q224": {
+  "set": "v1",
+  "id": "comms_review-007"
+ },
+ "q225": {
+  "set": "v1",
+  "id": "ss_claim-001"
+ },
+ "q226": {
+  "set": "v1",
+  "id": "ss_claim-009"
+ },
+ "q227": {
+  "set": "v1",
+  "id": "widow_all_in-003"
+ },
+ "q228": {
+  "set": "v1",
+  "id": "bracket_room-003"
+ },
+ "q229": {
+  "set": "v1",
+  "id": "tax_torpedo-003"
+ },
+ "q230": {
+  "set": "v1",
+  "id": "conversion_all_in-005"
+ },
+ "q231": {
+  "set": "v1",
+  "id": "widow_penalty-001"
+ },
+ "q232": {
+  "set": "v1",
+  "id": "bracket_room-004"
+ },
+ "q233": {
+  "set": "v1",
+  "id": "breakpoint-000"
+ },
+ "q234": {
+  "set": "v1",
+  "id": "ss_claim-002"
+ },
+ "q235": {
+  "set": "v1",
+  "id": "rollover_flags-009"
+ },
+ "q236": {
+  "set": "v1",
+  "id": "widow_penalty-004"
+ },
+ "q237": {
+  "set": "v1",
+  "id": "taxable_ss-009"
+ },
+ "q238": {
+  "set": "v1",
+  "id": "conversion_all_in-007"
+ },
+ "q239": {
+  "set": "v1",
+  "id": "taxable_ss-003"
+ },
+ "q240": {
+  "set": "v1",
+  "id": "breakpoint-005"
+ },
+ "q241": {
+  "set": "v1",
+  "id": "conversion_all_in-000"
+ },
+ "q242": {
+  "set": "v1",
+  "id": "widow_all_in-009"
+ },
+ "q243": {
+  "set": "v1",
+  "id": "conversion_all_in-008"
+ },
+ "q244": {
+  "set": "v1",
+  "id": "widow_penalty-003"
+ },
+ "q245": {
+  "set": "v1",
+  "id": "federal_tax-005"
+ },
+ "q246": {
+  "set": "v1",
+  "id": "conversion_all_in-003"
+ },
+ "q247": {
+  "set": "v1",
+  "id": "federal_tax-004"
+ },
+ "q248": {
+  "set": "v1",
+  "id": "tax_torpedo-009"
+ },
+ "q249": {
+  "set": "v1",
+  "id": "tax_torpedo-002"
+ },
+ "q250": {
+  "set": "v1",
+  "id": "irmaa-006"
+ },
+ "q251": {
+  "set": "v1",
+  "id": "comms_review-001"
+ },
+ "q252": {
+  "set": "v1",
+  "id": "rmd-007"
+ },
+ "q253": {
+  "set": "v1",
+  "id": "ss_claim-006"
+ },
+ "q254": {
+  "set": "v1",
+  "id": "irmaa-009"
+ },
+ "q255": {
+  "set": "v1",
+  "id": "taxable_ss-002"
+ },
+ "q256": {
+  "set": "v1",
+  "id": "senior_phaseout-001"
+ },
+ "q257": {
+  "set": "v1",
+  "id": "conversion_all_in-009"
+ },
+ "q258": {
+  "set": "v1",
+  "id": "breakpoint-007"
+ },
+ "q259": {
+  "set": "v1",
+  "id": "rollover_flags-003"
+ },
+ "q260": {
+  "set": "v1",
+  "id": "rollover_flags-002"
+ },
+ "q261": {
+  "set": "v1",
+  "id": "bracket_room-008"
+ },
+ "q262": {
+  "set": "v1",
+  "id": "breakpoint-004"
+ },
+ "q263": {
+  "set": "v1",
+  "id": "senior_phaseout-002"
+ }
+}

@@ -1,0 +1,35 @@
+{"qid":"q001","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q002","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q003","text":"Medicare enrollment does not determine the RMD age, and she is not yet subject to RMDs in 2026 based on her birth date.\nANSWER: 0"}
+{"qid":"q004","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q005","text":"Emeric is age 80 at the end of 2026. Using the Uniform Lifetime Table divisor of 20.2 and the year-end balance, the RMD is $61,881.\nANSWER: 61881"}
+{"qid":"q006","text":"Annual spending is $81,600 and Social Security plus pension is $72,000, leaving $9,600 to cover from assets. The notes don’t specify whether to use bank savings first or draw the entire shortfall from the IRA.\nANSWER: NEED_INFO"}
+{"qid":"q007","text":"The two stated year-end IRA values conflict, so I can’t determine the RMD balance reliably.\nANSWER: NEED_INFO"}
+{"qid":"q008","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q009","text":"At 62 years and 6 months, the reduction from full retirement age 67 is 27.5%, yielding about $2,211 monthly.\nANSWER: 2211"}
+{"qid":"q010","text":"The monthly spending figure is far above the apparent annual context and may be a typo. Please confirm it.\nANSWER: NEED_INFO"}
+{"qid":"q011","text":"Odette is age 83 at year end; divisor 18.7 gives an RMD of about $22,460.\nANSWER: 22460"}
+{"qid":"q012","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q013","text":"The stated monthly spending and available assets/income do not establish whether bank savings should fund the gap first.\nANSWER: NEED_INFO"}
+{"qid":"q014","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q015","text":"The spending amount appears unusually high as a monthly figure; please confirm it.\nANSWER: NEED_INFO"}
+{"qid":"q016","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q017","text":"Priya is a minor, so the notes do not support an ordinary owner RMD calculation; please clarify the account’s beneficiary/inherited status.\nANSWER: NEED_INFO"}
+{"qid":"q018","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q019","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q020","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q021","text":"Greta is age 81 at year end; using divisor 19.5, the RMD is about $28,205.\nANSWER: 28205"}
+{"qid":"q022","text":"The two stated year-end IRA values conflict, so I can’t determine the RMD balance reliably.\nANSWER: NEED_INFO"}
+{"qid":"q023","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q024","text":"Marisol is still working, but the account is an IRA rather than an employer plan. The work exception does not apply; age 74 divisor 25.5 gives an RMD of about $21,098.\nANSWER: 21098"}
+{"qid":"q025","text":"The spending figure appears unusually high as a monthly amount and the bank savings could affect how much to draw. Please confirm the intended spending and withdrawal approach.\nANSWER: NEED_INFO"}
+{"qid":"q026","text":"The stated filing status conflicts with being married and living together; please clarify the valid filing status.\nANSWER: NEED_INFO"}
+{"qid":"q027","text":"Noor is age 90 at year end; divisor 12.2 gives an RMD of about $33,770.\nANSWER: 33770"}
+{"qid":"q028","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q029","text":"The monthly spending figure appears unusually high and the bank savings could fund the gap. Please confirm the intended spending and withdrawal approach.\nANSWER: NEED_INFO"}
+{"qid":"q030","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q031","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q032","text":"The birth date is inconsistent with planning to claim at age 62 years and 6 months; please clarify the date/claiming age.\nANSWER: NEED_INFO"}
+{"qid":"q033","text":"The two stated year-end IRA values conflict, so I can’t determine the RMD balance reliably.\nANSWER: NEED_INFO"}
+{"qid":"q034","text":"I can’t responsibly compute this without confirming the applicable 2026 tax brackets and deduction amounts.\nANSWER: NEED_INFO"}
+{"qid":"q035","text":"The stated filing status conflicts with being widowed and unmarried; please clarify the valid filing status.\nANSWER: NEED_INFO"}
