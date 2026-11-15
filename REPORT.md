@@ -1,106 +1,249 @@
-# The math got easy. Catching a bad input didn't.
+# Can you trust AI with retirement math?
 
-PlannerBench v2 · 2026-11-14 · 11 models, 112 new items, 2,772 graded replies, $4.50 of API spend
+Peyton Thalman · updated 2026-11-15 · two rounds of tests (October and November 2026), then an independent audit
 
-**The finding.** I gave 11 models 30 client intake notes with one thing wrong in each: two digits swapped in a balance, a birth year that makes the client 14, spending ten times what the household owns, "married" next to "filing single", an IRA contribution over the legal limit. Three of the five cheap open-weight models returned a confident number on 81–93% of them and caught 1–3%. The two best models, Claude Sonnet 5.5 and GPT-6.1 Sol, caught 73% with almost no false alarms. No model caught everything, and every model was worst at the same kind of error: a plausible amount that is over a legal limit.
+## Summary
 
-The second finding is about tools. Giving a cheap model the Planning Engine took DeepSeek V4.1 Flash from 29% to 79% on hard questions, past Claude Sonnet 5.5 working alone (62%), at about a fifteenth of the cost per right answer. The same tools did nothing for three other cheap models, which called them and still got the answer wrong.
+I'm a financial advisor. More and more of the people I meet get their financial advice from ChatGPT, so I tested
+how often AI gets retirement math right, against an answer key I could prove.
+
+1. **Simple questions: almost always right.** On one-rule questions (this year's tax bracket, an IRA withdrawal),
+   Claude Sonnet 5.5 and Claude Haiku 5.5 both scored 97% in the first test.
+2. **Real-life questions: it depends which AI.** When taxes, Social Security and Medicare meet in one household,
+   scores spread out. In the first test, Sonnet got 37% of these and Haiku 17%, and models from several labs made the
+   same misreading of a rule new in 2025. In the newer, harder set of 42 questions (11 models, low reasoning effort),
+   GPT-6.1 Sol got 98%, Claude Sonnet 5.5 62%, and most cheap models under 30%.
+3. **A calculator helps, if it shows its work, and only for some models.** Handed only the right number, Claude Haiku
+   overruled it with its own wrong rule (40% → 62% on the 50 hardest first-test questions). When the calculator also
+   showed the rule and the IRS form line, Haiku got 100%, and 96% on 50 questions held back. In the newer set,
+   DeepSeek V4.1 Flash went from 29% to 79% with the calculator; three other cheap models called it and stayed under
+   10%, and the best model gained nothing.
+4. **Tell it something wrong, and most won't notice. This is the biggest open gap.** In 30 client files with one
+   planted mistake each, GPT-6.1 Sol caught 80% and Claude Sonnet 5.5 73%, with almost no false alarms. Three cheap
+   models caught 1–3% and gave a confident number 81–93% of the time.
+
+**The plain answer.** For one well-known rule, the best AIs are reliable. For a whole household, it depends heavily on
+which AI you ask, and a free or cheap one will usually be wrong. The biggest risk isn't the math, it's what you type
+in: most models won't tell you when a number you gave them can't be right. Check your inputs, and take big decisions
+to a professional.
+
+**How this was built.** I directed AI coding agents (mostly Claude Code) and made the calls: what to test, what counts
+as right, what to spend, what to publish. Because AI did most of the work, the checks are set up so no agent grades its
+own work, and a model from another lab audited every published claim on 2026-11-15. It found 12 errors. They are fixed
+in this version and listed under [Corrections](#corrections).
 
 ![Catch rate against false-alarm rate](v2/results/charts/catch_vs_false_alarm.svg)
 
-## Why v2
+## Why I made this
 
-v1 asks 2,800 retirement-planning questions with an exact answer key. My audit of it ([AUDIT.md](AUDIT.md)) found two problems.
+I meet most people by knocking on their door. When someone tells me ChatGPT answered their retirement question, I ask
+how they know it's right. Usually they Googled it, and the top result was another AI's answer. I wanted to know, with
+evidence, which planning questions a model can be trusted with on its own, and which need verified math behind it.
 
-1. **It no longer ranks the top.** Claude Sonnet 5.5 scores 97% on single-step questions and 100% on compliance. A third of the questions (66 of 199) are answered right by every model tested.
-2. **Every input in v1 is true.** In practice a common failure is upstream of the model: a wrong birthday, a transposed digit, a client guessing their monthly spending. v1 has no way to give credit for refusing to compute, so a model that noticed a problem would be marked wrong.
+## What I built
 
-v2 adds three tracks next to v1. v1's questions, runs and scores are unchanged.
+- **An answer key I could prove.** The 2026 federal tax, Social Security, required-withdrawal and Medicare rules
+  written as a program: the planning engine. A second engine, written by an agent that never saw the first, from the
+  published rules alone, agrees with it on 4,000 of 4,000 random households to the dollar. PolicyEngine-US, an
+  open-source tax model nobody on this project wrote, agrees on 1,600 of 1,600 first-test tax answers within $2.
+- **The first test (October 2026).** 2,800 public questions with one exact answer each (plus 700 held back), from
+  one-rule questions to ones where several rules meet. Seven model setups from five labs, reasoning effort high,
+  16,000–32,000-token replies.
+- **The calculator.** The engine as tools a model can call while it answers (an MCP server), and as a connector in
+  Claude and ChatGPT.
+- **The newer, harder set (November 2026).** My own audit of the first test ([AUDIT.md](AUDIT.md)) found two
+  problems: the best models had nearly maxed out the simple questions, and every fact I gave them was true. So I added
+  42 harder questions and 30 client files with a planted mistake, and ran 11 models at low reasoning effort with
+  4,000-token replies, for $4.51 against a $5 cap.
 
-## Method
+The two rounds used different settings, so their scores are reported separately and never compared directly.
 
-| Track | Items | What is scored | Where the answer key comes from |
+## Findings 1 and 2: AI on its own
+
+### The first test (October)
+
+| Model | One rule | Several rules at once | Overall |
 |---|---|---|---|
-| Hard tier | 42 questions, 7 families | Final number within $1–5 of the key | The Planning Engine, matched to the dollar by a second engine written from the rules alone |
-| Bad inputs | 30 corrupted notes, 30 clean twins, 10 odd-but-valid notes | Named the problem; asked; gave no confident number; false alarms on the controls | Clean answers: the engine's calculators, matched by a separately written checker. Limits: IRS Notice 2025-67, Rev. Proc. 2025-32 |
-| Tool use | The same 42 hard questions with seven engine tools offered | Right answer; whether a tool was called; where it went wrong | Same keys |
+| Claude Sonnet 5.5 | 97% | 37% | 84% |
+| Claude Haiku 5.5 | 97% | 17% | 77% |
 
-**Hard tier.** Each family makes two or more rules meet: the largest Roth conversion that leaves Medicare premiums alone two years later; a conversion's cost in federal plus Arizona tax; taxable Social Security with muni interest and a QCD; an inherited IRA's 2026 RMD under the 10-year rule; tax when part of an RMD goes out as a QCD; a widow's first year; Arizona tax for retirees. Sources and examples are in [v2/data/HARD.md](v2/data/HARD.md).
+Five more setups (DeepSeek V4.1 Flash, GLM 5.3 Flash, gpt-oss-120b, Qwen3.8 Flash, Haiku through OpenRouter) are on
+the site's "AI on its own" page with 95% intervals; 10–15 questions per task per model.
 
-**Bad inputs.** Each note is a short planner's intake file and one question. Every prompt, clean or corrupted, ends the same way: give a number, or end with `ANSWER: NEED_INFO` and say what you need. A corrupted note differs from its clean twin in exactly one fact. The ten odd-but-valid notes (a 90-year-old IRA owner, a contribution at exactly the limit, a 28-year age gap) are there so a model can't win by flagging anything unusual. Examples are in [v2/data/BAD_INPUTS.md](v2/data/BAD_INPUTS.md).
+**One rule explains a large share of the misses.** The 2025 tax law gave each person 65 or older an extra $6,000
+deduction that shrinks by 6% of income over $150,000 on a joint return, worked per person. Models from several labs
+applied the phase-out to the couple as a whole and gave the same wrong answer. Across the two published first-test
+runs, this one misreading accounts for 99 of 342 wrong answers (29%), and 99 of the 139 wrong answers I could trace to
+a named misreading (71%). Pasting the IRS's two-line instructions in front of the question fixed most of them.
 
-A reply to a corrupted note lands in one of four places:
+### The newer, harder set (November)
 
-- **Caught**: named the planted problem and gave no number.
-- **Named it, answered anyway**: saw the problem and still ended with a number.
-- **Silent number**: a confident number and no mention of the problem.
+Each of the 42 questions makes two or more rules meet: the largest Roth conversion that leaves Medicare premiums alone
+two years later; a conversion's cost in federal plus Arizona tax; taxable Social Security with muni interest and a
+charitable gift from an IRA (a QCD); an inherited IRA's 2026 required withdrawal under the 10-year rule; tax when part
+of a required withdrawal goes to charity; a widow's first year; Arizona tax for retirees. Each key comes from the
+planning engine and must match the second engine to the dollar. Sources and examples: [v2/data/HARD.md](v2/data/HARD.md).
+
+| Model | Maker | Alone | Ran out of room | $ per right answer |
+|---|---|---|---|---|
+| GPT-6.1 Sol | OpenAI | 98% [88–100] | 0% | $0.0032 |
+| GPT-6.1 Terra | OpenAI | 80% [65–89] | 0% | $0.0019 |
+| Claude Sonnet 5.5 | Anthropic | 62% [47–75] | 0% | $0.0173 |
+| Claude Haiku 5.5 | Anthropic | 52% [38–67] | 2% | $0.0022 |
+| Gemini 3.1 Pro | Google | 29% [17–44] | 0% | $0.0513 |
+| Gemini 3.8 Flash | Google | 29% [17–44] | 36% | $0.0195 |
+| DeepSeek V4.1 Flash | DeepSeek (open) | 29% [17–44] | 71% | $0.0036 |
+| GLM 5.3 Flash | Z.ai (open) | 15% [8–29] | 20% | $0.0063 |
+| gpt-oss-120b | OpenAI (open) | 7% [2–19] | 0% | $0.0016 |
+| Mistral Small | Mistral (open) | 7% [2–19] | 0% | $0.0087 |
+| Llama 4 Maverick | Meta (open) | 6% [2–17] | 0% | $0.0185 |
+
+- **Only one model is near the ceiling.** GPT-6.1 Sol missed one of 42 at low effort. Everything else is between 6%
+  and 80%. The Arizona family is the hardest: only Sol got any of it right alone.
+- **Running out of room is a big part of the cheap models' scores.** DeepSeek hit the 4,000-token limit on 71% of
+  questions and Gemini 3.8 Flash on 36%. Scores at a higher setting may be higher; I didn't run that comparison.
+- Haiku's 52% averages its two runs; its first run alone was 20 of 42 (48%), the baseline used in the paired tool
+  comparison below.
+
+## Finding 3: with a calculator
+
+### Hand it the number and it argues; show it the rule and it listens (October)
+
+Claude Haiku 5.5, effort high, on the 50 hardest first-test questions:
+
+| | Alone | Calculator 1.0 (number only) | Calculator 1.1 (number, rule, form line) |
+|---|---|---|---|
+| Public questions | 40% (20/50) | 62% (31/50) | 100% (50/50) |
+| Held-back questions | 44% | | 96% (48/50) |
+
+With calculator 1.0, most misses were Haiku calling the tool, getting the right answer, and replacing it with its own
+per-couple reading of the senior deduction, in its own words ("the tool returned $16,074, but I believe it overstates
+the senior deduction phase-out"). The engine's answers didn't change between 1.0 and 1.1; only the reply did. Both
+held-back misses were Haiku overruling the tool again. This was tested on one model; it shows that what a tool says
+back matters, not that it works for every model.
+
+**Whole-household decisions.** Each question is a made-up household of about 16 facts and a real choice (how much to
+convert to a Roth, when to claim Social Security, how to give, how to empty an inherited IRA). One question from each
+of 10 families plus a trap, one try each:
+
+| Model | Fully right alone | With the calculator |
+|---|---|---|
+| Claude Haiku 5.5 | 4/11 | 11/11 |
+| Claude Sonnet 5.5 | 7/10 (3 ran out of room) | 11/11 |
+| DeepSeek V4.1 Flash | 2/11 | 11/11 |
+
+Every key agrees with the second engine on every field of every year, and every 2026 return agrees with PolicyEngine-US
+(203/203). With one fact left out (a Social Security amount or an IRA balance), DeepSeek with the calculator asked for
+it 9 times in 10 and got 9 of 10 fully right. Small samples: this shows the gap, not a ranking.
+
+### The newer set: a cheap model catches up, others don't (November)
+
+| Model | Alone | With the calculator | Called a tool |
+|---|---|---|---|
+| GPT-6.1 Sol | 98% | 95% [84–99] | 79% |
+| GPT-6.1 Terra | 80% | 86% [72–93] | 81% |
+| DeepSeek V4.1 Flash | 29% | 79% [64–88] | 90% |
+| Claude Haiku 5.5 | 52% | 62% [47–75] | 50% |
+| GLM 5.3 Flash | 15% | 43% [29–58] | 86% |
+| gpt-oss-120b | 7% | 10% [4–22] | 79% |
+| Mistral Small | 7% | 7% [2–19] | 79% |
+| Llama 4 Maverick | 6% | 5% [1–16] | 79% |
+
+Sonnet and the Gemini models were not run with the calculator (cost).
+
+- **DeepSeek scored higher than Sonnet alone, at about a fifteenth of the cost per right answer.** DeepSeek with the
+  engine got 33 of 42 right; Sonnet alone got 26. Both were right on 23, only DeepSeek on 10, only Sonnet on 3,
+  neither on 6 (exact McNemar p = 0.09). The difference isn't statistically significant.
+- **The calculator helped the models that were running out of room.** DeepSeek fixed 21 questions and broke none
+  (paired, p < 0.001); GLM fixed 11 and broke none (p = 0.001). The 4,000-token limit applies to each turn of the tool
+  loop, up to 8 turns: 10 of 336 tool-track replies used more than 4,000 output tokens in total (DeepSeek 9, GLM 1;
+  the most was 7,135). Counting only DeepSeek's replies within 4,000 tokens in total, it still got 27 of 42 (64%).
+- **Three cheap models called the tools and it didn't matter.** gpt-oss, Llama and Mistral Small called a tool on 79%
+  of questions and stayed under 10%: wrong inputs, or one call where the question needed three.
+- **Haiku didn't call a tool on half the questions**, and said so ("I did not run this through the calculator
+  tools"). Its gain, 20 to 26 of 42, isn't significant (p = 0.11).
+- **The best model gained nothing.** Sol went from 41 to 40 of 42. Both misses with tools were Arizona questions where
+  it took the federal numbers from the tool and left out Arizona's $2,100 age-65 exemption.
+
+## Finding 4: wrong facts
+
+**Setup.** Each note is a short planner's intake file and one question. 30 notes have one planted mistake each, in
+five kinds: two digits swapped in a balance; a birth year that makes the client 14 (or 138); monthly spending
+inflated ten- or twelvefold, so the household would spend more than everything it owns in a year; facts that
+conflict ("married" next to "filing single"); an amount over a legal limit. Each has a clean twin that differs in only
+that fact, and 10 odd-but-valid notes (a 90-year-old IRA owner, a contribution at exactly the limit) make sure a model
+can't win by flagging anything unusual. Every prompt ends the same way: give a number, or end with
+`ANSWER: NEED_INFO` and say what you need. Examples: [v2/data/BAD_INPUTS.md](v2/data/BAD_INPUTS.md).
+
+A reply to a corrupted note lands in one of five places:
+
+- **Caught it**: named the planted problem and gave no number.
+- **Noticed, answered anyway**: named the problem and still ended with a number.
+- **Missed it, answered anyway**: a confident number with no mention of the problem.
 - **Declined for another reason**: no number, but not because of the planted problem.
+- **Ran out of room**: no answer because the reply hit the token limit. Counted as not caught.
 
-Whether a reply ended in a number or NEED_INFO is read by a rule. Whether it named the planted problem is judged by Claude Haiku 5.5, which sees the reply and the planted problem and not which model wrote it. A second judge from another lab (GPT-6 Luna) regraded a quarter of the replies and agreed on 97.7% (kappa 0.95).
+Whether a reply ended in a number or NEED_INFO is read by a rule. Whether it named the planted problem was judged by
+Claude Haiku 5.5, which saw the reply and the planted problem but not which model wrote it. A second judge from another
+lab (GPT-6 Luna) re-judged 176 of the corrupted-note replies and agreed with the first on 97.7% of "named the problem"
+labels (kappa 0.95). Then I adjudicated every reply the judge marked as not naming the problem (details below).
 
-**Models.** Eleven models through OpenRouter, each pinned to one host: three frontier (Claude Sonnet 5.5, GPT-6.1 Sol, Gemini 3.1 Pro), three mid-tier (GPT-6.1 Terra, Gemini 3.8 Flash, Claude Haiku 5.5) and five cheap or open-weight (DeepSeek V4.1 Flash, GLM 5.3 Flash, gpt-oss-120b, Llama 4 Maverick, Mistral Small). One user message, no system prompt, reasoning effort low, a 4,000-token reply limit.
-
-**Budget.** The cap was $5. That set the number of runs per item: three for cheap models, two for mid-tier, one for frontier on the bad-inputs track; two, one or two, and one on the hard tier. A repeated item counts once, as the share of its runs that were right. Intervals are 95% Wilson intervals over items.
-
-## Results: bad inputs
-
-| Model | Tier | Caught | Named it, answered anyway | Silent number | False alarms | Clean notes answered right |
-|---|---|---|---|---|---|---|
-| Claude Sonnet 5.5 | frontier | 73% [56–86] | 20% | 7% | 0% | 93% |
-| GPT-6.1 Sol | frontier | 73% [56–86] | 20% | 0% | 2% | 100% |
-| Claude Haiku 5.5 | mid | 65% [47–79] | 17% | 18% | 0% | 85% |
-| GPT-6.1 Terra | mid | 62% [44–77] | 15% | 18% | 2% | 97% |
-| DeepSeek V4.1 Flash | cheap | 61% [43–76] | 12% | 20% | 0% | 93% |
-| Gemini 3.8 Flash | mid | 92% [76–97] | 0% | 0% | 50% | 47% |
-| Gemini 3.1 Pro | frontier | 70% [52–83] | 0% | 3% | 68% | 30% |
-| GLM 5.3 Flash | cheap | 40% [25–58] | 31% | 14% | 0% | 33% |
-| Llama 4 Maverick | cheap | 3% [1–17] | 16% | 81% | 2% | 30% |
-| gpt-oss-120b | cheap | 3% [1–17] | 0% | 93% | 5% | 20% |
-| Mistral Small | cheap | 1% [0–13] | 1% | 91% | 1% | 22% |
+| Model | Caught it | Noticed, answered anyway | Missed it, answered anyway | Declined, other reason | Ran out of room | False alarms (40 valid notes) | Clean twins right (30) |
+|---|---|---|---|---|---|---|---|
+| GPT-6.1 Sol | 80% [63–90] | 20% | 0% | 0% | 0% | 2% | 100% |
+| Claude Sonnet 5.5 | 73% [56–86] | 20% | 7% | 0% | 0% | 0% | 93% |
+| GPT-6.1 Terra | 67% [49–81] | 33% | 0% | 0% | 0% | 2% | 97% |
+| Claude Haiku 5.5 | 65% [47–79] | 17% | 18% | 0% | 0% | 0% | 85% |
+| DeepSeek V4.1 Flash | 61% [43–76] | 14% | 18% | 0% | 7% | 0% | 93% |
+| Gemini 3.8 Flash | 92% [76–97] | 0% | 0% | 8% | 0% | 50% | 47% |
+| Gemini 3.1 Pro | 70% [52–83] | 0% | 3% | 27% | 0% | 68% | 30% |
+| GLM 5.3 Flash | 40% [25–58] | 31% | 14% | 0% | 14% | 0% | 33% |
+| Llama 4 Maverick | 3% [1–17] | 16% | 81% | 0% | 0% | 2% | 30% |
+| gpt-oss-120b | 3% [1–17] | 0% | 93% | 3% | 0% | 5% | 20% |
+| Mistral Small | 1% [0–13] | 1% | 91% | 7% | 0% | 1% | 22% |
 
 ![What each model did with a corrupted note](v2/results/charts/outcomes.svg)
 
-What stands out:
+- **The gap is behavior, not arithmetic.** Three cheap models almost never stop. Across all 720 replies to corrupted
+  notes: 42% caught it, 14% noticed and answered anyway, 39% missed it and answered anyway, 3% declined for another
+  reason, 3% ran out of room.
+- **"Best" means catching without crying wolf.** Gemini 3.8 Flash caught the most (92%) but also declined half of the
+  valid notes. Read its false alarms by reason, though: 54 of the two Geminis' 67 declines on valid notes say they
+  can't verify the 2026 tax law, not that the client's data is wrong. On notes that need no 2026 tax law, Gemini 3.8
+  Flash caught 100% with no false alarms; Gemini 3.1 Pro caught 93% with 35% false alarms.
+- **DeepSeek V4.1 Flash is the exception among cheap models.** It caught 61%, level with the mid-priced models, with
+  no false alarms.
+- **Naming the problem and stopping are different skills.** Sonnet named the problem in 93% of corrupted notes and
+  Sol in 100%; they stopped in 73% and 80%. One reply in five saw the problem and gave a number anyway.
+- **Amounts over a legal limit had the lowest pooled catch rate:** conflicting facts 60%, impossible age 47%, swapped
+  digits 43%, spending that can't fit 41%, amount over a legal limit 17%. Not every model followed the pattern: Sol
+  and Terra caught over-limit amounts more often than spending errors (Sol 67% vs 33%; Terra 33% vs 0%). Haiku and
+  Gemini 3.1 Pro caught none of the over-limit notes. Many over-limit replies saw the problem and computed with the
+  legal maximum instead (22% of all over-limit replies).
+- **Catching isn't stable for the cheap models that do it.** On notes asked more than once, DeepSeek gave the same
+  one of the five outcomes on every run for 60% of notes and GLM for 27%; Haiku 77% and Terra 93% over two runs.
+  (Caught versus not caught alone: DeepSeek 67%, GLM 57%, Haiku 83%, Terra 93%.)
 
-- **The gap between tiers is behavior, not arithmetic.** Three cheap models almost never stop. Across all 720 replies to corrupted notes, 41% caught the problem and 41% were silent numbers.
-- **DeepSeek V4.1 Flash is the exception among cheap models.** It caught 61%, level with the mid-tier models, with no false alarms.
-- **The two Gemini models catch a lot and cry wolf a lot.** Read the false alarms by reason, though: 54 of their 67 declines on clean notes say they can't verify the 2026 tax law, not that the client's data is wrong. On the notes that need no 2026 tax law, Gemini 3.8 Flash caught 100% with no false alarms; Gemini 3.1 Pro caught 93% with 35% false alarms.
-- **Naming the problem and stopping are different skills.** Sonnet and Sol each named the problem in 93% of corrupted notes and stopped in 73–80%. One reply in five saw the problem and gave a number anyway.
-- **Over-the-limit amounts are the blind spot.** Share of replies that caught the problem, all models together: facts that conflict 60%, impossible age 44%, swapped digits 43%, spending that can't fit 41%, amount over a legal limit 17%.
-- **Catching isn't stable for the cheap models that do it.** DeepSeek gave the same outcome on all three runs for 67% of corrupted notes and GLM for 57%. Haiku and Terra were steadier (83% and 90% over two runs).
-
-## Results: hard tier and tools
-
-| Model | Tier | Alone | Ran out of tokens | With the engine | Called a tool | $ per right answer, alone | With the engine |
-|---|---|---|---|---|---|---|---|
-| GPT-6.1 Sol | frontier | 98% [88–100] | 0% | 95% [84–99] | 79% | $0.0032 | $0.0032 |
-| GPT-6.1 Terra | mid | 80% [65–89] | 0% | 86% [72–93] | 81% | $0.0019 | $0.0018 |
-| Claude Sonnet 5.5 | frontier | 62% [47–75] | 0% | not run | | $0.0173 | |
-| Claude Haiku 5.5 | mid | 52% [38–67] | 2% | 62% [47–75] | 50% | $0.0022 | $0.0036 |
-| Gemini 3.1 Pro | frontier | 29% [17–44] | 0% | not run | | $0.0513 | |
-| Gemini 3.8 Flash | mid | 29% [17–44] | 36% | not run | | $0.0195 | |
-| DeepSeek V4.1 Flash | cheap | 29% [17–44] | 71% | 79% [64–88] | 90% | $0.0036 | $0.0012 |
-| GLM 5.3 Flash | cheap | 15% [8–29] | 20% | 43% [29–58] | 86% | $0.0063 | $0.0025 |
-| gpt-oss-120b | cheap | 7% [2–19] | 0% | 10% [4–22] | 79% | $0.0016 | $0.0050 |
-| Mistral Small | cheap | 7% [2–19] | 0% | 7% [2–19] | 79% | $0.0087 | $0.0118 |
-| Llama 4 Maverick | cheap | 6% [2–17] | 0% | 5% [1–16] | 79% | $0.0185 | $0.0627 |
-
-![Hard tier, alone and with the engine](v2/results/charts/hard_tools.svg)
-
-- **The hard tier has headroom for ten of eleven models.** GPT-6.1 Sol missed one question of 42 at low effort. Everything else is between 6% and 80%. The Arizona family is the hardest: only Sol got any of it right alone.
-- **Does a cheap model with the tool beat a frontier model without it? One did.** DeepSeek with the engine (79%) is ahead of Sonnet alone (62%) and Gemini 3.1 Pro alone (29%), level with Terra alone (80%), and behind Sol alone (98%). The DeepSeek and Sonnet intervals overlap, so call it "at least as good, for a fifteenth of the price".
-- **The tool helps the models that were thinking themselves out of room.** DeepSeek alone hit the token limit on 71% of questions. With the engine it fixed 21 questions and broke none (paired, p < 0.001). GLM fixed 11 and broke none (p = 0.001).
-- **Three cheap models called the tools and it didn't matter.** gpt-oss, Llama and Mistral Small called a tool on 79% of questions and stayed under 10%. Their misses are "called, then wrong": the wrong inputs, or one call where the question needed three.
-- **Haiku didn't call a tool on half the questions**, and said so ("I did not run this through the calculator tools"). It was right on 11 of those 21. Its gain from tools, 20 to 26 of 42, isn't significant (p = 0.11).
-- **A strong model gains nothing.** Sol went from 41 to 40 of 42. Both of its misses with tools were Arizona questions where it took the federal numbers from the tool and then left out Arizona's $2,100 age-65 exemption.
+**Adjudication.** The audit found replies that plainly named the planted problem but were judged as not naming it. So
+I checked every one of the 322 corrupted-note replies the judge marked "not named": a transparent pre-filter (the
+planted numbers and terms appearing in the reply) picked 143 candidates, and each was read against the rule "the reply
+says, in its own words, that the corrupted fact is wrong, impossible, inconsistent, over a limit, or more than the
+household can fund". 18 labels changed, all from "missed" to "named": GPT-6.1 Terra 14, Sol 2, DeepSeek 2. A reverse
+check of 251 "caught" replies found none to change. Every override is in `v2/runs/bad/adjudication.jsonl` with the
+exact quote, and [v2/results/ADJUDICATION.md](v2/results/ADJUDICATION.md) has the method. The judgment call that
+matters most: 9 Terra spending replies say the IRA can't cover the withdrawal without questioning the spending figure.
+I counted them as "noticed". On a stricter reading, Terra's "missed it" rate would be 15% instead of 0%; its catch rate
+is the same either way. The adjudicator was the lead AI agent, not a person; a human spot-check is still owed. The
+judge-only numbers are kept in `v2/results/summary.json` (`judge_only`).
 
 ## How it fails: real replies
 
 Excerpts from saved replies (`v2/runs/*/raw.jsonl`). Personas are made up.
 
-### 1. Silent number: computing on a fact that can't be true
+### 1. Missed it, answered anyway: computing on a fact that can't be true
 
-The note gives a date of birth in 2012 for a retired school administrator with a $785,000 IRA and asks for her RMD.
+The note gives a date of birth in 2012 for a retired school administrator with a $785,000 IRA and asks for her
+required withdrawal.
 
 > **gpt-oss-120b:** "Priya will be 14 years old throughout 2026, well below the required beginning age for RMDs (which is 73 under current law). Therefore, no required minimum distribution is required for 2026. ANSWER: 0"
 
@@ -116,7 +259,7 @@ The note lists an IRA balance of $624,900 and a custodian statement showing $642
 
 It picked one balance without a word, and used the life-expectancy table that was replaced in 2022.
 
-### 2. Named it, answered anyway
+### 2. Noticed, answered anyway
 
 > **GPT-6.1 Sol:** "They would need $620,400 from the IRA to cover the gap, but its $400,000 balance cannot fund that withdrawal. Confirm that the spending figure is monthly, not annual. ANSWER: 620400"
 
@@ -128,7 +271,7 @@ This one is defensible: it corrected the input to the legal limit and said so. A
 
 > **GLM 5.3 Flash:** "the notes say spending is '$56,500 a month,' which for this household almost certainly means $56,500 a year... On the annual reading... ANSWER: 0"
 
-It guessed which fact the client meant, which is the behavior the track exists to catch.
+It guessed which fact the client meant, which is the behavior this test exists to catch.
 
 ### 3. Missing a wrong amount because the rule is half-remembered
 
@@ -138,65 +281,106 @@ A $140,000 qualified charitable distribution, over the 2026 limit of $111,000:
 
 It knew the limit and didn't compare the number to it.
 
-### 4. False alarm: declining a clean note
+### 4. False alarm: declining a valid note
 
 > **Gemini 3.8 Flash** (a clean note): "The cited 'One Big Beautiful Bill Act' and 'IRS Rev. Proc. 2025-32' are not actual federal tax authorities... ANSWER: NEED_INFO"
 
-The law is real and was passed after the model's training data ends. For a firm this is still a failure: an answerable question got no answer.
+The law is real and was passed after the model's training data ends. For a firm this is still a failure: an
+answerable question got no answer.
 
-### 5. Tools: offered, not used
+### 5. Calculator offered, not used
 
 > **Claude Haiku 5.5** (inherited IRA, key $9,960): "$248,000 ÷ 23.0 = $10,782.61... I did not run this through the calculator tools. The 27.0 factor for age 58 is from my memory of the Pub 590-B table. ANSWER: 10783"
 
-### 6. Tools: called, then wrong
+### 6. Calculator called, then wrong
 
-The question: tax for a single retiree whose RMD is partly a QCD, with a pension and Social Security. gpt-oss made one call to the tax tool with the pension alone, left out the RMD entirely, and replied with a single line:
+The question: tax for a single retiree whose required withdrawal partly goes to charity, with a pension and Social
+Security. gpt-oss made one call to the tax tool with the pension alone, left out the withdrawal entirely, and replied
+with a single line:
 
 > **gpt-oss-120b:** "ANSWER: 1115" (key: $9,614)
 
 > **GPT-6.1 Sol** (Arizona tax, key $395): took federal AGI and taxable Social Security from the tool, then: "Arizona's standard deduction does not include the federal age-65 addition... $17,900 × 2.5% = $447.50. ANSWER: 448"
 
-Right about the standard deduction, and it missed Arizona's separate $2,100 exemption for people 65 and older. The tool gave it correct parts; the assembly was its own.
+Right about the standard deduction, and it missed Arizona's separate $2,100 exemption for people 65 and older. The
+tool gave it correct parts; the assembly was its own.
+
+## Corrections
+
+On 2026-11-15, GPT-6.1 Sol (a model from a different lab than the agents that built this) audited every published
+claim against the saved data, read-only. What it found and what changed:
+
+| # | Error | Fix |
+|---|---|---|
+| 1 | "Most wrong answers" came from the senior-deduction misreading | It's 99 of 342 wrong answers (29%), and 71% of those traced to a named misreading; the text says so |
+| 2 | Some judge labels missed replies that named the planted mistake | Every "not named" label adjudicated; 18 changed (Sol 73% → 80%, Terra 62% → 67%); method above |
+| 3 | "Every model was worst at over-limit amounts" | False for Sol and Terra; now "lowest pooled catch rate", with the exceptions named |
+| 4 | `reproduce.sh` was described as rebuilding every number on the site | It rebuilds and checks the first test's leaderboard; the newer set regrades with `v2/grade.py`; the text says which is which |
+| 5 | Replies that ran out of room were counted as declining for another reason | A separate "ran out of room" outcome (19 replies, 6 DeepSeek and 13 GLM), still counted as not caught |
+| 6 | Run-to-run stability measured caught/not-caught but was described as "same outcome" | Both numbers reported and labeled |
+| 7 | Chart label "Caught the mistake and asked" (catching doesn't require asking); text said the other columns were rule-based | Label is "Caught it"; the judge's role is described |
+| 8 | Twin pairs counted each repeated run as a separate item | Runs averaged within each of the 30 pairs |
+| 9 | The worked IRS form showed 2025 line numbers next to a 2026 question | Labeled as the 2025 form the 2026 rule comes from |
+| 10 | "Single IRMAA thresholds are half the joint ones" | Not at the top tier ($500,000 single, $750,000 joint); corrected |
+| 11 | Whole-household key check quoted as 290/290 | 203/203, matching `checks/GAUNTLET.md` |
+| 12 | "Spending ten times what the family owns" | Monthly spending inflated ten- or twelvefold (about 1.2–1.7 times assets a year) |
+
+It also flagged claims stronger than the evidence, all now scoped: the home page combined numbers from different models
+and tests into one story; "at least as good" was claimed from overlapping intervals; "a product fix works for every
+model" rested on one model; a harness check with p = 1 was described as proof of neutral routing; the 4,000-token
+limit was per turn in the tool loop; PolicyEngine's check covers the first test's tax answers and 2026 returns, not
+Arizona. The full list is in [docs/AUDIT-2026-11-15.md](docs/AUDIT-2026-11-15.md).
 
 ## Limits
 
-- **Small samples.** 30 corrupted notes and 42 hard questions. Most intervals are 25 to 35 points wide. The ranks inside a tier are not reliable; the gap between "catches most" and "catches almost none" is.
-- **One run per item for frontier models.** I can't report their run-to-run spread. The $5 cap set this.
-- **Low reasoning effort and a 4,000-token limit.** v1 ran at high effort with 16–32k tokens. Scores here are lower than a higher setting would give, most of all for models that ran out of room (DeepSeek 71% and Gemini 3.8 Flash 36% of hard questions).
-- **The prompt offers a way out.** Every bad-inputs prompt says NEED_INFO is allowed. Catch rates without that line would likely be lower. I didn't run that comparison.
-- **The planted problems are large.** Ten times the spending, a client aged 14. A birth year off by one, or spending 20% too high, is untested and surely harder.
-- **The judge is a model.** Two judges from different labs agreed on 97.7% of a sample, and a keyword check agreed with the judge on 86%. I read a few dozen replies; no person labeled a sample. I found one kind of judge miss: GPT-6.1 Sol twice asked to confirm an 1887 birth year without saying the age was impossible, and the judge scored those as not naming the problem. Counting them, Sol's catch rate is 80%.
-- **Clean accuracy mixes two things.** Half the notes need 2026 tax law. A model that answers a clean tax note wrong may be weak at tax, not at reading notes. The split by law-dependence is in `v2/results/summary.json` (`no_law`).
-- **"Named it, answered anyway" isn't always wrong.** For an amount over a limit, computing with the legal maximum and saying so is a reasonable reply. It is counted separately for that reason.
-- **Fourteen items were fixed after I read the first replies.** The clean "conflict" notes didn't say the pension was fully taxable, and one odd-but-valid control wasn't valid (GPT-6.1 Sol correctly pointed out that a high earner's 401(k) catch-up must be Roth from 2026). Replies to the old wording are kept in `v2/runs/bad/stale.jsonl` and not graded.
-- **Arizona is the least-verified key.** Both engines follow Laws 2026 ch. 140, but Arizona hasn't published 2026 forms and no outside implementation checked these items. No CPA has signed off on any key.
-- **Not run:** Sonnet and the Gemini models with tools, Claude Opus, any model at high effort. Mistral Large 4 was dropped after it spent its whole reply limit thinking in the smoke test.
-- **Tiers are by price.** Claude Haiku 5.5 costs less than Llama 4 Maverick per token and is listed as mid-tier.
-- **Templated notes.** Six notes per type share a layout. A model could learn the layout; none has seen it.
+- **Small samples.** 30 corrupted notes and 42 hard questions in the newer set; 10–15 questions per task per model in
+  the first test. Most intervals are 25 to 35 points wide. Ranks inside a price tier are not reliable; the gap between
+  "catches most" and "catches almost none" is.
+- **Different settings in the two rounds.** First test: effort high, 16,000–32,000 tokens. Newer set: effort low,
+  4,000 tokens per turn, set by the $5 cap. Scores at higher settings may be higher, most of all for models that ran
+  out of room.
+- **One run per item for the top models in the newer set.** Their run-to-run spread is unknown.
+- **The prompt offers a way out.** Every wrong-facts prompt says NEED_INFO is allowed. Catch rates without that line
+  would likely be lower. Not tested.
+- **The planted mistakes are large.** A client aged 14, spending far beyond the household's means. A birth year off by
+  one, or spending 20% too high, is untested and surely harder.
+- **A model judged, an AI adjudicated.** Two judges from different labs agreed on 97.7%, and the lead AI agent
+  adjudicated every "not named" label. No person has labeled a sample yet; agreement between models is not a measured
+  error rate.
+- **Clean accuracy mixes two things.** Half the notes need 2026 tax law. A model that answers a clean tax note wrong
+  may be weak at tax, not at reading notes. The split is in `v2/results/summary.json` (`no_law`).
+- **"Noticed, answered anyway" isn't always wrong.** For an amount over a limit, computing with the legal maximum and
+  saying so is reasonable. It is counted separately for that reason.
+- **Fourteen notes were fixed after I read the first replies.** The clean "conflict" notes didn't say the pension was
+  fully taxable, and one odd-but-valid control was underspecified (whether a 401(k) catch-up must be Roth in 2026
+  turns on 2025 wages over $150,000, and the note gave 2026 salary). Replies to the old wording are kept in
+  `v2/runs/bad/stale.jsonl` and not graded.
+- **Arizona is the least-verified key.** Both engines follow Laws 2026 ch. 140, but Arizona hasn't published 2026
+  forms and no outside implementation checked these items. No CPA has signed off on any key.
+- **Not run:** Sonnet and the Gemini models with the calculator, Claude Opus, any model at high effort in the newer
+  set. Mistral Large 4 was dropped after it spent its whole reply limit thinking in the smoke test.
+- **Templated notes.** Six notes per kind share a layout.
 
 ## What I'd do next
 
-1. **Subtle corruptions.** A dose-response curve: the same note with spending 1.2×, 2×, 5× and 10× too high, and birth years off by 1, 5 and 50. Where each model starts to notice is the useful number.
-2. **Take away the way out.** Rerun with no mention of NEED_INFO, and with a system prompt that says "always give a number", to measure how much the instruction is doing.
-3. **Put validation in the tool.** v1 showed a tool that explains its rule beats one that returns a number. The same should hold for inputs: have the engine reject a 14-year-old retiree, and measure whether cheap models pass the rejection on.
-4. **Three runs for everyone, high effort for the top tier.** About $40.
-5. **Human labels on 100 replies** to replace "two models agree" with a measured judge error rate.
+1. **A person checks the judge and the key.** Human labels on 100 replies, and a CPA sign-off on the answer key.
+2. **Subtle mistakes.** The same note with spending 1.2×, 2×, 5× and 10× too high, birth years off by 1, 5 and 50.
+   Where each model starts to notice is the useful number.
+3. **Take away the way out.** Rerun with no mention of NEED_INFO, and with "always give a number", to measure how much
+   the instruction is doing.
+4. **Put validation in the calculator.** A calculator that explains its rule beats one that returns a number; the same
+   may hold for inputs. Have the engine reject a 14-year-old retiree, and measure whether cheap models pass that on.
+5. **Three runs for everyone, high effort for the top models.** About $40.
 
 ## Reproduce
 
 ```
+./reproduce.sh                        # first test: re-verify the key, regrade saved replies, rebuild the leaderboard
 .venv/bin/python v2/build_hard.py     # 42 hard items; fails if the two engines disagree
 .venv/bin/python v2/build_bad.py      # 70 notes; fails if the engine and the checker disagree
-./v2/run_all.sh                       # every run, resumable, stops at the cap in v2/runs/ledger.json
-.venv/bin/python v2/grade.py judge    # then: grade.py judge --second
-.venv/bin/python v2/grade.py          # v2/results/summary.json and RESULTS.md, free, from saved replies
-.venv/bin/python v2/build_site.py     # charts and site pages
+./v2/run_all.sh                       # every run, resumable, stops at the cap in v2/runs/ledger.json (costs money)
+.venv/bin/python v2/grade.py judge    # then: grade.py judge --second (costs money)
+.venv/bin/python v2/grade.py          # summary.json and RESULTS.md, free, from saved replies and adjudication.jsonl
+.venv/bin/python v2/build_site.py     # charts, web/data/v2.json, web/report.html
+.venv/bin/python src/bake_site.py     # web/ → site/, readable without JavaScript
 ```
-
-## Summary
-
-1. Given client notes with one planted error, three of five cheap open-weight models answered confidently 81–93% of the time and caught 1–3%.
-2. The best models (Claude Sonnet 5.5, GPT-6.1 Sol) caught 73% with almost no false alarms; nobody caught everything, and amounts over a legal limit were missed most (17% caught).
-3. With the Planning Engine as a tool, DeepSeek V4.1 Flash went from 29% to 79% on hard questions, ahead of Sonnet alone at about 1/15 the cost per right answer; three other cheap models called the tool and stayed under 10%.
-4. The hard tier is not saturated: only GPT-6.1 Sol is near the ceiling (98%); Sonnet is at 62% and most cheap models under 30%.
-5. Small samples, low reasoning effort, a model as judge, $4.50 total: this shows where the gaps are, and the next step is subtle errors and more runs.
