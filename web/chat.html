@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Try it in Claude or ChatGPT · PlannerBench</title>
-<meta name="description" content="The planning engine as an add-on for Claude and ChatGPT: it asks one question at a time, does every calculation, and says what it assumed. Not public yet; this page shows what it does with its real replies.">
+<title>Chat demo (private) · PlannerBench</title>
+<meta name="description" content="A private demo, not open to the public: the planning engine as an add-on for Claude and ChatGPT. It asks one question at a time, does the calculations and says what it assumed. This page shows its real replies to a made-up couple.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body data-page="chat">
 <header class="nav">
@@ -27,15 +27,15 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Try it in Claude or ChatGPT</p>
-    <h1>The same calculator, inside the chat apps people already use.</h1>
+    <p class="eyebrow">Chat demo · private, not public</p>
+    <h1>A private demo: the same calculator, inside Claude and ChatGPT.</h1>
     <div class="tldr">
       <p class="label">What it is</p>
-      <p>The calculator from <a href="calculator.html">With a calculator</a> also works as an add-on (a “connector”) for Claude and ChatGPT. You ask a retirement question in everyday words. The calculator, not the chat AI, decides which fact to ask you for next, does every calculation, and says what it assumed. The chat AI’s only job is to be friendly and repeat the numbers exactly.</p>
+      <p>This is a private demo; you can’t install it. The calculator from <a href="calculator.html">With a calculator</a> also works as an add-on (a “connector”) for Claude and ChatGPT. Someone asks a retirement question in everyday words. The calculator, not the chat AI, decides which fact to ask for next, does the calculations, and says what it assumed. The chat AI is instructed to be friendly and quote the calculator’s numbers exactly.</p>
     </div>
     <div class="status">
-      <p class="label">Can I try it?</p>
-      <p>Not yet. It runs at a private link while I test it, and there’s no public install. This page shows what it does, using its real replies to a made-up couple.</p>
+      <p class="label">Can I use it?</p>
+      <p>No. It runs at a private link while I test it, and there’s no public install. This page shows what it does, using its real replies to a made-up couple.</p>
     </div>
   </section>
 
@@ -44,7 +44,7 @@
       <div class="section-head">
         <p class="eyebrow">A conversation, from the calculator’s side</p>
         <h2>What it sends back, word for word</h2>
-        <p class="sub">The chat AI turns these replies into conversation. It never adds a number of its own.</p>
+        <p class="sub">The chat AI turns these replies into conversation. Its instructions say to quote these numbers and never work out its own; in testing, a checker flags any number in a conversation that no calculator reply contains.</p>
       </div>
 
       <ol class="turns">
@@ -70,6 +70,7 @@
               <div><p class="label">What it costs now</p><ul id="c-costs"></ul></div>
               <div><p class="label">What it saves later</p><ul id="c-saves"></ul></div>
             </div>
+            <p class="table-note" id="c-accounting"></p>
             <p class="label">Said out loud: what it assumed</p>
             <ul class="assumed" id="c-assumed"></ul>
             <p class="label">And what could change the answer</p>
@@ -93,11 +94,11 @@
     <div class="split">
       <div>
         <p class="eyebrow">How it behaves</p>
-        <h2>Rules built into the calculator, not hoped for in a prompt</h2>
+        <h2>Most rules live in the calculator, not in a prompt</h2>
       </div>
       <ul class="notes">
         <li><b>It picks the next question.</b> It reruns the plan with each unknown fact both ways and asks only for the one that could change the choice or move the answer more than 2%. You can skip any question; it then says what it assumed instead.</li>
-        <li><b>No made-up numbers.</b> Every dollar comes from the calculator. A checker lists any number in a conversation that no calculator reply contains.</li>
+        <li><b>Numbers come from the calculator.</b> The chat AI is instructed to quote only the calculator’s numbers. In tests, a checker lists any number in a conversation that no calculator reply contains. That catches a slip; it can’t make one impossible.</li>
         <li><b>Close calls get both plans.</b> When two plans land within $1,000 over 25 years, it says “it’s close” instead of naming a winner.</li>
         <li><b>It says what it doesn’t cover.</b> A question outside its rules gets “that isn’t covered yet”, not a guess.</li>
         <li><b>It keeps nothing.</b> No database, no files, nothing you type in its logs. Anything that looks like a Social Security, account or ID number is refused and never repeated back.</li>
@@ -142,10 +143,11 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=16"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

@@ -15,13 +15,16 @@
 
   const questions = [...new Map(all.map((r) => [key(r), r])).values()];
   qSel.innerHTML = questions.map((r) => `<option value="${esc(key(r))}">${esc(label(r))}</option>`).join('');
-  const fromHash = decodeURIComponent(location.hash.slice(1));
+  // With no link to a replay, open on the example from With a calculator: DeepSeek V4.1 Flash sizing a Roth conversion,
+  // which it got wrong on its own and right with the calculator (and the baked page shows this one).
+  const start = all.find((r) => r.id === 'g-how_much-1' && !r.ask_first && r.engine && r.model.includes('deepseek'));
+  const fromHash = decodeURIComponent(location.hash.slice(1)) || (start ? `${key(start)}~${mkey(start)}` : '');
   if (questions.some((r) => key(r) === fromHash.split('~')[0])) qSel.value = fromHash.split('~')[0];
 
   function models() {
     const rs = all.filter((r) => key(r) === qSel.value);
     const keep = mSel.value;
-    mSel.innerHTML = rs.map((r) => `<option value="${esc(mkey(r))}">${esc(r.model_name)} ${r.engine ? 'with the engine' : 'alone'}</option>`).join('');
+    mSel.innerHTML = rs.map((r) => `<option value="${esc(mkey(r))}">${esc(r.model_name)} ${r.engine ? 'with the calculator' : 'on its own'}</option>`).join('');
     const want = fromHash.split('~')[1];
     if (rs.some((r) => mkey(r) === keep)) mSel.value = keep;
     else if (want && rs.some((r) => mkey(r) === want)) mSel.value = want;
@@ -43,12 +46,12 @@
 
   function answers(r) {
     const a = r.alone;
-    const run = r.engine ? 'With the engine' : 'This run';
-    const head = `<tr class="rp-head"><th scope="col"></th><th scope="col">Right answer</th><th scope="col">${run}</th>${a ? '<th scope="col">Alone</th>' : ''}</tr>`;
-    const rows = [`<tr><th scope="row">The decision</th>${cell(decision(r.key[0]), null, 'Right answer')}${cell(decision(pickOf(r.answer)), r.decision_right, run)}${a ? cell(decision(pickOf(a.answer)), a.decision_right, 'Alone') : ''}</tr>`];
+    const run = r.engine ? 'With the calculator' : 'This run';
+    const head = `<tr class="rp-head"><th scope="col"></th><th scope="col">Right answer</th><th scope="col">${run}</th>${a ? '<th scope="col">On its own</th>' : ''}</tr>`;
+    const rows = [`<tr><th scope="row">The decision</th>${cell(decision(r.key[0]), null, 'Right answer')}${cell(decision(pickOf(r.answer)), r.decision_right, run)}${a ? cell(decision(pickOf(a.answer)), a.decision_right, 'On its own') : ''}</tr>`];
     Object.entries(r.numbers).forEach(([k, x], i) => {
       const ax = a?.numbers?.[k];
-      rows.push(`<tr><th scope="row">${esc(r.asks[i] ?? k)}</th>${cell(usd(x.key), null, 'Right answer')}${cell(x.got == null ? '—' : usd(x.got), x.right, run)}${a ? cell(ax?.got == null ? '—' : usd(ax.got), ax?.right, 'Alone') : ''}</tr>`);
+      rows.push(`<tr><th scope="row">${esc(r.asks[i] ?? k)}</th>${cell(usd(x.key), null, 'Right answer')}${cell(x.got == null ? '—' : usd(x.got), x.right, run)}${a ? cell(ax?.got == null ? '—' : usd(ax.got), ax?.right, 'On its own') : ''}</tr>`);
     });
     return `<table class="rp-answers" style="--cols:${a ? 3 : 2}">${head}${rows.join('')}</table>`;
   }
@@ -87,31 +90,49 @@
       <h3 class="rp-title">${esc(s.title)} <code>${esc(s.tool)}</code></h3>
       <div class="rp-io">
         ${s.sent ? `<div><p class="rp-who">What it sent</p>${kv(s.sent)}</div>` : ''}
-        <div><p class="rp-who">${s.error ? 'The engine sent it back' : 'What the engine said'}</p>${said(s)}</div>
+        <div><p class="rp-who">${s.error ? 'The calculator sent it back' : 'What the calculator said'}</p>${said(s)}</div>
       </div>
-      ${s.hint ? `<p class="rp-hint">The engine also suggested asking: “${esc(s.hint)}”</p>` : ''}
+      ${s.hint ? `<p class="rp-hint">The calculator also suggested asking: “${esc(s.hint)}”</p>` : ''}
       ${raw}</div></li>`;
   }
+
+  // The facts are the question exactly as the model read it; these one-line glosses help a reader without the jargon.
+  const GLOSS = [[/\bPIA\b/, 'PIA: the monthly Social Security benefit at full retirement age.'],
+    [/IRMAA/, 'MAGI and IRMAA: Medicare sets premiums from income two years earlier (MAGI); higher income adds a surcharge (IRMAA).'],
+    [/8606/, 'After-tax basis (Form 8606): money already taxed, so it isn’t taxed again when it comes out.'],
+    [/\bRMD/, 'RMD: the withdrawal the IRS requires from a traditional IRA each year from a set age.']];
+  const gloss = (facts) => { const t = facts.join(' '), hits = GLOSS.filter(([re]) => re.test(t)).map(([, g]) => g); return hits.length ? `<p class="rp-gloss">${hits.map(esc).join(' ')}</p>` : ''; };
 
   function render() {
     const r = all.find((x) => key(x) === qSel.value && mkey(x) === mSel.value);
     if (!r) return;
     history.replaceState(null, '', '#' + encodeURIComponent(`${key(r)}~${mkey(r)}`));
+    // Mark the chosen options in the markup too, so the baked page (no JavaScript) names the replay it shows.
+    for (const sel of [qSel, mSel]) for (const o of sel.options) o.toggleAttribute('selected', o.value === sel.value);
     const opts = (r.options ?? []).map((o) => `<li><b>${esc(o.letter)}.</b> ${esc(o.text)}</li>`).join('');
     const calls = r.steps.filter((s) => s.kind === 'tool').length;
     const asks = r.steps.length - calls;
-    const who = `${r.model_name} ${r.engine ? 'with the engine' : 'alone'}`;
+    const who = `${r.model_name} ${r.engine ? 'with the calculator' : 'on its own'}`;
+    // The household first, in the question's own sentences, so the replay reads without opening any JSON.
+    const hh = r.household ?? { intro: '', facts: [] };
+    const asked = (r.asks ?? []).map((q) => `<li>${esc(q)}</li>`).join('');
     view.innerHTML = `
-      <section class="rp-card"><p class="label">The question</p><h2 class="rp-h">${esc(r.what)}</h2>
-        ${opts ? `<ul class="rp-opts">${opts}</ul>` : ''}
-        ${r.withheld ? `<p class="rp-withheld">Left out of the notes on purpose: <b>${esc(r.withheld)}</b>. The model has to ask the client for it.</p>` : ''}</section>
+      <section class="rp-card"><p class="label">The household</p><h2 class="rp-h">${esc(r.what)}</h2>
+        ${hh.intro ? `<p class="rp-intro">${esc(hh.intro)}</p>` : ''}
+        ${hh.facts.length ? `<p class="rp-who">What the model was told</p><ul class="rp-facts">${hh.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
+        ${gloss(hh.facts)}
+        ${r.withheld ? `<p class="rp-withheld">Left out of these notes on purpose: <b>${esc(r.withheld)}</b>. The model has to ask the client for it.</p>` : ''}</section>
+
+      <section class="rp-card"><p class="label">The choice</p>
+        ${opts ? `<ul class="rp-opts">${opts}</ul>` : '<p class="rp-sub">How much to convert, and for how many years.</p>'}
+        ${asked ? `<p class="rp-who">It also had to give these numbers</p><ol class="rp-asked">${asked}</ol>` : ''}</section>
 
       <section class="rp-card"><p class="label">How it did</p>
-        <div class="rp-verdicts">${verdict(who, r.great, r.outcome)}${r.alone ? verdict(`${r.model_name} alone`, r.alone.great, r.alone.outcome) : ''}</div>
+        <div class="rp-verdicts">${verdict(who, r.great, r.outcome)}${r.alone ? verdict(`${r.model_name} on its own`, r.alone.great, r.alone.outcome) : ''}</div>
         ${answers(r)}</section>
 
       <section class="rp-card"><p class="label">How it got there</p>
-        <p class="rp-sub">${r.steps.length ? `${calls} call${calls === 1 ? '' : 's'} to the engine${asks ? ` and ${asks} question${asks === 1 ? '' : 's'} to the client` : ''}, in order.` : 'It answered without calling the engine.'}${r.cost ? ` Cost ${cents(r.cost)}.` : ''}</p>
+        <p class="rp-sub">${r.steps.length ? `${calls} call${calls === 1 ? '' : 's'} to the calculator${asks ? ` and ${asks} question${asks === 1 ? '' : 's'} to the client` : ''}, in order.` : 'It answered without calling the calculator.'}${r.cost ? ` Cost ${cents(r.cost)}.` : ''}</p>
         ${r.steps.length ? `<ol class="rp-steps">${r.steps.map(step).join('')}</ol>` : ''}</section>`;
   }
 

@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Wrong facts · PlannerBench</title>
-<meta name="description" content="I planted one mistake in each of 30 client files, like a retiree who is 14. The best AI models caught most of them; the cheap ones caught almost none and gave a confident answer anyway.">
+<meta name="description" content="I planted one mistake in each of 30 client files, like a retiree who is 14. The two best AI models caught most of them; three cheap models caught almost none and gave a confident answer anyway. Other cheap models landed in between.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body data-page="wrong-facts">
 <header class="nav">
@@ -28,16 +28,26 @@
 <main>
   <section class="page-head wrap">
     <p class="eyebrow">Finding 4 · Wrong facts · the newer, harder set (November 2026)</p>
-    <h1>Tell it something wrong: the best AI models catch most mistakes, the cheap ones almost none.</h1>
+    <h1>Tell it something wrong: the two best models caught most mistakes. Three cheap models caught almost none.</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
-      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right. The two best, GPT-6.1 Sol and Claude Sonnet 5.5, caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> of the mistakes while almost never refusing a file that was fine. Three cheap models caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time. Even the best missed some. This is the biggest gap I found: the math can be fine while the answer is built on a fact nobody checked.</p>
+      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right. A mistake counts as <b>caught</b> only when the model named it <i>and</i> gave no number. The two best, GPT-6.1 Sol and Claude Sonnet 5.5, caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> while almost never refusing a file that was fine. Three cheap models (gpt-oss-120b, Llama 4 Maverick, Mistral Small) caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time. Not every cheap model was that bad: DeepSeek V4.1 Flash caught <span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span> and GLM 5.3 Flash <span data-v="v2:models.[name=GLM 5.3 Flash].bad.caught.rate" data-f="pct">—</span>. Even the best missed some.</p>
     </div>
     <div class="example">
       <p class="label">One example</p>
       <p>A client file said a retired school administrator with a $785,000 IRA was born in 2012, and asked how much she must withdraw this year. One model (gpt-oss-120b) replied:</p>
       <blockquote>“Priya will be 14 years old throughout 2026 … no required minimum distribution is required. ANSWER: 0”</blockquote>
       <p>It saw that she was 14 and kept going. With her real birth year, the answer is $34,279.</p>
+    </div>
+    <div class="glossary">
+      <p class="label">Words on this page</p>
+      <dl>
+        <div><dt>Caught</dt><dd>Named the planted mistake <b>and</b> gave no number. Noticing isn’t enough: GPT-6.1 Sol named the mistake in <span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged.rate" data-f="pct">—</span> of the files with one, but stopped without a number in <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span>, so it scores <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span>.</dd></div>
+        <div><dt>Best</dt><dd>Caught the most while rarely refusing files that were fine. Gemini 3.8 Flash caught more (<span data-v="v2:models.[name=Gemini 3.8 Flash].bad.caught.rate" data-f="pct">—</span>), but it also refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> of the fine files, so a refusal from it tells you little.</dd></div>
+        <div><dt>Clean twin</dt><dd>The same file with the mistake taken out, to check the model can answer it when nothing is wrong.</dd></div>
+        <div><dt>False alarm</dt><dd>Refusing to answer a file that was fine.</dd></div>
+        <div><dt>Price tier</dt><dd>Top, middle or cheap, by what the model costs per word.</dd></div>
+      </dl>
     </div>
   </section>
 
@@ -46,7 +56,7 @@
       <div class="section-head">
         <p class="eyebrow">How the test works</p>
         <h2><span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files with one planted mistake, and <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> that were fine</h2>
-        <p class="sub">I wrote <span data-v="v2:items.bad_corrupted" data-f="int">—</span> short client files, the kind a planner jots down at a first meeting, each with one mistake planted in it: two digits swapped in a balance, a birth year that makes a retiree 14, monthly spending ten or twelve times too high (more than the family owns, every year), “married” next to “filing single”, or a contribution over the legal limit. Each one has a clean twin that is identical except the mistake is gone, so I can tell a model that spots the error from one that just refuses hard questions. <span data-v="v2:items.bad_valid_odd" data-f="int">—</span> more files look odd but are fine (a 90-year-old IRA owner, a contribution exactly at the limit), so flagging everything unusual doesn’t win.</p>
+        <p class="sub">I wrote <span data-v="v2:items.bad_corrupted" data-f="int">—</span> short client files, the kind a planner jots down at a first meeting, each with one mistake planted in it: two digits swapped in a balance, a birth year that makes a retiree 14, monthly spending ten or twelve times too high (more than the family owns, every year), “married” next to “filing single”, or a contribution over the legal limit. Each one has a clean twin, identical except the mistake is gone, so I can tell a model that spots the error from one that just refuses hard questions. <span data-v="v2:items.bad_valid_odd" data-f="int">—</span> more files look odd but are fine (a 90-year-old IRA owner, a contribution exactly at the limit), so flagging everything unusual doesn’t win.</p>
       </div>
       <p class="takeaway">Every file ended the same way: give a number, or say you need more information and what you need. So every model had an easy way out.</p>
     </div>
@@ -55,15 +65,15 @@
   <section class="wrap section">
     <div class="section-head">
       <p class="eyebrow">What the models did</p>
-      <h2>The best caught most mistakes. Three cheap models caught almost none.</h2>
+      <h2>The two best caught most mistakes. Three cheap models caught almost none.</h2>
       <p class="sub">Each reply to a file with a planted mistake lands in one of these places:</p>
     </div>
     <ul class="notes wf-outcomes">
       <li><b>Caught it.</b> Named the planted mistake and gave no number. This is what you want.</li>
       <li><b>Noticed, answered anyway.</b> Mentioned the problem, then gave a number built on it.</li>
       <li><b>Missed it, answered anyway.</b> A confident number with no mention of the problem. This is the dangerous one.</li>
-      <li><b>Declined for another reason.</b> Gave no number, but not because of the planted mistake.</li>
-      <li><b>Ran out of room.</b> Used up its reply limit before giving any answer. Counted as a failure.</li>
+      <li><b>Declined for another reason.</b> Gave no number, but for some other reason, such as doubting this year’s tax law, not because of the planted mistake.</li>
+      <li><b>Ran out of room.</b> Hit its length limit for a reply before giving any answer. Counted as a failure.</li>
     </ul>
     <figure class="chart-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with the 30 files that had a mistake planted in them, as shares that add to 100%; the table under the toggle below has the same numbers" style="width:100%;height:auto"></div></figure>
     <p class="takeaway"><b>What it shows.</b> Across all <span data-w="all_replies">—</span> replies to a file with a planted mistake, <span data-w="all_caught">—</span> caught it and <span data-w="all_silent">—</span> missed it and answered anyway. The split is mostly by model: Claude Sonnet 5.5 and GPT-6.1 Sol stopped most of the time; gpt-oss-120b, Llama 4 Maverick and Mistral Small almost never did. One cheap model, DeepSeek V4.1 Flash, caught <span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span>, close to the middle-priced models.</p>
@@ -80,7 +90,7 @@
           <tbody></tbody>
         </table>
       </div>
-      <p class="table-note">The outcome columns are shares of the <span data-v="v2:items.bad_corrupted" data-f="int">—</span> files with a planted mistake and add to 100%. False alarms are out of all <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> files that were fine (<span data-v="v2:items.bad_clean" data-f="int">—</span> clean twins plus <span data-v="v2:items.bad_valid_odd" data-f="int">—</span> odd-but-valid files). “Clean twins answered right” is out of the <span data-v="v2:items.bad_clean" data-f="int">—</span> clean twins only: the two columns use different denominators. Sorted by caught minus false alarms. Bars show the score; the shaded band is the 95% interval. Price tier is by price per token.</p>
+      <p class="table-note">The outcome columns are shares of the <span data-v="v2:items.bad_corrupted" data-f="int">—</span> files with a planted mistake and add to 100%. False alarms are out of all <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> files that were fine (<span data-v="v2:items.bad_clean" data-f="int">—</span> clean twins plus <span data-v="v2:items.bad_valid_odd" data-f="int">—</span> odd-but-valid files). “Clean twins answered right” is out of the <span data-v="v2:items.bad_clean" data-f="int">—</span> clean twins only: the two columns use different denominators. Sorted by caught minus false alarms, which is what “best” means here. Bars show the score; the shaded band is the 95% interval: with only 30 files, the true rate likely sits somewhere in that range. Price tier is by price per token (a token is about three-quarters of a word). “Runs per item”: how many times each file was asked.</p>
     </details>
   </section>
 
@@ -138,7 +148,7 @@
         <h2>Check what you type in</h2>
       </div>
       <ul class="notes">
-        <li><b>Cheap models trust whatever you tell them.</b> If a balance, a birth year or a spending figure is wrong, expect an answer built on it, stated with confidence.</li>
+        <li><b>Three of the cheap models took the file at its word.</b> gpt-oss-120b, Llama 4 Maverick and Mistral Small almost always answered from a wrong balance, birth year or spending figure, with confidence. Other cheap models did better, but none as well as the best.</li>
         <li><b>Even the best missed some.</b> The quiet ones slip through most: a normal-looking amount that breaks a rule.</li>
         <li><b>Read the reply for a warning.</b> Several models mentioned the problem and answered anyway. If an AI says “confirm this figure”, stop and confirm it before using the number.</li>
       </ul>
@@ -177,10 +187,11 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=16"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

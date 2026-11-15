@@ -5,6 +5,7 @@ what came back, or the error), every question it put to the client (ask-first ru
 key, and the same model's answer alone when an alone run is given. The page is web/replay.html.
 
 Usage: .venv/bin/python src/replay_site.py <run> [<run> ...]   (tools runs, alone runs and ask-first runs, any order)
+       .venv/bin/python src/replay_site.py --refresh            (add household summaries to the existing replays.json)
 """
 import json
 import sys
@@ -153,10 +154,48 @@ def outcome(g, c):
     return f"Wrong decision ({d.get('why')}).{cost}" + (f" {off} of {len(nums)} numbers off too." if off else "")
 
 
+def household(c):
+    """The household as the model read it, in plain sentences: the opening line of the question and its list of facts
+    (for an ask-first question, the version with the decisive fact left out). The replay page leads with this."""
+    lines = (c.get("prompt") or "").splitlines()
+    intro = next((l.strip() for l in lines if l.strip()), "")
+    facts, inside = [], False
+    for l in lines:
+        if l.strip() == "Facts:":
+            inside = True
+        elif inside and l.startswith("- "):
+            facts.append(l[2:].strip())
+        elif inside and l.strip():
+            break
+    return {"intro": intro, "facts": facts}
+
+
+def case_files(ask):
+    """Public questions by id: the regular set, or the ask-first set (src/gauntlet_ask.py) with the fact left out."""
+    path = ROOT / "data" / ("gauntlet-ask.jsonl" if ask else "gauntlet.jsonl")
+    return {c["id"]: c for c in (json.loads(l) for l in path.read_text().splitlines() if l.strip())}
+
+
+def refresh():
+    """Add the household summary (and the withheld fact) to an existing replays.json without the runs, which are
+    git-ignored on some machines: everything needed is in data/gauntlet.jsonl and data/gauntlet-ask.jsonl."""
+    out = ROOT / "web" / "data" / "replays.json"
+    data = json.loads(out.read_text())
+    sets = {False: case_files(False), True: case_files(True)}
+    for r in data["replays"]:
+        c = sets[r["ask_first"]].get(r["id"]) or sets[False][r["id"]]
+        r["household"] = household(c)
+        if r["ask_first"] and c.get("withheld"):
+            r["withheld"] = c["withheld"]["fact"]
+    out.write_text(json.dumps(data, indent=1) + "\n")
+    print(f"{len(data['replays'])} replays refreshed -> {out.relative_to(ROOT)}")
+
+
 def load(run):
     d = ROOT / "runs" / run
     meta = json.loads((d / "meta.json").read_text())
-    cases = {c["id"]: c for c in map(json.loads, (ROOT / ("private" if meta.get("split") == "private" else "data") / "gauntlet.jsonl").read_text().splitlines())}
+    name = "gauntlet-ask.jsonl" if meta.get("set") == "gauntlet-ask" else "gauntlet.jsonl"
+    cases = {c["id"]: c for c in map(json.loads, (ROOT / ("private" if meta.get("split") == "private" else "data") / name).read_text().splitlines())}
     if meta.get("split") == "private":
         raise SystemExit(f"{run} is a private-split run; replays are only built from public questions.")
     graded = {(g["id"], g["model"]): g for g in map(json.loads, (d / "gauntlet_graded.jsonl").read_text().splitlines())}
@@ -205,7 +244,7 @@ def main(runs):
             replays.append({
                 "run": run, "id": r["id"], "family": c["family"], "what": WHAT.get(c["family"], "A question the facts can't settle"),
                 "model": r["model"], "model_name": NAMES.get(r["model"], r["model"]), "engine": bool(meta.get("tools")), "ask_first": ask,
-                "withheld": (c.get("withheld") or {}).get("fact") if ask else None,
+                "withheld": (c.get("withheld") or {}).get("fact") if ask else None, "household": household(c),
                 "options": c.get("options"), "asks": [n["ask"] for n in c["numbers"].values()],
                 "steps": steps, "answer": answer_lines(r["text"]), "key": key,
                 "great": g["great"], "decision_right": g["decision"]["right"], "why": g["decision"].get("why"), "outcome": outcome(g, c),
@@ -221,4 +260,4 @@ def main(runs):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    refresh() if sys.argv[1:] == ["--refresh"] else main(sys.argv[1:])

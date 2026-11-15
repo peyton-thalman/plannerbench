@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Replays · PlannerBench</title>
-<meta name="description" content="Watch a model answer a Gauntlet question with the planning engine: every tool call, what came back, and the answer against the key.">
+<meta name="description" content="Watch a model answer a whole-household retirement decision with the calculator: the household, every calculator call, what came back, and the answer against the key.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body data-page="replay">
 <header class="nav">
@@ -28,10 +28,10 @@
 <main>
   <section class="page-head wrap">
     <p class="eyebrow">Replays</p>
-    <h1>Watch it work: every call to the engine, and what came back.</h1>
+    <h1>Watch it work: one household, every call to the calculator, and the answer.</h1>
     <div class="tldr">
       <p class="label">In short</p>
-      <p>Pick a question. You see what the model asked the engine for, what the engine answered, any question it put to the client, and its final answer next to the key. Where the same model also answered alone, both answers are side by side.</p>
+      <p>These are the whole-household decisions from <a href="calculator.html#gauntlet">With a calculator</a>. Each replay starts with the household and the choice it faces, then shows how the model did against the answer key, then every step: what it asked the calculator (the planning engine), what came back, and any question it put to the client. Where the same model also answered on its own, both answers sit side by side. Pick another question or model below.</p>
     </div>
   </section>
 
@@ -42,15 +42,20 @@
     </div>
     <div id="rp-view" class="rp-view" aria-live="polite"><p class="rp-empty">Loading replays…</p></div>
   </section>
+
+  <section class="wrap section">
+    <a class="next" href="calculator.html#gauntlet"><span><span class="label">Back</span><b>With a calculator: the experiments these replays come from</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
     <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | Agent, top right: Agent shows the same site as plain text for AI readers.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="replay.js?v=7"></script>
+<script src="replay.js?v=9"></script>
 </body>
 </html>

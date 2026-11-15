@@ -420,6 +420,7 @@
       ds_tools_per1k: ds?.hard_tools && per1k(ds.hard_tools.cost_per_correct), sonnet_per1k: sonnet && per1k(sonnet.hard.cost_per_correct),
       weak_n: String(weakTools.length), weak_right: weakTools.length ? `${spread(weakTools.map((m) => m.hard_tools.k), String)} of ${weakTools[0].hard_tools.n}` : null,
       weak_called: weakTools.length ? spread(weakTools.map((m) => m.hard_tools.call_rate), pct) : null,
+      spent: v2.spent_usd != null ? usd(v2.spent_usd, true) : null, // writer B, round 2: built.html
     };
     document.querySelectorAll('[data-w]').forEach((n) => { if (W[n.dataset.w] != null) n.textContent = W[n.dataset.w]; else console.warn('data-w not found:', n.dataset.w); });
 
@@ -466,7 +467,9 @@
         .sort((a, b) => (b.hard_tools?.rate ?? b.hard.rate) - (a.hard_tools?.rate ?? a.hard.rate));
       for (const m of rows) {
         const tr = el('tr', m.hard_tools && m.hard_tools.rate - m.hard.rate > 0.3 ? 'best' : null);
-        tr.append(who(m, runs(m.hard.reps)), bar(m.hard), bar(m.hard_tools),
+        // writer B, round 2: say what each column averages, so a two-run score never sits unlabeled beside a one-run one
+        const label = !m.hard_tools ? runs(m.hard.reps) : m.hard.reps > 1 ? `on its own: ${m.hard.reps} runs averaged · with it: ${runs(m.hard_tools.reps).replace(' per item', '')}` : 'one run each way';
+        tr.append(who(m, label), bar(m.hard), bar(m.hard_tools),
           el('td', 'cost', m.hard_tools ? pct(m.hard_tools.call_rate) : '–'),
           el('td', 'cost', `${per1k(m.hard.cost_per_correct)}${m.hard_tools ? ` → ${per1k(m.hard_tools.cost_per_correct)}` : ''}`));
         tbody.append(tr);
@@ -484,6 +487,44 @@
         Object.keys(FAM).forEach((f) => tr.append(el('td', 'cost', `${pct(m.hard.by_family[f]?.rate)}${m.hard_tools ? ` → ${pct(m.hard_tools.by_family?.[f]?.rate)}` : ''}`)));
         tbody.append(tr);
       }
+    }
+
+    // --- calculator, chat (writer B, round 2) ---
+    // With a calculator, experiment 2: the paired comparison. Both columns are one run per question (the first run on
+    // its own, the one run with the calculator), from v2.tool_effect; Sonnet on its own is the reference row.
+    if ($('calc-paired')) {
+      const wilson = (k, n) => { const z = 1.96, p = k / n, d = 1 + z * z / n, c = (p + z * z / (2 * n)) / d, w = (z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))) / d; return [Math.max(0, c - w), Math.min(1, c + w)]; };
+      const frac = (k, n) => { const [lo, hi] = wilson(k, n), td = bar({ rate: k / n, lo, hi }); td.querySelector('.v').firstChild.textContent = `${pct(k / n)} · ${k}/${n}`; return td; };
+      const tbody = document.querySelector('#calc-paired tbody');
+      for (const t of [...v2.tool_effect].sort((a, b) => b.with - a.with)) {
+        const m = M.find((x) => x.name === t.name), tr = el('tr', (t.with - t.without) / t.questions > 0.3 ? 'best' : null);
+        tr.append(who(m, 'one run each way'), frac(t.without, t.questions), frac(t.with, t.questions),
+          el('td', 'cost', `${t.fixed} / ${t.broken}`), el('td', 'cost', pct(m.hard_tools.call_rate)));
+        tbody.append(tr);
+      }
+      const c = v2.comparisons?.[0];
+      if (c && sonnet) {
+        const tr = el('tr'); tr.append(who(sonnet, 'reference: not run with the calculator'), frac(c.b_right, c.questions), el('td', null, ''), el('td', 'cost', '–'), el('td', 'cost', '–'));
+        tr.children[2].append(el('span', 'ci', 'not run')); tbody.append(tr);
+      }
+    }
+  }
+
+  // --- calculator, chat (writer B, round 2) --- Chat demo: each side's total, and why the totals don't add up to the
+  // headline figures (each year's own dollars vs today's money; mcp/card.ts in the engine repo prints the same note)
+  if (document.body.dataset.page === 'chat' && $('c-accounting')) {
+    const cx = await get('connector'), a = cx?.answer;
+    if (a) {
+      const total = (side, id) => {
+        const shown = side.reasons.reduce((t, r) => t + Math.abs(r.amount), 0), all = Math.abs(side.amount);
+        const li = el('li', 'total'); li.append(el('span', null, `Total, ${side.years}${Math.round(shown) === Math.round(all) ? '' : ' (the biggest reasons are listed; smaller ones make up the rest)'}`), el('b', null, usd(all)));
+        $(id).append(li);
+      };
+      total(a.costs_now, 'c-costs'); total(a.saves_later, 'c-saves');
+      const k = (re) => a.key_numbers.find((n) => re.test(n.label))?.value;
+      $('c-accounting').textContent = `How these fit the figures above: the costs and savings are each year’s own dollars, added up as they would appear on the tax returns. `
+        + `The lifetime tax change (${k(/lifetime tax/i)}) and “better off” (${k(/better off/i)}) are in today’s money, which counts a dollar paid decades from now as worth less. `
+        + '“Better off” also counts what’s left in every account at the end, so it isn’t the tax change alone. The two kinds of figure measure different things and aren’t meant to add up.';
     }
   }
 

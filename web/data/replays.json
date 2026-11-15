@@ -125,6 +125,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Sam and Pat are both retired and haven't claimed Social Security yet. Sam has the bigger benefit. They want to know whether Sam should wait until 70, and whether to do Roth conversions while they wait.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born February 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $3,490 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Pat: born September 1961 (turns 65 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $2,210 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Sam's traditional IRA: $1,150,000 on December 31, 2025. Includes $163,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $200,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $135,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $510,000 on December 31, 2025.",
+     "Joint brokerage account: $220,000 on December 31, 2025. Cost basis $162,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Sam's tax-exempt municipal bond interest: $9,000 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $150,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $163,000, on a joint return.",
+     "For planning, assume Sam dies in 2040. The survivor keeps spending the same amount."
+    ]
    }
   },
   {
@@ -276,6 +297,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Lou turns 73 this year. They want to know how the first required minimum distribution fits with a Roth conversion. Lou will take the 2026 RMD during 2026, not delay it to April 2027.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Lou: born April 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,230 a month as of January 2026 (claimed at full retirement age).",
+     "Edie: born September 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,380 a month as of January 2026 (claimed at full retirement age).",
+     "Lou's traditional IRA: $1,570,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Edie's traditional IRA: $390,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Lou's Roth IRA: $40,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Edie's Roth IRA: $60,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $280,000 on December 31, 2025.",
+     "Joint brokerage account: $550,000 on December 31, 2025. Cost basis $407,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Lou's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Edie's taxable interest: $4,000 a year from 2026, no raises.",
+     "Spending: $98,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $7,600. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $144,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $107,000, on a joint return."
+    ]
    }
   },
   {
@@ -403,6 +445,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Frank and Joyce have read that their income is low enough to sell stock at a 0% capital-gains rate, and also that it's a good year for a Roth conversion. They can't decide which to use the room for.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born January 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,500 a month as of January 2026 (claimed at full retirement age).",
+     "Joyce: born April 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,260 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $830,000 on December 31, 2025. Includes $172,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $100,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $50,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $150,000 on December 31, 2025.",
+     "Joint brokerage account: $570,000 on December 31, 2025. Cost basis $251,000; dividends 1.5% of the opening balance each year, 90% of them qualified; all holdings long-term.",
+     "Frank's tax-exempt municipal bond interest: $20,000 a year from 2026, no raises.",
+     "Frank's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $108,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $8,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $137,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $151,000, on a joint return."
+    ]
    }
   },
   {
@@ -589,6 +652,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ray: born February 1957 (turns 69 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,460 a month as of January 2026 (claimed at full retirement age).",
+     "Linda: born September 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,180 a month as of January 2026 (claimed at full retirement age).",
+     "Ray's traditional IRA: $1,600,000 on December 31, 2025. Includes $208,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Linda's traditional IRA: $60,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ray's Roth IRA: $75,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Linda's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $440,000 on December 31, 2025.",
+     "Ray's pension (fully taxable): $11,000 a year from 2026, no raises.",
+     "Linda's taxable interest: $9,000 a year from 2026, no raises.",
+     "Ray's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Spending: $92,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $104,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $150,000, on a joint return."
+    ]
    }
   },
   {
@@ -716,6 +800,28 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Pat inherited a traditional IRA when a parent died in 2023 and must empty it by the end of 2033. They want to know the cheapest way to take it out.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,810 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,250 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $1,680,000 on December 31, 2025. Includes $166,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $190,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $105,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $260,000 on December 31, 2025.",
+     "Joint brokerage account: $500,000 on December 31, 2025. Cost basis $285,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Pat's inherited traditional IRA: $510,000 on December 31, 2025. Inherited from a parent born in 1933 who died in 2023. Pat is a non-eligible designated beneficiary (the 10-year rule applies).",
+     "Sam's pension (fully taxable): $34,000 a year from 2026, no raises.",
+     "Pat's taxable interest: $8,500 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $147,000, on a joint return."
+    ]
    }
   },
   {
@@ -843,6 +949,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Walt and Carol hold municipal bonds because the interest is tax-free, and they want to do a Roth conversion this year without causing problems.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Walt: born March 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,950 a month as of January 2026 (claimed at full retirement age).",
+     "Carol: born October 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,300 a month as of January 2026 (claimed at full retirement age).",
+     "Walt's traditional IRA: $1,080,000 on December 31, 2025. Includes $46,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Carol's traditional IRA: $280,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Walt's Roth IRA: $125,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Carol's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Joint brokerage account: $240,000 on December 31, 2025. Cost basis $125,000; dividends 1.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Carol's taxable interest: $4,500 a year from 2026, no raises.",
+     "Walt's tax-exempt municipal bond interest: $24,000 a year from 2026, no raises.",
+     "Spending: $102,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $6,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $178,000, on a joint return."
+    ]
    }
   },
   {
@@ -1020,6 +1147,26 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Sam and Pat give $11,000 a year to their church (a public charity) and want to know whether to keep writing checks or give straight from Sam's IRA.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born July 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,790 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,430 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $360,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $80,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $10,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $270,000 on December 31, 2025.",
+     "Pat's taxable interest: $4,500 a year from 2026, no raises.",
+     "Sam's tax-exempt municipal bond interest: $7,000 a year from 2026, no raises.",
+     "Spending: $100,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500, cash gifts to charity $11,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $136,000, on a joint return."
+    ]
    }
   },
   {
@@ -1149,6 +1296,25 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Ken and Gail have heard the new senior deduction makes the next few years a good time to convert to Roth, and also that converting can cost them that deduction. They want to know which is right.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ken: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,820 a month as of January 2026 (claimed at full retirement age).",
+     "Gail: born June 1956 (turns 70 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,730 a month as of January 2026 (claimed at full retirement age).",
+     "Ken's traditional IRA: $970,000 on December 31, 2025. Includes $131,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Gail's traditional IRA: $290,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ken's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Gail's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $380,000 on December 31, 2025. Cost basis $267,000; dividends 2.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Spending: $76,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $3,400. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $187,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $185,000, on a joint return."
+    ]
    }
   },
   {
@@ -1277,6 +1443,26 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Glen and Maria are retired and wondering whether a Roth conversion this year makes sense, and how big it should be.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Glen: born January 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,600 a month as of January 2026 (claimed at full retirement age).",
+     "Maria: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,170 a month as of January 2026 (claimed at full retirement age).",
+     "Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Maria's traditional IRA: $70,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Glen's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Maria's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $460,000 on December 31, 2025. Cost basis $319,000; dividends 1.5% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Glen's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $117,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $116,000, on a joint return."
+    ]
    }
   },
   {
@@ -1329,6 +1515,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Gus and Irene are converting $100,000 to Gus's Roth IRA this year and want to know what to buy inside the Roth. They know the planning conventions below use one return for every account; that's just for planning, and they're asking which fund will actually do better.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Gus: born August 1954 (turns 72 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,550 a month as of January 2026 (claimed at full retirement age).",
+     "Irene: born May 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,990 a month as of January 2026 (claimed at full retirement age).",
+     "Gus's traditional IRA: $1,650,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Irene's traditional IRA: $340,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Gus's Roth IRA: $55,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Irene's Roth IRA: $20,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $340,000 on December 31, 2025. Cost basis $222,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Gus's pension (fully taxable): $37,000 a year from 2026, no raises.",
+     "Irene's taxable interest: $7,500 a year from 2026, no raises.",
+     "Spending: $139,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $106,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $132,000, on a joint return."
+    ]
    }
   },
   {
@@ -1497,6 +1704,26 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Frank has serious health problems, and the couple wants a plan that still works for Joyce afterward. They're weighing Roth conversions from Joyce's IRA now, while they still file jointly, against waiting.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born May 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,640 a month as of January 2026 (claimed at full retirement age).",
+     "Joyce: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,240 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $1,790,000 on December 31, 2025. Includes $153,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $910,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $115,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Frank's tax-exempt municipal bond interest: $23,000 a year from 2026, no raises.",
+     "Spending: $113,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $135,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $181,000, on a joint return.",
+     "For planning, assume Frank dies in 2032. The survivor keeps spending the same amount."
+    ]
    }
   },
   {
@@ -1600,7 +1827,28 @@
    "revealed": null,
    "tokens": 67699,
    "cost": 0.1573,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Sam and Pat are both retired and haven't claimed Social Security yet. Sam has the bigger benefit. They want to know whether Sam should wait until 70, and whether to do Roth conversions while they wait.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born February 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $3,490 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Pat: born September 1961 (turns 65 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $2,210 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Sam's traditional IRA: $1,150,000 on December 31, 2025. Includes $163,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $200,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $135,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $510,000 on December 31, 2025.",
+     "Joint brokerage account: $220,000 on December 31, 2025. Cost basis $162,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Sam's tax-exempt municipal bond interest: $9,000 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $150,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $163,000, on a joint return.",
+     "For planning, assume Sam dies in 2040. The survivor keeps spending the same amount."
+    ]
+   }
   },
   {
    "run": "gauntlet-small-tools",
@@ -1752,6 +2000,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Lou turns 73 this year. They want to know how the first required minimum distribution fits with a Roth conversion. Lou will take the 2026 RMD during 2026, not delay it to April 2027.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Lou: born April 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,230 a month as of January 2026 (claimed at full retirement age).",
+     "Edie: born September 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,380 a month as of January 2026 (claimed at full retirement age).",
+     "Lou's traditional IRA: $1,570,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Edie's traditional IRA: $390,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Lou's Roth IRA: $40,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Edie's Roth IRA: $60,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $280,000 on December 31, 2025.",
+     "Joint brokerage account: $550,000 on December 31, 2025. Cost basis $407,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Lou's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Edie's taxable interest: $4,000 a year from 2026, no raises.",
+     "Spending: $98,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $7,600. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $144,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $107,000, on a joint return."
+    ]
    }
   },
   {
@@ -1880,6 +2149,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Frank and Joyce have read that their income is low enough to sell stock at a 0% capital-gains rate, and also that it's a good year for a Roth conversion. They can't decide which to use the room for.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born January 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,500 a month as of January 2026 (claimed at full retirement age).",
+     "Joyce: born April 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,260 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $830,000 on December 31, 2025. Includes $172,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $100,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $50,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $150,000 on December 31, 2025.",
+     "Joint brokerage account: $570,000 on December 31, 2025. Cost basis $251,000; dividends 1.5% of the opening balance each year, 90% of them qualified; all holdings long-term.",
+     "Frank's tax-exempt municipal bond interest: $20,000 a year from 2026, no raises.",
+     "Frank's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $108,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $8,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $137,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $151,000, on a joint return."
+    ]
    }
   },
   {
@@ -2018,6 +2308,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ray: born February 1957 (turns 69 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,460 a month as of January 2026 (claimed at full retirement age).",
+     "Linda: born September 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,180 a month as of January 2026 (claimed at full retirement age).",
+     "Ray's traditional IRA: $1,600,000 on December 31, 2025. Includes $208,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Linda's traditional IRA: $60,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ray's Roth IRA: $75,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Linda's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $440,000 on December 31, 2025.",
+     "Ray's pension (fully taxable): $11,000 a year from 2026, no raises.",
+     "Linda's taxable interest: $9,000 a year from 2026, no raises.",
+     "Ray's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Spending: $92,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $104,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $150,000, on a joint return."
+    ]
    }
   },
   {
@@ -2146,6 +2457,28 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Pat inherited a traditional IRA when a parent died in 2023 and must empty it by the end of 2033. They want to know the cheapest way to take it out.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,810 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,250 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $1,680,000 on December 31, 2025. Includes $166,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $190,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $105,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $260,000 on December 31, 2025.",
+     "Joint brokerage account: $500,000 on December 31, 2025. Cost basis $285,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Pat's inherited traditional IRA: $510,000 on December 31, 2025. Inherited from a parent born in 1933 who died in 2023. Pat is a non-eligible designated beneficiary (the 10-year rule applies).",
+     "Sam's pension (fully taxable): $34,000 a year from 2026, no raises.",
+     "Pat's taxable interest: $8,500 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $147,000, on a joint return."
+    ]
    }
   },
   {
@@ -2369,6 +2702,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Walt and Carol hold municipal bonds because the interest is tax-free, and they want to do a Roth conversion this year without causing problems.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Walt: born March 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,950 a month as of January 2026 (claimed at full retirement age).",
+     "Carol: born October 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,300 a month as of January 2026 (claimed at full retirement age).",
+     "Walt's traditional IRA: $1,080,000 on December 31, 2025. Includes $46,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Carol's traditional IRA: $280,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Walt's Roth IRA: $125,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Carol's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Joint brokerage account: $240,000 on December 31, 2025. Cost basis $125,000; dividends 1.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Carol's taxable interest: $4,500 a year from 2026, no raises.",
+     "Walt's tax-exempt municipal bond interest: $24,000 a year from 2026, no raises.",
+     "Spending: $102,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $6,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $178,000, on a joint return."
+    ]
    }
   },
   {
@@ -2503,6 +2857,26 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Sam and Pat give $11,000 a year to their church (a public charity) and want to know whether to keep writing checks or give straight from Sam's IRA.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born July 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,790 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,430 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $360,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $80,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $10,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $270,000 on December 31, 2025.",
+     "Pat's taxable interest: $4,500 a year from 2026, no raises.",
+     "Sam's tax-exempt municipal bond interest: $7,000 a year from 2026, no raises.",
+     "Spending: $100,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500, cash gifts to charity $11,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $136,000, on a joint return."
+    ]
    }
   },
   {
@@ -2630,6 +3004,25 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Ken and Gail have heard the new senior deduction makes the next few years a good time to convert to Roth, and also that converting can cost them that deduction. They want to know which is right.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ken: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,820 a month as of January 2026 (claimed at full retirement age).",
+     "Gail: born June 1956 (turns 70 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,730 a month as of January 2026 (claimed at full retirement age).",
+     "Ken's traditional IRA: $970,000 on December 31, 2025. Includes $131,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Gail's traditional IRA: $290,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ken's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Gail's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $380,000 on December 31, 2025. Cost basis $267,000; dividends 2.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Spending: $76,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $3,400. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $187,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $185,000, on a joint return."
+    ]
    }
   },
   {
@@ -2754,6 +3147,26 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Glen and Maria are retired and wondering whether a Roth conversion this year makes sense, and how big it should be.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Glen: born January 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,600 a month as of January 2026 (claimed at full retirement age).",
+     "Maria: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,170 a month as of January 2026 (claimed at full retirement age).",
+     "Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Maria's traditional IRA: $70,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Glen's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Maria's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $460,000 on December 31, 2025. Cost basis $319,000; dividends 1.5% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Glen's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $117,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $116,000, on a joint return."
+    ]
    }
   },
   {
@@ -2807,6 +3220,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Gus and Irene are converting $100,000 to Gus's Roth IRA this year and want to know what to buy inside the Roth. They know the planning conventions below use one return for every account; that's just for planning, and they're asking which fund will actually do better.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Gus: born August 1954 (turns 72 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,550 a month as of January 2026 (claimed at full retirement age).",
+     "Irene: born May 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,990 a month as of January 2026 (claimed at full retirement age).",
+     "Gus's traditional IRA: $1,650,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Irene's traditional IRA: $340,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Gus's Roth IRA: $55,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Irene's Roth IRA: $20,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $340,000 on December 31, 2025. Cost basis $222,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Gus's pension (fully taxable): $37,000 a year from 2026, no raises.",
+     "Irene's taxable interest: $7,500 a year from 2026, no raises.",
+     "Spending: $139,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $106,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $132,000, on a joint return."
+    ]
    }
   },
   {
@@ -2936,6 +3370,26 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Frank has serious health problems, and the couple wants a plan that still works for Joyce afterward. They're weighing Roth conversions from Joyce's IRA now, while they still file jointly, against waiting.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born May 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,640 a month as of January 2026 (claimed at full retirement age).",
+     "Joyce: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,240 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $1,790,000 on December 31, 2025. Includes $153,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $910,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $115,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Frank's tax-exempt municipal bond interest: $23,000 a year from 2026, no raises.",
+     "Spending: $113,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $135,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $181,000, on a joint return.",
+     "For planning, assume Frank dies in 2032. The survivor keeps spending the same amount."
+    ]
    }
   },
   {
@@ -3173,6 +3627,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Sam and Pat are both retired and haven't claimed Social Security yet. Sam has the bigger benefit. They want to know whether Sam should wait until 70, and whether to do Roth conversions while they wait.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born February 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $3,490 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Pat: born September 1961 (turns 65 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $2,210 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Sam's traditional IRA: $1,150,000 on December 31, 2025. Includes $163,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $200,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $135,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $510,000 on December 31, 2025.",
+     "Joint brokerage account: $220,000 on December 31, 2025. Cost basis $162,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Sam's tax-exempt municipal bond interest: $9,000 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $150,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $163,000, on a joint return.",
+     "For planning, assume Sam dies in 2040. The survivor keeps spending the same amount."
+    ]
    }
   },
   {
@@ -3356,6 +3831,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Lou turns 73 this year. They want to know how the first required minimum distribution fits with a Roth conversion. Lou will take the 2026 RMD during 2026, not delay it to April 2027.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Lou: born April 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,230 a month as of January 2026 (claimed at full retirement age).",
+     "Edie: born September 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,380 a month as of January 2026 (claimed at full retirement age).",
+     "Lou's traditional IRA: $1,570,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Edie's traditional IRA: $390,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Lou's Roth IRA: $40,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Edie's Roth IRA: $60,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $280,000 on December 31, 2025.",
+     "Joint brokerage account: $550,000 on December 31, 2025. Cost basis $407,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Lou's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Edie's taxable interest: $4,000 a year from 2026, no raises.",
+     "Spending: $98,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $7,600. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $144,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $107,000, on a joint return."
+    ]
    }
   },
   {
@@ -3627,6 +4123,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Frank and Joyce have read that their income is low enough to sell stock at a 0% capital-gains rate, and also that it's a good year for a Roth conversion. They can't decide which to use the room for.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born January 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,500 a month as of January 2026 (claimed at full retirement age).",
+     "Joyce: born April 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,260 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $830,000 on December 31, 2025. Includes $172,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $100,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $50,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $150,000 on December 31, 2025.",
+     "Joint brokerage account: $570,000 on December 31, 2025. Cost basis $251,000; dividends 1.5% of the opening balance each year, 90% of them qualified; all holdings long-term.",
+     "Frank's tax-exempt municipal bond interest: $20,000 a year from 2026, no raises.",
+     "Frank's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $108,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $8,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $137,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $151,000, on a joint return."
+    ]
    }
   },
   {
@@ -3824,6 +4341,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ray: born February 1957 (turns 69 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,460 a month as of January 2026 (claimed at full retirement age).",
+     "Linda: born September 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,180 a month as of January 2026 (claimed at full retirement age).",
+     "Ray's traditional IRA: $1,600,000 on December 31, 2025. Includes $208,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Linda's traditional IRA: $60,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ray's Roth IRA: $75,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Linda's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $440,000 on December 31, 2025.",
+     "Ray's pension (fully taxable): $11,000 a year from 2026, no raises.",
+     "Linda's taxable interest: $9,000 a year from 2026, no raises.",
+     "Ray's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Spending: $92,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $104,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $150,000, on a joint return."
+    ]
    }
   },
   {
@@ -4047,6 +4585,28 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Pat inherited a traditional IRA when a parent died in 2023 and must empty it by the end of 2033. They want to know the cheapest way to take it out.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,810 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,250 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $1,680,000 on December 31, 2025. Includes $166,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $190,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $105,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $260,000 on December 31, 2025.",
+     "Joint brokerage account: $500,000 on December 31, 2025. Cost basis $285,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Pat's inherited traditional IRA: $510,000 on December 31, 2025. Inherited from a parent born in 1933 who died in 2023. Pat is a non-eligible designated beneficiary (the 10-year rule applies).",
+     "Sam's pension (fully taxable): $34,000 a year from 2026, no raises.",
+     "Pat's taxable interest: $8,500 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $147,000, on a joint return."
+    ]
    }
   },
   {
@@ -4186,6 +4746,27 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Walt and Carol hold municipal bonds because the interest is tax-free, and they want to do a Roth conversion this year without causing problems.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Walt: born March 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,950 a month as of January 2026 (claimed at full retirement age).",
+     "Carol: born October 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,300 a month as of January 2026 (claimed at full retirement age).",
+     "Walt's traditional IRA: $1,080,000 on December 31, 2025. Includes $46,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Carol's traditional IRA: $280,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Walt's Roth IRA: $125,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Carol's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Joint brokerage account: $240,000 on December 31, 2025. Cost basis $125,000; dividends 1.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Carol's taxable interest: $4,500 a year from 2026, no raises.",
+     "Walt's tax-exempt municipal bond interest: $24,000 a year from 2026, no raises.",
+     "Spending: $102,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $6,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $178,000, on a joint return."
+    ]
    }
   },
   {
@@ -4366,6 +4947,26 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Sam and Pat give $11,000 a year to their church (a public charity) and want to know whether to keep writing checks or give straight from Sam's IRA.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born July 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,790 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,430 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $710,000 on December 31, 2025. Includes $62,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $360,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $80,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $10,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $270,000 on December 31, 2025.",
+     "Pat's taxable interest: $4,500 a year from 2026, no raises.",
+     "Sam's tax-exempt municipal bond interest: $7,000 a year from 2026, no raises.",
+     "Spending: $100,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500, cash gifts to charity $11,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $136,000, on a joint return."
+    ]
    }
   },
   {
@@ -4655,6 +5256,25 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Ken and Gail have heard the new senior deduction makes the next few years a good time to convert to Roth, and also that converting can cost them that deduction. They want to know which is right.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ken: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,820 a month as of January 2026 (claimed at full retirement age).",
+     "Gail: born June 1956 (turns 70 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,730 a month as of January 2026 (claimed at full retirement age).",
+     "Ken's traditional IRA: $970,000 on December 31, 2025. Includes $131,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Gail's traditional IRA: $290,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ken's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Gail's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $380,000 on December 31, 2025. Cost basis $267,000; dividends 2.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Spending: $76,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $3,400. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $187,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $185,000, on a joint return."
+    ]
    }
   },
   {
@@ -4782,6 +5402,26 @@
     "decision_right": false,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Glen and Maria are retired and wondering whether a Roth conversion this year makes sense, and how big it should be.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Glen: born January 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,600 a month as of January 2026 (claimed at full retirement age).",
+     "Maria: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,170 a month as of January 2026 (claimed at full retirement age).",
+     "Glen's traditional IRA: $1,210,000 on December 31, 2025. Includes $144,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Maria's traditional IRA: $70,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Glen's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Maria's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $460,000 on December 31, 2025. Cost basis $319,000; dividends 1.5% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Glen's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $117,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $116,000, on a joint return."
+    ]
    }
   },
   {
@@ -4863,6 +5503,27 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Gus and Irene are converting $100,000 to Gus's Roth IRA this year and want to know what to buy inside the Roth. They know the planning conventions below use one return for every account; that's just for planning, and they're asking which fund will actually do better.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Gus: born August 1954 (turns 72 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,550 a month as of January 2026 (claimed at full retirement age).",
+     "Irene: born May 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,990 a month as of January 2026 (claimed at full retirement age).",
+     "Gus's traditional IRA: $1,650,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Irene's traditional IRA: $340,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Gus's Roth IRA: $55,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Irene's Roth IRA: $20,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $340,000 on December 31, 2025. Cost basis $222,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Gus's pension (fully taxable): $37,000 a year from 2026, no raises.",
+     "Irene's taxable interest: $7,500 a year from 2026, no raises.",
+     "Spending: $139,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $106,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $132,000, on a joint return."
+    ]
    }
   },
   {
@@ -4990,6 +5651,26 @@
     "decision_right": true,
     "asks": 0,
     "revealed": false
+   },
+   "household": {
+    "intro": "Frank has serious health problems, and the couple wants a plan that still works for Joyce afterward. They're weighing Roth conversions from Joyce's IRA now, while they still file jointly, against waiting.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born May 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,640 a month as of January 2026 (claimed at full retirement age).",
+     "Joyce: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,240 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $1,790,000 on December 31, 2025. Includes $153,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $910,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $115,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Frank's tax-exempt municipal bond interest: $23,000 a year from 2026, no raises.",
+     "Spending: $113,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $135,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $181,000, on a joint return.",
+     "For planning, assume Frank dies in 2032. The survivor keeps spending the same amount."
+    ]
    }
   },
   {
@@ -5001,7 +5682,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Sam's Social Security",
    "options": [
     {
      "letter": "A",
@@ -5194,7 +5875,28 @@
    "revealed": true,
    "tokens": 63642,
    "cost": 0.0044,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Sam and Pat are both retired and haven't claimed Social Security yet. Sam has the bigger benefit. They want to know whether Sam should wait until 70, and whether to do Roth conversions while they wait.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born February 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Pat: born September 1961 (turns 65 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Not yet claiming Social Security. Full-retirement-age benefit (PIA): $2,210 a month in 2026 dollars; plans to claim at 67 unless an option says otherwise.",
+     "Sam's traditional IRA: $1,150,000 on December 31, 2025. Includes $163,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $200,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $135,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $510,000 on December 31, 2025.",
+     "Joint brokerage account: $220,000 on December 31, 2025. Cost basis $162,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Sam's tax-exempt municipal bond interest: $9,000 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $150,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $163,000, on a joint return.",
+     "For planning, assume Sam dies in 2040. The survivor keeps spending the same amount."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -5205,7 +5907,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Lou's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -5294,7 +5996,27 @@
    "revealed": false,
    "tokens": 20740,
    "cost": 0.0005,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Lou turns 73 this year. They want to know how the first required minimum distribution fits with a Roth conversion. Lou will take the 2026 RMD during 2026, not delay it to April 2027.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Lou: born April 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,230 a month as of January 2026 (claimed at full retirement age).",
+     "Edie: born September 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,380 a month as of January 2026 (claimed at full retirement age).",
+     "Edie's traditional IRA: $390,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Lou's Roth IRA: $40,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Edie's Roth IRA: $60,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $280,000 on December 31, 2025.",
+     "Joint brokerage account: $550,000 on December 31, 2025. Cost basis $407,000; dividends 2% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Lou's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Edie's taxable interest: $4,000 a year from 2026, no raises.",
+     "Spending: $98,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $7,600. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $144,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $107,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -5305,7 +6027,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Frank's Social Security",
    "options": [
     {
      "letter": "A",
@@ -5402,7 +6124,28 @@
    "revealed": true,
    "tokens": 69335,
    "cost": 0.0067,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Frank and Joyce have read that their income is low enough to sell stock at a 0% capital-gains rate, and also that it's a good year for a Roth conversion. They can't decide which to use the room for.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born January 1960 (turns 66 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Joyce: born April 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,260 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $830,000 on December 31, 2025. Includes $172,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $100,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $50,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $150,000 on December 31, 2025.",
+     "Joint brokerage account: $570,000 on December 31, 2025. Cost basis $251,000; dividends 1.5% of the opening balance each year, 90% of them qualified; all holdings long-term.",
+     "Frank's tax-exempt municipal bond interest: $20,000 a year from 2026, no raises.",
+     "Frank's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $108,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $8,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $137,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $151,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke",
@@ -5413,7 +6156,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": false,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Ray's Social Security",
    "options": [
     {
      "letter": "A",
@@ -5472,7 +6215,28 @@
    "revealed": true,
    "tokens": 38430,
    "cost": 0.0097,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ray: born February 1957 (turns 69 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Linda: born September 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,180 a month as of January 2026 (claimed at full retirement age).",
+     "Ray's traditional IRA: $1,600,000 on December 31, 2025. Includes $208,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Linda's traditional IRA: $60,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ray's Roth IRA: $75,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Linda's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $440,000 on December 31, 2025.",
+     "Ray's pension (fully taxable): $11,000 a year from 2026, no raises.",
+     "Linda's taxable interest: $9,000 a year from 2026, no raises.",
+     "Ray's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Spending: $92,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $104,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $150,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -5483,7 +6247,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Ray's Social Security",
    "options": [
     {
      "letter": "A",
@@ -5620,6 +6384,27 @@
     "decision_right": false,
     "asks": 2,
     "revealed": true
+   },
+   "household": {
+    "intro": "Ray and Linda want to start Roth conversions from Ray's traditional IRA this year and want to know how much to convert.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ray: born February 1957 (turns 69 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Linda: born September 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,180 a month as of January 2026 (claimed at full retirement age).",
+     "Ray's traditional IRA: $1,600,000 on December 31, 2025. Includes $208,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Linda's traditional IRA: $60,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ray's Roth IRA: $75,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Linda's Roth IRA: $45,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $440,000 on December 31, 2025.",
+     "Ray's pension (fully taxable): $11,000 a year from 2026, no raises.",
+     "Linda's taxable interest: $9,000 a year from 2026, no raises.",
+     "Ray's tax-exempt municipal bond interest: $6,000 a year from 2026, no raises.",
+     "Spending: $92,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $104,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $150,000, on a joint return."
+    ]
    }
   },
   {
@@ -5631,7 +6416,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Pat's inherited traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -5920,7 +6705,28 @@
    "revealed": true,
    "tokens": 155029,
    "cost": 0.0061,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Pat inherited a traditional IRA when a parent died in 2023 and must empty it by the end of 2033. They want to know the cheapest way to take it out.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,810 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,250 a month as of January 2026 (claimed at full retirement age).",
+     "Sam's traditional IRA: $1,680,000 on December 31, 2025. Includes $166,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Pat's traditional IRA: $190,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $105,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $260,000 on December 31, 2025.",
+     "Joint brokerage account: $500,000 on December 31, 2025. Cost basis $285,000; dividends 3% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Sam's pension (fully taxable): $34,000 a year from 2026, no raises.",
+     "Pat's taxable interest: $8,500 a year from 2026, no raises.",
+     "Spending: $112,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $5,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $147,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -5931,7 +6737,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Walt's Social Security",
    "options": [
     {
      "letter": "A",
@@ -6124,7 +6930,28 @@
    "revealed": true,
    "tokens": 116909,
    "cost": 0.0085,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Walt and Carol hold municipal bonds because the interest is tax-free, and they want to do a Roth conversion this year without causing problems.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Walt: born March 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Carol: born October 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,300 a month as of January 2026 (claimed at full retirement age).",
+     "Walt's traditional IRA: $1,080,000 on December 31, 2025. Includes $46,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Carol's traditional IRA: $280,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Walt's Roth IRA: $125,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Carol's Roth IRA: $35,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Joint brokerage account: $240,000 on December 31, 2025. Cost basis $125,000; dividends 1.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Carol's taxable interest: $4,500 a year from 2026, no raises.",
+     "Walt's tax-exempt municipal bond interest: $24,000 a year from 2026, no raises.",
+     "Spending: $102,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $6,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $178,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke",
@@ -6135,7 +6962,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": false,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Sam's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -6200,7 +7027,26 @@
    "revealed": true,
    "tokens": 25817,
    "cost": 0.0053,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Sam and Pat give $11,000 a year to their church (a public charity) and want to know whether to keep writing checks or give straight from Sam's IRA.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born July 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,790 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,430 a month as of January 2026 (claimed at full retirement age).",
+     "Pat's traditional IRA: $360,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $80,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $10,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $270,000 on December 31, 2025.",
+     "Pat's taxable interest: $4,500 a year from 2026, no raises.",
+     "Sam's tax-exempt municipal bond interest: $7,000 a year from 2026, no raises.",
+     "Spending: $100,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500, cash gifts to charity $11,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $136,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -6211,7 +7057,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Sam's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -6473,6 +7319,25 @@
     "decision_right": true,
     "asks": 3,
     "revealed": true
+   },
+   "household": {
+    "intro": "Sam and Pat give $11,000 a year to their church (a public charity) and want to know whether to keep writing checks or give straight from Sam's IRA.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Sam: born July 1953 (turns 73 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $3,790 a month as of January 2026 (claimed at full retirement age).",
+     "Pat: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,430 a month as of January 2026 (claimed at full retirement age).",
+     "Pat's traditional IRA: $360,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Sam's Roth IRA: $80,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Pat's Roth IRA: $10,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $270,000 on December 31, 2025.",
+     "Pat's taxable interest: $4,500 a year from 2026, no raises.",
+     "Sam's tax-exempt municipal bond interest: $7,000 a year from 2026, no raises.",
+     "Spending: $100,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500, cash gifts to charity $11,000. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $116,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $136,000, on a joint return."
+    ]
    }
   },
   {
@@ -6484,7 +7349,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": false,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Ken's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -6553,7 +7418,25 @@
    "revealed": true,
    "tokens": 66402,
    "cost": 0.0172,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Ken and Gail have heard the new senior deduction makes the next few years a good time to convert to Roth, and also that converting can cost them that deduction. They want to know which is right.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ken: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,820 a month as of January 2026 (claimed at full retirement age).",
+     "Gail: born June 1956 (turns 70 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,730 a month as of January 2026 (claimed at full retirement age).",
+     "Gail's traditional IRA: $290,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ken's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Gail's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $380,000 on December 31, 2025. Cost basis $267,000; dividends 2.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Spending: $76,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $3,400. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $187,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $185,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -6564,7 +7447,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Ken's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -6824,6 +7707,24 @@
     "decision_right": false,
     "asks": 3,
     "revealed": true
+   },
+   "household": {
+    "intro": "Ken and Gail have heard the new senior deduction makes the next few years a good time to convert to Roth, and also that converting can cost them that deduction. They want to know which is right.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Ken: born October 1952 (turns 74 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,820 a month as of January 2026 (claimed at full retirement age).",
+     "Gail: born June 1956 (turns 70 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,730 a month as of January 2026 (claimed at full retirement age).",
+     "Gail's traditional IRA: $290,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Ken's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Gail's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $380,000 on December 31, 2025. Cost basis $267,000; dividends 2.5% of the opening balance each year, 60% of them qualified; all holdings long-term.",
+     "Spending: $76,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $3,400. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $187,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $185,000, on a joint return."
+    ]
    }
   },
   {
@@ -6835,7 +7736,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": false,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Glen's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -6900,7 +7801,26 @@
    "revealed": true,
    "tokens": 67808,
    "cost": 0.0176,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Glen and Maria are retired and wondering whether a Roth conversion this year makes sense, and how big it should be.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Glen: born January 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,600 a month as of January 2026 (claimed at full retirement age).",
+     "Maria: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,170 a month as of January 2026 (claimed at full retirement age).",
+     "Maria's traditional IRA: $70,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Glen's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Maria's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $460,000 on December 31, 2025. Cost basis $319,000; dividends 1.5% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Glen's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $117,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $116,000, on a joint return."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -6911,7 +7831,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Glen's traditional IRA",
    "options": [
     {
      "letter": "A",
@@ -7125,6 +8045,25 @@
     "decision_right": false,
     "asks": 3,
     "revealed": true
+   },
+   "household": {
+    "intro": "Glen and Maria are retired and wondering whether a Roth conversion this year makes sense, and how big it should be.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Glen: born January 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,600 a month as of January 2026 (claimed at full retirement age).",
+     "Maria: born April 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $1,170 a month as of January 2026 (claimed at full retirement age).",
+     "Maria's traditional IRA: $70,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Glen's Roth IRA: $25,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Maria's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $390,000 on December 31, 2025.",
+     "Joint brokerage account: $460,000 on December 31, 2025. Cost basis $319,000; dividends 1.5% of the opening balance each year, 75% of them qualified; all holdings long-term.",
+     "Glen's pension (fully taxable): $28,000 a year from 2026, no raises.",
+     "Spending: $117,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,200. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $126,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $116,000, on a joint return."
+    ]
    }
   },
   {
@@ -7136,7 +8075,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": false,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Frank's Social Security",
    "options": [
     {
      "letter": "A",
@@ -7193,7 +8132,27 @@
    "revealed": true,
    "tokens": 30656,
    "cost": 0.008,
-   "alone": null
+   "alone": null,
+   "household": {
+    "intro": "Frank has serious health problems, and the couple wants a plan that still works for Joyce afterward. They're weighing Roth conversions from Joyce's IRA now, while they still file jointly, against waiting.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born May 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Joyce: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,240 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $1,790,000 on December 31, 2025. Includes $153,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $910,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $115,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Frank's tax-exempt municipal bond interest: $23,000 a year from 2026, no raises.",
+     "Spending: $113,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $135,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $181,000, on a joint return.",
+     "For planning, assume Frank dies in 2032. The survivor keeps spending the same amount."
+    ]
+   }
   },
   {
    "run": "ds-ask-smoke-tools",
@@ -7204,7 +8163,7 @@
    "model_name": "DeepSeek V4.1 Flash (Oct 17)",
    "engine": true,
    "ask_first": true,
-   "withheld": null,
+   "withheld": "Frank's Social Security",
    "options": [
     {
      "letter": "A",
@@ -7326,6 +8285,26 @@
     "decision_right": true,
     "asks": 1,
     "revealed": true
+   },
+   "household": {
+    "intro": "Frank has serious health problems, and the couple wants a plan that still works for Joyce afterward. They're weighing Roth conversions from Joyce's IRA now, while they still file jointly, against waiting.",
+    "facts": [
+     "Married, filing jointly.",
+     "They live in a state with no income tax.",
+     "Frank: born May 1959 (turns 67 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65).",
+     "Joyce: born May 1958 (turns 68 in 2026). Enrolled in Medicare Part B and a Part D drug plan (or will be from age 65). Already receiving Social Security: $2,240 a month as of January 2026 (claimed at full retirement age).",
+     "Frank's traditional IRA: $1,790,000 on December 31, 2025. Includes $153,000 of after-tax (nondeductible) contributions (Form 8606 basis).",
+     "Joyce's traditional IRA: $910,000 on December 31, 2025. All pre-tax (no after-tax basis).",
+     "Frank's Roth IRA: $115,000 on December 31, 2025. First Roth contribution in 2014.",
+     "Joyce's Roth IRA: $15,000 on December 31, 2025. First Roth contribution in 2016.",
+     "Joint savings (cash) account: $430,000 on December 31, 2025.",
+     "Frank's tax-exempt municipal bond interest: $23,000 a year from 2026, no raises.",
+     "Spending: $113,000 a year after tax in 2026 dollars, rising with inflation. Federal tax and Medicare premiums are paid on top of this.",
+     "Paid out of that spending each year (2026 dollars, rising with inflation): property tax $4,500. No other deductible expenses.",
+     "Their 2024 MAGI (for Medicare IRMAA) was $135,000, on a joint return.",
+     "Their 2025 MAGI (for Medicare IRMAA) was $181,000, on a joint return.",
+     "For planning, assume Frank dies in 2032. The survivor keeps spending the same amount."
+    ]
    }
   }
  ]
