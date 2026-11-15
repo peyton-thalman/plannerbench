@@ -12,6 +12,7 @@ src/bake_site.py to render web/ into site/.
 """
 import html
 import json
+import math
 import re
 import shutil
 from pathlib import Path
@@ -38,6 +39,11 @@ HEADLINE = ("Given client notes with one planted error, three of five cheap open
             "confidently 81–93% of the time and caught 1–3%. The best models caught 73–80% with almost no false "
             "alarms. With the planning engine as a tool, a cheap model went from 29% to 79% on hard questions.")
 
+def pc(v):
+    """A share as a whole percent, rounded half up like the site's app.js (Math.round), so 1/40 shows as 3% everywhere."""
+    return f"{math.floor(v * 100 + 0.5)}%"
+
+
 def svg(w, h, body, label):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{e(label)}" {FONT}>'
             f'<rect width="{w}" height="{h}" fill="{PAPER}"/>{body}</svg>\n')
@@ -56,8 +62,8 @@ def chart_catch():
     b = [text(L, 22, "Caught the planted mistake vs. refused a note that was fine", 15, INK, weight=600),
          text(L, 40, "Each dot is one model. Up and to the left is better.", 12)]
     for v in (0, .25, .5, .75, 1):
-        b.append(f'<line x1="{L}" x2="{L + pw}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="{RULE}"/>' + text(L - 10, Y(v) + 4, f"{v:.0%}", anchor="end"))
-        b.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{T}" y2="{T + ph}" stroke="{RULE}"/>' + text(X(v), T + ph + 20, f"{v:.0%}", anchor="middle"))
+        b.append(f'<line x1="{L}" x2="{L + pw}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="{RULE}"/>' + text(L - 10, Y(v) + 4, f"{pc(v)}", anchor="end"))
+        b.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{T}" y2="{T + ph}" stroke="{RULE}"/>' + text(X(v), T + ph + 20, f"{pc(v)}", anchor="middle"))
     b.append(text(L + pw / 2, H - 10, "Refused a note that was fine (false alarm)", 12, anchor="middle"))
     b.append(f'<text transform="translate(16 {T + ph / 2:.0f}) rotate(-90)" font-size="12" fill="{MUTED}" text-anchor="middle">Caught the planted mistake</text>')
     pts = sorted([(m["bad"]["false_alarm"]["rate"], m["bad"]["caught"]["rate"], m) for m in MODELS if m["bad"]], key=lambda p: -p[1])
@@ -71,7 +77,7 @@ def chart_catch():
         while any(abs(ly - py) < 14 and abs(lx_ - px) < 130 for px, py in placed):
             ly += step
         placed.append((lx_, ly))
-        b.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="7" fill="{TIER[m["tier"]]}" stroke="{PAPER}" stroke-width="2"><title>{e(m["name"])}: caught {c:.0%}, false alarms {fa:.0%}</title></circle>')
+        b.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="7" fill="{TIER[m["tier"]]}" stroke="{PAPER}" stroke-width="2"><title>{e(m["name"])}: caught {pc(c)}, false alarms {pc(fa)}</title></circle>')
         b.append(text(lx_, ly, m["name"], 12, INK))
     ly = T + 14
     for t, col in TIER.items():
@@ -99,9 +105,9 @@ def chart_outcomes():
             v = m["bad"][k]["rate"]
             w = pw * v
             if w > 0.5:
-                b.append(f'<rect x="{x + 1:.1f}" y="{y}" width="{max(0.5, w - 2):.1f}" height="20" rx="3" fill="{col}"><title>{e(m["name"])}: {e(name)} {v:.0%}</title></rect>')
+                b.append(f'<rect x="{x + 1:.1f}" y="{y}" width="{max(0.5, w - 2):.1f}" height="20" rx="3" fill="{col}"><title>{e(m["name"])}: {e(name)} {pc(v)}</title></rect>')
                 if v >= 0.07:
-                    b.append(text(x + w / 2, y + 14, f"{v:.0%}", 11, "#ffffff" if k != "flagged_but_answered" else INK, "middle", 600))
+                    b.append(text(x + w / 2, y + 14, f"{pc(v)}", 11, "#ffffff" if k != "flagged_but_answered" else INK, "middle", 600))
             x += w
     return svg(W, H, "".join(b), "What each model did with a note that had a mistake planted in it")
 
@@ -120,8 +126,8 @@ def chart_false_alarms():
         b.append(text(L - 10, y + 14, m["name"], 12.5, INK, "end"))
         b.append(f'<rect x="{L}" y="{y}" width="{pw}" height="18" rx="3" fill="#f1f1ef"/>')
         if v > 0:
-            b.append(f'<rect x="{L}" y="{y}" width="{max(3, pw * v):.1f}" height="18" rx="3" fill="{INK}"><title>{e(m["name"])}: refused {v:.0%} of correct notes</title></rect>')
-        b.append(text(L + pw * v + 8, y + 14, f"{v:.0%}", 12.5, INK, weight=600))
+            b.append(f'<rect x="{L}" y="{y}" width="{max(3, pw * v):.1f}" height="18" rx="3" fill="{INK}"><title>{e(m["name"])}: refused {pc(v)} of correct notes</title></rect>')
+        b.append(text(L + pw * v + 8, y + 14, f"{pc(v)}", 12.5, INK, weight=600))
     return svg(W, H, "".join(b), "Share of correct notes each model refused to answer")
 
 
@@ -137,7 +143,7 @@ def chart_tools():
          f'<circle cx="{L + 6}" cy="60" r="6" fill="{PAPER}" stroke="{INK}" stroke-width="2"/>' + text(L + 18, 64, "Alone", 12.5),
          f'<circle cx="{L + 76}" cy="60" r="6" fill="{INK}"/>' + text(L + 88, 64, "With the engine", 12)]
     for v in (0, .25, .5, .75, 1):
-        b.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{T - 6}" y2="{T + row * len(ms)}" stroke="{RULE}"/>' + text(X(v), T + row * len(ms) + 18, f"{v:.0%}", anchor="middle"))
+        b.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{T - 6}" y2="{T + row * len(ms)}" stroke="{RULE}"/>' + text(X(v), T + row * len(ms) + 18, f"{pc(v)}", anchor="middle"))
     for n, m in enumerate(ms):
         y = T + n * row + 12
         a, t = m["hard"]["rate"], m["hard_tools"]
@@ -145,14 +151,14 @@ def chart_tools():
         b.append(text(L - 10, y + 4, m["name"], 12, INK, "end"))
         if t:
             b.append(f'<line x1="{X(a):.1f}" x2="{X(t["rate"]):.1f}" y1="{y}" y2="{y}" stroke="{col}" stroke-width="2"/>')
-            b.append(f'<circle cx="{X(t["rate"]):.1f}" cy="{y}" r="7" fill="{col}" stroke="{PAPER}" stroke-width="2"><title>{e(m["name"])} with the engine: {t["rate"]:.0%} of {t["n"]} questions</title></circle>')
-            lab = f'{t["rate"]:.0%}' + (f' (on {t["n"]})' if t["n"] < 42 else "")
+            b.append(f'<circle cx="{X(t["rate"]):.1f}" cy="{y}" r="7" fill="{col}" stroke="{PAPER}" stroke-width="2"><title>{e(m["name"])} with the engine: {pc(t["rate"])} of {t["n"]} questions</title></circle>')
+            lab = f'{pc(t["rate"])}' + (f' (on {t["n"]})' if t["n"] < 42 else "")
             b.append(text(X(max(a, t["rate"])) + 13, y + 4, lab, 12, INK, weight=600))
             if abs(t["rate"] - a) > 0.06:
-                b.append(text(X(min(a, t["rate"])) - 13, y + 4, f"{a:.0%}" if a < t["rate"] else lab, 12, MUTED, "end"))
+                b.append(text(X(min(a, t["rate"])) - 13, y + 4, f"{pc(a)}" if a < t["rate"] else lab, 12, MUTED, "end"))
         else:
-            b.append(text(X(a) + 13, y + 4, f"{a:.0%}", 12, MUTED))
-        b.append(f'<circle cx="{X(a):.1f}" cy="{y}" r="6" fill="{PAPER}" stroke="{col}" stroke-width="2"><title>{e(m["name"])} alone: {a:.0%}</title></circle>')
+            b.append(text(X(a) + 13, y + 4, f"{pc(a)}", 12, MUTED))
+        b.append(f'<circle cx="{X(a):.1f}" cy="{y}" r="6" fill="{PAPER}" stroke="{col}" stroke-width="2"><title>{e(m["name"])} alone: {pc(a)}</title></circle>')
     return svg(W, H, "".join(b), "Hard-tier accuracy by model, alone and with the engine")
 
 
