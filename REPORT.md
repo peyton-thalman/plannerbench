@@ -24,9 +24,9 @@ how often AI gets retirement math right, against an answer key I could prove.
    models caught 1–3% and gave a confident number 81–93% of the time.
 
 **The plain answer.** For one well-known rule, the best AIs are reliable. For a whole household, it depends heavily on
-which AI you ask, and a free or cheap one will usually be wrong. The biggest risk isn't the math, it's what you type
-in: cheap models almost never tell you when a number you gave them can't be right, and even the best miss some. Check your inputs, and take big decisions
-to a professional.
+which AI you ask, and a free or cheap one will usually be wrong. And the answer is only as good as what you type in:
+in my tests, three cheap models almost never questioned an impossible fact, and even the best missed about one in
+four. Check your inputs, and take big decisions to a professional.
 
 **How this was built.** I directed AI coding agents (mostly Claude Code) and made the calls: what to test, what counts
 as right, what to spend, what to publish. Because AI did most of the work, the checks are set up so no agent grades its
@@ -45,7 +45,7 @@ evidence, which planning questions a model can be trusted with on its own, and w
 
 - **An answer key I could prove.** The 2026 federal tax, Social Security, required-withdrawal and Medicare rules
   written as a program: the planning engine. A second engine, written by an agent that never saw the first, from the
-  published rules alone, agrees with it on 4,000 of 4,000 random households to the dollar. PolicyEngine-US, an
+  published rules alone, agrees with it on 4,000 of 4,000 random households within $1. PolicyEngine-US, an
   open-source tax model nobody on this project wrote, agrees on 1,600 of 1,600 first-test tax answers within $2.
 - **The first test (October 2026).** 2,800 public questions with one exact answer each (plus 700 held back), from
   one-rule questions to ones where several rules meet. Seven model setups from five labs, reasoning effort high,
