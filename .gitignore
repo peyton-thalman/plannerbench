@@ -12,3 +12,9 @@ runs/*-private/
 # Full outputs of the free stand-in checks (rebuilt on every run); their summaries are committed.
 runs/*-fake-*/raw.jsonl
 runs/*-fake-*/gauntlet_graded.jsonl
+
+# site/ is built by src/bake_site.py from web/ (deploy from there; never edit it by hand). Its dotfiles stay tracked.
+site/*
+!site/.gitignore
+!site/.vercelignore
+.bake-stage/
