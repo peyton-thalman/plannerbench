@@ -20,7 +20,7 @@ prove, and tested the models. Site: **https://plannerbench.vercel.app** (every p
    mistake each (a retiree who is 14, a contribution over the legal limit), GPT-6.1 Sol caught 80% and Claude Sonnet
    5.5 73% with almost no false alarms; three cheap models caught 1–3% and answered confidently anyway. This is the biggest open gap.
 
-**And ChatGPT?** GPT-6 Luna, run through a ChatGPT subscription on the same questions and answer keys, got 71% of
+**And ChatGPT?** GPT-6 Luna (the model on my ChatGPT subscription), run through Codex with code and web off on the same questions and answer keys, got 71% of
 one-rule questions, 17% of the hardest ones, and caught half the planted mistakes (different setup; see REPORT.md).
 
 Full write-up: [REPORT.md](REPORT.md). How every number is made: [METHODOLOGY.md](METHODOLOGY.md).
