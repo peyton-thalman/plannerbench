@@ -150,8 +150,11 @@ def outcome(g, c):
         return "It said it couldn't answer, though every fact needed was there."
     if d["right"]:
         return f"Right decision, but {off} of {len(nums)} number{'s' * (len(nums) != 1)} off by more than 2%."
-    cost = f" That costs the household {usd(d['lost'])}." if d.get("lost") else ""
-    return f"Wrong decision ({d.get('why')}).{cost}" + (f" {off} of {len(nums)} numbers off too." if off else "")
+    cost = (f" That's a projected {usd(d['lost'])} less after-tax wealth over 25 years (a simulation, not a real household)."
+            if d.get("lost") else "")
+    why = d.get("why") or ""
+    head = "Wrong plan." if why.startswith("plan gives up") and cost else f"Wrong decision ({why})."
+    return f"{head}{cost}" + (f" {off} of {len(nums)} numbers off too." if off else "")
 
 
 def household(c):

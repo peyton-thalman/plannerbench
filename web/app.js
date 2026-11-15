@@ -292,7 +292,7 @@
       return Number(m[1].replace(/,/g, '')) === 0 || m[2] === '0' ? 'Convert nothing' : `${usd(Number(m[1].replace(/,/g, '')))} a year × ${m[2]} years`;
     };
     row('The calculator’s best plan', sb.best);
-    row(`${sb.model}, on its own`, `${plan(sb.alone)} (gives up ${usd(sb.alone_lost)})`, false);
+    row(`${sb.model}, on its own`, `${plan(sb.alone)} (a projected ${usd(sb.alone_lost)} less after-tax wealth over 25 years; a simulation, not a real household)`, false);
     row(`${sb.model} + calculator`, plan(sb.engine), true);
     const ol = document.getElementById('gauntlet-failures');
     gauntlet.failures.forEach((f, i) => {

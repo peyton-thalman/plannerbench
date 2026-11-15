@@ -281,7 +281,7 @@
     ],
     "lost": 7161,
     "why": "picked C; best was A",
-    "outcome": "Wrong decision (picked C; best was A). That costs the household $7,161.",
+    "outcome": "Wrong decision (picked C; best was A). That's a projected $7,161 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 59245.0,
@@ -636,7 +636,7 @@
     ],
     "lost": 26002.029999999795,
     "why": "plan gives up $26,002",
-    "outcome": "Wrong decision (plan gives up $26,002). That costs the household $26,002.",
+    "outcome": "Wrong plan. That's a projected $26,002 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 27676.0,
@@ -1427,7 +1427,7 @@
     ],
     "lost": 4154,
     "why": "picked B; best was A",
-    "outcome": "Wrong decision (picked B; best was A). That costs the household $4,154. 1 of 2 numbers off too.",
+    "outcome": "Wrong decision (picked B; best was A). That's a projected $4,154 less after-tax wealth over 25 years (a simulation, not a real household). 1 of 2 numbers off too.",
     "numbers": {
      "N1": {
       "got": 36222.0,
@@ -3815,7 +3815,7 @@
     ],
     "lost": 7161,
     "why": "picked C; best was A",
-    "outcome": "Wrong decision (picked C; best was A). That costs the household $7,161.",
+    "outcome": "Wrong decision (picked C; best was A). That's a projected $7,161 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 59245.0,
@@ -4325,7 +4325,7 @@
     ],
     "lost": 134445.0,
     "why": "plan gives up $134,445",
-    "outcome": "Wrong decision (plan gives up $134,445). That costs the household $134,445.",
+    "outcome": "Wrong plan. That's a projected $134,445 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 27835.0,
@@ -5240,7 +5240,7 @@
     ],
     "lost": 72529,
     "why": "picked B; best was C",
-    "outcome": "Wrong decision (picked B; best was C). That costs the household $72,529.",
+    "outcome": "Wrong decision (picked B; best was C). That's a projected $72,529 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 9691.0,
@@ -5386,7 +5386,7 @@
     ],
     "lost": 3704,
     "why": "picked C; best was A",
-    "outcome": "Wrong decision (picked C; best was A). That costs the household $3,704.",
+    "outcome": "Wrong decision (picked C; best was A). That's a projected $3,704 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 37190.0,
@@ -6198,7 +6198,7 @@
    "great": false,
    "decision_right": false,
    "why": "plan gives up $134,445",
-   "outcome": "Wrong decision (plan gives up $134,445). That costs the household $134,445. 1 of 2 numbers off too.",
+   "outcome": "Wrong plan. That's a projected $134,445 less after-tax wealth over 25 years (a simulation, not a real household). 1 of 2 numbers off too.",
    "numbers": {
     "N1": {
      "got": 32405.0,
@@ -6368,7 +6368,7 @@
     ],
     "lost": 134445.0,
     "why": "plan gives up $134,445",
-    "outcome": "Wrong decision (plan gives up $134,445). That costs the household $134,445. 1 of 2 numbers off too.",
+    "outcome": "Wrong plan. That's a projected $134,445 less after-tax wealth over 25 years (a simulation, not a real household). 1 of 2 numbers off too.",
     "numbers": {
      "N1": {
       "got": 32405.0,
@@ -7401,7 +7401,7 @@
    "great": false,
    "decision_right": false,
    "why": "picked A; best was C",
-   "outcome": "Wrong decision (picked A; best was C). That costs the household $26,852.",
+   "outcome": "Wrong decision (picked A; best was C). That's a projected $26,852 less after-tax wealth over 25 years (a simulation, not a real household).",
    "numbers": {
     "N1": {
      "got": 9691.0,
@@ -7691,7 +7691,7 @@
     ],
     "lost": 26852,
     "why": "picked A; best was C",
-    "outcome": "Wrong decision (picked A; best was C). That costs the household $26,852.",
+    "outcome": "Wrong decision (picked A; best was C). That's a projected $26,852 less after-tax wealth over 25 years (a simulation, not a real household).",
     "numbers": {
      "N1": {
       "got": 9691.0,
