@@ -4,18 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PlannerBench</title>
-<meta name="description" content="“It seems right.” A financial advisor in Sun City West, Arizona built an answer key for real retirement questions and tested AI models against it. One rule at a time, the best models were almost always right; with several rules at once it depended heavily on which AI; and most models gave confident advice on client files with an impossible fact.">
+<meta name="description" content="Can AI answer retirement questions correctly? PlannerBench is a set of retirement planning questions with known right answers, built by a financial advisor in Sun City West, Arizona. AI models are given the questions and graded on what they say.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=26">
+<link rel="stylesheet" href="styles.css?v=27">
 </head>
 <body data-page="home">
 <header class="nav">
   <div class="wrap nav-row">
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
-      <a href="./" aria-current="page">Story</a>
       <a href="results.html">Results</a>
       <a href="method.html">Methods</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="./" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
@@ -25,56 +24,46 @@
 
 <main class="story">
   <section class="hero wrap">
-    <p class="eyebrow">PlannerBench · by Peyton Thalman, financial advisor in Sun City West, Arizona</p>
-    <h1>“It seems right.”</h1>
-    <p class="lede">That’s what retirees tell me when I ask how they know ChatGPT’s retirement advice is correct. So I built a test to find out.</p>
+    <h1>PlannerBench</h1>
+    <p class="lede"><b>Can AI answer retirement questions correctly? I tested it.</b></p>
   </section>
 
   <div class="wrap story-body">
-    <section id="doorstep">
-      <h2>The doorstep</h2>
-      <p>I’m a financial advisor, and I build my practice by knocking doors in Sun City West, a retirement community outside Phoenix. Most people tell me they already have an advisor. Then a lot of them tell me they ask ChatGPT their money questions anyway.</p>
-      <p>So I ask them: how do you know it’s right?</p>
-      <p>The answer is almost always the same. <i>It seems right.</i> They Google it, the top result agrees, and that settles it. But that top result is usually Google’s own AI summary. One AI is fact-checking another.</p>
-      <p>I wanted a real answer to my own question, so I built one.</p>
+    <section id="what" class="intro">
+      <p>PlannerBench is a set of retirement planning questions with known right answers. I give the questions to AI models and grade what they say.</p>
+      <p>The questions cover taxes, Social Security, Medicare, required minimum distributions, and Roth conversions under 2026 rules. I built a planning engine to work out the correct answers, and a second, separately written program to double-check them.</p>
+      <p class="byline">By Peyton Thalman, financial advisor in Sun City West, Arizona.</p>
     </section>
 
-    <section id="built">
-      <h2>What I built</h2>
-      <p>I built an answer key for real retirement questions: taxes, Social Security, Medicare, and Roth conversions. A planning engine computed it from the 2026 IRS, Social Security, and Medicare rules, and a second program, written independently, checked it. Then I asked AI models the same questions and graded their answers.</p>
-      <p>I started with Anthropic’s Claude models and some open-source models, then added OpenAI’s, because that’s what most people actually use. Then I tested what happens when the person asking gets their own facts wrong.</p>
+    <section id="results">
+      <h2>Results</h2>
+      <ul class="results-list">
+        <li><b>Questions with one rule:</b> The top models got <a class="num" href="results.html#one-rule">about <span data-k="single">—</span></a> right.</li>
+        <li><b>Questions where several rules interact:</b> This is where most models fall apart. On the <a class="num" href="results.html#several-rules"><span data-v="v2:items.hard" data-f="int">—</span> hardest questions</a>, the best model got <a class="num" href="results.html#several-rules"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span></a>, Claude Sonnet 5.5 got <a class="num" href="results.html#several-rules"><span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span></a>, and the model behind the ChatGPT app got <a class="num" href="results.html#chatgpt"><span data-v="luna:hard.rate" data-f="pct">—</span></a>.<a class="fn" href="#note-luna">*</a> Cheap and free models were all <a class="num" href="results.html#several-rules">under 30%</a>.</li>
+        <li><b>With a calculator that shows its work:</b> When the calculator gave the rule and the IRS form line along with the number, Claude Haiku went from <a class="num" href="results.html#calculator"><span data-k="tools_from">—</span> to <span data-k="tools_to">—</span></a>.</li>
+        <li><b>When the client’s information is wrong:</b> I put one impossible fact in each client file, like a birthday that makes the client 14. Most models gave advice anyway. Some gave retirement advice to a 14-year-old. Even the best models missed <a class="num" href="results.html#wrong-facts"><span data-k="a_best_missed">—</span></a> of these.</li>
+      </ul>
+      <p class="more-link"><a href="results.html">See all results →</a></p>
     </section>
 
-    <section id="found">
-      <h2>What I found</h2>
-      <div class="finding">
-        <h3>1. One rule at a time, it’s great.</h3>
-        <p>Ask about a single rule, and the best models get it right <a class="num" href="results.html#one-rule">about <span data-k="single">—</span></a> of the time.</p>
-      </div>
-      <div class="finding">
-        <h3>2. Several rules at once, it depends heavily on which AI.</h3>
-        <p>Real retirement questions mix taxes, Social Security, and Medicare together. On the hardest of those, the best model scored <a class="num" href="results.html#several-rules"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span></a> and Claude Sonnet 5.5 scored <a class="num" href="results.html#several-rules"><span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span></a>. The model behind the regular ChatGPT app scored <a class="num" href="results.html#chatgpt"><span data-v="luna:hard.rate" data-f="pct">—</span></a>.<a class="fn" href="#note-luna">*</a> Cheap and free models scored <a class="num" href="results.html#several-rules">under 30%</a>.</p>
-        <p>A calculator that only handed over the right number didn’t fix it. A better calculator did. When the calculator showed the rule and the IRS form line behind each number, Claude Haiku went from <a class="num" href="results.html#calculator"><span data-k="tools_from">—</span> to <span data-k="tools_to">—</span></a>.</p>
-      </div>
-      <div class="finding">
-        <h3>3. It believes whatever you tell it.</h3>
-        <p>I hid one impossible fact in each client file. They were the kind of mistakes people make on doorsteps every day: a wrong birthday, transposed digits, a guess at monthly spending. Most models gave confident advice anyway. Some gave retirement advice to a 14-year-old. Even the best models missed <a class="num" href="results.html#wrong-facts"><span data-k="a_best_missed">—</span></a> of the planted errors.</p>
-      </div>
+    <section id="why">
+      <h2>Why I built it</h2>
+      <p>I’m a financial advisor, and I meet a lot of retirees by knocking doors. Many of them tell me they ask ChatGPT their money questions. When I ask how they know the answer is right, they say they Googled it and the top result agreed. That top result is usually Google’s AI. I wanted a real way to check, so I built one.</p>
     </section>
 
     <section id="for-you">
-      <h2>What it means for you</h2>
-      <p>Asking AI is often a good place to start. Then check every age, balance, and income it used, and ask which rule it applied. If it got a fact wrong or can’t name the rule, don’t act on the answer. Take decisions you can’t undo, like when to claim Social Security, to a person.</p>
+      <h2>If you use AI for retirement questions</h2>
+      <p>Check the ages, balances, and income it used. Ask which rule it’s applying. If it can’t tell you, or it got your facts wrong, don’t act on the answer. For decisions you can’t undo, like when to start Social Security, talk to a person.</p>
     </section>
 
     <section id="for-firms">
-      <h2>What it means for firms</h2>
-      <p>Your clients are asking AI before they ask you, even in a town full of retirees. They don’t know when it’s wrong, and the AI won’t tell them when their own facts are wrong. AI can do the math when it’s given the right tools. What’s missing is someone checking the inputs.</p>
+      <h2>For financial firms</h2>
+      <p>Your clients are already asking AI before they ask you. Most can’t tell when it’s wrong, and the AI usually won’t tell them when the facts they gave it are wrong.</p>
     </section>
 
-    <p class="story-links"><a href="results.html">See the full results →</a> <span aria-hidden="true">·</span> <a href="method.html">How I built and checked it →</a> <span aria-hidden="true">·</span> <a href="https://peytonthalman.com">peytonthalman.com</a></p>
+    <p class="story-links"><a href="method.html">How I built and checked it →</a> <span aria-hidden="true">·</span> <a href="https://peytonthalman.com">peytonthalman.com</a></p>
 
-    <p class="story-note" id="note-luna"><small>*GPT-6 Luna, tested through Codex with code and web access off. That’s close to the ChatGPT app, but not identical. Details on the <a href="method.html#chatgpt">Methods page</a>.</small></p>
+    <p class="story-note" id="note-luna"><small>*GPT-6 Luna, tested through Codex with code and web access off. That’s close to the ChatGPT app, but not identical.</small></p>
     <p class="story-note"><small>Decision support, not advice. Answers follow IRS, SSA, and CMS publications. Nothing on this site is tax or investment advice.</small></p>
   </div>
 </main>

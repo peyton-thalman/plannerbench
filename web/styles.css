@@ -631,3 +631,9 @@ details.fine .notes { margin-top: 0.75rem; }
 .story-links a { text-underline-offset: 3px; }
 .story-note { color: var(--muted); max-width: 62ch; line-height: 1.5; }
 .story-note + .story-note { margin-top: -1.75rem; }
+/* Home v2 (2026-11-15): plain intro, a four-line results list. */
+.story-body .intro { border-top: 0; padding-top: 0; }
+.story-body .byline { color: var(--muted); font-size: 1rem; }
+.results-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+.results-list li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+.story-body .more-link { margin: 0; }

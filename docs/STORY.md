@@ -1,8 +1,9 @@
 # The PlannerBench story (the brief every page follows)
 
-> **2026-11-15 rewrite (supersedes the Home sections below).** Home is now the owner's short story, copy word for word
-> ("It seems right." → The doorstep → What I built → What I found (3 findings, one number each) → What it means for you /
-> for firms). Nav: Story · Results · Methods · For AI readers. Everything that used to sit on Home (test table, price groups,
+> **2026-11-15 rewrite v2 (supersedes the Home sections below).** Home is the owner's copy, word for word: "PlannerBench" →
+> "Can AI answer retirement questions correctly? I tested it." → what it is → Results (four lines) → Why I built it → If you use AI
+> → For financial firms. Voice: plain, first person, across-the-table; no taglines, no quote headlines, no punchy one-liners.
+> Nav: Results · Methods · For AI readers (the wordmark links home). Everything that used to sit on Home (test table, price groups,
 > Luna/Codex note, Oct vs Nov settings, check status, audit, held-back questions, glossary) lives on Methods; the backing
 > numbers live on Results. Two sentences of the owner's draft were changed to match the data: "a better prompt didn't fix
 > it" (putting the rule text in the prompt did fix the senior deduction, rule_effect.json) → "a calculator that only handed

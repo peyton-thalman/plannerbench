@@ -11,8 +11,8 @@ local copy first (`python3 -m http.server 4173 --directory site`, then `checks/s
 `site_check.py http://localhost:4173`; previews sit behind Vercel login); after a deploy run both with no argument. The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
 Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
 white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
-Nav (2026-11-15 rewrite, owner's ask): Story (`index.html`, a short first-person story, owner's copy word for word, one
-number per finding, each linking into Results) · Results (`results.html`, short tables per finding, linking to the detail pages
+Nav (2026-11-15 rewrite v2, owner's ask): the PlannerBench wordmark links home (`index.html`: plain intro, a four-line results
+list, why I built it, for you, for firms; owner's copy word for word, every number linking into Results) · Results (`results.html`, short tables per finding, linking to the detail pages
 `alone.html`, `calculator.html`, `wrong-facts.html`) · Methods (`method.html`: every test, price groups, the GPT-6 Luna/Codex
 note, how I built it, the checks, glossary; links `built.html`) · plus the Human / For AI readers switch (→ `agent.html`).
 Don't add facts to the home page; put them on Methods and flag it to the owner. `chat.html`, `replay.html` and `report.html`
