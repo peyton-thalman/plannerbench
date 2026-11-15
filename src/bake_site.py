@@ -39,8 +39,8 @@ BASE = "https://plannerbench.vercel.app"
 CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 # Reading order: the nav, then the footer pages. agent.html is the agent-mode landing page itself.
 ORDER = ["index", "alone", "wrong-facts", "calculator", "method", "built", "chat", "report", "replay", "agent"]
-LABEL = {"index": "Home", "alone": "Results", "wrong-facts": "Bad inputs", "calculator": "With tools",
-         "method": "Method", "built": "How I built it", "chat": "In the chat", "report": "Report", "replay": "Replays", "agent": "Agent mode"}
+LABEL = {"index": "Home", "alone": "AI on its own", "wrong-facts": "Wrong facts", "calculator": "With a calculator",
+         "method": "How I checked", "built": "How I built it", "chat": "Try it in Claude or ChatGPT", "report": "Report", "replay": "Replays", "agent": "Agent mode"}
 OPTIONAL = {"replay", "agent"}  # listed under "Optional" in llms.txt
 REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator", "results": "alone"}  # old page name → new
 KEEP_SCRIPTS = {"replay.js"}  # scripts a baked page may still load (interactive, not filling)
@@ -407,7 +407,7 @@ def json_ld(desc):
     meta = json.loads((WEB / "data" / "meta.json").read_text())
     data = [("models.json", "Scores by model, with 95% intervals"), ("tasks.json", "Scores by task"),
             ("tools.json", "Scores with and without the planning engine as tools"), ("gauntlet.json", "Whole-household decisions, alone and with the engine"),
-            ("v2.json", "Bad inputs and the hard tier")]
+            ("v2.json", "Wrong facts and the newer, harder set")]
     return {
         "@context": "https://schema.org", "@type": "Dataset", "name": "PlannerBench",
         "description": desc, "url": f"{BASE}/",

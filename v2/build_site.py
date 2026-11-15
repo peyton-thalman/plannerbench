@@ -213,7 +213,7 @@ def inline(s):
     s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
     s = re.sub(r"(?<![\w*])\*([^*\n]+)\*(?![\w*])", r"<em>\1</em>", s)
     s = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", lambda m: f'<img src="charts/{Path(m[2]).name}" alt="{m[1]}" style="width:100%;height:auto">', s)
-    s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: f'<a href="{m[2] if m[2].startswith("http") else "https://github.com/peyton-thalman/plannerbench/blob/v2/" + m[2]}">{m[1]}</a>', s)
+    s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: f'<a href="{m[2] if m[2].startswith(("http", "#")) else "https://github.com/peyton-thalman/plannerbench/blob/v2/" + m[2]}">{m[1]}</a>', s)
     return s
 
 
@@ -233,7 +233,9 @@ def markdown(md):
         elif l.startswith("#"):
             n = len(l) - len(l.lstrip("#"))
             tag = {1: "h1", 2: "h2", 3: "h3"}.get(n, "h3")
-            out.append(f"<{tag}>{inline(l[n:].strip())}</{tag}>")
+            text = l[n:].strip()
+            slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")  # GitHub-style anchors, so [x](#corrections) works
+            out.append(f'<{tag} id="{slug}">{inline(text)}</{tag}>')
             i += 1
         elif l.startswith("|"):
             rows = []
@@ -274,7 +276,7 @@ def report_page():
     title = md.splitlines()[0].lstrip("# ").strip()
     body = markdown("\n".join(md.splitlines()[1:]))
     main = f"""  <section class="page-head wrap">
-    <p class="eyebrow">PlannerBench v2 · report</p>
+    <p class="eyebrow">PlannerBench · full report</p>
     <h1>{inline(title)}</h1>
   </section>
   <section class="wrap section report" style="padding-top:0">
@@ -291,7 +293,7 @@ def report_page():
 {body}
   </section>
 """
-    return page("Report: " + title, "The PlannerBench v2 report: bad inputs, the hard tier and tool use, with method, results, failure examples and limits.", "report.html", main, "report")
+    return page("Report: " + title, "The full PlannerBench write-up: AI on retirement math alone, with a calculator, and with wrong facts; method, corrections and limits.", "report.html", main, "report")
 
 
 def main():
