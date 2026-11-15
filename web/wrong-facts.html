@@ -31,8 +31,22 @@
     <h1>Tell it something wrong: the two best models caught most mistakes. Three cheap ones caught almost none.</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
-      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right. A mistake counts as <b>caught</b> only when the model named it <i>and</i> gave no number. The best models, GPT-6.1 Sol and Claude Sonnet 5.5, caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> while almost never refusing a file that was fine. Three of the <span data-w="cheap_n">—</span> cheap and free models (gpt-oss-120b, Llama 4 Maverick, Mistral Small) caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time; the other two did better (DeepSeek V4.1 Flash <span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span>, GLM 5.3 Flash <span data-v="v2:models.[name=GLM 5.3 Flash].bad.caught.rate" data-f="pct">—</span>). <b>ChatGPT</b>, tested separately the way most people use it, caught <span data-v="luna:bad.caught.rate" data-f="pct">—</span>. Even the best missed some.</p>
+      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right, and measured two things. <b>Recognized the mistake:</b> did the reply name it? <b>Stopped and asked:</b> did it ask for the right fact instead of giving a number? It counts as <b>caught</b> only when it did both.</p>
+      <p>The best models, GPT-6.1 Sol and Claude Sonnet 5.5, caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> while almost never refusing a file that was fine. Three of the <span data-w="cheap_n">—</span> cheap and free models (gpt-oss-120b, Llama 4 Maverick, Mistral Small) caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time. <b>ChatGPT</b>, tested separately, caught <span data-v="luna:bad.caught.rate" data-f="pct">—</span>.</p>
     </div>
+    <div class="table-wrap">
+      <table class="scores compact" id="wf-top">
+        <thead><tr><th scope="col">Of <span data-v="v2:items.bad_corrupted" data-f="int">—</span> planted mistakes</th><th scope="col" class="r">Recognized it</th><th scope="col" class="r">Stopped and asked</th><th scope="col" class="r">Caught (both)</th><th scope="col" class="r">Refused a fine file</th></tr></thead>
+        <tbody>
+          <tr><td class="model">GPT-6.1 Sol<span class="via">best</span></td><td class="r"><span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=GPT-6.1 Sol].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=GPT-6.1 Sol].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">Claude Sonnet 5.5<span class="via">best</span></td><td class="r"><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">Gemini 3.8 Flash<span class="via">mid-priced</span></td><td class="r"><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">DeepSeek V4.1 Flash<span class="via">cheap and free</span></td><td class="r"><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">gpt-oss-120b<span class="via">cheap and free</span></td><td class="r"><span data-v="v2:models.[name=gpt-oss-120b].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=gpt-oss-120b].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=gpt-oss-120b].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=gpt-oss-120b].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Recognizing isn’t stopping: GPT-6.1 Sol recognized <span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged.rate" data-f="pct">—</span> of the mistakes but stopped on <span data-v="v2:models.[name=GPT-6.1 Sol].bad.no_number.rate" data-f="pct">—</span>. Stopping isn’t recognizing either: Gemini 3.8 Flash stopped on <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.no_number.rate" data-f="pct">—</span> of the files with a mistake, but also refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> of the fine ones (out of <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span>), so a refusal from it tells you little. All <span data-w="models_n">—</span> models are under “All models and columns” below.</p>
     <div class="example">
       <p class="label">One example</p>
       <p>A client file said a retired school administrator with a $785,000 IRA was born in 2012, and asked how much she must withdraw this year. One model (gpt-oss-120b) replied:</p>
@@ -42,8 +56,7 @@
     <div class="glossary">
       <p class="label">Words on this page</p>
       <dl>
-        <div><dt>Caught</dt><dd>Named the planted mistake <b>and</b> gave no number. Noticing isn’t enough: GPT-6.1 Sol named the mistake in <span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged.rate" data-f="pct">—</span> of the files with one, but stopped without a number in <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span>, so it scores <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span>.</dd></div>
-        <div><dt>The best models</dt><dd>GPT-6.1 Sol and Claude Sonnet 5.5: they caught the most while rarely refusing files that were fine. Gemini 3.8 Flash caught more (<span data-v="v2:models.[name=Gemini 3.8 Flash].bad.caught.rate" data-f="pct">—</span>), but it also refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> of the fine files, so a refusal from it tells you little.</dd></div>
+        <div><dt>The best models</dt><dd>GPT-6.1 Sol and Claude Sonnet 5.5: they caught the most while rarely refusing files that were fine.</dd></div>
         <div><dt>Price groups</dt><dd>By what the model costs per word. <b>Top-priced:</b> <span data-w="tier_frontier">—</span>. <b>Mid-priced:</b> <span data-w="tier_mid">—</span>. <b>Cheap and free:</b> <span data-w="tier_cheap">—</span>.</dd></div>
         <div><dt>ChatGPT</dt><dd>GPT-6 Luna, used through an ordinary ChatGPT subscription. It was tested in a different setup, so it gets its own box below and isn’t ranked in the tables.</dd></div>
         <div><dt>Clean twin</dt><dd>The same file with the mistake taken out, to check the model can answer it when nothing is wrong.</dd></div>
@@ -67,24 +80,26 @@
     <div class="section-head">
       <p class="eyebrow">What the models did</p>
       <h2>The two best caught most mistakes. Three cheap models caught almost none.</h2>
-      <p class="sub">Each reply to a file with a planted mistake lands in one of these places:</p>
+      <p class="sub">The two measures split every reply to a file with a planted mistake into four outcomes, the colors in the chart:</p>
     </div>
-    <ul class="notes wf-outcomes">
-      <li><b>Caught it.</b> Named the planted mistake and gave no number. This is what you want.</li>
-      <li><b>Noticed, answered anyway.</b> Mentioned the problem, then gave a number built on it.</li>
-      <li><b>Missed it, answered anyway.</b> A confident number with no mention of the problem. This is the dangerous one.</li>
-      <li><b>Declined for another reason.</b> Gave no number, but for some other reason, such as doubting this year’s tax law, not because of the planted mistake.</li>
-      <li><b>Ran out of room.</b> Hit its length limit for a reply before giving any answer. Counted as a failure.</li>
-    </ul>
+    <div class="table-wrap">
+      <table class="scores compact wf-grid">
+        <thead><tr><th scope="col"></th><th scope="col">Stopped and asked</th><th scope="col">Gave a number</th></tr></thead>
+        <tbody>
+          <tr><td class="model">Recognized the mistake</td><td><b>Caught it.</b> What you want.</td><td><b>Noticed, answered anyway.</b> Said something looked wrong, then gave a number built on it.</td></tr>
+          <tr><td class="model">Didn’t recognize it</td><td><b>Declined for another reason</b>, such as doubting this year’s tax law.</td><td><b>Missed it, answered anyway.</b> A confident number. The dangerous one.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">A fifth outcome, <b>ran out of room</b> (hit the length limit before answering), counts as a failure.</p>
     <figure class="chart-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with the 30 files that had a mistake planted in them, as shares that add to 100%; the table under the toggle below has the same numbers" style="width:100%;height:auto"></div></figure>
     <p class="takeaway"><b>What it shows.</b> Each bar is one model. Pooling every model, there were <span data-w="all_replies">—</span> replies to a file with a planted mistake: <span data-v="v2:items.bad_corrupted" data-f="int">—</span> files, asked <span data-w="reps_breakdown">—</span> (cheaper models got more runs within the same budget). Of those replies, <span data-w="all_caught">—</span> caught the mistake and <span data-w="all_silent">—</span> missed it and answered anyway. The split is mostly by model: the best models stopped most of the time; gpt-oss-120b, Llama 4 Maverick and Mistral Small almost never did. One cheap model, DeepSeek V4.1 Flash, caught <span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span>, close to the mid-priced models.</p>
-    <p class="takeaway"><b>Noticing isn’t stopping.</b> Some replies saw the problem and gave a number anyway: <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.flagged_but_answered.rate" data-f="pct">—</span> of Claude Sonnet 5.5’s and <span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged_but_answered.rate" data-f="pct">—</span> of GPT-6.1 Sol’s. A number like that still ends up in someone’s plan.</p>
 
     <figure class="chart-card value-card"><div class="chart"><img src="charts/false_alarms.svg" alt="Share of the 40 fine files each model refused to answer; the table under the toggle below has the same numbers" style="width:100%;height:auto"></div></figure>
     <p class="takeaway"><b>What it shows.</b> The other way to fail is refusing a file that was fine. Most models almost never did. The two Gemini models refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Gemini 3.1 Pro].bad.false_alarm.rate" data-f="pct">—</span> of the 40 fine files, mostly because they didn’t believe this year’s tax law was real (it was passed after their training ended). So their high catch rates come with a lot of crying wolf, which is why “best” on this page means catching mistakes without refusing fine files.</p>
 
     <details class="fine wide">
-      <summary>Every model, every outcome</summary>
+      <summary>All models and columns (for the detail-minded)</summary>
       <div class="table-wrap">
         <table class="scores" id="wf-table">
           <thead><tr><th scope="col">Model</th></tr></thead>
@@ -104,7 +119,7 @@
         <div><dt>Graded</dt><dd>the same answer key, the same code and the same judge as above</dd></div>
         <div><dt>Why apart</dt><dd>the <span data-w="models_n">—</span> models above got one message each through the API, at low effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token limit. Different setups, so I don’t put them in one ranking.</dd></div>
       </dl>
-      <p class="result"><b>Result.</b> It caught <span data-v="luna:bad.caught.rate" data-f="pct">—</span> of the planted mistakes (<span data-v="luna:bad.caught.k" data-f="int">—</span> of <span data-v="luna:bad.caught.n" data-f="int">—</span>). It noticed the mistake and answered anyway on <span data-v="luna:bad.flagged_but_answered.rate" data-f="pct">—</span>, and missed it and answered anyway on <span data-v="luna:bad.silent_number.rate" data-f="pct">—</span>. It refused <span data-v="luna:bad.false_alarm.rate" data-f="pct">—</span> of the fine files, all <span data-v="luna:bad.decline_reasons.lacks_rules" data-f="int">—</span> times because it said it didn’t have this year’s rules. On the clean twins (the same files with the mistake fixed) it gave the right number <span data-v="luna:bad.clean_correct.rate" data-f="pct">—</span> of the time.</p>
+      <p class="result"><b>Result.</b> It recognized <span data-v="luna:bad.named.rate" data-f="pct">—</span> of the planted mistakes and stopped and asked on <span data-k="a_luna_stopped">—</span>, so it caught <span data-v="luna:bad.caught.rate" data-f="pct">—</span> (<span data-v="luna:bad.caught.k" data-f="int">—</span> of <span data-v="luna:bad.caught.n" data-f="int">—</span>). It noticed the mistake and answered anyway on <span data-v="luna:bad.flagged_but_answered.rate" data-f="pct">—</span>, and missed it and answered anyway on <span data-v="luna:bad.silent_number.rate" data-f="pct">—</span>. It refused <span data-v="luna:bad.false_alarm.rate" data-f="pct">—</span> of the fine files, all <span data-v="luna:bad.decline_reasons.lacks_rules" data-f="int">—</span> times because it said it didn’t have this year’s rules. On the clean twins (the same files with the mistake fixed) it gave the right number <span data-v="luna:bad.clean_correct.rate" data-f="pct">—</span> of the time.</p>
       <p class="result"><b>By kind of mistake.</b> It caught every pair of conflicting facts (<span data-v="luna:bad.by_type.conflict.rate" data-f="pct">—</span>) and <span data-v="luna:bad.by_type.transposed.rate" data-f="pct">—</span> of swapped digits, but only <span data-v="luna:bad.by_type.impossible_age.rate" data-f="pct">—</span> of impossible ages, <span data-v="luna:bad.by_type.spending.rate" data-f="pct">—</span> of impossible spending, and <span data-v="luna:bad.by_type.over_limit.rate" data-f="pct">—</span> of amounts over a legal limit.</p>
       <div class="example">
         <p class="label">The 14-year-old retiree again</p>
@@ -123,7 +138,7 @@
         <p class="sub">Pooling every model’s replies, <span data-w="pooled_top_kind">—</span> were caught <span data-w="pooled_top">—</span> of the time; <span data-w="pooled_low_kind">—</span> only <span data-w="pooled_low">—</span>. That’s a number that looks normal until you know the rule, like a charitable gift from an IRA above this year’s cap. ChatGPT, tested separately, caught none of them (<span data-v="luna:bad.by_type.over_limit.rate" data-f="pct">—</span>). Not every model followed the pattern: <span data-w="not_pattern">—</span> missed impossible spending more often than over-limit amounts. Sol, for example, caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.by_type.over_limit.caught.rate" data-f="pct">—</span> of over-limit amounts but only <span data-v="v2:models.[name=GPT-6.1 Sol].bad.by_type.spending.caught.rate" data-f="pct">—</span> of the impossible spending.</p>
       </div>
       <details class="fine wide">
-        <summary>Caught, by kind of mistake, for every model</summary>
+        <summary>By kind of mistake, every model (for the detail-minded)</summary>
         <div class="table-wrap">
           <table class="scores" id="wf-kind">
             <thead><tr><th scope="col">Model</th></tr></thead>
@@ -169,8 +184,7 @@
         <h2>Check what you type in</h2>
       </div>
       <ul class="notes">
-        <li><b>Three of the cheap and free models took the file at its word.</b> gpt-oss-120b, Llama 4 Maverick and Mistral Small almost always answered from a wrong balance, birth year or spending figure, with confidence. The other two cheap ones did better, but neither as well as the best models.</li>
-        <li><b>Even the best missed some, and ChatGPT caught only half.</b> The quiet ones slip through most: a normal-looking amount that breaks a rule.</li>
+        <li><b>Check the quiet numbers most.</b> A normal-looking amount that breaks a rule slipped through most often (above).</li>
         <li><b>Read the reply for a warning.</b> Several models mentioned the problem and answered anyway. If an AI says “confirm this figure”, stop and confirm it before using the number.</li>
       </ul>
     </div>
@@ -215,6 +229,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=18"></script>
+<script src="app.js?v=19"></script>
 </body>
 </html>

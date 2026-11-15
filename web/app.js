@@ -754,7 +754,9 @@
       Object.assign(A, { a_luna_hard_n: String(n), a_luna_hard_rate: pct(k / n), a_luna_hard_kn: `${k} of ${n}`,
         a_luna_missed: pct(1 - LU.bad.caught.rate), a_luna_hard_ci: range(LU.hard.lo, LU.hard.hi) + '%',
         a_luna_single_ci: range(LU.first_test.single_step.lo, LU.first_test.single_step.hi) + '%',
-        a_luna_unnamed: String(LU.bad.judged - LU.bad.named.k) });
+        a_luna_unnamed: String(LU.bad.judged - LU.bad.named.k),
+        // structural pass: the second wrong-facts measure, "stopped and asked" = gave no number (caught + declined for another reason)
+        a_luna_stopped: pct((LU.bad.caught.k + LU.bad.declined_other_reason.k) / LU.bad.caught.n) });
       // whole-household: one question per family plus one trap whose honest answer is "can't answer"
       const hh = LU.household, answerable = hh.n - 1;
       A.a_luna_household = `${hh.declined_answerable === answerable ? 'all' : hh.declined_answerable + ' of'} ${answerable} answerable ones`;
