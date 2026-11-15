@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Wrong facts · PlannerBench</title>
-<meta name="description" content="I planted one mistake in each of 30 client files, like a retiree who is 14. Most AI models didn't notice and gave a confident answer anyway. The best caught about three in four.">
+<meta name="description" content="I planted one mistake in each of 30 client files, like a retiree who is 14. The best AI models caught most of them; the cheap ones caught almost none and gave a confident answer anyway.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
@@ -28,10 +28,10 @@
 <main>
   <section class="page-head wrap">
     <p class="eyebrow">Finding 4 · Wrong facts · the newer, harder set (November 2026)</p>
-    <h1>Tell it something wrong, and most AI models won’t notice.</h1>
+    <h1>Tell it something wrong: the best AI models catch most mistakes, the cheap ones almost none.</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
-      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right. The two best, Claude Sonnet 5.5 and GPT-6.1 Sol, caught <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> of the mistakes. Three cheap models caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time. This is the biggest gap I found: the math is often fine, but the answer is built on a fact nobody checked.</p>
+      <p>I gave <span data-w="models_n">—</span> AI models client files with one fact that couldn’t be right. The two best, GPT-6.1 Sol and Claude Sonnet 5.5, caught <span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span> of the mistakes while almost never refusing a file that was fine. Three cheap models caught <span data-w="low_caught">—</span> and handed back a confident number <span data-w="low_silent">—</span> of the time. Even the best missed some. This is the biggest gap I found: the math can be fine while the answer is built on a fact nobody checked.</p>
     </div>
     <div class="example">
       <p class="label">One example</p>
@@ -70,7 +70,7 @@
     <p class="takeaway"><b>Noticing isn’t stopping.</b> Some replies saw the problem and gave a number anyway: <span data-v="v2:models.[name=Claude Sonnet 5.5].bad.flagged_but_answered.rate" data-f="pct">—</span> of Claude Sonnet 5.5’s and <span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged_but_answered.rate" data-f="pct">—</span> of GPT-6.1 Sol’s. A number like that still ends up in someone’s plan.</p>
 
     <figure class="chart-card value-card"><div class="chart"><img src="charts/false_alarms.svg" alt="Share of the 40 fine files each model refused to answer; the table under the toggle below has the same numbers" style="width:100%;height:auto"></div></figure>
-    <p class="takeaway"><b>What it shows.</b> The other way to fail is refusing a file that was fine. Most models almost never did. The two Gemini models refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Gemini 3.1 Pro].bad.false_alarm.rate" data-f="pct">—</span> of the 40 fine files, mostly because they didn’t believe this year’s tax law was real (it was passed after their training ended). So their high catch rates come with a lot of crying wolf.</p>
+    <p class="takeaway"><b>What it shows.</b> The other way to fail is refusing a file that was fine. Most models almost never did. The two Gemini models refused <span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span> and <span data-v="v2:models.[name=Gemini 3.1 Pro].bad.false_alarm.rate" data-f="pct">—</span> of the 40 fine files, mostly because they didn’t believe this year’s tax law was real (it was passed after their training ended). So their high catch rates come with a lot of crying wolf, which is why “best” on this page means catching mistakes without refusing fine files.</p>
 
     <details class="fine wide">
       <summary>Every model, every outcome</summary>
@@ -138,7 +138,7 @@
         <h2>Check what you type in</h2>
       </div>
       <ul class="notes">
-        <li><b>Most models trust whatever you tell them.</b> If a balance, a birth year or a spending figure is wrong, expect an answer built on it, stated with confidence.</li>
+        <li><b>Cheap models trust whatever you tell them.</b> If a balance, a birth year or a spending figure is wrong, expect an answer built on it, stated with confidence.</li>
         <li><b>Even the best missed some.</b> The quiet ones slip through most: a normal-looking amount that breaks a rule.</li>
         <li><b>Read the reply for a warning.</b> Several models mentioned the problem and answered anyway. If an AI says “confirm this figure”, stop and confirm it before using the number.</li>
       </ul>
