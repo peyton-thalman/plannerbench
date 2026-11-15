@@ -41,17 +41,24 @@ def pct(x):  # the same rounding as app.js (Math.round: halves go up)
     return f"{math.floor(x * 100 + 0.5)}%"
 
 
+def span(xs):  # the same as app.js span(): "73–80%", or "73%" when both round the same
+    lo, hi = pct(min(xs)), pct(max(xs))
+    return lo if lo == hi else f"{lo[:-1]}–{hi}"
+
+
 def expected():
     """What each page must say, worked out here from the data rather than read back from the page."""
     models, tools, meta, system = load("models"), load("tools"), load("meta"), load("system")
     lead = next(m for m in models if m["model"] == "claude-sonnet-5-5")
     st = tools["hard"]["stages"]
     cr = system["cleanroom"]
+    v2 = load("v2"); v2m = {m["name"]: m for m in v2["models"]}
     home = {"single": pct(lead["single_step_accuracy"]), "stacked": pct(lead["stacked_accuracy"]),
             "tools_from": pct(st[0]["accuracy"]), "tools_to": pct(st[-1]["accuracy"]),
             "questions": f"{meta['questions']:,}", "cleanroom": f"{cr['agree']:,} / {cr['of']:,}"}
     text = {
-        "index": [system["home_v2"]["caught_best"], system["home_v2"]["caught_cheap"]],
+        "index": [span([v2m["GPT-6.1 Sol"]["bad"]["caught"]["rate"], v2m["Claude Sonnet 5.5"]["bad"]["caught"]["rate"]]),
+                  span([m["bad"]["caught"]["rate"] for m in sorted(v2["models"], key=lambda m: m["bad"]["caught"]["rate"])[:3]])],
         "alone": [m["name"] for m in models] + [pct(m["accuracy"]) for m in models],
         "calculator": [f"{s['right']}/{s['questions']}" for s in st],
         "method": [f"{meta['questions']:,}"],

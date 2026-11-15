@@ -16,8 +16,8 @@ Target: both human readers score it 10/10 for "easy to follow the story."
 ## The one sentence
 
 AI is great at simple retirement questions; on real ones it depends heavily on which AI you ask; a trusted
-calculator rescues some models but not others; and almost none notice when you tell them something wrong,
-which is now the biggest gap.
+calculator rescues some models but not others; and when you tell it something wrong, the cheap ones almost never
+notice and even the best miss some, which is now the biggest gap.
 
 ## Why I made this (the opening, first person)
 
@@ -39,8 +39,8 @@ which is now the biggest gap.
 - For a single, well-known rule (this year's tax bracket, an IRA withdrawal), the best AIs are almost always right.
 - For your whole situation (taxes, Social Security and Medicare at once), it depends a lot on which AI. Free or
   cheap ones get most of these wrong; the very best got nearly all right in my newest test.
-- The biggest risk isn't the math. It's what you type in. Most AIs won't notice if a number you gave them can't be
-  right, and they'll hand back a confident answer anyway. Double-check your inputs, and take big decisions to a
+- The biggest risk isn't the math. It's what you type in. Cheap AIs almost never notice if a number you gave them can't
+  be right, and even the best miss about one in four; they hand back a confident answer anyway. Double-check your inputs, and take big decisions to a
   professional.
 
 ## The four findings (order is fixed; each links to its page)
@@ -68,9 +68,11 @@ which is now the biggest gap.
      right (one per family plus a trap), including DeepSeek, which got 2 of 11 alone. Small sample.
    - Leave a fact out: with the calculator, DeepSeek asked for the missing fact 9 of 10 times.
    - Try it yourself: it plugs into Claude and ChatGPT (chat.html).
-4. **Tell it something wrong, and most won't notice. This is the biggest open gap.** 30 client files, one planted
+4. **Tell it something wrong: the best catch most, the cheap ones almost none. This is the biggest open gap.**
+   (Not "most won't notice": 7 of 11 models caught at least half. "Best" = catching without false alarms;
+   Gemini 3.8 Flash caught 92% but flagged half the valid files.) 30 client files, one planted
    mistake each (a retiree who is 14, spending ten times what the family owns, a contribution over the legal limit).
-   The two best (Claude Sonnet 5.5, GPT-6.1 Sol) caught 73%; three cheap models caught 1–3% and gave a confident
+   GPT-6.1 Sol caught 80% and Claude Sonnet 5.5 73% with almost no false alarms; three cheap models caught 1–3% and gave a confident
    number 81–93% of the time. Some noticed the problem and answered anyway. Every model was worst at a plausible
    amount that's over a legal limit. Page: Wrong facts (wrong-facts.html).
 

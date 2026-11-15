@@ -16,9 +16,9 @@ prove, and tested the models. Site: **https://plannerbench.vercel.app** (every p
    wrong rule (40% → 62%). When the calculator also showed the rule and the IRS form line: 100% on the 50 hardest
    first-test questions, 96% on 50 held back. In November, DeepSeek V4.1 Flash went from 29% to 79% with it, at
    about a fifteenth of Sonnet's cost per right answer; three other cheap models called it and stayed under 10%.
-4. **Tell it something wrong, and most won't notice.** In 30 client files with one planted mistake each (a retiree
-   who is 14, a contribution over the legal limit), the best models caught about three in four; three cheap models
-   caught almost none and answered confidently anyway. This is the biggest open gap.
+4. **Tell it something wrong: the best catch most, the cheap ones almost none.** In 30 client files with one planted
+   mistake each (a retiree who is 14, a contribution over the legal limit), GPT-6.1 Sol caught 80% and Claude Sonnet
+   5.5 73% with almost no false alarms; three cheap models caught 1–3% and answered confidently anyway. This is the biggest open gap.
 
 Full write-up: [REPORT.md](REPORT.md). How every number is made: [METHODOLOGY.md](METHODOLOGY.md).
 

@@ -18,13 +18,14 @@ how often AI gets retirement math right, against an answer key I could prove.
    showed the rule and the IRS form line, Haiku got 100%, and 96% on 50 questions held back. In the newer set,
    DeepSeek V4.1 Flash went from 29% to 79% with the calculator; three other cheap models called it and stayed under
    10%, and the best model gained nothing.
-4. **Tell it something wrong, and most won't notice. This is the biggest open gap.** In 30 client files with one
+4. **Tell it something wrong: the best models catch most of it, the cheap ones almost none. This is the biggest
+   open gap.** In 30 client files with one
    planted mistake each, GPT-6.1 Sol caught 80% and Claude Sonnet 5.5 73%, with almost no false alarms. Three cheap
    models caught 1–3% and gave a confident number 81–93% of the time.
 
 **The plain answer.** For one well-known rule, the best AIs are reliable. For a whole household, it depends heavily on
 which AI you ask, and a free or cheap one will usually be wrong. The biggest risk isn't the math, it's what you type
-in: most models won't tell you when a number you gave them can't be right. Check your inputs, and take big decisions
+in: cheap models almost never tell you when a number you gave them can't be right, and even the best miss some. Check your inputs, and take big decisions
 to a professional.
 
 **How this was built.** I directed AI coding agents (mostly Claude Code) and made the calls: what to test, what counts
