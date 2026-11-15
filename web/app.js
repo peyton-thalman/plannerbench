@@ -41,20 +41,25 @@
     agree_cap: misread.length ? `models from ${misreadLabs.size} labs gave the same wrong answer to the same question` : null,
     chat_judge: sys.connector && `${sys.connector.judge_pass} / ${sys.connector.judge_of}`,
     cleanroom: sys.cleanroom && `${sys.cleanroom.agree.toLocaleString('en-US')} / ${sys.cleanroom.of.toLocaleString('en-US')}`,
+    // calculator test 1, number → rule: the paired test's p-value, shown only in the technical toggle
+    ladder_p: tools && ((x) => (x < 0.001 ? 'p < 0.001' : `p = ${x.toFixed(3)}`))(tools.hard.pairs.v1_to_v2.p),
     harness: h && `${name(h.direct)} was asked the same ${h.questions} questions directly and through OpenRouter. It scored ${pct(h.direct_accuracy)} both ways: no difference detected in this check.`,
   };
   document.querySelectorAll('[data-k]').forEach((n) => { if (fig[n.dataset.k]) n.textContent = fig[n.dataset.k]; });
 
   // Any number from any data file, with no page-specific code:
   //   <span data-v="v2:models.0.hard_alone" data-f="pct">—</span>
-  // data-v = "<file in data/ without .json>:<dot path>" (array items by index, or by [key=value], e.g. models.[model=x].acc).
+  // data-v = "<file in data/ without .json>:<dot path>" (array items by index, or by [key=value] / [k=v,k2=v2], e.g. models.[model=x].acc).
   // data-f = pct (0.73 → 73%), pct1, usd, int (1,234), frac (needs data-of: "<file>:<path>" → "22/30"), or raw (default).
   const files = {}; const load = async (f) => (files[f] ??= get(f));
   // [key=value] may contain dots (model names like "GPT-6.1 Sol"), so split on dots outside brackets only.
   const dig = (o, path) => path.match(/\[[^\]]*\]|[^.]+/g).reduce((x, k) => {
     if (x == null) return x;
-    const m = k.match(/^\[(.+?)=(.+)\]$/);
-    return m ? (Array.isArray(x) ? x.find((it) => String(it?.[m[1]]) === m[2]) : undefined) : x[k];
+    // [key=value] or several conditions, [key=value,key2=value2]; every one must match
+    const m = k.match(/^\[(.+=.+)\]$/);
+    if (!m) return x[k];
+    const conds = m[1].split(',').map((c) => [c.slice(0, c.indexOf('=')), c.slice(c.indexOf('=') + 1)]);
+    return Array.isArray(x) ? x.find((it) => conds.every(([a, b]) => String(it?.[a]) === b)) : undefined;
   }, o);
   const pick = async (ref) => { const i = ref.indexOf(':'); return dig(await load(ref.slice(0, i)), ref.slice(i + 1)); };
   const fmt = { pct: (x) => `${Math.round(x * 100)}%`, pct1: (x) => `${(x * 100).toFixed(1)}%`, usd: (x) => usd(x), int: (x) => Number(x).toLocaleString('en-US'), raw: (x) => String(x) };
@@ -276,7 +281,7 @@
       tbody.append(tr);
     }
     document.getElementById('gauntlet-note').textContent = `${gauntlet.questions} questions, one from each family plus a trap whose honest answer is “I can’t answer that.” `
-      + 'Ran out of room: used its whole reply budget thinking and never answered (scored as not right). Sonnet alone shows 10 because one reply was cancelled to stay inside the run’s spending cap. Bars show 95% intervals.';
+      + 'Ran out of room: used its whole reply budget thinking and never answered (scored as not right). Sonnet alone shows 10 because one reply was cancelled to stay inside the run’s spending cap. The shaded band behind each bar is the range the true score likely falls in, given so few questions.';
     const sb = gauntlet.side_by_side;
     document.getElementById('gauntlet-intro').textContent = sb.intro;
     const dl = document.getElementById('gauntlet-side');
@@ -321,7 +326,7 @@
     }
     const alone = ask.rows.find((r) => !r.engine);
     $('ask-note').textContent = `One question per family (the trap has nothing to leave out).${alone && alone.questions < 10 ? ` The alone run was stopped after ${alone.questions} questions: answering without the calculator took 10–15 minutes each.` : ''} `
-      + 'Fully right is graded against the full facts, by the same grader as above. Bars show 95% intervals.';
+      + 'Fully right is graded against the full facts, by the same grader as above. The shaded band behind each bar is the range the true score likely falls in, given so few questions.';
     const quotes = $('ask-quotes');
     const clip = (t) => (t.length > 220 ? t.slice(0, t.lastIndexOf(' ', 210)) + ' …' : t);
     (ask.rows.find((r) => r.engine) ?? ask.rows[0]).quotes.forEach((q, i) => {
@@ -349,9 +354,9 @@
     }
     const p = tools.hard.pairs, fmtP = (x) => (x < 0.001 ? 'p < 0.001' : `p = ${x.toFixed(3)}`);
     document.getElementById('ladder-note').textContent = `The same ${tools.hard.questions} questions in every row (${tools.hard.tasks.length} tasks, 10 each). `
-      + `The right number alone fixed ${p.none_to_v1.fixed} and broke ${p.none_to_v1.broken}; adding the rule and its source fixed ${p.v1_to_v2.fixed} more and broke ${p.v1_to_v2.broken} (${fmtP(p.v1_to_v2.p)}: same questions both ways, so very unlikely to be luck). `
+      + `The right number alone fixed ${p.none_to_v1.fixed} questions it had wrong and broke ${p.none_to_v1.broken} it had right; adding the rule and its source fixed ${p.v1_to_v2.fixed} more and broke ${p.v1_to_v2.broken}. With the same questions asked both ways, a jump that size is very unlikely to be luck (the statistics are under “For the technical reader” below). `
       + (toolsPrivate ? `On ${toolsPrivate.questions} held-back questions, never seen while the calculator was built: ${toolsPrivate.pairs.none_to_v2.fixed} fixed, ${toolsPrivate.pairs.none_to_v2.broken} broken. ` : '')
-      + 'Shaded bands are 95% intervals.';
+      + 'The shaded band behind each bar is the range the true score likely falls in, given so few questions.';
 
     const q = tools.quote;
     document.getElementById('tools-quote').textContent = `“${q.text}”`;
@@ -513,13 +518,15 @@
       const tbody = document.querySelector(`#${id} tbody`);
       for (const t of [...v2.tool_effect].filter((x) => !keep || keep.includes(x.name)).sort((a, b) => b.with - a.with)) {
         const m = M.find((x) => x.name === t.name), tr = el('tr', (t.with - t.without) / t.questions > 0.3 ? 'best' : null);
-        tr.append(who(m, 'one run each way'), frac(t.without, t.questions), frac(t.with, t.questions),
-          el('td', 'cost', `${t.fixed} / ${t.broken}`), el('td', 'cost', pct(m.hard_tools.call_rate)));
+        tr.append(who(m, 'one run each way'), frac(t.without, t.questions), frac(t.with, t.questions));
+        // Fixed / broken and Called it only in the full table behind the toggle, where they are explained
+        if (!keep) tr.append(el('td', 'cost', `${t.fixed} / ${t.broken}`), el('td', 'cost', pct(m.hard_tools.call_rate)));
         tbody.append(tr);
       }
       const c = v2.comparisons?.[0];
       if (c && sonnet) {
-        const tr = el('tr'); tr.append(who(sonnet, 'reference: not run with the calculator'), frac(c.b_right, c.questions), el('td', null, ''), el('td', 'cost', '–'), el('td', 'cost', '–'));
+        const tr = el('tr'); tr.append(who(sonnet, 'reference: not run with the calculator'), frac(c.b_right, c.questions), el('td', null, ''));
+        if (!keep) tr.append(el('td', 'cost', '–'), el('td', 'cost', '–'));
         tr.children[2].append(el('span', 'ci', 'not run')); tbody.append(tr);
       }
     }

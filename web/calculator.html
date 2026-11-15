@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>With a calculator · PlannerBench</title>
-<meta name="description" content="Three experiments with a calculator AI models can call while they answer: it fixed one model once it showed the rule, lifted a cheap model above a pricier one, and, for three models, got every whole-household decision right with every number within 2%. It did nothing for others. ChatGPT without a calculator mostly declined those decisions.">
+<meta name="description" content="Three experiments with a calculator AI models can call while they answer: it fixed one model once it showed the rule, lifted a cheap model above a pricier one, and, for three models, got every whole-household decision right with every number within 2%. It did nothing for others. GPT-6 Luna, the model on the author’s ChatGPT subscription, run through Codex without a calculator, declined those decisions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
@@ -48,7 +48,7 @@
       <ol>
         <li><a href="#tools"><b>Calculator test 1: number vs rule</b></a> (October). One model, the hardest first-test questions. A right number wasn’t enough; the rule behind it was.</li>
         <li><a href="#cheap"><b>Calculator test 2: who it rescues</b></a> (November). Eight models on the newer, harder set. A cheap model jumped; three others didn’t move.</li>
-        <li><a href="#gauntlet"><b>Calculator test 3: whole-household decisions</b></a>. Real choices over 25 years, three models. Plus ChatGPT without a calculator, and a short test: leave a fact out, and see if it asks.</li>
+        <li><a href="#gauntlet"><b>Calculator test 3: whole-household decisions</b></a>. Real choices over 25 years, three models. Plus GPT-6 Luna through Codex (the model on my ChatGPT subscription) without a calculator, and a short test: leave a fact out, and see if it asks.</li>
       </ol>
     </div>
   </section>
@@ -115,11 +115,11 @@
     <p class="result"><b>Not all of that gain is the calculator.</b> The setup also let a model write more in total, because the reply cap applied to each turn. On its own, DeepSeek hit the cap before answering on <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.truncated" data-f="pct">—</span> of questions; with the calculator, <span data-v="v2:tool_budget.by_model.[name=DeepSeek V4.1 Flash].over_4000_total" data-f="int">—</span> of its replies went past <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens in total. So part of the jump may come from that extra room. The conservative number: counting only replies that stayed within <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens in total, it got <span data-v="system:calculator_r2.ds_within_4000.right" data-f="frac" data-of="system:calculator_r2.ds_within_4000.of">—</span> (<span data-v="system:calculator_r2.ds_within_4000.rate" data-f="pct">—</span>). Higher than Sonnet’s score, but on only <span data-v="v2:items.hard" data-f="int">—</span> questions that lead could still be luck.</p>
     <div class="table-wrap">
       <table class="scores ladder" id="calc-paired">
-        <thead><tr><th scope="col">Model</th><th scope="col">On its own (first run)</th><th scope="col">With the calculator (one run)</th><th scope="col" class="r">Fixed / broken</th><th scope="col" class="r">Called it</th></tr></thead>
+        <thead><tr><th scope="col">Model</th><th scope="col">On its own (first run)</th><th scope="col">With the calculator (one run)</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <p class="table-note">Four of the <span data-v="v2:tool_effect.length" data-f="int">—</span> models run both ways, plus Claude Sonnet 5.5 on its own for reference; all of them are in the first table under “All models and columns” below. Both columns are one run per question, on the same <span data-v="v2:items.hard" data-f="int">—</span> questions. Fixed: wrong on its own, right with the calculator; broken: the reverse. Highlighted: the calculator added more than 30 points. Bars show the score; the shaded band is the 95% interval, the range the true score likely sits in given so few questions. These settings differ from calculator test 1 above, so don’t compare the two sets of scores.</p>
+    <p class="table-note">Four of the <span data-v="v2:tool_effect.length" data-f="int">—</span> models run both ways, plus Claude Sonnet 5.5 on its own for reference; all of them are in the first table under “All models and columns” below. Both columns are one run per question, on the same <span data-v="v2:items.hard" data-f="int">—</span> questions. Highlighted: the calculator added more than 30 points. The small grey numbers and the shaded band behind each bar show the range the true score likely falls in, given so few questions. These settings differ from calculator test 1 above, so don’t compare the two sets of scores.</p>
 
     <div class="wf-quotes">
       <div class="example">
@@ -137,12 +137,12 @@
     </div>
     <ul class="notes tools-notes">
       <li><b>Three cheap models called it and stayed low.</b> gpt-oss-120b, Llama 4 Maverick and Mistral Small called the calculator on <span data-w="weak_called">—</span> of the questions and still got only <span data-w="weak_right">—</span> right: wrong numbers in, or one call where the question needed three.</li>
-      <li><b>The best model gained nothing.</b> GPT-6.1 Sol got <span data-v="v2:tool_effect.[name=GPT-6.1 Sol].without" data-f="frac" data-of="v2:tool_effect.[name=GPT-6.1 Sol].questions">—</span> on its own and <span data-v="v2:tool_effect.[name=GPT-6.1 Sol].with" data-f="frac" data-of="v2:tool_effect.[name=GPT-6.1 Sol].questions">—</span> with it.</li>
+      <li><b>The highest scorer gained nothing.</b> GPT-6.1 Sol got <span data-v="v2:tool_effect.[name=GPT-6.1 Sol].without" data-f="frac" data-of="v2:tool_effect.[name=GPT-6.1 Sol].questions">—</span> on its own and <span data-v="v2:tool_effect.[name=GPT-6.1 Sol].with" data-f="frac" data-of="v2:tool_effect.[name=GPT-6.1 Sol].questions">—</span> with it.</li>
       <li><b>Claude Haiku 5.5 skipped it half the time.</b> It called the calculator on <span data-v="v2:models.[name=Claude Haiku 5.5].hard_tools.call_rate" data-f="pct">—</span> of questions, and once said so outright: “I did not run this through the calculator tools.” Its gain is small enough to be luck.</li>
     </ul>
     <details class="fine wide">
       <summary>All models and columns (for the detail-minded)</summary>
-      <p class="table-note">Every model run both ways, one run each:</p>
+      <p class="table-note">Every model run both ways, one run each. Fixed: wrong on its own, right with the calculator; broken: the reverse. Called it: the share of questions where the model used the calculator at all.</p>
       <div class="table-wrap">
         <table class="scores ladder" id="calc-paired-all">
           <thead><tr><th scope="col">Model</th><th scope="col">On its own (first run)</th><th scope="col">With the calculator (one run)</th><th scope="col" class="r">Fixed / broken</th><th scope="col" class="r">Called it</th></tr></thead>
@@ -215,15 +215,15 @@
 
       <div class="subpart solo" id="chatgpt-household">
         <p class="label">A separate result, not in the table above</p>
-        <h3>ChatGPT without a calculator: it mostly said it couldn’t</h3>
-        <dl class="idline" aria-label="How the ChatGPT household test was run">
+        <h3>GPT-6 Luna through Codex, without a calculator: it said it couldn’t</h3>
+        <dl class="idline" aria-label="How the GPT-6 Luna household test was run">
           <div><dt>Questions</dt><dd>the same <span data-v="luna:household.n" data-f="int">—</span> households, trap included</dd></div>
-          <div><dt>Model</dt><dd>GPT-6 Luna, through my own ChatGPT subscription (in Codex, OpenAI’s agent app), with no calculator, code or web</dd></div>
+          <div><dt>Model</dt><dd>GPT-6 Luna through Codex (the model on my ChatGPT subscription, run in OpenAI’s Codex app), with no calculator, code or web</dd></div>
           <div><dt>Settings</dt><dd>medium effort, no length limit, one try each; a different setup from the three models above</dd></div>
           <div><dt>Graded</dt><dd>the same way: the right decision, and every number within 2%</dd></div>
         </dl>
         <p class="result"><b>Result.</b> It declined all <span data-v="luna:household.declined_answerable" data-f="int">—</span> questions that had an answer, typically like this: “A reliable answer requires a full multi-year projection of taxes, RMDs, premiums, and account balances.” (RMDs are the withdrawals the IRS requires from retirement accounts.) It also rightly declined the trap, so it scored <span data-v="luna:household.great" data-f="int">—</span> of <span data-v="luna:household.n" data-f="int">—</span>.</p>
-        <p class="result"><b>Why this matters.</b> That’s an honest answer, and it’s the case for a calculator. A real decision needs a 25-year projection, which a chat can’t do in its head. Without one, the best you can hope for is a model that knows it can’t; with one, three models got every decision right.</p>
+        <p class="result"><b>Why this matters.</b> That’s an honest answer, and it’s the case for a calculator. A real decision needs a 25-year projection. GPT-6 Luna declined every one; some other models answered some of these correctly without a calculator (Claude Sonnet 5.5 got <span data-v="gauntlet:rows.[model=claude-sonnet-5-5,engine=false].great" data-f="int">—</span> of <span data-v="gauntlet:rows.[model=claude-sonnet-5-5,engine=false].questions" data-f="int">—</span>), and with one, all three models tested got every decision right.</p>
       </div>
 
       <div class="subpart" id="ask-first">
@@ -270,6 +270,7 @@
     <details class="fine">
       <summary>For the technical reader</summary>
       <p>The calculator is an MCP server (the Model Context Protocol, the standard way to plug tools into AI models). The benchmark runners and the chat add-on call the same code. The first test offered federal tax, taxable Social Security, required withdrawals, Social Security benefits, Medicare premiums and tax tables. The November set offered those plus a year-by-year scenario runner; the Roth-conversion solver and the chat front door were left out to keep the instructions short.</p>
+      <p><b>Calculator test 1</b>: from calculator 1.0 (just the number) to 1.1 (the number plus the rule), the same questions both ways; exact McNemar test, <span data-k="ladder_p">—</span>. Shaded bands in every table are 95% intervals (Wilson).</p>
       <p><b>Calculator test 2</b> (the <span data-v="v2:items.hard" data-f="int">—</span> questions in the newer set; low effort; one run each way; graded by code within <span data-v="system:calculator_r2.newer_set_tolerance">—</span>). Token budget: <span data-v="v2:tool_budget.tokens_per_turn" data-f="int">—</span> output tokens per turn, up to <span data-v="v2:tool_budget.max_tool_turns" data-f="int">—</span> turns. <span data-v="v2:tool_budget.over_4000_total" data-f="int">—</span> of <span data-v="v2:tool_budget.replies" data-f="int">—</span> calculator replies used more than <span data-v="v2:settings.max_tokens" data-f="int">—</span> in total, the longest <span data-v="v2:tool_budget.max_output_tokens" data-f="int">—</span>.</p>
       <p>DeepSeek V4.1 Flash with the calculator against Claude Sonnet 5.5 on its own, the same <span data-v="v2:comparisons.0.questions" data-f="int">—</span> questions, first run each: <span data-v="v2:comparisons.0.only_a" data-f="int">—</span> only DeepSeek got right, <span data-v="v2:comparisons.0.only_b" data-f="int">—</span> only Sonnet got right; exact McNemar p ≈ <span data-v="v2:comparisons.0.p_exact_mcnemar" data-f="raw">—</span>. Higher observed score, not a significant difference. DeepSeek alone → with: <span data-v="v2:tool_effect.[name=DeepSeek V4.1 Flash].fixed" data-f="int">—</span> fixed, <span data-v="v2:tool_effect.[name=DeepSeek V4.1 Flash].broken" data-f="int">—</span> broken, p &lt; 0.001. Claude Haiku 5.5: <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].fixed" data-f="int">—</span> fixed, <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].broken" data-f="int">—</span> broken, p = <span data-v="v2:tool_effect.[name=Claude Haiku 5.5].p" data-f="raw">—</span>.</p>
       <p>First test: Claude Haiku 5.5 through Anthropic’s API. November set: every model through OpenRouter (a service that relays requests to many models), each pinned to one host. The calculator prices each choice; it never picks investments or products.</p>
