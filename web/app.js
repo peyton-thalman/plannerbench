@@ -45,6 +45,24 @@
   };
   document.querySelectorAll('[data-k]').forEach((n) => { if (fig[n.dataset.k]) n.textContent = fig[n.dataset.k]; });
 
+  // Any number from any data file, with no page-specific code:
+  //   <span data-v="v2:models.0.hard_alone" data-f="pct">—</span>
+  // data-v = "<file in data/ without .json>:<dot path>" (array items by index, or by [key=value], e.g. models.[model=x].acc).
+  // data-f = pct (0.73 → 73%), pct1, usd, int (1,234), frac (needs data-of: "<file>:<path>" → "22/30"), or raw (default).
+  const files = {}; const load = async (f) => (files[f] ??= get(f));
+  const dig = (o, path) => path.split('.').reduce((x, k) => {
+    if (x == null) return x;
+    const m = k.match(/^\[(.+?)=(.+)\]$/);
+    return m ? (Array.isArray(x) ? x.find((it) => String(it?.[m[1]]) === m[2]) : undefined) : x[k];
+  }, o);
+  const pick = async (ref) => { const i = ref.indexOf(':'); return dig(await load(ref.slice(0, i)), ref.slice(i + 1)); };
+  const fmt = { pct: (x) => `${Math.round(x * 100)}%`, pct1: (x) => `${(x * 100).toFixed(1)}%`, usd: (x) => usd(x), int: (x) => Number(x).toLocaleString('en-US'), raw: (x) => String(x) };
+  await Promise.all([...document.querySelectorAll('[data-v]')].map(async (n) => {
+    const v = await pick(n.dataset.v);
+    if (v == null) { console.warn('data-v not found:', n.dataset.v); return; }
+    n.textContent = n.dataset.f === 'frac' ? `${v}/${await pick(n.dataset.of)}` : (fmt[n.dataset.f] ?? fmt.raw)(v);
+  }));
+
   // Home: the system map. Each node's panel says what it is, why it exists and the number that proves it.
   if ($('map-panel')) {
     const sonnetG = gRows.find((r) => r.engine && r.model.includes('sonnet')), sonnetAlone = gRows.find((r) => !r.engine && r.model.includes('sonnet'));
