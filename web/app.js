@@ -461,7 +461,8 @@
         const k = el('div', 'key');
         const item = (label, v) => { const s = el('span'); s.append(`${label} `, el('b', null, v)); return s; };
         k.append(item('Answer key', fmtAnswer(ex, ex.answer)));
-        for (const [m, r] of Object.entries(ex.replies)) k.append(item(name(m).replace('Claude ', ''), `${fmtAnswer(ex, r.got)} ${r.bucket === 'correct' ? '✓' : '✗'}`));
+        // A reply with no number (ran out of room, or the request failed) says so instead of showing $0.
+        for (const [m, r] of Object.entries(ex.replies)) k.append(item(name(m).replace('Claude ', ''), r.got == null ? (r.bucket === 'truncated' ? 'Ran out of room ✗' : 'No answer') : `${fmtAnswer(ex, r.got)} ${r.bucket === 'correct' ? '✓' : '✗'}`));
         d.append(k);
         card.append(d);
       }
