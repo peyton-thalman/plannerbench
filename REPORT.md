@@ -12,19 +12,22 @@ how often AI gets retirement math right, against an answer key I could prove.
 2. **Real-life questions: it depends which AI.** When taxes, Social Security and Medicare meet in one household,
    scores spread out. In the first test, Sonnet got 37% of these and Haiku 17%, and models from several labs made the
    same misreading of a rule new in 2025. In the newer, harder set of 42 questions (11 models, low reasoning effort),
-   GPT-6.1 Sol got 98%, Claude Sonnet 5.5 62%, and most cheap models under 30%.
+   GPT-6.1 Sol got 98%, Claude Sonnet 5.5 62%, and all five cheap models under 30%.
 3. **A calculator helps, if it shows its work, and only for some models.** Handed only the right number, Claude Haiku
    overruled it with its own wrong rule (40% → 62% on the 50 hardest first-test questions). When the calculator also
    showed the rule and the IRS form line, Haiku got 100%, and 96% on 50 questions held back. In the newer set,
-   DeepSeek V4.1 Flash went from 29% to 79% with the calculator; three other cheap models called it and stayed under
-   10%, and the best model gained nothing.
+   DeepSeek V4.1 Flash went from 29% to 79% with the calculator; three other cheap models called it and scored
+   10% or less, and the best model gained nothing.
 4. **Tell it something wrong: the best models catch most of it, three cheap models almost none. This is the biggest
    open gap.** In 30 client files with one
    planted mistake each, GPT-6.1 Sol caught 80% and Claude Sonnet 5.5 73%, with almost no false alarms. Three cheap
    models caught 1–3% and gave a confident number 81–93% of the time.
 
+**And ChatGPT?** GPT-6 Luna on a ChatGPT subscription got 71% of one-rule questions but 17% of the hardest ones, and
+caught half the planted mistakes. It was a different setup, so it is reported in its own section below.
+
 **The plain answer.** For one well-known rule, the best AIs are reliable. For a whole household, it depends heavily on
-which AI you ask, and a free or cheap one will usually be wrong. And the answer is only as good as what you type in:
+which AI you ask: the cheap and free models I tested, at quick-answer settings, got most of the hard questions wrong. And the answer is only as good as what you type in:
 in my tests, three cheap models almost never questioned an impossible fact, and even the best missed about one in
 four. Check your inputs, and take big decisions to a professional.
 
@@ -127,7 +130,7 @@ back matters, not that it works for every model.
 convert to a Roth, when to claim Social Security, how to give, how to empty an inherited IRA). One question from each
 of 10 families plus a trap, one try each:
 
-| Model | Fully right alone | With the calculator |
+| Model | Right decision and every number within 2%, alone | With the calculator |
 |---|---|---|
 | Claude Haiku 5.5 | 4/11 | 11/11 |
 | Claude Sonnet 5.5 | 7/10 (3 ran out of room) | 11/11 |
@@ -139,18 +142,21 @@ it 9 times in 10 and got 9 of 10 fully right. Small samples: this shows the gap,
 
 ### The newer set: a cheap model catches up, others don't (November)
 
-| Model | Alone | With the calculator | Called a tool |
-|---|---|---|---|
-| GPT-6.1 Sol | 98% | 95% [84–99] | 79% |
-| GPT-6.1 Terra | 80% | 86% [72–93] | 81% |
-| DeepSeek V4.1 Flash | 29% | 79% [64–88] | 90% |
-| Claude Haiku 5.5 | 52% | 62% [47–75] | 50% |
-| GLM 5.3 Flash | 15% | 43% [29–58] | 86% |
-| gpt-oss-120b | 7% | 10% [4–22] | 79% |
-| Mistral Small | 7% | 7% [2–19] | 79% |
-| Llama 4 Maverick | 6% | 5% [1–16] | 79% |
+Paired: each model's first run alone against its one run with the calculator, on the same 42 questions.
 
-Sonnet and the Gemini models were not run with the calculator (cost).
+| Model | Alone (first run) | With the calculator | Fixed / broken | Called a tool |
+|---|---|---|---|---|
+| GPT-6.1 Sol | 41/42 | 40/42 | 0 / 1 | 79% |
+| GPT-6.1 Terra | 34/42 | 36/42 | 3 / 1 | 81% |
+| DeepSeek V4.1 Flash | 12/42 | 33/42 | 21 / 0 | 90% |
+| Claude Haiku 5.5 | 20/42 | 26/42 | 8 / 2 | 50% |
+| GLM 5.3 Flash | 7/42 | 18/42 | 11 / 0 | 86% |
+| gpt-oss-120b | 3/42 | 4/42 | 2 / 1 | 79% |
+| Mistral Small | 3/42 | 3/42 | 3 / 3 | 79% |
+| Llama 4 Maverick | 3/42 | 2/42 | 0 / 1 | 79% |
+
+Sonnet and the Gemini models were not run with the calculator (cost). The "Alone" column in the earlier table averages
+two runs for some models; this one uses the first run, the one the calculator run is paired with.
 
 - **DeepSeek scored higher than Sonnet alone, at about a fifteenth of the cost per right answer.** DeepSeek with the
   engine got 33 of 42 right; Sonnet alone got 26. Both were right on 23, only DeepSeek on 10, only Sonnet on 3,
@@ -305,6 +311,38 @@ with a single line:
 
 Right about the standard deduction, and it missed Arizona's separate $2,100 exemption for people 65 and older. The
 tool gave it correct parts; the assembly was its own.
+
+## ChatGPT, as most people use it (GPT-6 Luna)
+
+Most people ask ChatGPT. So on 2026-11-15 the same questions went to GPT-6 Luna through a ChatGPT subscription (in
+Codex), graded with the same answer keys and graders. Luna answered each prompt as its own chat with no code,
+calculator or web, at medium effort with no token limit, in batches of 5–11 prompts per session. That is a different
+setup from the API runs (one message per question, fixed token limits), so these numbers sit beside the tables above,
+not inside them. In real ChatGPT the model may choose to run code; here it didn't, the same as the other models.
+
+| Test | GPT-6 Luna |
+|---|---|
+| First test: one-rule questions | 71% (42/59) |
+| First test: multi-step / several rules at once | 3% (1/30) / 0% (0/20) |
+| First test: compliance | 93% (28/30) |
+| Newer, harder set | 17% (7/42) |
+| Wrong facts: caught / noticed, answered anyway / missed, answered anyway | 50% / 10% / 40% (of 30) |
+| Wrong facts: false alarms (40 valid notes) / clean twins right (30) | 10% / 43% |
+| Whole-household decisions | declined 10 of 11 answerable questions; correctly declined the trap |
+
+- **It accepts impossible facts like the cheap models do.** "Priya is only 14 in 2026, so age-based required minimum
+  distributions do not apply to her traditional IRA... Her RMD is therefore zero." It caught none of the over-limit
+  amounts and a third of the impossible ages, but every conflicting fact and most swapped digits.
+- **Without a calculator, it mostly knew it couldn't do whole-household plans.** It declined 10 of 11 ("A reliable
+  answer requires a full multi-year projection"). Honest, but no help to the person asking, which is the case for
+  giving it a calculator.
+- **How it was run, and what went wrong.** The first attempt (batches of 11–35) was thrown out: most replies were a
+  bare "ANSWER: n" with no reasoning, which is not how the model answers a person. In the second attempt one session
+  declined a whole batch of hard tax questions "from memory", and a few answers were skipped or malformed; those
+  questions were re-asked one at a time. One first-test question was never answered, so that score is out of 139.
+  Wrong-facts replies were judged by Claude Haiku 5.5 with the same rubric, and every "missed" label was read; none
+  changed. Files: `runs/luna-codex-10x1/`, `runs/luna-gauntlet/`, `v2/runs/luna-codex/`, `v2/results/luna.json`,
+  `v2/runs/luna-map/` (the prompt-id map and both attempts).
 
 ## Corrections
 
