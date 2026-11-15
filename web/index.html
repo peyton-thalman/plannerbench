@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PlannerBench</title>
-<meta name="description" content="A financial advisor tested AI models on the retirement questions families ask, against an answer key checked by independent programs. One rule: the best AIs are reliable. A whole household: it depends which AI, and ChatGPT on a regular subscription got most of the hardest questions wrong. Some accept impossible facts, so check what you type.">
+<meta name="description" content="A financial advisor tested AI models on the retirement questions families ask, against an answer key checked by independent programs. One rule: the best AIs are reliable. Several rules at once: it depends which AI, and ChatGPT on a regular subscription got most of the hardest questions wrong. Some accept impossible facts, so check what you type.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
@@ -32,10 +32,11 @@
     <div class="answer-box bottom-line">
       <p class="label">The bottom line</p>
       <ul>
-        <li><b>One rule: the best AIs are reliable.</b> Ask this year’s tax on an income, or how much you must take out of an IRA (a retirement account you haven’t paid tax on yet), and Claude Sonnet 5.5 got <span data-k="single">—</span> right.</li>
-        <li><b>A whole household: it depends which AI.</b> When taxes, Social Security and Medicare affect each other, GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> of my hardest questions right. <b>ChatGPT on a regular subscription got only <span data-v="luna:hard.rate" data-f="pct">—</span>.</b></li>
+        <li><b>One rule at a time: the best AIs I tested were almost always right.</b> Ask this year’s tax on an income, or how much you must take out of an IRA (a retirement account you haven’t paid tax on yet), and Claude Sonnet 5.5 got <span data-k="single">—</span> right.</li>
+        <li><b>Several rules at once: it depends which AI.</b> When taxes, Social Security and Medicare affect each other, GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> of my hardest questions right. <b>ChatGPT’s model, on my regular subscription, got only <span data-v="luna:hard.rate" data-f="pct">—</span></b> (a different model and setup from Sol’s, tested separately; details below).</li>
         <li><b>AI can accept impossible facts, so check what you type.</b> Given client files with one planted mistake each (like a retiree who is 14), even the best models didn’t catch <span data-k="a_best_missed">—</span> of them, and ChatGPT didn’t catch <span data-k="a_luna_missed">—</span>.</li>
       </ul>
+      <p class="sure"><b>How sure am I?</b> Every answer is worked out by separate programs that have to agree, and I publish every check. A CPA (licensed tax accountant) hasn’t signed off yet; that’s next. <a href="method.html">How I checked →</a></p>
       <div class="this-week">
         <p class="label">What to do this week</p>
         <p>Ask the AI you use one retirement question you care about. Then read back every age, balance and income in its answer, and ask it to name the rule it used and where that rule comes from (an IRS form, Social Security’s rules). If a fact is wrong or it can’t name the rule, don’t act on the number. Take anything you can’t undo, like when to claim Social Security, to a professional.</p>
@@ -68,9 +69,9 @@
         <span class="more">AI on its own →</span>
       </a>
       <a class="find" href="alone.html#chatgpt">
-        <span class="n">ChatGPT, as most people use it</span>
+        <span class="n">ChatGPT’s model, on a subscription</span>
         <p class="big"><span data-v="luna:hard.rate" data-f="pct">—</span></p>
-        <p>GPT-6 Luna, the model in my own regular ChatGPT subscription, on the same <span data-v="v2:items.hard" data-f="int">—</span> questions, graded the same way. On one-rule questions it got <span data-v="luna:first_test.single_step.rate" data-f="pct">—</span>.</p>
+        <p>GPT-6 Luna, the model in my regular ChatGPT subscription, run through OpenAI’s Codex app with code and web turned off, on the same <span data-v="v2:items.hard" data-f="int">—</span> questions, graded the same way. On one-rule questions it got <span data-v="luna:first_test.single_step.rate" data-f="pct">—</span>.</p>
         <p class="catch"><b>Catch:</b> a different setup from the other models (more time to think, no length limit, questions sent in small batches), so it’s shown on its own, not ranked with them. Like the others, it wasn’t allowed to run code.</p>
         <span class="more">AI on its own →</span>
       </a>

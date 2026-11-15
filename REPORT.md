@@ -193,7 +193,7 @@ A reply to a corrupted note lands in one of five places:
 Whether a reply ended in a number or NEED_INFO is read by a rule. Whether it named the planted problem was judged by
 Claude Haiku 5.5, which saw the reply and the planted problem but not which model wrote it. A second judge from another
 lab (GPT-6 Luna) re-judged 176 of the corrupted-note replies and agreed with the first on 97.7% of "named the problem"
-labels (kappa 0.95). Then I adjudicated every reply the judge marked as not naming the problem (details below).
+labels (kappa 0.95). Then the lead AI agent (Claude), not a person, adjudicated every reply the judge marked as not naming the problem (details below).
 
 | Model | Caught it | Noticed, answered anyway | Missed it, answered anyway | Declined, other reason | Ran out of room | False alarms (40 valid notes) | Clean twins right (30) |
 |---|---|---|---|---|---|---|---|
@@ -232,7 +232,7 @@ labels (kappa 0.95). Then I adjudicated every reply the judge marked as not nami
   (Caught versus not caught alone: DeepSeek 67%, GLM 57%, Haiku 83%, Terra 93%.)
 
 **Adjudication.** The audit found replies that plainly named the planted problem but were judged as not naming it. So
-I checked every one of the 322 corrupted-note replies the judge marked "not named": a transparent pre-filter (the
+the lead AI agent checked every one of the 322 corrupted-note replies the judge marked "not named": a transparent pre-filter (the
 planted numbers and terms appearing in the reply) picked 143 candidates, and each was read against the rule "the reply
 says, in its own words, that the corrupted fact is wrong, impossible, inconsistent, over a limit, or more than the
 household can fund". 18 labels changed, all from "missed" to "named": GPT-6.1 Terra 14, Sol 2, DeepSeek 2. A reverse
@@ -312,10 +312,10 @@ with a single line:
 Right about the standard deduction, and it missed Arizona's separate $2,100 exemption for people 65 and older. The
 tool gave it correct parts; the assembly was its own.
 
-## ChatGPT, as most people use it (GPT-6 Luna)
+## ChatGPT’s model on a subscription (GPT-6 Luna, through Codex)
 
-Most people ask ChatGPT. So on 2026-11-15 the same questions went to GPT-6 Luna through a ChatGPT subscription (in
-Codex), graded with the same answer keys and graders. Luna answered each prompt as its own chat with no code,
+Most people ask ChatGPT. So on 2026-11-15 the same questions went to GPT-6 Luna, the model on my ChatGPT subscription,
+run through OpenAI’s Codex app (not the ChatGPT chat window), graded with the same answer keys and graders. Luna answered each prompt as its own chat with no code,
 calculator or web, at medium effort with no token limit, in batches of 5–11 prompts per session. That is a different
 setup from the API runs (one message per question, fixed token limits), so these numbers sit beside the tables above,
 not inside them. In real ChatGPT the model may choose to run code; here it didn't, the same as the other models.
