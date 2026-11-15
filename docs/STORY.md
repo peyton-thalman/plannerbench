@@ -17,7 +17,7 @@ Target: both human readers score it 10/10 for "easy to follow the story."
 
 AI is great at simple retirement questions; on real ones it depends heavily on which AI you ask; a trusted
 calculator rescues some models but not others; and when you tell it something wrong, three cheap models almost never
-noticed and even the best two missed about one in four or five (20–27%).
+noticed and even GPT-6.1 Sol and Claude Sonnet 5.5 missed about one in four or five (20–27%).
 
 Home page's one-sentence version (names names): the best AI I tested, GPT-6.1 Sol, got 98% of my hardest questions
 right and Claude Sonnet 5.5 got 62%; all five cheap and free models scored under 30%, and three of them almost never
@@ -40,11 +40,12 @@ noticed a fact that couldn't be true. "Best" = right most often; on wrong facts,
 ## A straight answer for a normal person (home page, near the top)
 
 "Should I trust AI with my retirement questions?" Plain answer, in this spirit:
-- For a single, well-known rule (this year's tax bracket, an IRA withdrawal), the best AIs are almost always right.
+- Say what was tested, not whom to trust: "On the one-rule questions I tested, Claude Sonnet 5.5 and Haiku 5.5 were right
+  about 97% of the time" (this year's tax bracket, an IRA withdrawal), never "trust the best AIs on a single rule".
 - For your whole situation (taxes, Social Security and Medicare at once), it depends a lot on which AI. Free or
   cheap ones get most of these wrong; the very best got nearly all right in my newest test.
 - Check what you type in. Say what was measured, not "the biggest risk": in my tests, three cheap models almost never
-  questioned an impossible fact, and even the best two missed 20–27%; they handed back a confident answer anyway.
+  questioned an impossible fact, and even Sol and Sonnet missed 20–27%; they handed back a confident answer anyway.
   (Don't say "the math isn't the problem": one model said $70,200 exceeds $798,000.)
 
 ## The four findings (order is fixed; each links to its page)
@@ -66,13 +67,13 @@ noticed a fact that couldn't be true. "Best" = right most often; on wrong facts,
      on 50 held-back questions nobody tuned against, 96% (48/50; both misses overruled it again).
    - A cheap model can catch up: in the November set, DeepSeek V4.1 Flash went from 29% to 79% with the calculator,
      ahead of Claude Sonnet 5.5 alone (62%) at about a fifteenth of the cost per right answer.
-   - Honest catch: three other cheap models called the calculator and still got under 10%; the best model
+   - Honest catch: three other cheap models called the calculator and still got under 10%; the highest scorer
      (GPT-6.1 Sol) gained nothing.
    - Whole-household decisions (formerly "the Gauntlet"): with the calculator, all three models tested got all 11
      right (one per family plus a trap), including DeepSeek, which got 2 of 11 alone. Small sample.
    - Leave a fact out: with the calculator, DeepSeek asked for the missing fact 9 of 10 times.
    - Try it yourself: it plugs into Claude and ChatGPT (chat.html).
-4. **Tell it something wrong: the best catch most, three cheap models almost none.** (Say "three cheap models", not
+4. **Tell it something wrong: Sol and Sonnet catch most, three cheap models almost none.** (Say "three cheap models", not
    "cheap models": DeepSeek V4.1 Flash caught 61% and GLM 5.3 Flash 40%. "Caught" = recognized the mistake and stopped and asked, giving no number.)
    (Not "most won't notice": 7 of 11 models caught at least half. "Best" = catching without false alarms;
    Gemini 3.8 Flash caught 92% but flagged half the valid files.) 30 client files, one planted
@@ -82,27 +83,35 @@ noticed a fact that couldn't be true. "Best" = right most often; on wrong facts,
    amount that's over a legal limit. Page: Wrong facts (wrong-facts.html).
 
 Home page order (structural pass, 2026-11-15; aim: half the old length, now about 720 visible words, was about 1,090):
-1. Headline + a one-sentence plain answer ("Trust the best AIs on a single rule. Check them on your whole situation, and
-   check what you type in.").
-2. The bottom-line box: three bullets (one rule; several rules at once, with ChatGPT's 17% and its setup note; impossible
-   facts), the How-sure line (separate programs must agree; no CPA yet) and What to do this week.
+1. Headline + a plain answer scoped to what was tested ("On the one-rule questions I tested, the two Claude models were
+   right about 97% of the time. On questions where several rules meet, the scores depended heavily on which AI…").
+2. The bottom-line box: the definitions of "one rule" and "several rules at once"; three bullets (one rule; several rules at
+   once, naming Sol, Terra and Sonnet, with GPT-6 Luna's 17%; impossible facts); the How-sure line as a one-sentence
+   verification boundary (outside coverage: the first test's tax answers, by PolicyEngine-US; everything else: two
+   separately written programs agreeing; still awaiting a person: CPA sign-off, a spot-check of the AI judge); the
+   "About ChatGPT" line (the regular ChatGPT app uses GPT-6 Luna, a different, cheaper model than GPT-6.1 Sol; this run
+   went through OpenAI's Codex app with code and web off, in small batches, so it's close to but not the same as typing
+   into ChatGPT); What to do this week.
 3. **The story in 60 seconds**: the problem (door-to-door advisor; clients ask ChatGPT), what I built (answer key from the
    planning engine, rechecked by separate programs, then the questions; AI agents built it, I made the calls), the strongest
    result (calculator test 1: 40% → 62% → 100% on 50, 96% on 50 held back), the limits (small samples, an AI judge, no CPA).
-4. **Three results**: It depends which AI (Sol vs Sonnet vs cheap; ChatGPT on its own line with its setup note) · Hand it
+4. **Three results**: It depends which AI (Sol vs Sonnet, Terra named, vs cheap; GPT-6 Luna on its own line with its setup note) · Hand it
    the answer and it argues (Haiku 40% → 100%; catch: DeepSeek rose, three cheap models didn't) · It accepts impossible
    facts (caught = recognized + stopped and asked).
-5. **What I decided**: build the checker before the questions; fix the calculator's reply, not the prompt; keep a test set
-   nobody tunes on; have another company's model audit it and publish the 12 errors. Link to How I built it.
-6. **The experiments** map (name · when · questions · models), linking to each page, with the October/November settings
-   note and the model groups in one line.
+5. **What I decided**: build the checker before the questions ("a second program, written without seeing the first, agreed
+   on all 4,000 test households", in words, no "cleanroom" or "4,000 / 4,000"); fix the calculator's reply, not the
+   prompt; keep secret test questions; have another company's model audit it and publish the 12 errors. Link to How I built it.
+6. **The experiments** map, headed "If you want to dig in, here's every test", columns Test · When · What it asked · How
+   many · Which AIs, linking to each page, with one plain settings sentence ("October and November used different
+   settings, so compare within a test, not across") and the price groups in one line.
 7. Next → AI on its own.
-Plain definitions at first use on Home: "one rule", "several rules at once", "answer key", "planning engine".
+Plain definitions at first use on Home: "one rule", "several rules at once", "answer key", "planning engine",
+"held-back questions", "AI judge", "planted mistakes".
 Not on Home any more: "Why I made this" (the dad line moved to How I built it's lede), "How to read the numbers", the
 trust paragraph, the reading list. Verification language: "within $1" / "within $2", never "to the dollar".
 
 Experiment names (use the same words on Home's map, page eyebrows and anchors):
-First test (Oct) · Newer, harder set (Nov) · ChatGPT on a subscription (Nov) · Calculator test 1: number vs rule (Oct) ·
+First test (Oct) · Newer, harder set (Nov) · GPT-6 Luna through Codex (Nov) · Calculator test 1: number vs rule (Oct) ·
 Calculator test 2: who it rescues (Nov) · Calculator test 3: whole-household decisions (Oct) · Wrong facts (Nov).
 
 Wrong facts uses two named measures everywhere: **recognized the mistake** (the reply named it) and **stopped and asked**
@@ -127,7 +136,9 @@ How I built it → How I checked → home. (Decisions come before method: hiring
 | the planning engine / the calculator | MoneyGuide, MCP server (except one technical aside) |
 | AI on its own · With a calculator · Wrong facts · How I built it · How I checked | Results · With tools · Bad inputs · Method |
 | the 50 hardest questions from the first test / the 42 questions in the newer set | "50 hard questions" and "42 hard questions" side by side unexplained |
-| cheap / free models, the best models | frontier, mid-tier, open weights (unless explained once) |
+| top-priced / mid-priced / cheap and free (price groups); name the models when ranking | "the best models" as a group (who is best depends on the measure: highest on the hard set is Sol, then Terra; best at catching mistakes without false alarms is Sol, then Sonnet), frontier, mid-tier, open weights |
+| GPT-6 Luna through Codex (the model on my ChatGPT subscription) at first mention per page, then GPT-6 Luna | "ChatGPT" for the model or the result ("ChatGPT" only for the app itself) |
+| a projected $X less after-tax wealth over 25 years (a simulation, not a real household) | "costs the household $X" |
 
 ## Voice and page rules
 
@@ -139,6 +150,7 @@ How I built it → How I checked → home. (Decisions come before method: hiring
 - Big tables go behind toggles; show the 3–5 rows that tell the story first.
 - Every claim is scoped: which models, which test, how many questions. No "AI" when you mean "these 11 models".
 - Limits are stated where the claim is made, briefly, not saved for the end.
+- Percentages round half up everywhere (app.js Math.round; charts use the same rule), so 1/40 shows as 3% on every page.
 - Every number in the text comes from a data file. Numbers typed as text are logged in web/data/system.json with
   their source.
 - House style (peytonthalman.com): white paper, ink, hairlines, Newsreader headlines, Geist text, no pills,
