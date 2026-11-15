@@ -12,8 +12,8 @@ local copy first (`python3 -m http.server 4173 --directory site`, then `checks/s
 Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
 white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
 Nav is five links in reading order: AI on its own (`alone.html`), With a calculator (`calculator.html`), Wrong facts
-(`wrong-facts.html`), How I built it, How I checked (`method.html`), plus a Human / Agent (plain text) switch at the right
-(Agent → `agent.html`); `chat.html` (Chat demo), `replay.html` and `report.html` are linked from the footer. The brief for
+(`wrong-facts.html`), How I built it, How I checked (`method.html`), plus a Human / For AI readers switch at the right
+(For AI readers → `agent.html`); `chat.html` (Chat demo), `replay.html` and `report.html` are linked from the footer. The brief for
 every page is `docs/STORY.md` (home order, names, voice); keep it and the pages in step. Numbers typed as text are logged
 in `web/data/system.json` with their source. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
 system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.

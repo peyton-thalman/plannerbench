@@ -56,7 +56,8 @@ def expected():
     # The first test's several-rules score moved from Home to AI on its own (Home: structural pass, 2026-11-15); checked there.
     home = {"single": pct(lead["single_step_accuracy"]),
             "tools_from": pct(st[0]["accuracy"]), "tools_to": pct(st[-1]["accuracy"]),
-            "questions": f"{meta['questions']:,}", "cleanroom": f"{cr['agree']:,} / {cr['of']:,}"}
+            "questions": f"{meta['questions']:,}", # Home says the second program "agreed on all" of them, so the check only passes while that is true.
+            "system:cleanroom.agree": f"{cr['agree']:,}" if cr["agree"] == cr["of"] else "(home says all agree; they don't)"}
     text = {
         "index": [span([v2m["GPT-6.1 Sol"]["bad"]["caught"]["rate"], v2m["Claude Sonnet 5.5"]["bad"]["caught"]["rate"]]),
                   span([m["bad"]["caught"]["rate"] for m in sorted(v2["models"], key=lambda m: m["bad"]["caught"]["rate"])[:3]])],
