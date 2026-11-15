@@ -434,7 +434,7 @@
         if (!n) return;
         const w = Math.max(0, x(x0 + n) - x(x0) - 2);
         const rect = svgEl('rect', { x: x(x0), y, width: w, height: 28, rx: 3, style: `fill:${color}` });
-        const tip = svgEl('title', {}); tip.textContent = `${name(m)}: ${n} × ${title.toLowerCase()}`; rect.append(tip); svg.append(rect);
+        const tip = svgEl('title', {}); tip.textContent = `${name(m)}: ${n} × ${title[0].toLowerCase() + title.slice(1)}`; rect.append(tip); svg.append(rect);
         if (w > 22) { const t = svgEl('text', { x: x(x0) + 8, y: y + 14, dy: '0.32em', style: `fill:${gi === 0 ? 'var(--paper)' : 'var(--ink)'};font-family:var(--mono)` }); t.textContent = n; svg.append(t); }
         x0 += n;
       });
