@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Results · PlannerBench</title>
+<meta name="description" content="The numbers behind each PlannerBench finding: one rule at a time, several rules at once, the ChatGPT model, the calculator test and the wrong-facts test, with a link to the full detail for each.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
+<link rel="stylesheet" href="styles.css?v=26">
+</head>
+<body data-page="results">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="./">Story</a>
+      <a href="results.html" aria-current="page">Results</a>
+      <a href="method.html">Methods</a>
+      <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="results.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Results</p>
+    <h1>The numbers behind each finding</h1>
+    <p class="lede">Each section below backs up one line of the <a href="./">story</a>, with the short table and a link to the full detail. How the questions were built and checked, and how the tests differ, is on <a href="method.html">Methods</a>.</p>
+  </section>
+
+  <section class="wrap section" id="one-rule">
+    <div class="section-head">
+      <p class="label">Finding 1 · First test · October 2026</p>
+      <h2>One rule at a time, it’s great</h2>
+      <p class="sub">A <b>one-rule question</b> applies a single rule, like the tax on an income or this year’s required IRA withdrawal.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="scores compact" id="a-v1-top">
+        <thead><tr><th scope="col">Model</th><th scope="col">One rule</th><th scope="col">Several rules at once</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="table-note">Claude Sonnet 5.5 got <span data-k="single">—</span> of one-rule questions right, and Claude Haiku 5.5 got <span data-v="models:[model=claude-haiku-5-5].single_step_accuracy" data-f="pct">—</span>. When several rules met in one household, Sonnet dropped to <span data-k="stacked">—</span>. The shaded band behind each bar is the range the true score likely sits in.</p>
+    <p class="more-link"><a href="alone.html#october">The first test in full →</a></p>
+  </section>
+
+  <section class="band" id="several-rules">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Finding 2 · Newer, harder set · November 2026</p>
+        <h2>Several rules at once, it depends heavily on which AI</h2>
+        <p class="sub"><span data-v="v2:items.hard" data-f="int">—</span> harder questions, each making two or more rules meet: the largest Roth conversion that won’t raise Medicare premiums two years later, a widow’s first year of taxes, Arizona state tax for retirees. <span data-k="a_v2_models">—</span> models, at <span data-v="v2:settings.effort">—</span> reasoning effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token reply limit.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="scores compact" id="a-v2-top">
+          <thead><tr><th scope="col">Model</th><th scope="col">Right, of the newer set</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note">GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span>, GPT-6.1 Terra <span data-v="v2:models.[name=GPT-6.1 Terra].hard.rate" data-f="pct">—</span>, Claude Sonnet 5.5 <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>, and <span data-k="a_cheap_under30">—</span> cheap and free models under 30%. These settings differ from the October test, so don’t compare the two sets of scores.</p>
+      <p class="more-link"><a href="alone.html#november">All <span data-k="a_v2_models">—</span> models in full →</a></p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="chatgpt">
+    <div class="section-head">
+      <p class="label">Finding 2 · The ChatGPT model · November 2026</p>
+      <h2>The model behind the regular ChatGPT app</h2>
+      <p class="sub">GPT-6 Luna, asked the same <span data-v="luna:hard.n" data-f="int">—</span> hard questions through OpenAI’s Codex app on my ChatGPT subscription, with code and web off, graded by the same answer key.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="scores compact luna">
+        <thead><tr><th scope="col">Questions</th><th scope="col" class="r">GPT-6 Luna</th></tr></thead>
+        <tbody>
+          <tr><td class="model">First test · one rule</td><td class="r"><span data-v="luna:first_test.single_step.rate" data-f="pct">—</span> · <span data-v="luna:first_test.single_step.k" data-f="int">—</span> of <span data-v="luna:first_test.single_step.n" data-f="int">—</span></td></tr>
+          <tr><td class="model">Newer, harder set</td><td class="r"><span data-v="luna:hard.rate" data-f="pct">—</span> · <span data-v="luna:hard.k" data-f="int">—</span> of <span data-v="luna:hard.n" data-f="int">—</span></td></tr>
+          <tr><td class="model">Wrong facts · caught the planted mistake</td><td class="r"><span data-v="luna:bad.caught.rate" data-f="pct">—</span> · <span data-v="luna:bad.caught.k" data-f="int">—</span> of <span data-v="luna:bad.caught.n" data-f="int">—</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">It ran with more time to think and no length limit, in a different setup from the models above, so it isn’t ranked with them. Why, and how the run was done, is on <a href="method.html#chatgpt">Methods</a>.</p>
+    <p class="more-link"><a href="alone.html#chatgpt">The GPT-6 Luna run in full →</a></p>
+  </section>
+
+  <section class="band" id="calculator">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Finding 2 · Calculator test · October 2026</p>
+        <h2>A calculator that only gave the number didn’t fix it. One that showed the rule did.</h2>
+        <p class="sub">Claude Haiku 5.5 on the <span data-v="tools:hard.questions" data-f="int">—</span> hardest first-test questions, asked three ways: on its own; with a calculator that sends back only the number; and with one that also shows the rule and the IRS form line behind it.</p>
+      </div>
+      <p class="result"><b>Result.</b> <span data-k="tools_from">—</span> on its own, <span data-v="tools:hard.stages.[key=v1].accuracy" data-f="pct">—</span> with only the number, <span data-k="tools_to">—</span> with the rule shown. On <span data-v="tools_private:questions" data-f="int">—</span> held-back questions nobody tuned against: <span data-k="private_tools">—</span>.</p>
+      <div class="table-wrap">
+        <table class="scores ladder" id="ladder">
+          <thead><tr><th scope="col">Claude Haiku 5.5</th><th scope="col">The hardest questions</th><th scope="col">Held-back questions</th><th scope="col" class="r">Dollars off per question, per year</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="ladder-note"></p>
+      <p class="table-note"><b>Not every model was rescued.</b> On the newer set, DeepSeek V4.1 Flash rose from <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.rate" data-f="pct">—</span> to <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard_tools.rate" data-f="pct">—</span> with the calculator; <span data-k="a_tools_weak">—</span> other cheap models stayed at 10% or less.</p>
+      <p class="more-link"><a href="calculator.html">All three calculator tests in full →</a></p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="wrong-facts">
+    <div class="section-head">
+      <p class="label">Finding 3 · Wrong facts · November 2026</p>
+      <h2>It believes whatever you tell it</h2>
+      <p class="sub"><span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files, each with one planted mistake (two digits swapped in a balance, a birth year that makes a retiree 14, monthly spending far beyond what the family owns). A model <b>caught</b> it only if it named the mistake <i>and</i> stopped to ask instead of giving a number.</p>
+    </div>
+    <div class="table-wrap">
+            <table class="scores compact" id="wf-top">
+        <thead><tr><th scope="col">Of <span data-v="v2:items.bad_corrupted" data-f="int">—</span> planted mistakes</th><th scope="col" class="r">Recognized it</th><th scope="col" class="r">Stopped and asked</th><th scope="col" class="r">Caught (both)</th><th scope="col" class="r">Refused a fine file</th></tr></thead>
+        <tbody>
+          <tr><td class="model">GPT-6.1 Sol<span class="via">top-priced</span></td><td class="r"><span data-v="v2:models.[name=GPT-6.1 Sol].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=GPT-6.1 Sol].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=GPT-6.1 Sol].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=GPT-6.1 Sol].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">Claude Sonnet 5.5<span class="via">top-priced</span></td><td class="r"><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=Claude Sonnet 5.5].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">Gemini 3.8 Flash<span class="via">mid-priced</span></td><td class="r"><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=Gemini 3.8 Flash].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">DeepSeek V4.1 Flash<span class="via">cheap and free</span></td><td class="r"><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=DeepSeek V4.1 Flash].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+          <tr><td class="model">gpt-oss-120b<span class="via">cheap and free</span></td><td class="r"><span data-v="v2:models.[name=gpt-oss-120b].bad.flagged.rate" data-f="pct">—</span></td><td class="r"><span data-v="v2:models.[name=gpt-oss-120b].bad.no_number.rate" data-f="pct">—</span></td><td class="r"><b><span data-v="v2:models.[name=gpt-oss-120b].bad.caught.rate" data-f="pct">—</span></b></td><td class="r"><span data-v="v2:models.[name=gpt-oss-120b].bad.false_alarm.rate" data-f="pct">—</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Even the best at catching mistakes without false alarms, GPT-6.1 Sol and Claude Sonnet 5.5, missed <span data-k="a_best_missed">—</span>. <span data-k="a_low_cheap">—</span> (<span data-k="a_low_names">—</span>) caught <span data-k="a_low_caught">—</span>. An AI judge decided whether a reply named the mistake; how that was checked is on <a href="method.html#ai-work">Methods</a>.</p>
+    <div class="example">
+      <p class="label">One example</p>
+      <p>A client file said a retired school administrator with a $785,000 IRA was born in 2012, and asked how much she must withdraw this year. One model (gpt-oss-120b) replied:</p>
+      <blockquote>“Priya will be 14 years old throughout 2026 … no required minimum distribution is required. ANSWER: 0”</blockquote>
+      <p>It saw that she was 14 and kept going. With her real birth year, the answer is $34,279.</p>
+    </div>
+    <p class="more-link"><a href="wrong-facts.html">The wrong-facts test in full →</a></p>
+  </section>
+
+  <section class="wrap section">
+    <a class="next" href="method.html"><span><span class="label">Next</span><b>Methods: how I built it and how I checked it</b></span><span class="arrow" aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=21"></script>
+</body>
+</html>

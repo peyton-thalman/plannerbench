@@ -37,12 +37,12 @@ WEB = ROOT / "web"
 SITE = ROOT / "site"
 BASE = "https://plannerbench.vercel.app"
 CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
-# Reading order: the nav, then the footer pages. agent.html is the agent-mode landing page itself.
-ORDER = ["index", "alone", "calculator", "wrong-facts", "built", "method", "chat", "report", "replay", "agent"]
-LABEL = {"index": "Home", "alone": "AI on its own", "wrong-facts": "Wrong facts", "calculator": "With a calculator",
-         "method": "How I checked", "built": "How I built it", "chat": "Demo walkthrough", "report": "Report", "replay": "Replays", "agent": "Agent mode"}
+# Reading order: the nav (Story, Results, Methods), the detail pages they link to, then the footer pages. agent.html is the agent-mode landing page itself.
+ORDER = ["index", "results", "method", "alone", "calculator", "wrong-facts", "built", "chat", "report", "replay", "agent"]
+LABEL = {"index": "Story", "results": "Results", "alone": "AI on its own", "wrong-facts": "Wrong facts", "calculator": "With a calculator",
+         "method": "Methods", "built": "How I built it", "chat": "Demo walkthrough", "report": "Report", "replay": "Replays", "agent": "Agent mode"}
 OPTIONAL = {"replay", "agent"}  # listed under "Optional" in llms.txt
-REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator", "results": "alone"}  # old page name → new
+REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator"}  # old page name → new ("results" is a real page again since 2026-11-15)
 KEEP_SCRIPTS = {"replay.js"}  # scripts a baked page may still load (interactive, not filling)
 SKIP_COPY = {"app.js"}  # web/ files the baked site doesn't need
 

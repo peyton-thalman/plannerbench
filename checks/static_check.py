@@ -28,8 +28,8 @@ except ImportError:
 
 ROOT = Path(__file__).parent.parent
 LIVE = "https://plannerbench.vercel.app"
-PAGES = ["index", "alone", "wrong-facts", "calculator", "method", "built", "chat", "report", "replay", "agent"]
-REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator", "results": "alone"}
+PAGES = ["index", "results", "alone", "wrong-facts", "calculator", "method", "built", "chat", "report", "replay", "agent"]
+REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator"}
 
 
 def load(name):
@@ -53,17 +53,22 @@ def expected():
     st = tools["hard"]["stages"]
     cr = system["cleanroom"]
     v2 = load("v2"); v2m = {m["name"]: m for m in v2["models"]}
-    # The first test's several-rules score moved from Home to AI on its own (Home: structural pass, 2026-11-15); checked there.
+    # Home is the short story (2026-11-15): one number per finding, each a link into Results. The test table and the
+    # "second program agreed on all" line moved to Methods, so they are checked there.
+    luna = load("luna")
     home = {"single": pct(lead["single_step_accuracy"]),
             "tools_from": pct(st[0]["accuracy"]), "tools_to": pct(st[-1]["accuracy"]),
-            "questions": f"{meta['questions']:,}", # Home says the second program "agreed on all" of them, so the check only passes while that is true.
-            "system:cleanroom.agree": f"{cr['agree']:,}" if cr["agree"] == cr["of"] else "(home says all agree; they don't)"}
+            "a_best_missed": span([1 - v2m["GPT-6.1 Sol"]["bad"]["caught"]["rate"], 1 - v2m["Claude Sonnet 5.5"]["bad"]["caught"]["rate"]])}
+    cheap = [m for m in v2["models"] if m.get("tier") == "cheap"]
     text = {
-        "index": [span([v2m["GPT-6.1 Sol"]["bad"]["caught"]["rate"], v2m["Claude Sonnet 5.5"]["bad"]["caught"]["rate"]]),
-                  span([m["bad"]["caught"]["rate"] for m in sorted(v2["models"], key=lambda m: m["bad"]["caught"]["rate"])[:3]])],
+        "index": [pct(v2m["GPT-6.1 Sol"]["hard"]["rate"]), pct(v2m["Claude Sonnet 5.5"]["hard"]["rate"]), pct(luna["hard"]["rate"]),
+                  # home says "cheap and free models scored under 30%", so the check only passes while all of them did
+                  "under 30%" if all(m["hard"]["rate"] < 0.3 for m in cheap) else "(home says all cheap models under 30%; they aren't)",
+                  'href="results.html#one-rule"', 'href="results.html#several-rules"', 'href="results.html#calculator"', 'href="results.html#wrong-facts"'],
+        "results": [pct(v2m["GPT-6.1 Sol"]["hard"]["rate"]), pct(lead["single_step_accuracy"])] + [f"{s['right']}/{s['questions']}" for s in st],
         "alone": [m["name"] for m in models] + [pct(m["accuracy"]) for m in models] + [pct(lead["stacked_accuracy"])],
         "calculator": [f"{s['right']}/{s['questions']}" for s in st],
-        "method": [f"{meta['questions']:,}"],
+        "method": [f"{meta['questions']:,}", f"{cr['agree']:,}" if cr["agree"] == cr["of"] else "(methods says all agree; they don't)"],
     }
     return home, text
 

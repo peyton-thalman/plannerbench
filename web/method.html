@@ -3,23 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>How I checked · PlannerBench</title>
-<meta name="description" content="How every PlannerBench answer is checked: a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
+<title>Methods · PlannerBench</title>
+<meta name="description" content="How PlannerBench was built and how every answer is checked: every test and its settings, the GPT-6 Luna run through Codex, a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=25">
+<link rel="stylesheet" href="styles.css?v=26">
 </head>
 <body data-page="method">
 <header class="nav">
   <div class="wrap nav-row">
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
-      <a href="alone.html">AI on its own</a>
-      <a href="calculator.html">With a calculator</a>
-      <a href="wrong-facts.html">Wrong facts</a>
-      <a href="built.html">How I built it</a>
-      <a href="method.html" aria-current="page">How I checked</a>
+      <a href="./">Story</a>
+      <a href="results.html">Results</a>
+      <a href="method.html" aria-current="page">Methods</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="method.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
     </nav>
   </div>
@@ -27,12 +25,61 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">How I checked</p>
-    <h1>Before grading the AI, I had to check my own answers</h1>
+    <p class="eyebrow">Methods</p>
+    <h1>How I built it, and how I checked it</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
       <p>The planning engine (the program that works out the right answers) and a second, separately written program both compute every answer in the first test, and they must agree within <span data-v="system:two_way_check.within">—</span>. Outside tax software built by other people recomputes the tax answers. Another engine, written by a separate AI agent that was never allowed to see the planning engine’s code, agrees within <span data-v="system:cleanroom.within">—</span> on every one of <span data-v="system:cleanroom.of" data-f="int">—</span> random households, and every question in the newer set must match it. Two human checks are still owed: a CPA’s sign-off and a person spot-checking the AI judge in the wrong-facts test.</p>
-      <p class="stop-here">That’s the whole idea. The rest of this page is the detail.</p>
+      <p class="stop-here">That’s the whole idea. The rest of this page is the detail: <a href="#tests">every test</a>, <a href="#chatgpt">the ChatGPT model</a>, <a href="#built">how I built it</a>, <a href="#checks">the checks</a> and <a href="#glossary">the words used on this site</a>.</p>
+    </div>
+  </section>
+
+
+  <section class="wrap section" id="tests">
+    <div class="section-head">
+      <h2>Every test</h2>
+      <p class="sub">October and November used different settings, so compare within a test, not across. October: high reasoning effort, long replies. November: <span data-v="v2:settings.effort">—</span> effort, replies up to <span data-v="v2:settings.max_tokens" data-f="int">—</span> tokens.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="exp-map">
+        <thead><tr><th scope="col">Test</th><th scope="col">When</th><th scope="col">What it asked</th><th scope="col">How many</th><th scope="col">Which AIs</th></tr></thead>
+        <tbody>
+          <tr><td><a href="alone.html#october">First test</a></td><td>Oct</td><td>One-rule questions, then several rules at once</td><td><span data-k="a_v1_per_model">—</span> each, of <span data-k="questions">—</span></td><td><span data-k="a_v1_models">—</span> models</td></tr>
+          <tr><td><a href="alone.html#november">Newer, harder set</a></td><td>Nov</td><td>Harder questions where several rules meet</td><td><span data-v="v2:items.hard" data-f="int">—</span></td><td><span data-k="a_v2_models">—</span> models</td></tr>
+          <tr><td><a href="alone.html#chatgpt">GPT-6 Luna through Codex</a></td><td>Nov</td><td>The same questions, through my ChatGPT subscription</td><td><span data-v="luna:hard.n" data-f="int">—</span> + <span data-v="luna:first_test.overall.n" data-f="int">—</span> from the first test</td><td>GPT-6 Luna</td></tr>
+          <tr><td><a href="calculator.html#tools">Calculator test 1: number vs rule</a></td><td>Oct</td><td>Does a calculator help if it shows only the number, or the rule too?</td><td><span data-v="tools:hard.questions" data-f="int">—</span> + <span data-v="tools_private:questions" data-f="int">—</span> held back</td><td>Claude Haiku 5.5</td></tr>
+          <tr><td><a href="calculator.html#cheap">Calculator test 2: who it rescues</a></td><td>Nov</td><td>Which models the calculator lifts</td><td><span data-v="v2:items.hard" data-f="int">—</span></td><td><span data-v="v2:tool_effect.length" data-f="int">—</span> models</td></tr>
+          <tr><td><a href="calculator.html#gauntlet">Calculator test 3: whole-household decisions</a></td><td>Oct</td><td>Real choices over 25 years, like when to claim Social Security</td><td><span data-v="gauntlet:questions" data-f="int">—</span></td><td><span data-k="g_models">—</span> models</td></tr>
+          <tr><td><a href="wrong-facts.html">Wrong facts</a></td><td>Nov</td><td>Client files with one fact that can’t be right</td><td><span data-v="v2:items.bad_corrupted" data-f="int">—</span> + <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> that were fine</td><td><span data-k="a_v2_models">—</span> models + GPT-6 Luna</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">All in 2026. Price groups, by what each model costs to use: <b>top-priced:</b> GPT-6.1 Sol, Claude Sonnet 5.5, Gemini 3.1 Pro · <b>mid-priced:</b> GPT-6.1 Terra, Gemini 3.8 Flash, Claude Haiku 5.5 · <b>cheap and free:</b> DeepSeek V4.1 Flash, GLM 5.3 Flash, gpt-oss-120b, Llama 4 Maverick, Mistral Small.</p>
+  </section>
+
+  <section class="band" id="chatgpt">
+    <div class="wrap split">
+      <div><h2>About ChatGPT: GPT-6 Luna through Codex</h2></div>
+      <div class="prose">
+        <p>The regular ChatGPT app uses GPT-6 Luna, a different, cheaper model than GPT-6.1 Sol (the one that got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> of the hardest questions). I ran Luna through OpenAI’s Codex app (a ChatGPT-subscription tool for running tasks) with code and web turned off, in small batches, so it’s close to, but not the same as, typing into the ChatGPT window.</p>
+        <p>It also ran with more time to think and no length limit, so its <span data-v="luna:hard.rate" data-f="pct">—</span> on the hardest questions isn’t ranked with the other models. How the run was done, and the first attempt that was thrown out, is on <a href="alone.html#chatgpt">AI on its own</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="built">
+    <div class="split">
+      <div><h2>How I built it</h2></div>
+      <div>
+        <p class="prose">An answer key first (the right answer to every question), from a planning engine (a program I had built for the 2026 IRS, Social Security and Medicare rules) that separate programs recheck. Then the questions. I’m a financial advisor; I decided what to test and what counts as right, and directed AI coding agents (mostly Claude Code) to build it.</p>
+        <ul class="notes">
+          <li><b>Build the checker before the questions.</b> A second program, written without seeing the first, agreed on all <span data-v="system:cleanroom.agree" data-f="int">—</span> test households.</li>
+          <li><b>Fix the calculator’s reply, not the prompt.</b> Show the rule, not just the number.</li>
+          <li><b>Keep secret test questions.</b> Held-back questions are never used while building; they only check that a fix is real.</li>
+          <li><b>Have another company’s model audit it.</b> GPT-6.1 Sol found <span data-v="system:audit.errors" data-f="int">—</span> errors; all fixed and published.</li>
+        </ul>
+        <p class="more-link"><a href="built.html">The full build story: decisions, mistakes caught, who did what →</a></p>
+      </div>
     </div>
   </section>
 
@@ -104,8 +151,30 @@
     </details>
   </section>
 
+
+  <section class="band" id="glossary">
+    <div class="wrap split">
+      <div><h2>Words on this site</h2></div>
+      <div class="glossary">
+        <dl>
+          <div><dt>One rule</dt><dd>One tax or retirement rule, like this year’s tax brackets or a required IRA withdrawal.</dd></div>
+          <div><dt>Several rules at once</dt><dd>Taxes, Social Security and Medicare affecting each other, the way they do in a real household.</dd></div>
+          <div><dt>The planning engine</dt><dd>The program I had built for the 2026 IRS, Social Security and Medicare rules. It computes the answer key, and it is the calculator the AI models could call.</dd></div>
+          <div><dt>Best</dt><dd>On scores, right most often. On wrong facts, catching the most mistakes without refusing files that were fine.</dd></div>
+          <div><dt>Caught</dt><dd>On wrong facts, the reply recognized the planted mistake <i>and</i> stopped to ask, with no number.</dd></div>
+          <div><dt>AI judge</dt><dd>Another AI model reading each wrong-facts reply to decide whether it named the mistake. No person has checked its labels yet.</dd></div>
+          <div><dt>Held-back questions</dt><dd>Secret questions never used while building, kept only to check that a fix is real.</dd></div>
+          <div><dt>CPA</dt><dd>A licensed tax accountant. A CPA’s sign-off on the answer key is still to come.</dd></div>
+          <div><dt>PolicyEngine-US</dt><dd>Outside tax software built by other people. It rechecks the first test’s tax answers.</dd></div>
+          <div><dt>Price groups</dt><dd>By what each model costs to use: top-priced, mid-priced, and cheap and free (listed under <a href="#tests">Every test</a>).</dd></div>
+        </dl>
+        <p class="table-note"><b>The limits.</b> Small samples; on the wrong-facts test, an AI judge decided whether a model named the mistake; no CPA sign-off yet.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="wrap section">
-    <a class="next" href="./"><span><span class="label">Back to the start</span><b>The whole story on one page</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="next" href="./"><span><span class="label">Back to the start</span><b>The story on one page</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
@@ -117,6 +186,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=20"></script>
+<script src="app.js?v=21"></script>
 </body>
 </html>

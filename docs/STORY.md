@@ -1,5 +1,15 @@
 # The PlannerBench story (the brief every page follows)
 
+> **2026-11-15 rewrite (supersedes the Home sections below).** Home is now the owner's short story, copy word for word
+> ("It seems right." → The doorstep → What I built → What I found (3 findings, one number each) → What it means for you /
+> for firms). Nav: Story · Results · Methods · For AI readers. Everything that used to sit on Home (test table, price groups,
+> Luna/Codex note, Oct vs Nov settings, check status, audit, held-back questions, glossary) lives on Methods; the backing
+> numbers live on Results. Two sentences of the owner's draft were changed to match the data: "a better prompt didn't fix
+> it" (putting the rule text in the prompt did fix the senior deduction, rule_effect.json) → "a calculator that only handed
+> over the right number didn't fix it"; "Claude Sonnet 5.5 gave retirement advice to a 14-year-old" (Sonnet stopped on all six
+> impossible-age files) → "Some gave retirement advice to a 14-year-old" (gpt-oss-120b and GPT-6 Luna, quoted on wrong-facts).
+> The rest of this file still governs Results and the detail pages.
+
 Owner: Peyton Thalman. This file is the single source for the site's arc, voice and headline numbers.
 If a page and this file disagree, fix one of them; never let them drift.
 

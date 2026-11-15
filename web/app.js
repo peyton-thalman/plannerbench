@@ -358,6 +358,8 @@
       + (toolsPrivate ? `On ${toolsPrivate.questions} held-back questions, never seen while the calculator was built: ${toolsPrivate.pairs.none_to_v2.fixed} fixed, ${toolsPrivate.pairs.none_to_v2.broken} broken. ` : '')
       + 'The shaded band behind each bar is the range the true score likely falls in, given so few questions.';
 
+    // The worked example and notes below live only on calculator.html; results.html shows just the ladder.
+    if ($('tools-quote')) {
     const q = tools.quote;
     document.getElementById('tools-quote').textContent = `“${q.text}”`;
     const dl = document.getElementById('tools-answers');
@@ -385,6 +387,7 @@
     document.getElementById('tools-private').textContent = toolsPrivate
       ? `On ${toolsPrivate.questions} questions held back from a secret seed and never used while building the calculator: ${pct(toolsPrivate.stages[0].accuracy)} on its own, ${pct(toolsPrivate.stages.at(-1).accuracy)} with calculator 1.1. Both misses were Haiku overruling the calculator again, with the rule in front of it.`
       : 'Held-out results aren’t published yet.';
+    }
   }
 
   // --- wrong-facts (writer B) ---

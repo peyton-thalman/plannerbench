@@ -613,3 +613,21 @@ details.fine .notes { margin-top: 0.75rem; }
   .exp-map td:nth-child(3)::before { content: "Questions: "; color: var(--dim); }
   .exp-map td:nth-child(4)::before { content: "Models: "; color: var(--dim); }
 }
+
+/* Home as a short story (2026-11-15): one reading column, a number links to the section that backs it up. */
+.story .hero { padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+.story .hero h1 { max-width: 14ch; }
+.story-body { display: grid; gap: clamp(2.5rem, 5vw, 3.5rem); padding-bottom: clamp(3.5rem, 7vw, 6rem); font-size: 1.125rem; line-height: 1.65; }
+.story-body > * { max-width: 62ch; }
+.story-body section { display: grid; gap: 1rem; padding-top: clamp(2rem, 4vw, 2.75rem); border-top: 1px solid var(--rule); }
+.story-body h2 { font-size: var(--step-2); }
+.story-body .finding { display: grid; gap: 0.6rem; }
+.story-body .finding + .finding { margin-top: 0.75rem; }
+.story-body .finding h3 { font: 500 1.125rem/1.35 var(--sans); }
+.story-body a.num { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule-2); white-space: nowrap; }
+.story-body a.num:hover { text-decoration-color: var(--ink); }
+.story-body a.fn { text-decoration: none; color: var(--muted); }
+.story-links { font: 500 0.9375rem/1.6 var(--mono); display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; padding-top: clamp(2rem, 4vw, 2.75rem); border-top: 1px solid var(--ink); }
+.story-links a { text-underline-offset: 3px; }
+.story-note { color: var(--muted); max-width: 62ch; line-height: 1.5; }
+.story-note + .story-note { margin-top: -1.75rem; }
