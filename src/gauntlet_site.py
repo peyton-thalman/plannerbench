@@ -1,4 +1,4 @@
-"""The Gauntlet's numbers for the site: site/data/gauntlet.json, from graded runs (src/gauntlet_grade.py first).
+"""The Gauntlet's numbers for the site: web/data/gauntlet.json, from graded runs (src/gauntlet_grade.py first).
 
 Usage: .venv/bin/python src/gauntlet_site.py gauntlet-small,ds-smoke gauntlet-small-tools,ds-smoke-tools [ds-ask-smoke,ds-ask-smoke-tools]
 First the runs with models alone, then the same questions with the engine's MCP tools (comma-separated, any number of
@@ -118,7 +118,7 @@ def main(alone_run, tools_run, ask_runs=None):
     out = {"questions": len({g["id"] for g in alone}), "runs": alone_run.split(",") + tools_run.split(","), "ask_first": ask_first(ask_runs),
            "rows": rows(alone, raw_alone, False) + rows(tools, raw_tools, True),
            "failures": failures[:3], "side_by_side": side, "families": len(WHAT)}
-    (ROOT / "site" / "data" / "gauntlet.json").write_text(json.dumps(out, indent=1) + "\n")
+    (ROOT / "web" / "data" / "gauntlet.json").write_text(json.dumps(out, indent=1) + "\n")
     print(json.dumps({k: out[k] for k in ("questions", "failures")}, indent=1)[:1500])
 
 

@@ -1,8 +1,8 @@
-"""Tool-call replays for the site: site/data/replays.json, from graded Gauntlet runs (src/gauntlet_grade.py first).
+"""Tool-call replays for the site: web/data/replays.json, from graded Gauntlet runs (src/gauntlet_grade.py first).
 
 Each replay is one model answering one question with the engine: every tool call it made (what it asked the engine,
 what came back, or the error), every question it put to the client (ask-first runs), its final answer against the
-key, and the same model's answer alone when an alone run is given. The page is site/replay.html.
+key, and the same model's answer alone when an alone run is given. The page is web/replay.html.
 
 Usage: .venv/bin/python src/replay_site.py <run> [<run> ...]   (tools runs, alone runs and ask-first runs, any order)
 """
@@ -215,7 +215,7 @@ def main(runs):
                 "alone": alone.get((r["id"], r["model"], ask)) if meta.get("tools") else None,
             })
     replays.sort(key=lambda x: (x["ask_first"], x["model_name"], x["id"]))
-    out = ROOT / "site" / "data" / "replays.json"
+    out = ROOT / "web" / "data" / "replays.json"
     out.write_text(json.dumps({"replays": replays}, indent=1) + "\n")
     print(f"{len(replays)} replays -> {out.relative_to(ROOT)}")
 

@@ -1,14 +1,14 @@
-"""Build the v2 charts and site pages from the graded results.
+"""Build the v2 charts, data and report page from the graded results.
 
   .venv/bin/python v2/build_site.py
 
 Reads v2/results/summary.json (from v2/grade.py) and REPORT.md. Writes:
   v2/results/charts/*.svg     the three charts (also used by REPORT.md)
-  site/charts/*.svg           the same files for the site
-  site/data/v2.json           the numbers the v2 page shows
-  site/wrong-facts.html                the v2 leaderboard
-  site/report.html            REPORT.md as a page
-in the shared site style (v1 scores and data are untouched). The nav lives in each page; NAV here must match it.
+  web/charts/*.svg            the same files for the site
+  web/data/v2.json            the numbers the wrong-facts page quotes
+  web/report.html             REPORT.md as a page, with the nav and stylesheet link copied from web/index.html
+web/wrong-facts.html is a hand-edited page like the others (this script no longer writes it). Then run
+src/bake_site.py to render web/ into site/.
 """
 import html
 import json
@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 V2 = ROOT / "v2"
-SITE = ROOT / "site"
+SITE = ROOT / "web"  # page sources; src/bake_site.py renders them into site/
 S = json.loads((V2 / "results" / "summary.json").read_text())
 MODELS = S["models"]
 # Validated with the dataviz palette checker against the site's paper (#faf8f5): all pass; amber is under 3:1 contrast,
@@ -156,11 +156,20 @@ def chart_tools():
 
 # ---- pages ----------------------------------------------------------------------------------------------------------
 
-NAV = [('alone.html', 'Results'), ('wrong-facts.html', 'Bad inputs'), ('calculator.html', 'With tools'), ('method.html', 'Method'), ('built.html', 'How I built it')]
+def shared_head_nav(current):
+    """The nav block and stylesheet link of web/index.html, so the report page always matches the hand-edited pages."""
+    idx = (SITE / "index.html").read_text()
+    nav = idx[idx.index("<nav"):idx.index("</nav>") + len("</nav>")]
+    nav = nav.replace(' aria-current="page"', "")
+    nav = re.sub(r'(<a href="%s")' % re.escape(current), r'\1 aria-current="page"', nav, count=1)
+    # The Human/Agent switch links "Human" to the page itself.
+    nav = re.sub(r'(<a class="mode-human" href=")[^"]*(")', r'\g<1>%s\2' % current, nav)
+    css = re.search(r'<link rel="stylesheet" href="styles\.css[^"]*">', idx)[0]
+    return nav, css
 
 
 def page(title, desc, current, main, name):
-    nav = "\n      ".join(f'<a href="{h}"{" aria-current=\"page\"" if h == current else ""}>{t}</a>' for h, t in NAV)
+    nav, css = shared_head_nav(current)
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -171,15 +180,13 @@ def page(title, desc, current, main, name):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=18">
+{css}
 </head>
 <body data-page="{name}">
 <header class="nav">
   <div class="wrap nav-row">
     <a class="wordmark" href="./">PlannerBench</a>
-    <nav aria-label="Pages">
-      {nav}
-    </nav>
+    {nav}
   </div>
 </header>
 
@@ -196,126 +203,6 @@ def page(title, desc, current, main, name):
 </body>
 </html>
 """
-
-
-def pc(x):
-    return "–" if x is None else f"{x:.0%}"
-
-
-def cell(d, low=None):
-    """A score cell in the site's style: value, bar, 95% band."""
-    if not d or d.get("rate") is None:
-        return '<td><span class="ci">not run</span></td>'
-    r, lo, hi = d["rate"], d["lo"], d["hi"]
-    cls = "cell low" if (low is not None and low(r)) else "cell"
-    return (f'<td><div class="{cls}"><span class="v">{r:.0%}</span><div class="track"><div class="band-ci" style="left:{lo:.1%};width:{hi - lo:.1%}"></div>'
-            f'<div class="fill" style="width:{r:.1%}"></div></div><span class="ci">{lo:.0%}–{hi:.0%}</span></div></td>')
-
-
-def model_cell(m, runs):
-    return f'<td class="model">{e(m["name"])}<span class="via">{TIER_NAME[m["tier"]].lower()} · {runs}</span></td>'
-
-
-def v2_page():
-    bad = sorted([m for m in MODELS if m["bad"]], key=lambda m: -m["bad"]["net"])
-    rows = "".join(
-        f'<tr>{model_cell(m, f"{m["bad"]["reps"]:.0f} run{"s" if m["bad"]["reps"] > 1 else ""} per note")}{cell(m["bad"]["caught"], lambda r: r < .5)}'
-        f'{cell(m["bad"]["silent_number"])}{cell(m["bad"]["false_alarm"])}{cell(m["bad"]["clean_correct"])}'
-        f'<td class="overall">{100 * m["bad"]["net"]:+.0f}</td></tr>' for m in bad)
-    hard = sorted([m for m in MODELS if m["hard"]], key=lambda m: -m["hard"]["rate"])
-    hrows = ""
-    for m in hard:
-        h, t = m["hard"], m["hard_tools"]
-        tc = cell(t) if t else '<td><span class="ci">not run</span></td>'
-        if t and t["n"] < 42:
-            tc = tc.replace('</span></div></td>', f' · {t["n"]} questions</span></div></td>')
-        hrows += (f'<tr>{model_cell(m, f"{h["reps"]:.0f} run{"s" if h["reps"] > 1 else ""} per question")}{cell(h)}<td class="cost">{h["truncated"]:.0%}</td>{tc}'
-                  f'<td class="cost">{"–" if not t else f"{t["call_rate"]:.0%}"}</td>'
-                  f'<td class="cost">{"–" if h["cost_per_correct"] is None else f"${1000 * h["cost_per_correct"]:.2f}"}</td>'
-                  f'<td class="cost">{"–" if not t or t["cost_per_correct"] is None else f"${1000 * t["cost_per_correct"]:.2f}"}</td></tr>')
-    fams = list(next(m for m in MODELS if m["hard"])["hard"]["by_family"])
-    frows = "".join(f'<tr>{model_cell(m, "alone")}' + "".join(f'<td class="cost">{pc(m["hard"]["by_family"].get(f, {}).get("rate"))}</td>' for f in fams) + "</tr>" for m in hard)
-    types = ["transposed", "impossible_age", "spending", "conflict", "over_limit"]
-    trows = "".join(f'<tr>{model_cell(m, "caught, by kind of problem")}' + "".join(f'<td class="cost">{pc(m["bad"]["by_type"][t]["caught"]["rate"])}</td>' for t in types) + "</tr>" for m in bad)
-    best = bad[0]
-    j = S["judge_check"]
-    main = f"""  <section class="page-head wrap">
-    <p class="eyebrow">PlannerBench v2 · 2026-11-14</p>
-    <h1>The math got easy. Catching a bad input didn’t.</h1>
-    <p class="lede">People give AI the wrong facts all the time: a mistyped balance, the wrong birth year, a guess at what they spend. Then they make decisions from the answer. So I planted one mistake in each of 30 client notes and watched what {len(MODELS)} models did.</p>
-    <div class="example">
-      <p class="label">One example</p>
-      <p>The note said a retired school administrator with a $785,000 IRA was born in 2012, and asked for this year’s required withdrawal. One model replied:</p>
-      <blockquote>“Priya will be 14 years old throughout 2026 … no required minimum distribution is required. ANSWER: 0”</blockquote>
-      <p>With her real birth year the answer is $34,279. The model saw the age and didn’t question it.</p>
-    </div>
-    <p class="cta"><a class="btn primary" href="report.html">Read the report</a></p>
-  </section>
-
-  <section class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Who notices when the client’s facts can’t be right?</h2>
-        <p class="sub">Each note had one planted mistake: two digits swapped, an impossible birth year, spending far beyond what the household has, two facts that conflict, or an amount over a legal limit. A model could answer with a number or say it needed more information.</p>
-      </div>
-      <figure class="chart-card"><div class="chart"><img src="charts/outcomes.svg" alt="What each model did with a note that had a mistake planted in it, as shares that add to 100%; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
-      <p class="takeaway"><b>What it shows.</b> The best models caught about three mistakes in four. Three of the five cheapest gave a confident answer more than eight times in ten. Every model was worst at the same kind: a believable amount that is over a legal limit.</p>
-      <figure class="chart-card value-card"><div class="chart"><img src="charts/false_alarms.svg" alt="Share of correct notes each model refused to answer; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
-      <p class="takeaway"><b>What it shows.</b> A model can’t win by refusing everything. Each mistaken note had a correct twin, plus ten notes that look odd but are fine. The two Gemini models refused half or more of those, mostly because they didn’t know this year’s tax law.</p>
-      <details class="fine wide">
-        <summary>Full table, with 95% intervals</summary>
-        <div class="table-wrap">
-          <table class="scores">
-            <thead><tr><th scope="col">Model</th><th scope="col">Caught the mistake</th><th scope="col">Missed it, answered anyway</th><th scope="col">Refused a correct note</th><th scope="col">Correct notes answered right</th><th scope="col" class="r">Net (caught − refused)</th></tr></thead>
-            <tbody>{rows}</tbody>
-          </table>
-        </div>
-        <p class="table-note">Caught = named the planted mistake and gave no number. Bars show the score; the shaded band is the 95% interval. Whether a reply named the mistake is judged by a second model ({e(j["judge"].split("/")[-1].split("@")[0])}); the other columns are rule-based.</p>
-      </details>
-      <details class="fine wide">
-        <summary>Caught, by kind of mistake</summary>
-        <div class="table-wrap">
-          <table class="scores">
-            <thead><tr><th scope="col">Model</th><th scope="col" class="r">Swapped digits</th><th scope="col" class="r">Impossible age</th><th scope="col" class="r">Spending can’t fit</th><th scope="col" class="r">Facts conflict</th><th scope="col" class="r">Over a legal limit</th></tr></thead>
-            <tbody>{trows}</tbody>
-          </table>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <section class="wrap section">
-    <div class="section-head">
-      <h2>Harder questions, and whether a tool rescues a cheap model</h2>
-      <p class="sub">42 new questions where several rules meet: a Roth conversion that changes Medicare premiums two years later, an inherited IRA, a widow’s first tax year, state tax on top of federal. Each answer comes from the planning engine and is matched to the dollar by a second engine written separately.</p>
-    </div>
-    <figure class="chart-card"><div class="chart"><img src="charts/hard_tools.svg" alt="Hard questions answered right by each model, alone and with the engine; the full table below has the same numbers" style="width:100%;height:auto"></div></figure>
-    <p class="takeaway"><b>What it shows.</b> With the engine to call, one cheap model (DeepSeek) went from 29% to 79%, past a far pricier model working alone. Three other cheap models called the engine and still got the answer wrong, so the tool only helps a model that can use it.</p>
-    <details class="fine wide">
-      <summary>Full table, with cost per right answer</summary>
-      <div class="table-wrap">
-        <table class="scores">
-          <thead><tr><th scope="col">Model</th><th scope="col">Alone</th><th scope="col" class="r">Ran out of room</th><th scope="col">With the engine</th><th scope="col" class="r">Called the engine</th><th scope="col" class="r">Cost per 1,000 right, alone</th><th scope="col" class="r">With the engine</th></tr></thead>
-          <tbody>{hrows}</tbody>
-        </table>
-      </div>
-    </details>
-    <details class="fine wide">
-      <summary>By kind of question, models alone</summary>
-      <div class="table-wrap">
-        <table class="scores">
-          <thead><tr><th scope="col">Model</th>{"".join(f'<th scope="col" class="r">{e(f.replace("_", " "))}</th>' for f in fams)}</tr></thead>
-          <tbody>{frows}</tbody>
-        </table>
-      </div>
-    </details>
-    <details class="fine">
-      <summary>How these were run</summary>
-      <p>Every model through OpenRouter, pinned to one host, data collection off, one user message and no system prompt. Reasoning effort low and a 4,000-token reply limit for all (Mistral Small with reasoning off). Total spend ${S["spend"]["spent_usd"]:.2f} against a $5 cap, which is why the most expensive models have one run per item. Small samples: read the intervals, not the ranks.</p>
-    </details>
-  </section>
-"""
-    return page("v2: bad inputs and the hard tier", "PlannerBench v2: does a model notice when a client's facts are wrong, and does a planning engine rescue a cheap model on hard retirement questions?", "wrong-facts.html", main, "v2")
 
 
 def inline(s):
@@ -417,7 +304,6 @@ def main():
         shutil.copy(f, SITE / "charts" / f.name)
     (SITE / "data" / "v2.json").write_text(json.dumps({k: S[k] for k in ("settings", "items", "models", "tiers", "tool_effect", "judge_check", "bad_outcomes_all_models", "bad_by_type_all_models")}
                                                       | {"headline": HEADLINE, "spent_usd": S["spend"]["spent_usd"]}, indent=1) + "\n")
-    (SITE / "wrong-facts.html").write_text(v2_page())
     if (ROOT / "REPORT.md").exists():
         (SITE / "report.html").write_text(report_page())
     print("site built")

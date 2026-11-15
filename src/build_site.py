@@ -1,4 +1,4 @@
-"""Copy the leaderboard data and a few real example questions into site/data/ for the public site.
+"""Copy the leaderboard data and a few real example questions into web/data/ for the public site.
 
 Usage: .venv/bin/python src/build_site.py live-high-10x1 [with-rule-10x1]
 Run src/leaderboard.py first; the site reads only what this writes.
@@ -57,7 +57,7 @@ def replies(run):
 
 
 def main(run, rule_run=None):
-    out = ROOT / "site" / "data"
+    out = ROOT / "web" / "data"
     out.mkdir(parents=True, exist_ok=True)
     for name in ("models", "tasks", "mistakes", "dollars_by_mistake", "rule_effect", "harness", "tools", "tools_private"):
         src = ROOT / "leaderboard" / f"{name}.json"
@@ -87,7 +87,7 @@ def main(run, rule_run=None):
 
     for name, data in (("examples", examples), ("featured", featured), ("meta", meta)):
         (out / f"{name}.json").write_text(json.dumps(data, indent=1) + "\n")
-    print(f"Wrote site/data/ from runs {run}" + (f" and {rule_run}" if rule_run else "") + f": {meta['questions']} questions, {meta['tasks']} tasks")
+    print(f"Wrote web/data/ from runs {run}" + (f" and {rule_run}" if rule_run else "") + f": {meta['questions']} questions, {meta['tasks']} tasks")
 
 
 if __name__ == "__main__":
