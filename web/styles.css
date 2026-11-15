@@ -510,3 +510,7 @@ details.fine.wide .table-wrap { margin-top: 0.75rem; }
 .settings b { color: var(--ink); font-weight: 600; }
 .prose .notes { font-size: 1rem; line-height: 1.6; }
 details.fine .notes { margin-top: 0.75rem; }
+/* writer A: the short tables on alone.html fit a phone without sideways scrolling */
+.scores.compact { min-width: 0; }
+.scores.compact .model { white-space: normal; }
+.scores.compact .cell { min-width: 5.5rem; }

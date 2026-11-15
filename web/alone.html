@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Results · PlannerBench</title>
-<meta name="description" content="How AI models score on 2,800 retirement-planning questions with an exact answer key, where they go wrong, and what the mistakes would cost a client.">
+<title>AI on its own · PlannerBench</title>
+<meta name="description" content="How AI models score on retirement questions with an exact answer key: almost always right on one rule, widely spread when several rules meet, and the 2025 rule many of them misread.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=19">
+<link rel="stylesheet" href="styles.css?v=21">
 </head>
 <body data-page="results">
 <header class="nav">
@@ -27,20 +27,19 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Results · AI on its own</p>
-    <h1>AI can do the math. It often doesn’t know this year’s rule.</h1>
+    <p class="eyebrow">AI on its own · findings 1 and 2</p>
+    <h1>AI gets one rule right. When rules meet, it depends which AI you ask.</h1>
     <div class="tldr">
-      <p class="label">In short</p>
-      <p>Ask about one old, well-known rule and AI is almost always right. Ask a question where several rules meet, the way they do in a real household, and it gets most of them wrong. Most of the wrong answers come from one rule that changed in 2025. Show the AI that rule and it gets the question right.</p>
+      <p class="label">The plain answer</p>
+      <p>Ask about one well-known rule and the best AIs I tested are almost always right. Ask a question where several rules meet, the way they do in a real household, and scores spread out: in my newer, harder set, the best model got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> right and <span data-k="a_cheap_under30">—</span> cheap models scored under 30%. In the first test, many models made the same mistake on a tax rule that is new since 2025.</p>
     </div>
   </section>
 
   <section class="band" id="worked">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">One question, worked</p>
         <h2>One question, and where it goes wrong</h2>
-        <p class="sub">This is a real question from the test. AI models from different companies all gave the same wrong answer. The IRS form shows why.</p>
+        <p class="sub">A real question from the first test (October 2026). <span data-k="agree_models">—</span> <span data-k="agree_cap">—</span>, to the dollar. The IRS form shows why.</p>
       </div>
       <div class="worked">
         <div class="question">
@@ -49,8 +48,8 @@
           <dl class="answers" id="featured-answers"></dl>
         </div>
         <div class="form" aria-label="Schedule 1-A Part V, worked">
-          <p class="label">IRS Schedule 1-A, Part V · Enhanced deduction for seniors</p>
-          <p class="rule-text">The 2025 tax law gave each person 65 or older an extra $6,000 deduction, shrinking by 6% of income over $150,000 on a joint return. Here is the IRS form, line by line:</p>
+          <p class="label">IRS Schedule 1-A, Part V (2025 form) · Enhanced deduction for seniors</p>
+          <p class="rule-text">A 2025 tax law gave each person 65 or older an extra <span data-v="system:senior_deduction.per_person" data-f="usd">—</span> deduction (an amount taken off income before tax). It shrinks by <span data-v="system:senior_deduction.phaseout_rate" data-f="pct">—</span> of income over <span data-v="featured:steps.threshold" data-f="usd">—</span> on a joint return. Below is the 2025 version of the form, line by line; the question is about 2026, and the 2026 form runs the same steps on renumbered lines.</p>
           <ol class="lines" id="featured-lines"></ol>
           <div class="misread">
             <p class="label">What the AI models did</p>
@@ -58,97 +57,133 @@
           </div>
         </div>
       </div>
+      <div class="takeaway-row">
+        <p class="takeaway"><b>How common was this mistake?</b> Across the two runs of the first test, <span data-k="a_sd">—</span> of the <span data-k="a_wrong">—</span> wrong answers (<span data-k="a_sd_of_wrong">—</span>) were this exact misreading. Most wrong answers matched no known misreading at all; of the <span data-k="a_named">—</span> we could trace to a named one, it explains <span data-k="a_sd_of_named">—</span>. For Claude Sonnet 5.5 it was <span data-k="a_son_sd">—</span> wrong answers.</p>
+        <p class="takeaway"><b>Show it the rule, and it gets it right.</b> When I pasted the IRS’s instructions for the new deduction in front of the same questions, Claude Sonnet 5.5 went from <span data-k="a_rule_son">—</span> on the senior-deduction questions, and Claude Haiku 5.5 from <span data-k="a_rule_haiku">—</span>. The math was fine; the rule was the gap.</p>
+      </div>
     </div>
   </section>
 
-  <section class="wrap section" id="scores-section">
+  <section class="wrap section" id="october">
     <div class="section-head">
-      <p class="eyebrow">Scores</p>
-      <h2>How many each AI got right</h2>
-      <p class="sub">The percent of questions each AI answered correctly, from easy questions on the left to hard ones on the right. The dark bar is the score. The lighter band shows how far off it could be, since each AI only answered a small number of questions.</p>
+      <p class="label">Test 1 · October 2026</p>
+      <h2>The first test: simple questions almost always right, stacked ones mostly wrong</h2>
+      <p class="sub"><span data-k="questions">—</span> questions, from one rule to several rules meeting in one household. I tested <span data-k="a_setups">—</span> model setups from <span data-k="a_v1_labs">—</span> companies, each set to think hard and allowed long replies.</p>
     </div>
     <div class="table-wrap">
-      <table class="scores" id="scores">
-        <thead>
-          <tr><th scope="col">Model</th><th scope="col">One rule</th><th scope="col">A few steps</th><th scope="col">Several rules at once</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Never finished</th><th scope="col" class="r">Cost per 1,000 right</th></tr>
-        </thead>
+      <table class="scores compact" id="a-v1-top">
+        <thead><tr><th scope="col">Model</th><th scope="col">One rule</th><th scope="col">Several rules at once</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <details class="fine">
-      <summary>How these were run</summary>
-      <p>Claude models were asked 10 questions per task through Anthropic’s API; the others 15 per task through OpenRouter, each pinned to one named host with data collection off. “Open weights” means anyone can download the model; fp8 and bf16 say how compressed the host’s copy is. “Never finished” means the model spent its whole 32,000-token budget thinking and never answered; that counts as not right. When two bands overlap heavily, the gap between those models may be noise.</p>
-    </details>
-
-    <div class="sub-head">
-      <h3>What the mistakes would cost a client</h3>
-      <p>A right-or-wrong score treats a Medicare premium that is ten cents off the same as a required withdrawal that is $9,000 too high. A planner wouldn’t. So here each answer is scored by how many dollars a year it is off. A miss of $1,000 a year or more counts as a big one.</p>
-    </div>
-    <div class="table-wrap">
-      <table class="scores dollars" id="dollars">
-        <thead>
-          <tr><th scope="col">Model</th><th scope="col" class="r">Dollars off per question, per year</th><th scope="col" class="r">Big misses ($1,000+)</th><th scope="col" class="r">Typical miss</th><th scope="col" class="r">Worst miss</th><th scope="col" class="r">Questions scored</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <p class="table-note" id="dollars-note"></p>
+    <p class="table-note">Claude Sonnet 5.5 got <span data-k="single">—</span> of one-rule questions right, and Claude Haiku 5.5 got <span data-v="models:[model=claude-haiku-5-5].single_step_accuracy" data-f="pct">—</span>. When several rules met in one household, Sonnet dropped to <span data-k="stacked">—</span> and Haiku to <span data-v="models:[model=claude-haiku-5-5].stacked_accuracy" data-f="pct">—</span>. The shaded band behind each bar is the range the true score likely sits in, since each model answered only <span data-v="system:first_test.per_task_claude" data-f="int">—</span>–<span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> questions per task.</p>
 
     <figure class="chart-card value-card">
       <figcaption>
-        <h3>Right answers per dollar</h3>
-        <p>How often each AI was right, against what each right answer cost me. Higher and further left is better. A cheap AI isn’t always cheap per answer: some think for so long that they run out of room and never answer.</p>
+        <h3>What the wrong answers were</h3>
+        <p>Each wrong answer checked against known ways of misreading the rules. The senior-deduction misreading is the biggest named cause; most other wrong answers matched no known misreading (“Unexplained”). One cheap model, gpt-oss-120b, used the required-withdrawal table the IRS replaced in 2022.</p>
       </figcaption>
-      <div class="chart" id="value-chart" role="img" aria-label="Accuracy against cost per right answer"></div>
-      <div class="legend"><span><i class="dot"></i>Closed weights</span><span><i class="dot open"></i>Open weights</span></div>
+      <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
     </figure>
 
-    <div class="pair">
-      <figure class="chart-card">
-        <figcaption>
-          <h3>Give it the rule</h3>
-          <p>The same questions again, this time with the IRS’s two-line instructions for the new rule pasted in front.</p>
-        </figcaption>
-        <div class="chart" id="rule-chart" role="img" aria-label="Accuracy without and with the rule"></div>
-        <div class="legend"><span><i class="dot hollow"></i>Without the rule</span><span><i class="dot"></i>With the rule</span></div>
-      </figure>
-      <figure class="chart-card">
-        <figcaption>
-          <h3>What the wrong answers were</h3>
-          <p>I checked each wrong answer against known ways of misreading the rules. One misreading of the new senior deduction explains most of them.</p>
-        </figcaption>
-        <div class="chart" id="mistake-chart" role="img" aria-label="Wrong answers by type"></div>
-      </figure>
+    <details class="fine wide draw-open">
+      <summary>All models and columns (first test)</summary>
+      <p>Every model setup, every kind of question. “Compliance” questions ask a reviewer to catch a planted problem. In this test they were too easy: each question defined the issue it was about, so all <span data-k="a_setups">—</span> setups scored <span data-k="a_comp">—</span>. The next version names issues without defining them. “Never finished” means the model used its whole reply budget thinking and never answered; that counts as not right.</p>
+      <div class="table-wrap">
+        <table class="scores" id="scores">
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col">One rule</th><th scope="col">A few steps</th><th scope="col">Several rules at once</th><th scope="col">Compliance</th><th scope="col" class="r">Overall</th><th scope="col" class="r">Never finished</th><th scope="col" class="r">Cost per 1,000 right</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="sub-head">
+        <h3>Give it the rule</h3>
+        <p>The same questions again, with the IRS’s two-line instructions for the new rule pasted in front.</p>
+      </div>
+      <div class="chart" id="rule-chart" role="img" aria-label="Accuracy without and with the rule"></div>
+      <div class="legend"><span><i class="dot hollow"></i>Without the rule</span><span><i class="dot"></i>With the rule</span></div>
+
+      <div class="sub-head">
+        <h3>What the mistakes would cost a client</h3>
+        <p>A right-or-wrong score treats a Medicare premium that is ten cents off the same as a required withdrawal that is thousands of dollars too high. So here each answer is also scored by how many dollars a year it is off. A miss of $1,000 a year or more counts as a big one.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="scores dollars" id="dollars">
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col" class="r">Dollars off per question, per year</th><th scope="col" class="r">Big misses ($1,000+)</th><th scope="col" class="r">Typical miss</th><th scope="col" class="r">Worst miss</th><th scope="col" class="r">Questions scored</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="dollars-note"></p>
+
+      <div class="sub-head">
+        <h3>Right answers per dollar</h3>
+        <p>How often each model was right, against what each right answer cost me. Higher and further left is better. A cheap model isn’t always cheap per answer: some think so long they run out of room and never answer.</p>
+      </div>
+      <div class="chart" id="value-chart" role="img" aria-label="Accuracy against cost per right answer"></div>
+      <div class="legend"><span><i class="dot"></i>Closed weights</span><span><i class="dot open"></i>Open weights (free to download)</span></div>
+
+      <div class="sub-head">
+        <h3>The four kinds of question</h3>
+        <p id="questions-sub">Every question is generated from a household’s numbers, so none can be memorized from the web. Open a card to see a real one.</p>
+      </div>
+      <div class="tiers" id="tiers"></div>
+    </details>
+
+    <details class="fine">
+      <summary>How the first test was run</summary>
+      <p>Claude models were asked <span data-v="system:first_test.per_task_claude" data-f="int">—</span> questions per task through Anthropic’s API, with up to <span data-v="system:first_test.max_tokens_claude" data-f="int">—</span> tokens per reply; the others <span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> per task through OpenRouter (a service that relays requests to many models), with up to <span data-v="system:first_test.max_tokens_openrouter" data-f="int">—</span>. Reasoning effort was <span data-v="system:first_test.effort">—</span> for all. Each outside model was pinned to one named host with data collection off; “fp8” and “bf16” say how compressed that host’s copy is. Ranges are 95% intervals; when two overlap heavily, the gap between those models may be noise.</p>
+    </details>
+  </section>
+
+  <section class="band" id="november">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Test 2 · November 2026</p>
+        <h2>The newer, harder set: it depends which AI you ask</h2>
+        <p class="sub">A month later I wrote <span data-v="v2:items.hard" data-f="int">—</span> harder questions, each making two or more rules meet: the largest Roth conversion (paying tax now to move savings into an account that’s tax-free later) that won’t raise Medicare premiums two years later, a widow’s first year of taxes, Arizona state tax for retirees. I tested <span data-k="a_v2_models">—</span> models, including OpenAI’s GPT and Google’s Gemini.</p>
+      </div>
+      <p class="settings"><b>Different settings from the first test.</b> Every model ran at <span data-v="v2:settings.effort">—</span> reasoning effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token reply limit, a quick answer rather than a long think. Don’t compare these scores with the October ones.</p>
+      <div class="table-wrap">
+        <table class="scores compact" id="a-v2-top">
+          <thead><tr><th scope="col">Model</th><th scope="col">Right, of the newer set</th><th scope="col" class="r">Ran out of room</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-note">The spread is the finding: GPT-6.1 Sol got <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span>, Claude Sonnet 5.5 <span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span>, and <span data-k="a_cheap_under30">—</span> cheap models under 30%. A low score can mean wrong math or simply running out of room: DeepSeek V4.1 Flash hit the reply limit before answering on <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.truncated" data-f="pct">—</span> of questions, which counts as not right.</p>
+
+      <details class="fine wide">
+        <summary>All <span data-v="v2:items.hard" data-f="int">—</span> questions, all models</summary>
+        <div class="table-wrap">
+          <table class="scores" id="a-v2-all">
+            <thead><tr><th scope="col">Model</th><th scope="col">Right</th><th scope="col" class="r">Ran out of room</th><th scope="col" class="r">Runs averaged</th><th scope="col" class="r">Cost per 1,000 right</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p>Most models were run twice and the two runs averaged, so a half point in the Right column means the two runs differed. Ranges are 95% intervals; with <span data-v="v2:items.hard" data-f="int">—</span> questions they are wide, so the order of models close together is not reliable. Every question’s answer was computed by the planning engine and matched by the second, independently written engine. The Arizona questions have no outside check.</p>
+      </details>
     </div>
   </section>
 
-  <section class="wrap section" id="questions">
-    <div class="section-head">
-      <p class="eyebrow">The questions</p>
-      <h2>Four kinds of question, from easy to hard</h2>
-      <p class="sub" id="questions-sub">Every question is generated from a household’s numbers, so there are as many as needed and none can be memorized from the web. Open a card to see a real one.</p>
-    </div>
-    <div class="tiers" id="tiers"></div>
-  </section>
-
-  <section class="band">
-    <div class="wrap split">
+  <section class="wrap section">
+    <div class="split">
       <div>
-        <p class="eyebrow">Reading the results</p>
-        <h2>What they mean, and what they don’t</h2>
+        <h2>What the results mean, and what they don’t</h2>
       </div>
       <ul class="notes">
-        <li><b>The math isn’t the problem.</b> Models handle long-standing rules well. They slip on the newest ones and on several rules interacting at once.</li>
-        <li><b>It isn’t one lab’s blind spot.</b> DeepSeek and GLM made the same senior-deduction misreading as Claude. gpt-oss-120b used the RMD table that was replaced in 2022 on every RMD it got wrong. Models know the rules as they were, not as they are.</li>
-        <li><b>Price per token misleads.</b> DeepSeek V4.1 Flash tied Claude Haiku 5.5 overall, and Haiku was still the cheapest per right answer.</li>
-        <li><b>The compliance questions are too easy.</b> They define each issue in the question, so every model scores 91–100%. The next version names issues without defining them.</li>
-        <li><b>It’s still small.</b> 10–15 questions per task per model. A gap of a few points is within the noise; the intervals show how much.</li>
+        <li><b>The math isn’t the problem.</b> In the first test, models handled long-standing rules well. They slipped on the newest rules and on several rules meeting at once.</li>
+        <li><b>It isn’t one company’s blind spot.</b> In the first test, DeepSeek and GLM made the same senior-deduction misreading as Claude. Models know the rules as they were, not as they are.</li>
+        <li><b>Price per word misleads.</b> A model that’s cheap to run can cost more per right answer if it thinks so long it never answers. The cost columns are in the full tables above.</li>
+        <li><b>It’s still small.</b> <span data-v="system:first_test.per_task_claude" data-f="int">—</span>–<span data-v="system:first_test.per_task_openrouter" data-f="int">—</span> questions per task per model in the first test, <span data-v="v2:items.hard" data-f="int">—</span> in the newer set. A gap of a few points is within the noise; the ranges show how much.</li>
       </ul>
     </div>
   </section>
 
   <section class="wrap section">
-    <a class="next" href="calculator.html"><span><span class="label">Next</span><b>With tools: what happens when AI gets a calculator</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="next" href="calculator.html"><span><span class="label">Next · finding 3</span><b>With a calculator: what happens when AI can call one it trusts</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
@@ -159,6 +194,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=14"></script>
+<script src="app.js?v=15"></script>
 </body>
 </html>
