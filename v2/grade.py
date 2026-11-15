@@ -7,8 +7,13 @@
 What is rule-based and what is judged:
   hard tier      rule-based: the last "ANSWER:" number against the key and its tolerance
   tool use       rule-based: tool calls are saved with each reply
-  bad inputs     rule-based: whether the reply ends in a number or NEED_INFO (confident number; false alarm; clean accuracy)
+  bad inputs     rule-based: whether the reply ends in a number, NEED_INFO, or nothing because it hit the token limit
+                             (false alarm; clean accuracy; ran out of room)
                  judged:     whether the reply named the planted problem, and whether it asked for the right fact
+                 adjudicated: v2/runs/bad/adjudication.jsonl overrides judge labels that contradict the reply's own words
+                             (see v2/adjudicate.py and v2/results/ADJUDICATION.md); both versions are published
+  So of the five outcomes on a corrupted note, only "ran out of room" is purely rule-based: caught, noticed-but-answered,
+  missed-and-answered (silent number) and declined-for-another-reason all depend on the judged flag.
 """
 import json
 import re
@@ -31,6 +36,9 @@ LINE = re.compile(r"ANSWER\**\s*:\s*\**\s*([^\n]*)", re.IGNORECASE)
 JUDGE = "or:anthropic/claude-haiku-5.5@anthropic"
 JUDGE2 = "or:openai/gpt-6-luna@openai"
 TYPES = ["transposed", "impossible_age", "spending", "conflict", "over_limit"]
+# The five ways a reply to a corrupted note can go. "ran_out_of_room": no answer because the reply hit the token limit.
+OUTCOMES = ["caught", "flagged_but_answered", "silent_number", "declined_other_reason", "ran_out_of_room"]
+TOKENS_PER_TURN, TOOL_TURNS = 4000, 8  # v2/runs/hard-tools/meta.json: max_tokens and engine.max_tool_turns
 
 
 def load(path):
@@ -173,6 +181,15 @@ def per_item(rows, flag):
     return sum(sum(v) / len(v) for v in by.values()), len(by), stable
 
 
+def stability(rows, key):
+    """Share of items with more than one run where every run landed in the same category (key(row)); and how many such items."""
+    by = defaultdict(list)
+    for r in rows:
+        by[r["id"]].append(key(r))
+    multi = [v for v in by.values() if len(v) > 1]
+    return (round(sum(len(set(v)) == 1 for v in multi) / len(multi), 4) if multi else None), len(multi)
+
+
 def grade_hard():
     items = {i["id"]: i for i in load(V2 / "data" / "hard.jsonl")}
     rows = []
@@ -206,6 +223,8 @@ def grade_hard():
 def grade_bad():
     items = {i["id"]: i for i in load(V2 / "data" / "bad_inputs.jsonl")}
     judged = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge.jsonl")}
+    adj = {(a["model"], a["id"], a["rep"]): a for a in load(V2 / "runs" / "bad" / "adjudication.jsonl")}
+    assert all(judged[k]["flagged"] == a["judge_flagged"] for k, a in adj.items()), "adjudication.jsonl is out of date with judge.jsonl"
     stale = lambda j: ("flagged" in j) != (items[j["id"]]["kind"] == "corrupted")
     assert not any(stale(j) for j in judged.values())
     rows = []
@@ -215,17 +234,24 @@ def grade_bad():
         trunc = r.get("stop_reason") in ("length", "max_tokens")
         row = {"model": r["model"], "id": r["id"], "kind": it["kind"], "type": it["type"], "pair": it["pair"], "rep": r["rep"], "ans": kind, "got": x,
                "needs_2026_law": "Use 2026 federal tax law" in it["prompt"],
-               "truncated": trunc, "cost": cost(r), "out_tokens": r.get("output_tokens", 0)}
+               "truncated": trunc, "cost": cost(r), "out_tokens": r.get("output_tokens", 0),
+               "ran_out_of_room": kind == "none" and trunc}
         if it["kind"] == "corrupted":
-            j = judged.get((r["model"], r["id"], r["rep"]))
+            key = (r["model"], r["id"], r["rep"])
+            j = judged.get(key)
             row["judged"] = j is not None
-            row["flagged"] = bool(j and j.get("flagged"))
+            row["flagged_judge"] = bool(j and j.get("flagged"))
+            row["adjudicated"] = key in adj
+            row["flagged"] = adj[key]["adjudicated_flagged"] if key in adj else row["flagged_judge"]
             row["asked"] = bool(j and j.get("asked"))
             row["keyword"] = bool(re.search(KEYWORDS[it["type"]], r.get("text") or "", re.IGNORECASE))
             row["no_number"] = kind != "number"
-            # The four ways a reply to a corrupted note can go:
-            row["outcome"] = ("caught" if row["flagged"] and kind != "number" else "flagged_but_answered" if row["flagged"] else
-                              "silent_number" if kind == "number" else "declined_other_reason")
+
+            def outcome(flag):  # the five ways a reply to a corrupted note can go (OUTCOMES)
+                return ("ran_out_of_room" if row["ran_out_of_room"] else "caught" if flag and kind != "number" else
+                        "flagged_but_answered" if flag else "silent_number" if kind == "number" else "declined_other_reason")
+            row["outcome"] = outcome(row["flagged"])
+            row["outcome_judge"] = outcome(row["flagged_judge"])
             row["used_clean_value"] = kind == "number" and abs(x - it["answer"]) <= it["tol"]
         else:
             row["correct"] = kind == "number" and abs(x - it["answer"]) <= it["tol"]
@@ -268,16 +294,32 @@ def summarize(hard, bad):
             c = sum(r["cost"] or 0 for r in rows)
             f = lambda sel, flag: rate(*per_item(sel, flag)[:2])
             b = {"replies": len(rows), "reps": round(len(rows) / len({r["id"] for r in rows}), 2), "judged": sum(r["judged"] for r in cor), "corrupted_replies": len(cor),
-                 "caught": f(cor, lambda r: r["outcome"] == "caught"), "flagged": f(cor, lambda r: r["flagged"]), "asked": f(cor, lambda r: r["asked"]),
-                 "no_number": f(cor, lambda r: r["no_number"]), "silent_number": f(cor, lambda r: r["outcome"] == "silent_number"),
-                 "flagged_but_answered": f(cor, lambda r: r["outcome"] == "flagged_but_answered"), "declined_other_reason": f(cor, lambda r: r["outcome"] == "declined_other_reason"),
+                 # The five outcomes (OUTCOMES) add to 100%; headline numbers use the adjudicated labels.
+                 **{k: f(cor, lambda r, k=k: r["outcome"] == k) for k in OUTCOMES},
+                 "flagged": f(cor, lambda r: r["flagged"]), "asked": f(cor, lambda r: r["asked"]), "no_number": f(cor, lambda r: r["no_number"]),
+                 # The same with the judge's labels alone, before adjudication.
+                 "judge_only": {**{k: f(cor, lambda r, k=k: r["outcome_judge"] == k) for k in OUTCOMES}, "flagged": f(cor, lambda r: r["flagged_judge"])},
+                 "adjudication": {"labels_changed": sum(r["adjudicated"] for r in cor), "false_to_true": sum(r["adjudicated"] and r["flagged"] for r in cor),
+                                  "true_to_false": sum(r["adjudicated"] and not r["flagged"] for r in cor),
+                                  "outcome_changes": dict(Counter(f'{r["outcome_judge"]}->{r["outcome"]}' for r in cor if r["outcome_judge"] != r["outcome"]))},
                  "clean_correct": f(cln, lambda r: r["correct"]), "false_alarm_clean": f(cln, lambda r: r["false_alarm"]),
                  "false_alarm_odd": f(oddr, lambda r: r["false_alarm"]), "false_alarm": f(ctl, lambda r: r["false_alarm"]), "control_correct": f(ctl, lambda r: r["correct"]),
-                 "stable_caught": per_item(cor, lambda r: r["outcome"] == "caught")[2], "truncated": round(sum(r["truncated"] for r in rows) / len(rows), 4),
+                 # Truncation on correct notes is neither a right answer nor a false alarm (a false alarm is NEED_INFO); shown on its own.
+                 "ran_out_of_room_clean": f(cln, lambda r: r["ran_out_of_room"]), "ran_out_of_room_odd": f(oddr, lambda r: r["ran_out_of_room"]),
+                 "ran_out_of_room_controls": f(ctl, lambda r: r["ran_out_of_room"]),
+                 # Run-to-run agreement on corrupted notes, over items asked more than once: same outcome of the five on every run
+                 # (stable_outcome), and the coarser caught / not caught (stable_caught, binary; kept for comparison only).
+                 "stable_outcome": stability(cor, lambda r: r["outcome"])[0], "stable_outcome_judge_only": stability(cor, lambda r: r["outcome_judge"])[0],
+                 "stable_caught": stability(cor, lambda r: r["outcome"] == "caught")[0], "stable_items": stability(cor, lambda r: r["outcome"])[1],
+                 "truncated": round(sum(r["truncated"] for r in rows) / len(rows), 4),
                  "cost_usd": round(c, 4), "cost_per_question": round(c / len(rows), 5),
                  "by_type": {t: {"caught": f([r for r in cor if r["type"] == t], lambda r: r["outcome"] == "caught"),
+                                 "caught_judge_only": f([r for r in cor if r["type"] == t], lambda r: r["outcome_judge"] == "caught"),
                                  "flagged": f([r for r in cor if r["type"] == t], lambda r: r["flagged"]),
+                                 "silent_number": f([r for r in cor if r["type"] == t], lambda r: r["outcome"] == "silent_number"),
                                  "false_alarm": f([r for r in cln if r["type"] == t], lambda r: r["false_alarm"])} for t in TYPES}}
+            low = min(b["by_type"][t]["caught"]["rate"] for t in TYPES)
+            b["lowest_catch_types"] = [t for t in TYPES if b["by_type"][t]["caught"]["rate"] == low]
             b["decline_reasons"] = dict(Counter(r["decline_reason"] for r in ctl if r["false_alarm"]))
             # The same two rates on the notes that need no 2026 tax law (RMDs, Social Security claiming, spending), so a model
             # that declines because it doesn't know the new law isn't mistaken for one that catches or cries wolf.
@@ -288,11 +330,13 @@ def summarize(hard, bad):
             # One number for the track: catches minus false alarms (0 for a model that never flags or always flags).
             b["net"] = round(b["caught"]["rate"] - b["false_alarm"]["rate"], 4)
             # Paired view: the twin pairs handled right both ways (caught the corrupted one, answered the clean one correctly).
-            pairs = defaultdict(dict)
+            # Runs are matched by run number within a pair and averaged, so each of the 30 pairs counts once.
+            pairs = defaultdict(lambda: defaultdict(dict))
             for r in cor + cln:
-                pairs[(r["pair"], r["rep"])][r["kind"]] = r
-            both = [p for p in pairs.values() if len(p) == 2]
-            b["pairs_both_right"] = rate(sum(p["corrupted"]["outcome"] == "caught" and p["clean"]["correct"] for p in both), len(both))
+                pairs[r["pair"]][r["rep"]][r["kind"]] = r
+            shares = [sum(p["corrupted"]["outcome"] == "caught" and p["clean"]["correct"] for p in reps) / len(reps)
+                      for reps in ([p for p in v.values() if len(p) == 2] for v in pairs.values()) if reps]
+            b["pairs_both_right"] = rate(sum(shares), len(shares))
             s["bad"] = b
         else:
             s["bad"] = None
@@ -315,13 +359,54 @@ def tool_effect(hard):
     return out
 
 
+def catch_by_type(bad, models):
+    """Catch rate by error type: pooled over every reply to a corrupted note, and per model (from summarize)."""
+    cor = [r for r in bad if r["kind"] == "corrupted"]
+    pooled = {t: rate(sum(r["outcome"] == "caught" for r in cor if r["type"] == t), sum(r["type"] == t for r in cor)) for t in TYPES}
+    judge = {t: rate(sum(r["outcome_judge"] == "caught" for r in cor if r["type"] == t), sum(r["type"] == t for r in cor)) for t in TYPES}
+    per_model = {m["name"]: {t: m["bad"]["by_type"][t]["caught"]["rate"] for t in TYPES} for m in models if m["bad"]}
+    mean = {t: round(sum(v[t] for v in per_model.values()) / len(per_model), 4) for t in TYPES}
+    lowest = min(TYPES, key=lambda t: pooled[t]["rate"])
+    return {"note": "pooled = share of all replies to corrupted notes of that type that were caught (adjudicated); model_mean = average of the per-model rates",
+            "pooled": pooled, "pooled_judge_only": judge, "model_mean": mean, "lowest_pooled": lowest, "per_model": per_model,
+            # Models for which the lowest pooled type is not (or not alone) their lowest catch rate.
+            "models_not_lowest_on_" + lowest: [m["name"] for m in models if m["bad"] and m["bad"]["lowest_catch_types"] != [lowest]],
+            "models_with_another_type_below_" + lowest: [m["name"] for m in models if m["bad"] and any(m["bad"]["by_type"][t]["caught"]["rate"] < m["bad"]["by_type"][lowest]["caught"]["rate"] for t in TYPES)]}
+
+
+def tool_budget():
+    """The 4,000-token limit applies to each turn of the tool loop, up to TOOL_TURNS turns, so a tools reply can total more."""
+    out = {}
+    for r in replies("hard-tools"):
+        name = NAME[r["model"]]["name"]
+        o = out.setdefault(name, {"replies": 0, "over_4000_total": 0, "max_output_tokens": 0})
+        t = r.get("output_tokens") or 0
+        o["replies"] += 1
+        o["over_4000_total"] += t > TOKENS_PER_TURN
+        o["max_output_tokens"] = max(o["max_output_tokens"], t)
+    return {"tokens_per_turn": TOKENS_PER_TURN, "max_tool_turns": TOOL_TURNS, "replies": sum(o["replies"] for o in out.values()),
+            "over_4000_total": sum(o["over_4000_total"] for o in out.values()), "max_output_tokens": max(o["max_output_tokens"] for o in out.values()), "by_model": out}
+
+
+def paired(hard, a_model, a_tools, b_model, b_tools):
+    """Two setups on the same hard items, first run of each, with an exact McNemar test."""
+    a = {r["id"]: r["bucket"] == "correct" for r in hard if r["model"] == a_model and r["tools"] == a_tools and r["rep"] == 0}
+    b = {r["id"]: r["bucket"] == "correct" for r in hard if r["model"] == b_model and r["tools"] == b_tools and r["rep"] == 0}
+    ids = sorted(set(a) & set(b))
+    pairs = [(a[i], b[i]) for i in ids]
+    label = lambda m, t: NAME[m]["name"] + (" with the engine" if t else " alone")
+    return {"a": label(a_model, a_tools), "b": label(b_model, b_tools), "questions": len(ids), "a_right": sum(x for x, _ in pairs), "b_right": sum(y for _, y in pairs),
+            "both_right": sum(x and y for x, y in pairs), "only_a": sum(x and not y for x, y in pairs), "only_b": sum(y and not x for x, y in pairs),
+            "neither": sum(not x and not y for x, y in pairs), "p_exact_mcnemar": round(mcnemar(pairs), 4), "runs": "first run of each (rep 0)"}
+
+
 def judge_check(bad):
     """How far to trust the judge: agreement with a second judge from another lab, and with a keyword check."""
     j1 = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge.jsonl") if "flagged" in j}
     j2 = {(j["model"], j["id"], j["rep"]): j for j in load(V2 / "runs" / "bad" / "judge2.jsonl")}
     both = [(j1[k], j2[k]) for k in j2 if k in j1]
     cor = [r for r in bad if r["kind"] == "corrupted" and r["judged"]]
-    kw = sum(r["flagged"] == r["keyword"] for r in cor)
+    kw = sum(r["flagged_judge"] == r["keyword"] for r in cor)
 
     def kappa(pairs):
         n = len(pairs)
@@ -337,7 +422,10 @@ def judge_check(bad):
             "asked_agreement": round(sum(a["asked"] == b["asked"] for a, b in both) / len(both), 4) if both else None,
             "asked_kappa": kappa([(a["asked"], b["asked"]) for a, b in both]),
             "keyword_agreement": round(kw / len(cor), 4) if cor else None,
-            "judge_flagged_keyword_missing": sum(r["flagged"] and not r["keyword"] for r in cor), "keyword_hit_judge_not_flagged": sum(r["keyword"] and not r["flagged"] for r in cor)}
+            "judge_flagged_keyword_missing": sum(r["flagged_judge"] and not r["keyword"] for r in cor), "keyword_hit_judge_not_flagged": sum(r["keyword"] and not r["flagged_judge"] for r in cor),
+            "adjudication": {"file": "v2/runs/bad/adjudication.jsonl", "overrides": sum(r["adjudicated"] for r in cor),
+                             "false_to_true": sum(r["adjudicated"] and r["flagged"] for r in cor), "true_to_false": sum(r["adjudicated"] and not r["flagged"] for r in cor),
+                             "adjudicator": "Claude (the lead AI agent), not a human; a human spot-check is still owed"}}
 
 
 def main():
@@ -355,27 +443,68 @@ def main():
         avg = lambda get: (lambda xs: round(sum(xs) / len(xs), 4) if xs else None)([get(m) for m in ms if get(m) is not None])
         tiers[t] = {"models": len(ms), "hard": avg(lambda m: m["hard"] and m["hard"]["rate"]), "hard_tools": avg(lambda m: m["hard_tools"] and m["hard_tools"]["rate"]),
                     "caught": avg(lambda m: m["bad"] and m["bad"]["caught"]["rate"]), "false_alarm": avg(lambda m: m["bad"] and m["bad"]["false_alarm"]["rate"]),
-                    "silent_number": avg(lambda m: m["bad"] and m["bad"]["silent_number"]["rate"]), "clean_correct": avg(lambda m: m["bad"] and m["bad"]["clean_correct"]["rate"])}
+                    "silent_number": avg(lambda m: m["bad"] and m["bad"]["silent_number"]["rate"]), "clean_correct": avg(lambda m: m["bad"] and m["bad"]["clean_correct"]["rate"]),
+                    "ran_out_of_room": avg(lambda m: m["bad"] and m["bad"]["ran_out_of_room"]["rate"])}
     cor = [r for r in bad if r["kind"] == "corrupted"]
-    summary = {"generated_from": "v2/runs/*/raw.jsonl and v2/runs/bad/judge.jsonl", "settings": {"effort": "low", "max_tokens": 4000},
+    by_id = {m["name"]: m["id"] for m in LINEUP}
+    summary = {"generated_from": "v2/runs/*/raw.jsonl, v2/runs/bad/judge.jsonl and v2/runs/bad/adjudication.jsonl",
+               "settings": {"effort": "low", "max_tokens": 4000, "max_tokens_applies_to": "each reply; in the tool track each turn, up to 8 turns", "max_tool_turns": TOOL_TURNS},
+               "outcomes": OUTCOMES,
                "spend": led, "items": {"hard": 42, "bad_corrupted": 30, "bad_clean": 30, "bad_valid_odd": 10},
                "models": models, "tiers": tiers, "tool_effect": tool_effect(hard), "judge_check": judge_check(bad),
-               "bad_outcomes_all_models": dict(Counter(r["outcome"] for r in cor)),
-               "bad_by_type_all_models": {t: dict(Counter(r["outcome"] for r in cor if r["type"] == t)) for t in TYPES}}
+               "bad_outcomes_all_models": {k: sum(r["outcome"] == k for r in cor) for k in OUTCOMES},
+               "bad_outcomes_all_models_judge_only": {k: sum(r["outcome_judge"] == k for r in cor) for k in OUTCOMES},
+               "bad_ran_out_of_room_controls_all_models": sum(r["ran_out_of_room"] for r in bad if r["kind"] != "corrupted"),
+               "bad_by_type_all_models": {t: {k: sum(r["outcome"] == k for r in cor if r["type"] == t) for k in OUTCOMES} for t in TYPES},
+               "catch_by_type": catch_by_type(bad, models), "tool_budget": tool_budget(),
+               "comparisons": [paired(hard, by_id["DeepSeek V4.1 Flash"], True, by_id["Claude Sonnet 5.5"], False)]}
     (RES / "summary.json").write_text(json.dumps(summary, indent=1) + "\n")
     pct = lambda x: "–" if x is None else f"{100 * x:.0f}%"
     ci = lambda d: "–" if not d or d["rate"] is None else f"{100 * d['rate']:.0f}% [{100 * d['lo']:.0f}–{100 * d['hi']:.0f}]"
     md = ["# PlannerBench v2 results", "", "Built by `v2/grade.py` from the saved replies. Brackets are 95% Wilson intervals over items (a repeated item counts once).", "",
-          "## Bad inputs", "", "| Model | Tier | Runs/item | Caught | Flagged | Asked | No number | Silent number | False alarm (clean + odd) | Clean answers right | Net |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+          "## Bad inputs", "",
+          "What each model did with the 30 corrupted notes. The five outcomes add to 100%. \"Caught it\" = named the planted problem and gave no number "
+          "(asking a question is not required). Only \"Ran out of room\" (no answer because the reply hit the 4,000-token limit) is purely rule-based; "
+          "the other four depend on whether the reply named the problem, which Claude Haiku 5.5 judged and the lead AI agent (Claude) adjudicated "
+          "where the judge's label contradicted the reply's own words (`v2/runs/bad/adjudication.jsonl`, `v2/results/ADJUDICATION.md`). "
+          "\"Judge only\" is the catch rate before adjudication; \"Labels changed\" counts the replies whose label was overridden.", "",
+          "| Model | Tier | Runs/item | Caught it | Noticed, answered anyway | Missed it, answered anyway | Declined for another reason | Ran out of room | Caught (judge only) | Labels changed | False alarm (clean + odd) | Correct notes: ran out of room | Clean answers right | Net |",
+          "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for m in sorted([m for m in models if m["bad"]], key=lambda m: -m["bad"]["net"]):
         b = m["bad"]
-        md.append(f"| {m['name']} | {m['tier']} | {b['reps']:.0f} | {ci(b['caught'])} | {pct(b['flagged']['rate'])} | {pct(b['asked']['rate'])} | {pct(b['no_number']['rate'])} | "
-                  f"{pct(b['silent_number']['rate'])} | {ci(b['false_alarm'])} | {pct(b['clean_correct']['rate'])} | {100 * b['net']:+.0f} |")
+        md.append(f"| {m['name']} | {m['tier']} | {b['reps']:.0f} | {ci(b['caught'])} | {pct(b['flagged_but_answered']['rate'])} | {pct(b['silent_number']['rate'])} | "
+                  f"{pct(b['declined_other_reason']['rate'])} | {pct(b['ran_out_of_room']['rate'])} | {pct(b['judge_only']['caught']['rate'])} | {b['adjudication']['labels_changed']} | "
+                  f"{ci(b['false_alarm'])} | {pct(b['ran_out_of_room_controls']['rate'])} | {pct(b['clean_correct']['rate'])} | {100 * b['net']:+.0f} |")
+    tot = summary["bad_outcomes_all_models"]
+    md += ["", f"All models, {len(cor)} replies to corrupted notes: " + ", ".join(f"{k} {v}" for k, v in tot.items()) + "; judge only: "
+           + ", ".join(f"{k} {v}" for k, v in summary["bad_outcomes_all_models_judge_only"].items()) + ".",
+           f"Replies to correct notes that ran out of room (not counted as false alarms, not right): {summary['bad_ran_out_of_room_controls_all_models']}.",
+           "", "### Catch rate by error type", "", "| Model | " + " | ".join(TYPES) + " |", "|---|" + "---|" * len(TYPES)]
+    cbt = summary["catch_by_type"]
+    for name, v in cbt["per_model"].items():
+        md.append(f"| {name} | " + " | ".join(pct(v[t]) for t in TYPES) + " |")
+    md.append("| **All replies, pooled** | " + " | ".join(ci(cbt["pooled"][t]) for t in TYPES) + " |")
+    md.append("| Mean of the model rates | " + " | ".join(pct(cbt["model_mean"][t]) for t in TYPES) + " |")
+    md += ["", "### Run-to-run agreement (corrupted notes asked more than once)", "",
+           "| Model | Items | Same outcome of five, every run | Same caught / not caught (binary) |", "|---|---|---|---|"]
+    for m in models:
+        b = m["bad"]
+        if b and b["stable_items"]:
+            md.append(f"| {m['name']} | {b['stable_items']} | {pct(b['stable_outcome'])} | {pct(b['stable_caught'])} |")
+    md += ["", "### Twin pairs handled right both ways (runs averaged within each of the 30 pairs)", "", "| Model | Both right |", "|---|---|"]
+    md += [f"| {m['name']} | {ci(m['bad']['pairs_both_right'])} |" for m in models if m["bad"]]
     md += ["", "## Hard tier", "", "| Model | Tier | Runs/item | Alone | Truncated | $ per right answer | With engine | Called a tool | Never called |", "|---|---|---|---|---|---|---|---|---|"]
     for m in sorted([m for m in models if m["hard"]], key=lambda m: -m["hard"]["rate"]):
         h, t = m["hard"], m["hard_tools"]
         md.append(f"| {m['name']} | {m['tier']} | {h['reps']:.0f} | {ci(h)} | {pct(h['truncated'])} | {'–' if h['cost_per_correct'] is None else '$%.4f' % h['cost_per_correct']} | "
                   f"{ci(t) if t else '–'}{' (n=%d)' % t['n'] if t and t['n'] < 42 else ''} | {pct(t['call_rate']) if t else '–'} | {t['paths'].get('never_called', 0) if t else '–'} |")
+    tb = summary["tool_budget"]
+    md += ["", f"### Tool track token budget", "", f"The {tb['tokens_per_turn']:,}-token limit applies to each turn of the tool loop, up to {tb['max_tool_turns']} turns. "
+           f"{tb['over_4000_total']} of {tb['replies']} tool-track replies used more than {tb['tokens_per_turn']:,} output tokens in total; the most was {tb['max_output_tokens']:,}.", "",
+           "| Model | Replies | Over 4,000 in total | Most output tokens |", "|---|---|---|---|"]
+    md += [f"| {k} | {v['replies']} | {v['over_4000_total']} | {v['max_output_tokens']:,} |" for k, v in tb["by_model"].items()]
+    md += ["", "### Paired comparisons (same 42 hard questions, first run of each)", "", "| A | B | A right | B right | Both | Only A | Only B | Neither | Exact McNemar p |", "|---|---|---|---|---|---|---|---|---|"]
+    md += [f"| {c['a']} | {c['b']} | {c['a_right']} | {c['b_right']} | {c['both_right']} | {c['only_a']} | {c['only_b']} | {c['neither']} | {c['p_exact_mcnemar']:.3f} |" for c in summary["comparisons"]]
     (RES / "RESULTS.md").write_text("\n".join(md) + "\n")
     print("\n".join(md))
 
