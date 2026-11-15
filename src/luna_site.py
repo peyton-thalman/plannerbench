@@ -15,8 +15,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from stats import wilson  # noqa: E402
 
 TIERS = {"single_step": ["federal_tax", "taxable_ss", "rmd", "ss_claim", "bracket_room", "irmaa"],
-         "multi_step": ["tax_torpedo", "widow_penalty", "senior_phaseout"],
-         "stacked": ["conversion_all_in", "widow_all_in"],
+         "multi_step": ["tax_torpedo", "widow_penalty"],
+         "stacked": ["conversion_all_in", "senior_phaseout", "widow_all_in"],  # same tiers as leaderboard/tasks.json
          "compliance": ["rollover_flags", "breakpoint", "comms_review"]}
 
 

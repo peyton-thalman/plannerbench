@@ -61,7 +61,7 @@ def main():
     fam = sorted({h["family"] for h in hard})
     out = {
         "model": "GPT-6 Luna", "via": "Codex agent, ChatGPT subscription", "effort": "medium", "date": "2026-11-15",
-        "setup_note": "Answered in agent sessions of 11-35 prompts each, told to treat each as its own chat, no code, web or files; no token limit. The 11 API models got one message per question at low effort with a 4,000-token limit.",
+        "setup_note": "Answered in agent sessions of 5-11 prompts each (earlier prompts stayed in the conversation), told to treat each as its own chat, no code, web or files; no token limit. The 11 API models got one message per question at low effort with a 4,000-token limit.",
         "hard": {**r_(sum(h["bucket"] == "correct" for h in hard), len(hard)), "no_answer": sum(h["bucket"] == "no_answer" for h in hard),
                  "by_family": {f: r_(sum(h["bucket"] == "correct" for h in hard if h["family"] == f), sum(h["family"] == f for h in hard)) for f in fam}},
         "bad": {"corrupted": len(cor), "judged": sum(c["judged"] for c in cor),

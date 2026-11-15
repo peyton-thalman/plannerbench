@@ -122,8 +122,6 @@
  "chat_r2": {
   "accounting": "costs_now and saves_later are each year's own dollars, as on the tax returns; the 'better off' figure and the lifetime tax change are in today's money, and 'better off' counts what's left in every account at the end",
   "source": "engine repo: mcp/card.ts line 72 (the note the chat card prints under the costs and savings); data/connector.json. Shown on web/chat.html"
- }
-}
  },
  "luna_text": {
   "quoted": [
@@ -132,3 +130,5 @@
   ],
   "note": "The first ChatGPT attempt was archived unscored because the agent wrote bare final numbers; one session refused a batch of hard tax questions 'from memory'. Numbers shown come from data/luna.json.",
   "source": "replies in v2/runs/luna-codex/raw.jsonl (wrong facts) and runs/luna-gauntlet/raw.jsonl (whole-household); v2/runs/luna-codex/ADJUDICATION.md; quoted as text in web/wrong-facts.html, web/calculator.html, web/built.html"
+ }
+}

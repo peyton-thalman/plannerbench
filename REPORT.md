@@ -323,7 +323,7 @@ not inside them. In real ChatGPT the model may choose to run code; here it didn'
 | Test | GPT-6 Luna |
 |---|---|
 | First test: one-rule questions | 71% (42/59) |
-| First test: multi-step / several rules at once | 3% (1/30) / 0% (0/20) |
+| First test: a few steps / several rules at once | 5% (1/20) / 0% (0/30) |
 | First test: compliance | 93% (28/30) |
 | Newer, harder set | 17% (7/42) |
 | Wrong facts: caught / noticed, answered anyway / missed, answered anyway | 50% / 10% / 40% (of 30) |
