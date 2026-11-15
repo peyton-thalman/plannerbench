@@ -21,8 +21,8 @@ It measures rule knowledge and arithmetic. It doesn't measure advice quality, ju
 
 - One user message per question: no system prompt, no tools (except tools runs, below), no examples. The prompt text is in `data/cases.jsonl`.
 - Claude models: `effort` as recorded in each run's `meta.json` (default `high`), `max_tokens` 16,000.
-- Other labs' models: the same prompt through OpenRouter, `max_tokens` 16,000, reasoning effort set to the run's
-  effort. Each model is pinned to one host (`only: [host]`, no fallbacks), chosen as the model maker's own endpoint or
+- Other labs' models: the same prompt through OpenRouter, `max_tokens` as recorded in each run's `meta.json`
+  (16,000 for the smoke run, 32,000 for `or-5models-15x1`), reasoning effort set to the run's effort. Each model is pinned to one host (`only: [host]`, no fallbacks), chosen as the model maker's own endpoint or
   else a full-precision one, never 4-bit; the lineup and the reason for each host are in `lineups/`. Every reply
   records the host that actually served it. Hosts that train on prompts are excluded (`data_collection: deny`).
 - Other OpenAI-compatible endpoints (`oai:`) are supported for exploration. Their serving host and precision aren't
@@ -47,7 +47,8 @@ check; 2026 income sets 2028 premiums), call several tools and combine the resul
 - Each reply saves every tool call with its inputs and result. Tokens are summed over all turns; a question gets up
   to 12 turns, after which it is scored `no_answer`. `meta.json` records the tool names, the MCP server version and
   the MoneyGuide commit, and the runner refuses a live run while that repo has uncommitted engine or tool changes.
-- Claude models only for now.
+- First run with Claude models (October); DeepSeek V4.1 Flash and other open models followed through the same loop as
+  OpenAI-style function calls, and the November set ran eight models with the engine (see REPORT.md).
 
 ## How the answer key is checked
 
@@ -122,8 +123,8 @@ fixed, the change is logged in the README, and every affected score is regraded 
 ## Known limits
 
 - One fixed wording per task. Paraphrased prompts aren't tested yet, so part of a score may reflect the wording.
-- Compliance tasks define each issue in the question. Both models tested scored 100%, so this track currently
-  measures reading, not knowledge.
+- Compliance tasks define each issue in the question. The seven model setups tested scored 91–100%, so this track
+  currently measures reading, not knowledge.
 - Federal rules only. No state tax, no AMT cases (PolicyEngine found none in the set), no credits.
 - Pilot runs (`live-high-10x1`, `with-rule-10x1`) were asked before a 2026-10-20 wording fix. That fix changed how
   the age line reads for single filers ("age 65 or older" instead of "1 spouse age 65 or older"); inputs and answers

@@ -43,7 +43,7 @@ Read README.md (how to run, dated log of findings) and METHODOLOGY.md (how every
   with 18/22 misses Haiku explicitly overruling the tool. `src/tool_effect.py` writes the comparison. Then MCP 1.1.0
   (tool reply shows the senior deduction per spouse and cites Schedule 1-A Part V): `tools-v2-high-10x1`, 50
   multi-step + stacked questions, $0.10, **50/50** (vs 31/50 with tools 1.0, 20/50 without). Report files are
-  `runs/<run>/TOOL_EFFECT_vs_<base>.md`. Not on the leaderboard or site yet. Private confirm done
+  `runs/<run>/TOOL_EFFECT_vs_<base>.md`. On the site (calculator.html) since 2026-10-21. Private confirm done
   (`tools-v2-high-10x1-private`, $0.11): 48/50; both misses overruled conversion_all_in. Private runs are
   git-ignored (`runs/*-private/`); publish aggregates only. Private no-tools baseline done
   (`live-high-10x1-private`, $0.09): 44% → 96% paired, 26 fixed / 0 broken. Next ideas, each needs the owner's OK

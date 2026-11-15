@@ -22,7 +22,7 @@ The answer key comes from the MoneyGuide engine, whose tests check it against IR
 | `widow_penalty` (v2) | Extra tax when a survivor switches to single brackets and loses the smaller SS check | Composed from the rows above |
 | `senior_phaseout` (v3) | Full tax for retirees inside the OBBBA senior-deduction phase-out band | Schedule 1-A Part V |
 | `conversion_all_in` (v3) | Roth conversion's true cost: tax torpedo plus the IRMAA cliff it triggers two years later | Rows above + CMS tiers |
-| `widow_all_in` (v3) | Widow's penalty including Medicare: single IRMAA tiers are half the joint ones | Rows above + CMS tiers |
+| `widow_all_in` (v3) | Widow's penalty including Medicare: single IRMAA thresholds are about half the joint ones (not at the top tier: $500k single vs $750k joint) | Rows above + CMS tiers |
 | `rollover_flags` (compliance) | Which planted issues a 401(k)-to-IRA rollover recommendation missed: age-55 penalty exception, NUA, cost | Reg BI Care Obligation, FINRA RN 13-45 |
 | `breakpoint` (compliance) | Sales charge after rights of accumulation (spouse and minor children count; adult child and other fund families don't) | Prospectus schedule given in the question |
 | `comms_review` (compliance) | Which sentences of a client email break Rule 2210(d)(1); compliant look-alikes share keywords | FINRA Rule 2210(d)(1) |
@@ -38,7 +38,7 @@ questions + 33 held out, plus trap questions whose honest answer is "I can't ans
   torpedo, the senior-deduction phase-out, capital-gains stacking, NIIT), no single tax rate lands within 2% of it, and
   lazy strategies ("always convert the most") do no better than guessing on the decisions.
 - **Keys checked outside the engine:** every option of every question agrees with the clean-room engine on every field
-  of every year, and every 2026 return agrees with PolicyEngine-US (`checks/GAUNTLET.md`: 290/290).
+  of every year, and every 2026 return agrees with PolicyEngine-US (`checks/GAUNTLET.md`: 203/203).
 - **Graded four ways:** right decision (or within $1,000 of the best), every number within 2%, traps declined and only
   traps, and the format. Wrong picks are priced in dollars by the engine; wrong numbers are named by the shortcut they
   match. With tools, every wrong answer is sorted into override / possible override / mistranslated / never called
