@@ -18,7 +18,7 @@ how often AI gets retirement math right, against an answer key I could prove.
    showed the rule and the IRS form line, Haiku got 100%, and 96% on 50 questions held back. In the newer set,
    DeepSeek V4.1 Flash went from 29% to 79% with the calculator; three other cheap models called it and scored
    10% or less, and the best model gained nothing.
-4. **Tell it something wrong: the best models catch most of it, three cheap models almost none. This is the biggest
+4. **Tell it something wrong: GPT-6.1 Sol and Claude Sonnet 5.5 catch most of it, three cheap models almost none. This is the biggest
    open gap.** In 30 client files with one
    planted mistake each, GPT-6.1 Sol caught 80% and Claude Sonnet 5.5 73%, with almost no false alarms. Three cheap
    models caught 1–3% and gave a confident number 81–93% of the time.
@@ -56,7 +56,7 @@ evidence, which planning questions a model can be trusted with on its own, and w
 - **The calculator.** The engine as tools a model can call while it answers (an MCP server), and as a connector in
   Claude and ChatGPT.
 - **The newer, harder set (November 2026).** My own audit of the first test ([AUDIT.md](AUDIT.md)) found two
-  problems: the best models had nearly maxed out the simple questions, and every fact I gave them was true. So I added
+  problems: the top-scoring models had nearly maxed out the simple questions, and every fact I gave them was true. So I added
   42 harder questions and 30 client files with a planted mistake, and ran 11 models at low reasoning effort with
   4,000-token replies, for $4.51 against a $5 cap.
 
@@ -312,7 +312,7 @@ with a single line:
 Right about the standard deduction, and it missed Arizona's separate $2,100 exemption for people 65 and older. The
 tool gave it correct parts; the assembly was its own.
 
-## ChatGPT’s model on a subscription (GPT-6 Luna, through Codex)
+## GPT-6 Luna through Codex (the model on my ChatGPT subscription)
 
 Most people ask ChatGPT. So on 2026-11-15 the same questions went to GPT-6 Luna, the model on my ChatGPT subscription,
 run through OpenAI’s Codex app (not the ChatGPT chat window), graded with the same answer keys and graders. Luna answered each prompt as its own chat with no code,
