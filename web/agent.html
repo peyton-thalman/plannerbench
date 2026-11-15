@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agent mode · PlannerBench</title>
+<meta name="description" content="PlannerBench as an AI agent reads it: a plain Markdown twin of every page, llms.txt and the whole site as one file, with nothing hidden from the human version.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
+<link rel="stylesheet" href="styles.css?v=19">
+</head>
+<body data-page="agent">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="alone.html">Results</a>
+      <a href="wrong-facts.html">Bad inputs</a>
+      <a href="calculator.html">With tools</a>
+      <a href="method.html">Method</a>
+      <a href="built.html">How I built it</a>
+      <span class="mode" role="group" aria-label="Reading mode"><a class="mode-human" href="./">Human</a><a class="mode-agent" href="agent.html" aria-current="page">Agent</a></span>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Agent mode</p>
+    <h1>This is the site as an AI agent reads it.</h1>
+    <div class="tldr">
+      <p class="label">In short</p>
+      <p>A lot of reading now starts with a model. So every page here has a plain-text twin, no JavaScript needed, and nothing in it is hidden from the human version.</p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Start here</h2>
+      <p class="sub">Each file is made from the finished pages every time the site is built, so the numbers match what people see.</p>
+    </div>
+    <ul class="agent-list">
+      <li><a href="llms.txt"><code>/llms.txt</code></a><span>A short map of the site with a link to each page’s Markdown, in the llms.txt format.</span></li>
+      <li><a href="llms-full.txt"><code>/llms-full.txt</code></a><span>The whole site as one Markdown document: every page’s text, every table, and every chart’s numbers as a table.</span></li>
+    </ul>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Every page, as Markdown</h2>
+      <p class="sub">Charts become tables of the numbers they show. Text behind “show the table” toggles is written out in full.</p>
+    </div>
+    <ul class="agent-list">
+      <li><a href="index.md"><code>/index.md</code></a><span>Home: The story: why I made this and the four findings</span></li>
+      <li><a href="alone.md"><code>/alone.md</code></a><span>Results: Model by model, alone, and the one misread rule behind most misses</span></li>
+      <li><a href="wrong-facts.md"><code>/wrong-facts.md</code></a><span>Bad inputs: Who notices when a client’s facts can’t be right</span></li>
+      <li><a href="calculator.md"><code>/calculator.md</code></a><span>With tools: The same models with the planning engine to call</span></li>
+      <li><a href="method.md"><code>/method.md</code></a><span>Method: How the answer key is checked</span></li>
+      <li><a href="built.md"><code>/built.md</code></a><span>How I built it: The decisions, the dead ends and what it cost</span></li>
+      <li><a href="chat.md"><code>/chat.md</code></a><span>In the chat: The planning engine as a connector inside Claude and ChatGPT</span></li>
+      <li><a href="report.md"><code>/report.md</code></a><span>Report: The full v2 write-up</span></li>
+      <li><a href="replay.md"><code>/replay.md</code></a><span>Replays: One tool-call replay, in full</span></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">In the chat</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+</body>
+</html>
