@@ -399,7 +399,7 @@
       conflict: 'two facts that conflict', over_limit: 'an amount over a legal limit' };
     const KINDS = { transposed: 'swapped digits', impossible_age: 'impossible ages', spending: 'impossible spending',
       conflict: 'facts that conflict', over_limit: 'amounts over a legal limit' };
-    const TIER_W = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap or free' };
+    const TIER_W = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' };
     // round 3: one label per price group on every page, and the plural used in sentences
     const TIER_G = { frontier: 'top-priced', mid: 'mid-priced', cheap: 'cheap and free' };
     const runs = (r) => `${r} run${r === 1 ? '' : 's'} per item`;
