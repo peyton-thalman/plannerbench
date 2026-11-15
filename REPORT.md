@@ -197,9 +197,9 @@ labels (kappa 0.95). Then the lead AI agent (Claude), not a person, adjudicated 
 
 | Model | Caught it | Recognized it, answered anyway | Missed it, answered anyway | Declined, other reason | Ran out of room | False alarms (40 valid notes) | Clean twins right (30) |
 |---|---|---|---|---|---|---|---|
-| GPT-6.1 Sol | 80% [63–90] | 20% | 0% | 0% | 0% | 2% | 100% |
+| GPT-6.1 Sol | 80% [63–90] | 20% | 0% | 0% | 0% | 3% | 100% |
 | Claude Sonnet 5.5 | 73% [56–86] | 20% | 7% | 0% | 0% | 0% | 93% |
-| GPT-6.1 Terra | 67% [49–81] | 33% | 0% | 0% | 0% | 2% | 97% |
+| GPT-6.1 Terra | 67% [49–81] | 33% | 0% | 0% | 0% | 3% | 97% |
 | Claude Haiku 5.5 | 65% [47–79] | 17% | 18% | 0% | 0% | 0% | 85% |
 | DeepSeek V4.1 Flash | 61% [43–76] | 14% | 18% | 0% | 7% | 0% | 93% |
 | Gemini 3.8 Flash | 92% [76–97] | 0% | 0% | 8% | 0% | 50% | 47% |
