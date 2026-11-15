@@ -60,21 +60,6 @@
   "source": "v2/results/summary.json and v2/results/hard_graded.jsonl; quoted as text in web/index.html"
  },
  "calculator_v2": {
-  "ds_tools_vs_sonnet_alone": {
-   "ds_tools_right": 33,
-   "sonnet_right": 26,
-   "of": 42,
-   "discordant_ds_only": 10,
-   "discordant_sonnet_only": 3,
-   "mcnemar_exact_p": 0.092,
-   "source": "v2/results/hard_graded.jsonl (DeepSeek V4.1 Flash with tools vs Claude Sonnet 5.5 alone, all reps right per item); exact two-sided McNemar; matches docs/AUDIT-2026-11-15.md overclaims #3"
-  },
-  "tokens_per_turn": 4000,
-  "max_tool_turns": 8,
-  "replies_over_4000_total": 10,
-  "tool_replies": 336,
-  "max_total_output_tokens": 7135,
-  "tokens_source": "v2/runs/hard-tools/meta.json (engine.max_tool_turns) and raw.jsonl output_tokens; docs/AUDIT-2026-11-15.md overclaims #2",
   "gauntlet_reply_limits": {
    "claude": 64000,
    "deepseek": 32000,

@@ -409,6 +409,7 @@
       pooled_top_kind: KINDS[pooled[0][0]], pooled_top: pct(pooled[0][1]),
       pooled_low_kind: KINDS[pooled.at(-1)[0]], pooled_low: pct(pooled.at(-1)[1]),
       models_n: String(M.length),
+      not_pattern: v2.catch_by_type?.models_with_another_type_below_over_limit?.join(' and '),
       cost_ratio: ds?.hard_tools && sonnet && String(Math.round(sonnet.hard.cost_per_correct / ds.hard_tools.cost_per_correct)),
       ds_tools_per1k: ds?.hard_tools && per1k(ds.hard_tools.cost_per_correct), sonnet_per1k: sonnet && per1k(sonnet.hard.cost_per_correct),
       weak_n: String(weakTools.length), weak_right: weakTools.length ? `${spread(weakTools.map((m) => m.hard_tools.k), String)} of ${weakTools[0].hard_tools.n}` : null,
@@ -428,7 +429,7 @@
 
     // Wrong facts: what each model did with the 30 planted-mistake notes, and how often it refused a fine one
     if ($('wf-table')) {
-      head('wf-table', [['Model'], ...OUT.map(([, t], i) => [t, i > 0]), ['False alarms, of 40 fine notes', true], ['Clean twins answered right, of 30', true]]);
+      head('wf-table', [['Model'], ...OUT.map(([, t], i) => [t, i > 0]), [`False alarms, of ${M[0].bad.false_alarm.n} fine files`, true], [`Clean twins answered right, of ${M[0].bad.clean_correct.n}`, true]]);
       const tbody = document.querySelector('#wf-table tbody');
       for (const m of M.filter((x) => x.bad).sort((a, b) => (b.bad.caught.rate - b.bad.false_alarm.rate) - (a.bad.caught.rate - a.bad.false_alarm.rate))) {
         const tr = el('tr'); tr.append(who(m, runs(m.bad.reps)));
