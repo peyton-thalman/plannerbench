@@ -75,7 +75,7 @@ class Page(HTMLParser):
             self.links.append(a)
         if tag in ("br", "img", "meta", "link", "input", "hr", "source", "wbr", "col"):
             return
-        key = a.get("data-k") or a.get("data-c")
+        key = a.get("data-k") or a.get("data-c") or a.get("data-v")
         self.stack.append([tag, key, ""])
 
     def handle_endtag(self, tag):

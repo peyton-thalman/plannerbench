@@ -144,8 +144,8 @@ def check(name, root, ids):
     bad = []
     blank = lambda n: re.sub(r"\s+", "", n.text()) in ("", "—", "–")
     for n in root.iter():
-        where = f"<{n.tag}{''.join(f' {k}={v!r}' for k, v in n.attrs.items() if k in ('id', 'data-k', 'data-c', 'class'))}>"
-        if ("data-k" in n.attrs or "data-c" in n.attrs) and blank(n):
+        where = f"<{n.tag}{''.join(f' {k}={v!r}' for k, v in n.attrs.items() if k in ('id', 'data-k', 'data-c', 'data-v', 'class'))}>"
+        if ("data-k" in n.attrs or "data-c" in n.attrs or "data-v" in n.attrs) and blank(n):
             bad.append(f"empty fill slot {where}")
         if n.attrs.get("id") in ids and n.tag not in ("select", "table") and blank(n) and not any(isinstance(c, Node) and c.tag == "svg" for c in n.iter()):
             bad.append(f"empty fill target {where}")
