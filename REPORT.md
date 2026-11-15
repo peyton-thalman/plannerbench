@@ -18,7 +18,7 @@ how often AI gets retirement math right, against an answer key I could prove.
    showed the rule and the IRS form line, Haiku got 100%, and 96% on 50 questions held back. In the newer set,
    DeepSeek V4.1 Flash went from 29% to 79% with the calculator; three other cheap models called it and stayed under
    10%, and the best model gained nothing.
-4. **Tell it something wrong: the best models catch most of it, the cheap ones almost none. This is the biggest
+4. **Tell it something wrong: the best models catch most of it, three cheap models almost none. This is the biggest
    open gap.** In 30 client files with one
    planted mistake each, GPT-6.1 Sol caught 80% and Claude Sonnet 5.5 73%, with almost no false alarms. Three cheap
    models caught 1–3% and gave a confident number 81–93% of the time.
@@ -29,8 +29,8 @@ in my tests, three cheap models almost never questioned an impossible fact, and 
 four. Check your inputs, and take big decisions to a professional.
 
 **How this was built.** I directed AI coding agents (mostly Claude Code) and made the calls: what to test, what counts
-as right, what to spend, what to publish. Because AI did most of the work, the checks are set up so no agent grades its
-own work, and a model from another lab audited every published claim on 2026-11-15. It found 12 errors. They are fixed
+as right, what to spend, what to publish. Because AI did most of the work, the checks are set up so no agent is the only grader of its
+own work (the lead agent did re-check 18 judge labels; that is disclosed below, and a human spot-check is owed), and a model from another lab audited every published claim on 2026-11-15. It found 12 errors. They are fixed
 in this version and listed under [Corrections](#corrections).
 
 ![Catch rate against false-alarm rate](v2/results/charts/catch_vs_false_alarm.svg)
@@ -160,7 +160,7 @@ Sonnet and the Gemini models were not run with the calculator (cost).
   loop, up to 8 turns: 10 of 336 tool-track replies used more than 4,000 output tokens in total (DeepSeek 9, GLM 1;
   the most was 7,135). Counting only DeepSeek's replies within 4,000 tokens in total, it still got 27 of 42 (64%).
 - **Three cheap models called the tools and it didn't matter.** gpt-oss, Llama and Mistral Small called a tool on 79%
-  of questions and stayed under 10%: wrong inputs, or one call where the question needed three.
+  of questions and scored 10% or less: wrong inputs, or one call where the question needed three.
 - **Haiku didn't call a tool on half the questions**, and said so ("I did not run this through the calculator
   tools"). Its gain, 20 to 26 of 42, isn't significant (p = 0.11).
 - **The best model gained nothing.** Sol went from 41 to 40 of 42. Both misses with tools were Arizona questions where

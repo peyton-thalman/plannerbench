@@ -124,7 +124,9 @@
         ${r.withheld ? `<p class="rp-withheld">Left out of these notes on purpose: <b>${esc(r.withheld)}</b>. The model has to ask the client for it.</p>` : ''}</section>
 
       <section class="rp-card"><p class="label">The choice</p>
-        ${opts ? `<ul class="rp-opts">${opts}</ul>` : '<p class="rp-sub">How much to convert, and for how many years.</p>'}
+        ${String(r.id).startsWith('g-how_much')
+          ? `<p class="rp-sub">Find the best plan: the same amount converted every year, for 1 to 10 years starting in 2026, any amount. “Best” means the most after-tax wealth; if no conversion is best, say 0. The two plans below aren’t the choices; they are only there to price the other numbers it had to give.</p>${opts ? `<ul class="rp-opts">${opts}</ul>` : ''}`
+          : opts ? `<ul class="rp-opts">${opts}</ul>` : '<p class="rp-sub">How much to convert, and for how many years.</p>'}
         ${asked ? `<p class="rp-who">It also had to give these numbers</p><ol class="rp-asked">${asked}</ol>` : ''}</section>
 
       <section class="rp-card"><p class="label">How it did</p>

@@ -15,8 +15,8 @@ prove, and tested the models. Site: **https://plannerbench.vercel.app** (every p
 3. **A calculator helps, if it shows its work.** Handed only the right number, Claude Haiku overruled it with its own
    wrong rule (40% → 62%). When the calculator also showed the rule and the IRS form line: 100% on the 50 hardest
    first-test questions, 96% on 50 held back. In November, DeepSeek V4.1 Flash went from 29% to 79% with it, at
-   about a fifteenth of Sonnet's cost per right answer; three other cheap models called it and stayed under 10%.
-4. **Tell it something wrong: the best catch most, the cheap ones almost none.** In 30 client files with one planted
+   about a fifteenth of Sonnet's cost per right answer; three other cheap models called it and scored 10% or less.
+4. **Tell it something wrong: the best catch most, three cheap models almost none.** In 30 client files with one planted
    mistake each (a retiree who is 14, a contribution over the legal limit), GPT-6.1 Sol caught 80% and Claude Sonnet
    5.5 73% with almost no false alarms; three cheap models caught 1–3% and answered confidently anyway. This is the biggest open gap.
 
@@ -31,8 +31,8 @@ write, recomputes every tax answer in the first test a third time. If any of the
 question doesn't ship.
 
 **How it was built.** I directed AI coding agents (mostly Claude Code) and made the calls: what to test, what counts
-as right, when to spend, what to publish. Because AI did most of the work, the checks are built so no agent grades its
-own work, and on 2026-11-15 a model from another lab (GPT-6.1 Sol) audited every published claim against the raw data.
+as right, when to spend, what to publish. Because AI did most of the work, the checks are built so no agent is the only grader of its
+own work (the lead agent did re-check 18 judge labels; that is disclosed and a human spot-check is owed), and on 2026-11-15 a model from another lab (GPT-6.1 Sol) audited every published claim against the raw data.
 It found 12 errors; all are fixed (see the "Corrections" section of [REPORT.md](REPORT.md)). Still owed: a human CPA
 sign-off on the answer key and a human spot-check of the judge's labels.
 

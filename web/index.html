@@ -52,7 +52,7 @@
       <ul>
         <li><b>For one well-known rule, mostly yes.</b> This year’s tax brackets, or how much you must take out of an IRA (a retirement account you haven’t paid tax on yet): Claude Sonnet 5.5 got <span data-k="single">—</span> of these right.</li>
         <li><b>For your whole situation, it depends a lot on which AI.</b> When taxes, Social Security and Medicare all affect each other, GPT-6.1 Sol got nearly all of my hardest questions right; the cheap and free models got most of them wrong.</li>
-        <li><b>Check what you type in.</b> In my tests, three cheap models almost never questioned an impossible fact, and even the best two missed <span data-k="a_best_missed">—</span> of them. They handed back a confident answer anyway.</li>
+        <li><b>Check what you type in.</b> In my tests, three cheap models almost never questioned an impossible fact. Even the best two still gave a number on <span data-k="a_best_missed">—</span> of the files with a planted mistake, though they mostly said something looked wrong first.</li>
       </ul>
     </div>
   </section>
@@ -80,7 +80,7 @@
         <h3>Simple questions: almost always right.</h3>
         <p class="big"><span data-k="single">—</span></p>
         <p>Claude Sonnet 5.5 on one-rule questions, like “what’s the tax on this income?” First test, October.</p>
-        <p class="catch"><b>Catch:</b> one rule at a time. On questions where several rules met in one household, the same model got <span data-k="stacked">—</span> (finding 2).</p>
+        <p class="catch"><b>Catch:</b> one rule at a time. On questions where several rules met in one household, the same model got <span data-k="stacked">—</span> in that October test (the November set is finding 2).</p>
         <span class="more">AI on its own →</span>
       </a>
       <a class="find" href="alone.html#november">
@@ -95,8 +95,8 @@
         <span class="n">3 · With a calculator</span>
         <h3>Give it a calculator that shows the rule, and some models get nearly all right.</h3>
         <p class="big"><span data-k="tools_from">—</span> → <span data-k="tools_to">—</span></p>
-        <p>Claude Haiku 5.5 on the <span data-v="tools:hard.questions" data-f="int">—</span> hardest questions from the first test, alone and then with the calculator showing the rule along with the number.</p>
-        <p class="catch"><b>Catch:</b> one model, <span data-v="tools:hard.questions" data-f="int">—</span> questions (<span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on <span data-v="tools_private:questions" data-f="int">—</span> held-back ones). It doesn’t rescue every model: <span data-k="a_tools_weak">—</span> cheap models still scored under 10% with it.</p>
+        <p>Claude Haiku 5.5 on the <span data-v="tools:hard.questions" data-f="int">—</span> hardest questions from the first test, alone and then with the calculator showing the rule along with the number. I designed that reply while looking at these questions, so the fairer number is the held-back one below.</p>
+        <p class="catch"><b>Catch:</b> one model, <span data-v="tools:hard.questions" data-f="int">—</span> questions (<span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on <span data-v="tools_private:questions" data-f="int">—</span> held-back ones). It doesn’t rescue every model: <span data-k="a_tools_weak">—</span> cheap models still scored 10% or less with it.</p>
         <span class="more">With a calculator →</span>
       </a>
       <a class="find" href="wrong-facts.html">
@@ -117,7 +117,7 @@
       </div>
       <div class="prose">
         <p>I don’t have a computer science degree. I directed AI coding agents, mostly Claude Code, to build and run all of it; I decided what to test, what counts as right, when to spend money and what to publish.</p>
-        <p>That’s exactly why nothing rests on one program. Every answer is computed by two separately written programs that must agree within <span data-v="system:two_way_check.within">—</span>, and tax answers also by outside tax software built by other people. A third engine, written by an AI agent that never saw the first, agrees on <span data-k="cleanroom">—</span> random households within <span data-v="system:cleanroom.within">—</span>.</p>
+        <p>That’s exactly why nothing rests on one program. Every answer is computed by the planning engine and by a separately written checker, which must agree within <span data-v="system:two_way_check.within">—</span>, and tax answers also by outside tax software built by other people. A second engine, written blind by an AI agent that never saw the planning engine, agrees on <span data-k="cleanroom">—</span> random households within <span data-v="system:cleanroom.within">—</span>.</p>
         <p>Then a model from another lab, OpenAI’s GPT-6.1 Sol, audited the whole project and found <span data-v="system:audit.errors" data-f="int">—</span> errors. All are fixed and listed in the <a href="report.html">report</a>. That makes the numbers more trustworthy, not less: someone other than the builder looked hard, and what they found is public.</p>
         <p>A CPA (a licensed tax accountant) hasn’t signed off yet. That’s an extra human check on top, not the only one: the independent programs above already agree.</p>
         <p><a href="method.html">How I checked →</a> · <a href="built.html">How I built it →</a></p>

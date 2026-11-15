@@ -330,7 +330,7 @@
     });
     const proof = $('ask-proof'), st = ask.stand_ins ?? {};
     const item = (b, t) => { const li = el('li'); li.append(el('b', null, b), document.createTextNode(' ' + t)); proof.append(li); };
-    item('Every guess fails.', `Before a question is used, the engine answers it ${ask.guesses}–5 times with the missing fact guessed (none, half, 75%, 125%, 150%). All ${ask.all_guesses_wrong} of ${ask.built} questions grade wrong under every guess.`);
+    item('Every tested guess fails.', `Before a question is used, the engine answers it ${ask.guesses}–5 times with the missing fact guessed (none, half, 75%, 125%, 150%). All ${ask.all_guesses_wrong} of ${ask.built} questions grade wrong under every guess.`);
     item('The client never volunteers.', 'It’s code, not a model: it answers only a question on the missing fact’s topic, and says nothing new to anything else.');
     if (st.asker) item('Checked with stand-ins.', `A stand-in that asks the right question gets ${st.asker.great} of ${st.asker.of} fully right; one that guesses gets ${st.guesser?.great ?? '—'} of ${st.guesser?.of ?? '—'}; one that asks vague questions never gets the fact (${st.spammer?.got_fact ?? '—'} of ${st.spammer?.of ?? '—'}).`);
   }
