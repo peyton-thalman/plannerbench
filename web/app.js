@@ -52,7 +52,7 @@
       sources: ['Ground truth', 'Published rules',
         'IRS forms and publications, SSA’s operating manual (POMS) and Medicare’s premium tables, for tax years 2025 and 2026. Every rule in the engine cites where it comes from.',
         'When models disagree with the key, the published source decides, never a vote among models. That one rule settled every dispute so far.',
-        fig.agree_models, fig.agree_cap ? `${fig.agree_cap}; Schedule 1-A Part V showed the key was right` : '', 'results.html#worked'],
+        fig.agree_models, fig.agree_cap ? `${fig.agree_cap}; Schedule 1-A Part V showed the key was right` : '', 'alone.html#worked'],
       engine: ['The asset', 'The planning engine',
         'Code for 2026 federal tax, taxable Social Security, required distributions and inherited IRAs, Medicare premiums, and 25-year retirement scenarios with a Roth-conversion solver. Every answer comes with a trace of the rules it used.',
         'Models do arithmetic fine but don’t reliably know this year’s rules. So the rules live in tested code, and the model’s job becomes choosing inputs and explaining the result.',
@@ -64,11 +64,11 @@
       bench: ['Measure', 'PlannerBench',
         `${fig.questions ?? '2,800'} public questions across ${meta?.tasks ?? 14} tasks, plus a private held-out set, from one rule to many. A script grades every reply. ${models?.length ?? 7} model setups from ${new Set((models ?? []).map((m) => lab(m.model))).size || 5} labs so far.`,
         'Find out exactly where models fail before building anything. It turned up one misreading of a 2025 rule behind most of the misses.',
-        fig.single && `${fig.single} → ${fig.stacked}`, 'Claude Sonnet 5.5 on one rule, then on several rules in one household', 'results.html'],
+        fig.single && `${fig.single} → ${fig.stacked}`, 'Claude Sonnet 5.5 on one rule, then on several rules in one household', 'alone.html'],
       tools: ['Fix', 'MCP tools',
         `The engine as tools any model can call over the Model Context Protocol: ${(tools?.tools ?? []).map((t) => t.replace(/_/g, ' ')).join(', ')}, plus a scenario runner and a Roth-conversion solver.`,
         `Version 1.0 returned the right number, and the model replaced it with its own wrong rule on ${tools?.whole.overruled ?? 18} of its ${tools?.whole.misses ?? 22} misses. Version 1.1 shows the rule and cites the IRS form line. The lesson is about product design, not model size.`,
-        fig.tools_from && `${fig.tools_from} → ${fig.tools_to}`, `Claude Haiku 5.5 on the 50 hardest questions${fig.private_tools ? `; ${fig.private_tools} on held-out ones` : ''}`, 'gauntlet.html#tools'],
+        fig.tools_from && `${fig.tools_from} → ${fig.tools_to}`, `Claude Haiku 5.5 on the 50 hardest questions${fig.private_tools ? `; ${fig.private_tools} on held-out ones` : ''}`, 'calculator.html#tools'],
       chat: ['Talk to it', 'In the chat',
         'A connector anyone can add to Claude or ChatGPT. A person asks in everyday words; the engine picks the one question that matters next, runs every plan, and replies with the answer, every assumption and the law behind each dollar. A card shows it inside the chat.',
         'A planning engine only helps if people can reach it where they already ask questions. Putting the engine in charge of the questions keeps the chat model from guessing facts or doing math.',
@@ -80,7 +80,7 @@
       gauntlet: ['Prove it matters', 'The Gauntlet',
         `${gauntlet?.families ?? 10} families of real decisions (Roth conversions, claiming age, giving, inherited IRAs) for whole households, each stacking three or more rules over 25 years. Code proves no shortcut lands within 2% of the answer.`,
         'Single questions can be passed with a good guess. Decisions with dollars attached show what a mistake costs a family, and whether a model with the engine still overrules it.',
-        fig.g_from && `${fig.g_from} → ${fig.g_to}`, `decisions fully right, alone vs. with the engine, across ${fig.g_models ?? 'all'} models (one open)${sonnetG && sonnetAlone ? `; Sonnet thought ${Math.round(sonnetAlone.output_tokens / sonnetG.output_tokens)}× less with it` : ''}`, 'gauntlet.html'],
+        fig.g_from && `${fig.g_from} → ${fig.g_to}`, `decisions fully right, alone vs. with the engine, across ${fig.g_models ?? 'all'} models (one open)${sonnetG && sonnetAlone ? `; Sonnet thought ${Math.round(sonnetAlone.output_tokens / sonnetG.output_tokens)}× less with it` : ''}`, 'calculator.html'],
     };
     const show = (key) => {
       const [kind, title, what, why, proof, cap, href] = NODES[key];

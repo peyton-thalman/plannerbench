@@ -6,7 +6,7 @@ Reads v2/results/summary.json (from v2/grade.py) and REPORT.md. Writes:
   v2/results/charts/*.svg     the three charts (also used by REPORT.md)
   site/charts/*.svg           the same files for the site
   site/data/v2.json           the numbers the v2 page shows
-  site/v2.html                the v2 leaderboard
+  site/wrong-facts.html                the v2 leaderboard
   site/report.html            REPORT.md as a page
 in the shared site style (v1 scores and data are untouched). The nav lives in each page; NAV here must match it.
 """
@@ -156,7 +156,7 @@ def chart_tools():
 
 # ---- pages ----------------------------------------------------------------------------------------------------------
 
-NAV = [('results.html', 'Results'), ('v2.html', 'Bad inputs'), ('gauntlet.html', 'With tools'), ('method.html', 'Method'), ('built.html', 'How I built it')]
+NAV = [('alone.html', 'Results'), ('wrong-facts.html', 'Bad inputs'), ('calculator.html', 'With tools'), ('method.html', 'Method'), ('built.html', 'How I built it')]
 
 
 def page(title, desc, current, main, name):
@@ -315,7 +315,7 @@ def v2_page():
     </details>
   </section>
 """
-    return page("v2: bad inputs and the hard tier", "PlannerBench v2: does a model notice when a client's facts are wrong, and does a planning engine rescue a cheap model on hard retirement questions?", "v2.html", main, "v2")
+    return page("v2: bad inputs and the hard tier", "PlannerBench v2: does a model notice when a client's facts are wrong, and does a planning engine rescue a cheap model on hard retirement questions?", "wrong-facts.html", main, "v2")
 
 
 def inline(s):
@@ -417,7 +417,7 @@ def main():
         shutil.copy(f, SITE / "charts" / f.name)
     (SITE / "data" / "v2.json").write_text(json.dumps({k: S[k] for k in ("settings", "items", "models", "tiers", "tool_effect", "judge_check", "bad_outcomes_all_models", "bad_by_type_all_models")}
                                                       | {"headline": HEADLINE, "spent_usd": S["spend"]["spent_usd"]}, indent=1) + "\n")
-    (SITE / "v2.html").write_text(v2_page())
+    (SITE / "wrong-facts.html").write_text(v2_page())
     if (ROOT / "REPORT.md").exists():
         (SITE / "report.html").write_text(report_page())
     print("site built")
