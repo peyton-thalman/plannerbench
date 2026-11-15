@@ -28,8 +28,8 @@
 <main>
   <section class="hero wrap">
     <p class="eyebrow">PlannerBench · by Peyton Thalman, financial advisor</p>
-    <h1>AI gets simple retirement questions right. On real ones, it depends which AI you ask.</h1>
-    <p class="lede">On the one-rule questions I tested, the two Claude models were right about <span data-v="models:[model=claude-sonnet-5-5].single_step_accuracy" data-f="pct">—</span> of the time. On questions where several rules meet, the scores depended heavily on which AI. And in my wrong-facts test, some models accepted facts that couldn’t be true.</p>
+    <h1>The AI models I tested got simple retirement questions right. On real ones, it depends which AI you ask.</h1>
+    <p class="lede"><b>PlannerBench is a test I built:</b> I asked AI models the retirement questions I work through with families and checked every answer against a key I computed. I’m a financial advisor; I decided what to test and what counts as right, and directed AI coding agents to build it. On the one-rule questions I tested, the two Claude models were right about <span data-v="models:[model=claude-sonnet-5-5].single_step_accuracy" data-f="pct">—</span> of the time. On questions where several rules meet, the scores depended heavily on which AI. And in my wrong-facts test, some models accepted facts that couldn’t be true.</p>
     <div class="answer-box bottom-line">
       <p class="label">The bottom line</p>
       <p class="defs"><b>One rule</b> = one tax or retirement rule, like this year’s tax brackets. <b>Several rules at once</b> = taxes, Social Security and Medicare affecting each other, the way they do in a real household.</p>
@@ -39,7 +39,7 @@
         <li><b>Some accepted impossible facts, so check what you type.</b> Of the mistakes I planted (like a retiree who is 14), GPT-6.1 Sol and Claude Sonnet 5.5, the two best at catching them without false alarms, still missed <span data-k="a_best_missed">—</span>; GPT-6 Luna missed <span data-k="a_luna_missed">—</span>.</li>
       </ul>
       <p class="sure"><b>How sure am I?</b> Outside tax software built by other people (PolicyEngine-US) rechecks the first test’s tax answers; every other answer rests on two separately written programs agreeing; and two checks by a person are still to come: a CPA’s (licensed tax accountant’s) sign-off and a spot-check of the AI judge. <a href="method.html">How I checked →</a></p>
-      <p class="sure"><b>About ChatGPT.</b> The regular ChatGPT app uses GPT-6 Luna, a different, cheaper model than GPT-6.1 Sol (the <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> one). I ran Luna through OpenAI’s Codex app with code and web turned off, in small batches, so it’s close to, but not the same as, typing into the ChatGPT window.</p>
+      <p class="sure"><b>About ChatGPT.</b> The regular ChatGPT app uses GPT-6 Luna, a different, cheaper model than GPT-6.1 Sol (the <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> one). I ran Luna through OpenAI’s Codex app (a ChatGPT-subscription tool for running tasks) with code and web turned off, in small batches, so it’s close to, but not the same as, typing into the ChatGPT window.</p>
       <div class="this-week">
         <p class="label">What to do this week</p>
         <p>Ask your AI one retirement question you care about. Check every age, balance and income it used, and ask which rule it applied. If a fact is wrong or it can’t name the rule, don’t act on the number; take anything you can’t undo, like when to claim Social Security, to a professional.</p>
@@ -72,7 +72,7 @@
       <a class="find" href="calculator.html#tools">
         <span class="n">Hand it the answer and it argues</span>
         <p class="big"><span data-k="tools_from">—</span> → <span data-k="tools_to">—</span></p>
-        <p>Claude Haiku 5.5. Given only the number, it often overruled the calculator; shown the rule too, it got every one.</p>
+        <p>Claude Haiku 5.5’s score on 50 hard questions. I gave it a calculator that returned the right number, and it often argued with the calculator and used its own wrong rule. When the calculator also showed the rule and the IRS form line, it got every one right.</p>
         <p class="catch"><b>Catch:</b> DeepSeek V4.1 Flash rose <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard.rate" data-f="pct">—</span> → <span data-v="v2:models.[name=DeepSeek V4.1 Flash].hard_tools.rate" data-f="pct">—</span>; <span data-k="a_tools_weak">—</span> other cheap models stayed at 10% or less.</p>
         <span class="more">With a calculator →</span>
       </a>
@@ -130,7 +130,7 @@
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Chat demo</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
