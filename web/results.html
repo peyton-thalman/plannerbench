@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body data-page="results">
 <header class="nav">
@@ -16,7 +16,8 @@
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
       <a href="results.html" aria-current="page">Results</a>
-      <a href="method.html">Methods</a>
+      <a href="built.html">How I built it</a>
+      <a href="method.html">Technical details</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="results.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
     </nav>
   </div>
@@ -26,7 +27,7 @@
   <section class="page-head wrap">
     <p class="eyebrow">Results</p>
     <h1>The numbers behind each finding</h1>
-    <p class="lede">Each section below backs up one line of the <a href="./">home page</a>, with the short table and a link to the full detail. How the questions were built and checked, and how the tests differ, is on <a href="method.html">Methods</a>.</p>
+    <p class="lede">Each section below backs up one line of the <a href="./">home page</a>, with the short table and a link to the full detail. How the questions were built and checked, and how the tests differ, is on <a href="method.html">Technical details</a>.</p>
   </section>
 
   <section class="wrap section" id="one-rule">
@@ -79,7 +80,7 @@
         </tbody>
       </table>
     </div>
-    <p class="table-note">It ran with more time to think and no length limit, in a different setup from the models above, so it isn’t ranked with them. Why, and how the run was done, is on <a href="method.html#chatgpt">Methods</a>.</p>
+    <p class="table-note">It ran with more time to think and no length limit, in a different setup from the models above, so it isn’t ranked with them. Why, and how the run was done, is on <a href="method.html#chatgpt">Technical details</a>.</p>
     <p class="more-link"><a href="alone.html#chatgpt">The GPT-6 Luna run in full →</a></p>
   </section>
 
@@ -121,7 +122,7 @@
         </tbody>
       </table>
     </div>
-    <p class="table-note">Even the best at catching mistakes without false alarms, GPT-6.1 Sol and Claude Sonnet 5.5, missed <span data-k="a_best_missed">—</span>. <span data-k="a_low_cheap">—</span> (<span data-k="a_low_names">—</span>) caught <span data-k="a_low_caught">—</span>. An AI judge decided whether a reply named the mistake; how that was checked is on <a href="method.html#ai-work">Methods</a>.</p>
+    <p class="table-note">Even the best at catching mistakes without false alarms, GPT-6.1 Sol and Claude Sonnet 5.5, missed <span data-k="a_best_missed">—</span>. <span data-k="a_low_cheap">—</span> (<span data-k="a_low_names">—</span>) caught <span data-k="a_low_caught">—</span>. An AI judge decided whether a reply named the mistake; how that was checked is on <a href="method.html#ai-work">Technical details</a>.</p>
     <div class="example">
       <p class="label">One example</p>
       <p>A client file said a retired school administrator with a $785,000 IRA was born in 2012, and asked how much she must withdraw this year. One model (gpt-oss-120b) replied:</p>
@@ -132,18 +133,18 @@
   </section>
 
   <section class="wrap section">
-    <a class="next" href="method.html"><span><span class="label">Next</span><b>Methods: how I built it and how I checked it</b></span><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="next" href="built.html"><span><span class="label">Next</span><b>How I built it</b></span><span class="arrow" aria-hidden="true">→</span></a>
   </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=21"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>

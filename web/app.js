@@ -62,7 +62,7 @@
     return Array.isArray(x) ? x.find((it) => conds.every(([a, b]) => String(it?.[a]) === b)) : undefined;
   }, o);
   const pick = async (ref) => { const i = ref.indexOf(':'); return dig(await load(ref.slice(0, i)), ref.slice(i + 1)); };
-  const fmt = { pct: (x) => `${Math.round(x * 100)}%`, pct1: (x) => `${(x * 100).toFixed(1)}%`, usd: (x) => usd(x), int: (x) => Number(x).toLocaleString('en-US'), raw: (x) => String(x) };
+  const fmt = { pct: (x) => `${Math.round(x * 100)}%`, pct1: (x) => `${(x * 100).toFixed(1)}%`, usd: (x) => usd(x), usd2: (x) => usd(x, true), int: (x) => Number(x).toLocaleString('en-US'), raw: (x) => String(x) };
   await Promise.all([...document.querySelectorAll('[data-v]')].map(async (n) => {
     const v = await pick(n.dataset.v);
     if (v == null) { console.warn('data-v not found:', n.dataset.v); return; }
@@ -747,6 +747,7 @@
       const under30 = cheap.filter((m) => m.hard.rate < 0.3).length;
       A.a_v2_models = String(vm.length);
       A.a_v2_labs = words[new Set(vm.map((m) => m.lab)).size];
+      A.a_v2_labs_n = String(new Set(vm.map((m) => m.lab)).size); // built.html says "from 7 companies" as a digit
       A.a_cheap_under30 = under30 === cheap.length ? `all ${cheap.length}` : `${under30} of the ${cheap.length}`;
       A.a_tools_weak = words[cheap.filter((m) => m !== dsk && m.hard_tools && m.hard_tools.rate < 0.1).length];
       // Wrong facts: the two best models' catch rate, and the three models that caught least (as on wrong-facts.html)

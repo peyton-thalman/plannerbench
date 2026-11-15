@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body data-page="home">
 <header class="nav">
@@ -16,7 +16,8 @@
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
       <a href="results.html">Results</a>
-      <a href="method.html">Methods</a>
+      <a href="built.html">How I built it</a>
+      <a href="method.html">Technical details</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="./" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
     </nav>
   </div>
@@ -41,7 +42,7 @@
         <li><b>Questions with one rule:</b> The top models got <a class="num" href="results.html#one-rule">about <span data-k="single">—</span></a> right.</li>
         <li><b>Questions where several rules interact:</b> This is where most models fall apart. On the <a class="num" href="results.html#several-rules"><span data-v="v2:items.hard" data-f="int">—</span> hardest questions</a>, the best model got <a class="num" href="results.html#several-rules"><span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span></a>, Claude Sonnet 5.5 got <a class="num" href="results.html#several-rules"><span data-v="v2:models.[name=Claude Sonnet 5.5].hard.rate" data-f="pct">—</span></a>, and the model behind the ChatGPT app got <a class="num" href="results.html#chatgpt"><span data-v="luna:hard.rate" data-f="pct">—</span></a>.<a class="fn" href="#note-luna">*</a> Cheap and free models were all <a class="num" href="results.html#several-rules">under 30%</a>.</li>
         <li><b>With a calculator that shows its work:</b> When the calculator gave the rule and the IRS form line along with the number, Claude Haiku went from <a class="num" href="results.html#calculator"><span data-k="tools_from">—</span> to <span data-k="tools_to">—</span></a>.</li>
-        <li><b>When the client’s information is wrong:</b> I put one impossible fact in each client file, like a birthday that makes the client 14. Most models gave advice anyway. Some gave retirement advice to a 14-year-old. Even the best models missed <a class="num" href="results.html#wrong-facts"><span data-k="a_best_missed">—</span></a> of these.</li>
+        <li><b>When the client’s information is wrong:</b> I put one impossible fact in each client file, like a birthday that makes the client 14. Most models gave advice anyway. The model behind the ChatGPT app gave retirement advice to a 14-year-old. Even the best models missed <a class="num" href="results.html#wrong-facts"><span data-k="a_best_missed">—</span></a> of these.</li>
       </ul>
       <p class="more-link"><a href="results.html">See all results →</a></p>
     </section>
@@ -61,7 +62,7 @@
       <p>Your clients are already asking AI before they ask you. Most can’t tell when it’s wrong, and the AI usually won’t tell them when the facts they gave it are wrong.</p>
     </section>
 
-    <p class="story-links"><a href="method.html">How I built and checked it →</a> <span aria-hidden="true">·</span> <a href="https://peytonthalman.com">peytonthalman.com</a></p>
+    <p class="story-links"><a href="built.html">How I built and checked it →</a> <span aria-hidden="true">·</span> <a href="https://peytonthalman.com">peytonthalman.com</a></p>
 
     <p class="story-note" id="note-luna"><small>*GPT-6 Luna, tested through Codex with code and web access off. That’s close to the ChatGPT app, but not identical.</small></p>
     <p class="story-note"><small>Decision support, not advice. Answers follow IRS, SSA, and CMS publications. Nothing on this site is tax or investment advice.</small></p>
@@ -70,11 +71,11 @@
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
   </div>
 </footer>
 
-<script src="app.js?v=21"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>

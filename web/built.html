@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>How I Built It · PlannerBench</title>
-<meta name="description" content="How a financial advisor directed AI agents to build a verified planning engine and a benchmark of AI on retirement math: the decisions, what the AI got wrong, and what caught it.">
+<title>How I built it · PlannerBench</title>
+<meta name="description" content="How a financial advisor, not a programmer, built PlannerBench with AI coding tools: the planning engine, the answer key, a second calculator to check it, secret questions, the calculator test, the wrong-facts test and an outside audit, in plain English.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body data-page="built">
 <header class="nav">
@@ -16,185 +16,77 @@
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
       <a href="results.html">Results</a>
-      <a href="method.html" aria-current="page">Methods</a>
+      <a href="built.html" aria-current="page">How I built it</a>
+      <a href="method.html">Technical details</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="built.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="page-head wrap">
-    <p class="eyebrow">Case study</p>
-    <h1>I made the calls. AI agents did the building. Independent checks caught their mistakes.</h1>
-    <p class="lede">I’m a licensed financial advisor, not a software engineer. My dad became a financial advisor in 1999; watching him take care of people is why I do this work, and why I wanted to know whether the AI my clients ask gets it right. In October 2026 I directed AI coding agents, mostly Claude Code, to build a planning engine, a test of AI on retirement math, and a way to plug the engine into Claude and ChatGPT. In November I added harder questions and the wrong-facts test, then had a model from another lab audit the whole thing. This page covers what the others don’t: the decisions I made, the mistakes that got caught, and who did what. Results are on <a href="results.html">Results</a>; the checks are on <a href="method.html">Methods</a>.</p>
+<main class="story">
+  <section class="hero wrap">
+    <h1>How I built PlannerBench</h1>
   </section>
 
-  <section class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Decisions</p>
-        <h2>The calls that shaped it</h2>
-      </div>
-      <div class="table-wrap">
-        <table class="decisions">
-          <thead><tr><th scope="col">Decision</th><th scope="col">Options</th><th scope="col">Chose</th><th scope="col">Why</th></tr></thead>
-          <tbody>
-            <tr><td>Fix the model overruling a correct tool</td><td>Stronger prompt; a bigger model; change what the tool says back</td><td class="chose">Change the tool’s reply to show the rule and cite the form</td><td>It targets the cause rather than one prompt; I tested it on one model. How far it carried to other models is on <a href="calculator.html">With a calculator</a>.</td></tr>
-            <tr><td>Which models to run</td><td>Every frontier model; a few, cheapest first</td><td class="chose">October: Claude Haiku and Sonnet plus four low-cost models from other labs. November: <span data-w="models_n">—</span> models from <span data-k="a_v2_labs">—</span> labs, most to least expensive, plus GPT-6 Luna through Codex (the model on my ChatGPT subscription), tested separately</td><td>The goal is to show the gap and its cause, not to run a leaderboard, and to stay inside small capped budgets.</td></tr>
-            <tr><td>What “better plan” means</td><td>Lowest tax; highest income; most after-tax wealth</td><td class="chose">After-tax wealth at the end of the plan</td><td>It’s what the family keeps. Paying tax now to save more later nets out in one number.</td></tr>
-            <tr><td>When two plans are close</td><td>Pick the winner; show both</td><td class="chose">Show both, and say “it’s close”</td><td>When two plans land within a rounding error of each other over 25 years, naming one the winner is false precision.</td></tr>
-            <tr><td>What the connector keeps</td><td>Conversations, for usage data; nothing</td><td class="chose">Nothing</td><td>People type real finances into it. The cost is no usage numbers, so quality is measured offline: simulated clients and test drives.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <details class="fine wide">
-        <summary>Five more calls (for the detail-minded)</summary>
-        <div class="table-wrap">
-          <table class="decisions">
-            <thead><tr><th scope="col">Decision</th><th scope="col">Options</th><th scope="col">Chose</th><th scope="col">Why</th></tr></thead>
-            <tbody>
-              <tr><td>The demo’s role</td><td>Keep adding features; freeze it</td><td class="chose">Freeze it as the demo</td><td>Speech-to-text and form-filling are commodity. The verified engine is the defensible part.</td></tr>
-              <tr><td>Positioning</td><td>Integrate with one firm’s systems; stand alone</td><td class="chose">Stand alone, with a generic intake form</td><td>No firm data anywhere, and a clean story for any firm’s compliance review.</td></tr>
-              <tr><td>Who picks the next question in a chat</td><td>The chat model; the engine</td><td class="chose">The engine</td><td>It reruns the plan with each unknown both ways and asks only what could change the answer. A chat model asks what sounds reasonable.</td></tr>
-              <tr><td>Where people reach it</td><td>A new app; a connector in Claude and ChatGPT</td><td class="chose">A connector</td><td>People already ask these questions there. A new app would need an audience first.</td></tr>
-              <tr><td>Public wording</td><td>“AI advisor”; “verified decision support”</td><td class="chose">Verified decision support</td><td>The engine prices choices. It never picks investments or products.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </div>
-  </section>
+  <div class="wrap story-body">
+    <section class="intro">
+      <p>I’m a financial advisor, not a programmer. I built all of this by telling AI coding tools what to build (mostly Claude Code) and checking what they made. A lot of it happened at 3:45 in the morning before the gym, on the stair stepper, or while I pushed my daughter in a stroller and worked on my laptop remotely from my phone. Running the latest full round of tests cost <span data-v="v2:spent_usd" data-f="usd2">—</span>.</p>
+    </section>
 
-  <section class="wrap section">
-    <div class="split">
-      <div>
-        <p class="eyebrow">Mistakes</p>
-        <h2>What the AI got wrong, and what caught it</h2>
-        <p class="sub">AI agents did most of the work, so I assumed they would make mistakes and built things to catch them. These are the ones that got caught.</p>
-      </div>
-      <ul class="notes">
-        <li><b>A bug in the engine itself.</b> The second engine, written without seeing the first, disagreed on 3 of 2,000 households. One was a real error in the main engine: a 2027 tax threshold. Fixed; after that, the two engines agreed on all <span data-v="system:cleanroom.agree" data-f="int">—</span> households in the next comparison.</li>
-        <li><b>A Medicare premium off by a tier.</b> Income exactly at a threshold was placed one tier too low. Found by a check, fixed, logged.</li>
-        <li><b>Questions that weren’t fair.</b> Reading the first replies on the wrong-facts test, a model rightly asked about a fact the notes never stated. 14 notes were ambiguous. I fixed them, re-asked, and kept the old replies out of the scores.</li>
-        <li><b>A spending cap that leaked.</b> One run went $0.39 over its cap because requests already in flight weren’t counted. The cap now reserves each request’s worst case.</li>
-        <li><b>Testing GPT-6 Luna through Codex.</b> I wanted a result for GPT-6 Luna, the model on my ChatGPT subscription (and the one the regular ChatGPT app uses), not only for models reached through a developer account. It answered the questions in OpenAI’s Codex app on my account, with code and web off, which is close to but not the same as typing into ChatGPT; its results describe that setup. The first attempt was thrown out: asked to do dozens at once, the agent wrote bare final numbers instead of answering each question the way a chat would. The re-run used small batches, each question treated as its own chat; even then, one session refused a whole batch of hard tax questions as impossible “from memory”. The lesson: an AI agent asked to do work in bulk cuts corners, so check how the work was done, not only the score.</li>
-        <li><b>Grading and wording errors.</b> The outside audit found replies that ran out of room counted as a choice to decline, some judge labels that missed a model naming the mistake, and sentences stronger than the evidence (like “every model was worst at” one kind of error, when two weren’t). All fixed here; the report lists each one.</li>
-      </ul>
-    </div>
-  </section>
+    <section id="start">
+      <h2>It started as a different project</h2>
+      <p>I wanted to see if I could build my own version of the planning software advisors use, and fill it in by talking instead of typing everything in by hand. Getting the retirement math right turned out to be hard. Taxes, Social Security, and Medicare all affect each other, and making my version correct took a lot of work.</p>
+      <p>That made me wonder how the AI models do on this math on their own. In my testing they made a lot of mistakes.</p>
+    </section>
 
-  <section class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">The team</p>
-        <h2>Who did what</h2>
-        <p class="sub">I set the problem, the planning rules, every go/no-go and every spending approval. AI agents did the building. Independent engines, outside software and another lab’s models did the checking, with one disclosed exception: the lead agent re-checked some wrong-facts judge labels.</p>
-      </div>
-      <div class="crew">
-        <div><b>Me</b><span>Problem framing, retirement-planning rules, reading samples and signing off, test drives as a client, every spend and scope call</span></div>
-        <div><b>Claude Code</b><span>Engineering partner: engine, test harness, grader, tools, demo and this site, built to the plan I approved; also re-checked <span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> wrong-facts judge labels (disclosed on Wrong facts)</span></div>
-        <div><b>Isolated agents</b><span>The second engine, written blind from the rules alone; fake meeting small talk for the demo’s test set</span></div>
-        <div><b>PolicyEngine-US</b><span>The outside referee: an open-source tax model nobody on this project wrote</span></div>
-        <div><b>Another lab’s model</b><span>GPT-6.1 Sol audited every claim on the site against the raw data (Nov 15); GPT-6 Luna re-judged a quarter of the wrong-facts replies</span></div>
-        <div><b>Models under test</b><span>Claude, GPT and Gemini models plus cheap and free models (DeepSeek, GLM, Qwen, gpt-oss, Llama, Mistral), each pinned to one named host; and GPT-6 Luna, through Codex on my ChatGPT subscription, tested separately</span></div>
-      </div>
-    </div>
-  </section>
+    <section id="personal">
+      <h2>Then it got personal</h2>
+      <p>I meet a lot of my prospects by knocking doors. Many of them already have an advisor and ask ChatGPT their money questions anyway. When I ask how they know the answer is right, they say it seems right. They Google it, and the top result agrees, but that top result is usually Google’s AI. One prospect I’d been following up with told me they had a question about a 529 versus a UTMA account for their kid. They felt it was too dumb a question to ask me, so they asked ChatGPT. That’s fine for a simple question. On more complicated stuff, I don’t think people realize what risks they’re taking.</p>
+      <p>So I wanted an actual answer: how do you check whether the AI is right?</p>
+    </section>
 
-  <section class="wrap section">
-    <div class="section-head">
-      <p class="eyebrow">How I work</p>
-      <h2>Seven rules I worked by, each with where it paid off</h2>
-    </div>
-    <div class="principles">
-      <div class="principle"><span class="n">01</span><h3>Build the judge before the feature</h3><p>Every piece started with the check that would prove it right: answer keys before questions, graders before models, fake meetings with answer keys before the meeting app.</p><p class="eg">The grader for the whole-household decisions passed 12 stand-in checks, including a fake model that answers perfectly and one that lies, before a single real model was asked.</p></div>
-      <div class="principle"><span class="n">02</span><h3>The published source decides</h3><p>When the models and the key disagree, the IRS form, SSA’s manual or the CMS table settles it. Never a vote among models.</p><p class="eg">Several models from different labs gave the same answer on the new senior deduction, against my key. The IRS form (Schedule 1-A Part V) showed the key was right.</p></div>
-      <div class="principle"><span class="n">03</span><h3>Don’t let the builder be the only grader</h3><p>Claude Code built the engine, so other things check it: a second engine written separately, outside tax software, and models from another lab. The full list, with results, is on <a href="method.html">Methods</a>.</p><p class="eg">Where I fell short, said plainly: on the wrong-facts test the lead agent itself re-checked judge labels and changed <span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> of them, under the judge’s written rule and with every change listed. A person spot-checking those labels is still pending.</p></div>
-      <div class="principle"><span class="n">04</span><h3>Spend in capped steps</h3><p>A smoke test under $1, then a small run under $5, then a decision. Every run has a hard spending cap.</p><p class="eg">The whole November round, <span data-w="models_n">—</span> models on two tests, cost <span data-w="spent">—</span> against a $5 cap.</p></div>
-      <div class="principle"><span class="n">05</span><h3>Keep a test set nobody tunes on</h3><p>Some questions are generated from a secret seed, never published and never used to improve anything. They exist only to check that an improvement is real.</p><p class="eg">The calculator redesign was built on public questions, then checked on held-back ones nobody had seen (<a href="calculator.html#tools">calculator test 1</a>).</p></div>
-      <div class="principle"><span class="n">06</span><h3>Cut scope on purpose</h3><p>Speed comes from saying no. Once the engine proved to be the valuable part, the demo app’s features were frozen.</p><p class="eg">About 18 of 23 demo commits had gone to polish anyone could build. The next week went to the engine and the proof instead.</p></div>
-      <div class="principle"><span class="n">07</span><h3>Every rough edge becomes a test</h3><p>Use it the way a client would, write down everything that feels wrong, fix it, then save the whole session as a test so it can’t come back.</p><p class="eg">Two test drives gave 6 notes, then 17. One changed a headline: once the Social Security earnings test was modeled, a “claim at 62” gain of about $149,000 disappeared.</p></div>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap split">
-      <div>
-        <p class="eyebrow">The problem</p>
-        <h2>“Is AI smart?” is the wrong question</h2>
-      </div>
-      <ul class="notes">
-        <li><b>The real question.</b> Which planning questions can an advisor trust a model with on its own, and which need verified math behind it? I couldn’t find anyone answering that with evidence.</li>
-        <li><b>Why it matters.</b> In this field a confident wrong number costs a family real money. In one of my simulated households, a Roth conversion that a model sized wrong left <span data-v="gauntlet:failures.2.lost" data-f="usd">—</span> less projected after-tax wealth over 25 years than the best plan (a simulation, not a real client). And a firm’s compliance team has to be able to defend every number a tool shows.</li>
-        <li><b>Who it’s for.</b> Wealth-tech product teams deciding what to build, compliance teams deciding what to allow, AI labs looking for hard, current, exact questions, and advisors asking “can I check this with AI?”</li>
-        <li><b>The bet.</b> Models are good at language and judgment, and unreliable at rules that change every year. So put the rules in tested code, and let the model choose the inputs and explain the result.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="wrap section">
-    <div class="split">
-      <div>
-        <p class="eyebrow">Timeline</p>
-        <h2>Two rounds of building, then an outside audit</h2>
-        <p class="sub">Each stage ended with a measured result before the next one started.</p>
-      </div>
-      <ol class="timeline">
-        <li><span class="when">Oct 15</span><h3>The engine</h3><p>A planning engine for federal tax, Social Security, required IRA withdrawals and Medicare premiums, checked for rule errors the same day.</p></li>
-        <li><span class="when">Oct 20</span><h3>The first test</h3><p>Questions with an answer key I could prove, an outside tax model as referee, and the first models scored. The same day: the Wizard meeting demo, built behind its own grader.</p></li>
-        <li><span class="when">Oct 21</span><h3>The calculator, and why it got ignored</h3><p>The engine as tools a model can call. Version 1.0 returned only the number and got overruled; 1.1 showed the rule and the form line, and the overruling almost stopped (both misses on the held-back questions were still overrules). Also: a second engine written from the rules alone, and a year-by-year runner for 25-year plans.</p></li>
-        <li><span class="when">Oct 22</span><h3>Whole-household decisions, and the connector</h3><p>Decisions built so no shortcut works, a grader that tracks every time a model overrules the engine, then the engine inside Claude and ChatGPT, graded by simulated clients before anyone used it.</p></li>
-        <li><span class="when">Nov 14</span><h3>The newer, harder set and wrong facts</h3><p>An audit of my own first test found the two Claude models had nearly maxed its one-rule questions, and that every fact I gave them was true. So I added harder questions and client files with one planted mistake each.</p></li>
-        <li><span class="when">Nov 15</span><h3>An outside audit, and this rewrite</h3><p>GPT-6.1 Sol, from a different lab than the agents that built it, checked every published claim against the raw data. It found <span data-v="system:audit.errors" data-f="int">—</span> errors. They are fixed on this version, and the site was rewritten so the story reads in order.</p></li>
+    <section id="parts">
+      <h2>The parts, in plain English</h2>
+      <ol class="parts">
+        <li><p><b>The calculator (planning engine).</b> A program that knows the 2026 rules for federal taxes, Social Security, Medicare premiums, and required withdrawals from retirement accounts. Give it a household and it works out the exact numbers. Think of a very focused TurboTax for retirement.</p></li>
+        <li><p><b>The answer key.</b> Thousands of retirement questions, each with one exact answer, usually a dollar amount, worked out by the calculator.</p></li>
+        <li><p><b>Checking the checker.</b> If the calculator is wrong, the whole test is wrong. So I had a separate AI write a second calculator from the written rules only, without ever seeing the first one’s code, in a different programming language. On <span data-v="system:cleanroom.of" data-f="int">—</span> made-up households, the two have to agree within <span data-v="system:cleanroom.within">—</span>. The first time I compared them, they disagreed on 3 households, and that’s how I found a real bug in my calculator. Free outside tax software called PolicyEngine-US also rechecks the tax answers. When anything disagrees, the IRS, Social Security, or Medicare publication decides. A vote between AIs doesn’t.</p></li>
+        <li><p><b>The test.</b> I gave the same questions to <span data-k="a_v2_models">—</span> AI models from <span data-k="a_v2_labs_n">—</span> companies, plus the model behind the ChatGPT app. A script grades the number answers, so nobody’s opinion decides what’s right, mine included.</p></li>
+        <li><p><b>Secret questions.</b> I kept some questions locked away and never used them while I was building. It’s like not letting a student see the final exam. If a fix works on questions I never looked at, it’s a real fix and not me accidentally teaching to the test.</p></li>
+        <li><p><b>Giving the AI the calculator.</b> My first idea was to let the AI use my calculator. The surprise was that it often ignored the right number and argued with it. What fixed it was changing what the calculator handed back. Along with the number, it now shows the rule it used and the IRS form line. After that, Claude Haiku went from <span data-k="tools_from">—</span> to <span data-k="tools_to">—</span> on <span data-v="tools:hard.questions" data-f="int">—</span> hard questions, and <span data-v="tools_private:stages.[key=v2].accuracy" data-f="pct">—</span> on the <span data-v="tools_private:questions" data-f="int">—</span> secret ones.</p></li>
+        <li><p><b>The wrong-facts test.</b> At the doors, people give wrong information all the time: the wrong birthday, transposed digits, a guess at what they spend. So I made <span data-v="v2:items.bad_corrupted" data-f="int">—</span> client files that each had one impossible fact (like a birthday that makes a retiree 14) and <span data-v="v2:models.0.bad.false_alarm.n" data-f="int">—</span> normal files. The question was whether the AI notices and asks, or just gives advice anyway. An AI graded these replies, and an AI from a different company re-graded <span data-v="v2:judge_check.replies_double_judged" data-f="int">—</span> of them and agreed <span data-v="v2:judge_check.flagged_agreement" data-f="pct1">—</span> of the time.</p></li>
+        <li><p><b>Having another AI audit everything.</b> Since AI built most of this, I had OpenAI’s top model review the whole project, looking for mistakes and claims that went too far. It found <span data-v="system:audit.errors" data-f="int">—</span> problems. I fixed all of them and published what they were.</p></li>
       </ol>
-    </div>
-  </section>
+    </section>
 
-  <section class="band">
-    <div class="wrap split">
-      <div>
-        <p class="eyebrow">What’s next</p>
-        <h2>Ranked, with the reason for each</h2>
-        <p class="sub">Ordered by what most raises trust in the result per dollar spent.</p>
-      </div>
-      <ol class="roadmap">
-        <li><span><b>A CPA signs off on the answer key.</b> Two engines and PolicyEngine agree, but a licensed outside reviewer is what a firm’s compliance team will ask for first. It costs time, not money.</span></li>
-        <li><span><b>A person spot-checks the judge.</b> On the wrong-facts test, a model decides whether a reply named the planted mistake, and another lab’s model re-judged a quarter of them. A human check on a sample is still owed.</span></li>
-        <li><span><b>Subtler wrong facts.</b> The planted mistakes are mostly obvious. The next set should look like real intake errors: a balance from last year, a spouse’s benefit entered as the client’s.</span></li>
-        <li><span><b>Run the 33 held-back whole-household questions.</b> They were never used to build or tune anything, so they show whether the result holds on questions nobody has seen.</span></li>
-        <li><span><b>Harder compliance questions.</b> Today’s define the issue in the question, so every model scores 91–100%. Useful, but it tests reading, not knowledge.</span></li>
-      </ol>
-    </div>
-  </section>
+    <section id="learned">
+      <h2>What I learned</h2>
+      <p>The models mostly fail by skipping steps. They assume things instead of asking, and they lean on what they remember from training instead of the current rules. When you tell them what they need to ask and what to think about before they answer, they do much better. Even cheap models get pretty close.</p>
+      <p>The expensive models do great on their own. GPT-6.1 Sol scored <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> on the hardest questions. But it sits behind a $20 a month subscription, and paying per question gets expensive fast across thousands of advisors and their clients. GPT-6 Luna, the cheaper model behind the regular ChatGPT app, scored <span data-v="luna:hard.rate" data-f="pct">—</span> on its own. So for most people, the answer isn’t a smarter model. It’s asking the right questions in a set order, giving the model a calculator that shows its work, and having it flag things that don’t make sense.</p>
+    </section>
 
-  <section class="wrap section" id="wizard">
-    <div class="split">
-      <div>
-        <p class="eyebrow">The demo</p>
-        <h2>Wizard: where the engine meets a meeting</h2>
-      </div>
-      <ul class="notes">
-        <li><b>What it does.</b> As an advisor and a client talk, the intake form fills itself in. When someone asks a planning question out loud (“what if we converted some of Dana’s IRA?”), the engine’s answer appears as a card a few seconds later, in plain English, with every fact it used and where that fact came from.</li>
-        <li><b>Graded like everything else.</b> It was built against fake meetings with answer keys, up to an hour long, with hedges, corrections and spouses who disagree.</li>
-        <li><b>Safe by design.</b> Fake households only. Sensitive numbers are masked in the browser before any model sees them, and speech can be transcribed on the laptop so no audio leaves it.</li>
-        <li><b>Frozen on purpose.</b> It’s the demo. The engine and the proof are the product.</li>
-      </ul>
-    </div>
-  </section>
+    <section id="limits">
+      <h2>The limits</h2>
+      <p>This is one person on a small budget, testing for a few dollars a round. The samples are small. No CPA has signed off on the answer key yet. An AI, not a person, graded the wrong-facts test. I tested the ChatGPT model through OpenAI’s Codex app with code and web access off, which is close to the ChatGPT app but not the same. All the details are in <a href="method.html">Technical details</a>.</p>
+    </section>
 
-  <section class="wrap section">
-    <a class="next" href="method.html"><span><span class="label">Next</span><b>Methods: every test, and how the answer key is checked</b></span><span class="arrow" aria-hidden="true">→</span></a>
-  </section>
+    <section id="who">
+      <h2>Who did what</h2>
+      <p>I picked the problem, decided what counts as a correct answer, set the rules, and approved every test and every dollar spent. AI coding tools did the building and ran the tests. Separate AIs, outside tax software, and another company’s model checked the work.</p>
+    </section>
+
+    <p class="story-links"><a href="labs.html">For AI labs →</a> <span aria-hidden="true">·</span> <a href="firms.html">For financial firms →</a> <span aria-hidden="true">·</span> <a href="method.html">Technical details →</a></p>
+  </div>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=21"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>

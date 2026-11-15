@@ -11,11 +11,14 @@ local copy first (`python3 -m http.server 4173 --directory site`, then `checks/s
 `site_check.py http://localhost:4173`; previews sit behind Vercel login); after a deploy run both with no argument. The tools section reads `leaderboard/tools.json` (`src/tools_board.py`).
 Site look (2026-11-14, owner's ask): the same house style as peytonthalman.com (`~/Projects/peyton-site/src/styles.css`):
 white paper, ink, hairlines, Newsreader headlines, Geist text, Geist Mono labels, 6px corners, no pills or shadows.
-Nav (2026-11-15 rewrite v2, owner's ask): the PlannerBench wordmark links home (`index.html`: plain intro, a four-line results
-list, why I built it, for you, for firms; owner's copy word for word, every number linking into Results) · Results (`results.html`, short tables per finding, linking to the detail pages
-`alone.html`, `calculator.html`, `wrong-facts.html`) · Methods (`method.html`: every test, price groups, the GPT-6 Luna/Codex
-note, how I built it, the checks, glossary; links `built.html`) · plus the Human / For AI readers switch (→ `agent.html`).
-Don't add facts to the home page; put them on Methods and flag it to the owner. `chat.html`, `replay.html` and `report.html`
+Nav (2026-11-15, owner's ask): the PlannerBench wordmark links home (`index.html`: plain intro, a four-line results list, why
+I built it, for you, for firms; owner's copy word for word, every number linking into Results) · Results (`results.html`, short
+tables per finding, linking to `alone.html`, `calculator.html`, `wrong-facts.html`) · How I built it (`built.html`, owner's
+plain-English copy word for word) · Technical details (`method.html`: every test, the GPT-6 Luna/Codex note, the checks with
+scores, the technical reader's notes, glossary and limits) · plus the Human / For AI readers switch (→ `agent.html`). Two
+audience pages, `labs.html` (For AI labs) and `firms.html` (For financial firms), are linked from built.html and the footer.
+Voice everywhere: plain English, first person, jargon explained right next to it, no taglines or dramatic one-liners. Don't add
+facts to the plain pages; put them in Technical details and flag it to the owner. `chat.html`, `replay.html` and `report.html`
 are linked from the footer. The brief for
 every page is `docs/STORY.md` (home order, names, voice); keep it and the pages in step. Numbers typed as text are logged
 in `web/data/system.json` with their source. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable

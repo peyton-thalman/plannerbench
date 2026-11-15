@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Methods · PlannerBench</title>
-<meta name="description" content="How PlannerBench was built and how every answer is checked: every test and its settings, the GPT-6 Luna run through Codex, a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
+<title>Technical details · PlannerBench</title>
+<meta name="description" content="Technical details for PlannerBench: every test and its settings, the GPT-6 Luna run through Codex, how every answer is checked: a second engine written from the rules alone, PolicyEngine-US where it reaches, published tables, a second AI judge and an outside audit, plus the two human checks still owed.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body data-page="method">
 <header class="nav">
@@ -16,7 +16,8 @@
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
       <a href="results.html">Results</a>
-      <a href="method.html" aria-current="page">Methods</a>
+      <a href="built.html">How I built it</a>
+      <a href="method.html" aria-current="page">Technical details</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="method.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
     </nav>
   </div>
@@ -24,12 +25,12 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Methods</p>
-    <h1>How I built it, and how I checked it</h1>
+    <p class="eyebrow">Technical details</p>
+    <h1>Technical details</h1>
     <div class="tldr">
       <p class="label">The plain answer</p>
       <p>The planning engine (the program that works out the right answers) and a second, separately written program both compute every answer in the first test, and they must agree within <span data-v="system:two_way_check.within">—</span>. Outside tax software built by other people recomputes the tax answers. Another engine, written by a separate AI agent that was never allowed to see the planning engine’s code, agrees within <span data-v="system:cleanroom.within">—</span> on every one of <span data-v="system:cleanroom.of" data-f="int">—</span> random households, and every question in the newer set must match it. Two human checks are still owed: a CPA’s sign-off and a person spot-checking the AI judge in the wrong-facts test.</p>
-      <p class="stop-here">That’s the whole idea. The rest of this page is the detail: <a href="#tests">every test</a>, <a href="#chatgpt">the ChatGPT model</a>, <a href="#built">how I built it</a>, <a href="#checks">the checks</a> and <a href="#glossary">the words used on this site</a>.</p>
+      <p class="stop-here">That’s the whole idea. The rest of this page is the detail: <a href="#tests">every test</a>, <a href="#chatgpt">the ChatGPT model</a>, <a href="#checks">the checks</a>, <a href="#proof-tech">the statistics</a>, <a href="#build-log">the choices and mistakes behind the build</a>, and <a href="#glossary">the words used on this site and the limits</a>. How I built it, in plain English, is on <a href="built.html">How I built it</a>.</p>
     </div>
   </section>
 
@@ -66,23 +67,7 @@
     </div>
   </section>
 
-  <section class="wrap section" id="built">
-    <div class="split">
-      <div><h2>How I built it</h2></div>
-      <div>
-        <p class="prose">An answer key first (the right answer to every question), from a planning engine (a program I had built for the 2026 IRS, Social Security and Medicare rules) that separate programs recheck. Then the questions. I’m a financial advisor; I decided what to test and what counts as right, and directed AI coding agents (mostly Claude Code) to build it.</p>
-        <ul class="notes">
-          <li><b>Build the checker before the questions.</b> A second program, written without seeing the first, agreed on all <span data-v="system:cleanroom.agree" data-f="int">—</span> test households.</li>
-          <li><b>Fix the calculator’s reply, not the prompt.</b> Show the rule, not just the number.</li>
-          <li><b>Keep secret test questions.</b> Held-back questions are never used while building; they only check that a fix is real.</li>
-          <li><b>Have another company’s model audit it.</b> GPT-6.1 Sol found <span data-v="system:audit.errors" data-f="int">—</span> errors; all fixed and published.</li>
-        </ul>
-        <p class="more-link"><a href="built.html">The full build story: decisions, mistakes caught, who did what →</a></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="key">
+  <section class="section" id="key">
     <div class="wrap split">
       <div>
         <h2>The answer key, in plain words</h2>
@@ -106,10 +91,9 @@
   <section class="band" id="ai-work">
     <div class="wrap split">
       <div>
-        <h2>Where AI did the work, and what checked it</h2>
+        <h2>What checked the AI’s work</h2>
       </div>
       <ul class="notes">
-        <li><b>AI built it and graded it.</b> The lead AI coding agent (Claude Code, working under my direction) wrote the planning engine, the questions, the grader and this site, and ran every test. I decided what to test, what counts as right, when to spend money and what to publish.</li>
         <li><b>The engines above.</b> A second engine written by a separate agent that never read the first, and outside tax software written by people, recompute the answers.</li>
         <li><b>A second judge from another lab.</b> In the wrong-facts test, an AI judge (Claude Haiku 5.5) reads each reply and records whether it flagged the problem. A judge from OpenAI (GPT-6 Luna) re-read <span data-v="v2:judge_check.replies_double_judged" data-f="int">—</span> of those replies and agreed on <span data-v="v2:judge_check.flagged_agreement" data-f="pct1">—</span>. Where a reply plainly named the problem but the judge marked it as missed, the lead AI agent corrected the label (<span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> replies). Two AIs agreeing, or one AI correcting another, is not the same as a person checking.</li>
         <li><b>The GPT-6 Luna run.</b> GPT-6 Luna through Codex (the model on my ChatGPT subscription): its replies were graded by the same answer keys and the same scripts as every other model. On wrong facts the same judge (Claude Haiku 5.5) used the same instructions, and the lead AI agent read every reply the judge marked as not catching the mistake (<span data-k="a_luna_unnamed">—</span> replies; <span data-v="luna:bad.labels_changed" data-f="int">—</span> labels changed). The replies the judge marked as caught haven’t been re-read yet. A first attempt was thrown out because most replies were a bare final number with no reasoning, which isn’t how ChatGPT answers a person; the details are on <a href="alone.html#chatgpt">AI on its own</a>.</li>
@@ -151,6 +135,50 @@
   </section>
 
 
+
+  <section class="wrap section" id="build-log">
+    <div class="split">
+      <div>
+        <h2>Behind the build</h2>
+        <p class="sub">The main choices I made, the mistakes that got caught, and when each piece was built. The plain-English version is on <a href="built.html">How I built it</a>.</p>
+      </div>
+      <div>
+        <details class="fine">
+          <summary>The main choices I made, and why</summary>
+          <ul class="notes">
+            <li><b>When the AI ignored the calculator, I changed what the calculator says back.</b> I could have written a stronger prompt or used a bigger model. Instead the calculator now shows the rule and the IRS form line next to the number, which fixes the cause. I tested that on one model; how it carried over to others is on <a href="calculator.html">With a calculator</a>.</li>
+            <li><b>A few models, cheapest first, inside small budgets.</b> October: two Claude models plus four low-cost models from other companies. November: <span data-k="a_v2_models">—</span> models from <span data-k="a_v2_labs">—</span> companies, plus the ChatGPT model tested separately. The goal was to show the gap and why it happens, not to rank every model.</li>
+            <li><b>“Better plan” means more money left after taxes at the end.</b> Not lowest tax or highest income. That’s what the family actually keeps.</li>
+            <li><b>When two plans are close, say so.</b> If two plans end within a rounding error of each other over 25 years, picking a “winner” would be false precision.</li>
+            <li><b>The chat version keeps nothing people type.</b> People enter real finances, so nothing is saved. The cost is no usage numbers, so quality is measured with made-up clients instead.</li>
+          </ul>
+        </details>
+        <details class="fine">
+          <summary>Mistakes the AI made while building, and what caught them</summary>
+          <ul class="notes">
+            <li><b>A bug in the calculator.</b> The second calculator disagreed on 3 of 2,000 households. One was a real error in mine: a 2027 tax threshold. After the fix, the two agreed on all <span data-v="system:cleanroom.agree" data-f="int">—</span> households in the next comparison.</li>
+            <li><b>A Medicare premium off by one level.</b> Income exactly at a cutoff was put one level too low. A check found it and it was fixed.</li>
+            <li><b>Unfair questions.</b> Reading the first wrong-facts replies, a model rightly asked about a fact the file never gave. 14 files were unclear. I fixed them, asked again, and left the old replies out of the scores.</li>
+            <li><b>A spending cap that leaked.</b> One run went $0.39 over its cap because requests already in progress weren’t counted. The cap now sets aside the most each request could cost.</li>
+            <li><b>The first ChatGPT-model run cut corners.</b> Asked to do dozens of questions at once, it wrote bare final numbers instead of answering each one like a chat would. I threw that run out and redid it in small batches. Lesson: when an AI does work in bulk, check how it did the work, not only the score.</li>
+            <li><b>Grading and wording errors.</b> The outside audit found replies that ran out of room counted the wrong way, some judge labels that missed a model naming the mistake, and sentences that claimed more than the data showed. All fixed; the <a href="report.html">report</a> lists each one. On the wrong-facts test the lead AI also corrected <span data-v="v2:judge_check.adjudication.overrides" data-f="int">—</span> of the judge’s labels, every change listed; a person still needs to spot-check them.</li>
+          </ul>
+        </details>
+        <details class="fine">
+          <summary>Timeline</summary>
+          <ul class="notes">
+            <li><b>Oct 15:</b> the calculator (federal tax, Social Security, required withdrawals, Medicare premiums), checked for rule errors the same day.</li>
+            <li><b>Oct 20:</b> the first test: questions with a provable answer key, outside tax software as a referee, and the first models graded.</li>
+            <li><b>Oct 21:</b> the calculator as a tool AI can use. Version 1.0 gave only the number and got ignored; 1.1 showed the rule and the form line, and the AI mostly stopped arguing. Also the second calculator, written from the rules alone.</li>
+            <li><b>Oct 22:</b> whole-household decisions over 25 years, and the calculator inside Claude and ChatGPT, tested with made-up clients first.</li>
+            <li><b>Nov 14:</b> the harder questions and the wrong-facts test, after I saw the Claude models had nearly maxed out the simple questions and every fact I’d given them was true.</li>
+            <li><b>Nov 15:</b> an outside audit by OpenAI’s GPT-6.1 Sol. It found <span data-v="system:audit.errors" data-f="int">—</span> errors, all fixed, and the site was rewritten to read simply.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="band" id="glossary">
     <div class="wrap split">
       <div><h2>Words on this site</h2></div>
@@ -179,12 +207,12 @@
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=21"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>

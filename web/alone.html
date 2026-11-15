@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body data-page="results">
 <header class="nav">
@@ -16,7 +16,8 @@
     <a class="wordmark" href="./">PlannerBench</a>
     <nav aria-label="Pages">
       <a href="results.html" aria-current="page">Results</a>
-      <a href="method.html">Methods</a>
+      <a href="built.html">How I built it</a>
+      <a href="method.html">Technical details</a>
       <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="alone.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
     </nav>
   </div>
@@ -164,7 +165,7 @@
             <tbody></tbody>
           </table>
         </div>
-        <p>Most models were run twice and the two runs averaged, so a half point in the Right column means the two runs differed. Ranges are 95% intervals; with <span data-v="v2:items.hard" data-f="int">—</span> questions they are wide, so the order of models close together is not reliable. How the answers were checked is on <a href="method.html">Methods</a>.</p>
+        <p>Most models were run twice and the two runs averaged, so a half point in the Right column means the two runs differed. Ranges are 95% intervals; with <span data-v="v2:items.hard" data-f="int">—</span> questions they are wide, so the order of models close together is not reliable. How the answers were checked is on <a href="method.html">Technical details</a>.</p>
       </details>
     </div>
   </section>
@@ -193,7 +194,7 @@
     <p class="settings"><b>Why it isn’t in the tables above.</b> The setup differs. The other models got one message per question, at low reasoning effort with a <span data-v="v2:settings.max_tokens" data-f="int">—</span>-token reply limit. GPT-6 Luna ran at <span data-v="luna:effort">—</span> effort with no limit, and I sent the questions in small batches, each to be answered as its own chat. In the regular ChatGPT app the model can choose to run code; here it was told not to, like every other model on this page.</p>
     <details class="fine">
       <summary>How the GPT-6 Luna run was done</summary>
-      <p>The questions went through Codex, OpenAI’s coding app, which runs on a ChatGPT subscription, so no per-question fee and no developer account were involved. Each batch had a handful of questions with their answers removed and their names replaced by plain codes, and the instruction to answer each as its own chat, showing the reasoning, with no code, calculator, web search or other files. A first attempt was thrown out because most replies were a bare final number with no reasoning, which isn’t how ChatGPT answers a person. In the second attempt, one session refused a whole batch and some questions were skipped; those were asked again in a fill-in batch, and one first-test question still went unanswered, so its first-test score is out of <span data-v="luna:first_test.overall.n" data-f="int">—</span>. Within a batch, earlier questions stayed in the conversation, which a fresh chat wouldn’t have. Ranges (95%): newer set <span data-k="a_luna_hard_ci">—</span>; one rule <span data-k="a_luna_single_ci">—</span>. Grading checks are on <a href="method.html#ai-work">Methods</a>.</p>
+      <p>The questions went through Codex, OpenAI’s coding app, which runs on a ChatGPT subscription, so no per-question fee and no developer account were involved. Each batch had a handful of questions with their answers removed and their names replaced by plain codes, and the instruction to answer each as its own chat, showing the reasoning, with no code, calculator, web search or other files. A first attempt was thrown out because most replies were a bare final number with no reasoning, which isn’t how ChatGPT answers a person. In the second attempt, one session refused a whole batch and some questions were skipped; those were asked again in a fill-in batch, and one first-test question still went unanswered, so its first-test score is out of <span data-v="luna:first_test.overall.n" data-f="int">—</span>. Within a batch, earlier questions stayed in the conversation, which a fresh chat wouldn’t have. Ranges (95%): newer set <span data-k="a_luna_hard_ci">—</span>; one rule <span data-k="a_luna_single_ci">—</span>. Grading checks are on <a href="method.html#ai-work">Technical details</a>.</p>
     </details>
   </section>
 
@@ -217,12 +218,12 @@
 
 <footer class="foot">
   <div class="wrap foot-row">
-    <span>PlannerBench · 2026 rules · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
     <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
     <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
   </div>
 </footer>
 
-<script src="app.js?v=21"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>

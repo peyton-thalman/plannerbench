@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For AI labs · PlannerBench</title>
+<meta name="description" content="PlannerBench for AI labs: retirement planning questions with exact, checked answers that a script can grade, where the top models are nearly maxed out, cheap models are not, and none reliably catch wrong facts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
+<link rel="stylesheet" href="styles.css?v=28">
+</head>
+<body data-page="labs">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="built.html">How I built it</a>
+      <a href="method.html">Technical details</a>
+      <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="labs.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
+    </nav>
+  </div>
+</header>
+
+<main class="story">
+  <section class="hero wrap">
+    <h1>For AI labs</h1>
+  </section>
+
+  <div class="wrap story-body">
+    <section class="intro">
+      <p><b>What this is:</b> A test set of retirement planning questions where every answer is exact and checked. The answers come from a calculator built on 2026 IRS, Social Security, and Medicare rules, confirmed by a second calculator written separately and by outside tax software. This is an area where real people are already asking AI for advice and acting on it.</p>
+    </section>
+
+    <section>
+      <h2>What it shows</h2>
+      <ul class="results-list">
+        <li>The top models are nearly maxed out. GPT-6.1 Sol scored <span data-v="v2:models.[name=GPT-6.1 Sol].hard.rate" data-f="pct">—</span> on the hardest set.</li>
+        <li>Cheap models aren’t. They scored under 30%, and the model behind the regular ChatGPT app scored <span data-v="luna:hard.rate" data-f="pct">—</span>.</li>
+        <li>None of them reliably catch wrong facts. Even the best models missed <span data-k="a_best_missed">—</span> of planted errors and gave advice anyway.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Why it’s useful for training</h2>
+      <p>Every number answer can be graded by a script, so there’s no human or AI judge in the loop for those. I think a cheap model could close most of the gap quickly with reinforcement learning (training it by rewarding correct answers). The wrong-facts files add a second thing to train: knowing when to stop and ask instead of answering.</p>
+    </section>
+
+    <section>
+      <h2>What I’d build next</h2>
+      <p>Subtler, more realistic wrong facts. A CPA sign-off on the answer key. A person checking the AI judge’s labels.</p>
+    </section>
+
+    <p class="story-links"><a href="built.html">How I built it →</a> <span aria-hidden="true">·</span> <a href="method.html">Technical details →</a></p>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=22"></script>
+</body>
+</html>

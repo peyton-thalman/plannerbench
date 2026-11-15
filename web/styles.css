@@ -637,3 +637,9 @@ details.fine .notes { margin-top: 0.75rem; }
 .results-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
 .results-list li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
 .story-body .more-link { margin: 0; }
+/* How I built it (2026-11-15): the eight parts as a numbered, ruled list. */
+.parts { margin: 0; padding: 0; list-style: none; counter-reset: p; border-top: 1px solid var(--ink); }
+.parts li { counter-increment: p; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0.5rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.parts li::before { content: counter(p); font: 500 var(--step--1)/2.1 var(--mono); color: var(--dim); }
+.story-body .hero h1, .story .hero h1 { max-width: 18ch; }
+.story-body h2 { max-width: none; }
