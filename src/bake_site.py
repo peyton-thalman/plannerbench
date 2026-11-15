@@ -40,7 +40,7 @@ CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacO
 # Reading order: the nav, then the footer pages. agent.html is the agent-mode landing page itself.
 ORDER = ["index", "alone", "wrong-facts", "calculator", "method", "built", "chat", "report", "replay", "agent"]
 LABEL = {"index": "Home", "alone": "AI on its own", "wrong-facts": "Wrong facts", "calculator": "With a calculator",
-         "method": "How I checked", "built": "How I built it", "chat": "Try it in Claude or ChatGPT", "report": "Report", "replay": "Replays", "agent": "Agent mode"}
+         "method": "How I checked", "built": "How I built it", "chat": "Chat demo", "report": "Report", "replay": "Replays", "agent": "Agent mode"}
 OPTIONAL = {"replay", "agent"}  # listed under "Optional" in llms.txt
 REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator", "results": "alone"}  # old page name → new
 KEEP_SCRIPTS = {"replay.js"}  # scripts a baked page may still load (interactive, not filling)
