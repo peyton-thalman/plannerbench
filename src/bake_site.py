@@ -10,7 +10,9 @@ replay is already written into the page). It also writes, from the baked pages:
   site/<page>.md        a Markdown twin of every page (tables kept, charts as tables of their numbers)
   site/llms.txt         the llms.txt map (llmstxt.org) linking to the twins
   site/llms-full.txt    the whole site as one Markdown document
-  site/robots.txt, site/sitemap.xml, site/vercel.json (redirects for the old page names, Markdown headers)
+  site/robots.txt, site/sitemap.xml, site/vercel.json (redirects for the old page names, Markdown headers,
+                        a Link header on the home page pointing agents at llms.txt and the Markdown twin)
+  site/middleware.js    Vercel middleware: a page asked for with "Accept: text/markdown" gets its .md twin
 
 It fails, and leaves the previous site/ alone, if a slot app.js fills is still empty or "—", or a table body is
 empty. Stdlib only. Set CHROME to use another Chrome binary.
@@ -502,6 +504,22 @@ def llms_full(pages):
     return "\n".join(parts) + "\n"
 
 
+# Markdown for agents: a page request that sends "Accept: text/markdown" is answered with the page's .md twin.
+# Browsers never send that header, so they keep getting HTML. It has to be middleware because vercel.json rewrites
+# run after the filesystem, and every page is a real file. No packages: the two headers are what Vercel's own
+# next() and rewrite() helpers send.
+MIDDLEWARE = """export const config = { matcher: ['/', '/:page.html'] }
+
+export default function middleware(request) {
+  if (!(request.headers.get('accept') || '').includes('text/markdown'))
+    return new Response(null, { headers: { 'x-middleware-next': '1' } })
+  const url = new URL(request.url)
+  url.pathname = url.pathname === '/' ? '/index.md' : url.pathname.replace(/\\.html$/, '.md')
+  return new Response(null, { headers: { 'x-middleware-rewrite': url.toString(), Vary: 'Accept' } })
+}
+"""
+
+
 def vercel_json():
     redirects = []
     for old, new in REDIRECTS.items():
@@ -510,8 +528,10 @@ def vercel_json():
     redirects.append({"source": "/agent", "destination": "/agent.html", "permanent": False})
     md = [{"key": "Content-Type", "value": "text/markdown; charset=utf-8"}, {"key": "Content-Disposition", "value": "inline"}]
     txt = [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]
+    link = [{"key": "Link", "value": '</llms.txt>; rel="describedby"; type="text/plain", </index.md>; rel="alternate"; type="text/markdown", '
+                                     '</sitemap.xml>; rel="sitemap"; type="application/xml"'}]
     return {"redirects": redirects,
-            "headers": [{"source": "/(.*)\\.md", "headers": md}, {"source": "/llms.txt", "headers": txt}, {"source": "/llms-full.txt", "headers": txt}]}
+            "headers": [{"source": "/", "headers": link}, {"source": "/index.html", "headers": link}, {"source": "/(.*)\\.md", "headers": md}, {"source": "/llms.txt", "headers": txt}, {"source": "/llms-full.txt", "headers": txt}]}
 
 
 def sitemap(names):
@@ -583,6 +603,7 @@ def main():
     (stage / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
     (stage / "sitemap.xml").write_text(sitemap(names))
     (stage / "vercel.json").write_text(json.dumps(vercel_json(), indent=2) + "\n")
+    (stage / "middleware.js").write_text(MIDDLEWARE)
 
     SITE.mkdir(exist_ok=True)
     for p in SITE.iterdir():
