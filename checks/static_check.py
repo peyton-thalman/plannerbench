@@ -28,7 +28,7 @@ except ImportError:
 
 ROOT = Path(__file__).parent.parent
 LIVE = "https://plannerbench.vercel.app"
-PAGES = ["index", "results", "built", "labs", "firms", "alone", "wrong-facts", "calculator", "method", "chat", "report", "replay", "agent"]
+PAGES = ["index", "results", "built", "labs", "firms", "alone", "wrong-facts", "calculator", "questions", "method", "chat", "report", "replay", "agent"]
 REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator"}
 
 
@@ -70,6 +70,7 @@ def expected():
         "calculator": [f"{s['right']}/{s['questions']}" for s in st],
         "built": [pct(st[0]["accuracy"]), pct(st[-1]["accuracy"]), f"{cr['of']:,}"],
         "labs": [pct(v2m["GPT-6.1 Sol"]["hard"]["rate"]), pct(luna["hard"]["rate"])],
+        "questions": [q["title"] for q in load("questions")] + ["$61,616", "$527.50", "Sentences 2, 4", "COST, NUA", "3.5%"],
         "method": [f"{meta['questions']:,}", f"{cr['agree']:,}" if cr["agree"] == cr["of"] else "(methods says all agree; they don't)"],
     }
     return home, text

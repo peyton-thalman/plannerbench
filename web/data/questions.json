@@ -1,0 +1,632 @@
+[
+ {
+  "id": "federal_tax-003",
+  "task": "federal_tax",
+  "tier": "single-step",
+  "title": "Federal income tax for one year",
+  "prompt": "In 2026, a single filer (age 65 or older) has $191,000 of wages, $34,000 of traditional IRA distributions, $0 of long-term capital gains and qualified dividends, and $41,400 of Social Security benefits. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?",
+  "answer": 53909,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 10,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 9,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 0,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 0,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "taxable_ss-003",
+  "task": "taxable_ss",
+  "tier": "single-step",
+  "title": "How much of a Social Security benefit is taxable",
+  "prompt": "Using the IRS Publication 915 worksheet, a single filer receives $24,500 of Social Security benefits and has $65,000 of other income (no tax-exempt interest, no adjustments). How much of the Social Security is taxable, rounded to the nearest dollar?",
+  "answer": 20825,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 14,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 11,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 12,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 7,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "rmd-003",
+  "task": "rmd",
+  "tier": "single-step",
+  "title": "This year\u2019s required IRA withdrawal",
+  "prompt": "Under SECURE 2.0, a traditional IRA owner born in 1949 turns 77 in 2026. The IRA balance on December 31, 2025 was $1,411,000. Their spouse is not more than 10 years younger. What is the required minimum distribution for 2026, rounded to the nearest dollar? Answer 0 if no RMD is required for 2026.",
+  "answer": 61616,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 11,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 6,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 5,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "ss_claim-003",
+  "task": "ss_claim",
+  "tier": "single-step",
+  "title": "The monthly benefit when Social Security starts early",
+  "prompt": "A worker born in 1965 has a primary insurance amount (PIA) of $1,530/month. They start retirement benefits at age 63 and 3 months. Ignoring COLAs and the earnings test, what is their monthly benefit, rounded to the nearest dollar?",
+  "answer": 1167,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 8,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 9,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 12,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 14,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 14,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 14,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "bracket_room-003",
+  "task": "bracket_room",
+  "tier": "single-step",
+  "title": "How big a Roth conversion fits in a tax bracket",
+  "prompt": "In 2026, a married couple filing jointly under age 65 has $218,000 of ordinary income (no Social Security, no capital gains) and takes the standard deduction. How large a Roth conversion can they do without any of it being taxed above the 22% bracket? Answer 0 if they are already above it.",
+  "answer": 25600,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 11,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 14,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 13,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 7,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 6,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "irmaa-003",
+  "task": "irmaa",
+  "tier": "single-step",
+  "title": "The Medicare Part B premium at a given income",
+  "prompt": "In 2026, a Medicare enrollee filing jointly had a 2024 modified adjusted gross income of $342,800. What is their 2026 monthly Medicare Part B premium per person, including any IRMAA surcharge? Give dollars and cents.",
+  "answer": 527.5,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 9,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 11,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 13,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 3,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 0,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 0,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "tax_torpedo-003",
+  "task": "tax_torpedo",
+  "tier": "multi-step",
+  "title": "The tax a Roth conversion adds when it also makes more Social Security taxable",
+  "prompt": "In 2026, a married couple filing jointly (both spouses age 65 or older) has $40,000 of traditional IRA distributions, $0 of long-term capital gains and qualified dividends, and $39,900 of Social Security benefits, with no wages. They take the standard deduction and have no credits. If they also convert $14,000 from a traditional IRA to a Roth IRA in 2026, by how many dollars does their total federal income tax (including any Net Investment Income Tax) go up? Round to the nearest dollar.",
+  "answer": 2853,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 9,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 14,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 12,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 11,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 1,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 3,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "widow_penalty-003",
+  "task": "widow_penalty",
+  "tier": "multi-step",
+  "title": "How much more tax a surviving spouse owes",
+  "prompt": "A married couple, both age 65 or older, files jointly. They have $58,500 of traditional IRA distributions, $20,500 of long-term capital gains and qualified dividends, and Social Security benefits of $24,500 (spouse A) and $22,500 (spouse B), with no wages. Spouse B dies. In the survivor's first full year filing as single (no dependents), spouse A keeps the larger of the two Social Security benefits and has the same IRA distributions and gains. Using 2026 law and amounts for both years, standard deduction and no credits, how many dollars more total federal income tax (including any Net Investment Income Tax) does the survivor owe than the couple did? Give a negative number if the survivor owes less. Round to the nearest dollar.",
+  "answer": 4635,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 8,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 6,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 7,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 7,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 4,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 0,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 0,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "senior_phaseout-003",
+  "task": "senior_phaseout",
+  "tier": "stacked",
+  "title": "Tax for retirees whose income shrinks the new senior deduction",
+  "prompt": "In 2026, a married couple filing jointly (both spouses age 65 or older) has $124,000 of traditional IRA distributions, $37,500 of long-term capital gains and qualified dividends, and $54,300 of Social Security benefits, with no wages. They take the standard deduction and have no credits. What is their total federal income tax including any Net Investment Income Tax, rounded to the nearest dollar?",
+  "answer": 23555,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 1,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 0,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 3,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 0,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 4,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 0,
+    "answered": 1
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 1,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "conversion_all_in-003",
+  "task": "conversion_all_in",
+  "tier": "stacked",
+  "title": "What a Roth conversion costs in tax plus Medicare premiums",
+  "prompt": "In 2026, a married couple filing jointly (both spouses age 65 or older, both enrolled in Medicare Part B) has $291,000 of traditional IRA distributions, $0 of long-term capital gains and qualified dividends, and $71,500 of Social Security benefits, with no wages, standard deduction and no credits. They are considering converting $40,000 from a traditional IRA to a Roth IRA in 2026. Medicare sets Part B premiums from the tax return two years earlier, so 2026 income sets 2028 premiums; assume the 2026 premiums and tiers still apply in 2028 and that nothing else changes. What is the total added cost of the conversion: the increase in 2026 federal income tax (including any Net Investment Income Tax) plus the increase in their combined 2028 Part B premiums for the full year? Round to the nearest dollar.",
+  "answer": 9600,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 8,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 3,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 8,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 6,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 5,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 0,
+    "answered": 5
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 1,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "widow_all_in-003",
+  "task": "widow_all_in",
+  "tier": "stacked",
+  "title": "What a surviving spouse pays in added tax plus Medicare premiums",
+  "prompt": "A married couple, both age 65 or older and both enrolled in Medicare Part B, files jointly. They have $155,500 of traditional IRA distributions, $16,500 of long-term capital gains and qualified dividends, and Social Security benefits of $26,500 (spouse A) and $11,200 (spouse B), with no wages. Spouse B dies. In the survivor's first full year filing as single (no dependents), spouse A keeps the larger of the two Social Security benefits and has the same IRA distributions and gains. Using 2026 law and amounts for both years, standard deduction and no credits, and assuming each year's Part B premiums are set by that same year's income, how many dollars more does the survivor pay per year in federal income tax (including any Net Investment Income Tax) plus Part B premiums than the couple paid together? Give a negative number if the survivor pays less. Round to the nearest dollar.",
+  "answer": 10768,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 2,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 2,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 5,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 3,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 3,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 0,
+    "answered": 11
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 0,
+    "answered": 7
+   }
+  ]
+ },
+ {
+  "id": "comms_review-003",
+  "task": "comms_review",
+  "tier": "compliance",
+  "title": "Spotting misleading sentences in a client email",
+  "prompt": "FINRA Rule 2210(d)(1) says retail communications may not contain any false, exaggerated, unwarranted, promissory or misleading statement or claim, and may not predict or project performance. A representative drafted this email to retail clients about a stock mutual fund:\n\n1. The fund is not guaranteed and can lose value, so you could lose money.\n2. This fund is guaranteed to outperform the stock market over the next five years.\n3. Past performance does not guarantee future results.\n4. This is a can't-miss opportunity that will double your money.\n5. CDs are FDIC-insured up to $250,000 per depositor; mutual fund shares are not FDIC-insured.\n6. The fund's expense ratio is 0.65% a year, which is taken out of fund assets.\n\nWhich numbered sentences violate Rule 2210(d)(1)?",
+  "answer": "2,4",
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 15,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "rollover_flags-003",
+  "task": "rollover_flags",
+  "tier": "compliance",
+  "title": "What a 401(k) rollover recommendation should have weighed",
+  "prompt": "You are a supervisor reviewing a registered representative's rollover recommendation under Regulation Best Interest's Care Obligation and the factors in FINRA Regulatory Notice 13-45. The client is 57 and left their employer at age 52. They plan to withdraw $45,000 a year starting now to cover expenses until they claim Social Security. Their 401(k) is worth $1,200,000, including $352,000 of the former employer's stock with a cost basis of $46,000. The 401(k)'s funds charge 0.15% a year in total. The recommendation is to roll the whole 401(k), employer stock included, into an IRA invested in funds charging 0.95% a year plus a 1% annual advisory fee.\n\nWhich of these issues apply to this client and should have been weighed before recommending the rollover?\n- AGE55: The client left the employer in or after the year they turned 55, is under 59\u00bd, and plans withdrawals before 59\u00bd. Withdrawals from the 401(k) would avoid the 10% early-withdrawal penalty, but IRA withdrawals would not.\n- NUA: Rolling low-basis employer stock into an IRA gives up net unrealized appreciation tax treatment.\n- COST: The IRA would cost the client more each year than staying in the plan.\n\nAnswer with every code that applies, separated by commas, or NONE.",
+  "answer": "COST,NUA",
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 13,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 12,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 12,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 11,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 11,
+    "answered": 15
+   }
+  ]
+ },
+ {
+  "id": "breakpoint-003",
+  "task": "breakpoint",
+  "tier": "compliance",
+  "title": "The sales-charge discount on a mutual fund purchase",
+  "prompt": "A client is buying $87,000 of Class A shares of a mutual fund. The prospectus sales charge, as a percentage of the offering price, is: less than $50,000: 5.75%; $50,000 to less than $100,000: 4.50%; $100,000 to less than $250,000: 3.50%; $250,000 to less than $500,000: 2.50%; $500,000 to less than $1,000,000: 2.00%; $1,000,000 or more: 0%. Under the prospectus's rights of accumulation, the purchase is combined with the current value of holdings in the same fund family owned by the client, the client's spouse, and their children under age 21, in any type of account. Current holdings: the client's IRA in the same fund family, $0; the spouse's taxable account in the same fund family, $90,000; their 14-year-old child's account in the same fund family, $4,000; their 24-year-old child's account in the same fund family, $31,000; the client's brokerage holdings in a different fund family, $138,000. What sales charge percentage should this purchase receive?",
+  "answer": 3.5,
+  "scores": [
+   {
+    "model": "claude-sonnet-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "claude-haiku-5-5",
+    "correct": 10,
+    "answered": 10
+   },
+   {
+    "model": "or:deepseek/deepseek-v4.1-flash@deepinfra/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:anthropic/claude-haiku-5.5@anthropic",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:z-ai/glm-5.3-flash@z-ai/fp8",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:qwen/qwen3.8-flash@alibaba",
+    "correct": 15,
+    "answered": 15
+   },
+   {
+    "model": "or:openai/gpt-oss-120b@deepinfra/bf16",
+    "correct": 15,
+    "answered": 15
+   }
+  ]
+ }
+]

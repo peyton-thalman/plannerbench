@@ -642,7 +642,7 @@
     ['compliance', 'Compliance review', 'A planted problem a reviewer must catch: a rollover issue, a missed sales-charge discount, a misleading sentence.', 'compliance_accuracy'],
   ];
   const fmtAnswer = (ex, v) => (ex.task === 'comms_review' ? (v === 'NONE' ? 'None' : `Sentences ${String(v).replace(/,/g, ', ')}`)
-    : ex.task === 'breakpoint' ? `${v}%` : usd(v));
+    : ex.task === 'breakpoint' ? `${v}%` : ex.task === 'rollover_flags' ? String(v).replace(/,/g, ', ') : usd(v, ex.task === 'irmaa'));
   if (examples && $('tiers')) {
     const host = document.getElementById('tiers');
     for (const [key, title, blurb, col] of TIERS) {
@@ -668,6 +668,30 @@
       host.append(card);
     }
     if (lead) document.getElementById('questions-sub').append(` The score on each card is ${name(lead.model)}’s.`);
+  }
+
+  // Example questions (questions.html): one real question of every type, its answer, and each model's score on that type.
+  if ($('questions')) {
+    const questions = await get('questions');
+    const host = document.getElementById('questions');
+    for (const [key, title, blurb] of TIERS) {
+      const sec = el('section');
+      sec.id = key;
+      sec.append(el('h2', null, title), el('p', null, blurb));
+      for (const q of (questions ?? []).filter((x) => x.tier === key)) {
+        const card = el('article', 'qcard');
+        card.id = q.task;
+        card.append(el('h3', null, q.title), el('p', 'q', q.prompt));
+        const a = el('p', 'qa');
+        a.append('Right answer: ', el('b', null, fmtAnswer(q, q.answer)));
+        card.append(a, el('p', 'label', 'Right, on questions of this kind'));
+        const list = el('ul', 'qscores');
+        for (const r of q.scores) { const li = el('li'); li.append(el('span', null, name(r.model)), el('b', null, `${r.correct} of ${r.answered}`)); list.append(li); }
+        card.append(list);
+        sec.append(card);
+      }
+      host.append(sec);
+    }
   }
 
   // Accuracy against what a right answer costs, on a log scale: up and to the left is better.

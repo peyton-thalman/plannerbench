@@ -19,7 +19,9 @@ scores, the technical reader's notes, glossary and limits) · plus the Human / F
 audience pages, `labs.html` (For AI labs) and `firms.html` (For financial firms), are linked from built.html and the footer.
 Voice everywhere: plain English, first person, jargon explained right next to it, no taglines or dramatic one-liners. Don't add
 facts to the plain pages; put them in Technical details and flag it to the owner. `chat.html`, `replay.html` and `report.html`
-are linked from the footer. The brief for
+are linked from the footer. `questions.html` (Example questions, 2026-11-16, owner's ask: one real question of each
+of the 14 kinds with its answer and each model's first-test score on that kind; the picks are `QUESTIONS` in `src/build_site.py`)
+is linked from the bottom of the home page. The brief for
 every page is `docs/STORY.md` (home order, names, voice); keep it and the pages in step. Numbers typed as text are logged
 in `web/data/system.json` with their source. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
 system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.

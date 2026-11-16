@@ -11,6 +11,11 @@
 > impossible-age files) → "Some gave retirement advice to a 14-year-old" (gpt-oss-120b and GPT-6 Luna, quoted on wrong-facts).
 > The rest of this file still governs Results and the detail pages.
 
+> **2026-11-16: Example questions.** `questions.html` shows one real question of each of the 14 kinds (chosen in
+> `src/build_site.py` QUESTIONS → `web/data/questions.json`), its right answer, and each model's first-test score on that kind
+> (leaderboard/tasks.json). Linked from the bottom of Home ("See example questions →"). No commentary on why models miss; that
+> stays on the detail pages.
+
 Owner: Peyton Thalman. This file is the single source for the site's arc, voice and headline numbers.
 If a page and this file disagree, fix one of them; never let them drift.
 

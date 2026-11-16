@@ -22,6 +22,23 @@ EXAMPLES = [
     ("senior_phaseout-000", "Retirees inside the new senior-deduction phase-out"),
     ("comms_review-000", "Spotting Rule 2210 violations in a client email"),
 ]
+# One real question of every type, for questions.html (linked from the bottom of the home page).
+QUESTIONS = [
+    ("federal_tax-003", "Federal income tax for one year"),
+    ("taxable_ss-003", "How much of a Social Security benefit is taxable"),
+    ("rmd-003", "This year’s required IRA withdrawal"),
+    ("ss_claim-003", "The monthly benefit when Social Security starts early"),
+    ("bracket_room-003", "How big a Roth conversion fits in a tax bracket"),
+    ("irmaa-003", "The Medicare Part B premium at a given income"),
+    ("tax_torpedo-003", "The tax a Roth conversion adds when it also makes more Social Security taxable"),
+    ("widow_penalty-003", "How much more tax a surviving spouse owes"),
+    ("senior_phaseout-003", "Tax for retirees whose income shrinks the new senior deduction"),
+    ("conversion_all_in-003", "What a Roth conversion costs in tax plus Medicare premiums"),
+    ("widow_all_in-003", "What a surviving spouse pays in added tax plus Medicare premiums"),
+    ("comms_review-003", "Spotting misleading sentences in a client email"),
+    ("rollover_flags-003", "What a 401(k) rollover recommendation should have weighed"),
+    ("breakpoint-003", "The sales-charge discount on a mutual fund purchase"),
+]
 # The one case the site walks through line by line.
 FEATURED = "senior_phaseout-000"
 
@@ -79,13 +96,25 @@ def main(run, rule_run=None):
     featured = {"id": FEATURED, "prompt": short_prompt(c["prompt"]), "inputs": c["inputs"], "answer": c["answer"],
                 "replies": answers(FEATURED, base), "with_rule": answers(FEATURED, ruled), "steps": steps(c)}
 
+    # Each question type's score per model (leaderboard/tasks.json), best overall model first.
+    board = json.loads((ROOT / "leaderboard" / "models.json").read_text())
+    rank = {m["model"]: i for i, m in enumerate(sorted(board, key=lambda m: -m["accuracy"]))}
+    per_task = {}
+    for t in json.loads((ROOT / "leaderboard" / "tasks.json").read_text()):
+        per_task.setdefault(t["task"], []).append({"model": t["model"], "correct": t["correct"], "answered": t["answered"]})
+    questions = [{"id": cid, "task": cases[cid]["task"], "tier": TIER[cases[cid]["task"]], "title": title,
+                  "prompt": short_prompt(cases[cid]["prompt"]), "answer": cases[cid]["answer"],
+                  "scores": sorted(per_task[cases[cid]["task"]], key=lambda r: rank[r["model"]])}
+                 for cid, title in QUESTIONS]
+    assert {q["task"] for q in questions} == set(TIER), "questions.html needs one question of every type"
+
     by_tier = {}
     for cid, case in cases.items():
         by_tier.setdefault(TIER[case["task"]], set()).add(case["task"])
     meta = {"questions": len(cases), "tasks": len({c["task"] for c in cases.values()}), "run": run, "rule_run": rule_run,
             "tiers": {t: sorted(ts) for t, ts in by_tier.items()}}
 
-    for name, data in (("examples", examples), ("featured", featured), ("meta", meta)):
+    for name, data in (("examples", examples), ("questions", questions), ("featured", featured), ("meta", meta)):
         (out / f"{name}.json").write_text(json.dumps(data, indent=1) + "\n")
     print(f"Wrote web/data/ from runs {run}" + (f" and {rule_run}" if rule_run else "") + f": {meta['questions']} questions, {meta['tasks']} tasks")
 

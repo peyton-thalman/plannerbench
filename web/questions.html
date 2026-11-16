@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Example questions · PlannerBench</title>
+<meta name="description" content="One real PlannerBench question of each of the 14 kinds, with the right answer and how many each AI model got right on questions of that kind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&display=swap">
+<link rel="stylesheet" href="styles.css?v=29">
+</head>
+<body data-page="questions">
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="wordmark" href="./">PlannerBench</a>
+    <nav aria-label="Pages">
+      <a href="results.html">Results</a>
+      <a href="built.html">How I built it</a>
+      <a href="method.html">Technical details</a>
+      <span class="mode" role="group" aria-label="Version: for people, or the same site as plain text for AI agents reading on someone’s behalf"><a class="mode-human" href="questions.html" aria-current="true">Human</a><a class="mode-agent" href="agent.html" title="The same site as plain text and Markdown, for AI agents reading on someone’s behalf">For AI readers</a></span>
+    </nav>
+  </div>
+</header>
+
+<main class="story">
+  <section class="hero wrap">
+    <h1>Example questions</h1>
+  </section>
+
+  <div class="wrap story-body">
+    <section class="intro">
+      <p>Here is one real question of each of the <span data-v="meta:tasks" data-f="int">—</span> kinds I asked, with the right answer. Under each one is how many questions of that kind each model got right in my first test, in October 2026.</p>
+      <p>Each tax question also told the model to use 2026 federal tax law, including the new $6,000 senior deduction, and every question asked for the answer on a line of its own. I left those parts out here so the questions are easier to read.</p>
+      <p>The totals differ because I asked some models more questions than others, and a few replies never came back. Claude Haiku 5.5 is listed twice because I asked it two separate ways.</p>
+      <p class="more-link"><a href="alone.html#october">The first test in full →</a></p>
+    </section>
+
+    <div id="questions"></div>
+
+    <p class="story-links"><a href="./">Home →</a> <span aria-hidden="true">·</span> <a href="results.html">Results →</a></p>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>PlannerBench · 2026 rules · <a href="labs.html">For AI labs</a> · <a href="firms.html">For financial firms</a> · <a href="report.html">Report</a> · <a href="chat.html">Demo walkthrough</a> · <a href="replay.html">Replays</a> · <a href="https://peytonthalman.com">peytonthalman.com</a></span>
+    <span>Human | For AI readers, top right: the same site as plain text for AI agents reading on someone’s behalf, with every page as Markdown.</span>
+    <span>Decision support, not advice. Answers follow IRS, SSA and CMS publications; nothing here is tax or investment advice.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=23"></script>
+</body>
+</html>
