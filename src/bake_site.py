@@ -35,7 +35,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 WEB = ROOT / "web"
 SITE = ROOT / "site"
-BASE = "https://plannerbench.vercel.app"
+BASE = "https://plannerbench.org"
 CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 # Reading order: home, the nav (Results, How I built it, Technical details), the two audience pages, the detail pages they link to, then the footer pages. agent.html is the agent-mode landing page itself.
 ORDER = ["index", "results", "built", "method", "labs", "firms", "alone", "calculator", "wrong-facts", "questions", "chat", "report", "replay", "agent"]
@@ -441,6 +441,15 @@ def finish_html(name, src, desc):
     src = re.sub(r'\s*<script\b[^>]*\bsrc="app\.js[^"]*"[^>]*>\s*</script>', "", src)
     url = f"{BASE}/" if name == "index" else f"{BASE}/{name}.html"
     add = [f'<link rel="canonical" href="{url}">', f'<link rel="alternate" type="text/markdown" href="/{name}.md" title="This page as Markdown">']
+    # Link preview (iMessage, Teams, Slack, LinkedIn): the page's own title and description, and one card for the whole
+    # site, web/og.png, drawn from src/og_card.html (the command to redraw it is at the top of that file).
+    t = re.search(r"<title>(.*?)</title>", src, re.S)
+    title = html.unescape(re.sub(r"\s+", " ", t.group(1)).strip()) if t else "PlannerBench"
+    og = [("og:type", "website"), ("og:site_name", "PlannerBench"), ("og:title", title), ("og:description", desc), ("og:url", url),
+          ("og:image", f"{BASE}/og.png"), ("og:image:type", "image/png"), ("og:image:width", "2400"), ("og:image:height", "1260"),
+          ("og:image:alt", "PlannerBench. Can AI answer retirement questions correctly? I tested it.")]
+    add += [f'<meta property="{k}" content="{html.escape(v, quote=True)}">' for k, v in og if v]
+    add.append('<meta name="twitter:card" content="summary_large_image">')
     if name == "index":
         add.append('<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">')
         add.append('<script type="application/ld+json">' + json.dumps(json_ld(desc), ensure_ascii=False).replace("</", "<\\/") + "</script>")

@@ -1,6 +1,6 @@
 # PlannerBench v2: progress
 
-**Live:** https://plannerbench.vercel.app/v2.html (report: `/report.html`). Deployed to production and pushed to
+**Live:** https://plannerbench.org/v2.html (report: `/report.html`). Deployed to production and pushed to
 `origin v2` on 2026-11-14 at the owner's say-so, with the site restyled to match peytonthalman.com.
 **Read `REPORT.md` first; its last five lines are the summary.**
 

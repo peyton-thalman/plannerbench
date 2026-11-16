@@ -1,7 +1,7 @@
 # PlannerBench: notes for the next session
 
 A benchmark of AI models on retirement-planning math (2026 federal tax, Social Security, RMDs, Medicare IRMAA) plus
-a compliance track, with an exact answer key. Site: https://plannerbench.vercel.app (public; the owner
+a compliance track, with an exact answer key. Site: https://plannerbench.org (public; the owner
 cleared the outside-activity question on 2026-11-14, so don't raise FINRA 3290 again). Page sources are in `web/`; edit
 those, never `site/`. Build: the data builders write `web/data/` and `web/charts/` (`src/build_site.py`, `src/gauntlet_site.py`,
 `src/replay_site.py`, `v2/build_site.py`), then `.venv/bin/python src/bake_site.py` renders every page with headless Chrome into
@@ -21,7 +21,8 @@ Voice everywhere: plain English, first person, jargon explained right next to it
 facts to the plain pages; put them in Technical details and flag it to the owner. `chat.html`, `replay.html` and `report.html`
 are linked from the footer. `questions.html` (Example questions, 2026-11-16, owner's ask: one real question of each
 of the 14 kinds with its answer and each model's first-test score on that kind; the picks are `QUESTIONS` in `src/build_site.py`)
-is linked from the bottom of the home page. The brief for
+is linked from the bottom of the home page. Link preview (2026-11-16, owner's ask): every baked page gets Open Graph tags from its own title and description, and
+one card for the whole site, `web/og.png`, drawn from `src/og_card.html` (redraw command at the top of that file). The brief for
 every page is `docs/STORY.md` (home order, names, voice); keep it and the pages in step. Numbers typed as text are logged
 in `web/data/system.json` with their source. Charts on `wrong-facts.html` carry a plain "What it shows" line and tables sit behind toggles. (The clickable
 system map was removed to simplify). Engine is called "the planning engine" everywhere, never MoneyGuide.

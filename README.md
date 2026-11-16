@@ -2,8 +2,8 @@
 
 **Can you trust AI with retirement math?** I'm a financial advisor, and more and more of the people I meet get their
 financial advice from ChatGPT. So I wrote the questions planners work through every week, built an answer key I could
-prove, and tested the models. Site: **https://plannerbench.vercel.app** (every page also as plain text:
-[llms.txt](https://plannerbench.vercel.app/llms.txt)).
+prove, and tested the models. Site: **https://plannerbench.org** (every page also as plain text:
+[llms.txt](https://plannerbench.org/llms.txt)).
 
 ## What I found
 
@@ -181,7 +181,7 @@ Page sources live in `web/` (plain HTML and CSS; `web/app.js` fills numbers, tab
 python3 -m http.server 4173 --directory site           # then, in another shell:
 .venv/bin/python -I checks/static_check.py http://localhost:4173   # every page readable with no JavaScript
 .venv/bin/python -I checks/site_check.py http://localhost:4173     # data files match leaderboard/
-cd site && vercel deploy --prod      # Vercel project "plannerbench" → plannerbench.vercel.app
+cd site && vercel deploy --prod      # Vercel project "plannerbench" → plannerbench.org (plannerbench.vercel.app still works)
 ```
 
 The bake fails, leaving `site/` as it was, if any slot `app.js` fills is still empty or "—" or a table body is empty. Besides the pages it writes, for AI readers: a Markdown twin of every page (`/index.md`, `/alone.md`, …; charts become tables of their numbers), `/llms.txt`, `/llms-full.txt` (the whole site in one file), `sitemap.xml`, `robots.txt`, and `vercel.json` with permanent redirects from the old page names (`/v2.html` → `/wrong-facts.html`, `/gauntlet.html` → `/calculator.html`, `/results.html` → `/alone.html`). `/agent.html` (the "Agent" side of the nav switch) links to all of them.

@@ -27,7 +27,7 @@ except ImportError:
     pass
 
 ROOT = Path(__file__).parent.parent
-LIVE = "https://plannerbench.vercel.app"
+LIVE = "https://plannerbench.org"
 PAGES = ["index", "results", "built", "labs", "firms", "alone", "wrong-facts", "calculator", "questions", "method", "chat", "report", "replay", "agent"]
 REDIRECTS = {"v2": "wrong-facts", "gauntlet": "calculator"}
 

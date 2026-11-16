@@ -4,7 +4,7 @@ Fetches the data files a deployed site serves and compares them field for field 
 src/leaderboard.py builds from the graded runs. Any difference (a stale deploy, a hand edit, a build that skipped
 a run) fails.
 
-Usage: .venv/bin/python -I checks/site_check.py [https://plannerbench.vercel.app]
+Usage: .venv/bin/python -I checks/site_check.py [https://plannerbench.org]
 """
 import json
 import sys
@@ -42,4 +42,4 @@ def main(base):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "https://plannerbench.vercel.app")
+    main(sys.argv[1] if len(sys.argv) > 1 else "https://plannerbench.org")
